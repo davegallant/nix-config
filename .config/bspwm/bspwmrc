@@ -1,0 +1,47 @@
+#! /bin/sh
+
+sxhkd &
+
+monitors=$(xrandr | grep -swc 'connected')
+
+# I currently have a laptop and a desktop with 2 monitors
+# This checks the number of monitors and then sets desktops
+if [ "$monitors" -gt 1 ]; then
+  bspc monitor HDMI-A-0 -d 1 2 3 4 5
+  bspc monitor DisplayPort-0 -d 6 7 8 9 0
+else
+  bspc monitor -d 1 2 3 4 5 6 7 8 9 0
+fi
+
+bspc config border_width 2
+bspc config window_gap 4
+bspc config focus_follows_pointer true
+
+bspc config split_ratio 0.52
+bspc config borderless_monocle true
+bspc config gapless_monocle true
+
+bspc rule -a Gimp state=floating follow=on
+bspc rule -a Zathura state=tiled
+bspc rule -a feh state=floating
+
+# Set background
+feh --bg-fill ~/Pictures/Wallpapers/laughingman.jpg &
+
+# lemonbar-xft-git
+~/.config/lemonbar/lemonbar.sh | lemonbar -p -f "Fira Code-12" -f "Font Awesome 5 Free" -f "Noto Color Emoji" -B '#000000' -F '#FFFFFF' &
+
+stalonetray &
+
+# Compositor to prevent screen tearing
+compton --config ~/.config/compton.conf -b
+
+# Switch to a lefty mouse if mouse detected
+if xinput list | grep -qi 'mouse'; then
+  xmodmap -e "pointer = 3 2 1 " # swap mouse buttons
+fi
+
+sleep 3
+
+xdo above -t "$(xdo id -n root)" "$(xdo id -n stalonetray)"
+xdo above -t "$(xdo id -n root)" "$(xdo id -n lemonbar)"
