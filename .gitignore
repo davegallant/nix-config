@@ -1,0 +1,2 @@
+# avoid weird recursion problems
+.dotfiles
