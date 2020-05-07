@@ -11,7 +11,8 @@ Battery() {
   capacity=$(grep -hs ^ /sys/class/power_supply/BAT0/capacity)
   if [ -n "$capacity" ]; then
     case $capacity in
-    [0-1][0-9]{0,1}) colour=$red ;;
+    [0-9]) colour=$red ;;
+    [0-1][0-9]) colour=$red ;;
     [2-3][0-9]) colour=$yellow ;;
     *) colour=$green ;;
     esac
