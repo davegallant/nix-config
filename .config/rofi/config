@@ -1,0 +1,6 @@
+rofi.font: Fira Code 14
+rofi.hide-scrollbar: true
+rofi.levenshtein-sort: true
+rofi.matching: fuzzy
+rofi.sort: true
+rofi.theme: /usr/share/rofi/themes/glue_pro_blue.rasi
