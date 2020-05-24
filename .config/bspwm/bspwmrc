@@ -21,9 +21,13 @@ bspc config split_ratio 0.52
 bspc config borderless_monocle true
 bspc config gapless_monocle true
 
+bspc rule -a Android_Studio state=tiled
 bspc rule -a Gimp state=floating follow=on
 bspc rule -a Zathura state=tiled
 bspc rule -a feh state=floating
+
+# https://wiki.archlinux.org/index.php/Bspwm#Problems_with_Java_applications
+wmname LG3D
 
 # Set background
 feh --bg-fill ~/Pictures/Wallpapers/laughingman.jpg &
