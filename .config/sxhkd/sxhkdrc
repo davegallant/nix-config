@@ -14,10 +14,6 @@ super + d
 super + Escape
 	pkill -USR1 -x sxhkd
 
-#
-# bspwm hotkeys
-#
-
 # quit bspwm normally
 super + alt + Escape
 	bspc quit
@@ -114,7 +110,7 @@ super + shift + {Left,Down,Up,Right}
 
 # shrink a window by moving one of its side inward
 super + shift + control + {Left,Down,Up,Right}
-    bspc node -z {right -20 0,top 0 20,bottom 0 20,left 20 0}
+	bspc node -z {right -20 0,top 0 20,bottom 0 20,left 20 0}
 
 # move a floating window
 super + {Left,Down,Up,Right}
@@ -128,15 +124,13 @@ super + {_,shift + }c
 super + equal
 	bspc node @/ --equalize
 
-# lock screen
-super + @l
-	XSECURELOCK_NO_COMPOSITE=1 \
-	XSECURELOCK_PASSWORD_PROMPT=kaomoji \
-	xsecurelock
-
 # suspend
 super + {_,shift + }s
-   systemctl suspend
+	systemctl suspend
+
+# lock
+super + l
+	slock
 
 # screenshot
 super + @Print

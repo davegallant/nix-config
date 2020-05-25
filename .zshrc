@@ -21,6 +21,7 @@ alias ll='exa -la'
 alias grep='grep --color=auto --line-buffered'
 alias vi='nvim'
 alias vim='nvim'
+
 export LANG=en_US.UTF-8
 export EDITOR='vim'
 export PATH=$PATH:$HOME/.local/bin
@@ -29,20 +30,7 @@ export GPG_TTY=$(tty)
 setopt noincappendhistory
 
 # golang
-export PATH=$PATH:/usr/local/go/bin
 export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
-
-# rust
-export PATH=$PATH:$HOME/.cargo/bin
-
-# jvm
-export JAVA_HOME=/usr/lib/jvm/java-11-openjdk
-export PATH=$PATH:$HOME/.local/groovy-3.0.1/bin
-
-# nodejs
-export PATH=$PATH:$HOME/.local/node-v13.8.0-linux-x64/bin
-export PATH=$HOME/.npm-global/bin:$PATH
 
 # fzf
 [ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
