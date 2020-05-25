@@ -71,9 +71,8 @@ set path+=**
 " Display all matching files when we tab complete
 set wildmenu
 
-set tabstop=4
-set shiftwidth=4
-set expandtab
+set tabstop=2
+set shiftwidth=2
 
 " Enable folding
 set foldmethod=indent
