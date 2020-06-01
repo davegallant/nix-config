@@ -1,9 +1,12 @@
 # oh-my-zsh
 export ZSH=$HOME/.oh-my-zsh
-plugins=(fzf git zsh-syntax-highlighting last-working-dir)
+plugins=(fzf git zsh-syntax-highlighting last-working-dir zsh-autosuggestions)
 
 # case-sensitive completion
 CASE_SENSITIVE="true"
+
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#838383,underline"
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 # Disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -40,9 +43,6 @@ eval "$(_RFD_COMPLETE=source_zsh rfd)"
 
 # broot
 source $HOME/.config/broot/launcher/bash/br
-
-# zoxide
-eval "$(zoxide init zsh)"
 
 # starship
 eval "$(starship init zsh)"
