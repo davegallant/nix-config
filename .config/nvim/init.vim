@@ -11,6 +11,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 
 " Plugins
 call plug#begin('~/.vim/plugged')
+Plug 'LnL7/vim-nix'
 Plug 'ap/vim-css-color'
 Plug 'fatih/vim-go'
 Plug 'hashivim/vim-terraform'
@@ -73,6 +74,7 @@ set wildmenu
 
 set tabstop=2
 set shiftwidth=2
+set expandtab
 
 " Enable folding
 set foldmethod=indent
@@ -122,6 +124,7 @@ highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
 
 " groovy syntax
+au BufNewFile,BufRead *.groovy set tabstop=2 shiftwidth=2 expandtab
 au BufNewFile,BufRead Jenkinsfile setf groovy
 au BufNewFile,BufRead Jenkinsfile set tabstop=2 shiftwidth=2 expandtab
 
