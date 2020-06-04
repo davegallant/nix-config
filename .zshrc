@@ -6,7 +6,6 @@ plugins=(fzf git zsh-syntax-highlighting last-working-dir zsh-autosuggestions)
 CASE_SENSITIVE="true"
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#838383,underline"
-ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 # Disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
