@@ -27,6 +27,7 @@
     fd
     fzf
     go
+    golint
     google-cloud-sdk
     groovy
     hadolint
@@ -35,12 +36,16 @@
     jq
     nmap
     openvpn
+    postman
     python3
     ripgrep
+    ruby
     rustup
+    shellcheck
     signal-desktop
     slack
     spotify
+    ssm-session-manager-plugin
     stalonetray
     terraform
     tflint
@@ -62,6 +67,7 @@
     localVariables = {
       COMPLETITION_WAITING_DOTS = "true";
       ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE = "fg=#838383,underline";
+      ZSH_DISABLE_COMPFIX = "true";
     };
 
     initExtra = ''
@@ -72,7 +78,7 @@
       export EDITOR='neovim'
       export GPG_TTY=$(tty)
       export GOPATH=$HOME/go
-      source ~/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+      source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     '';
 
     shellAliases = {
@@ -90,6 +96,14 @@
         "last-working-dir"
       ];
     };
+
+    plugins = [
+      {
+        name = "syntax-highlighting";
+        src = "${pkgs.zsh-syntax-highlighting}/share/zsh/site-functions";
+      }
+    ];
+
   };
 
   programs.neovim =  {
