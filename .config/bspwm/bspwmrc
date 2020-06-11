@@ -1,4 +1,7 @@
-#! /bin/sh
+#!/usr/bin/env bash
+
+p='sxhkd stalonetray lemonbar'
+for i in $p; do pkill "$i"; done
 
 sxhkd &
 
@@ -47,5 +50,5 @@ fi
 
 sleep 3
 
-xdo above -t "$(xdo id -n root)" "$(xdo id -n stalonetray)"
 xdo above -t "$(xdo id -n root)" "$(xdo id -n lemonbar)"
+xdo above -t "$(xdo id -n lemonbar)" "$(xdo id -n stalonetray)"
