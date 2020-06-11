@@ -41,21 +41,13 @@ ActiveWindow() {
   echo -n " %{F$grey}[ $title ]%{F-}%{B-}"
 }
 
-Weather() {
-  echo '(' "$(curl -Ss 'https://wttr.in/yxu?0&T&Q' 2>/dev/null | cut -c 16- | head -2 | xargs echo)" ')'
-}
-
 Ip() {
   dig +short myip.opendns.com @resolver1.opendns.com
 }
 
 while true; do
-  if ! (($(date '+%s') % 60)); then
-    ip=$(Ip)
-    weather=$(Weather)
-  fi
   desktop_name=$(bspc query -D -d focused --names)
-  panel_info=$(echo -e "%{c}[$desktop_name] $(ActiveWindow)" "%{r}$weather $ip $(Calendar)$(Clock)$(Battery)")
+  panel_info=$(echo -e "%{c}[$desktop_name] $(ActiveWindow)" "%{r}$ip $(Calendar)$(Clock)$(Battery)")
   # List of all the monitors/screens
   monitors=$(xrandr | grep -o "^.* connected" | sed "s/ connected//")
   tmp=0
