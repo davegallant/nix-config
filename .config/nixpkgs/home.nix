@@ -48,7 +48,7 @@
     zathura
     zip
     zsh-autosuggestions
-    zsh-fast-syntax-highlighting
+    zsh-syntax-highlighting
   ];
 
   programs.zsh = {
@@ -73,6 +73,8 @@
       eval "$(direnv hook zsh)"
       eval "$(_RFD_COMPLETE=source_zsh rfd)"
       eval "$(starship init zsh)"
+
+      source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     '';
 
     shellAliases = {
@@ -93,7 +95,7 @@
 
     plugins = [
       {
-        name = "fast-syntax-highlighting";
+        name = "syntax-highlighting";
         src = "${pkgs.zsh-fast-syntax-highlighting}/share/zsh/site-functions";
       }
     ];
