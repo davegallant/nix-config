@@ -9,6 +9,7 @@
 
   home.packages = with pkgs; [
     awscli2
+    bandwhich
     bat
     black
     chromium
@@ -45,10 +46,10 @@
     tree
     unzip
     vlc
+    youtube-dl
     zathura
     zip
-    zsh-autosuggestions
-    zsh-syntax-highlighting
+    zsh-fast-syntax-highlighting
   ];
 
   programs.zsh = {
@@ -57,24 +58,18 @@
     history.size = 1000000;
 
     localVariables = {
-      COMPLETITION_WAITING_DOTS = "true";
       ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE = "fg=#838383,underline";
-      ZSH_DISABLE_COMPFIX = "true";
     };
 
     initExtra = ''
       export EDITOR='neovim'
       export GOPATH=$HOME/go
       export GPG_TTY=$(tty)
-      export LANG="en_US.UTF-8";
-      export LC_ALL="C";
       export PATH=$PATH:~/.local/bin
 
       eval "$(direnv hook zsh)"
       eval "$(_RFD_COMPLETE=source_zsh rfd)"
       eval "$(starship init zsh)"
-
-      source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     '';
 
     shellAliases = {
@@ -95,7 +90,7 @@
 
     plugins = [
       {
-        name = "syntax-highlighting";
+        name = "fast-syntax-highlighting";
         src = "${pkgs.zsh-fast-syntax-highlighting}/share/zsh/site-functions";
       }
     ];
