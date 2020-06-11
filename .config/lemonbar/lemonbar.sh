@@ -46,6 +46,11 @@ Ip() {
 }
 
 while true; do
+
+  if ! (($(date '+%s') % 60)); then
+    ip=$(Ip)
+  fi
+
   desktop_name=$(bspc query -D -d focused --names)
   panel_info=$(echo -e "%{c}[$desktop_name] $(ActiveWindow)" "%{r}$ip $(Calendar)$(Clock)$(Battery)")
   # List of all the monitors/screens

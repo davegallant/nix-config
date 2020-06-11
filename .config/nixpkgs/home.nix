@@ -38,11 +38,11 @@
     openvpn
     postman
     python38
-    python38Packages.pip
+    rfd
     ripgrep
-    ruby
     rustup
     shellcheck
+    shfmt
     signal-desktop
     slack
     spotify
@@ -57,7 +57,7 @@
     zathura
     zip
     zsh-autosuggestions
-    zsh-syntax-highlighting
+    zsh-fast-syntax-highlighting
   ];
 
   programs.zsh = {
@@ -80,8 +80,6 @@
       eval "$(direnv hook zsh)"
       eval "$(_RFD_COMPLETE=source_zsh rfd)"
       eval "$(starship init zsh)"
-
-      source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     '';
 
     shellAliases = {
@@ -102,8 +100,8 @@
 
     plugins = [
       {
-        name = "syntax-highlighting";
-        src = "${pkgs.zsh-syntax-highlighting}/share/zsh/site-functions";
+        name = "fast-syntax-highlighting";
+        src = "${pkgs.zsh-fast-syntax-highlighting}/share/zsh/site-functions";
       }
     ];
 

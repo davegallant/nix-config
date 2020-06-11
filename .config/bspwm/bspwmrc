@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
 
-
 p='sxhkd stalonetray lemonbar'
 for i in $p; do pkill "$i"; done
-
 
 sxhkd &
 
