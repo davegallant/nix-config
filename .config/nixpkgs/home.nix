@@ -37,11 +37,12 @@
     nmap
     openvpn
     postman
-    python3
+    python38
+    rfd
     ripgrep
-    ruby
     rustup
     shellcheck
+    shfmt
     signal-desktop
     slack
     spotify
@@ -56,7 +57,7 @@
     zathura
     zip
     zsh-autosuggestions
-    zsh-syntax-highlighting
+    zsh-fast-syntax-highlighting
   ];
 
   programs.zsh = {
@@ -71,14 +72,14 @@
     };
 
     initExtra = ''
-      eval "$(direnv hook zsh)"
-      eval "$(_RFD_COMPLETE=source_zsh rfd)"
-      eval "$(starship init zsh)"
-
       export EDITOR='neovim'
       export GPG_TTY=$(tty)
       export GOPATH=$HOME/go
-      source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+      export PATH=$PATH:~/.local/bin
+
+      eval "$(direnv hook zsh)"
+      eval "$(_RFD_COMPLETE=source_zsh rfd)"
+      eval "$(starship init zsh)"
     '';
 
     shellAliases = {
@@ -99,8 +100,8 @@
 
     plugins = [
       {
-        name = "syntax-highlighting";
-        src = "${pkgs.zsh-syntax-highlighting}/share/zsh/site-functions";
+        name = "fast-syntax-highlighting";
+        src = "${pkgs.zsh-fast-syntax-highlighting}/share/zsh/site-functions";
       }
     ];
 
