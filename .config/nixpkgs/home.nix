@@ -37,7 +37,8 @@
     nmap
     openvpn
     postman
-    python3
+    python38
+    python38Packages.pip
     ripgrep
     ruby
     rustup
@@ -71,13 +72,15 @@
     };
 
     initExtra = ''
+      export EDITOR='neovim'
+      export GPG_TTY=$(tty)
+      export GOPATH=$HOME/go
+      export PATH=$PATH:~/.local/bin
+
       eval "$(direnv hook zsh)"
       eval "$(_RFD_COMPLETE=source_zsh rfd)"
       eval "$(starship init zsh)"
 
-      export EDITOR='neovim'
-      export GPG_TTY=$(tty)
-      export GOPATH=$HOME/go
       source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     '';
 
