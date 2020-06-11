@@ -1,20 +1,10 @@
 { config, pkgs, ... }:
 
 {
-  # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
   home.username = "dgallant";
   home.homeDirectory = "/home/dgallant";
-
-  home.sessionVariables = {
-    LANG = "en_US.UTF-8";
-  };
-
-  # This value determines the Home Manager release that your
-  # configuration is compatible with. This helps avoid breakage
-  # when a new Home Manager release introduces backwards
-  # incompatible changes.
   home.stateVersion = "20.09";
 
   home.packages = with pkgs; [
@@ -40,6 +30,7 @@
     python38
     rfd
     ripgrep
+    rtv
     rustup
     shellcheck
     shfmt
@@ -73,8 +64,10 @@
 
     initExtra = ''
       export EDITOR='neovim'
-      export GPG_TTY=$(tty)
       export GOPATH=$HOME/go
+      export GPG_TTY=$(tty)
+      export LANG="en_US.UTF-8";
+      export LC_ALL="C";
       export PATH=$PATH:~/.local/bin
 
       eval "$(direnv hook zsh)"
