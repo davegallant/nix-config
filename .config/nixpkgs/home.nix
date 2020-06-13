@@ -6,6 +6,7 @@
   home.username = "dgallant";
   home.homeDirectory = "/home/dgallant";
   home.stateVersion = "20.09";
+  home.sessionVariables.LOCALES_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
 
   home.packages = with pkgs; [
     awscli2
@@ -16,7 +17,10 @@
     direnv
     exa
     fd
+    firefox
     fzf
+    gimp
+    glibcLocales
     go
     golint
     google-cloud-sdk
@@ -27,6 +31,7 @@
     jq
     nmap
     openvpn
+    pavucontrol
     postman
     python38
     rfd
@@ -50,7 +55,31 @@
     zathura
     zip
     zsh-fast-syntax-highlighting
+
+    # fonts
+    aileron
+    comfortaa
+    dejavu_fonts
+    dina-font
+    eunomia
+    fantasque-sans-mono
+    fira
+    fira-code
+    fira-code-symbols
+    fira-mono
+    font-awesome
+    helvetica-neue-lt-std
+    hermit
+    ibm-plex
+    inconsolata
+    liberation_ttf
+    libre-baskerville
+    libre-bodoni
+    libre-caslon
+    libre-franklin
   ];
+
+  fonts.fontconfig.enable = true;
 
   programs.zsh = {
     enable = true;
