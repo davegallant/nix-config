@@ -130,7 +130,7 @@ super + {_,shift + }s
 
 # lock
 super + l
-	slock
+	i3lock-fancy
 
 # screenshot
 super + @Print
