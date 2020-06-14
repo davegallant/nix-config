@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-p='sxhkd stalonetray lemonbar'
+p='compton sxhkd stalonetray lemonbar'
 for i in $p; do pkill "$i"; done
 
 sxhkd &

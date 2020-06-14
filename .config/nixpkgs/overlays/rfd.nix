@@ -1,9 +1,9 @@
 self: super:
 rec {
 
-  python3 = with super; super.python3.override {};
+  python38 = with super; super.python38.override {};
 
-  pythonPackages = python3.pkgs;
+  pythonPackages = python38.pkgs;
 
   rfd = with self; pythonPackages.buildPythonApplication rec {
     pname = "rfd";
