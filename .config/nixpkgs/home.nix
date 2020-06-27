@@ -22,19 +22,20 @@
       fd
       firefox
       fzf
+      gcc
       gimp
       glibcLocales
       go
       golint
       google-cloud-sdk
+      gradle
       groovy
       hadolint
       htop
+      jetbrains.idea-community
       jdk
       jq
-      kbfs
-      keybase
-      keybase-gui
+      maven
       nmap
       openvpn
       pavucontrol
@@ -101,10 +102,6 @@
         pinentry-program ${pkgs.pinentry-curses}/bin/pinentry
       '';
     };
-
-    keybase.enable = true;
-    kbfs.enable = true;
-
   };
 
 
@@ -127,6 +124,7 @@
         export GOPATH=$HOME/go
         export GPG_TTY=$(tty)
         export PATH=$PATH:~/.local/bin
+        export PATH=$PATH:~/go/bin
 
         eval "$(direnv hook zsh)"
         eval "$(_RFD_COMPLETE=source_zsh rfd)"
