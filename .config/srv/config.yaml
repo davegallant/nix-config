@@ -1,6 +1,7 @@
 ---
 feeds:
 - https://aws.amazon.com/blogs/security/feed/
+- https://www.phoronix.com/rss.php
 - https://news.ycombinator.com/rss
 - https://www.archlinux.org/feeds/news/
 - https://www.bleepingcomputer.com/feed/
