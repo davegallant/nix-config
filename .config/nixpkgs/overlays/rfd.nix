@@ -7,13 +7,13 @@ rec {
 
   rfd = with self; pythonPackages.buildPythonApplication rec {
     pname = "rfd";
-    version = "v0.3.4";
+    version = "v0.3.5";
 
     src = fetchFromGitHub {
       owner = "davegallant";
       repo = "rfd";
       rev = version;
-      sha256 = "08f9xsw5h35p5sbljrv7vrzvdz17icgr85n7507p27fcg0yphd0s";
+      hash = "sha256:0hg9mgb0hf8ddxbnnrd28a7fxngld7m0fadzidjbj99j0gxvzq6g";
     };
 
     # No tests included
