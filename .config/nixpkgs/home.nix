@@ -62,32 +62,20 @@
       zsh-fast-syntax-highlighting
 
       # python packages
-      black
       python38Packages.ipython
       rfd
       rtv
 
+      # python dev
+      black
+
       # fonts
-      aileron
-      comfortaa
       dejavu_fonts
-      dina-font
-      eunomia
-      fantasque-sans-mono
       fira
-      fira-code
       fira-code-symbols
       fira-mono
       font-awesome
       helvetica-neue-lt-std
-      hermit
-      ibm-plex
-      inconsolata
-      liberation_ttf
-      libre-baskerville
-      libre-bodoni
-      libre-caslon
-      libre-franklin
     ];
   };
 
@@ -157,6 +145,7 @@
       enable = true;
       viAlias = true;
       vimAlias = true;
+
       extraConfig = ''
         call plug#begin('~/.vim/plugged')
         Plug 'LnL7/vim-nix'
