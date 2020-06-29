@@ -1,7 +1,7 @@
 self: super:
 rec {
 
-  python38 = with super; super.python38.override {};
+  python38 = with super; super.python38.override { };
 
   pythonPackages = python38.pkgs;
 
@@ -36,4 +36,3 @@ rec {
     };
   };
 }
-

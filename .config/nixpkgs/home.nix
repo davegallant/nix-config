@@ -8,9 +8,9 @@
     homeDirectory = "/home/dgallant";
     stateVersion = "20.09";
     sessionVariables = {
-      EDITOR= "vim";
+      EDITOR = "vim";
       LOCALE = "en_US.UTF8";
-      LOCALES_ARCHIVE = ["${pkgs.glibcLocales}/lib/locale/locale-archive"];
+      LOCALES_ARCHIVE = [ "${pkgs.glibcLocales}/lib/locale/locale-archive" ];
     };
     packages = with pkgs; [
       awscli2
@@ -20,22 +20,21 @@
       direnv
       exa
       fd
-      firefox
+      firefox-devedition-bin
       fzf
-      gcc
       gimp
       glibcLocales
-      go
       golint
       google-cloud-sdk
       gradle
       groovy
       hadolint
       htop
-      jetbrains.idea-community
       jdk
+      jetbrains.idea-community
       jq
       maven
+      nixpkgs-fmt
       nmap
       openvpn
       pavucontrol
@@ -109,8 +108,6 @@
 
   programs = {
 
-    firefox.enable = true;
-
     zsh = {
       enable = true;
       enableAutosuggestions = true;
@@ -125,6 +122,7 @@
         export GPG_TTY=$(tty)
         export PATH=$PATH:~/.local/bin
         export PATH=$PATH:~/go/bin
+        export PATH=$PATH:~/.cargo/bin
 
         eval "$(direnv hook zsh)"
         eval "$(_RFD_COMPLETE=source_zsh rfd)"
@@ -132,7 +130,7 @@
       '';
 
       shellAliases = {
-        ls   = "exa -la --git";
+        ls = "exa -la --git";
         ".." = "cd ..";
         config = "/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME";
         grep = "grep --color=auto --line-buffered";
@@ -155,7 +153,7 @@
       ];
     };
 
-    neovim =  {
+    neovim = {
       enable = true;
       viAlias = true;
       vimAlias = true;
@@ -291,7 +289,7 @@
         let g:syntastic_auto_loc_list = 1
         let g:syntastic_check_on_open = 1
         let g:syntastic_check_on_wq = 0
-        '';
-      };
+      '';
     };
+  };
 }
