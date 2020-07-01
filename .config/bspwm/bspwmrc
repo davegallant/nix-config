@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-p='compton sxhkd stalonetray lemonbar'
+p='picom sxhkd stalonetray lemonbar'
 for i in $p; do pkill "$i"; done
 
 sxhkd &
@@ -41,7 +41,7 @@ feh --bg-fill ~/Pictures/Wallpapers/laughingman.jpg &
 stalonetray &
 
 # Compositor to prevent screen tearing
-compton --config ~/.config/compton.conf -b
+picom --config ~/.config/compton.conf -b
 
 # Switch to a lefty mouse if mouse detected
 if xinput list | grep -qi 'mouse'; then
