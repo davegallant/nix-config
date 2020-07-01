@@ -72,10 +72,11 @@
       # fonts
       dejavu_fonts
       fira
+      fira-code
       fira-code-symbols
       fira-mono
       font-awesome
-      helvetica-neue-lt-std
+      google-fonts
     ];
   };
 
