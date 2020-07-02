@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-p='picom sxhkd stalonetray lemonbar'
+p='picom sxhkd polybar'
 for i in $p; do pkill "$i"; done
 
 sxhkd &
@@ -35,10 +35,7 @@ wmname LG3D
 # Set background
 feh --bg-fill ~/Pictures/Wallpapers/laughingman.jpg &
 
-# lemonbar-xft-git
-~/.config/lemonbar/lemonbar.sh | lemonbar -p -f "Fira Code-12" -f "Font Awesome 5 Free" -f "Noto Color Emoji" -B '#000000' -F '#FFFFFF' &
-
-stalonetray &
+"$HOME"/.config/polybar/launch.sh
 
 # Compositor to prevent screen tearing
 picom --config ~/.config/compton.conf -b
@@ -47,8 +44,3 @@ picom --config ~/.config/compton.conf -b
 if xinput list | grep -qi 'mouse'; then
   xmodmap -e "pointer = 3 2 1 " # swap mouse buttons
 fi
-
-sleep 3
-
-xdo above -t "$(xdo id -n root)" "$(xdo id -n lemonbar)"
-xdo above -t "$(xdo id -n lemonbar)" "$(xdo id -n stalonetray)"

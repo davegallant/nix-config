@@ -24,6 +24,7 @@
       fzf
       gimp
       glibcLocales
+      go
       golint
       google-cloud-sdk
       gradle
@@ -38,6 +39,7 @@
       nmap
       openvpn
       pavucontrol
+      polybar
       postman
       python38
       pinentry-curses
