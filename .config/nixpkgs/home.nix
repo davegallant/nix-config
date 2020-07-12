@@ -23,7 +23,6 @@
       glibcLocales
       gnumake
       go
-      golint
       google-cloud-sdk
       gradle
       groovy
