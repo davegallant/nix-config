@@ -16,6 +16,11 @@ rec {
       hash = "sha256:0hg9mgb0hf8ddxbnnrd28a7fxngld7m0fadzidjbj99j0gxvzq6g";
     };
 
+    postPatch = ''
+      substituteInPlace requirements.txt --replace "soupsieve<=2.0" "soupsieve"
+      substituteInPlace requirements.txt --replace "beautifulsoup4<=4.8.2" "beautifulsoup4"
+    '';
+
     # No tests included
     doCheck = false;
 
@@ -24,6 +29,7 @@ rec {
       click
       colorama
       requests
+      soupsieve
     ];
 
     passthru.python3 = python3;

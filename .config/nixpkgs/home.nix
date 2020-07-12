@@ -1,12 +1,8 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
-  programs.home-manager.enable = true;
 
   home = {
-    username = "dgallant";
-    homeDirectory = "/home/dgallant";
-    stateVersion = "20.09";
     sessionVariables = {
       EDITOR = "vim";
       LOCALE = "en_US.UTF8";
@@ -23,7 +19,9 @@
       firefox-devedition-bin
       fzf
       gimp
+      git
       glibcLocales
+      gnumake
       go
       golint
       google-cloud-sdk
@@ -34,25 +32,24 @@
       jdk
       jetbrains.idea-community
       jq
+      libreoffice
       maven
       nixpkgs-fmt
       nmap
       openvpn
-      pavucontrol
-      polybar
+      pinentry-curses
       postman
       python38
-      pinentry-curses
       ripgrep
+      rtv
       rustup
       shellcheck
       shfmt
       signal-desktop
       slack
       spotify
-      ssm-session-manager-plugin
-      stalonetray
       terraform
+      terraform-lsp
       tflint
       tmux
       tree
@@ -61,15 +58,21 @@
       youtube-dl
       zathura
       zip
-      zsh-fast-syntax-highlighting
 
-      # python packages
+      ## linux
+      pavucontrol
+      polybar
+      ssm-session-manager-plugin
+
+      # python
       python38Packages.ipython
-      rfd
-      rtv
-
-      # python dev
+      python38Packages.pip
+      python38Packages.setuptools
+      python38Packages.virtualenv
       black
+
+      # overlays
+      rfd
 
       # fonts
       dejavu_fonts
@@ -98,6 +101,8 @@
   fonts.fontconfig.enable = true;
 
   programs = {
+
+    home-manager.enable = true;
 
     zsh = {
       enable = true;
