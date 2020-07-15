@@ -48,6 +48,7 @@
       slack
       spotify
       terraform
+      terraform-docs
       terraform-lsp
       tflint
       tmux
@@ -214,8 +215,7 @@
         command JsonFormat execute "::%!jq '.'"
 
         " Shortcuts
-        map <Leader>r :Rg<CR>
-        map <Leader>g :Rg<CR>
+        map <Leader>r :FzfPreviewProjectCommandGrep<CR>
         map <Leader>f :FzfPreviewDirectoryFiles<CR>
         map <Leader>n :NERDTree<CR>
 
@@ -230,7 +230,7 @@
         let python_highlight_all=1
 
         syntax on
-        colorscheme xoria256
+        colorscheme gruvbox
         " Transparency
         hi Normal guibg=NONE ctermbg=NONE
 
