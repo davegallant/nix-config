@@ -34,8 +34,8 @@
       libreoffice
       maven
       nixpkgs-fmt
-      nodejs
       nmap
+      nodejs
       openvpn
       pinentry-curses
       postman
@@ -130,7 +130,7 @@
       shellAliases = {
         ls = "exa -la --git";
         ".." = "cd ..";
-        config = "/usr/bin/git --git-dir=~/.dotfiles/ --work-tree=~";
+        config = "/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME";
         grep = "grep --color=auto --line-buffered";
       };
 
