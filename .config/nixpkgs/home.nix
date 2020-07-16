@@ -34,6 +34,7 @@
       libreoffice
       maven
       nixpkgs-fmt
+      nodejs
       nmap
       openvpn
       pinentry-curses
@@ -114,11 +115,12 @@
       };
 
       initExtra = ''
-        export GOPATH=$HOME/go
+        export GOPATH=~/go
         export GPG_TTY=$(tty)
         export PATH=$PATH:~/.local/bin
         export PATH=$PATH:~/go/bin
         export PATH=$PATH:~/.cargo/bin
+        export PATH=$PATH:~/.npm-packages/bin
 
         eval "$(direnv hook zsh)"
         eval "$(_RFD_COMPLETE=source_zsh rfd)"
@@ -128,7 +130,7 @@
       shellAliases = {
         ls = "exa -la --git";
         ".." = "cd ..";
-        config = "/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME";
+        config = "/usr/bin/git --git-dir=~/.dotfiles/ --work-tree=~";
         grep = "grep --color=auto --line-buffered";
       };
 
