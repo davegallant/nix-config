@@ -12,11 +12,13 @@
       awscli2
       bandwhich
       bat
+      bind
       chromium
       direnv
+      dunst
       exa
       fd
-      firefox-devedition-bin
+      firefox
       fzf
       gimp
       git
@@ -48,14 +50,15 @@
       signal-desktop
       slack
       spotify
+      starship
       terraform
-      terraform-docs
       terraform-lsp
       tflint
       tmux
       tree
       unzip
       vlc
+      vscode
       youtube-dl
       zathura
       zip
@@ -112,6 +115,9 @@
 
       localVariables = {
         ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE = "fg=#838383,underline";
+        ZSH_DISABLE_COMPFIX = "true";
+        DISABLE_UNTRACKED_FILES_DIRTY="true";
+        CASE_SENSITIVE="true";
       };
 
       initExtra = ''
@@ -125,6 +131,8 @@
         eval "$(direnv hook zsh)"
         eval "$(_RFD_COMPLETE=source_zsh rfd)"
         eval "$(starship init zsh)"
+
+        setopt noincappendhistory
       '';
 
       shellAliases = {
@@ -200,6 +208,11 @@
         set t_Co=256
         set tabstop=2
         set wildmenu
+
+        " Remember line number
+        if has("autocmd")
+          au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+        endif
 
         " Search down into subfolders
         " Provides tab-completion for all file-related tasks
