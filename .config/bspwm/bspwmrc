@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
-p='picom sxhkd polybar'
+p='picom sxhkd polybar dunst'
 for i in $p; do pkill "$i"; done
 
 sxhkd &
+dunst &
 
 monitors=$(xrandr | grep -swc 'connected')
 
