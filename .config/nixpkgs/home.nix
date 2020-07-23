@@ -9,13 +9,16 @@
       LOCALES_ARCHIVE = [ "${pkgs.glibcLocales}/lib/locale/locale-archive" ];
     };
     packages = with pkgs; [
+      audio-recorder
       awscli2
       bandwhich
       bat
       bind
       chromium
+      clipmenu
       direnv
       dunst
+      element-desktop
       exa
       fd
       firefox
@@ -26,18 +29,21 @@
       gnumake
       go
       google-cloud-sdk
+      gopass
       gradle
       groovy
       hadolint
       htop
+      imagemagick
       jdk
       jetbrains.idea-community
       jq
+      kubectl
       libreoffice
       maven
       nixpkgs-fmt
       nmap
-      nodejs
+      nodejs-14_x
       openvpn
       pinentry-curses
       postman
@@ -59,6 +65,8 @@
       unzip
       vlc
       vscode
+      xclip
+      xdg_utils
       youtube-dl
       zathura
       zip
