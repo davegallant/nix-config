@@ -45,6 +45,7 @@
       nmap
       nodejs-14_x
       openvpn
+      packer
       pinentry-curses
       postman
       python38
@@ -88,12 +89,13 @@
 
       # fonts
       dejavu_fonts
-      fira
       fira-code
       fira-code-symbols
       fira-mono
-      font-awesome
       google-fonts
+      noto-fonts
+      noto-fonts-emoji
+      noto-fonts-extra
     ];
   };
 
