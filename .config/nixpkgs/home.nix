@@ -71,6 +71,7 @@
       zathura
       zip
 
+
       ## linux
       pavucontrol
       polybar
@@ -117,6 +118,10 @@
   programs = {
 
     home-manager.enable = true;
+
+    rtorrent = {
+      enable = true;
+    };
 
     zsh = {
       enable = true;
