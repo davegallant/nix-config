@@ -8,5 +8,5 @@ while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
 # Launch polybar on all monitors
 for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
-  MONITOR=$m polybar --reload poly &
+	MONITOR=$m polybar --reload poly &
 done
