@@ -5,8 +5,6 @@
   home = {
     sessionVariables = {
       EDITOR = "vim";
-      LOCALE = "en_US.UTF8";
-      LOCALES_ARCHIVE = [ "${pkgs.glibcLocales}/lib/locale/locale-archive" ];
     };
     packages = with pkgs; [
       audio-recorder
@@ -16,9 +14,11 @@
       bind
       chromium
       clipmenu
+      curl
       direnv
       dunst
       element-desktop
+      evince
       exa
       fd
       firefox
@@ -92,6 +92,7 @@
       fira-code
       fira-code-symbols
       fira-mono
+      font-awesome
       google-fonts
       noto-fonts
       noto-fonts-emoji
@@ -137,6 +138,8 @@
         export PATH=$PATH:~/go/bin
         export PATH=$PATH:~/.cargo/bin
         export PATH=$PATH:~/.npm-packages/bin
+
+        export LANG=en_US.UTF-8
 
         eval "$(direnv hook zsh)"
         eval "$(_RFD_COMPLETE=source_zsh rfd)"
