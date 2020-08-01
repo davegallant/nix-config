@@ -11,10 +11,10 @@ monitors=$(xrandr | grep -swc 'connected')
 # I currently have a laptop and a desktop with 2 monitors
 # This checks the number of monitors and then sets desktops
 if [ "$monitors" -gt 1 ]; then
-  bspc monitor HDMI-A-0 -d 1 2 3 4 5
-  bspc monitor DisplayPort-0 -d 6 7 8 9 0
+	bspc monitor HDMI-A-0 -d 1 2 3 4 5
+	bspc monitor DisplayPort-0 -d 6 7 8 9 0
 else
-  bspc monitor -d 1 2 3 4 5 6 7 8 9 0
+	bspc monitor -d 1 2 3 4 5 6 7 8 9 0
 fi
 
 bspc config border_width 2
@@ -43,5 +43,5 @@ picom --config ~/.config/compton.conf -b
 
 # Switch to a lefty mouse if mouse detected
 if xinput list | grep -qi 'mouse'; then
-  xmodmap -e "pointer = 3 2 1 " # swap mouse buttons
+	xmodmap -e "pointer = 3 2 1 " # swap mouse buttons
 fi
