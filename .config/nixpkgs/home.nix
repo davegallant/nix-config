@@ -18,7 +18,6 @@
       direnv
       dunst
       element-desktop
-      evince
       exa
       fd
       firefox
