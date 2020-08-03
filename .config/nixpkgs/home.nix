@@ -198,7 +198,6 @@
         Plug 'tpope/vim-surround'
         Plug 'vifm/vifm.vim'
         Plug 'vim-syntastic/syntastic'
-        Plug 'yuki-ycino/fzf-preview.vim'
         call plug#end()
 
         set autoread
@@ -247,8 +246,9 @@
         command JsonFormat execute "::%!jq '.'"
 
         " Shortcuts
-        map <Leader>r :FzfPreviewProjectCommandGrep<CR>
-        map <Leader>f :FzfPreviewDirectoryFiles<CR>
+        map <Leader>r :Rg<CR>
+        map <Leader>f :Files<CR>
+        map <Leader>g :GFiles<CR>
         map <Leader>n :NERDTree<CR>
 
         noremap <Leader>y "*y
@@ -317,6 +317,11 @@
         let g:syntastic_auto_loc_list = 1
         let g:syntastic_check_on_open = 1
         let g:syntastic_check_on_wq = 0
+
+        " fzf.vim
+        let g:fzf_preview_window = 'right:60%'
+        let g:fzf_layout = { 'window': 'enew' }
+
       '';
     };
   };
