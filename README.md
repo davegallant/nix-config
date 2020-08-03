@@ -1,6 +1,6 @@
 # dotfiles
 
-![screenshot](https://user-images.githubusercontent.com/4519234/77236166-52fe0d80-6b92-11ea-8b78-cb94b29c4265.png)
+![screenshot](https://user-images.githubusercontent.com/4519234/89136156-34286400-d500-11ea-838c-59ced8eff5ea.png)
 
 ## use
 
@@ -12,5 +12,3 @@ config config --local status.showUntrackedFiles no
 # override all config files
 config checkout -f
 ```
-
-See: https://www.atlassian.com/git/tutorials/dotfiles
