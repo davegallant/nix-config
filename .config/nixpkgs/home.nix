@@ -8,16 +8,15 @@
     };
     packages = with pkgs; [
       audio-recorder
-      awscli2
       bandwhich
       bat
       bind
       chromium
       clipmenu
+      colordiff
       curl
       direnv
       dunst
-      element-desktop
       exa
       fd
       firefox
@@ -53,8 +52,6 @@
       rustup
       shellcheck
       shfmt
-      signal-desktop
-      slack
       spotify
       starship
       terraform
@@ -71,10 +68,19 @@
       zathura
       zip
 
+      # communication
+      element-desktop
+      signal-desktop
+      slack
 
-      ## linux
-      pavucontrol
+      # desktop environments
+      bspwm
       polybar
+      sxhkd
+      pavucontrol
+
+      ## aws
+      awscli2
       ssm-session-manager-plugin
 
       # python
@@ -83,9 +89,6 @@
       python38Packages.setuptools
       python38Packages.virtualenv
       black
-
-      # overlays
-      rfd
 
       # fonts
       dejavu_fonts
@@ -98,6 +101,10 @@
       noto-fonts-cjk
       noto-fonts-emoji
       noto-fonts-extra
+
+      # overlays
+      rfd
+
     ];
   };
 
@@ -139,10 +146,13 @@
       initExtra = ''
         export GOPATH=~/go
         export GPG_TTY=$(tty)
-        export PATH=$PATH:~/.local/bin
-        export PATH=$PATH:~/go/bin
         export PATH=$PATH:~/.cargo/bin
+        export PATH=$PATH:~/.local/bin
+        export PATH=$PATH:~/.nix-profile/bin
         export PATH=$PATH:~/.npm-packages/bin
+        export PATH=$PATH:~/go/bin
+
+        export CM_LAUNCHER=rofi
 
         export LANG=en_US.UTF-8
 
