@@ -260,7 +260,11 @@
         map <Leader>r :Rg<CR>
         map <Leader>f :Files<CR>
         map <Leader>g :GFiles<CR>
-        map <Leader>n :NERDTree<CR>
+        map <Leader>n :NERDTreeToggle<CR>
+
+        map <C-l> :tabn<CR>
+        map <C-h> :tabp<CR>
+        map <C-n> :tabnew<CR>
 
         noremap <Leader>y "*y
         noremap <Leader>p "*p
