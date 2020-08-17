@@ -55,13 +55,12 @@
       spotify
       starship
       terraform
-      terraform-lsp
       tflint
       tmux
       tree
       unzip
       vlc
-      vscode
+      vscodium
       xclip
       xdg_utils
       youtube-dl
@@ -196,6 +195,7 @@
         call plug#begin('~/.vim/plugged')
         Plug 'LnL7/vim-nix'
         Plug 'ap/vim-css-color'
+        Plug 'dracula/vim', { 'as': 'dracula' }
         Plug 'fatih/vim-go'
         Plug 'hashivim/vim-terraform'
         Plug 'itchyny/lightline.vim'
@@ -266,10 +266,9 @@
         map <C-h> :tabp<CR>
         map <C-n> :tabnew<CR>
 
-        noremap <Leader>y "*y
-        noremap <Leader>p "*p
-        noremap <Leader>Y "+y
-        noremap <Leader>P "+p
+        " Copypasta
+        noremap <Leader>y "+y
+        noremap <Leader>p "+p
 
         " Python indentation
         au BufNewFile,BufRead *.py set tabstop=4 softtabstop=4 shiftwidth=4 textwidth=79 expandtab autoindent fileformat=unix
@@ -277,7 +276,7 @@
         let python_highlight_all=1
 
         syntax on
-        colorscheme gruvbox
+        colorscheme dracula
         " Transparency
         hi Normal guibg=NONE ctermbg=NONE
 
