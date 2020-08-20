@@ -68,6 +68,7 @@
       zip
 
       # communication
+      discord
       element-desktop
       signal-desktop
       slack
