@@ -11,7 +11,7 @@
       bandwhich
       bat
       bind
-      chromium
+      brave
       clipmenu
       colordiff
       curl
@@ -19,7 +19,6 @@
       dunst
       exa
       fd
-      firefox
       fzf
       gimp
       git
@@ -54,7 +53,8 @@
       shfmt
       spotify
       starship
-      terraform
+      terraform_0_13
+      terraform-ls
       tflint
       tmux
       tree
@@ -263,8 +263,8 @@
         map <Leader>g :GFiles<CR>
         map <Leader>n :NERDTreeToggle<CR>
 
-        map <C-l> :tabn<CR>
-        map <C-h> :tabp<CR>
+        map <C-s> :tabn<CR>
+        map <C-a> :tabp<CR>
         map <C-n> :tabnew<CR>
 
         " Copypasta
