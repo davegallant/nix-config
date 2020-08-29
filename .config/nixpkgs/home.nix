@@ -67,6 +67,10 @@
       zathura
       zip
 
+      # haskell
+      ghc
+      haskellPackages.hlint
+
       # communication
       discord
       element-desktop
@@ -78,6 +82,10 @@
       polybar
       sxhkd
       pavucontrol
+      xmonad-with-packages
+      haskellPackages.xmobar
+      haskellPackages.xmonad-extras
+      haskellPackages.xmonad-contrib
 
       ## aws
       awscli2
@@ -151,15 +159,11 @@
         export PATH=$PATH:~/.nix-profile/bin
         export PATH=$PATH:~/.npm-packages/bin
         export PATH=$PATH:~/go/bin
-
         export CM_LAUNCHER=rofi
-
         export LANG=en_US.UTF-8
-
         eval "$(direnv hook zsh)"
         eval "$(_RFD_COMPLETE=source_zsh rfd)"
         eval "$(starship init zsh)"
-
         setopt noincappendhistory
       '';
 
@@ -211,7 +215,6 @@
         Plug 'vifm/vifm.vim'
         Plug 'vim-syntastic/syntastic'
         call plug#end()
-
         set autoread
         set cursorline
         set encoding=utf-8
@@ -236,60 +239,45 @@
         set t_Co=256
         set tabstop=2
         set wildmenu
-
         " Remember line number
         if has("autocmd")
           au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
         endif
-
         " Search down into subfolders
         " Provides tab-completion for all file-related tasks
         set path+=**
-
         filetype plugin indent on
-
         " Enable folding with the spacebar
         nnoremap <space> za
-
         " replace visually selected
         vnoremap <C-r> "hy:%s/<C-r>h//g<left><left>
-
         " Custom Commands
         command JsonFormat execute "::%!jq '.'"
-
         " Shortcuts
         map <Leader>r :Rg<CR>
         map <Leader>f :Files<CR>
         map <Leader>g :GFiles<CR>
         map <Leader>n :NERDTreeToggle<CR>
-
         map <C-s> :tabn<CR>
         map <C-a> :tabp<CR>
         map <C-n> :tabnew<CR>
-
         " Copypasta
         noremap <Leader>y "+y
         noremap <Leader>p "+p
-
         " Python indentation
         au BufNewFile,BufRead *.py set tabstop=4 softtabstop=4 shiftwidth=4 textwidth=79 expandtab autoindent fileformat=unix
-
         let python_highlight_all=1
-
         syntax on
         colorscheme dracula
         " Transparency
         hi Normal guibg=NONE ctermbg=NONE
-
         " highlight red lines
         highlight ExtraWhitespace ctermbg=red guibg=red
         match ExtraWhitespace /\s\+$/
-
         " groovy syntax
         au BufNewFile,BufRead *.groovy set tabstop=2 shiftwidth=2 expandtab
         au BufNewFile,BufRead Jenkinsfile setf groovy
         au BufNewFile,BufRead Jenkinsfile set tabstop=2 shiftwidth=2 expandtab
-
         " vim-go
         let g:go_auto_sameids = 0
         let g:go_fmt_command = "goimports"
@@ -314,29 +302,23 @@
         let g:go_metalinter_autosave=1
         let g:go_metalinter_autosave_enabled=['golint', 'govet']
         let g:go_rename_command = 'gopls'
-
         " vim-terraform
         let g:terraform_align=1
         let g:terraform_fmt_on_save=1
         let g:terraform_fold_sections=1
-
         " rust.vim
         let g:rustfmt_autosave = 1
-
         " syntastic
         set statusline+=%#warningmsg#
         set statusline+=%{SyntasticStatuslineFlag()}
         set statusline+=%*
-
         let g:syntastic_always_populate_loc_list = 1
         let g:syntastic_auto_loc_list = 1
         let g:syntastic_check_on_open = 1
         let g:syntastic_check_on_wq = 0
-
         " fzf.vim
         let g:fzf_preview_window = 'right:60%'
         let g:fzf_layout = { 'window': 'enew' }
-
       '';
     };
   };
