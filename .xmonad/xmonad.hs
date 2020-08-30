@@ -4,6 +4,7 @@ import Data.Monoid
 import System.Exit
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
+import Graphics.X11.ExtraTypes.XF86
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.SpawnOnce
 import System.IO (hPutStrLn)
@@ -80,6 +81,8 @@ myWorkspaces = clickable . map xmobarEscape $ ["1","2","3","4","5","6","7","8","
 myNormalBorderColor  = "#dddddd"
 myFocusedBorderColor = "#ff0000"
 
+lockScreen = "i3lock-fancy-rapid 10 2 pixels"
+
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
 --
@@ -96,6 +99,21 @@ myKeys conf@XConfig {XMonad.modMask = modm} = M.fromList $
 
     -- close focused window
     , ((modm .|. shiftMask, xK_c     ), kill)
+
+    -- lock the screen
+    , ((modm .|. shiftMask, xK_l     ), spawn lockScreen)
+
+    -- suspend
+    , ((modm .|. shiftMask, xK_s     ), spawn $ lockScreen ++ " && systemctl suspend")
+
+    -- screenshot
+    , ((modm              , xK_Print ), spawn "import png:- | xclip -selection clipboard -t image/png")
+
+    -- multimedia
+    , ((0, xF86XK_AudioPlay), spawn "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause")
+    , ((0, xF86XK_AudioStop), spawn "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop")
+    , ((0, xF86XK_AudioPrev), spawn "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous")
+    , ((0, xF86XK_AudioNext), spawn "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next")
 
      -- Rotate through the available layout algorithms
     , ((modm,               xK_space ), sendMessage NextLayout)
@@ -267,13 +285,13 @@ myEventHook = mempty
 -- combining it with ewmhDesktopsLogHook.
 --
 myLogHook h = dynamicLogWithPP $ xmobarPP
-                                  { ppOutput = hPutStrLn h
-                                  , ppCurrent = xmobarColor "yellow" "" . wrap "[" "]"
-                                  , ppHiddenNoWindows = xmobarColor "grey" ""
-                                  , ppTitle   = xmobarColor "green"  "" . shorten 40
-                                  , ppVisible = wrap "(" ")"
-                                  , ppUrgent  = xmobarColor "red" "yellow"
-                                  }
+    { ppOutput = hPutStrLn h
+    , ppCurrent = xmobarColor "yellow" "" . wrap "[" "]"
+    , ppHiddenNoWindows = xmobarColor "grey" ""
+    , ppTitle   = xmobarColor "green"  "" . shorten 40
+    , ppVisible = wrap "(" ")"
+    , ppUrgent  = xmobarColor "red" "yellow"
+    }
 
 ------------------------------------------------------------------------
 -- Startup hook
