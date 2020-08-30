@@ -310,8 +310,9 @@ myLogHook h = dynamicLogWithPP $ xmobarPP
 myStartupHook = do
   spawnOnce "dunst &"
   spawnOnce "feh --bg-fill ~/Pictures/Wallpapers/laughingman.jpg"
-  spawnOnce "picom --config ~/.config/compton.conf -b"
   spawnOnce "if xinput list | grep -qi 'mouse'; then xmodmap -e 'pointer = 3 2 1 ';fi" -- flip mouse buttons
+  spawnOnce "picom --config ~/.config/compton.conf -b"
+  spawnOnce "stalonetray &"
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
