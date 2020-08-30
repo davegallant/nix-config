@@ -43,6 +43,7 @@
       nodejs-14_x
       openvpn
       packer
+      pfetch
       pinentry-curses
       postman
       python38
@@ -53,8 +54,8 @@
       shfmt
       spotify
       starship
-      terraform_0_13
       terraform-ls
+      terraform_0_13
       tflint
       tmux
       tree
@@ -79,13 +80,14 @@
 
       # desktop environments
       bspwm
-      polybar
-      sxhkd
-      pavucontrol
-      xmonad-with-packages
       haskellPackages.xmobar
-      haskellPackages.xmonad-extras
       haskellPackages.xmonad-contrib
+      haskellPackages.xmonad-extras
+      pavucontrol
+      polybar
+      stalonetray
+      sxhkd
+      xmonad-with-packages
 
       ## aws
       awscli2
@@ -165,6 +167,7 @@
         eval "$(_RFD_COMPLETE=source_zsh rfd)"
         eval "$(starship init zsh)"
         setopt noincappendhistory
+        pfetch
       '';
 
       shellAliases = {
