@@ -1,13 +1,14 @@
 --
-import XMonad
 import Data.Monoid
+import Graphics.X11.ExtraTypes.XF86
 import System.Exit
+import System.IO (hPutStrLn)
+import XMonad
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
-import Graphics.X11.ExtraTypes.XF86
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.SpawnOnce
-import System.IO (hPutStrLn)
+import XMonad.Hooks.EwmhDesktops
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
@@ -270,7 +271,7 @@ myManageHook = composeAll
 -- It will add EWMH event handling to your custom event hooks by
 -- combining them with ewmhDesktopsEventHook.
 --
-myEventHook = mempty
+myEventHook = docksEventHook <+> handleEventHook def <+> fullscreenEventHook
 
 ------------------------------------------------------------------------
 -- Status bars and logging
@@ -321,7 +322,7 @@ myStartupHook = do
 --
 main = do
   xmproc <- spawnPipe "LC_ALL=C.UTF-8 xmobar -x 1 ~/.config/xmobar/xmobar.hs"
-  xmonad $ docks defaultConfig {
+  xmonad $ ewmh $ docks defaultConfig {
       -- simple stuff
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,
