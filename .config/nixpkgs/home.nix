@@ -206,19 +206,23 @@
         Plug 'ap/vim-css-color'
         Plug 'dracula/vim', { 'as': 'dracula' }
         Plug 'fatih/vim-go'
+        Plug 'godlygeek/tabular'
         Plug 'hashivim/vim-terraform'
         Plug 'itchyny/lightline.vim'
         Plug 'junegunn/fzf'
         Plug 'junegunn/fzf.vim'
         Plug 'neoclide/coc.nvim', {'branch': 'release'}
+        Plug 'plasticboy/vim-markdown'
         Plug 'rust-lang/rust.vim'
         Plug 'scrooloose/nerdtree'
         Plug 'tpope/vim-commentary'
         Plug 'tpope/vim-fugitive'
+        Plug 'tpope/vim-repeat'
         Plug 'tpope/vim-surround'
         Plug 'vifm/vifm.vim'
         Plug 'vim-syntastic/syntastic'
         call plug#end()
+
         set autoread
         set cursorline
         set encoding=utf-8
@@ -233,7 +237,7 @@
         set mouse=a
         set nocompatible
         set noswapfile
-        set number
+        set number relativenumber
         set pastetoggle=<F3>
         set ruler
         set shiftwidth=2
@@ -255,7 +259,6 @@
         filetype plugin indent on
 
         " Enable folding with the spacebar
-
         nnoremap <space> za
 
         " replace visually selected
@@ -340,6 +343,14 @@
         " fzf.vim
         let g:fzf_preview_window = 'right:60%'
         let g:fzf_layout = { 'window': 'enew' }
+
+        " vim-markdown
+        let g:vim_markdown_override_foldtext=0
+        let g:vim_markdown_no_default_key_mappings=1
+        let g:vim_markdown_emphasis_multiline=0
+        let g:vim_markdown_conceal=0
+        let g:vim_markdown_frontmatter=1
+        let g:vim_markdown_new_list_item_indent=0
       '';
     };
   };
