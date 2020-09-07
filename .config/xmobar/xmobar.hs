@@ -4,14 +4,14 @@ Config {
      font =         "xft:Fira Code:size=10:bold:antialias=true"
    , bgColor =      "black"
    , fgColor =      "#CCC"
-   , position =     Top
+   , position =     TopP 0 80
    , border =       BottomB
    , borderColor =  "#646464"
 
    -- layout
    , sepChar =  "%"   -- delineator between plugin names and straight text
    , alignSep = "}{"  -- separator between left-right alignment
-   , template = "%UnsafeStdinReader% | %date% | %battery% | %multicpu% | %memory% | %dynnetwork%  "
+   , template = "%UnsafeStdinReader% }{ %multicpu% | %memory% | %dynnetwork% | %battery% | %date%"
 
    -- general behavior
    , lowerOnStart =     True    -- send to bottom of window stack on start
