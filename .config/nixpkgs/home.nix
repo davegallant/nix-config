@@ -249,9 +249,7 @@
         set wildmenu
 
         " Remember line number
-        if has("autocmd")
-          au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
-        endif
+        au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
         " Search down into subfolders
         " Provides tab-completion for all file-related tasks
@@ -279,6 +277,9 @@
         " Copypasta
         noremap <Leader>y "+y
         noremap <Leader>p "+p
+
+        " yaml indentation
+        au FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
         " Python indentation
         au BufNewFile,BufRead *.py set tabstop=4 softtabstop=4 shiftwidth=4 textwidth=79 expandtab autoindent fileformat=unix
