@@ -65,17 +65,7 @@ myModMask       = mod4Mask
 --
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
-xmobarEscape = concatMap doubleLts
-  where doubleLts '<' = "<<"
-        doubleLts x   = [x]
-
-myWorkspaces :: [String]
-myWorkspaces = clickable . map xmobarEscape $ ["1","2","3","4","5","6","7","8","9"]
-
-  where
-         clickable l = [ "<action=xdotool key alt+" ++ show n ++ ">" ++ ws ++ "</action>" |
-                             (i,ws) <- zip [1..9] l,
-                            let n = i ]
+myWorkspaces = ["1","2","3","4","5","6","7","8","9"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
@@ -288,10 +278,11 @@ myEventHook = docksEventHook <+> handleEventHook def <+> fullscreenEventHook
 myLogHook h = dynamicLogWithPP $ xmobarPP
     { ppOutput = hPutStrLn h
     , ppCurrent = xmobarColor "yellow" "" . wrap "[" "]"
-    , ppHiddenNoWindows = xmobarColor "grey" ""
-    , ppTitle   = xmobarColor "green"  "" . shorten 40
+    , ppTitle   = xmobarColor "grey"  "" . shorten 80
     , ppVisible = wrap "(" ")"
     , ppUrgent  = xmobarColor "red" "yellow"
+    , ppWsSep   = " "
+    , ppOrder   = \(ws:l:t:_) -> [ws,t]
     }
 
 ------------------------------------------------------------------------
