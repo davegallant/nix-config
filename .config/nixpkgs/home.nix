@@ -78,15 +78,14 @@
       signal-desktop
       slack
 
-      # desktop environments
-      bspwm
+      # desktop environment
       haskellPackages.xmobar
       haskellPackages.xmonad-contrib
       haskellPackages.xmonad-extras
       pavucontrol
-      polybar
       stalonetray
       sxhkd
+      xautolock
       xmonad-with-packages
 
       ## aws
