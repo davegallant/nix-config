@@ -305,6 +305,7 @@ myStartupHook = do
   spawnOnce "if xinput list | grep -qi 'mouse'; then xmodmap -e 'pointer = 3 2 1 ';fi" -- flip mouse buttons
   spawnOnce "picom --config ~/.config/compton.conf -b"
   spawnOnce "stalonetray &"
+  spawn "xautolock -time 5 -locker 'i3lock-fancy-rapid 10 2 pixels' -notify 30 -notifier \"notify-send -t 30000 'Locking in 30 seconds'\""
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
