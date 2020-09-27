@@ -69,8 +69,8 @@ myWorkspaces = ["1","2","3","4","5","6","7","8","9"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
-myNormalBorderColor  = "#dddddd"
-myFocusedBorderColor = "#ff0000"
+myNormalBorderColor  = "#cccccc"
+myFocusedBorderColor = "#b541c4"
 
 lockScreen = "i3lock-fancy-rapid 10 2 pixels"
 
