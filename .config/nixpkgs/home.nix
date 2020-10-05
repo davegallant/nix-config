@@ -22,6 +22,7 @@
       fzf
       gimp
       git
+      github-cli
       glibcLocales
       gnumake
       go
@@ -49,7 +50,6 @@
       python38
       ripgrep
       rtv
-      rustup
       shellcheck
       shfmt
       spotify
@@ -95,6 +95,7 @@
       # python
       python38Packages.ipython
       python38Packages.pip
+      python38Packages.poetry
       python38Packages.setuptools
       python38Packages.virtualenv
       black
@@ -113,6 +114,7 @@
 
       # overlays
       rfd
+      lpass
 
     ];
   };
@@ -165,6 +167,7 @@
         eval "$(direnv hook zsh)"
         eval "$(_RFD_COMPLETE=source_zsh rfd)"
         eval "$(starship init zsh)"
+        eval "$(jira --completion-script-zsh)"
         setopt noincappendhistory
         pfetch
       '';
