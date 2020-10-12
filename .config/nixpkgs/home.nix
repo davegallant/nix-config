@@ -33,7 +33,7 @@
       hadolint
       htop
       imagemagick
-      jdk
+      jdk8
       jetbrains.idea-community
       jq
       kubectl
@@ -206,6 +206,7 @@
         Plug 'LnL7/vim-nix'
         Plug 'airblade/vim-gitgutter'
         Plug 'ap/vim-css-color'
+        Plug 'artur-shaik/vim-javacomplete2'
         Plug 'dracula/vim', { 'as': 'dracula' }
         Plug 'fatih/vim-go'
         Plug 'godlygeek/tabular'
@@ -354,6 +355,9 @@
         let g:vim_markdown_conceal=0
         let g:vim_markdown_frontmatter=1
         let g:vim_markdown_new_list_item_indent=0
+
+        " vim-javacomplete2
+        autocmd FileType java setlocal omnifunc=javacomplete#Complete
       '';
     };
   };
