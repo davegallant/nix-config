@@ -303,7 +303,7 @@ myStartupHook = do
   spawnOnce "dunst &"
   spawnOnce "feh --bg-fill ~/Pictures/Wallpapers/laughingman.jpg"
   spawnOnce "if xinput list | grep -qi 'mouse'; then xmodmap -e 'pointer = 3 2 1 ';fi" -- flip mouse buttons
-  spawnOnce "picom --config ~/.config/compton.conf -b"
+  spawnOnce "picom --config ~/.config/picom.conf -b"
   spawnOnce "stalonetray &"
   spawn "xautolock -time 5 -locker 'i3lock-fancy-rapid 10 2 pixels' -notify 30 -notifier \"notify-send -t 30000 'Locking in 30 seconds'\""
 
