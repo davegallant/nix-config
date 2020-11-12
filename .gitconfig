@@ -54,8 +54,6 @@
 [gpg]
 	program      = gpg
 
-[core]
-
 [interactive]
   diffFilter   = delta --color-only
 
