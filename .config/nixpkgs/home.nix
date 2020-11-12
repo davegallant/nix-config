@@ -34,14 +34,13 @@
       htop
       imagemagick
       jdk8
-      jetbrains.idea-community
       jq
       kubectl
       libreoffice
       maven
       nixpkgs-fmt
       nmap
-      nodejs-14_x
+      nodejs-12_x
       openvpn
       packer
       pfetch
@@ -198,6 +197,7 @@
 
     neovim = {
       enable = true;
+
       viAlias = true;
       vimAlias = true;
 
