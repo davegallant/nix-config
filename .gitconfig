@@ -1,3 +1,6 @@
+[include]
+  path = ~/.gitconfig-work
+
 [alias]
   aa           = add -A .
   br           = branch
@@ -31,9 +34,7 @@
 
 [core]
   editor       = vim
-
-[user]
-  name         = Dave Gallant
+  pager        = delta
 
 [push]
   default      = current
@@ -46,7 +47,23 @@
   smudge       = git-lfs smudge -- %f
   required     = true
   process      = git-lfs filter-process
+
 [commit]
-	gpgsign = true
+	gpgsign      = true
+
 [gpg]
-	program = gpg
+	program      = gpg
+
+[core]
+
+[interactive]
+  diffFilter   = delta --color-only
+
+[delta]
+  features               = line-numbers decorations
+  whitespace-error-style = 22 reverse
+
+[delta "decorations"]
+  commit-decoration-style   = bold yellow box ul
+  file-style                = bold yellow ul
+  file-decoration-style     = none
