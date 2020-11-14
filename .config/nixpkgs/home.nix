@@ -16,6 +16,7 @@
       colordiff
       curl
       direnv
+      docker-compose
       dunst
       exa
       fd
@@ -41,7 +42,6 @@
       maven
       nixpkgs-fmt
       nmap
-      nodejs-14_x
       openvpn
       packer
       pfetch
@@ -162,6 +162,7 @@
         export PATH=$PATH:~/.nix-profile/bin
         export PATH=$PATH:~/.npm-packages/bin
         export PATH=$PATH:~/go/bin
+        export PATH=$PATH:~/node-v12.19.0-linux-x64/bin
         export CM_LAUNCHER=rofi
         export LANG=en_US.UTF-8
         eval "$(direnv hook zsh)"
@@ -214,7 +215,9 @@
         Plug 'itchyny/lightline.vim'
         Plug 'junegunn/fzf'
         Plug 'junegunn/fzf.vim'
+        Plug 'leafgarland/typescript-vim'
         Plug 'neoclide/coc.nvim', {'branch': 'release'}
+        Plug 'peitalin/vim-jsx-typescript'
         Plug 'plasticboy/vim-markdown'
         Plug 'rust-lang/rust.vim'
         Plug 'scrooloose/nerdtree'
@@ -224,6 +227,9 @@
         Plug 'tpope/vim-surround'
         Plug 'vifm/vifm.vim'
         Plug 'vim-syntastic/syntastic'
+        Plug 'prettier/vim-prettier', {
+          \ 'do': 'yarn install',
+          \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
         call plug#end()
 
         set autoread
@@ -289,9 +295,6 @@
         let python_highlight_all=1
         syntax on
         colorscheme dracula
-
-        " Transparency
-        hi Normal guibg=NONE ctermbg=NONE
 
         " highlight red lines
         highlight ExtraWhitespace ctermbg=red guibg=red
