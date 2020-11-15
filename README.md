@@ -1,8 +1,6 @@
 # dotfiles
 
-![screenshot](https://user-images.githubusercontent.com/4519234/89136156-34286400-d500-11ea-838c-59ced8eff5ea.png)
-
-## use
+## Setup a bare git repo
 
 ```shell
 git clone --bare git@github.com:davegallant/dotfiles.git $HOME/.dotfiles
