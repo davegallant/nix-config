@@ -313,7 +313,7 @@ myStartupHook = do
 -- Run xmonad with the settings you specify. No need to modify this.
 --
 main = do
-  xmproc <- spawnPipe "LC_ALL=C.UTF-8 xmobar -x 1 ~/.config/xmobar/xmobar.hs"
+  xmproc <- spawnPipe "LC_ALL=C.UTF-8 xmobar -x 2 ~/.config/xmobar/xmobar.hs"
   xmonad $ ewmh $ docks defaultConfig {
       -- simple stuff
         terminal           = myTerminal,
