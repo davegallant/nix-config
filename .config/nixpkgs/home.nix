@@ -35,7 +35,6 @@
       htop
       imagemagick
       jdk8
-      jetbrains.idea-community
       jq
       kubectl
       libreoffice
@@ -208,7 +207,6 @@
         Plug 'airblade/vim-gitgutter'
         Plug 'ap/vim-css-color'
         Plug 'artur-shaik/vim-javacomplete2'
-        Plug 'dracula/vim', { 'as': 'dracula' }
         Plug 'fatih/vim-go'
         Plug 'godlygeek/tabular'
         Plug 'hashivim/vim-terraform'
@@ -294,7 +292,7 @@
         au BufNewFile,BufRead *.py set tabstop=4 softtabstop=4 shiftwidth=4 textwidth=79 expandtab autoindent fileformat=unix
         let python_highlight_all=1
         syntax on
-        colorscheme dracula
+        colorscheme gruvbox
 
         " highlight red lines
         highlight ExtraWhitespace ctermbg=red guibg=red
