@@ -60,6 +60,7 @@
 [delta]
   features               = line-numbers decorations
   whitespace-error-style = 22 reverse
+  plus-style             = green bold ul "#198214"
 
 [delta "decorations"]
   commit-decoration-style   = bold yellow box ul
