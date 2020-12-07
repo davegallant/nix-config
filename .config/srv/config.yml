@@ -10,4 +10,4 @@ feeds:
 - https://www.reddit.com/r/linux/.rss
 - https://www.zdnet.com/topic/security/rss.xml
 # Optionally define an application to view the feeds
-externalViewer: chromium
+externalViewer: brave

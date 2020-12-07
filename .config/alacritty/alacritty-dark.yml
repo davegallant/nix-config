@@ -24,7 +24,7 @@ font:
   bold_italic:
     family: Fira Code
 
-  size: 11.0
+  size: 12.0
 
 # Colors (iTerm 2 default theme)
 colors:
@@ -57,7 +57,7 @@ colors:
 
 custom_cursor_colors: true
 
-background_opacity: 0.9
+background_opacity: 1
 
 shell:
   program: /bin/bash

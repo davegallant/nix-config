@@ -27,6 +27,7 @@
       glibcLocales
       gnumake
       go
+      go-jira
       google-cloud-sdk
       gopass
       gradle
@@ -161,7 +162,7 @@
         export PATH=$PATH:~/.nix-profile/bin
         export PATH=$PATH:~/.npm-packages/bin
         export PATH=$PATH:~/go/bin
-        export PATH=$PATH:~/node-v12.19.0-linux-x64/bin
+        export PATH=$PATH:~/node-v12.19.1-linux-x64/bin
         export CM_LAUNCHER=rofi
         export LANG=en_US.UTF-8
         eval "$(direnv hook zsh)"
