@@ -33,11 +33,13 @@
       gradle
       groovy
       hadolint
+      nodejs-12_x
       htop
       imagemagick
       jdk8
       jq
       kubectl
+      kubernetes-helm
       libreoffice
       maven
       nixpkgs-fmt
@@ -68,25 +70,11 @@
       zathura
       zip
 
-      # haskell
-      ghc
-      haskellPackages.hlint
-
       # communication
       discord
       element-desktop
       signal-desktop
       slack
-
-      # desktop environment
-      haskellPackages.xmobar
-      haskellPackages.xmonad-contrib
-      haskellPackages.xmonad-extras
-      pavucontrol
-      stalonetray
-      sxhkd
-      xautolock
-      xmonad-with-packages
 
       ## aws
       awscli2
