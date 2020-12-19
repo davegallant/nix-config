@@ -166,6 +166,7 @@
         ".." = "cd ..";
         config = "/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME";
         grep = "grep --color=auto --line-buffered";
+        k = "kubectl";
       };
 
       "oh-my-zsh" = {
