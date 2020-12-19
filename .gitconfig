@@ -1,5 +1,5 @@
 [include]
-  path = ~/.gitconfig-work
+  path         = ~/.gitconfig-work
 
 [alias]
   aa           = add -A .
@@ -17,15 +17,13 @@
   dic          = diff --cached
   dicn         = diff --cached --name-only
   din          = diff --name-only
-  dump         = cat-file -p
-  hist         = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  l            = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
   ms           = merge --squash
   pb           = pull --rebase
   po           = push origin
   por          = push origin HEAD:refs/for/$1
-  pu           = !"git fetch origin -v; git fetch upstream -v; git merge upstream/master"
   st           = status
-  type         =  cat-file -t
+  wip          = for-each-ref --sort='authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' refs/heads
 
 [color]
   diff         = auto
