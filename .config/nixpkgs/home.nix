@@ -57,8 +57,9 @@
       spotify
       starship
       terraform-ls
-      terraform_0_13
+      terraform_0_14
       tflint
+      tfsec
       tmux
       tree
       unzip
