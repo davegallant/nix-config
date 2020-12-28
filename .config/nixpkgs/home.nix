@@ -15,9 +15,9 @@
       clipmenu
       colordiff
       curl
+      deluge
       direnv
       docker-compose
-      dunst
       exa
       fd
       fzf
