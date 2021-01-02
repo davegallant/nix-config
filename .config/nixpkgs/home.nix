@@ -7,6 +7,7 @@
       EDITOR = "vim";
     };
     packages = with pkgs; [
+      asciinema
       audio-recorder
       bandwhich
       bat
