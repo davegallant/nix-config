@@ -43,7 +43,6 @@
       kubernetes-helm
       libreoffice
       maven
-      nixpkgs-fmt
       nmap
       openvpn
       packer
@@ -71,6 +70,10 @@
       youtube-dl
       zathura
       zip
+
+      # nix
+      nixpkgs-fmt
+      rnix-lsp
 
       # communication
       discord
