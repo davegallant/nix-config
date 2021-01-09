@@ -7,12 +7,12 @@
       EDITOR = "vim";
     };
     packages = with pkgs; [
+      alacritty
       asciinema
       audio-recorder
       bandwhich
       bat
       bind
-      brave
       clipmenu
       colordiff
       curl
@@ -39,8 +39,6 @@
       imagemagick
       jdk8
       jq
-      kubectl
-      kubernetes-helm
       libreoffice
       maven
       nmap
@@ -71,9 +69,28 @@
       zathura
       zip
 
+      # encryption
+      cryptsetup
+
+      # browser
+      brave
+      firefox
+
+      # Docker
+      docker
+
+      # k8s
+      kubectl
+      kubernetes-helm
+
       # nix
       nixpkgs-fmt
       rnix-lsp
+
+      # games
+      steam
+      minecraft
+      yuzu
 
       # communication
       discord
@@ -108,6 +125,7 @@
       # overlays
       rfd
       lpass
+      zoom
 
     ];
   };
@@ -123,7 +141,6 @@
       '';
     };
   };
-
 
   fonts.fontconfig.enable = true;
 
@@ -169,7 +186,7 @@
       shellAliases = {
         ls = "exa -la --git";
         ".." = "cd ..";
-        config = "/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME";
+        config = "git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME";
         grep = "grep --color=auto --line-buffered";
         k = "kubectl";
       };
