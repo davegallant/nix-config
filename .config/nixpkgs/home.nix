@@ -93,6 +93,28 @@
       '';
     };
 
+    starship = {
+      settings = {
+        add_newline = false;
+        error_symbol = "[✖](bold red) ";
+        enableZshIntegration = true;
+        initExtra = ''
+          [gcloud]
+          disabled = true
+
+          [time]
+          time_format = "%T"
+          format = "$time($style) "
+          style = "bright-white"
+          disabled = false
+
+          [directory]
+          truncation_length = 5
+          format = "[$path]($style)[$lock_symbol]($lock_style) "
+        '';
+      };
+    };
+
     zsh = {
       enable = true;
       enableAutosuggestions = true;
@@ -110,7 +132,6 @@
         export GPG_TTY=$(tty)
         export PATH=$PATH:~/.cargo/bin
         export PATH=$PATH:~/.local/bin
-        export PATH=$PATH:~/.nix-profile/bin
         export PATH=$PATH:~/.npm-packages/bin
         export PATH=$PATH:~/go/bin
         export CM_LAUNCHER=rofi

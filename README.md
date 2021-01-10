@@ -1,6 +1,6 @@
 # config
 
-This repo stores nix, dotfiles, and other miscellaneous scripts.
+This repo stores nix expressions and other configuration.
 
 ## Setup
 
