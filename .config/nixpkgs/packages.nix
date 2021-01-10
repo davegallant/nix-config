@@ -98,6 +98,7 @@ with pkgs; [
   element-desktop
   signal-desktop
   slack
+  zoom-us
 
   ## aws
   awscli2
@@ -144,5 +145,4 @@ with pkgs; [
   # overlays
   rfd
   lpass
-  zoom
 ]
