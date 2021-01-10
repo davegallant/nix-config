@@ -136,7 +136,6 @@ with pkgs; [
   shellcheck
   shfmt
   starship
-  tmux
   xclip
   xdg_utils
   zathura
