@@ -85,6 +85,7 @@ with pkgs; [
 
   # nix
   nixpkgs-fmt
+  nixpkgs-review
   rnix-lsp
 
   # games
