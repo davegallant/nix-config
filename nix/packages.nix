@@ -19,6 +19,9 @@ with pkgs; [
   unzip
   zip
 
+  # education
+  anki
+
   # monitoring
   htop
 
