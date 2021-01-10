@@ -85,12 +85,11 @@
         };
       };
 
-      extraConfig = ''
-        [push]
-          default = current
-        [pull]
-          rebase = true
-      '';
+      extraConfig = {
+        push = { default = "current"; };
+        pull = { rebase = true; };
+      };
+
     };
 
     starship = {
