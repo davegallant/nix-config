@@ -6,127 +6,7 @@
     sessionVariables = {
       EDITOR = "vim";
     };
-    packages = with pkgs; [
-      asciinema
-      audio-recorder
-      bandwhich
-      bat
-      bind
-      clipmenu
-      colordiff
-      curl
-      deluge
-      direnv
-      docker-compose
-      exa
-      fd
-      fzf
-      gimp
-      git
-      github-cli
-      glibcLocales
-      gnumake
-      go
-      go-jira
-      google-cloud-sdk
-      gopass
-      gradle
-      groovy
-      hadolint
-      nodejs-12_x
-      htop
-      imagemagick
-      jdk8
-      jq
-      libreoffice
-      maven
-      nmap
-      openvpn
-      packer
-      pfetch
-      pinentry-curses
-      postman
-      python38
-      ripgrep
-      rtv
-      shellcheck
-      shfmt
-      spotify
-      starship
-      terraform-ls
-      terraform_0_14
-      tflint
-      tfsec
-      tmux
-      tree
-      unzip
-      vlc
-      vscodium
-      xclip
-      xdg_utils
-      youtube-dl
-      zathura
-      zip
-
-      # encryption
-      cryptsetup
-
-      # browser
-      brave
-      firefox
-
-      # Docker
-      docker
-
-      # k8s
-      kubectl
-      kubernetes-helm
-
-      # nix
-      nixpkgs-fmt
-      rnix-lsp
-
-      # games
-      steam
-      minecraft
-      yuzu
-
-      # communication
-      discord
-      element-desktop
-      signal-desktop
-      slack
-
-      ## aws
-      awscli2
-      ssm-session-manager-plugin
-
-      # python
-      python38Packages.ipython
-      python38Packages.pip
-      python38Packages.poetry
-      python38Packages.setuptools
-      python38Packages.virtualenv
-      black
-
-      # fonts
-      dejavu_fonts
-      fira-code
-      fira-code-symbols
-      fira-mono
-      font-awesome
-      google-fonts
-      noto-fonts
-      noto-fonts-cjk
-      noto-fonts-emoji
-      noto-fonts-extra
-
-      # overlays
-      rfd
-      lpass
-      zoom
-
-    ];
+    packages = import ./packages.nix { inherit pkgs; };
   };
 
   services = {
@@ -157,10 +37,10 @@
       history.size = 1000000;
 
       localVariables = {
+        CASE_SENSITIVE="true";
+        DISABLE_UNTRACKED_FILES_DIRTY="true";
         ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE = "fg=#838383,underline";
         ZSH_DISABLE_COMPFIX = "true";
-        DISABLE_UNTRACKED_FILES_DIRTY="true";
-        CASE_SENSITIVE="true";
       };
 
       initExtra = ''
@@ -171,7 +51,6 @@
         export PATH=$PATH:~/.nix-profile/bin
         export PATH=$PATH:~/.npm-packages/bin
         export PATH=$PATH:~/go/bin
-        export PATH=$PATH:~/node-v12.19.1-linux-x64/bin
         export CM_LAUNCHER=rofi
         export LANG=en_US.UTF-8
         eval "$(direnv hook zsh)"
@@ -259,7 +138,7 @@
             };
 
             key_bindings = [
-              { key = "Home"; mods = "Control"; action = "RecentFontSize"; }
+              { key = "Home"; mods = "Control"; action = "ResetFontSize"; }
               { key = "Plus"; mods = "Control"; action = "IncreaseFontSize"; }
               { key = "Minus"; mods = "Control"; action = "DecreaseFontSize"; }
            ];
