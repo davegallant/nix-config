@@ -146,6 +146,56 @@
         };
     };
 
+    tmux = {
+        enable = true;
+        clock24 = true;
+        terminal = "screen-256color";
+        customPaneNavigationAndResize = true;
+        extraConfig = ''
+          set-window-option -g automatic-rename on
+          set-option -g set-titles on
+
+          set -g mouse on
+
+          # Length of tmux status line
+          set -g status-left-length 30
+          set -g status-right-length 150
+
+          set -g status-interval 5
+
+          set -g default-terminal "screen-256color" # colors!
+          setw -g xterm-keys on
+
+          set -g set-titles on          # set terminal title
+          set -g display-panes-time 800 # slightly longer pane indicators display time
+          set -g display-time 2000      # slightly longer status messages display time
+
+          # Lots of scrollback.
+          setw -g history-limit 50000000
+
+          setw -q -g utf8 on
+
+          # activity
+          set -g monitor-activity on
+          set -g visual-activity off
+
+          set -g status-right '#(gitmux #{pane_current_path})'
+
+          set -g @plugin 'tmux-plugins/tmux-pain-control'
+          set -g @plugin 'tmux-plugins/tmux-sensible'
+          set -g @plugin 'tmux-plugins/tmux-sessionist'
+          set -g @plugin 'tmux-plugins/tmux-yank'
+          set -g @plugin 'tmux-plugins/tpm'
+
+          # Theme
+          set -g @plugin 'seebi/tmux-colors-solarized'
+          set -g @colors-solarized 'dark'
+
+          # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+          run -b '~/.tmux/plugins/tpm/tpm'
+        '';
+      };
+
     neovim = {
       enable = true;
       viAlias = true;
