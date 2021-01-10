@@ -59,7 +59,7 @@ with pkgs; [
   tflint
   tfsec
 
-  # cloud
+  # gcp
   google-cloud-sdk
 
   # jvm
