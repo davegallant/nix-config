@@ -7,7 +7,6 @@
       EDITOR = "vim";
     };
     packages = with pkgs; [
-      alacritty
       asciinema
       audio-recorder
       bandwhich
@@ -206,6 +205,66 @@
           src = "${pkgs.zsh-fast-syntax-highlighting}/share/zsh/site-functions";
         }
       ];
+    };
+
+    alacritty = {
+        enable = true;
+        settings = {
+          window.padding.x = 10;
+          window.padding.y = 10;
+          scrolling.history = 100000;
+          live_config_reload = true;
+          selection.save_to_clipboard = true;
+          mouse.hide_when_typing = true;
+
+          font = {
+            normal.family = "Fira Code";
+            size = 12;
+          };
+
+          shell = {
+            program = "zsh";
+            args = [
+             "-l"
+             "-c"
+             "tmux"
+             "u"
+            ];
+          };
+
+          colors = {
+            primary.background = "0x101421";
+            primary.foreground = "0xfffbf6";
+
+            normal = {
+              black = "0x2e2e2e";
+              red = "0xeb4129";
+              green = "0xabe047";
+              yellow = "0xf6c744";
+              blue = "0x47a0f3";
+              magenta = "0x7b5cb0";
+              cyan = "0x64dbed";
+              white = "0xe5e9f0";
+            };
+
+            bright = {
+              black = "0x565656";
+              red = "0xec5357";
+              green = "0xc0e17d";
+              yellow = "0xf9da6a";
+              blue = "0x49a4f8";
+              magenta = "0xa47de9";
+              cyan = "0x99faf2";
+              white = "0xffffff";
+            };
+
+            key_bindings = [
+              { key = "Home"; mods = "Control"; action = "RecentFontSize"; }
+              { key = "Plus"; mods = "Control"; action = "IncreaseFontSize"; }
+              { key = "Minus"; mods = "Control"; action = "DecreaseFontSize"; }
+           ];
+          };
+        };
     };
 
     neovim = {
