@@ -37,14 +37,70 @@
       '';
     };
 
+
+    git = {
+      enable = true;
+
+      aliases = {
+        "aa" = "add -A .";
+        "br" = "branch";
+        "ca" = "commit -S --amend";
+        "cb" = "checkout -b";
+        "ci" = "commit";
+        "cm" = "commit -m";
+        "co" = "checkout";
+        "cs" = "commit -S";
+        "csm" = "commit -S -m";
+        "csa" = "commit -S --amend";
+        "deleted" = "log --diff-filter=D --summary";
+        "di" = "diff";
+        "dic" = "diff --cached";
+        "dicn" = "diff --cached --name-only";
+        "din" = "diff --name-only";
+        "l" = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
+        "ms" = "merge --squash";
+        "pb" = "pull --rebase";
+        "po" = "push origin";
+        "por" = "push origin HEAD:refs/for/$1";
+        "st" = "status";
+        "wip" = "for-each-ref --sort='authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' refs/heads";
+      };
+
+      includes = [
+        { path = "~/.gitconfig-work"; }
+      ];
+
+      delta = {
+        enable = true;
+
+        options = {
+          features = "line-numbers decorations";
+          whitespace-error-style = "22 reverse";
+          plus-style = "green bold ul '#198214'";
+          decorations = {
+            commit-decoration-style = "bold yellow box ul";
+            file-style = "bold yellow ul";
+            file-decoration-style = "none";
+          };
+        };
+      };
+
+      extraConfig = ''
+        [push]
+          default = current
+        [pull]
+          rebase = true
+      '';
+    };
+
     zsh = {
       enable = true;
       enableAutosuggestions = true;
       history.size = 1000000;
 
       localVariables = {
-        CASE_SENSITIVE="true";
-        DISABLE_UNTRACKED_FILES_DIRTY="true";
+        CASE_SENSITIVE = "true";
+        DISABLE_UNTRACKED_FILES_DIRTY = "true";
         ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE = "fg=#838383,underline";
         ZSH_DISABLE_COMPFIX = "true";
       };
@@ -93,114 +149,114 @@
     };
 
     alacritty = {
-        enable = true;
-        settings = {
-          window.padding.x = 10;
-          window.padding.y = 10;
-          scrolling.history = 100000;
-          live_config_reload = true;
-          selection.save_to_clipboard = true;
-          mouse.hide_when_typing = true;
+      enable = true;
+      settings = {
+        window.padding.x = 10;
+        window.padding.y = 10;
+        scrolling.history = 100000;
+        live_config_reload = true;
+        selection.save_to_clipboard = true;
+        mouse.hide_when_typing = true;
 
-          font = {
-            normal.family = "Fira Code";
-            size = 12;
-          };
-
-          shell = {
-            program = "zsh";
-            args = [
-             "-l"
-             "-c"
-             "tmux"
-             "u"
-            ];
-          };
-
-          colors = {
-            primary.background = "0x101421";
-            primary.foreground = "0xfffbf6";
-
-            normal = {
-              black = "0x2e2e2e";
-              red = "0xeb4129";
-              green = "0xabe047";
-              yellow = "0xf6c744";
-              blue = "0x47a0f3";
-              magenta = "0x7b5cb0";
-              cyan = "0x64dbed";
-              white = "0xe5e9f0";
-            };
-
-            bright = {
-              black = "0x565656";
-              red = "0xec5357";
-              green = "0xc0e17d";
-              yellow = "0xf9da6a";
-              blue = "0x49a4f8";
-              magenta = "0xa47de9";
-              cyan = "0x99faf2";
-              white = "0xffffff";
-            };
-
-            key_bindings = [
-              { key = "Home"; mods = "Control"; action = "ResetFontSize"; }
-              { key = "Plus"; mods = "Control"; action = "IncreaseFontSize"; }
-              { key = "Minus"; mods = "Control"; action = "DecreaseFontSize"; }
-           ];
-          };
+        font = {
+          normal.family = "Fira Code";
+          size = 12;
         };
+
+        shell = {
+          program = "zsh";
+          args = [
+            "-l"
+            "-c"
+            "tmux"
+            "u"
+          ];
+        };
+
+        colors = {
+          primary.background = "0x101421";
+          primary.foreground = "0xfffbf6";
+
+          normal = {
+            black = "0x2e2e2e";
+            red = "0xeb4129";
+            green = "0xabe047";
+            yellow = "0xf6c744";
+            blue = "0x47a0f3";
+            magenta = "0x7b5cb0";
+            cyan = "0x64dbed";
+            white = "0xe5e9f0";
+          };
+
+          bright = {
+            black = "0x565656";
+            red = "0xec5357";
+            green = "0xc0e17d";
+            yellow = "0xf9da6a";
+            blue = "0x49a4f8";
+            magenta = "0xa47de9";
+            cyan = "0x99faf2";
+            white = "0xffffff";
+          };
+
+          key_bindings = [
+            { key = "Home"; mods = "Control"; action = "ResetFontSize"; }
+            { key = "Plus"; mods = "Control"; action = "IncreaseFontSize"; }
+            { key = "Minus"; mods = "Control"; action = "DecreaseFontSize"; }
+          ];
+        };
+      };
     };
 
     tmux = {
-        enable = true;
-        clock24 = true;
-        terminal = "screen-256color";
-        customPaneNavigationAndResize = true;
-        extraConfig = ''
-          set-window-option -g automatic-rename on
-          set-option -g set-titles on
+      enable = true;
+      clock24 = true;
+      terminal = "screen-256color";
+      customPaneNavigationAndResize = true;
+      extraConfig = ''
+        set-window-option -g automatic-rename on
+        set-option -g set-titles on
 
-          set -g mouse on
+        set -g mouse on
 
-          # Length of tmux status line
-          set -g status-left-length 30
-          set -g status-right-length 150
+        # Length of tmux status line
+        set -g status-left-length 30
+        set -g status-right-length 150
 
-          set -g status-interval 5
+        set -g status-interval 5
 
-          set -g default-terminal "screen-256color" # colors!
-          setw -g xterm-keys on
+        set -g default-terminal "screen-256color" # colors!
+        setw -g xterm-keys on
 
-          set -g set-titles on          # set terminal title
-          set -g display-panes-time 800 # slightly longer pane indicators display time
-          set -g display-time 2000      # slightly longer status messages display time
+        set -g set-titles on          # set terminal title
+        set -g display-panes-time 800 # slightly longer pane indicators display time
+        set -g display-time 2000      # slightly longer status messages display time
 
-          # Lots of scrollback.
-          setw -g history-limit 50000000
+        # Lots of scrollback.
+        setw -g history-limit 50000000
 
-          setw -q -g utf8 on
+        setw -q -g utf8 on
 
-          # activity
-          set -g monitor-activity on
-          set -g visual-activity off
+        # activity
+        set -g monitor-activity on
+        set -g visual-activity off
 
-          set -g status-right '#(gitmux #{pane_current_path})'
+        set -g status-right '#(gitmux #{pane_current_path})'
 
-          set -g @plugin 'tmux-plugins/tmux-pain-control'
-          set -g @plugin 'tmux-plugins/tmux-sensible'
-          set -g @plugin 'tmux-plugins/tmux-sessionist'
-          set -g @plugin 'tmux-plugins/tmux-yank'
-          set -g @plugin 'tmux-plugins/tpm'
+        set -g @plugin 'tmux-plugins/tmux-pain-control'
+        set -g @plugin 'tmux-plugins/tmux-sensible'
+        set -g @plugin 'tmux-plugins/tmux-sessionist'
+        set -g @plugin 'tmux-plugins/tmux-yank'
+        set -g @plugin 'tmux-plugins/tpm'
 
-          # Theme
-          set -g @plugin 'seebi/tmux-colors-solarized'
-          set -g @colors-solarized 'dark'
+        # Theme
+        set -g @plugin 'seebi/tmux-colors-solarized'
+        set -g @colors-solarized 'dark'
 
-          # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
-          run -b '~/.tmux/plugins/tpm/tpm'
-        '';
-      };
+        # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+        run -b '~/.tmux/plugins/tpm/tpm'
+      '';
+    };
 
     neovim = {
       enable = true;
