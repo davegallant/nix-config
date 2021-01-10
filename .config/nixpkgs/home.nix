@@ -93,24 +93,25 @@
     };
 
     starship = {
+      enable = true;
+      enableZshIntegration = true;
+
       settings = {
         add_newline = false;
-        error_symbol = "[✖](bold red) ";
-        enableZshIntegration = true;
-        initExtra = ''
-          [gcloud]
-          disabled = true
+        gcloud = {
+          disabled = true;
+        };
+        scan_timeout = 10;
+        character = {
+          error_symbol = "[✖](bold red)";
+        };
 
-          [time]
-          time_format = "%T"
-          format = "$time($style) "
-          style = "bright-white"
-          disabled = false
-
-          [directory]
-          truncation_length = 5
-          format = "[$path]($style)[$lock_symbol]($lock_style) "
-        '';
+        time  = {
+          time_format = "%T";
+          format = "$time($style) ";
+          style = "bright-white";
+          disabled = false;
+        };
       };
     };
 
@@ -137,7 +138,6 @@
         export LANG=en_US.UTF-8
         eval "$(direnv hook zsh)"
         eval "$(_RFD_COMPLETE=source_zsh rfd)"
-        eval "$(starship init zsh)"
         eval "$(jira --completion-script-zsh)"
         setopt noincappendhistory
         pfetch
