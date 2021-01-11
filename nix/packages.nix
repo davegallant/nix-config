@@ -32,6 +32,7 @@ with pkgs; [
   rtv
 
   # imaging
+  gifsicle
   gimp
 
   # editors
