@@ -53,9 +53,6 @@ with pkgs; [
   openvpn
   postman
 
-  # go
-  go
-
   # terraform
   terraform-ls
   terraform_0_14
@@ -148,4 +145,5 @@ with pkgs; [
   # overlays
   rfd
   lpass
+  vpngate
 ]

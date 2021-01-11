@@ -130,7 +130,6 @@
       };
 
       initExtra = ''
-        export GOPATH=~/go
         export GPG_TTY=$(tty)
         export PATH=$PATH:~/.cargo/bin
         export PATH=$PATH:~/.local/bin
@@ -228,6 +227,13 @@
           ];
         };
       };
+    };
+
+
+    go = {
+      enable = true;
+      goBin = "go/bin";
+      goPath = "go";
     };
 
     tmux = {
