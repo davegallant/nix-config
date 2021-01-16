@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  nixpkgs.overlays = import ./overlays { inherit pkgs; };
+  nixpkgs.overlays = import ../overlays { inherit pkgs; };
   nixpkgs.config.allowUnfree = true;
 
   home = {
