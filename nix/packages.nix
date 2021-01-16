@@ -5,6 +5,7 @@ with pkgs; [
   # utils
   bat
   bind
+  binutils-unwrapped
   colordiff
   curl
   direnv
@@ -85,6 +86,8 @@ with pkgs; [
   kubernetes-helm
 
   # nix
+  nix-index
+  nixfmt
   nixpkgs-fmt
   nixpkgs-review
   rnix-lsp
@@ -144,7 +147,8 @@ with pkgs; [
   zathura
 
   # overlays
-  rfd
   lpass
+  rfd
   vpngate
+
 ]
