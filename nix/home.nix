@@ -5,9 +5,7 @@
   nixpkgs.config.allowUnfree = true;
 
   home = {
-    sessionVariables = {
-      EDITOR = "vim";
-    };
+    sessionVariables = { EDITOR = "vim"; };
     packages = import ./packages.nix { inherit pkgs; };
   };
 
@@ -17,9 +15,6 @@
       defaultCacheTtl = 3600;
       defaultCacheTtlSsh = 3600;
       enableSshSupport = true;
-      extraConfig = ''
-        pinentry-program ${pkgs.pinentry-curses}/bin/pinentry
-      '';
     };
   };
 
@@ -39,9 +34,10 @@
       '';
     };
 
-
     git = {
       enable = true;
+
+      userName = "Dave Gallant";
 
       aliases = {
         "aa" = "add -A .";
@@ -59,18 +55,18 @@
         "dic" = "diff --cached";
         "dicn" = "diff --cached --name-only";
         "din" = "diff --name-only";
-        "l" = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
+        "l" =
+          "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
         "ms" = "merge --squash";
         "pb" = "pull --rebase";
         "po" = "push origin";
         "por" = "push origin HEAD:refs/for/$1";
         "st" = "status";
-        "wip" = "for-each-ref --sort='authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' refs/heads";
+        "wip" =
+          "for-each-ref --sort='authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' refs/heads";
       };
 
-      includes = [
-        { path = "~/.gitconfig-work"; }
-      ];
+      includes = [{ path = "~/.gitconfig-work"; }];
 
       delta = {
         enable = true;
@@ -100,15 +96,11 @@
 
       settings = {
         add_newline = false;
-        gcloud = {
-          disabled = true;
-        };
+        gcloud = { disabled = true; };
         scan_timeout = 10;
-        character = {
-          error_symbol = "[✖](bold red)";
-        };
+        character = { error_symbol = "[✖](bold red)"; };
 
-        time  = {
+        time = {
           time_format = "%T";
           format = "$time($style) ";
           style = "bright-white";
@@ -130,16 +122,17 @@
       };
 
       initExtra = ''
-        export GPG_TTY=$(tty)
         export PATH=$PATH:~/.cargo/bin
         export PATH=$PATH:~/.local/bin
         export PATH=$PATH:~/.npm-packages/bin
         export PATH=$PATH:~/go/bin
-        export CM_LAUNCHER=rofi
+
         export LANG=en_US.UTF-8
+
         eval "$(direnv hook zsh)"
         eval "$(_RFD_COMPLETE=source_zsh rfd)"
         eval "$(jira --completion-script-zsh)"
+
         setopt noincappendhistory
         pfetch
       '';
@@ -154,19 +147,13 @@
 
       "oh-my-zsh" = {
         enable = true;
-        plugins = [
-          "fzf"
-          "git"
-          "last-working-dir"
-        ];
+        plugins = [ "fzf" "git" "last-working-dir" ];
       };
 
-      plugins = [
-        {
-          name = "fast-syntax-highlighting";
-          src = "${pkgs.zsh-fast-syntax-highlighting}/share/zsh/site-functions";
-        }
-      ];
+      plugins = [{
+        name = "fast-syntax-highlighting";
+        src = "${pkgs.zsh-fast-syntax-highlighting}/share/zsh/site-functions";
+      }];
     };
 
     alacritty = {
@@ -186,12 +173,7 @@
 
         shell = {
           program = "zsh";
-          args = [
-            "-l"
-            "-c"
-            "tmux"
-            "u"
-          ];
+          args = [ "-l" "-c" "tmux" "u" ];
         };
 
         colors = {
@@ -221,14 +203,25 @@
           };
 
           key_bindings = [
-            { key = "Home"; mods = "Control"; action = "ResetFontSize"; }
-            { key = "Plus"; mods = "Control"; action = "IncreaseFontSize"; }
-            { key = "Minus"; mods = "Control"; action = "DecreaseFontSize"; }
+            {
+              key = "Home";
+              mods = "Control";
+              action = "ResetFontSize";
+            }
+            {
+              key = "Plus";
+              mods = "Control";
+              action = "IncreaseFontSize";
+            }
+            {
+              key = "Minus";
+              mods = "Control";
+              action = "DecreaseFontSize";
+            }
           ];
         };
       };
     };
-
 
     go = {
       enable = true;
