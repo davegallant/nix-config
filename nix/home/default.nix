@@ -1,12 +1,9 @@
 { pkgs, ... }:
 
 {
-  nixpkgs.overlays = import ../overlays { inherit pkgs; };
-  nixpkgs.config.allowUnfree = true;
 
   home = {
     sessionVariables = { EDITOR = "vim"; };
-    packages = import ./packages.nix { inherit pkgs; };
   };
 
   services = {
