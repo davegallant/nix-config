@@ -1,4 +1,3 @@
-
 { pkgs, ... }:
 
 {
@@ -22,18 +21,9 @@
 
   # Set default fonts.
   fonts.fontconfig.defaultFonts = {
-    sansSerif = [
-      "Noto Sans"
-    ];
-    serif = [
-      "Noto Serif"
-    ];
-    monospace = [
-      "MesloLGS Nerd Font"
-      "Noto Sans Mono"
-    ];
-    emoji = [
-      "Noto Color Emoji"
-    ];
+    sansSerif = [ "Noto Sans" ];
+    serif = [ "Noto Serif" ];
+    monospace = [ "MesloLGS Nerd Font" "Noto Sans Mono" ];
+    emoji = [ "Noto Color Emoji" ];
   };
 }

@@ -3,24 +3,12 @@
 {
   imports = [ ./hardware.nix ];
 
-  nixpkgs.config.allowUnfree = true;
-
-  nix = {
-    package = pkgs.nixFlakes;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-  };
-
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "hephaestus"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Set your time zone.
-  time.timeZone = "America/Toronto";
 
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config
@@ -52,15 +40,6 @@
   hardware.opengl.extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
   hardware.pulseaudio.support32Bit = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.dave = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" "docker" ];
-    shell = pkgs.zsh;
-  };
-
-  environment.systemPackages = with pkgs; [ gnome3.gnome-tweaks ];
-
   virtualisation.docker.enable = true;
 
   programs.gnupg.agent = {
@@ -70,9 +49,6 @@
 
   # Open ports in the firewall.
   networking.firewall.enable = true;
-
-  system.stateVersion = "unstable";
-  system.autoUpgrade.enable = true;
 
   # systemd.services.g810-led = {
   #   description = "Set Logitech G810 Led Profile";

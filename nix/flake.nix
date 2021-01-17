@@ -15,10 +15,10 @@
         home-manager.nixosModules.home-manager
         ./modules/g810-led.nix
         ./main/fonts.nix
+        ./main/general.nix
         ./main/kernel.nix
         ./main/packages.nix
         ./main/printing.nix
-        # ./main/general.nix
         # ./main/hardware.nix
         # ./main/misc.nix
         # ./main/networking.nix
