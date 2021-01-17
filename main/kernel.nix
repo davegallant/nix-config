@@ -1,8 +1,8 @@
-{ pkgs, ... }:
+{ unstable, ... }:
 
 {
   # Use the latest stable kernel
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = unstable.linuxPackages_latest;
 
   # Enable support for additional filesystems
   boot.supportedFilesystems = [ "ntfs" ];
