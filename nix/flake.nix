@@ -14,14 +14,14 @@
       defaultModules = [
         home-manager.nixosModules.home-manager
         ./modules/g810-led.nix
-        # ./main/fonts.nix
+        ./main/fonts.nix
+        ./main/kernel.nix
+        ./main/packages.nix
+        ./main/printing.nix
         # ./main/general.nix
         # ./main/hardware.nix
-        # ./main/kernel.nix
         # ./main/misc.nix
         # ./main/networking.nix
-        # ./main/packages.nix
-        # ./main/printing.nix
         # ./main/services.nix
         # ./main/terminal.nix
 
@@ -38,7 +38,7 @@
               nixpkgs-unstable.flake = nixpkgs-unstable;
             };
 
-            nixpkgs.overlays = [ (import ./overlays) ];
+            # nixpkgs.overlays = [ (import ./overlays) ];
 
             home-manager = {
               useGlobalPkgs = true;
