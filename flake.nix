@@ -19,11 +19,6 @@
         ./main/kernel.nix
         ./main/packages.nix
         ./main/printing.nix
-        # ./main/hardware.nix
-        # ./main/misc.nix
-        # ./main/networking.nix
-        # ./main/services.nix
-        # ./main/terminal.nix
 
         ({ config, lib, lib', ... }: {
           config = {
@@ -38,7 +33,8 @@
               nixpkgs-unstable.flake = nixpkgs-unstable;
             };
 
-            # nixpkgs.overlays = [ (import ./overlays) ];
+            # nixpkgs.overlays = (import ./overlays);
+            nixpkgs.overlays = import ./overlays { inherit nixpkgs; };
 
             home-manager = {
               useGlobalPkgs = true;

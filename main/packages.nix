@@ -141,9 +141,9 @@
         gnome3.gnome-tweaks
 
         # overlays
-        # lpass
-        # rfd
-        # vpngate
+        lpass
+        rfd
+        vpngate
 
       ];
     in common;
