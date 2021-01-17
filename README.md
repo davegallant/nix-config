@@ -2,25 +2,12 @@
 
 [![built with nix](https://builtwithnix.org/badge.svg)](https://builtwithnix.org)
 
-This repo stores nix expressions to manage my machines.
+This repo stores nix to manage my machines. The initial config here was heavily inspired from [here](https://gitlab.com/samuelgrf/nixos-config/-/tree/master/).
 
 ## Setup
 
-## git
-
-Clone this as a bare repo to avoid the need for symlinking:
-
 ```console
-$ git clone --bare git@github.com:davegallant/nix-config.git $HOME/.dotfiles
-$ alias config='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME' # add alias to a .bashrc / .zshrc
-$ config config --local status.showUntrackedFiles no
-$ config checkout -f # this will overwrite any existing configs in the home directory
-```
-
-## home manager
-
-Install [nix](https://nixos.org/guides/install-nix.html) and [home-manager](https://github.com/nix-community/home-manager).
-
-```console
-$ home-manager -f ~/nix/home.nix switch
+$ git clone git@github.com:davegallant/nix-config.git
+$ cd nix-config
+$ sudo ./nixos-rebuild switch
 ```

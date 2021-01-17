@@ -135,7 +135,6 @@
       shellAliases = {
         ls = "exa -la --git";
         ".." = "cd ..";
-        config = "git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME";
         grep = "grep --color=auto --line-buffered";
         k = "kubectl";
       };
