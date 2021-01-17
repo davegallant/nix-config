@@ -2,10 +2,8 @@
 
 with lib;
 
-let
-  cfg = config.hardware.g810-led;
-in
-{
+let cfg = config.hardware.g810-led;
+in {
   options.hardware.g810-led = {
     enable = mkOption {
       type = types.bool;
@@ -36,9 +34,8 @@ in
 
   config = mkIf cfg.enable {
 
-    services.udev.packages = [
-      (pkgs.g810-led.override { profile = cfg.profile; })
-    ];
+    services.udev.packages =
+      [ (pkgs.g810-led.override { profile = cfg.profile; }) ];
 
     # Workaround mentioned here:
     # https://github.com/MatMoul/g810-led/blob/14e331ad2ab7c5ffb546e0c14dd6164b517ff9ca/PROFILES.md

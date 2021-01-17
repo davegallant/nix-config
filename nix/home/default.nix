@@ -2,9 +2,7 @@
 
 {
 
-  home = {
-    sessionVariables = { EDITOR = "vim"; };
-  };
+  home = { sessionVariables = { EDITOR = "vim"; }; };
 
   services = {
     gpg-agent = {

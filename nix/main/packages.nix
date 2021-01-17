@@ -120,18 +120,6 @@
         python38Packages.setuptools
         python38Packages.virtualenv
 
-        # fonts
-        dejavu_fonts
-        fira-code
-        fira-code-symbols
-        fira-mono
-        font-awesome
-        google-fonts
-        noto-fonts
-        noto-fonts-cjk
-        noto-fonts-emoji
-        noto-fonts-extra
-
         # misc
         asciinema
         github-cli
@@ -148,6 +136,9 @@
         xclip
         xdg_utils
         zathura
+
+        # gnome
+        gnome3.gnome-tweaks
 
         # overlays
         # lpass
