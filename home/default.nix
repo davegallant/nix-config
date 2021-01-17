@@ -284,6 +284,7 @@
         Plug 'airblade/vim-gitgutter'
         Plug 'ap/vim-css-color'
         Plug 'artur-shaik/vim-javacomplete2'
+        Plug 'endel/vim-github-colorscheme'
         Plug 'fatih/vim-go'
         Plug 'godlygeek/tabular'
         Plug 'hashivim/vim-terraform'
@@ -291,12 +292,13 @@
         Plug 'junegunn/fzf'
         Plug 'junegunn/fzf.vim'
         Plug 'leafgarland/typescript-vim'
-        Plug 'neoclide/coc.nvim', {'branch': 'release'}
         Plug 'morhetz/gruvbox'
+        Plug 'neoclide/coc.nvim', {'branch': 'release'}
         Plug 'peitalin/vim-jsx-typescript'
         Plug 'plasticboy/vim-markdown'
         Plug 'rust-lang/rust.vim'
         Plug 'scrooloose/nerdtree'
+        Plug 'sheerun/vim-polyglot'
         Plug 'tpope/vim-commentary'
         Plug 'tpope/vim-fugitive'
         Plug 'tpope/vim-repeat'
