@@ -143,6 +143,7 @@
         # overlays
         lpass
         rfd
+        srv
         vpngate
 
       ];
