@@ -1,4 +1,0 @@
-b = "build"
-c = "check"
-t = "test"
-r = "run"

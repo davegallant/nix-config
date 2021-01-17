@@ -293,6 +293,7 @@
         Plug 'junegunn/fzf.vim'
         Plug 'leafgarland/typescript-vim'
         Plug 'neoclide/coc.nvim', {'branch': 'release'}
+        Plug 'morhetz/gruvbox'
         Plug 'peitalin/vim-jsx-typescript'
         Plug 'plasticboy/vim-markdown'
         Plug 'rust-lang/rust.vim'
