@@ -57,6 +57,7 @@
         nmap
         openvpn
         postman
+        tailscale
 
         # terraform
         terraform-ls

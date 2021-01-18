@@ -30,10 +30,6 @@
   # Set your time zone.
   time.timeZone = "America/Toronto";
 
-  # Set keyboard layout.
-  services.xserver = {
-    layout = "us";
-    xkbVariant = "altgr-intl";
-    xkbOptions = "caps:escape";
-  };
+  services.tailscale.enable = true;
+
 }
