@@ -14,7 +14,6 @@
         direnv
         exa
         fd
-        fzf
         git
         gnumake
         jq
