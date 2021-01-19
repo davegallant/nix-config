@@ -122,8 +122,6 @@
         export PATH=$PATH:~/.npm-packages/bin
         export PATH=$PATH:~/go/bin
 
-        export LANG=en_US.UTF-8
-
         eval "$(direnv hook zsh)"
         eval "$(_RFD_COMPLETE=source_zsh rfd)"
         eval "$(jira --completion-script-zsh)"
@@ -141,7 +139,7 @@
 
       "oh-my-zsh" = {
         enable = true;
-        plugins = [ "fzf" "git" "last-working-dir" ];
+        plugins = [ "git" "last-working-dir" ];
       };
 
       plugins = [{
@@ -271,6 +269,11 @@
         # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
         run -b '~/.tmux/plugins/tpm/tpm'
       '';
+    };
+
+    fzf = {
+      enable = true;
+      enableZshIntegration = true;
     };
 
     neovim = {
