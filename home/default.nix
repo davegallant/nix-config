@@ -284,6 +284,28 @@
       configure = {
         customRC = builtins.readFile ./init.vim;
         vam.knownPlugins = pkgs.vimPlugins;
+        vam.pluginDictionaries = [{
+          names = [
+            "coc-go"
+            "coc-nvim"
+            "fzf-vim"
+            "fzfWrapper"
+            "gruvbox"
+            "nerdtree"
+            "rust-vim"
+            "syntastic"
+            "vim-commentary"
+            "vim-fugitive"
+            "vim-gitgutter"
+            "vim-go"
+            "vim-javacomplete2"
+            "vim-markdown"
+            "vim-nix"
+            "vim-repeat"
+            "vim-surround"
+            "vim-terraform"
+          ];
+        }];
       };
 
     };

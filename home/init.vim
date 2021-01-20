@@ -1,32 +1,3 @@
- call plug#begin('~/.vim/plugged')
- Plug 'LnL7/vim-nix'
- Plug 'airblade/vim-gitgutter'
- Plug 'ap/vim-css-color'
- Plug 'artur-shaik/vim-javacomplete2'
- Plug 'endel/vim-github-colorscheme'
- Plug 'fatih/vim-go'
- Plug 'godlygeek/tabular'
- Plug 'hashivim/vim-terraform'
- Plug 'itchyny/lightline.vim'
- Plug 'leafgarland/typescript-vim'
- Plug 'morhetz/gruvbox'
- Plug 'neoclide/coc.nvim', {'branch': 'release'}
- Plug 'peitalin/vim-jsx-typescript'
- Plug 'plasticboy/vim-markdown'
- Plug 'rust-lang/rust.vim'
- Plug 'scrooloose/nerdtree'
- Plug 'sheerun/vim-polyglot'
- Plug 'tpope/vim-commentary'
- Plug 'tpope/vim-fugitive'
- Plug 'tpope/vim-repeat'
- Plug 'tpope/vim-surround'
- Plug 'vifm/vifm.vim'
- Plug 'vim-syntastic/syntastic'
- Plug 'prettier/vim-prettier', {
-   \ 'do': 'yarn install',
-   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
- call plug#end()
-
  set autoread
  set cursorline
  set encoding=utf-8
