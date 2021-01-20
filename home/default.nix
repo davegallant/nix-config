@@ -287,7 +287,9 @@
         vam.pluginDictionaries = [{
           names = [
             "coc-go"
+            "coc-json"
             "coc-nvim"
+            "coc-rls"
             "fzf-vim"
             "fzfWrapper"
             "gruvbox"
