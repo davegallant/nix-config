@@ -14,6 +14,7 @@
         direnv
         exa
         fd
+        gcc
         git
         gnumake
         jq
@@ -35,6 +36,14 @@
         golangci-lint
         golint
         gopls
+
+        # rust
+        cargo
+        rls
+        rust-analyzer
+        rustPackages.clippy
+        rustc
+        rustfmt
 
         # social media
         rtv
