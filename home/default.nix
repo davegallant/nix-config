@@ -226,6 +226,31 @@
       clock24 = true;
       terminal = "screen-256color";
       customPaneNavigationAndResize = true;
+      plugins = with pkgs.tmuxPlugins; [
+        {
+          plugin = pain-control;
+          extraConfig = "set -g @plugin 'tmux-plugins/tmux-pain-control'";
+        }
+        {
+          plugin = sensible;
+          extraConfig = "set -g @plugin 'tmux-plugins/tmux-sensible'";
+        }
+        {
+          plugin = sessionist;
+          extraConfig = "set -g @plugin 'tmux-plugins/tmux-sessionist'";
+        }
+        {
+          plugin = yank;
+          extraConfig = "set -g @plugin 'tmux-plugins/tmux-yank'";
+        }
+        {
+          plugin = tmux-colors-solarized;
+          extraConfig = ''
+            set -g @plugin 'seebi/tmux-colors-solarized'
+            set -g @colors-solarized 'dark'
+              '';
+        }
+      ];
       extraConfig = ''
         set-window-option -g automatic-rename on
         set-option -g set-titles on
@@ -255,19 +280,6 @@
         set -g visual-activity off
 
         set -g status-right '#(gitmux #{pane_current_path})'
-
-        set -g @plugin 'tmux-plugins/tmux-pain-control'
-        set -g @plugin 'tmux-plugins/tmux-sensible'
-        set -g @plugin 'tmux-plugins/tmux-sessionist'
-        set -g @plugin 'tmux-plugins/tmux-yank'
-        set -g @plugin 'tmux-plugins/tpm'
-
-        # Theme
-        set -g @plugin 'seebi/tmux-colors-solarized'
-        set -g @colors-solarized 'dark'
-
-        # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
-        run -b '~/.tmux/plugins/tpm/tpm'
       '';
     };
 
