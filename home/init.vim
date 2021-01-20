@@ -92,9 +92,10 @@
  let g:go_highlight_types = 1
  let g:go_highlight_variable_assignments = 1
  let g:go_highlight_variable_declarations = 1
- let g:go_metalinter_autosave=1
- let g:go_metalinter_autosave_enabled=['golint', 'govet']
  let g:go_rename_command = 'gopls'
+ " golangcli-lint is currently not working
+ " let g:go_metalinter_autosave=1
+ " let g:go_metalinter_autosave_enabled=['golint', 'govet']
 
  " vim-terraform
  let g:terraform_align=1
