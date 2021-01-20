@@ -31,6 +31,11 @@
         # password
         gopass
 
+        # golang
+        golangci-lint
+        golint
+        gopls
+
         # social media
         rtv
 
