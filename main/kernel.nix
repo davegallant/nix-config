@@ -1,7 +1,7 @@
 { unstable, ... }:
 
 {
-  # Use the latest stable kernel
+  # Use the latest kernel
   boot.kernelPackages = unstable.linuxPackages_latest;
 
   # Enable support for additional filesystems

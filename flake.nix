@@ -33,8 +33,9 @@
               nixpkgs-unstable.flake = nixpkgs-unstable;
             };
 
-            # nixpkgs.overlays = (import ./overlays);
-            nixpkgs.overlays = import ./overlays { inherit nixpkgs; };
+            nixpkgs.overlays = [
+              (import ./overlays)
+            ];
 
             home-manager = {
               useGlobalPkgs = true;

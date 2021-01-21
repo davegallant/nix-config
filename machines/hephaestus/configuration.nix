@@ -8,7 +8,6 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "hephaestus"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config
@@ -50,14 +49,14 @@
   # Open ports in the firewall.
   networking.firewall.enable = true;
 
-  # systemd.services.g810-led = {
-  #   description = "Set Logitech G810 Led Profile";
-  #   serviceConfig = {
-  #     ExecStart = "${pkgs.g810-led}/bin/g810-led -p /etc/g610-led/profile";
-  #     Type = "oneshot";
-  #   };
-  #   wantedBy = [ "multi-user.target" ];
-  # };
+  systemd.services.g810-led = {
+    description = "Set Logitech G810 Led Profile";
+    serviceConfig = {
+      ExecStart = "${pkgs.g810-led}/bin/g810-led -p /etc/g610-led/profile";
+      Type = "oneshot";
+    };
+    wantedBy = [ "multi-user.target" ];
+  };
 
 }
 

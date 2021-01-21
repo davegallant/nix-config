@@ -1,9 +1,9 @@
-{ ... }:
+final: prev: {
 
-[
-  (import ./lastpass.nix)
-  (import ./rfd.nix)
-  (import ./srv.nix)
-  (import ./vpngate.nix)
-]
+  g810-led = prev.callPackage ./g810-led { };
+  lpass = prev.callPackage ./lastpass { };
+  rfd = prev.callPackage ./rfd { };
+  srv = prev.callPackage ./srv { };
+  vpngate = prev.callPackage ./vpngate { };
 
+}
