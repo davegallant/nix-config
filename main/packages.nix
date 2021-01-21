@@ -159,6 +159,7 @@
         rfd
         srv
         vpngate
+        g810-led
 
       ];
     in common;
