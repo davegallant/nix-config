@@ -135,6 +135,7 @@
         ".." = "cd ..";
         grep = "grep --color=auto --line-buffered";
         k = "kubectl";
+        aws-azure-login = "docker run --rm -it -v ~/.aws:/root/.aws sportradar/aws-azure-login";
       };
 
       "oh-my-zsh" = {
