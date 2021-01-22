@@ -18,6 +18,7 @@
         git
         gnumake
         jq
+        remmina
         ripgrep
         tree
         unzip
