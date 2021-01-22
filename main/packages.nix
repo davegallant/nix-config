@@ -21,6 +21,7 @@
         ripgrep
         tree
         unzip
+        yq-go
         zip
 
         # education
@@ -68,6 +69,7 @@
         bandwhich
         deluge
         nmap
+        openssl
         openvpn
         postman
         tailscale
