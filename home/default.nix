@@ -121,6 +121,7 @@
         export PATH=$PATH:~/.local/bin
         export PATH=$PATH:~/.npm-packages/bin
         export PATH=$PATH:~/go/bin
+        export PAGER=less
 
         eval "$(direnv hook zsh)"
         eval "$(_RFD_COMPLETE=source_zsh rfd)"
