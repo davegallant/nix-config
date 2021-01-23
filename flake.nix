@@ -7,9 +7,10 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-20.09";
     nixpkgs-master.url = "github:NixOS/nixpkgs";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixos-hardware.url = github:NixOS/nixos-hardware/master;
   };
 
-  outputs = { self, home-manager, nixpkgs, nixpkgs-master, nixpkgs-unstable }: {
+  outputs = { self, home-manager, nixpkgs, nixpkgs-master, nixpkgs-unstable, nixos-hardware }: {
     nixosConfigurations = let
       defaultModules = [
         home-manager.nixosModules.home-manager
@@ -51,6 +52,14 @@
         modules = [
           ./machines/hephaestus/configuration.nix
           ./machines/hephaestus/hardware.nix
+        ] ++ defaultModules;
+      };
+      hermes = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          nixos-hardware.nixosModules.lenovo-thinkpad-t480s
+          ./machines/hermes/configuration.nix
+          ./machines/hermes/hardware.nix
         ] ++ defaultModules;
       };
     };
