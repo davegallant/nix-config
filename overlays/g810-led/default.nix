@@ -41,7 +41,7 @@ stdenv.mkDerivation rec {
     inherit (src.meta) homepage;
     license = licenses.gpl3;
     platforms = platforms.linux;
-    maintainers = with maintainers; [ samuelgrf ];
+    maintainers = with maintainers; [ davegallant ];
   };
 }
 
