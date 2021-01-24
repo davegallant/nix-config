@@ -25,6 +25,9 @@
         yq-go
         zip
 
+        # printing
+        ghostscript
+
         # education
         anki
 
@@ -67,6 +70,7 @@
         vlc
 
         # network
+        arp-scan
         bandwhich
         deluge
         nmap
