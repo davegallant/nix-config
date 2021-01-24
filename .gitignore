@@ -1,2 +1,1 @@
-# avoid weird recursion problems
-.dotfiles
+.pre-commit-config.yaml

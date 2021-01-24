@@ -9,7 +9,7 @@ This repo stores nix to manage my machines. The initial structure was inspired b
 ```console
 $ git clone git@github.com:davegallant/nix-config.git
 $ cd nix-config
-$ sudo ./nixos-rebuild switch
+$ sudo ./nixos-rebuild.sh switch
 ```
 
 ## Update
