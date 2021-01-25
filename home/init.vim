@@ -115,7 +115,7 @@
  let g:syntastic_check_on_wq = 0
 
  " fzf.vim
- let g:fzf_preview_window = 'right:60%'
+ let g:fzf_preview_window = 'up:50%'
  let g:fzf_layout = { 'window': 'enew' }
 
  " vim-markdown
