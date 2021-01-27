@@ -356,6 +356,7 @@
           spinner
           terraform-mode
           web-mode
+          xclip
         ]);
     };
   };

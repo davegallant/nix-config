@@ -1,6 +1,16 @@
 ;; Enable Mouse
 (xterm-mouse-mode 1)
 
+;; Enable xclip
+(require 'xclip)
+(define-globalized-minor-mode global-xclip-mode
+  xclip-mode xclip-mode)
+
+(global-xclip-mode 1)
+
+;; Fix clipboard
+(setq x-select-enable-clipboard t)
+
 ;; Enable Line Numbers
 (global-display-line-numbers-mode 1)
 
@@ -29,11 +39,6 @@
 
 ;; Prefer UTF-8.
 (prefer-coding-system 'utf-8)
-
-;; Improved handling of clipboard in GNU/Linux and otherwise.
-(setq select-enable-clipboard t
-      select-enable-primary t
-      save-interprogram-paste-before-kill t)
 
 ;; Disable some GUI distractions.
 (tool-bar-mode -1)
