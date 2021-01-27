@@ -136,7 +136,8 @@
         ".." = "cd ..";
         grep = "grep --color=auto --line-buffered";
         k = "kubectl";
-        aws-azure-login = "docker run --rm -it -v ~/.aws:/root/.aws sportradar/aws-azure-login";
+        aws-azure-login =
+          "docker run --rm -it -v ~/.aws:/root/.aws sportradar/aws-azure-login";
       };
 
       "oh-my-zsh" = {
@@ -325,5 +326,49 @@
       };
 
     };
+
+    emacs = {
+      enable = true;
+      package = pkgs.emacs-nox;
+      extraPackages = epkgs:
+        (with epkgs; [
+          centaur-tabs
+          doom-modeline
+          doom-themes
+          evil
+          evil-collection
+          evil-exchange
+          evil-magit
+          evil-matchit
+          evil-numbers
+          evil-surround
+          evil-tutor
+          evil-visualstar
+          go-mode
+          highlight-parentheses
+          htmlize
+          hydra
+          lsp-mode
+          magit
+          magithub
+          markdown-mode
+          markdown-toc
+          nix-mode
+          nix-sandbox
+          nix-update
+          org-bullets
+          org-re-reveal
+          org-superstar
+          rainbow-delimiters
+          ripgrep
+          rust-mode
+          spinner
+          terraform-mode
+          web-mode
+        ]);
+    };
   };
+
+  home.file.".emacs.d/init.el".source = ./init.el;
+
 }
