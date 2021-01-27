@@ -350,6 +350,7 @@
           org-bullets
           org-re-reveal
           org-superstar
+          ox-pandoc
           rainbow-delimiters
           ripgrep
           rust-mode
