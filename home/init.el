@@ -46,3 +46,15 @@
 ;; Always show line and column number in the mode line.
 (line-number-mode)
 (column-number-mode)
+
+;; Increment and decrement numbers easily
+(global-set-key (kbd "C-c +") 'evil-numbers/inc-at-pt)
+(global-set-key (kbd "C-c -") 'evil-numbers/dec-at-pt)
+
+;; Enable Mouse scrolling
+(unless (display-graphic-p)
+  ;; activate mouse-based scrolling
+  (xterm-mouse-mode 1)
+  (global-set-key (kbd "<mouse-4>") 'scroll-down-line)
+  (global-set-key (kbd "<mouse-5>") 'scroll-up-line)
+  )

@@ -94,13 +94,6 @@
         gcloud = { disabled = true; };
         scan_timeout = 10;
         character = { error_symbol = "[✖](bold red)"; };
-
-        time = {
-          time_format = "%T";
-          format = "$time($style) ";
-          style = "bright-white";
-          disabled = false;
-        };
       };
     };
 
@@ -337,8 +330,6 @@
           doom-themes
           evil
           evil-collection
-          evil-exchange
-          evil-magit
           evil-matchit
           evil-numbers
           evil-surround
