@@ -330,11 +330,13 @@
           doom-themes
           evil
           evil-collection
+          evil-commentary
           evil-matchit
           evil-numbers
           evil-surround
           evil-tutor
           evil-visualstar
+          flycheck
           go-mode
           highlight-parentheses
           htmlize
