@@ -338,6 +338,7 @@
           evil-visualstar
           flycheck
           go-mode
+          groovy-mode
           highlight-parentheses
           htmlize
           hydra
