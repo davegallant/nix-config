@@ -18,8 +18,11 @@
         git
         gnumake
         jq
+        procs
         remmina
         ripgrep
+        tldr
+        tokei
         tree
         unzip
         yq-go

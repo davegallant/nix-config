@@ -125,12 +125,14 @@
       '';
 
       shellAliases = {
-        ls = "exa -la --git";
-        ".." = "cd ..";
-        grep = "grep --color=auto --line-buffered";
-        k = "kubectl";
         aws-azure-login =
           "docker run --rm -it -v ~/.aws:/root/.aws sportradar/aws-azure-login";
+        ".." = "cd ..";
+        e = "emacs -nw";
+        grep = "grep --color=auto --line-buffered";
+        k = "kubectl";
+        ls = "exa -la --git";
+        ps = "procs";
       };
 
       "oh-my-zsh" = {
@@ -322,9 +324,9 @@
 
     emacs = {
       enable = true;
-      package = pkgs.emacs-nox;
       extraPackages = epkgs:
         (with epkgs; [
+          all-the-icons
           centaur-tabs
           doom-modeline
           doom-themes
@@ -359,6 +361,7 @@
           rust-mode
           spinner
           terraform-mode
+          treemacs
           web-mode
           xclip
         ]);
