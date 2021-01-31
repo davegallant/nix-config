@@ -291,34 +291,34 @@
       viAlias = true;
       vimAlias = true;
 
-      configure = {
-        customRC = builtins.readFile ./init.vim;
-        vam.knownPlugins = pkgs.vimPlugins;
-        vam.pluginDictionaries = [{
-          names = [
-            "coc-go"
-            "coc-json"
-            "coc-nvim"
-            "coc-rls"
-            "fzf-vim"
-            "fzfWrapper"
-            "gruvbox"
-            "nerdtree"
-            "rust-vim"
-            "syntastic"
-            "vim-commentary"
-            "vim-fugitive"
-            "vim-gitgutter"
-            "vim-go"
-            "vim-javacomplete2"
-            "vim-markdown"
-            "vim-nix"
-            "vim-repeat"
-            "vim-surround"
-            "vim-terraform"
-          ];
-        }];
-      };
+      extraConfig = builtins.readFile ./init.vim;
+
+      plugins = with pkgs.vimPlugins; [
+        coc-go
+        coc-json
+        coc-nvim
+        coc-rls
+        fzf-vim
+        fzfWrapper
+        gruvbox
+        nerdtree
+        rust-vim
+        supertab
+        syntastic
+        vim-commentary
+        vim-fugitive
+        vim-gitgutter
+        vim-go
+        vim-javacomplete2
+        vim-markdown
+        vim-nix
+        vim-repeat
+        vim-sneak
+        vim-surround
+        vim-terraform
+        vim-pandoc
+        vim-pandoc-syntax
+      ];
 
     };
 
