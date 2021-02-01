@@ -1,67 +1,59 @@
 {
   inputs = {
     home-manager = {
-      url = "github:nix-community/home-manager/release-20.09";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "/nixpkgs";
     };
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-20.09";
-    nixpkgs-master.url = "github:NixOS/nixpkgs";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
-  outputs = { self, home-manager, nixpkgs, nixpkgs-master, nixpkgs-unstable
-    , nixos-hardware }: {
-      nixosConfigurations = let
-        defaultModules = [
-          home-manager.nixosModules.home-manager
-          ./modules/g810-led.nix
-          ./main/fonts.nix
-          ./main/general.nix
-          ./main/kernel.nix
-          ./main/packages.nix
-          ./main/printing.nix
+  outputs = { self, home-manager, nixpkgs, nixos-hardware }: {
+    nixosConfigurations = let
+      defaultModules = [
+        home-manager.nixosModules.home-manager
+        ./modules/g810-led.nix
+        ./main/fonts.nix
+        ./main/general.nix
+        ./main/kernel.nix
+        ./main/packages.nix
+        ./main/printing.nix
 
-          ({ config, lib, lib', ... }: {
-            config = {
-              _module.args = {
-                lib' = lib // import ./lib { inherit config lib; };
-                master = lib'.pkgsImport nixpkgs-master;
-                unstable = lib'.pkgsImport nixpkgs-unstable;
-              };
-
-              nix.registry = {
-                nixpkgs.flake = nixpkgs;
-                nixpkgs-unstable.flake = nixpkgs-unstable;
-              };
-
-              nixpkgs.overlays = [ (import ./overlays) ];
-
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                users.dave.imports = [ ./home/default.nix ];
-              };
+        ({ config, lib, lib', ... }: {
+          config = {
+            _module.args = {
+              lib' = lib // import ./lib { inherit config lib; };
             };
-          })
-        ];
-      in {
-        hephaestus = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            ./machines/hephaestus/configuration.nix
-            ./machines/hephaestus/hardware.nix
-          ] ++ defaultModules;
-        };
-        hermes = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            nixos-hardware.nixosModules.lenovo-thinkpad-t480s
-            ./machines/hermes/configuration.nix
-            ./machines/hermes/hardware.nix
-          ] ++ defaultModules;
-        };
+
+            nix.registry = { nixpkgs.flake = nixpkgs; };
+
+            nixpkgs.overlays = [ (import ./overlays) ];
+
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.dave.imports = [ ./home/default.nix ];
+            };
+          };
+        })
+      ];
+    in {
+      hephaestus = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./machines/hephaestus/configuration.nix
+          ./machines/hephaestus/hardware.nix
+        ] ++ defaultModules;
+      };
+      hermes = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          nixos-hardware.nixosModules.lenovo-thinkpad-t480s
+          ./machines/hermes/configuration.nix
+          ./machines/hermes/hardware.nix
+        ] ++ defaultModules;
       };
     };
+  };
 }
 

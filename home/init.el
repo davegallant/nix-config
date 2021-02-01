@@ -1,18 +1,29 @@
 ;; Enable Mouse
-(xterm-mouse-mode 1)
+(xterm-mouse-mode)
 
 ;; Enable xclip
 (require 'xclip)
 (define-globalized-minor-mode global-xclip-mode
   xclip-mode xclip-mode)
-
 (global-xclip-mode 1)
 
+;; Set up fonts early.
+(set-face-attribute 'default
+                     nil
+                     :height 80
+                     :family "Fira Code Mono")
+(set-face-attribute 'variable-pitch
+                     nil
+                     :family "Fira CodeSans")
+
 ;; Fix clipboard
-(setq x-select-enable-clipboard t)
+(setq select-enable-clipboard t)
 
 ;; Enable Line Numbers
 (global-display-line-numbers-mode 1)
+
+;; Disable lock files
+(setq create-lockfiles nil)
 
 ;; Enable Evil
 (require 'evil)
@@ -73,6 +84,7 @@
 
 ;; Enable Flycheck
 (global-flycheck-mode)
+(setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
 
 ;; An easier way to toggle comments
 (evil-commentary-mode)

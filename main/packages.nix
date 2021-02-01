@@ -1,8 +1,8 @@
-{ config, lib, pkgs, unstable, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   # System-wide packages to install.
-  environment.systemPackages = with unstable;
+  environment.systemPackages = with pkgs;
     let
       common = [
         # utils

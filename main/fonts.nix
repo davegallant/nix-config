@@ -9,12 +9,9 @@
     fira-mono
     font-awesome
     google-fonts
-    liberation_ttf # Free replacement for MS Fonts.
-    noto-fonts
+    liberation_ttf
     noto-fonts
     noto-fonts-cjk
-    noto-fonts-cjk
-    noto-fonts-emoji
     noto-fonts-emoji
     noto-fonts-extra
   ];
@@ -23,7 +20,7 @@
   fonts.fontconfig.defaultFonts = {
     sansSerif = [ "Noto Sans" ];
     serif = [ "Noto Serif" ];
-    monospace = [ "MesloLGS Nerd Font" "Noto Sans Mono" ];
+    monospace = [ "Noto Sans Mono" ];
     emoji = [ "Noto Color Emoji" ];
   };
 }
