@@ -121,6 +121,7 @@
 
         # games
         steam
+        mindustry
         minecraft
         yuzu
 
