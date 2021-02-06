@@ -1,6 +1,16 @@
 { pkgs, ... }:
 
-{
+let
+  vim-prettier = pkgs.vimUtils.buildVimPlugin {
+    name = "vim-prettier";
+    src = pkgs.fetchFromGitHub {
+      owner = "prettier";
+      repo = "vim-prettier";
+      rev = "0.2.7";
+      sha256 = "sha256-FDeyGH5OPAYV7zePCfDujsj+nGd5AFnqySPStJYEY2E=";
+    };
+  };
+in {
 
   home = { sessionVariables = { EDITOR = "vim"; }; };
 
@@ -152,7 +162,6 @@
         window.padding.y = 10;
         scrolling.history = 100000;
         live_config_reload = true;
-        selection.save_to_clipboard = true;
         mouse.hide_when_typing = true;
 
         font = {
@@ -291,7 +300,6 @@
       vimAlias = true;
 
       extraConfig = builtins.readFile ./init.vim;
-
       plugins = with pkgs.vimPlugins; [
         coc-go
         coc-json
@@ -314,6 +322,7 @@
         vim-markdown
         vim-nix
         vim-pandoc
+        vim-prettier
         vim-pandoc-syntax
         vim-repeat
         vim-sneak
