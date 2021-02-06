@@ -312,6 +312,7 @@ in {
         rust-vim
         supertab
         syntastic
+        tabular
         typescript-vim
         vim-commentary
         vim-fugitive
