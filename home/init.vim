@@ -8,13 +8,11 @@
  set ignorecase
  set incsearch
  set laststatus=2
- set modelines=0
  set mouse=a
  set nocompatible
  set noswapfile
  set number relativenumber
  set pastetoggle=<F3>
- set ruler
  set shiftwidth=2
  set showcmd
  set showmode
@@ -29,12 +27,13 @@
  " Search down into subfolders
  " Provides tab-completion for all file-related tasks
  set path+=**
+
  filetype plugin indent on
 
  " Enable folding with the spacebar
  nnoremap <space> za
 
- " replace visually selected
+ " Replace visually selected
  vnoremap <C-r> "hy:%s/<C-r>h//g<left><left>
 
  " Custom Commands
@@ -53,7 +52,7 @@
  noremap <Leader>y "+y
  noremap <Leader>p "+p
 
- " yaml indentation
+ " Indent YAML
  au FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
  " Python indentation
@@ -62,11 +61,11 @@
  syntax on
  colorscheme gruvbox
 
- " highlight red lines
+ " Highlight whitespace
  highlight ExtraWhitespace ctermbg=red guibg=red
  match ExtraWhitespace /\s\+$/
 
- " groovy syntax
+ " Groovy syntax
  au BufNewFile,BufRead *.groovy set tabstop=2 shiftwidth=2 expandtab
  au BufNewFile,BufRead Jenkinsfile setf groovy
  au BufNewFile,BufRead Jenkinsfile set tabstop=2 shiftwidth=2 expandtab
@@ -93,9 +92,8 @@
  let g:go_highlight_variable_assignments = 1
  let g:go_highlight_variable_declarations = 1
  let g:go_rename_command = 'gopls'
- " golangcli-lint is currently not working
- " let g:go_metalinter_autosave=1
- " let g:go_metalinter_autosave_enabled=['golint', 'govet']
+ let g:go_metalinter_autosave=1
+ let g:go_metalinter_autosave_enabled=['golint', 'govet']
 
  " vim-terraform
  let g:terraform_align=1
