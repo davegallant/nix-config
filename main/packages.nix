@@ -56,6 +56,7 @@
 
         # node
         nodejs-14_x
+        nodePackages.prettier
         nodePackages.yarn
 
         # social media
