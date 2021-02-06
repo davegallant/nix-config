@@ -299,7 +299,7 @@ in {
       viAlias = true;
       vimAlias = true;
 
-      extraConfig = builtins.readFile ./init.vim;
+      extraConfig = builtins.readFile ./nvim/init.vim;
       plugins = with pkgs.vimPlugins; [
         coc-go
         coc-json
@@ -380,5 +380,6 @@ in {
   };
 
   home.file.".emacs.d/init.el".source = ./init.el;
+  home.file.".config/nvim/statusline.vim".source = ./nvim/statusline.vim;
 
 }
