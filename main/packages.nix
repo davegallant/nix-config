@@ -21,6 +21,7 @@
         procs
         remmina
         ripgrep
+        strace
         tldr
         tokei
         tree
@@ -52,6 +53,10 @@
         rustPackages.clippy
         rustc
         rustfmt
+
+        # node
+        nodejs-14_x
+        nodePackages.yarn
 
         # social media
         rtv
@@ -151,7 +156,6 @@
         glibcLocales
         go-jira
         hadolint
-        nodejs-12_x
         imagemagick
         pfetch
         pinentry-curses

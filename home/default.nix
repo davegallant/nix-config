@@ -304,19 +304,21 @@
         rust-vim
         supertab
         syntastic
+        typescript-vim
         vim-commentary
         vim-fugitive
         vim-gitgutter
         vim-go
         vim-javacomplete2
+        vim-javascript
         vim-markdown
         vim-nix
+        vim-pandoc
+        vim-pandoc-syntax
         vim-repeat
         vim-sneak
         vim-surround
         vim-terraform
-        vim-pandoc
-        vim-pandoc-syntax
       ];
 
     };
