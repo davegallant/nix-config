@@ -55,7 +55,7 @@ endfunction
 
 function! StatuslineGit()
   let l:branchname = GitBranch()
-  return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
+  return strlen(l:branchname) > 0?'   '.l:branchname.' ':''
 endfunction
 
 augroup SetStatusline
