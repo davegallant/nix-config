@@ -98,7 +98,7 @@
         google-cloud-sdk
 
         # jvm
-        jdk8
+        jdk11
         gradle
         groovy
         maven
