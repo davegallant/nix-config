@@ -68,7 +68,7 @@
 
         # editors
         libreoffice
-        vscodium
+        vscode
 
         # audio
         audio-recorder
