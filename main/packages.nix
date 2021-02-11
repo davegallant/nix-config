@@ -66,9 +66,8 @@
         gifsicle
         gimp
 
-        # editors
+        # office
         libreoffice
-        vscode
 
         # audio
         audio-recorder
