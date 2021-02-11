@@ -378,6 +378,11 @@ in {
         ]);
     };
 
+    vscode = {
+      enable = true;
+      extensions = with pkgs.vscode-extensions; [ ms-vsliveshare.vsliveshare ];
+    };
+
   };
 
   home.file.".emacs.d/init.el".source = ./init.el;
