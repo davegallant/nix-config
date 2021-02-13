@@ -5,5 +5,6 @@ final: prev: {
   rfd = prev.callPackage ./rfd { };
   srv = prev.callPackage ./srv { };
   vpngate = prev.callPackage ./vpngate { };
+  vscode = prev.callPackage ./vscode { };
 
 }
