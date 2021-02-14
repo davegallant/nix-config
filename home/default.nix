@@ -138,7 +138,7 @@ in {
           "docker run --rm -it -v ~/.aws:/root/.aws sportradar/aws-azure-login";
         ".." = "cd ..";
         e = "emacs -nw";
-        grep = "grep --color=auto --line-buffered";
+        grep = "rg --smart-case";
         k = "kubectl";
         ls = "exa -la --git";
         ps = "procs";
