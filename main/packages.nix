@@ -154,7 +154,7 @@
         github-cli
         glibcLocales
         go-jira
-        hadolint
+        # hadolint
         imagemagick
         pfetch
         pinentry-curses

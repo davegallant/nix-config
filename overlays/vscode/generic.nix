@@ -69,11 +69,7 @@ in stdenv.mkDerivation {
   dontBuild = true;
   dontConfigure = true;
 
-  installPhase = if system == "x86_64-darwin" then ''
-    mkdir -p "$out/Applications/${longName}.app" $out/bin
-    cp -r ./* "$out/Applications/${longName}.app"
-    ln -s "$out/Applications/${longName}.app/Contents/Resources/app/bin/code" $out/bin/${executableName}
-  '' else ''
+  installPhase = ''
     mkdir -p $out/lib/vscode $out/bin
     cp -r ./* $out/lib/vscode
 
