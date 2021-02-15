@@ -123,6 +123,7 @@
         nixpkgs-fmt
         nixpkgs-review
         rnix-lsp
+        steam-run # can run unpatched binaries
 
         # games
         steam
