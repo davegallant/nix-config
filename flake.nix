@@ -12,7 +12,6 @@
     nixosConfigurations = let
       defaultModules = [
         home-manager.nixosModules.home-manager
-        ./modules/g810-led.nix
         ./main/fonts.nix
         ./main/general.nix
         ./main/kernel.nix
@@ -43,6 +42,7 @@
         modules = [
           ./machines/hephaestus/configuration.nix
           ./machines/hephaestus/hardware.nix
+          ./modules/g810-led.nix
         ] ++ defaultModules;
       };
       hermes = nixpkgs.lib.nixosSystem {
