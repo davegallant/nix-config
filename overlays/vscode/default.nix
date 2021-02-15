@@ -3,28 +3,15 @@
 let
   inherit (stdenv.hostPlatform) system;
 
-  plat = {
-    x86_64-linux = "linux-x64";
-    x86_64-darwin = "darwin";
-    aarch64-linux = "linux-arm64";
-    armv7l-linux = "linux-armhf";
-  }.${system};
+  plat = { x86_64-linux = "linux-x64"; }.${system};
 
-  archive_fmt = if system == "x86_64-darwin" then "zip" else "tar.gz";
+  archive_fmt = "tar.gz";
 
   sha256 = {
-    x86_64-linux = "1kbjbqb03yapz7067q589gaa7d6cqaipj7hmp1l3nh0bmggzsc4c";
-    x86_64-darwin = "1qgadm52c5lzkvgvqrz0n8brm4qbjg8hf1dk6a2ynqhqjxcwbj4r";
-    aarch64-linux = "0i3yl9rx9h7qkl3k9qk6gg35nhz737qzzbvzvdwkqjaacsbpfgf8";
-    armv7l-linux = "19iz2bxcq6y8sklr6zcnbp47kki9l00x3nvr213lkk3kj08l0afv";
+    x86_64-linux = "sha256-I8k6e/bO7TRvnyA0tGMNjUl9zD9LnM5rZ/CPjScuFTA=";
   }.${system};
 in callPackage ./generic.nix rec {
-  # The update script doesn't correctly change the hash for darwin, so please:
-  # nixpkgs-update: no auto update
-
-  # Please backport all compatible updates to the stable release.
-  # This is important for the extension ecosystem.
-  version = "1.52.1";
+  version = "1.53.2";
   pname = "vscode";
 
   executableName = "code" + lib.optionalString isInsiders "-insiders";
@@ -54,8 +41,7 @@ in callPackage ./generic.nix rec {
     homepage = "https://code.visualstudio.com/";
     downloadPage = "https://code.visualstudio.com/Updates";
     license = licenses.unfree;
-    maintainers = with maintainers; [ eadwu synthetica ];
-    platforms =
-      [ "x86_64-linux" "x86_64-darwin" "aarch64-linux" "armv7l-linux" ];
+    maintainers = with maintainers; [ davegallant ];
+    platforms = [ "x86_64-linux" ];
   };
 }
