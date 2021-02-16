@@ -8,10 +8,10 @@ let
   archive_fmt = "tar.gz";
 
   sha256 = {
-    x86_64-linux = "sha256-I8k6e/bO7TRvnyA0tGMNjUl9zD9LnM5rZ/CPjScuFTA=";
+    x86_64-linux = "sha256-jDD936sLQDtouBUeeaPCzLSj1Euo4GPA+Vf5ARZecs0=";
   }.${system};
 in callPackage ./generic.nix rec {
-  version = "1.53.2";
+  version = "1.52.1";
   pname = "vscode";
 
   executableName = "code" + lib.optionalString isInsiders "-insiders";
