@@ -41,6 +41,10 @@
 
   virtualisation.docker.enable = true;
 
+  # Virtualization
+  virtualisation.libvirtd.enable = true;
+  systemd.services.libvirtd.enable = true;
+
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
