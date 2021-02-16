@@ -168,6 +168,7 @@
 
         # gnome
         gnome3.gnome-tweaks
+        gnomeExtensions.appindicator
 
         # overlays
         lpass
