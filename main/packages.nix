@@ -87,6 +87,10 @@
         postman
         tailscale
 
+        # virtualization
+        qemu
+        virtmanager
+
         # terraform
         terraform-ls
         terraform_0_14
