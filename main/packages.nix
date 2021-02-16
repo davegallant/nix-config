@@ -122,6 +122,7 @@
         kubernetes-helm
 
         # nix
+        cachix
         nix-index
         nixfmt
         nixpkgs-fmt

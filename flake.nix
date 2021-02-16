@@ -24,7 +24,16 @@
               lib' = lib // import ./lib { inherit config lib; };
             };
 
-            nix.registry = { nixpkgs.flake = nixpkgs; };
+            nix = {
+              autoOptimiseStore = true;
+              binaryCaches = [ "https://davegallant.cachix.org" ];
+              binaryCachePublicKeys = [
+                "davegallant.cachix.org-1:SsUMqL4+tF2R3/G6X903E9laLlY1rES2QKFfePegF08="
+              ];
+              useSandbox = false;
+              registry = { nixpkgs.flake = nixpkgs; };
+              trustedUsers = [ "root" "dave" ];
+            };
 
             nixpkgs.overlays = [ (import ./overlays) ];
 
