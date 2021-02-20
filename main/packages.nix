@@ -85,6 +85,7 @@
         openssl
         openvpn
         postman
+        sshfs
         tailscale
 
         # virtualization
@@ -147,13 +148,13 @@
         ssm-session-manager-plugin
 
         # python
-        black
-        python38
-        python38Packages.ipython
-        python38Packages.pip
-        python38Packages.poetry
-        python38Packages.setuptools
-        python38Packages.virtualenv
+        python39
+        python39Packages.black
+        python39Packages.ipython
+        python39Packages.pip
+        # python39Packages.poetry
+        python39Packages.setuptools
+        python39Packages.virtualenv
 
         # misc
         asciinema
