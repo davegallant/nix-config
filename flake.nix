@@ -51,7 +51,6 @@
         modules = [
           ./machines/hephaestus/configuration.nix
           ./machines/hephaestus/hardware.nix
-          ./modules/g810-led.nix
         ] ++ defaultModules;
       };
       hermes = nixpkgs.lib.nixosSystem {

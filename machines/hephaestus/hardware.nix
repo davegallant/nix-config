@@ -25,11 +25,4 @@
   # high-resolution display
   hardware.video.hidpi.enable = lib.mkDefault true;
 
-  # Enable g810-led and set profile.
-  hardware.g810-led.enable = true;
-  hardware.g810-led.profile = builtins.toFile "g610-led-profile" ''
-    a 000000 # Set all keys to orange-red.
-    c # Commit changes.
-  '';
-
 }
