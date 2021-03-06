@@ -134,7 +134,7 @@
         # games
         steam
         minecraft
-        yuzu
+        # yuzu
 
         # communication
         discord
