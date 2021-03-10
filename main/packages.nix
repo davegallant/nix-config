@@ -16,6 +16,7 @@
         fd
         gcc
         git
+        glances
         gnumake
         jq
         procs
