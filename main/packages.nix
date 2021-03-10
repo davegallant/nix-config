@@ -119,6 +119,7 @@
         docker-compose
 
         # k8s
+        k3s
         kubectl
         kubernetes-helm
 
