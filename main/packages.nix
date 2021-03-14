@@ -176,6 +176,7 @@
         # gnome
         gnome3.gnome-tweaks
         gnomeExtensions.appindicator
+        networkmanager-openvpn
 
         # overlays
         lpass
