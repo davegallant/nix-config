@@ -14,10 +14,14 @@ $ sudo ./nixos-rebuild.sh switch
 
 ## Update
 
-`nix flake update` does not update the [flake.lock](./flake.lock). There is an open issue [here](https://github.com/NixOS/nix/issues/3781).
-
-To update `flake.lock`, run:
+To update nixpkgs defined in [flake.nix](./flake.nix), run:
 
 ```console
-$ nix flake update --recreate-lock-file
+$ nix flake update
 ```
+
+If there are updates, they should be reflected in [flake.lock](./flake.lock).
+
+## Pre-commit hooks
+
+Pre-commit hooks are automatically activated when [direnv](https://github.com/direnv/direnv) is installed.
