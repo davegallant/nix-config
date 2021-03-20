@@ -150,6 +150,7 @@
         ssm-session-manager-plugin
 
         # python
+        pipenv
         python39
         python39Packages.black
         python39Packages.ipython
