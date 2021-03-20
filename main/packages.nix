@@ -19,6 +19,7 @@
         glances
         gnumake
         jq
+        pre-commit
         procs
         remmina
         ripgrep
