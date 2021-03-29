@@ -166,6 +166,9 @@
         rbenv
         ruby
 
+        # databases
+        postgresql
+
         # misc
         asciinema
         github-cli
