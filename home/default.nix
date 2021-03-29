@@ -122,12 +122,14 @@ in {
       initExtra = ''
         export PATH=$PATH:~/.cargo/bin
         export PATH=$PATH:~/.local/bin
+        export PATH=$PATH:~/.nodenv/bin
         export PATH=$PATH:~/go/bin
         export PAGER=less
 
         eval "$(direnv hook zsh)"
         eval "$(_RFD_COMPLETE=source_zsh rfd)"
         eval "$(jira --completion-script-zsh)"
+        eval "$(nodenv init -)"
 
         setopt noincappendhistory
         pfetch

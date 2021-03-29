@@ -161,6 +161,11 @@
 
         python38Packages.poetry # 3.9 doesn't work yet
 
+        # ruby
+        bundler
+        rbenv
+        ruby
+
         # misc
         asciinema
         github-cli
