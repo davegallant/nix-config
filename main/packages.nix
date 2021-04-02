@@ -23,6 +23,7 @@
         procs
         remmina
         ripgrep
+        rpi-imager
         strace
         tldr
         tokei
