@@ -10,6 +10,7 @@
         bind
         binutils-unwrapped
         colordiff
+        ctop
         curl
         direnv
         exa
