@@ -92,6 +92,9 @@
         sshfs
         tailscale
 
+        # backup
+        restic
+
         # virtualization
         qemu
         virtmanager
