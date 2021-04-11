@@ -134,10 +134,10 @@
         nixpkgs-fmt
         nixpkgs-review
         rnix-lsp
-        steam-run # can run unpatched binaries
+        # steam-run # can run unpatched binaries
 
         # games
-        steam
+        # steam
         minecraft
         # yuzu
 
@@ -149,6 +149,7 @@
         zoom-us
 
         ## aws
+        aws-connect
         awscli2
         ssm-session-manager-plugin
 
