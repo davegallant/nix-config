@@ -42,7 +42,8 @@
         # monitoring
         htop
 
-        # password
+        # password managers
+        bitwarden-cli
         gopass
 
         # golang
@@ -140,7 +141,7 @@
         # steam-run # can run unpatched binaries
 
         # games
-        # steam
+        steam
         minecraft
         # yuzu
 
