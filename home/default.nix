@@ -29,16 +29,6 @@ in {
 
     home-manager.enable = true;
 
-    rtorrent = {
-      enable = true;
-      settings = ''
-        directory.default.set = ~/Downloads/torrents
-        pieces.hash.on_completion.set = yes
-        schedule2 = watch_directory,5,5,load.start=~/Downloads/torrents/*.torrent
-        session.path.set = ~/.rtorrent.session
-      '';
-    };
-
     git = {
       enable = true;
 
