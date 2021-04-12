@@ -24,6 +24,13 @@
 
   services.xserver.videoDrivers = [ "nvidia" ];
 
+  # Evolution
+  programs.evolution.enable = true;
+  programs.evolution.plugins = [ pkgs.evolution-ews ];
+  services.gnome3.evolution-data-server.enable = true;
+  services.gnome3.gnome-keyring.enable = true;
+  programs.seahorse.enable = true;
+
   # Enable the GNOME 3 Desktop Environment.
   services.xserver.enable = true;
   services.xserver.displayManager.gdm.enable = true;
