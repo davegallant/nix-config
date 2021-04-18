@@ -76,6 +76,7 @@
 
         # audio
         audio-recorder
+        pulseeffects-pw
         spotify
 
         # video
