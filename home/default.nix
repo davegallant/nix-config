@@ -356,7 +356,6 @@ in {
           nix-sandbox
           nix-update
           org-bullets
-          org-re-reveal
           org-superstar
           ox-pandoc
           rainbow-delimiters
