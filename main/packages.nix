@@ -5,7 +5,8 @@
   environment.systemPackages = with pkgs;
     let
       common = [
-        # utils
+        # productivity
+        albert
         bat
         bind
         binutils-unwrapped
