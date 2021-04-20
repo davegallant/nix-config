@@ -81,6 +81,7 @@
         spotify
 
         # video
+        kazam
         youtube-dl
         vlc
 
