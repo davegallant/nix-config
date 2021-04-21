@@ -153,6 +153,7 @@
         element-desktop
         signal-desktop
         slack
+        teams
         zoom-us
 
         ## aws
