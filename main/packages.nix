@@ -21,6 +21,7 @@
         glances
         gnumake
         jq
+        lazydocker
         lazygit
         pre-commit
         procs
