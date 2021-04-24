@@ -21,6 +21,7 @@
         glances
         gnumake
         jq
+        lazygit
         pre-commit
         procs
         remmina
