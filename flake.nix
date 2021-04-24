@@ -16,6 +16,7 @@
         ./main/fonts.nix
         ./main/general.nix
         ./main/kernel.nix
+        ./main/netdata/default.nix
         ./main/packages.nix
         ./main/printing.nix
 

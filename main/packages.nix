@@ -44,6 +44,7 @@
 
         # monitoring
         htop
+        netdata
 
         # password managers
         bitwarden-cli
