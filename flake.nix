@@ -12,6 +12,7 @@
     nixosConfigurations = let
       defaultModules = [
         home-manager.nixosModules.home-manager
+        ./main/configuration.nix
         ./main/fonts.nix
         ./main/general.nix
         ./main/kernel.nix
