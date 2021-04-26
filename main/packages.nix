@@ -14,6 +14,7 @@
         ctop
         curl
         direnv
+        dive
         exa
         fd
         gcc
