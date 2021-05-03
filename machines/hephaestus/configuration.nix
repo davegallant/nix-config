@@ -15,6 +15,9 @@
   networking.useDHCP = false;
   networking.interfaces.enp34s0.useDHCP = true;
 
+  # Enable the OpenSSH server.
+  services.sshd.enable = true;
+
   services.xserver.videoDrivers = [ "nvidia" ];
 
   # Evolution

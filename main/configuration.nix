@@ -9,6 +9,12 @@
     keyMap = "us";
   };
 
+  networking.firewall = {
+    allowPing = false;
+    enable = true;
+    trustedInterfaces = [ "tailscale0" ];
+  };
+
   # Enable the GNOME 3 Desktop Environment.
   services.xserver.enable = true;
   services.xserver.displayManager.gdm.enable = true;
