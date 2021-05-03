@@ -171,10 +171,9 @@
         python39Packages.black
         python39Packages.ipython
         python39Packages.pip
+        python39Packages.poetry
         python39Packages.setuptools
         python39Packages.virtualenv
-
-        python38Packages.poetry # 3.9 doesn't work yet
 
         # ruby
         rbenv
