@@ -5,37 +5,49 @@
   environment.systemPackages = with pkgs;
     let
       common = [
+        # utils
+        curl
+        glibcLocales
+        imagemagick
+        pfetch
+        rpi-imager
+        strace
+        tree
+        unzip
+        xdg_utils
+        yq-go
+        zip
+
+        # dev tools 
+        asciinema
+        dive
+        gcc
+        git
+        github-cli
+        gnumake
+        lazydocker
+        lazygit
+        pre-commit
+        shellcheck
+        shfmt
+        starship
+        tokei
+
         # productivity
         albert
         bat
         bind
         binutils-unwrapped
         colordiff
-        ctop
-        curl
         direnv
-        dive
         exa
         fd
-        gcc
-        git
-        glances
-        gnumake
+        go-jira
         jq
-        lazydocker
-        lazygit
-        pre-commit
-        procs
-        remmina
+        rfd
         ripgrep
-        rpi-imager
-        strace
         tldr
-        tokei
-        tree
-        unzip
-        yq-go
-        zip
+        xclip
 
         # printing
         ghostscript
@@ -44,12 +56,16 @@
         anki
 
         # monitoring
+        ctop
+        glances
         htop
         netdata
+        procs
 
         # password managers
         bitwarden-cli
         gopass
+        lpass
 
         # golang
         golangci-lint
@@ -99,6 +115,7 @@
         postman
         sshfs
         tailscale
+        vpngate
 
         # backup
         restic
@@ -181,30 +198,13 @@
         # databases
         postgresql
 
-        # misc
-        asciinema
-        github-cli
-        glibcLocales
-        go-jira
-        # hadolint
-        imagemagick
-        pfetch
-        shellcheck
-        shfmt
-        starship
-        xclip
-        xdg_utils
-
         # gnome
         gnome3.gnome-tweaks
         gnomeExtensions.appindicator
         networkmanager-openvpn
 
-        # overlays
-        lpass
-        rfd
+        # news
         srv
-        vpngate
       ];
     in common;
 
