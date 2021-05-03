@@ -15,7 +15,7 @@ buildGoModule rec {
 
   meta = with lib; {
     description = "a simple rss viewer";
-    license = licenses.unlicense;
+    license = licenses.gpl3;
     maintainers = with maintainers; [ davegallant ];
     platforms = platforms.linux ++ platforms.darwin;
   };

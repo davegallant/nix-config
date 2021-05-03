@@ -17,7 +17,7 @@ buildGoModule rec {
   meta = with lib; {
     homepage = "https://www.vpngate.net";
     description = "a client for vpngate.net";
-    license = licenses.asl20;
+    license = licenses.gpl3;
     maintainers = with maintainers; [ davegallant ];
     platforms = platforms.linux ++ platforms.darwin;
   };
