@@ -30,6 +30,23 @@
   # Set your time zone.
   time.timeZone = "America/Toronto";
 
-  services.tailscale.enable = true;
+  # Enable CUPS to print documents.
+  services.printing.enable = true;
+
+  # Enable sound.
+  sound.enable = true;
+
+  # Enable 32bit for steam
+  hardware.pulseaudio.enable = true;
+  hardware.opengl.driSupport32Bit = true;
+  hardware.opengl.extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
+  hardware.pulseaudio.support32Bit = true;
+
+  virtualisation.docker.enable = true;
+
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
 
 }
