@@ -2,13 +2,13 @@
 
 stdenv.mkDerivation rec {
   pname = "aws-connect";
-  version = "1.0.18";
+  version = "1.0.19";
 
   src = fetchFromGitHub {
     owner = "rewindio";
     repo = "aws-connect";
-    rev = "06218c9078b8a73cd9d51779db3320b9cbda7f4a";
-    sha256 = "sha256-Nh/85IyPgUbKSuYSB1vYv8HGuFka231hkmh4Lysswzo=";
+    rev = "v${version}";
+    sha256 = "sha256-xS5eRVjbjK/qzaZhNApwghNqnHGqVGWJ4hvgDu4dfDQ=";
   };
 
   installPhase = ''
