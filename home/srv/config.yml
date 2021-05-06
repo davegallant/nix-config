@@ -1,0 +1,14 @@
+---
+feeds:
+- https://aws.amazon.com/blogs/security/feed/
+- https://www.phoronix.com/rss.php
+- https://news.ycombinator.com/rss
+- https://www.bleepingcomputer.com/feed/
+- https://www.theregister.com/security/headlines.atom
+- https://www.reddit.com/r/golang/.rss
+- https://www.reddit.com/r/linux/.rss
+- https://www.reddit.com/r/londonontario/.rss
+- https://www.zdnet.com/topic/security/rss.xml
+- https://www.cbc.ca/cmlink/rss-topstories
+# Optionally define an application to view the feeds
+externalViewer: brave
