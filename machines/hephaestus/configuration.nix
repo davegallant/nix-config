@@ -7,13 +7,15 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "hephaestus"; # Define your hostname.
+  networking.hostName = "hephaestus";
 
-  # The global useDHCP flag is deprecated, therefore explicitly set to false here.
-  # Per-interface useDHCP will be mandatory in the future, so this generated config
-  # replicates the default behaviour.
-  networking.useDHCP = false;
-  networking.interfaces.enp34s0.useDHCP = true;
+  networking = {
+    interfaces.enp34s0 = { useDHCP = true; };
+    defaultGateway = {
+      address = "192.168.0.1";
+      interface = "enp34s0";
+    };
+  };
 
   # Enable the OpenSSH server.
   services.sshd.enable = true;
