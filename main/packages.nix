@@ -91,7 +91,7 @@
         gimp
 
         # office
-        bookworm
+        calibre
         libreoffice
 
         # audio
