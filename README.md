@@ -2,7 +2,9 @@
 
 [![built with nix](https://builtwithnix.org/badge.svg)](https://builtwithnix.org)
 
-This repo stores nix to manage my machines. The initial structure was inspired by [samuelgrf/nixos-config](https://gitlab.com/samuelgrf/nixos-config/-/tree/master/).
+This repo stores nix to manage my machines running [NixOS](https://nixos.org/). The initial structure was inspired by [samuelgrf/nixos-config](https://gitlab.com/samuelgrf/nixos-config/-/tree/master/).
+
+The configuration is very specific to my own machines and setup, but it may be helpful to anyone else learning or experimenting with nix, whether it be on a desktop or a server.
 
 ## Setup
 
