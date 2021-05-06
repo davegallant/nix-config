@@ -36,8 +36,6 @@
         # productivity
         albert
         bat
-        bind
-        binutils-unwrapped
         colordiff
         direnv
         exa
@@ -110,6 +108,7 @@
         arp-scan
         bandwhich
         deluge
+        dnsutils
         nmap
         openssl
         openvpn
@@ -117,6 +116,7 @@
         sshfs
         tailscale
         vpngate
+        whois
         wireshark
 
         # backup
