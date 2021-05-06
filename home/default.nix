@@ -333,5 +333,6 @@ in {
   };
 
   home.file.".config/nvim/statusline.vim".source = ./nvim/statusline.vim;
+  home.file.".config/srv/config.yml".source = ./srv/config.yml;
 
 }
