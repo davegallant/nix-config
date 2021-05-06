@@ -159,6 +159,7 @@
 
         # nix
         cachix
+        nix-diff
         nix-index
         nixfmt
         nixpkgs-fmt
