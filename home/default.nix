@@ -325,50 +325,6 @@ in {
 
     };
 
-    emacs = {
-      enable = true;
-      extraPackages = epkgs:
-        (with epkgs; [
-          all-the-icons
-          centaur-tabs
-          doom-modeline
-          doom-themes
-          evil
-          evil-collection
-          evil-commentary
-          evil-matchit
-          evil-numbers
-          evil-surround
-          evil-tutor
-          evil-visualstar
-          flycheck
-          go-mode
-          groovy-mode
-          highlight-parentheses
-          htmlize
-          hydra
-          lsp-mode
-          magit
-          magithub
-          markdown-mode
-          markdown-toc
-          nix-mode
-          nix-sandbox
-          nix-update
-          org-bullets
-          org-superstar
-          ox-pandoc
-          rainbow-delimiters
-          ripgrep
-          rust-mode
-          spinner
-          terraform-mode
-          treemacs
-          web-mode
-          xclip
-        ]);
-    };
-
     vscode = {
       enable = true;
       extensions = with pkgs.vscode-extensions; [ ms-vsliveshare.vsliveshare ];
@@ -376,7 +332,6 @@ in {
 
   };
 
-  home.file.".emacs.d/init.el".source = ./init.el;
   home.file.".config/nvim/statusline.vim".source = ./nvim/statusline.vim;
 
 }
