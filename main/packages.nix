@@ -93,6 +93,7 @@
         gimp
 
         # office
+        bookworm
         libreoffice
 
         # audio
@@ -116,6 +117,7 @@
         sshfs
         tailscale
         vpngate
+        wireshark
 
         # backup
         restic
