@@ -9,10 +9,18 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
-  boot.initrd.luks.devices.luksroot = {
-    allowDiscards = true;
-    device = "/dev/disk/by-uuid/570a2b97-3310-4784-9138-6e09037cea17";
-    preLVM = true;
+  boot.initrd.luks.devices = {
+    luksroot = {
+      allowDiscards = true;
+      device = "/dev/disk/by-uuid/570a2b97-3310-4784-9138-6e09037cea17";
+      preLVM = true;
+    };
+
+    luksstorage = {
+      allowDiscards = true;
+      device = "/dev/disk/by-uuid/23b54f60-1eb8-4bf1-b04c-79f8537c228a";
+      preLVM = true;
+    };
   };
 
   fileSystems."/" = {
@@ -27,6 +35,11 @@
 
   swapDevices =
     [{ device = "/dev/disk/by-uuid/aca92a73-2941-40ca-88c4-0dd8607d232a"; }];
+
+  fileSystems."/mnt/storage" = {
+    device = "/dev/disk/by-uuid/0f592fca-1d4e-43f7-9bf4-f1c3e19e841f";
+    fsType = "ext4";
+  };
 
   # high-resolution display
   hardware.video.hidpi.enable = lib.mkDefault true;
