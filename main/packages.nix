@@ -141,8 +141,9 @@
         groovy
         maven
 
-        # encryption
+        # disk
         cryptsetup
+        gptfdisk
 
         # browser
         brave
