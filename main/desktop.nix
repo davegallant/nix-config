@@ -2,9 +2,9 @@
 
 {
 
-  # Enable the GNOME 3 Desktop Environment.
+  # Enable the GNOME Desktop Environment.
   services.xserver.enable = true;
   services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome3.enable = true;
+  services.xserver.desktopManager.gnome.enable = true;
 
 }
