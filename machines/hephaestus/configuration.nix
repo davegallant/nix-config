@@ -25,8 +25,8 @@
   # Evolution
   programs.evolution.enable = true;
   programs.evolution.plugins = [ pkgs.evolution-ews ];
-  services.gnome3.evolution-data-server.enable = true;
-  services.gnome3.gnome-keyring.enable = true;
+  services.gnome.evolution-data-server.enable = true;
+  services.gnome.gnome-keyring.enable = true;
   programs.seahorse.enable = true;
 
 }
