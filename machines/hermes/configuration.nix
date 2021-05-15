@@ -11,5 +11,7 @@
 
   networking.interfaces.wlp61s0.useDHCP = true;
 
+  services.power-profiles-daemon.enable = false;
+
 }
 
