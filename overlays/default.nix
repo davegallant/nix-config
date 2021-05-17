@@ -5,5 +5,6 @@ final: prev: {
   rfd = prev.callPackage ./rfd { };
   srv = prev.callPackage ./srv { };
   vpngate = prev.callPackage ./vpngate { };
+  changedetection.io = prev.callPackage ./changedetection.io { };
 
 }
