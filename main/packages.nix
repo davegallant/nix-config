@@ -211,6 +211,8 @@
 
         # news
         srv
+
+        changedetection.io
       ];
     in common;
 
