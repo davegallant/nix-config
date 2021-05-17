@@ -14,11 +14,12 @@
         strace
         tree
         unzip
+        usbutils
         xdg_utils
         yq-go
         zip
 
-        # dev tools 
+        # dev tools
         asciinema
         dive
         gcc
@@ -100,9 +101,10 @@
         spotify
 
         # video
+        guvcview
         kazam
-        youtube-dl
         vlc
+        youtube-dl
 
         # network
         arp-scan
