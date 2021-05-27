@@ -11,7 +11,7 @@ The configuration is very specific to my own machines and setup, but it may be a
 ```console
 $ git clone git@github.com:davegallant/nix-config.git
 $ cd nix-config
-$ sudo ./nixos-rebuild.sh switch
+$ sudo ./rebuild.sh switch
 ```
 
 ## Update
