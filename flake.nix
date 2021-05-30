@@ -4,11 +4,15 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "/nixpkgs";
     };
+
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
+    darwin.url = "github:lnl7/nix-darwin";
+    darwin.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, home-manager, nixpkgs, nixos-hardware }: {
+  outputs = { self, darwin, home-manager, nixpkgs, nixos-hardware }: {
     nixosConfigurations = let
       defaultModules = [
         home-manager.nixosModules.home-manager
@@ -56,13 +60,24 @@
           ./machines/hephaestus/hardware.nix
         ] ++ defaultModules;
       };
-      hermes = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+    };
+    darwinConfigurations = {
+      demeter = darwin.lib.darwinSystem {
         modules = [
-          nixos-hardware.nixosModules.lenovo-thinkpad-t480s
-          ./machines/hermes/configuration.nix
-          ./machines/hermes/hardware.nix
-        ] ++ defaultModules;
+          ./machines/demeter/configuration.nix
+          ./main/packages.nix
+
+          ({ config, ... }: {
+            config = {
+              nixpkgs.overlays = [ (import ./overlays) ];
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users.dave.imports = [ ./home/default.nix ];
+              };
+            };
+          })
+        ];
       };
     };
   };

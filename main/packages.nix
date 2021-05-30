@@ -1,20 +1,18 @@
 { config, lib, pkgs, ... }:
 
-{
+let inherit (pkgs) stdenv;
+in {
   # System-wide packages to install.
   environment.systemPackages = with pkgs;
     let
       common = [
         # utils
         curl
-        glibcLocales
+        gnupg
         imagemagick
         pfetch
-        rpi-imager
-        strace
         tree
         unzip
-        usbutils
         xdg_utils
         yq-go
         zip
@@ -35,7 +33,6 @@
         tokei
 
         # productivity
-        albert
         bat
         colordiff
         direnv
@@ -61,10 +58,13 @@
         netdata
         procs
 
+        # databases
+        postgresql
+
         # password managers
+        _1password
         bitwarden-cli
         gopass
-        lpass
 
         # golang
         golangci-lint
@@ -91,42 +91,22 @@
         gifsicle
         gimp
 
-        # office
-        calibre
-        libreoffice
-
-        # audio
-        audio-recorder
-        pulseeffects-pw
-        spotify
-
         # video
-        guvcview
-        kazam
-        vlc
         youtube-dl
 
         # network
         arp-scan
-        bandwhich
-        deluge
         dnsutils
         nmap
         openssl
         openvpn
-        postman
         sshfs
-        tailscale
         vpngate
         whois
         wireshark
 
         # backup
         restic
-
-        # virtualization
-        qemu
-        virtmanager
 
         # terraform
         terraform-ls
@@ -137,28 +117,12 @@
         # gcp
         google-cloud-sdk
 
-        # jvm
-        jdk11
-        gradle
-        groovy
-        maven
-
-        # disk
-        cryptsetup
-        gptfdisk
-
-        # browser
-        brave
-        firefox
-
         # docker
         docker
         docker-compose
 
         # k8s
-        k3s
         kubectl
-        kubernetes-helm
 
         # nix
         cachix
@@ -168,20 +132,9 @@
         nixpkgs-fmt
         nixpkgs-review
         rnix-lsp
-        # steam-run # can run unpatched binaries
-
-        # games
-        steam
-        minecraft
-        # yuzu
 
         # communication
-        discord
         element-desktop
-        signal-desktop
-        slack
-        teams
-        zoom-us
 
         ## aws
         aws-connect
@@ -189,7 +142,6 @@
         ssm-session-manager-plugin
 
         # python
-        pipenv
         python39
         python39Packages.black
         python39Packages.ipython
@@ -201,26 +153,46 @@
         # ruby
         rbenv
 
-        # databases
-        postgresql
-
-        # gnome
-        gnome3.gnome-tweaks
-        gnomeExtensions.appindicator
-        networkmanager-openvpn
-
         # news
         srv
 
-        changedetection.io
-      ];
+      ] ++ lib.optionals stdenv.isLinux ([
+        usbutils
+        glibcLocales
+        strace
+        albert
+        audio-recorder
+        pulseeffects-pw
+        guvcview
+        kazam
+        calibre
+        spotify
+        libreoffice
+        vlc
+        qemu
+        virtmanager
+        cryptsetup
+        gptfdisk
+        gnome3.gnome-tweaks
+        gnomeExtensions.appindicator
+        networkmanager-openvpn
+        # Unsupported on darwin but likely should be:
+        bandwhich
+        brave
+        deluge
+        discord
+        firefox
+        minecraft
+        postman
+        signal-desktop
+        slack
+        steam
+        tailscale
+        teams
+        yuzu
+        zoom-us
+      ]);
     in common;
-
-  # Don't install optional default packages.
-  environment.defaultPackages = [ ];
-
-  # Install ADB and fastboot.
-  programs.adb.enable = true;
 
   # Install GnuPG agent.
   programs.gnupg.agent.enable = true;

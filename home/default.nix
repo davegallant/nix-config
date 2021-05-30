@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 let
   vim-prettier = pkgs.vimUtils.buildVimPlugin {
@@ -10,13 +10,14 @@ let
       sha256 = "sha256-FDeyGH5OPAYV7zePCfDujsj+nGd5AFnqySPStJYEY2E=";
     };
   };
+  inherit (pkgs) stdenv;
 in {
 
   home = { sessionVariables = { EDITOR = "vim"; }; };
 
   services = {
     gpg-agent = {
-      enable = true;
+      enable = stdenv.isLinux;
       defaultCacheTtl = 3600;
       defaultCacheTtlSsh = 3600;
       enableSshSupport = true;
@@ -112,14 +113,12 @@ in {
       initExtra = ''
         export PATH=$PATH:~/.cargo/bin
         export PATH=$PATH:~/.local/bin
-        export PATH=$PATH:~/.nodenv/bin
         export PATH=$PATH:~/go/bin
         export PAGER=less
 
         eval "$(direnv hook zsh)"
         eval "$(_RFD_COMPLETE=source_zsh rfd)"
         eval "$(jira --completion-script-zsh)"
-        eval "$(nodenv init -)"
 
         setopt noincappendhistory
         pfetch
@@ -129,7 +128,6 @@ in {
         aws-azure-login =
           "docker run --rm -it -v ~/.aws:/root/.aws sportradar/aws-azure-login";
         ".." = "cd ..";
-        e = "emacs -nw";
         grep = "rg --smart-case";
         k = "kubectl";
         ls = "exa -la --git";
@@ -327,7 +325,8 @@ in {
 
     vscode = {
       enable = true;
-      extensions = with pkgs.vscode-extensions; [ ms-vsliveshare.vsliveshare ];
+      extensions = with pkgs.vscode-extensions;
+        [ ] ++ lib.optionals stdenv.isLinux ([ ms-vsliveshare.vsliveshare ]);
     };
 
   };
