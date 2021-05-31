@@ -1,5 +1,16 @@
-{ stdenv, lib, fetchFromGitHub, asciidoc, cmake, docbook_xsl, pkgconfig
-, bash-completion, curl, openssl, libxml2, libxslt }:
+{ stdenv
+, lib
+, fetchFromGitHub
+, asciidoc
+, cmake
+, docbook_xsl
+, pkgconfig
+, bash-completion
+, curl
+, openssl
+, libxml2
+, libxslt
+}:
 
 stdenv.mkDerivation rec {
   pname = "lpass";

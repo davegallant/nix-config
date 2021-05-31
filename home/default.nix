@@ -11,9 +11,8 @@ let
     };
   };
   inherit (pkgs) stdenv;
-in {
-
-  home = { sessionVariables = { EDITOR = "vim"; }; };
+in
+{
 
   services = {
     gpg-agent = {
@@ -115,6 +114,7 @@ in {
         export PATH=$PATH:~/.local/bin
         export PATH=$PATH:~/go/bin
         export PAGER=less
+        export EDITOR=vim
 
         eval "$(direnv hook zsh)"
         eval "$(_RFD_COMPLETE=source_zsh rfd)"
@@ -244,7 +244,7 @@ in {
           extraConfig = ''
             set -g @plugin 'seebi/tmux-colors-solarized'
             set -g @colors-solarized 'dark'
-              '';
+          '';
         }
       ];
       extraConfig = ''

@@ -22,7 +22,8 @@ let
       };
     };
   };
-in with py.pkgs;
+in
+with py.pkgs;
 buildPythonApplication rec {
   pname = "changedetection.io";
   version = "0.30";
