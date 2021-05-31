@@ -1,7 +1,8 @@
 { config, lib, pkgs, ... }:
 
 let inherit (pkgs) stdenv;
-in {
+in
+{
   # System-wide packages to install.
   environment.systemPackages = with pkgs;
     let
@@ -58,7 +59,7 @@ in {
         netdata
         procs
 
-        # databases
+        # data tools
         postgresql
 
         # password managers
@@ -100,7 +101,7 @@ in {
         nmap
         openssl
         openvpn
-        sshfs
+        sshfs # mac requires https://osxfuse.github.io/
         vpngate
         whois
         wireshark
@@ -179,6 +180,7 @@ in {
         # Unsupported on darwin but likely should be:
         bandwhich
         brave
+        datasette
         deluge
         discord
         firefox
@@ -192,7 +194,8 @@ in {
         yuzu
         zoom-us
       ]);
-    in common;
+    in
+    common;
 
   # Install GnuPG agent.
   programs.gnupg.agent.enable = true;

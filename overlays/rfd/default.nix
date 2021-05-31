@@ -2,7 +2,8 @@
 
 let py = python3.override { };
 
-in with py.pkgs;
+in
+with py.pkgs;
 buildPythonApplication rec {
   pname = "rfd";
   version = "v0.7.1";
