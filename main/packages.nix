@@ -39,7 +39,6 @@ in
         direnv
         exa
         fd
-        go-jira
         jq
         rfd
         ripgrep
@@ -153,6 +152,9 @@ in
 
         # ruby
         rbenv
+        rubocop
+        ruby
+        rufo
 
         # news
         srv
