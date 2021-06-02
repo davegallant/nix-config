@@ -118,7 +118,7 @@ in
 
         eval "$(direnv hook zsh)"
         eval "$(_RFD_COMPLETE=source_zsh rfd)"
-        eval "$(jira --completion-script-zsh)"
+        eval "$(rbenv init -)"
 
         setopt noincappendhistory
         pfetch
