@@ -138,8 +138,12 @@ in
 
         ## aws
         aws-connect
+        # aws-sam-cli # broken!
         awscli2
         ssm-session-manager-plugin
+
+        # security
+        git-crypt
 
         # python
         python39
