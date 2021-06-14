@@ -23,6 +23,7 @@ in
         dive
         gcc
         git
+        git-crypt
         github-cli
         gnumake
         lazydocker
@@ -127,7 +128,6 @@ in
         # nix
         cachix
         nix-diff
-        nix-index
         nixfmt
         nixpkgs-fmt
         nixpkgs-review
@@ -141,9 +141,6 @@ in
         # aws-sam-cli # broken!
         awscli2
         ssm-session-manager-plugin
-
-        # security
-        git-crypt
 
         # python
         python39
