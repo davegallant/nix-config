@@ -37,7 +37,7 @@ nnoremap <space> za
 vnoremap <C-r> "hy:%s/<C-r>h//g<left><left>
 
 " Custom Commands
-command JsonFormat execute "::%!jq '.'"
+command! JsonFormat execute "::%!jq '.'"
 
 " Shortcuts
 map <Leader>r :Rg<CR>
