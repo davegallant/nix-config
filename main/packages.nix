@@ -161,25 +161,26 @@ in
         srv
 
       ] ++ lib.optionals stdenv.isLinux ([
-        usbutils
-        glibcLocales
-        strace
         albert
         audio-recorder
-        pulseeffects-pw
-        guvcview
-        kazam
         calibre
-        spotify
-        libreoffice
-        vlc
-        qemu
-        virtmanager
         cryptsetup
-        gptfdisk
+        glibcLocales
         gnome3.gnome-tweaks
         gnomeExtensions.appindicator
+        gptfdisk
+        guvcview
+        kazam
+        libreoffice
         networkmanager-openvpn
+        pulseeffects-pw
+        qemu
+        rtorrent
+        spotify
+        strace
+        usbutils
+        virtmanager
+        vlc
         # Unsupported on darwin but likely should be:
         bandwhich
         brave
