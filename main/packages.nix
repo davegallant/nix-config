@@ -9,6 +9,8 @@ in
       common = [
         # utils
         curl
+        du-dust
+        duf
         gnupg
         imagemagick
         pfetch
@@ -56,7 +58,6 @@ in
         ctop
         glances
         htop
-        netdata
         procs
 
         # data tools
@@ -90,7 +91,7 @@ in
 
         # imaging
         gifsicle
-        gimp
+        # gimp
 
         # video
         youtube-dl
@@ -160,6 +161,9 @@ in
         # news
         srv
 
+        # security
+        yubikey-manager
+
       ] ++ lib.optionals stdenv.isLinux ([
         albert
         audio-recorder
@@ -197,6 +201,7 @@ in
         teams
         yuzu
         zoom-us
+        netdata # TODO: Enable launchd support with nix-darwin
       ]);
     in
     common;
