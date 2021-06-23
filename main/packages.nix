@@ -99,6 +99,7 @@ in
         # network
         arp-scan
         dnsutils
+        gping
         nmap
         openssl
         openvpn
