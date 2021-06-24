@@ -21,6 +21,7 @@ in
         zip
 
         # dev tools
+        act
         asciinema
         dive
         gcc
