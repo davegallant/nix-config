@@ -15,7 +15,12 @@
       address = "192.168.0.1";
       interface = "enp34s0";
     };
-    firewall = { allowedTCPPorts = [ 8001 ]; };
+    firewall = {
+      allowedTCPPorts = [
+        6080 # hound
+        8001 # datasette
+      ];
+    };
   };
 
   # Enable the OpenSSH server.
