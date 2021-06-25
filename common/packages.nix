@@ -92,7 +92,7 @@ in
 
         # imaging
         gifsicle
-        # gimp
+        gimp
 
         # video
         youtube-dl

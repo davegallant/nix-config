@@ -17,14 +17,13 @@
       let
         defaultModules = [
           home-manager.nixosModules.home-manager
-          # ./main/desktop.nix
-          ./main/fonts.nix
-          ./main/general.nix
-          ./main/kernel.nix
-          ./main/netdata/default.nix
-          ./main/networking.nix
-          ./main/packages.nix
-          ./main/printing.nix
+          # ./common/desktop.nix
+          ./common/fonts.nix
+          ./common/linux.nix
+          ./common/netdata/default.nix
+          ./common/networking.nix
+          ./common/packages.nix
+          ./common/printing.nix
 
           ({ config, lib, lib', ... }: {
             config = {
@@ -66,8 +65,9 @@
     darwinConfigurations = {
       demeter = darwin.lib.darwinSystem {
         modules = [
+          ./common/darwin.nix
+          ./common/packages.nix
           ./machines/demeter/configuration.nix
-          ./main/packages.nix
 
           ({ config, ... }: {
             config = {
