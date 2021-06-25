@@ -2,9 +2,10 @@ final: prev: {
 
   aws-connect = prev.callPackage ./aws-connect { };
   lpass = prev.callPackage ./lastpass { };
+  changedetection.io = prev.callPackage ./changedetection.io { };
   rfd = prev.callPackage ./rfd { };
   srv = prev.callPackage ./srv { };
   vpngate = prev.callPackage ./vpngate { };
-  changedetection.io = prev.callPackage ./changedetection.io { };
+  yar = prev.callPackage ./yar { };
 
 }
