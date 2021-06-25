@@ -164,6 +164,7 @@ in
         srv
 
         # security
+        yar
         yubikey-manager
 
       ] ++ lib.optionals stdenv.isLinux ([
