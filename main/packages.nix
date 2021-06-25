@@ -99,6 +99,7 @@ in
 
         # network
         arp-scan
+        bandwhich
         dnsutils
         gping
         nmap
@@ -189,7 +190,6 @@ in
         virtmanager
         vlc
         # Unsupported on darwin but likely should be:
-        bandwhich
         brave
         datasette
         deluge
