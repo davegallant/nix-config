@@ -13,6 +13,10 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # Enable support for additional filesystems
+  boot.supportedFilesystems = [ "ntfs" ];
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.dave = {
     isNormalUser = true;
