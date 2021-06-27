@@ -92,7 +92,6 @@ in
 
         # imaging
         gifsicle
-        gimp
 
         # video
         youtube-dl
@@ -195,6 +194,7 @@ in
         deluge
         discord
         firefox
+        gimp
         minecraft
         postman
         signal-desktop
