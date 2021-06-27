@@ -17,7 +17,7 @@
       let
         defaultModules = [
           home-manager.nixosModules.home-manager
-          # ./common/desktop.nix
+          ./common/desktop.nix
           ./common/fonts.nix
           ./common/linux.nix
           ./common/netdata/default.nix
