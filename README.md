@@ -18,7 +18,6 @@ sudo ./rebuild.sh switch
 
 1. Install the latest unstable nix from https://github.com/numtide/nix-unstable-installer (to get nix flakes)
 1. Install nix-darwin: https://github.com/LnL7/nix-darwin
-1. Add home-manager channel: `nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager; nix-channel --update` (TODO: this requirement should be removed in the future)
 
 ```sh
 ./rebuild.sh switch

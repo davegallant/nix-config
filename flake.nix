@@ -1,15 +1,20 @@
 {
+  description = "nixos and macos configurations";
+
   inputs = {
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "/nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
-    darwin.url = "github:lnl7/nix-darwin";
-    darwin.inputs.nixpkgs.follows = "nixpkgs";
+    darwin = {
+      url = "github:lnl7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, darwin, home-manager, nixpkgs, nixos-hardware }: {
@@ -42,7 +47,7 @@
                 trustedUsers = [ "root" "dave" ];
               };
 
-              nixpkgs.overlays = [ (import ./overlays) ];
+              nixpkgs.overlays = [ (import ./modules/overlays) ];
 
               home-manager = {
                 useGlobalPkgs = true;
@@ -65,13 +70,15 @@
     darwinConfigurations = {
       demeter = darwin.lib.darwinSystem {
         modules = [
+          home-manager.darwinModules.home-manager
           ./common/darwin.nix
           ./common/packages.nix
           ./machines/demeter/configuration.nix
+          ./modules/darwin/default.nix
 
           ({ config, ... }: {
             config = {
-              nixpkgs.overlays = [ (import ./overlays) ];
+              nixpkgs.overlays = [ (import ./modules/overlays) ];
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
