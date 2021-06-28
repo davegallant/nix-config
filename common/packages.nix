@@ -23,6 +23,7 @@ in
         # dev tools
         act
         asciinema
+        chromedriver
         dive
         gcc
         git
