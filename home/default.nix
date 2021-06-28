@@ -100,6 +100,7 @@ in
     zsh = {
       enable = true;
       enableAutosuggestions = true;
+      enableSyntaxHighlighting = true;
       history.size = 1000000;
 
       localVariables = {
@@ -139,10 +140,6 @@ in
         plugins = [ "git" "last-working-dir" ];
       };
 
-      plugins = [{
-        name = "fast-syntax-highlighting";
-        src = "${pkgs.zsh-fast-syntax-highlighting}/share/zsh/site-functions";
-      }];
     };
 
     alacritty = {
