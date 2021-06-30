@@ -113,9 +113,12 @@ in
       initExtra = ''
         export PATH=$PATH:~/.cargo/bin
         export PATH=$PATH:~/.local/bin
-        export PATH=$PATH:~/go/bin
         export PAGER=less
         export EDITOR=vim
+
+        export GOPATH=~/go
+        export GOBIN=$GOPATH/bin
+        export PATH=$PATH:$GOBIN
 
         eval "$(direnv hook zsh)"
         eval "$(_RFD_COMPLETE=source_zsh rfd)"
@@ -210,8 +213,6 @@ in
 
     go = {
       enable = true;
-      goBin = "go/bin";
-      goPath = "go";
     };
 
     tmux = {
