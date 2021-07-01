@@ -53,9 +53,6 @@ in
         # printing
         ghostscript
 
-        # education
-        anki
-
         # monitoring
         ctop
         glances
@@ -106,9 +103,10 @@ in
         openssl
         openvpn
         sshfs # mac requires https://osxfuse.github.io/
+        tcpdump
         vpngate
         whois
-        wireshark
+        wireshark-qt
 
         # backup
         restic
@@ -132,6 +130,7 @@ in
         # nix
         cachix
         nix-diff
+        nix-query-tree-viewer
         nixfmt
         nixpkgs-fmt
         nixpkgs-review
