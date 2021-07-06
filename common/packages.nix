@@ -99,6 +99,7 @@ in
         bandwhich
         dnsutils
         gping
+        iperf
         nmap
         openssl
         openvpn
