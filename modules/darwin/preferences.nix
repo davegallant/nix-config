@@ -46,9 +46,9 @@
       "com.apple.sound.beep.volume" = "0.000";
       ApplePressAndHoldEnabled = false;
       # delay before repeating keystrokes
-      InitialKeyRepeat = 10;
+      InitialKeyRepeat = 15;
       # delay between repeated keystrokes upon holding a key
-      KeyRepeat = 1;
+      KeyRepeat = 5;
       AppleShowAllExtensions = true;
       AppleShowScrollBars = "Automatic";
     };
