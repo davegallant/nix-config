@@ -242,6 +242,7 @@ in
           extraConfig = ''
             set -g @plugin 'seebi/tmux-colors-solarized'
             set -g @colors-solarized 'dark'
+            set -sg escape-time 0
           '';
         }
       ];
@@ -293,14 +294,13 @@ in
         coc-json
         coc-nvim
         coc-rls
-        fzf-vim
-        fzfWrapper
         gruvbox
         nerdtree
         rust-vim
         supertab
         syntastic
         tabular
+        telescope-nvim
         typescript-vim
         vim-commentary
         vim-fugitive

@@ -112,9 +112,11 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-" fzf.vim
-let g:fzf_preview_window = 'up:50%'
-let g:fzf_layout = { 'window': 'enew' }
+" telescope-nvim
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 " vim-markdown
 let g:vim_markdown_override_foldtext=0
