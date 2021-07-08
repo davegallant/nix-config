@@ -131,7 +131,7 @@ in
         # nix
         cachix
         nix-diff
-        nix-query-tree-viewer
+        # nix-query-tree-viewer
         nixfmt
         nixpkgs-fmt
         nixpkgs-review
