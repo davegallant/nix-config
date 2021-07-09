@@ -238,11 +238,14 @@ in
           extraConfig = "set -g @plugin 'tmux-plugins/tmux-yank'";
         }
         {
+          plugin = sensible;
+          extraConfig = "set -g @plugin 'tmux-plugins/tmux-sensible'";
+        }
+        {
           plugin = tmux-colors-solarized;
           extraConfig = ''
             set -g @plugin 'seebi/tmux-colors-solarized'
             set -g @colors-solarized 'dark'
-            set -sg escape-time 0
           '';
         }
       ];
@@ -256,19 +259,13 @@ in
         set -g status-left-length 30
         set -g status-right-length 150
 
-        set -g status-interval 5
+        set -g xterm-keys on
 
-        set -g default-terminal "screen-256color" # colors!
-        setw -g xterm-keys on
+        set -g set-titles on
+        set -g display-panes-time 800
+        set -g display-time 2000
 
-        set -g set-titles on          # set terminal title
-        set -g display-panes-time 800 # slightly longer pane indicators display time
-        set -g display-time 2000      # slightly longer status messages display time
-
-        # Lots of scrollback.
-        setw -g history-limit 50000000
-
-        setw -q -g utf8 on
+        set -q -g utf8 on
 
         # activity
         set -g monitor-activity on
