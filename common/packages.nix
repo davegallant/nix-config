@@ -14,6 +14,7 @@ in
         gnupg
         imagemagick
         pfetch
+        pinentry-curses
         tree
         unzip
         xdg_utils

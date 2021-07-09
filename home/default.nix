@@ -218,7 +218,7 @@ in
     tmux = {
       enable = true;
       clock24 = true;
-      terminal = "screen-256color";
+      terminal = "xterm-256color";
       customPaneNavigationAndResize = true;
       plugins = with pkgs.tmuxPlugins; [
         {
@@ -303,13 +303,10 @@ in
         vim-fugitive
         vim-gitgutter
         vim-go
-        vim-javacomplete2
         vim-javascript
         vim-markdown
         vim-nix
-        vim-pandoc
         vim-prettier
-        vim-pandoc-syntax
         vim-repeat
         vim-sneak
         vim-surround
