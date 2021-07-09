@@ -11,7 +11,6 @@ set statusline=
 set statusline+=%#Pmenu#
 set statusline+=%{StatuslineMode()}
 set statusline+=%#PmenuSel#
-set statusline+=%{StatuslineGit()}
 set statusline+=%#LineNr#
 set statusline+=\ %f
 set statusline+=%m
@@ -47,15 +46,6 @@ function! StatuslineMode()
 
     return '  '.g:modeMap[mode()].' '
 
-endfunction
-
-function! GitBranch()
-  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
-endfunction
-
-function! StatuslineGit()
-  let l:branchname = GitBranch()
-  return strlen(l:branchname) > 0?'   '.l:branchname.' ':''
 endfunction
 
 augroup SetStatusline
