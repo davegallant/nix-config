@@ -39,6 +39,11 @@ in
         starship
         tokei
 
+        # language servers
+        nodePackages.bash-language-server
+        nodePackages.yaml-language-server
+        nodePackages.pyright
+
         # productivity
         bat
         colordiff

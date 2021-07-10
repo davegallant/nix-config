@@ -287,12 +287,9 @@ in
 
       extraConfig = builtins.readFile ./nvim/init.vim;
       plugins = with pkgs.vimPlugins; [
-        coc-go
-        coc-json
-        coc-nvim
-        coc-rls
         gruvbox
         nerdtree
+        nvim-lspconfig
         rust-vim
         supertab
         syntastic
