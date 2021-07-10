@@ -154,10 +154,17 @@ in
         live_config_reload = true;
         mouse.hide_when_typing = true;
 
-        font = {
-          normal.family = "Fira Code";
-          size = 12;
-        };
+        font =
+          if stdenv.isLinux then
+            {
+              normal.family = "Fira Code";
+              size = 12;
+            }
+          else
+            {
+              normal.family = "Fira Code";
+              size = 18;
+            };
 
         shell = {
           program = "zsh";
