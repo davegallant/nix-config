@@ -132,4 +132,14 @@ autocmd FileType java setlocal omnifunc=javacomplete#Complete
 " vim-prettier
 let g:prettier#autoformat = 1
 
+lua << EOF
+require'lspconfig'.bashls.setup{}
+require'lspconfig'.pyright.setup{}
+require'lspconfig'.rls.setup{}
+require'lspconfig'.rnix.setup{}
+require'lspconfig'.terraformls.setup{}
+require'lspconfig'.tflint.setup{}
+require'lspconfig'.yamlls.setup{}
+EOF
+
 source ~/.config/nvim/statusline.vim
