@@ -26,6 +26,7 @@ in
 
     casks = [
       "1password"
+      "amethyst"
       "osxfuse"
       "visual-studio-code"
     ];
