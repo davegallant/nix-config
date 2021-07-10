@@ -134,6 +134,7 @@ let g:prettier#autoformat = 1
 
 lua << EOF
 require'lspconfig'.bashls.setup{}
+require'lspconfig'.gopls.setup{}
 require'lspconfig'.pyright.setup{}
 require'lspconfig'.rls.setup{}
 require'lspconfig'.rnix.setup{}
