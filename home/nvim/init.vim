@@ -132,6 +132,9 @@ autocmd FileType java setlocal omnifunc=javacomplete#Complete
 " vim-prettier
 let g:prettier#autoformat = 1
 
+" Use completion-nvim in every buffer
+autocmd BufEnter * lua require'completion'.on_attach()
+
 lua << EOF
 require('lualine').setup()
 
