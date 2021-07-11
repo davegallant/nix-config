@@ -27,6 +27,7 @@ in
     casks = [
       "1password"
       "amethyst"
+      "font-hack-nerd-font"
       "osxfuse"
       "visual-studio-code"
     ];
