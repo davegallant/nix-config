@@ -294,6 +294,7 @@ in
 
       extraConfig = builtins.readFile ./nvim/init.vim;
       plugins = with pkgs.vimPlugins; [
+        completion-nvim
         gruvbox
         lualine-nvim
         nerdtree
