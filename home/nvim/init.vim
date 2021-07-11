@@ -133,6 +133,8 @@ autocmd FileType java setlocal omnifunc=javacomplete#Complete
 let g:prettier#autoformat = 1
 
 lua << EOF
+require('lualine').setup()
+
 require'lspconfig'.bashls.setup{}
 require'lspconfig'.gopls.setup{}
 require'lspconfig'.pyright.setup{}
@@ -143,4 +145,3 @@ require'lspconfig'.tflint.setup{}
 require'lspconfig'.yamlls.setup{}
 EOF
 
-source ~/.config/nvim/statusline.vim
