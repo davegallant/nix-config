@@ -295,6 +295,7 @@ in
       extraConfig = builtins.readFile ./nvim/init.vim;
       plugins = with pkgs.vimPlugins; [
         gruvbox
+        lualine-nvim
         nerdtree
         nvim-lspconfig
         rust-vim
@@ -327,7 +328,6 @@ in
 
   };
 
-  home.file.".config/nvim/statusline.vim".source = ./nvim/statusline.vim;
   home.file.".config/srv/config.yml".source = ./srv/config.yml;
 
 }
