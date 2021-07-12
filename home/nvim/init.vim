@@ -132,8 +132,23 @@ autocmd FileType java setlocal omnifunc=javacomplete#Complete
 " vim-prettier
 let g:prettier#autoformat = 1
 
-" Use completion-nvim in every buffer
+
+" completion-nvim
+" Use in every buffer
 autocmd BufEnter * lua require'completion'.on_attach()
+
+" Use <Tab> and <S-Tab> to navigate through popup menu
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+imap <tab> <Plug>(completion_smart_tab)
+imap <s-tab> <Plug>(completion_smart_s_tab)
+
+" Set completeopt to have a better completion experience
+set completeopt=menuone,noinsert,noselect
+
+" Avoid showing message extra message when using completion
+set shortmess+=c
 
 lua << EOF
 require('lualine').setup()
