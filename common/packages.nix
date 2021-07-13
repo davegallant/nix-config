@@ -166,6 +166,7 @@ in
         rubocop
         ruby
         rufo
+        rubyPackages.solargraph
 
         # news
         srv

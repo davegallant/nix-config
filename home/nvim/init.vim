@@ -158,6 +158,7 @@ require'lspconfig'.gopls.setup{}
 require'lspconfig'.pyright.setup{}
 require'lspconfig'.rls.setup{}
 require'lspconfig'.rnix.setup{}
+require'lspconfig'.solargraph.setup{}
 require'lspconfig'.terraformls.setup{}
 require'lspconfig'.tflint.setup{}
 require'lspconfig'.yamlls.setup{}
