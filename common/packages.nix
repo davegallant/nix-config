@@ -180,6 +180,7 @@ in
         audio-recorder
         calibre
         cryptsetup
+        firejail
         glibcLocales
         gnome3.gnome-tweaks
         gnomeExtensions.appindicator
