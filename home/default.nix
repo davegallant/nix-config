@@ -296,9 +296,13 @@ in
       plugins = with pkgs.vimPlugins; [
         completion-nvim
         gruvbox
+        # gruvbox-nvim # TODO: Not working for some reason?
+        # lush-nvim # required by gruvbox-nvim
         lualine-nvim
         nerdtree
         nvim-lspconfig
+        nvim-treesitter
+        nvim-ts-rainbow
         rust-vim
         supertab
         syntastic
@@ -316,6 +320,7 @@ in
         vim-repeat
         vim-sneak
         vim-surround
+        vim-signify
         vim-terraform
       ];
 
@@ -329,6 +334,6 @@ in
 
   };
 
-  home.file.".config/srv/config.yml".source = ./srv/config.yml;
+  home.file.".config/nvim/init2.lua".source = ./nvim/init2.lua;
 
 }

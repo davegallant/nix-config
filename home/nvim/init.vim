@@ -2,8 +2,6 @@ set autoread
 set cursorline
 set encoding=utf-8
 set expandtab
-set foldlevel=99
-set foldmethod=indent
 set hlsearch
 set ignorecase
 set incsearch
@@ -58,7 +56,8 @@ au FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 " Python indentation
 au BufNewFile,BufRead *.py set tabstop=4 softtabstop=4 shiftwidth=4 textwidth=79 expandtab autoindent fileformat=unix
 let python_highlight_all=1
-syntax on
+
+set background=dark
 colorscheme gruvbox
 
 " Highlight whitespace
@@ -150,17 +149,4 @@ set completeopt=menuone,noinsert,noselect
 " Avoid showing message extra message when using completion
 set shortmess+=c
 
-lua << EOF
-require('lualine').setup()
-
-require'lspconfig'.bashls.setup{}
-require'lspconfig'.gopls.setup{}
-require'lspconfig'.pyright.setup{}
-require'lspconfig'.rls.setup{}
-require'lspconfig'.rnix.setup{}
-require'lspconfig'.solargraph.setup{}
-require'lspconfig'.terraformls.setup{}
-require'lspconfig'.tflint.setup{}
-require'lspconfig'.yamlls.setup{}
-EOF
-
+luafile ~/.config/nvim/init2.lua
