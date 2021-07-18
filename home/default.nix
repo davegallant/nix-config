@@ -308,6 +308,7 @@ in
         syntastic
         tabular
         telescope-nvim
+        twilight-nvim
         typescript-vim
         vim-commentary
         vim-fugitive
