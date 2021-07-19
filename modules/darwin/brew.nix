@@ -20,6 +20,9 @@ in
 
     brews = [
       "aws-sam-cli"
+      "coreutils"
+      "gnu-sed"
+      "gnu-tar"
       "fabianishere/personal/pam_reattach"
       "netdata"
     ];

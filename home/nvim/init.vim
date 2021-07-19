@@ -46,7 +46,7 @@ map <C-s> :tabn<CR>
 map <C-a> :tabp<CR>
 map <C-n> :tabnew<CR>
 
-" Copypasta
+" Copy/paste with OS clipboard
 noremap <Leader>y "+y
 noremap <Leader>p "+p
 
@@ -57,17 +57,11 @@ au FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 au BufNewFile,BufRead *.py set tabstop=4 softtabstop=4 shiftwidth=4 textwidth=79 expandtab autoindent fileformat=unix
 let python_highlight_all=1
 
-set background=dark
 colorscheme gruvbox
 
 " Highlight whitespace
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
-
-" Groovy syntax
-au BufNewFile,BufRead *.groovy set tabstop=2 shiftwidth=2 expandtab
-au BufNewFile,BufRead Jenkinsfile setf groovy
-au BufNewFile,BufRead Jenkinsfile set tabstop=2 shiftwidth=2 expandtab
 
 " vim-go
 let g:go_auto_sameids = 0
@@ -111,12 +105,6 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-" telescope-nvim
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-
 " vim-markdown
 let g:vim_markdown_override_foldtext=0
 let g:vim_markdown_no_default_key_mappings=1
@@ -125,28 +113,29 @@ let g:vim_markdown_conceal=0
 let g:vim_markdown_frontmatter=1
 let g:vim_markdown_new_list_item_indent=0
 
-" vim-javacomplete2
-autocmd FileType java setlocal omnifunc=javacomplete#Complete
-
 " vim-prettier
 let g:prettier#autoformat = 1
 
-
 " completion-nvim
-" Use in every buffer
 autocmd BufEnter * lua require'completion'.on_attach()
 
 " Use <Tab> and <S-Tab> to navigate through popup menu
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-imap <tab> <Plug>(completion_smart_tab)
-imap <s-tab> <Plug>(completion_smart_s_tab)
-
 " Set completeopt to have a better completion experience
 set completeopt=menuone,noinsert,noselect
 
 " Avoid showing message extra message when using completion
 set shortmess+=c
+
+" telescope-nvim
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+imap <tab> <Plug>(completion_smart_tab)
+imap <s-tab> <Plug>(completion_smart_s_tab)
 
 luafile ~/.config/nvim/init2.lua

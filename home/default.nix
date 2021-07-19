@@ -125,7 +125,13 @@ in
         eval "$(rbenv init -)"
 
         setopt noincappendhistory
+
+        source $HOME/.cargo/env
+
         pfetch
+      '' + lib.optionals stdenv.isDarwin ''
+        export PATH="$(brew --prefix)/opt/gnu-tar/libexec/gnubin:$PATH"
+        export PATH="$(brew --prefix)/opt/gnu-sed/libexec/gnubin:$PATH"
       '';
 
       shellAliases = {
@@ -140,7 +146,7 @@ in
 
       "oh-my-zsh" = {
         enable = true;
-        plugins = [ "git" "last-working-dir" ];
+        plugins = [ "last-working-dir" ];
       };
 
     };
