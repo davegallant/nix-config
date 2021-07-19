@@ -15,9 +15,13 @@
       url = "github:lnl7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+
+
   };
 
-  outputs = { self, darwin, home-manager, nixpkgs, nixos-hardware }: {
+  outputs = { self, darwin, home-manager, nixpkgs, nixos-hardware, ... }@inputs: {
+
     nixosConfigurations =
       let
         defaultModules = [
@@ -47,7 +51,7 @@
                 trustedUsers = [ "root" "dave" ];
               };
 
-              nixpkgs.overlays = [ (import ./modules/overlays) ];
+              nixpkgs.overlays = [ (import ./modules/overlays) inputs.neovim-nightly-overlay.overlay ];
 
               home-manager = {
                 useGlobalPkgs = true;
@@ -69,6 +73,7 @@
       };
     darwinConfigurations = {
       demeter = darwin.lib.darwinSystem {
+
         modules = [
           home-manager.darwinModules.home-manager
           ./common/darwin.nix
@@ -78,7 +83,10 @@
 
           ({ config, ... }: {
             config = {
-              nixpkgs.overlays = [ (import ./modules/overlays) ];
+              nixpkgs.overlays = [
+                inputs.neovim-nightly-overlay.overlay
+                (import ./modules/overlays)
+              ];
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;

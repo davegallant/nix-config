@@ -78,14 +78,6 @@ in
         golint
         gopls
 
-        # rust
-        cargo
-        rls
-        rust-analyzer
-        rustPackages.clippy
-        rustc
-        rustfmt
-
         # node
         nodejs-14_x
         nodePackages.prettier
@@ -191,6 +183,7 @@ in
         networkmanager-openvpn
         pulseeffects-pw
         qemu
+        rustup
         rtorrent
         spotify
         strace
