@@ -168,7 +168,7 @@ in
             }
           else
             {
-              normal.family = "Fira Code";
+              normal.family = "FiraCode Nerd Font";
               size = 18;
             };
 
@@ -300,20 +300,22 @@ in
 
       extraConfig = builtins.readFile ./nvim/init.vim;
       plugins = with pkgs.vimPlugins; [
-        completion-nvim
         # gruvbox-nvim # TODO: Not working for some reason?
         # lush-nvim # required by gruvbox-nvim
-        tokyonight-nvim
+        completion-nvim
         lualine-nvim
         nerdtree
         nvim-lspconfig
         nvim-treesitter
         nvim-ts-rainbow
+        nvim-web-devicons
         rust-vim
         supertab
         syntastic
         tabular
         telescope-nvim
+        tokyonight-nvim
+        trouble-nvim
         twilight-nvim
         typescript-vim
         vim-commentary
@@ -325,9 +327,9 @@ in
         vim-nix
         vim-prettier
         vim-repeat
+        vim-signify
         vim-sneak
         vim-surround
-        vim-signify
         vim-terraform
       ];
 
