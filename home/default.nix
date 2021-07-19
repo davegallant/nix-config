@@ -301,9 +301,9 @@ in
       extraConfig = builtins.readFile ./nvim/init.vim;
       plugins = with pkgs.vimPlugins; [
         completion-nvim
-        gruvbox
         # gruvbox-nvim # TODO: Not working for some reason?
         # lush-nvim # required by gruvbox-nvim
+        tokyonight-nvim
         lualine-nvim
         nerdtree
         nvim-lspconfig

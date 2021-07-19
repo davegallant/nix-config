@@ -1,5 +1,14 @@
+-- colours
+vim.cmd[[colorscheme tokyonight]]
+vim.g.tokyonight_style = "night"
+vim.g.tokyonight_italic_functions = true
+
 -- status line
-require('lualine').setup()
+require('lualine').setup {
+  options = {
+    theme = 'tokyonight'
+  }
+}
 
 -- lsp
 require'lspconfig'.bashls.setup{}
@@ -51,6 +60,7 @@ require("twilight").setup {
   },
   exclude = {}, -- exclude these filetypes
 }
+vim.cmd[[autocmd BufEnter * :TwilightEnable]]
 
 vim.api.nvim_exec([[
     set foldmethod=expr
