@@ -149,6 +149,7 @@ in
         python39Packages.black
         python39Packages.ipython
         python39Packages.pip
+        python39Packages.pipx
         python39Packages.poetry
         python39Packages.setuptools
         python39Packages.virtualenv

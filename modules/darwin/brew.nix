@@ -21,10 +21,11 @@ in
     brews = [
       "aws-sam-cli"
       "coreutils"
+      "fabianishere/personal/pam_reattach"
       "gnu-sed"
       "gnu-tar"
-      "fabianishere/personal/pam_reattach"
       "netdata"
+      "rewindio/public/aws-role-play"
     ];
 
     casks = [
@@ -32,6 +33,7 @@ in
       "amethyst"
       "font-fira-code-nerd-font"
       "font-hack-nerd-font"
+      "lulu"
       "osxfuse"
       "visual-studio-code"
     ];
