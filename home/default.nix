@@ -298,7 +298,9 @@ in
       viAlias = true;
       vimAlias = true;
 
-      extraConfig = builtins.readFile ./nvim/init.vim;
+      # home-manager doesn't yet support `init.lua`
+      extraConfig = "lua require('init')";
+
       plugins = with pkgs.vimPlugins; [
         # gruvbox-nvim # TODO: Not working for some reason?
         # lush-nvim # required by gruvbox-nvim
@@ -343,6 +345,6 @@ in
 
   };
 
-  home.file.".config/nvim/init2.lua".source = ./nvim/init2.lua;
+  home.file.".config/nvim/lua".source = ./nvim/lua;
 
 }
