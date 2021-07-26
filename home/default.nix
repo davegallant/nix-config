@@ -128,6 +128,8 @@ in
 
         source $HOME/.cargo/env
 
+        source $HOME/.zsh-work
+
         pfetch
       '' + lib.optionals stdenv.isDarwin ''
         export PATH="$(brew --prefix)/opt/gnu-tar/libexec/gnubin:$PATH"
@@ -306,10 +308,10 @@ in
         # lush-nvim # required by gruvbox-nvim
         completion-nvim
         lualine-nvim
-        nerdtree
         nvim-lspconfig
         nvim-treesitter
         nvim-ts-rainbow
+        nvim-tree-lua
         nvim-web-devicons
         rust-vim
         supertab

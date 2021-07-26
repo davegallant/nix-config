@@ -72,9 +72,15 @@ vim.api.nvim_set_keymap("v", "<leader>y", "\"+y",
   {noremap = true}
 )
 
--- NERDTree
-vim.api.nvim_set_keymap("n", "<leader>n", "<cmd>NERDTreeToggle<cr>",
-  {silent = true, noremap = true}
+-- NvimTreeToggle
+vim.api.nvim_set_keymap("n", "<leader>n", "<cmd>NvimTreeToggle<cr>",
+  {noremap = true}
+)
+vim.api.nvim_set_keymap("n", "<leader>r", "<cmd>NvimTreeRefresh<cr>",
+  {noremap = true}
+)
+vim.api.nvim_set_keymap("n", "<leader>nf", "<cmd>NvimTreeFindFile<cr>",
+  {noremap = true}
 )
 
 -- Folding
