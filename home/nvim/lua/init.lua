@@ -308,10 +308,10 @@ vim.cmd[[au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "
 vim.cmd[[vnoremap <C-r> "hy:%s/<C-r>h//g<left><left>]]
 
 -- Indent YAML
--- au FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+vim.cmd[[au FileType yaml setlocal ts=2 sts=2 sw=2 expandtab]]
 
 -- Python indentation
--- au BufNewFile,BufRead *.py set tabstop=4 softtabstop=4 shiftwidth=4 textwidth=79 expandtab autoindent fileformat=unix
+vim.cmd[[au BufNewFile,BufRead *.py set tabstop=4 softtabstop=4 shiftwidth=4 textwidth=79 expandtab autoindent fileformat=unix]]
 
 -- Highlight whitespace
 vim.cmd[[highlight ExtraWhitespace ctermbg=red guibg=red]]
