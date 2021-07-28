@@ -304,14 +304,14 @@ in
       extraConfig = "lua require('init')";
 
       plugins = with pkgs.vimPlugins; [
-        # gruvbox-nvim # TODO: Not working for some reason?
-        # lush-nvim # required by gruvbox-nvim
         completion-nvim
+        git-blame-nvim
+        glow-nvim
         lualine-nvim
         nvim-lspconfig
+        nvim-tree-lua
         nvim-treesitter
         nvim-ts-rainbow
-        nvim-tree-lua
         nvim-web-devicons
         rust-vim
         supertab
@@ -323,8 +323,6 @@ in
         twilight-nvim
         typescript-vim
         vim-commentary
-        vim-fugitive
-        vim-gitgutter
         vim-go
         vim-javascript
         vim-markdown
