@@ -4,7 +4,7 @@
 
 This repo stores nix to manage my machines running both [NixOS](https://nixos.org/) and macOS. The initial structure was inspired by [samuelgrf/nixos-config](https://gitlab.com/samuelgrf/nixos-config/-/tree/master/).
 
-The configuration is very specific to my own machines and setup, but it may be a useful reference for anyone else learning or experimenting with nix, whether it be on a desktop or a server.
+The configuration is very specific to my own machines and setup, but it may be a useful reference for anyone else learning or experimenting with nix, whether it be on a personal machine or a server.
 
 ## Setup
 

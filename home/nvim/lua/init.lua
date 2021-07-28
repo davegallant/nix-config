@@ -230,7 +230,6 @@ require("twilight").setup {
   },
   exclude = {}, -- exclude these filetypes
 }
-vim.cmd[[autocmd BufEnter * :TwilightEnable]]
 
 -- vim-go
 vim.g.go_auto_sameids = 0
