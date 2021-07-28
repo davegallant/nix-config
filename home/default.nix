@@ -121,24 +121,17 @@ in
         export PATH=$PATH:$GOBIN
 
         eval "$(direnv hook zsh)"
-        eval "$(_RFD_COMPLETE=source_zsh rfd)"
-        eval "$(rbenv init -)"
 
         setopt noincappendhistory
 
-        source $HOME/.cargo/env
-
         source $HOME/.zsh-work
 
-        pfetch
       '' + lib.optionals stdenv.isDarwin ''
         export PATH="$(brew --prefix)/opt/gnu-tar/libexec/gnubin:$PATH"
         export PATH="$(brew --prefix)/opt/gnu-sed/libexec/gnubin:$PATH"
       '';
 
       shellAliases = {
-        aws-azure-login =
-          "docker run --rm -it -v ~/.aws:/root/.aws sportradar/aws-azure-login";
         ".." = "cd ..";
         grep = "rg --smart-case";
         k = "kubectl";
