@@ -276,6 +276,9 @@ vim.g.vim_markdown_new_list_item_indent = 0
 -- vim-prettier
 vim.g['prettier#autoformat'] = 1
 
+-- git-blame
+vim.g.gitblame_enabled = 0
+
 -- telescope
 vim.api.nvim_set_keymap("n", "<leader>ff", "<cmd>Telescope find_files<cr>",
   {silent = true, noremap = true}
