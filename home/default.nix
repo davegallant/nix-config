@@ -3,11 +3,22 @@
 let
   vim-prettier = pkgs.vimUtils.buildVimPlugin {
     name = "vim-prettier";
+    nativeBuildInputs = with pkgs; [ lua53Packages.luacheck ];
     src = pkgs.fetchFromGitHub {
       owner = "prettier";
       repo = "vim-prettier";
       rev = "0.2.7";
       sha256 = "sha256-FDeyGH5OPAYV7zePCfDujsj+nGd5AFnqySPStJYEY2E=";
+    };
+  };
+  gitlinker-nvim = pkgs.vimUtils.buildVimPlugin {
+    name = "gitlinker-nvim";
+    nativeBuildInputs = with pkgs; [ lua53Packages.luacheck stylua ];
+    src = pkgs.fetchFromGitHub {
+      owner = "ruifm";
+      repo = "gitlinker.nvim";
+      rev = "master";
+      sha256 = "sha256-MpWK5f69rTMsb9b2YHzL5+N9FFWfwZ6GsVONsk72if0=";
     };
   };
   inherit (pkgs) stdenv;
@@ -299,6 +310,7 @@ in
       plugins = with pkgs.vimPlugins; [
         completion-nvim
         git-blame-nvim
+        gitlinker-nvim
         glow-nvim
         lualine-nvim
         nvim-lspconfig
@@ -306,6 +318,7 @@ in
         nvim-treesitter
         nvim-ts-rainbow
         nvim-web-devicons
+        plenary-nvim
         rust-vim
         supertab
         syntastic

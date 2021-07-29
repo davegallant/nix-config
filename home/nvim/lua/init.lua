@@ -107,10 +107,12 @@ require'lspconfig'.terraformls.setup{}
 require'lspconfig'.tflint.setup{}
 require'lspconfig'.yamlls.setup{}
 
-
 -------------------------------------------------------------------------------
 -- Plugins {{{1 ---------------------------------------------------------------
 -------------------------------------------------------------------------------
+-- gitlinker
+require"gitlinker".setup()
+
 -- status line
 require('lualine').setup {
   options = {
