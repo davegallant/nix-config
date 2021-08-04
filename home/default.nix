@@ -137,9 +137,10 @@ in
 
         source $HOME/.zsh-work
 
-      '' + lib.optionals stdenv.isDarwin ''
-        export PATH="$(brew --prefix)/opt/gnu-tar/libexec/gnubin:$PATH"
-        export PATH="$(brew --prefix)/opt/gnu-sed/libexec/gnubin:$PATH"
+        if [[ "$OSTYPE" == "darwin"* ]]; then
+          export PATH="$(brew --prefix)/opt/gnu-tar/libexec/gnubin:$PATH"
+          export PATH="$(brew --prefix)/opt/gnu-sed/libexec/gnubin:$PATH"
+        fi
       '';
 
       shellAliases = {
