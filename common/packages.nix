@@ -182,10 +182,12 @@ in
         kazam
         libreoffice
         networkmanager-openvpn
+        opensnitch
+        opensnitch-ui
         pulseeffects-pw
         qemu
-        rustup
         rtorrent
+        rustup
         spotify
         strace
         usbutils
