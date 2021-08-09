@@ -11,16 +11,6 @@ let
       sha256 = "sha256-FDeyGH5OPAYV7zePCfDujsj+nGd5AFnqySPStJYEY2E=";
     };
   };
-  gitlinker-nvim = pkgs.vimUtils.buildVimPlugin {
-    name = "gitlinker-nvim";
-    nativeBuildInputs = with pkgs; [ lua53Packages.luacheck stylua ];
-    src = pkgs.fetchFromGitHub {
-      owner = "ruifm";
-      repo = "gitlinker.nvim";
-      rev = "master";
-      sha256 = "sha256-MpWK5f69rTMsb9b2YHzL5+N9FFWfwZ6GsVONsk72if0=";
-    };
-  };
   inherit (pkgs) stdenv;
 in
 {
