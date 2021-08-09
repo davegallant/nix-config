@@ -83,9 +83,6 @@ in
         nodePackages.prettier
         nodePackages.yarn
 
-        # social media
-        rtv
-
         # imaging
         gifsicle
 
@@ -112,7 +109,7 @@ in
 
         # terraform
         terraform-ls
-        terraform_0_14
+        terraform
         tflint
         tfsec
 

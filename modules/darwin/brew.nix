@@ -35,6 +35,7 @@ in
       "font-hack-nerd-font"
       "lulu"
       "osxfuse"
+      "rectangle"
       "visual-studio-code"
     ];
 
