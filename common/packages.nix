@@ -168,6 +168,7 @@ in
       ] ++ lib.optionals stdenv.isLinux ([
         albert
         audio-recorder
+        authy
         calibre
         cryptsetup
         firejail
