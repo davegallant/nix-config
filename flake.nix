@@ -30,6 +30,7 @@
           ./common/fonts.nix
           ./common/linux.nix
           ./common/netdata/default.nix
+          ./common/changedetection.io/default.nix
           ./common/opensnitch/default.nix
           ./common/networking.nix
           ./common/packages.nix
