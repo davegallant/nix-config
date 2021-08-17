@@ -81,16 +81,20 @@ in
 with py.pkgs;
 buildPythonApplication rec {
   pname = "changedetection.io";
-  version = "0.38.2";
+  version = "0.39";
 
   src = fetchFromGitHub {
     owner = "dgtlmoon";
     repo = "changedetection.io";
-    rev = "00fe4d4e41f8e2c7690f164da43f1aba1b6a517e";
-    hash = "sha256-BQyX0lzFC97ly/9TyohXBRluURPJ3nAuPjX6JzXKmXg";
+    rev = "a11b6daa2e24933d0a3b9548a02d57c96ed0c09e";
+    hash = "sha256-IdPlYa0lBI9xr+ywHuQ3OgNGvvKUIZf/wZ0ITbt2TyM=";
   };
 
-  patches = [ (substituteAll { src = ./setup.patch; }) ];
+  postPatch = ''
+    substituteInPlace requirements.txt \
+      --replace "chardet==2.3.0" "chardet" \
+      --replace "selenium ~= 3.141" "selenium"
+  '';
 
   propagatedBuildInputs = with py.pkgs; [
     apprise
@@ -106,6 +110,7 @@ buildPythonApplication rec {
     pytest-flask
     pytz
     requests
+    selenium
     timeago
     urllib3
     validators
