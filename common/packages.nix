@@ -120,13 +120,9 @@ in
         docker
         docker-compose
 
-        # k8s
-        kubectl
-
         # nix
         cachix
         nix-diff
-        # nix-query-tree-viewer
         nixfmt
         nixpkgs-fmt
         nixpkgs-review
