@@ -26,6 +26,7 @@ in
       "gnu-tar"
       "netdata"
       "rewindio/public/aws-role-play"
+      "universal-ctags"
     ];
 
     casks = [

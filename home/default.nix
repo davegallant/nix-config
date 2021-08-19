@@ -309,6 +309,7 @@ in
         nvim-treesitter
         nvim-ts-rainbow
         nvim-web-devicons
+        packer-nvim
         plenary-nvim
         rust-vim
         supertab
