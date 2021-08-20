@@ -25,6 +25,7 @@ in
       "gnu-sed"
       "gnu-tar"
       "netdata"
+      "node"
       "rewindio/public/aws-role-play"
       "universal-ctags"
     ];
