@@ -78,8 +78,7 @@ in
         golint
         gopls
 
-        # node
-        nodejs-14_x
+        # js
         nodePackages.prettier
         nodePackages.yarn
 
