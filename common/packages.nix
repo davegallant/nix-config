@@ -165,7 +165,6 @@ in
         audio-recorder
         authy
         calibre
-        changedetection.io
         cryptsetup
         firejail
         glibcLocales
