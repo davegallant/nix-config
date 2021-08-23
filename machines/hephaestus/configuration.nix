@@ -17,14 +17,17 @@
     };
     firewall = {
       allowedTCPPorts = [
-        6080 # hound
-        8001 # datasette
+        19999 # netdata
+      ];
+      allowedUDPPorts = [
+        41641 # tailscale
       ];
     };
   };
 
-  # Enable the OpenSSH server.
   services.sshd.enable = true;
+
+  services.tailscale = { enable = true; };
 
   services.xserver.videoDrivers = [ "nvidia" ];
 
