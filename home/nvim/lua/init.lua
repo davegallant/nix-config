@@ -128,6 +128,9 @@ require('lualine').setup {
   }
 }
 
+-- bufferline
+require("bufferline").setup{}
+
 -- treesitter
 require('nvim-treesitter.configs').setup({
     ensure_installed = "all",
