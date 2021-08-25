@@ -304,6 +304,7 @@ in
         gitlinker-nvim
         glow-nvim
         lualine-nvim
+        nvim-bufferline-lua
         nvim-lspconfig
         nvim-tree-lua
         nvim-treesitter
