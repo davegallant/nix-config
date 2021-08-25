@@ -300,6 +300,7 @@ in
 
       plugins = with pkgs.vimPlugins; [
         completion-nvim
+        far-vim
         git-blame-nvim
         gitlinker-nvim
         glow-nvim
