@@ -90,9 +90,7 @@ vim.api.nvim_set_keymap("n", "<space>", "za",
 
 --Set colorscheme
 vim.o.termguicolors = true
-vim.cmd[[colorscheme tokyonight]]
-vim.g.tokyonight_style = "night"
-vim.g.tokyonight_italic_functions = true
+vim.cmd[[colorscheme gruvbox]]
 
 -------------------------------------------------------------------------------
 -- LSP {{{1 -------------------------------------------------------------------
@@ -124,7 +122,7 @@ require"gitlinker".setup()
 -- status line
 require('lualine').setup {
   options = {
-    theme = 'tokyonight'
+    theme = 'gruvbox'
   }
 }
 
