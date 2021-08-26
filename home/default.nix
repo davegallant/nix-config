@@ -300,12 +300,12 @@ in
 
       plugins = with pkgs.vimPlugins; [
         completion-nvim
-        far-vim
         git-blame-nvim
         gitlinker-nvim
         glow-nvim
+        gruvbox-nvim
         lualine-nvim
-        nvim-bufferline-lua
+        bufferline-nvim
         nvim-lspconfig
         nvim-tree-lua
         nvim-treesitter
@@ -318,7 +318,6 @@ in
         syntastic
         tabular
         telescope-nvim
-        tokyonight-nvim
         trouble-nvim
         twilight-nvim
         typescript-vim
