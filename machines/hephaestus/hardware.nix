@@ -41,7 +41,11 @@
     fsType = "ext4";
   };
 
-  # high-resolution display
+  fileSystems."/mnt/nfs" = {
+    device = "192.168.1.208:/mnt/nfs";
+    fsType = "nfs";
+  };
+
   hardware.video.hidpi.enable = lib.mkDefault true;
 
 }
