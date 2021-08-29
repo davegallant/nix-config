@@ -194,6 +194,7 @@ in
         firefox
         gimp
         minecraft
+        nfs-utils
         postman
         signal-desktop
         slack
