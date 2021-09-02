@@ -12,10 +12,9 @@ in
 
   homebrew = {
     enable = true;
-    autoUpdate = true;
+    autoUpdate = false;
     global = {
       brewfile = true;
-      noLock = true;
     };
 
     brews = [
