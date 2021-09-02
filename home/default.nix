@@ -101,6 +101,7 @@ in
       localVariables = {
         CASE_SENSITIVE = "true";
         DISABLE_UNTRACKED_FILES_DIRTY = "true";
+        RPROMPT = "";
         ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE = "fg=#838383,underline";
         ZSH_DISABLE_COMPFIX = "true";
       };
@@ -137,7 +138,7 @@ in
 
       "oh-my-zsh" = {
         enable = true;
-        plugins = [ "last-working-dir" ];
+        plugins = [ "last-working-dir" "tmux" ];
       };
 
     };
@@ -264,6 +265,8 @@ in
 
         set -g xterm-keys on
 
+        set -g pane-border-status top
+
         set -g set-titles on
         set -g display-panes-time 800
         set -g display-time 2000
@@ -274,6 +277,7 @@ in
         set -g visual-activity off
 
         set -g status-right '#(gitmux #{pane_current_path})'
+
       '';
     };
 
