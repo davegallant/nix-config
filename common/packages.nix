@@ -134,6 +134,7 @@ in
         aws-connect
         # aws-sam-cli # broken!
         awscli2
+        awslogs
         ssm-session-manager-plugin
 
         # python
