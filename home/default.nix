@@ -38,23 +38,17 @@ in
       aliases = {
         "aa" = "add -A .";
         "br" = "branch";
+        "c" = "commit -S";
         "ca" = "commit -S --amend";
         "cb" = "checkout -b";
-        "ci" = "commit";
-        "cm" = "commit -m";
         "co" = "checkout";
-        "cs" = "commit -S";
-        "csm" = "commit -S -m";
-        "csa" = "commit -S --amend";
-        "deleted" = "log --diff-filter=D --summary";
-        "di" = "diff";
-        "dic" = "diff --cached";
-        "dicn" = "diff --cached --name-only";
-        "din" = "diff --name-only";
+        "d" = "diff";
+        "dc" = "diff --cached";
+        "dcn" = "diff --cached --name-only";
+        "ds" = "! git diff origin | sed -r 's/.*value:.*\"(.*)\"/\tvalue:\"************\"/'";
         "l" =
           "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
         "ms" = "merge --squash";
-        "pb" = "pull --rebase";
         "po" = "push origin";
         "por" = "push origin HEAD:refs/for/$1";
         "st" = "status";
@@ -265,7 +259,6 @@ in
 
         set -g mouse on
 
-        # Length of tmux status line
         set -g status-left-length 30
         set -g status-right-length 150
 
@@ -277,7 +270,6 @@ in
 
         set -q -g utf8 on
 
-        # activity
         set -g monitor-activity on
         set -g visual-activity off
 
