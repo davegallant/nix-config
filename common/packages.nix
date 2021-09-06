@@ -56,6 +56,9 @@ in
         tldr
         xclip
 
+        # blog
+        hugo
+
         # printing
         ghostscript
 
@@ -132,7 +135,6 @@ in
 
         ## aws
         aws-connect
-        # aws-sam-cli # broken!
         awscli2
         awslogs
         ssm-session-manager-plugin
@@ -188,6 +190,7 @@ in
         virtmanager
         vlc
         # Unsupported on darwin but likely should be:
+        aws-sam-cli
         brave
         datasette
         deluge
