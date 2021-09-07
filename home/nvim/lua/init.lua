@@ -289,6 +289,13 @@ vim.g['prettier#autoformat'] = 1
 -- git-blame
 vim.g.gitblame_enabled = 0
 
+-- hound.vim
+vim.g.hound_base_url = "hound"
+vim.g.hound_port = "6080"
+vim.api.nvim_set_keymap("n", "<leader>hs", ":Hound",
+  {silent = true, noremap = true}
+)
+
 -- telescope
 vim.api.nvim_set_keymap("n", "<leader>ff", "<cmd>Telescope find_files<cr>",
   {silent = true, noremap = true}
@@ -309,10 +316,6 @@ vim.cmd[[autocmd BufEnter * lua require'completion'.on_attach()]]
 -- use tab as trigger keys
 vim.cmd[[imap <tab> <Plug>(completion_smart_tab)]]
 vim.cmd[[imap <s-tab> <Plug>(completion_smart_s_tab)]]
-
--- Use <Tab> and <S-Tab> to navigate through popup menu
--- vim.cmd[[inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"]]
--- vim.cmd[[inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"]]
 
 -- Remember line number
 vim.cmd[[au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif]]
