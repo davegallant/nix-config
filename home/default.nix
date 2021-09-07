@@ -11,6 +11,15 @@ let
       sha256 = "sha256-FDeyGH5OPAYV7zePCfDujsj+nGd5AFnqySPStJYEY2E=";
     };
   };
+  hound-vim = pkgs.vimUtils.buildVimPlugin {
+    name = "hound-vim";
+    src = pkgs.fetchFromGitHub {
+      owner = "jfo";
+      repo = "hound.vim";
+      rev = "88a932104b47e0b5461c107837b3a9dd7cede529";
+      sha256 = "sha256-E97h75Zyc01klRi+245l/Y8HSvnnyvCjDrAB/BnK3G8=";
+    };
+  };
   inherit (pkgs) stdenv;
 in
 {
@@ -295,13 +304,14 @@ in
       extraConfig = "lua require('init')";
 
       plugins = with pkgs.vimPlugins; [
+        bufferline-nvim
         completion-nvim
         git-blame-nvim
         gitlinker-nvim
         glow-nvim
         gruvbox-nvim
+        hound-vim
         lualine-nvim
-        bufferline-nvim
         nvim-lspconfig
         nvim-tree-lua
         nvim-treesitter
@@ -328,6 +338,7 @@ in
         vim-sneak
         vim-surround
         vim-terraform
+        webapi-vim
       ];
 
     };
