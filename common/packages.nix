@@ -160,6 +160,7 @@ in
         srv
 
         # security
+        amass
         yar
         yubikey-manager
 

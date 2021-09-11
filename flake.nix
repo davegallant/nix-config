@@ -11,13 +11,12 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+
     darwin = {
       url = "github:lnl7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-
-
   };
 
   outputs = { self, darwin, home-manager, nixpkgs, nixos-hardware, ... }@inputs: {

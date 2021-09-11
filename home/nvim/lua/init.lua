@@ -39,7 +39,6 @@ vim.opt.switchbuf     = 'usetab'                -- try to reuse windows/tabs whe
 vim.opt.synmaxcol     = 200                     -- don't bother syntax highlighting long lines
 vim.opt.tabstop       = 2                       -- spaces per tab
 vim.opt.termguicolors = true                    -- use guifg/guibg instead of ctermfg/ctermbg in terminal
-vim.opt.textwidth     = 80                      -- automatically hard wrap at 80 columns
 
 vim.opt.shell         = 'bash'                  -- shell to use for `!`, `:!`, `system()` etc.
 vim.opt.shiftround    = false                   -- don't always indent by multiple of shiftwidth

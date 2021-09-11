@@ -59,6 +59,7 @@ in
           "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
         "ms" = "merge --squash";
         "po" = "push origin";
+        "pf" = "push -f";
         "por" = "push origin HEAD:refs/for/$1";
         "st" = "status";
         "wip" =
@@ -110,7 +111,7 @@ in
       localVariables = {
         CASE_SENSITIVE = "true";
         DISABLE_UNTRACKED_FILES_DIRTY = "true";
-        RPROMPT = "";
+        RPROMPT = ""; # override because macOS defaults to filepath
         ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE = "fg=#838383,underline";
         ZSH_DISABLE_COMPFIX = "true";
       };
@@ -147,7 +148,11 @@ in
 
       "oh-my-zsh" = {
         enable = true;
-        plugins = [ "last-working-dir" "tmux" ];
+        plugins = [
+          "gitfast"
+          "last-working-dir"
+          "tmux"
+        ];
       };
 
     };
