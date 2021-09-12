@@ -1,4 +1,4 @@
--------------------------------------------------------------------------------
+-----------------------------------------------------------------------------
 -- Options {{{1 ---------------------------------------------------------------
 -------------------------------------------------------------------------------
 vim.opt.autoindent     = true                              -- maintain indent of current line
@@ -58,7 +58,7 @@ vim.opt.sidescroll    = 0                       -- sidescroll in jumps because t
 vim.opt.sidescrolloff = 3                       -- same as scrolloff, but for columns
 vim.opt.smarttab      = true                    -- <tab>/<BS> indent/dedent in leading whitespace
 
--- Custom Commands
+-- Format JSON
 vim.cmd[[command! JsonFormat execute "::%!jq '.'"]]
 
 -- Tab shortcuts
@@ -66,19 +66,8 @@ vim.api.nvim_set_keymap("n", "<C-n>", "<cmd>tabnew<cr>",
   {noremap = true}
 )
 
--- copy to OS clipboard
+-- Copy to OS clipboard
 vim.api.nvim_set_keymap("v", "<leader>y", "\"+y",
-  {noremap = true}
-)
-
--- NvimTreeToggle
-vim.api.nvim_set_keymap("n", "<leader>n", "<cmd>NvimTreeToggle<cr>",
-  {noremap = true}
-)
-vim.api.nvim_set_keymap("n", "<leader>r", "<cmd>NvimTreeRefresh<cr>",
-  {noremap = true}
-)
-vim.api.nvim_set_keymap("n", "<leader>nf", "<cmd>NvimTreeFindFile<cr>",
   {noremap = true}
 )
 
@@ -87,9 +76,34 @@ vim.api.nvim_set_keymap("n", "<space>", "za",
   {silent = true, noremap = true}
 )
 
+-- Map gx to xdg-open
+vim.api.nvim_set_keymap("n", "gx", ":execute 'silent! !xdg-open ' . shellescape(expand('<cWORD>'), 1)<cr>",
+ {silent = true, noremap = true}
+)
+
 --Set colorscheme
 vim.o.termguicolors = true
 vim.cmd[[colorscheme gruvbox]]
+
+-- Use tab as trigger keys
+vim.cmd[[imap <tab> <Plug>(completion_smart_tab)]]
+vim.cmd[[imap <s-tab> <Plug>(completion_smart_s_tab)]]
+
+-- Remember line number
+vim.cmd[[au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif]]
+
+-- Replace visual selection
+vim.cmd[[vnoremap <C-r> "hy:%s/<C-r>h//g<left><left>]]
+
+-- Indent YAML
+vim.cmd[[au FileType yaml setlocal ts=2 sts=2 sw=2 expandtab]]
+
+-- Indent Python
+vim.cmd[[au BufNewFile,BufRead *.py set tabstop=4 softtabstop=4 shiftwidth=4 textwidth=79 expandtab autoindent fileformat=unix]]
+
+-- Highlight whitespace
+vim.cmd[[highlight ExtraWhitespace ctermbg=red guibg=red]]
+vim.cmd[[match ExtraWhitespace /\s\+$/]]
 
 -------------------------------------------------------------------------------
 -- LSP {{{1 -------------------------------------------------------------------
@@ -303,6 +317,17 @@ vim.api.nvim_set_keymap("n", "<leader>fg", "<cmd>Telescope live_grep<cr>",
   {silent = true, noremap = true}
 )
 
+-- NvimTree
+vim.api.nvim_set_keymap("n", "<leader>n", "<cmd>NvimTreeToggle<cr>",
+  {noremap = true}
+)
+vim.api.nvim_set_keymap("n", "<leader>r", "<cmd>NvimTreeRefresh<cr>",
+  {noremap = true}
+)
+vim.api.nvim_set_keymap("n", "<leader>nf", "<cmd>NvimTreeFindFile<cr>",
+  {noremap = true}
+)
+
 -- syntastic
 vim.g.syntastic_always_populate_loc_list = 1
 vim.g.syntastic_auto_loc_list = 1
@@ -311,24 +336,4 @@ vim.g.syntastic_check_on_wq = 0
 
 -- completion-nvim
 vim.cmd[[autocmd BufEnter * lua require'completion'.on_attach()]]
-
--- use tab as trigger keys
-vim.cmd[[imap <tab> <Plug>(completion_smart_tab)]]
-vim.cmd[[imap <s-tab> <Plug>(completion_smart_s_tab)]]
-
--- Remember line number
-vim.cmd[[au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif]]
-
---Replace visually selected
-vim.cmd[[vnoremap <C-r> "hy:%s/<C-r>h//g<left><left>]]
-
--- Indent YAML
-vim.cmd[[au FileType yaml setlocal ts=2 sts=2 sw=2 expandtab]]
-
--- Python indentation
-vim.cmd[[au BufNewFile,BufRead *.py set tabstop=4 softtabstop=4 shiftwidth=4 textwidth=79 expandtab autoindent fileformat=unix]]
-
--- Highlight whitespace
-vim.cmd[[highlight ExtraWhitespace ctermbg=red guibg=red]]
-vim.cmd[[match ExtraWhitespace /\s\+$/]]
 
