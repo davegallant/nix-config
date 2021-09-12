@@ -14,10 +14,10 @@ let
   hound-vim = pkgs.vimUtils.buildVimPlugin {
     name = "hound-vim";
     src = pkgs.fetchFromGitHub {
-      owner = "jfo";
+      owner = "davegallant";
       repo = "hound.vim";
-      rev = "88a932104b47e0b5461c107837b3a9dd7cede529";
-      sha256 = "sha256-E97h75Zyc01klRi+245l/Y8HSvnnyvCjDrAB/BnK3G8=";
+      rev = "426a8711b1b5d49f136b8ac21849f34591a960ee";
+      sha256 = "sha256-Vma/cDPNGoExvUf5sP9sQ3dHWUtHpOmrVJbZbHQpdiI=";
     };
   };
   inherit (pkgs) stdenv;
