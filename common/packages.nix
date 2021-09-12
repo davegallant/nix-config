@@ -47,7 +47,6 @@ in
         # productivity
         bat
         colordiff
-        direnv
         exa
         fd
         jq

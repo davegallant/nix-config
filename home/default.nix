@@ -39,6 +39,8 @@ in
 
     home-manager.enable = true;
 
+    direnv.enable = true;
+
     git = {
       enable = true;
 
@@ -116,18 +118,18 @@ in
         ZSH_DISABLE_COMPFIX = "true";
       };
 
-      initExtra = ''
-        export PATH=$PATH:~/.cargo/bin
-        export PATH=$PATH:~/.local/bin
+      envExtra = ''
         export PAGER=less
         export EDITOR=vim
 
+        export PATH=$PATH:~/.cargo/bin
+        export PATH=$PATH:~/.local/bin
         export GOPATH=~/go
         export GOBIN=$GOPATH/bin
         export PATH=$PATH:$GOBIN
+      '';
 
-        eval "$(direnv hook zsh)"
-
+      initExtra = ''
         setopt noincappendhistory
 
         source $HOME/.zsh-work
@@ -135,6 +137,8 @@ in
         if [[ "$OSTYPE" == "darwin"* ]]; then
           export PATH="$(brew --prefix)/opt/gnu-tar/libexec/gnubin:$PATH"
           export PATH="$(brew --prefix)/opt/gnu-sed/libexec/gnubin:$PATH"
+
+          alias xdg-open=open
         fi
       '';
 
