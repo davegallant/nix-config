@@ -305,6 +305,7 @@ vim.g.gitblame_enabled = 0
 -- hound.vim
 vim.g.hound_base_url = "hound"
 vim.g.hound_port = "6080"
+vim.g.hound_results_url = 1
 vim.api.nvim_set_keymap("n", "<leader>hs", ":Hound",
   {silent = true, noremap = true}
 )
