@@ -47,24 +47,24 @@ in
       userName = "Dave Gallant";
 
       aliases = {
-        "aa" = "add -A .";
-        "br" = "branch";
-        "c" = "commit -S";
-        "ca" = "commit -S --amend";
-        "cb" = "checkout -b";
-        "co" = "checkout";
-        "d" = "diff";
-        "dc" = "diff --cached";
-        "dcn" = "diff --cached --name-only";
-        "ds" = "! git diff origin | sed -r 's/.*value:.*\"(.*)\"/\tvalue:\"************\"/'";
-        "l" =
+        aa = "add -A .";
+        br = "branch";
+        c = "commit -S";
+        ca = "commit -S --amend";
+        cb = "checkout -b";
+        co = "checkout";
+        d = "diff";
+        dc = "diff --cached";
+        dcn = "diff --cached --name-only";
+        ds = "! git diff origin | sed -r 's/value: (.*)/value: \"************\"/'";
+        l =
           "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
-        "ms" = "merge --squash";
-        "po" = "push origin";
-        "pf" = "push -f";
-        "por" = "push origin HEAD:refs/for/$1";
-        "st" = "status";
-        "wip" =
+        ms = "merge --squash";
+        po = "push origin";
+        pf = "push -f";
+        por = "push origin HEAD:refs/for/$1";
+        st = "status";
+        wip =
           "for-each-ref --sort='authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' refs/heads";
       };
 
