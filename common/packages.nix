@@ -75,6 +75,10 @@ in
         bitwarden-cli
         gopass
 
+        # lua
+        stylua
+
+
         # golang
         golangci-lint
         golint
