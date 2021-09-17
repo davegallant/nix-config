@@ -138,6 +138,7 @@ in
 
         ## aws
         aws-connect
+        aws-vault
         awscli2
         awslogs
         ssm-session-manager-plugin
