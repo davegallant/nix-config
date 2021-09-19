@@ -72,6 +72,7 @@ in
 
         # password managers
         _1password
+        bitwarden
         bitwarden-cli
         gopass
 
