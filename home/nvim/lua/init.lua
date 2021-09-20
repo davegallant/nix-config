@@ -255,6 +255,16 @@ require("twilight").setup {
   exclude = {}, -- exclude these filetypes
 }
 
+-- hound.nvim
+require("hound").setup {
+  hound_base_url = "http://hound", -- Rely on Tailscale's MagicDNS
+  hound_port = 6080, -- the port hound is running on
+  split = "split", -- split horizontally
+}
+vim.api.nvim_set_keymap("n", "<leader>hs", ":Hound",
+  {silent = true, noremap = true}
+)
+
 -- vim-go
 vim.g.go_auto_sameids = 0
 vim.g.go_fmt_command = "goimports"
@@ -301,14 +311,6 @@ vim.g['prettier#autoformat'] = 1
 
 -- git-blame
 vim.g.gitblame_enabled = 0
-
--- hound.vim
-vim.g.hound_base_url = "hound"
-vim.g.hound_port = "6080"
-vim.g.hound_results_url = 1
-vim.api.nvim_set_keymap("n", "<leader>hs", ":Hound",
-  {silent = true, noremap = true}
-)
 
 -- telescope
 vim.api.nvim_set_keymap("n", "<leader>ff", "<cmd>Telescope find_files<cr>",

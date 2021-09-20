@@ -72,7 +72,6 @@ in
 
         # password managers
         _1password
-        bitwarden
         bitwarden-cli
         gopass
 
@@ -197,6 +196,7 @@ in
         vlc
         # Unsupported on darwin but likely should be:
         aws-sam-cli
+        bitwarden
         brave
         datasette
         deluge
