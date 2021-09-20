@@ -31,10 +31,10 @@ in
 
     casks = [
       "1password"
-      "amethyst"
       "font-fira-code-nerd-font"
       "font-hack-nerd-font"
       "lulu"
+      "maccy"
       "osxfuse"
       "rectangle"
       "visual-studio-code"
