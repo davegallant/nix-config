@@ -139,9 +139,6 @@ require('lualine').setup {
   }
 }
 
--- bufferline
-require("bufferline").setup{}
-
 -- treesitter
 require('nvim-treesitter.configs').setup({
     ensure_installed = "all",
@@ -259,7 +256,10 @@ require("twilight").setup {
 require("hound").setup {
   hound_base_url = "http://hound", -- Rely on Tailscale's MagicDNS
   hound_port = 6080, -- the port hound is running on
-  split = "split", -- split horizontally
+  search_results_buffer = "tabnew", -- how to open the search results (vsplit, split, tabnew)
+  display_file_match_urls = true, -- whether or not urls should be displayed alongside file matches
+  hound_url_pattern = "https://github.com/{repo}/blob/{revision}/{path}", -- the format of the url displayed for file matches
+
 }
 vim.api.nvim_set_keymap("n", "<leader>hs", ":Hound",
   {silent = true, noremap = true}
