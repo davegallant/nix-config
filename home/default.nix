@@ -17,8 +17,8 @@ let
     src = pkgs.fetchFromGitHub {
       owner = "davegallant";
       repo = "hound.nvim";
-      rev = "13dd6061f1614c514feab68200779ae4bd08273d";
-      sha256 = "sha256-VZLbfEjWOYwQtVT1kOycRZKNmAd/IhiYZnCtm4Y/DWY=";
+      rev = "e85ba4f65ece79fe6332d8a0ccc594a0d367f4ed";
+      sha256 = "sha256-fxPtixVB6dVjrxpJ1oP+eA00JSiKxWuii8pMxVeuyMY=";
     };
   };
   inherit (pkgs) stdenv;
@@ -314,7 +314,6 @@ in
       extraConfig = "lua require('init')";
 
       plugins = with pkgs.vimPlugins; [
-        bufferline-nvim
         completion-nvim
         git-blame-nvim
         gitlinker-nvim
