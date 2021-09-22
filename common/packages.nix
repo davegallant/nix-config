@@ -76,8 +76,8 @@ in
         gopass
 
         # lua
+        lua53Packages.luacheck
         stylua
-
 
         # golang
         golangci-lint
@@ -115,6 +115,7 @@ in
         # terraform
         terraform-ls
         terraform
+        terraformer
         tflint
         tfsec
 
