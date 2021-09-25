@@ -6,6 +6,7 @@ let
 in
 {
   users.extraGroups.netdata.gid = 220008;
+  users.users.netdata.group = "netdata";
   users.extraUsers.netdata = {
     description = "Netdata server user";
     isSystemUser = true;
