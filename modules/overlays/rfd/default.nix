@@ -6,14 +6,14 @@ in
 with py.pkgs;
 buildPythonApplication rec {
   pname = "rfd";
-  version = "v0.7.2";
+  version = "v0.8.0";
   format = "pyproject";
 
   src = fetchFromGitHub {
     owner = "davegallant";
     repo = "rfd";
     rev = version;
-    hash = "sha256-LW/iXAmq59xxIxqx9RaMLe0L6DFkkcm/+hTq8UgjyQM=";
+    hash = "sha256-Y98CKy89UMB+KJYHeM4zXkAZ2BnvGu4eyw6ZwcGnMPg=";
   };
 
   # No tests included
