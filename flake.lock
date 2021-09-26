@@ -75,6 +75,7 @@
       "inputs": {
         "flake-utils": "flake-utils",
         "nixpkgs": [
+          "neovim-nightly-overlay",
           "nixpkgs"
         ]
       },
