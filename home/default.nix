@@ -334,7 +334,6 @@ in
         tabular
         telescope-nvim
         trouble-nvim
-        twilight-nvim
         typescript-vim
         vim-commentary
         vim-go
