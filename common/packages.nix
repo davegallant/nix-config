@@ -31,7 +31,7 @@ in
         git-crypt
         github-cli
         gnumake
-        lazydocker
+        hadolint
         lazygit
         pre-commit
         shellcheck
