@@ -187,6 +187,7 @@ in
         networkmanager-openvpn
         opensnitch
         opensnitch-ui
+        linuxPackages.perf
         pulseeffects-pw
         qemu
         rtorrent
