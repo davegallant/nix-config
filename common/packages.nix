@@ -49,6 +49,7 @@ in
         colordiff
         exa
         fd
+        go-jira
         jq
         rfd
         ripgrep
