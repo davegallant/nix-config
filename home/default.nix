@@ -151,6 +151,7 @@ in
         k = "kubectl";
         ls = "exa -la --git";
         ps = "procs";
+        docker = "podman";
       };
 
       "oh-my-zsh" = {
