@@ -20,7 +20,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.dave = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "docker" "libvirtd" ];
+    extraGroups = [ "wheel" "libvirtd" ];
     shell = pkgs.zsh;
   };
 
@@ -46,7 +46,7 @@
   hardware.opengl.extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
   hardware.pulseaudio.support32Bit = true;
 
-  virtualisation.docker.enable = true;
+  virtualisation.podman.enable = true;
 
   programs.gnupg.agent = {
     enable = true;
