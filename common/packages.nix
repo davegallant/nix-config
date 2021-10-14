@@ -123,10 +123,6 @@ in
         # gcp
         google-cloud-sdk
 
-        # docker
-        docker
-        docker-compose
-
         # nix
         cachix
         nix-diff
@@ -166,8 +162,6 @@ in
         srv
 
         # security
-        amass
-        yar
         yubikey-manager
 
       ] ++ lib.optionals stdenv.isLinux ([
@@ -184,10 +178,11 @@ in
         guvcview
         kazam
         libreoffice
+        linuxPackages.perf
         networkmanager-openvpn
         opensnitch
         opensnitch-ui
-        linuxPackages.perf
+        podman
         pulseeffects-pw
         qemu
         rtorrent
