@@ -14,7 +14,6 @@ in
         gnupg
         imagemagick
         pfetch
-        pinentry-curses
         tree
         unzip
         xdg_utils
@@ -51,7 +50,6 @@ in
         fd
         go-jira
         jq
-        rfd
         ripgrep
         tldr
         xclip
@@ -108,7 +106,6 @@ in
         tcpdump
         vpngate
         whois
-        wireshark-qt
 
         # backup
         restic
@@ -182,6 +179,7 @@ in
         networkmanager-openvpn
         opensnitch
         opensnitch-ui
+        pinentry-curses
         podman
         pulseeffects-pw
         qemu
@@ -192,10 +190,11 @@ in
         usbutils
         virtmanager
         vlc
-        # Unsupported on darwin but likely should be:
+        # Unsupported or broken on darwin:
         aws-sam-cli
         bitwarden
         brave
+        rfd
         datasette
         deluge
         discord
@@ -209,6 +208,7 @@ in
         steam
         tailscale
         teams
+        wireshark-qt
         yuzu
         zoom-us
         netdata # TODO: Enable launchd support with nix-darwin
