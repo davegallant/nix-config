@@ -354,12 +354,6 @@ in
 
     };
 
-    vscode = {
-      enable = true;
-      extensions = with pkgs.vscode-extensions;
-        [ ] ++ lib.optionals stdenv.isLinux ([ ms-vsliveshare.vsliveshare ]);
-    };
-
   };
 
   home.file.".config/nvim/lua".source = ./nvim/lua;
