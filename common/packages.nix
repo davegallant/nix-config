@@ -174,6 +174,7 @@ in
         gptfdisk
         guvcview
         kazam
+        kazam
         libreoffice
         linuxPackages.perf
         networkmanager-openvpn
