@@ -8,20 +8,15 @@ The configuration is very specific to my own machines and setup, but it may be a
 
 ## Setup
 
-### NixOS
+> on macOS: install the latest unstable nix from https://github.com/numtide/nix-unstable-installer (for nix flakes),
+> and nix-darwin: https://github.com/LnL7/nix-darwin
 
-```sh
-sudo ./rebuild.sh switch
-```
-
-### macOS
-
-1. Install the latest unstable nix from https://github.com/numtide/nix-unstable-installer (to get nix flakes)
-1. Install nix-darwin: https://github.com/LnL7/nix-darwin
+To run a rebuild:
 
 ```sh
 ./rebuild.sh switch
 ```
+
 
 ## Update
 

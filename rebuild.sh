@@ -10,7 +10,7 @@ Darwin*) machine=mac ;;
 esac
 
 if [[ "$machine" == "linux" ]]; then
-	exec nixos-rebuild -I nixos-config="machines/$(hostname)/configuration.nix" "$@" --flake '.#'
+	sudo nixos-rebuild -I nixos-config="machines/$(hostname)/configuration.nix" "$@" --flake '.#'
 elif [[ "$machine" == "mac" ]]; then
 	exec darwin-rebuild "$@" --flake .
 else
