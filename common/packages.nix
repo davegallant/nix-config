@@ -133,6 +133,7 @@ in
 
         ## aws
         aws-connect
+        aws-role-play
         aws-vault
         awscli2
         awslogs
