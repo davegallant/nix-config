@@ -2,7 +2,7 @@
 
 [![built with nix](https://builtwithnix.org/badge.svg)](https://builtwithnix.org)
 
-This repo stores nix to manage my machines running both [NixOS](https://nixos.org/) and macOS. The initial structure was inspired by [samuelgrf/nixos-config](https://gitlab.com/samuelgrf/nixos-config/-/tree/master/).
+This repo stores nix to manage my machines running both [NixOS](https://nixos.org/) and macOS.
 
 The configuration is very specific to my own machines and setup, but it may be a useful reference for anyone else learning or experimenting with nix, whether it be on a personal machine or a server.
 
@@ -14,16 +14,15 @@ The configuration is very specific to my own machines and setup, but it may be a
 To run a rebuild:
 
 ```sh
-./rebuild.sh switch
+make switch
 ```
-
 
 ## Update
 
 To update nixpkgs defined in [flake.nix](./flake.nix), run:
 
 ```sh
-nix flake update
+make update
 ```
 
 If there are updates, they should be reflected in [flake.lock](./flake.lock).
