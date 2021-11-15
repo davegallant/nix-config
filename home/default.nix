@@ -147,11 +147,12 @@ in
 
       shellAliases = {
         ".." = "cd ..";
+        docker = "podman";
         grep = "rg --smart-case";
         k = "kubectl";
         ls = "exa -la --git";
         ps = "procs";
-        docker = "podman";
+        tree = "exa --tree";
       };
 
       "oh-my-zsh" = {

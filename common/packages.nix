@@ -14,7 +14,6 @@ in
         gnupg
         imagemagick
         pfetch
-        tree
         unzip
         xdg_utils
         yq-go
@@ -30,7 +29,7 @@ in
         git-crypt
         github-cli
         gnumake
-        hadolint
+        # hadolint # broken
         lazygit
         pre-commit
         shellcheck
