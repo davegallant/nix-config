@@ -293,7 +293,7 @@ vim.g["prettier#autoformat"] = 1
 vim.g.gitblame_enabled = 0
 
 -- telescope
-vim.api.nvim_set_keymap("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { silent = true, noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>ff", "<cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files,-g,!.git prompt_prefix=🔍<cr>", { silent = true, noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { silent = true, noremap = true })
 
 -- NvimTree
