@@ -11,7 +11,12 @@
   nix.package = pkgs.nixUnstable;
   nix.extraOptions = "experimental-features = nix-command flakes";
 
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+    permittedInsecurePackages = [
+      "electron-9.4.4"
+    ];
+  };
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
   # Enable support for additional filesystems
