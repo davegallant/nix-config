@@ -42,7 +42,7 @@
   };
 
   fileSystems."/mnt/nfs" = {
-    device = "192.168.1.208:/mnt/nfs";
+    device = "synology-2b:/mnt/nfs";
     fsType = "nfs";
   };
 
