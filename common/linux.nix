@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  system.stateVersion = "unstable";
+  system.stateVersion = "stable";
   system.autoUpgrade.enable = true;
 
   # Automatically optimize the Nix store.

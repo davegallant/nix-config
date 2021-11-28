@@ -7,7 +7,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-21.05";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 

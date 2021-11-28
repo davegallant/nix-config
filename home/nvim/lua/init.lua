@@ -106,7 +106,7 @@ require("lspconfig").gopls.setup({})
 require("lspconfig").pyright.setup({})
 require("lspconfig").rls.setup({})
 require("lspconfig").rnix.setup({})
-require("lspconfig").solargraph.setup({})
+-- require("lspconfig").solargraph.setup({}) # not in 21.05
 require("lspconfig").terraformls.setup({})
 require("lspconfig").tflint.setup({})
 require("lspconfig").yamlls.setup({})
@@ -129,7 +129,7 @@ end)
 -- Plugins {{{1 ---------------------------------------------------------------
 -------------------------------------------------------------------------------
 -- gitlinker
-require("gitlinker").setup()
+-- require("gitlinker").setup()
 
 -- status line
 require("lualine").setup({
