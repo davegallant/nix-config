@@ -11,16 +11,16 @@ let
       sha256 = "sha256-FDeyGH5OPAYV7zePCfDujsj+nGd5AFnqySPStJYEY2E=";
     };
   };
-  hound-nvim = pkgs.vimUtils.buildVimPlugin {
-    name = "hound-nvim";
-    nativeBuildInputs = with pkgs; [ lua53Packages.luacheck stylua ];
-    src = pkgs.fetchFromGitHub {
-      owner = "davegallant";
-      repo = "hound.nvim";
-      rev = "e85ba4f65ece79fe6332d8a0ccc594a0d367f4ed";
-      sha256 = "sha256-fxPtixVB6dVjrxpJ1oP+eA00JSiKxWuii8pMxVeuyMY=";
-    };
-  };
+  # hound-nvim = pkgs.vimUtils.buildVimPlugin {
+  #   name = "hound-nvim";
+  #   nativeBuildInputs = with pkgs; [ lua53Packages.luacheck ];
+  #   src = pkgs.fetchFromGitHub {
+  #     owner = "davegallant";
+  #     repo = "hound.nvim";
+  #     rev = "e85ba4f65ece79fe6332d8a0ccc594a0d367f4ed";
+  #     sha256 = "sha256-fxPtixVB6dVjrxpJ1oP+eA00JSiKxWuii8pMxVeuyMY=";
+  #   };
+  # };
   inherit (pkgs) stdenv;
 in
 {
@@ -320,10 +320,10 @@ in
       plugins = with pkgs.vimPlugins; [
         completion-nvim
         git-blame-nvim
-        gitlinker-nvim
+        # gitlinker-nvim # not in 21.05
         glow-nvim
         gruvbox-nvim
-        hound-nvim
+        # hound-nvim
         lualine-nvim
         nvim-lspconfig
         nvim-tree-lua
