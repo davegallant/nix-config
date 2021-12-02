@@ -29,7 +29,7 @@ in
         git-crypt
         github-cli
         gnumake
-        # hadolint # broken
+        hadolint
         lazygit
         pre-commit
         shellcheck
@@ -76,7 +76,7 @@ in
 
         # lua
         lua53Packages.luacheck
-        # stylua
+        stylua
 
         # golang
         golangci-lint
@@ -133,7 +133,7 @@ in
 
         ## aws
         aws-connect
-        # aws-role-play
+        aws-role-play
         aws-vault
         awscli2
         awslogs
@@ -142,9 +142,9 @@ in
         # python
         python39
         python39Packages.black
-        # python39Packages.ipython
+        python39Packages.ipython
         python39Packages.pip
-        # python39Packages.poetry
+        python39Packages.poetry
         python39Packages.setuptools
         python39Packages.virtualenv
 
@@ -153,7 +153,7 @@ in
         rubocop
         ruby
         rufo
-        # rubyPackages.solargraph # not in 21.05
+        rubyPackages.solargraph
 
         # news
         srv
