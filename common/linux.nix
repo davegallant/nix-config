@@ -1,11 +1,13 @@
 { pkgs, ... }:
 
 {
-  system.stateVersion = "stable";
+  system.stateVersion = "unstable";
   system.autoUpgrade.enable = true;
 
   # Automatically optimize the Nix store.
   nix.autoOptimiseStore = true;
+
+  boot.kernel.sysctl."kernel.unprivileged_userns_clone" = 1;
 
   # Enable Nix flake support.
   nix.package = pkgs.nixUnstable;
@@ -18,7 +20,7 @@
     ];
   };
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_hardened;
   # Enable support for additional filesystems
   boot.supportedFilesystems = [ "ntfs" ];
 
