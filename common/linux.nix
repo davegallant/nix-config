@@ -1,17 +1,16 @@
 { pkgs, ... }:
 
 {
+  boot.kernel.sysctl."kernel.unprivileged_userns_clone" = 1;
+  boot.kernelPackages = pkgs.linuxPackages_hardened;
+  boot.supportedFilesystems = [ "ntfs" ];
+
   system.stateVersion = "unstable";
   system.autoUpgrade.enable = true;
 
-  # Automatically optimize the Nix store.
   nix.autoOptimiseStore = true;
-
-  boot.kernel.sysctl."kernel.unprivileged_userns_clone" = 1;
-
-  # Enable Nix flake support.
-  nix.package = pkgs.nixUnstable;
   nix.extraOptions = "experimental-features = nix-command flakes";
+  nix.package = pkgs.nixUnstable;
 
   nixpkgs.config = {
     allowUnfree = true;
@@ -20,31 +19,20 @@
     ];
   };
 
-  boot.kernelPackages = pkgs.linuxPackages_hardened;
-  # Enable support for additional filesystems
-  boot.supportedFilesystems = [ "ntfs" ];
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.dave = {
     isNormalUser = true;
     extraGroups = [ "wheel" "libvirtd" ];
     shell = pkgs.zsh;
   };
 
-  # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
     font = "Lat2-Terminus16";
     keyMap = "us";
   };
 
-  # Set your time zone.
   time.timeZone = "America/Toronto";
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-  # Enable sound.
   sound.enable = true;
 
   # Enable 32bit for steam

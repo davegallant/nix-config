@@ -191,7 +191,7 @@ in
         usbutils
         virtmanager
         vlc
-        # Unsupported or broken on darwin:
+        # Unsupported / broken on darwin:
         aws-sam-cli
         bitwarden
         brave
@@ -211,11 +211,10 @@ in
         teams
         wireshark-qt
         zoom-us
-        netdata # TODO: Enable launchd support with nix-darwin
+        netdata
       ]);
     in
     common;
 
-  # Install GnuPG agent.
   programs.gnupg.agent.enable = true;
 }
