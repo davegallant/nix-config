@@ -195,15 +195,16 @@ in
         aws-sam-cli
         bitwarden
         brave
-        rfd
         datasette
         deluge
         discord
         firefox
         gimp
+        google-chrome
         minecraft
         nfs-utils
         postman
+        rfd
         signal-desktop
         slack
         steam
