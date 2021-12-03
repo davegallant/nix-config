@@ -1,8 +1,7 @@
 { pkgs, ... }:
 
 {
-  boot.kernel.sysctl."kernel.unprivileged_userns_clone" = 1;
-  boot.kernelPackages = pkgs.linuxPackages_hardened;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.supportedFilesystems = [ "ntfs" ];
 
   system.stateVersion = "unstable";
