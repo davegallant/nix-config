@@ -309,6 +309,39 @@ in
       enableZshIntegration = true;
     };
 
+    emacs = {
+      enable = true;
+      extraPackages = epkgs:
+        (with epkgs; [
+          all-the-icons
+          centaur-tabs
+          doom-modeline
+          doom-themes
+          evil
+          evil-collection
+          evil-commentary
+          evil-matchit
+          evil-numbers
+          evil-surround
+          evil-visualstar
+          flycheck
+          highlight-parentheses
+          htmlize
+          hydra
+          lsp-mode
+          magit
+          markdown-mode
+          markdown-toc
+          org-bullets
+          org-superstar
+          ox-pandoc
+          ripgrep
+          spinner
+          treemacs
+          xclip
+        ]);
+    };
+
     neovim = {
       enable = true;
       viAlias = true;
@@ -359,5 +392,6 @@ in
 
   home.file.".config/nvim/lua".source = ./nvim/lua;
   home.file.".config/srv".source = ./srv;
+  home.file.".emacs.d/init.el".source = ./init.el;
 
 }
