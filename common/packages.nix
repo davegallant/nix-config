@@ -66,6 +66,7 @@ in
         procs
 
         # data tools
+        dbeaver
         postgresql
 
         # password managers
