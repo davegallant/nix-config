@@ -20,7 +20,6 @@ vim.opt.modelines = 5
 vim.opt.mouse = "a"
 vim.opt.number = true
 vim.opt.pumblend = 10
-vim.opt.relativenumber = true
 vim.opt.scrolloff = 3
 vim.opt.shell = "bash"
 vim.opt.shiftround = false
