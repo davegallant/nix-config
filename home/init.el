@@ -26,6 +26,7 @@
 (setq create-lockfiles nil)
 
 ;; Enable Evil
+(setq evil-want-C-i-jump nil)
 (require 'evil)
 (evil-mode 1)
 
@@ -59,7 +60,6 @@
 
 ;; Disable some GUI distractions.
 (tool-bar-mode -1)
-(menu-bar-mode -1)
 (blink-cursor-mode 0)
 
 ;; Enable highlighting of current line.
@@ -87,3 +87,9 @@
 
 ;; An easier way to toggle comments
 (evil-commentary-mode)
+
+;; Enable transient mark mode
+(transient-mark-mode 1)
+
+;;;;Org mode configuration
+(require 'org)

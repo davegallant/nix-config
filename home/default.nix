@@ -332,7 +332,6 @@ in
           magit
           markdown-mode
           markdown-toc
-          org-bullets
           org-superstar
           ox-pandoc
           ripgrep
