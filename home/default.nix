@@ -147,7 +147,6 @@ in
 
       shellAliases = {
         ".." = "cd ..";
-        docker = "podman";
         grep = "rg --smart-case";
         k = "kubectl";
         ls = "exa -la --git";

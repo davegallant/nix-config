@@ -20,7 +20,7 @@
 
   users.users.dave = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "libvirtd" ];
+    extraGroups = [ "docker" "wheel" "libvirtd" ];
     shell = pkgs.zsh;
   };
 
@@ -40,6 +40,7 @@
   hardware.opengl.extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
   hardware.pulseaudio.support32Bit = true;
 
+  virtualisation.docker.enable = true;
   virtualisation.podman.enable = true;
 
   programs.gnupg.agent = {
