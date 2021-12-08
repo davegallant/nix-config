@@ -37,6 +37,11 @@ in
         starship
         tokei
 
+        # containers
+        docker
+        docker-compose
+        podman
+
         # language servers
         nodePackages.bash-language-server
         nodePackages.yaml-language-server
@@ -182,7 +187,6 @@ in
         opensnitch
         opensnitch-ui
         pinentry-curses
-        podman
         pulseeffects-pw
         qemu
         rtorrent
