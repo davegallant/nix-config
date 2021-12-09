@@ -76,7 +76,6 @@ in
 
         # password managers
         _1password
-        _1password-gui
         bitwarden-cli
         gopass
 
@@ -168,6 +167,7 @@ in
         yubikey-manager
 
       ] ++ lib.optionals stdenv.isLinux ([
+        _1password-gui
         albert
         audio-recorder
         authy
