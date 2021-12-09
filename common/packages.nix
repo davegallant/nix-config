@@ -116,9 +116,9 @@ in
         # backup
         restic
 
-        # terraform
-        terraform-ls
+        # infra tools
         terraform
+        terraform-ls
         terraformer
         tflint
         tfsec
@@ -177,6 +177,7 @@ in
         glibcLocales
         gnome3.gnome-tweaks
         gnomeExtensions.appindicator
+        google-drive-ocamlfuse
         gptfdisk
         guvcview
         kazam
