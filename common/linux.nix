@@ -32,6 +32,8 @@
 
   time.timeZone = "America/Toronto";
 
+  services.opensnitch.enable = true;
+
   sound.enable = true;
 
   # Enable 32bit for steam
