@@ -185,8 +185,6 @@ in
         libreoffice
         linuxPackages.perf
         networkmanager-openvpn
-        opensnitch
-        opensnitch-ui
         pinentry-curses
         pulseeffects-pw
         qemu
