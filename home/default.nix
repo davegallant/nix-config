@@ -365,15 +365,12 @@ in
         nvim-web-devicons
         packer-nvim
         plenary-nvim
-        rust-vim
         supertab
         syntastic
-        tabular
         telescope-nvim
         trouble-nvim
         typescript-vim
         vim-commentary
-        vim-go
         vim-javascript
         vim-markdown
         vim-nix
