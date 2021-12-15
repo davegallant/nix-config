@@ -97,6 +97,28 @@ vim.cmd([[match ExtraWhitespace /\s\+$/]])
 -------------------------------------------------------------------------------
 -- LSP {{{1 -------------------------------------------------------------------
 -------------------------------------------------------------------------------
+-- See `:help vim.lsp.*` for documentation on any of the below functions
+
+local opts = { noremap=true, silent=true }
+vim.api.nvim_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+vim.api.nvim_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+vim.api.nvim_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+vim.api.nvim_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+vim.api.nvim_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+vim.api.nvim_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+vim.api.nvim_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+vim.api.nvim_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+vim.api.nvim_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+vim.api.nvim_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+vim.api.nvim_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+vim.api.nvim_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+vim.api.nvim_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+vim.api.nvim_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+vim.api.nvim_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+vim.api.nvim_set_keymap("n", "<space>", "za", { silent = true, noremap = true })
+
 require("lspconfig").bashls.setup({})
 require("lspconfig").gopls.setup({})
 require("lspconfig").pyright.setup({})
@@ -106,6 +128,7 @@ require("lspconfig").solargraph.setup({})
 require("lspconfig").terraformls.setup({})
 require("lspconfig").tflint.setup({})
 require("lspconfig").yamlls.setup({})
+
 
 -------------------------------------------------------------------------------
 -- packer {{{1 -------------------------------------------------------------------
@@ -241,38 +264,10 @@ vim.api.nvim_set_keymap("n", "<leader>hs", ":Hound", { silent = true, noremap = 
 -- neoclip
 require('telescope').load_extension('neoclip')
 
--- vim-go
-vim.g.go_auto_sameids = 0
-vim.g.go_fmt_command = "goimports"
-vim.g.go_fmt_experimental = 1
-vim.g.go_highlight_array_whitespace_error = 1
-vim.g.go_highlight_build_constraints = 1
-vim.g.go_highlight_chan_whitespace_error = 1
-vim.g.go_highlight_extra_types = 1
-vim.g.go_highlight_fields = 1
-vim.g.go_highlight_format_strings = 1
-vim.g.go_highlight_function_calls = 1
-vim.g.go_highlight_function_parameters = 1
-vim.g.go_highlight_functions = 1
-vim.g.go_highlight_generate_tags = 1
-vim.g.go_highlight_operators = 1
-vim.g.go_highlight_space_tab_error = 1
-vim.g.go_highlight_string_spellcheck = 1
-vim.g.go_highlight_trailing_whitespace_error = 0
-vim.g.go_highlight_types = 1
-vim.g.go_highlight_variable_assignments = 1
-vim.g.go_highlight_variable_declarations = 1
-vim.g.go_rename_command = "gopls"
-vim.g.go_metalinter_autosave = 1
-vim.g.go_metalinter_autosave_enabled = { "golint", "govet" }
-
 -- vim-terraform
 vim.g.terraform_align = 1
 vim.g.terraform_fmt_on_save = 1
 vim.g.terraform_fold_sections = 1
-
--- rust.vim
-vim.g.rustfmt_autosave = 1
 
 -- vim-markdown
 vim.g.vim_markdown_override_foldtext = 0
