@@ -364,10 +364,8 @@ in
         packer-nvim
         plenary-nvim
         supertab
-        syntastic
         telescope-nvim
         trouble-nvim
-        typescript-vim
         vim-commentary
         vim-markdown
         vim-repeat
