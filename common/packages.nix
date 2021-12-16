@@ -56,6 +56,7 @@ in
         jq
         ripgrep
         tldr
+        tmux-sessionizer
         xclip
 
         # blog
