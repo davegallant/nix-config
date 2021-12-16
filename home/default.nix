@@ -190,7 +190,6 @@ in
 
         shell = {
           program = "zsh";
-          args = [ "-l" "-c" "tmux" "u" ];
         };
 
         colors = {
@@ -354,7 +353,6 @@ in
         completion-nvim
         git-blame-nvim
         gitlinker-nvim
-        glow-nvim
         gruvbox-nvim
         hound-nvim
         lualine-nvim
@@ -371,16 +369,11 @@ in
         trouble-nvim
         typescript-vim
         vim-commentary
-        vim-javascript
         vim-markdown
-        vim-nix
-        vim-prettier
         vim-repeat
         vim-signify
         vim-sneak
         vim-surround
-        vim-terraform
-        webapi-vim
       ];
 
     };

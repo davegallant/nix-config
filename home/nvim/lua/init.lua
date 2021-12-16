@@ -129,7 +129,6 @@ require("lspconfig").terraformls.setup({})
 require("lspconfig").tflint.setup({})
 require("lspconfig").yamlls.setup({})
 
-
 -------------------------------------------------------------------------------
 -- packer {{{1 -------------------------------------------------------------------
 -------------------------------------------------------------------------------
@@ -263,11 +262,6 @@ vim.api.nvim_set_keymap("n", "<leader>hs", ":Hound", { silent = true, noremap = 
 
 -- neoclip
 require('telescope').load_extension('neoclip')
-
--- vim-terraform
-vim.g.terraform_align = 1
-vim.g.terraform_fmt_on_save = 1
-vim.g.terraform_fold_sections = 1
 
 -- vim-markdown
 vim.g.vim_markdown_override_foldtext = 0
