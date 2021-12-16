@@ -129,6 +129,12 @@ require("lspconfig").terraformls.setup({})
 require("lspconfig").tflint.setup({})
 require("lspconfig").yamlls.setup({})
 
+vim.cmd([[autocmd BufWritePre *.tf lua vim.lsp.buf.formatting_sync()]])
+vim.cmd([[autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync()]])
+vim.cmd([[autocmd BufWritePre *.go lua vim.lsp.buf.formatting_sync()]])
+vim.cmd([[autocmd BufWritePre *.rb lua vim.lsp.buf.formatting_sync()]])
+vim.cmd([[autocmd BufWritePre *.nix lua vim.lsp.buf.formatting_sync()]])
+
 -------------------------------------------------------------------------------
 -- packer {{{1 -------------------------------------------------------------------
 -------------------------------------------------------------------------------
