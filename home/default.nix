@@ -154,6 +154,7 @@ in
         ls = "exa -la --git";
         ps = "procs";
         tree = "exa --tree";
+        t = "tmux-sessionizer";
       };
 
       "oh-my-zsh" = {
@@ -190,6 +191,7 @@ in
 
         shell = {
           program = "zsh";
+          args = [ "-l" "-c" "tmux" "u" ];
         };
 
         colors = {
