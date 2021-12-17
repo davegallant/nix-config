@@ -380,6 +380,7 @@ in
         plenary-nvim
         supertab
         telescope-nvim
+        telescope-fzy-native-nvim
         trouble-nvim
         vim-commentary
         vim-markdown
