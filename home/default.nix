@@ -278,6 +278,19 @@ in
             set -g @colors-solarized 'dark'
           '';
         }
+        {
+          plugin = resurrect;
+          extraConfig = ''
+            set -g @plugin 'tmux-plugins/tmux-resurrect'
+          '';
+        }
+        {
+          plugin = continuum;
+          extraConfig = ''
+            set -g @plugin 'tmux-plugins/tmux-continuum'
+            set -g @continuum-restore 'on'
+          '';
+        }
       ];
       extraConfig = ''
         set-window-option -g automatic-rename on
