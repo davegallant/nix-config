@@ -162,6 +162,9 @@ require("lualine").setup({
 	},
 })
 
+-- nvim-tree
+require'nvim-tree'.setup {}
+
 -- treesitter
 require("nvim-treesitter.configs").setup({
 	ensure_installed = "all",
