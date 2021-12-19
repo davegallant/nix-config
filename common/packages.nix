@@ -87,6 +87,7 @@ in
         golangci-lint
         golint
         gopls
+        gofumpt
 
         # js
         nodePackages.prettier
