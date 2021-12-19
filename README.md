@@ -14,7 +14,7 @@ The configuration is very specific to my own machines and setup, but it may be a
 To run a rebuild:
 
 ```sh
-make switch
+make
 ```
 
 ## Update

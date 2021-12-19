@@ -1,7 +1,15 @@
 name: "Build and push to cachix"
+
 on:
-  pull_request:
   push:
+    branches:
+      - main
+    paths-ignore:
+      - '**/*.md'
+      - '*.md'
+      - 'LICENSE'
+  workflow_dispatch:
+
 jobs:
   build:
     runs-on: ubuntu-latest
