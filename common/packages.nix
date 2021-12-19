@@ -16,7 +16,6 @@ in
         pfetch
         unzip
         xdg_utils
-        yq-go
         zip
 
         # dev tools
@@ -180,11 +179,9 @@ in
         gnomeExtensions.appindicator
         google-drive-ocamlfuse
         gptfdisk
-        guvcview
         kazam
         libreoffice
         linuxPackages.perf
-        networkmanager-openvpn
         pinentry-curses
         pulseeffects-pw
         qemu
