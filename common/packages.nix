@@ -182,7 +182,6 @@ in
         gptfdisk
         guvcview
         kazam
-        kazam
         libreoffice
         linuxPackages.perf
         networkmanager-openvpn
@@ -207,7 +206,6 @@ in
         gimp
         google-chrome
         minecraft
-        nfs-utils
         postman
         rfd
         signal-desktop
