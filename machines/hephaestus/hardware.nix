@@ -40,12 +40,6 @@
     device = "/dev/disk/by-uuid/0f592fca-1d4e-43f7-9bf4-f1c3e19e841f";
     fsType = "ext4";
   };
-
-  fileSystems."/mnt/nfs" = {
-    device = "synology-2b:/mnt/nfs";
-    fsType = "nfs";
-  };
-
   hardware.video.hidpi.enable = lib.mkDefault true;
 
 }
