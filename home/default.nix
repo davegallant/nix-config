@@ -368,6 +368,7 @@ in
 
       plugins = with pkgs.vimPlugins; [
         completion-nvim
+        copilot-vim
         git-blame-nvim
         gitlinker-nvim
         gruvbox-nvim
