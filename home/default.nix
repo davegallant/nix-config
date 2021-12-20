@@ -54,6 +54,7 @@ in
         br = "branch";
         c = "commit -S";
         ca = "commit -S --amend";
+        cane = "commit -S --amend --no-edit";
         cb = "checkout -b";
         co = "checkout";
         d = "diff";
@@ -149,12 +150,13 @@ in
 
       shellAliases = {
         ".." = "cd ..";
+        g = "git";
         grep = "rg --smart-case";
         k = "kubectl";
         ls = "exa -la --git";
         ps = "procs";
-        tree = "exa --tree";
         t = "tmux-sessionizer";
+        tree = "exa --tree";
       };
 
       "oh-my-zsh" = {
