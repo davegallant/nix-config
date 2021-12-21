@@ -178,7 +178,6 @@ in
         glibcLocales
         gnome3.gnome-tweaks
         gnomeExtensions.appindicator
-        google-drive-ocamlfuse
         gptfdisk
         kazam
         libreoffice
