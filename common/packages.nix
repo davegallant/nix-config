@@ -182,6 +182,7 @@ in
         kazam
         libreoffice
         linuxPackages.perf
+        pavucontrol
         pinentry-curses
         pulseeffects-pw
         qemu
