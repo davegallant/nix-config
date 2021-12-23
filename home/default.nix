@@ -34,8 +34,6 @@ in
     };
   };
 
-  services.opensnitch-ui.enable = true;
-
   fonts.fontconfig.enable = true;
 
   programs = {

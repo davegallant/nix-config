@@ -33,6 +33,7 @@
   time.timeZone = "America/Toronto";
 
   services.opensnitch.enable = true;
+  services.opensnitch-ui.enable = true;
 
   sound.enable = true;
 

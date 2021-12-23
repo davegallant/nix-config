@@ -25,19 +25,18 @@ in
       "gnu-tar"
       "netdata"
       "node"
-      "rewindio/public/aws-role-play"
       "universal-ctags"
     ];
 
     casks = [
       "1password"
+      "dbeaver-community"
       "font-fira-code-nerd-font"
       "font-hack-nerd-font"
       "lulu"
       "maccy"
       "osxfuse"
       "rectangle"
-      "visual-studio-code"
     ];
 
     taps = [
