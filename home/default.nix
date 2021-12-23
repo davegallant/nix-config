@@ -155,6 +155,7 @@ in
         ps = "procs";
         t = "tmux-sessionizer";
         tree = "exa --tree";
+        v = "nvim";
       };
 
       "oh-my-zsh" = {

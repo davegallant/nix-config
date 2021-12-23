@@ -72,7 +72,7 @@ vim.api.nvim_set_keymap(
 
 --Set colorscheme
 vim.o.termguicolors = true
-vim.cmd([[colorscheme gruvbox]])
+vim.cmd([[colorscheme kanagawa]])
 
 -- Use tab as trigger keys
 vim.cmd([[imap <tab> <Plug>(completion_smart_tab)]])
@@ -141,6 +141,7 @@ vim.cmd([[autocmd BufWritePre *.nix lua vim.lsp.buf.formatting_sync()]])
 require("packer").startup(function()
 	use({ "ms-jpq/coq_nvim", branch = "coq" }) -- main one
 	use({ "ms-jpq/coq.artifacts", branch = "artifacts" }) -- 9000+ Snippets
+	use({ "rebelot/kanagawa.nvim", branch = "master" })
 	use({
 		"AckslD/nvim-neoclip.lua",
 		config = function()
