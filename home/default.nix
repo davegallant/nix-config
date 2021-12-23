@@ -34,6 +34,8 @@ in
     };
   };
 
+  services.opensnitch-ui.enable = stdenv.isLinux;
+
   fonts.fontconfig.enable = true;
 
   programs = {
@@ -62,9 +64,9 @@ in
         l =
           "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
         ms = "merge --squash";
-        po = "push origin";
+        p = "push origin";
         pf = "push -f";
-        por = "push origin HEAD:refs/for/$1";
+        pl = "! git pull origin $(git rev-parse --abbrev-ref HEAD)";
         st = "status";
         wip =
           "for-each-ref --sort='authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' refs/heads";

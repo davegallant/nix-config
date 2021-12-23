@@ -70,10 +70,6 @@ vim.api.nvim_set_keymap(
 	{ silent = true, noremap = true }
 )
 
---Set colorscheme
-vim.o.termguicolors = true
-vim.cmd([[colorscheme kanagawa]])
-
 -- Use tab as trigger keys
 vim.cmd([[imap <tab> <Plug>(completion_smart_tab)]])
 vim.cmd([[imap <s-tab> <Plug>(completion_smart_s_tab)]])
@@ -304,3 +300,7 @@ vim.g.syntastic_check_on_wq = 0
 
 -- completion-nvim
 vim.cmd([[autocmd BufEnter * lua require'completion'.on_attach()]])
+
+--Set colorscheme
+vim.o.termguicolors = true
+vim.cmd([[colorscheme kanagawa]])
