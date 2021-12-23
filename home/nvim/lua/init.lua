@@ -137,7 +137,6 @@ vim.cmd([[autocmd BufWritePre *.nix lua vim.lsp.buf.formatting_sync()]])
 require("packer").startup(function()
 	use({ "ms-jpq/coq_nvim", branch = "coq" }) -- main one
 	use({ "ms-jpq/coq.artifacts", branch = "artifacts" }) -- 9000+ Snippets
-	use({ "rebelot/kanagawa.nvim", branch = "master" })
 	use({
 		"AckslD/nvim-neoclip.lua",
 		config = function()
@@ -303,4 +302,4 @@ vim.cmd([[autocmd BufEnter * lua require'completion'.on_attach()]])
 
 --Set colorscheme
 vim.o.termguicolors = true
-vim.cmd([[colorscheme kanagawa]])
+vim.cmd([[colorscheme gruvbox]])
