@@ -9,6 +9,8 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
+  powerManagement.cpuFreqGovernor = "performance";
+
   boot.initrd.luks.devices = {
     luksroot = {
       allowDiscards = true;
