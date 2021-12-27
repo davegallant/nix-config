@@ -114,6 +114,7 @@ in
         whois
 
         # backup
+        rclone
         restic
 
         # infra tools
