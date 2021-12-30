@@ -29,7 +29,7 @@ in
         github-cli
         gnumake
         hadolint
-        lazygit
+        nodePackages.eslint
         pre-commit
         shellcheck
         shfmt
