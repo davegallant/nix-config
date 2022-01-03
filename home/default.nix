@@ -1,16 +1,6 @@
 { lib, pkgs, ... }:
 
 let
-  vim-prettier = pkgs.vimUtils.buildVimPlugin {
-    name = "vim-prettier";
-    nativeBuildInputs = with pkgs; [ lua53Packages.luacheck ];
-    src = pkgs.fetchFromGitHub {
-      owner = "prettier";
-      repo = "vim-prettier";
-      rev = "0.2.7";
-      sha256 = "sha256-FDeyGH5OPAYV7zePCfDujsj+nGd5AFnqySPStJYEY2E=";
-    };
-  };
   hound-nvim = pkgs.vimUtils.buildVimPlugin {
     name = "hound-nvim";
     nativeBuildInputs = with pkgs; [ lua53Packages.luacheck stylua ];
@@ -374,7 +364,6 @@ in
         git-blame-nvim
         gitlinker-nvim
         gruvbox-nvim
-        hound-nvim
         lualine-nvim
         nvim-lspconfig
         nvim-tree-lua
@@ -384,8 +373,7 @@ in
         packer-nvim
         plenary-nvim
         supertab
-        telescope-nvim
-        telescope-fzy-native-nvim
+        /* telescope-fzy-native-nvim */ # remove until latest fixes are pulled in
         trouble-nvim
         vim-commentary
         vim-markdown

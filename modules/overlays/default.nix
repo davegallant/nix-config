@@ -10,7 +10,4 @@ final: prev: {
   vpngate = prev.callPackage ./vpngate { };
   yar = prev.callPackage ./yar { };
 
-  # overrides
-  neovim = prev.pkgs.neovim-nightly;
-
 }
