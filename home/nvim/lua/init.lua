@@ -24,7 +24,6 @@ vim.opt.scrolloff = 3
 vim.opt.shell = "bash"
 vim.opt.shiftround = false
 vim.opt.shiftwidth = 2
-vim.opt.shiftwidth = 2
 vim.opt.shortmess = vim.opt.shortmess + "A"
 vim.opt.shortmess = vim.opt.shortmess + "I"
 vim.opt.shortmess = vim.opt.shortmess + "O"
@@ -45,7 +44,6 @@ vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.swapfile = false
 vim.opt.switchbuf = "usetab"
-vim.opt.tabstop = 2
 vim.opt.tabstop = 2
 vim.opt.termguicolors = true
 vim.opt.wildmenu = true
@@ -137,6 +135,7 @@ vim.cmd([[autocmd BufWritePre *.nix lua vim.lsp.buf.formatting_sync()]])
 require("packer").startup(function()
 	use({ "ms-jpq/coq_nvim", branch = "coq" }) -- main one
 	use({ "ms-jpq/coq.artifacts", branch = "artifacts" }) -- 9000+ Snippets
+	use({ "nvim-telescope/telescope.nvim", branch = "master" })
 end)
 
 -------------------------------------------------------------------------------
@@ -249,16 +248,6 @@ vim.api.nvim_set_keymap("n", "<leader>xl", "<cmd>Trouble loclist<cr>", { silent 
 vim.api.nvim_set_keymap("n", "<leader>xq", "<cmd>Trouble quickfix<cr>", { silent = true, noremap = true })
 vim.api.nvim_set_keymap("n", "gR", "<cmd>Trouble lsp_references<cr>", { silent = true, noremap = true })
 
--- hound.nvim
-require("hound").setup({
-	hound_base_url = "http://hound", -- Rely on Tailscale's MagicDNS
-	hound_port = 6080, -- the port hound is running on
-	search_results_buffer = "tabnew", -- how to open the search results (vsplit, split, tabnew)
-	display_file_match_urls = true, -- whether or not urls should be displayed alongside file matches
-	hound_url_pattern = "https://github.com/{repo}/blob/{revision}/{path}", -- the format of the url displayed for file matches
-})
-vim.api.nvim_set_keymap("n", "<leader>hs", ":Hound", { silent = true, noremap = true })
-
 -- vim-markdown
 vim.g.vim_markdown_override_foldtext = 0
 vim.g.vim_markdown_no_default_key_mappings = 1
@@ -273,18 +262,6 @@ vim.g["prettier#autoformat"] = 1
 -- git-blame
 vim.g.gitblame_enabled = 0
 
--- telescope
-require "telescope".setup {
-  defaults = {
-    mappings = {
-      i = {
-        ["<C-w>"] = function()
-          vim.cmd [[normal! bcw]]
-        end,
-      },
-    },
-  }
-}
 vim.api.nvim_set_keymap("n", "<leader>ff", "<cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files,-g,!.git prompt_prefix=🔍<cr>", { silent = true, noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { silent = true, noremap = true })
 
