@@ -137,12 +137,6 @@ vim.cmd([[autocmd BufWritePre *.nix lua vim.lsp.buf.formatting_sync()]])
 require("packer").startup(function()
 	use({ "ms-jpq/coq_nvim", branch = "coq" }) -- main one
 	use({ "ms-jpq/coq.artifacts", branch = "artifacts" }) -- 9000+ Snippets
-	use({
-		"AckslD/nvim-neoclip.lua",
-		config = function()
-			require("neoclip").setup()
-		end,
-	})
 end)
 
 -------------------------------------------------------------------------------
@@ -265,9 +259,6 @@ require("hound").setup({
 })
 vim.api.nvim_set_keymap("n", "<leader>hs", ":Hound", { silent = true, noremap = true })
 
--- neoclip
-require('telescope').load_extension('neoclip')
-
 -- vim-markdown
 vim.g.vim_markdown_override_foldtext = 0
 vim.g.vim_markdown_no_default_key_mappings = 1
@@ -283,6 +274,17 @@ vim.g["prettier#autoformat"] = 1
 vim.g.gitblame_enabled = 0
 
 -- telescope
+require "telescope".setup {
+  defaults = {
+    mappings = {
+      i = {
+        ["<C-w>"] = function()
+          vim.cmd [[normal! bcw]]
+        end,
+      },
+    },
+  }
+}
 vim.api.nvim_set_keymap("n", "<leader>ff", "<cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files,-g,!.git prompt_prefix=🔍<cr>", { silent = true, noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { silent = true, noremap = true })
 
