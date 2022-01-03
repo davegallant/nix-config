@@ -153,7 +153,7 @@ in
         g = "git";
         grep = "rg --smart-case";
         k = "kubectl";
-        ls = "exa -la --git";
+        l = "exa -la --git --group-directories-first";
         ps = "procs";
         t = "tmux-sessionizer";
         tree = "exa --tree";
