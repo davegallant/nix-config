@@ -154,6 +154,7 @@ in
         grep = "rg --smart-case";
         k = "kubectl";
         l = "exa -la --git --group-directories-first";
+        m = "make";
         ps = "procs";
         t = "tmux-sessionizer";
         tree = "exa --tree";
