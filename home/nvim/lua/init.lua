@@ -135,7 +135,7 @@ vim.cmd([[autocmd BufWritePre *.nix lua vim.lsp.buf.formatting_sync()]])
 require("packer").startup(function()
 	use({ "ms-jpq/coq_nvim", branch = "coq" }) -- main one
 	use({ "ms-jpq/coq.artifacts", branch = "artifacts" }) -- 9000+ Snippets
-	use({ "nvim-telescope/telescope.nvim", branch = "master" })
+	use({ "petertriho/nvim-scrollbar", branch = "main" })
 end)
 
 -------------------------------------------------------------------------------
@@ -154,16 +154,15 @@ require("lualine").setup({
 -- nvim-tree
 require'nvim-tree'.setup {}
 
+-- gitsigns
+require('gitsigns').setup()
+
 -- treesitter
 require("nvim-treesitter.configs").setup({
 	ensure_installed = "all",
 
 	highlight = {
 		enable = true,
-		custom_captures = {
-			-- ["<capture group>"] = "<highlight group>",
-			-- ["keyword"] = "TSString",
-		},
 	},
 
 	indent = {
@@ -187,67 +186,6 @@ vim.api.nvim_exec(
 	true
 )
 
--- trouble
-require("trouble").setup({
-	{
-		position = "bottom",
-		height = 10,
-		width = 50,
-		icons = true,
-		mode = "lsp_workspace_diagnostics",
-		fold_open = "",
-		fold_closed = "",
-		action_keys = {
-			close = "q",
-			cancel = "<esc>",
-			refresh = "r",
-			jump = { "<cr>", "<tab>" },
-			open_split = { "<c-x>" },
-			open_vsplit = { "<c-v>" },
-			open_tab = { "<c-t>" },
-			jump_close = { "o" },
-			toggle_mode = "m",
-			toggle_preview = "P",
-			hover = "K",
-			preview = "p",
-			close_folds = { "zM", "zm" },
-			open_folds = { "zR", "zr" },
-			toggle_fold = { "zA", "za" },
-			previous = "k",
-			next = "j",
-		},
-		indent_lines = true,
-		auto_open = false,
-		auto_close = false,
-		auto_preview = true,
-		auto_fold = false,
-		signs = {
-			error = "",
-			warning = "",
-			hint = "",
-			information = "",
-			other = "﫠",
-		},
-		use_lsp_diagnostic_signs = false,
-	},
-})
-vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>Trouble<cr>", { silent = true, noremap = true })
-vim.api.nvim_set_keymap(
-	"n",
-	"<leader>xw",
-	"<cmd>Trouble lsp_workspace_diagnostics<cr>",
-	{ silent = true, noremap = true }
-)
-vim.api.nvim_set_keymap(
-	"n",
-	"<leader>xd",
-	"<cmd>Trouble lsp_document_diagnostics<cr>",
-	{ silent = true, noremap = true }
-)
-vim.api.nvim_set_keymap("n", "<leader>xl", "<cmd>Trouble loclist<cr>", { silent = true, noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>xq", "<cmd>Trouble quickfix<cr>", { silent = true, noremap = true })
-vim.api.nvim_set_keymap("n", "gR", "<cmd>Trouble lsp_references<cr>", { silent = true, noremap = true })
-
 -- vim-markdown
 vim.g.vim_markdown_override_foldtext = 0
 vim.g.vim_markdown_no_default_key_mappings = 1
@@ -269,12 +207,6 @@ vim.api.nvim_set_keymap("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { sil
 vim.api.nvim_set_keymap("n", "<leader>n", "<cmd>NvimTreeToggle<cr>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>r", "<cmd>NvimTreeRefresh<cr>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>nf", "<cmd>NvimTreeFindFile<cr>", { noremap = true })
-
--- syntastic
-vim.g.syntastic_always_populate_loc_list = 1
-vim.g.syntastic_auto_loc_list = 1
-vim.g.syntastic_check_on_open = 1
-vim.g.syntastic_check_on_wq = 0
 
 -- completion-nvim
 vim.cmd([[autocmd BufEnter * lua require'completion'.on_attach()]])

@@ -361,8 +361,8 @@ in
       plugins = with pkgs.vimPlugins; [
         completion-nvim
         copilot-vim
-        git-blame-nvim
         gitlinker-nvim
+        gitsigns-nvim
         gruvbox-nvim
         lualine-nvim
         nvim-lspconfig
@@ -373,12 +373,10 @@ in
         packer-nvim
         plenary-nvim
         supertab
-        /* telescope-fzy-native-nvim */ # remove until latest fixes are pulled in
-        trouble-nvim
+        telescope-fzy-native-nvim
         vim-commentary
         vim-markdown
         vim-repeat
-        vim-signify
         vim-sneak
         vim-surround
       ];
