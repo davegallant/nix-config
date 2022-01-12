@@ -21,7 +21,6 @@ in
         # dev tools
         act
         asciinema
-        chromedriver
         dive
         gcc
         git
@@ -76,8 +75,8 @@ in
 
         # password managers
         _1password
-        bitwarden-cli
         gopass
+        rbw
 
         # lua
         lua53Packages.luacheck
@@ -147,6 +146,7 @@ in
         ssm-session-manager-plugin
 
         # python
+        mypy
         python39
         python39Packages.black
         python39Packages.ipython
