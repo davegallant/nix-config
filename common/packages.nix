@@ -117,11 +117,11 @@ in
         restic
 
         # infra tools
-        terraform
         terraform-ls
         terraformer
         tflint
         tfsec
+        tfswitch
 
         # gcp
         google-cloud-sdk
