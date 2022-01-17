@@ -361,7 +361,7 @@ in
 
       plugins = with pkgs.vimPlugins; [
         completion-nvim
-        copilot-vim
+        /* copilot-vim */
         gitlinker-nvim
         gitsigns-nvim
         gruvbox-nvim
