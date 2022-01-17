@@ -180,6 +180,7 @@ in
         gnome3.gnome-tweaks
         gnomeExtensions.appindicator
         gptfdisk
+        guake
         kazam
         libreoffice
         linuxPackages.perf
