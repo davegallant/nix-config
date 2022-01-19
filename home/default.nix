@@ -142,6 +142,7 @@ in
       shellAliases = {
         ".." = "cd ..";
         g = "git";
+        gho = "gh repo view --web >/dev/null";
         grep = "rg --smart-case";
         k = "kubectl";
         l = "exa -la --git --group-directories-first";
