@@ -122,6 +122,7 @@ in
         tflint
         tfsec
         tfswitch
+        infracost
 
         # gcp
         google-cloud-sdk
@@ -158,7 +159,7 @@ in
         # ruby
         rbenv
         rubocop
-        ruby
+        ruby_3_1
         rufo
         rubyPackages.solargraph
 
