@@ -38,6 +38,7 @@ in
         # containers
         docker
         docker-compose
+        kubectl
         podman
 
         # language servers
@@ -98,7 +99,7 @@ in
         # video
         youtube-dl
 
-        # network
+        # networking
         arp-scan
         bandwhich
         dnsutils
@@ -214,6 +215,7 @@ in
         steam
         tailscale
         teams
+        traceroute
         wireshark-qt
         zoom-us
         netdata
