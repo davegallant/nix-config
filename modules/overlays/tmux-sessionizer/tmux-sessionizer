@@ -6,7 +6,7 @@
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(find ~/src/github.com/davegallant ~/src/github.com/rewindio -mindepth 1 -maxdepth 1 -type d | fzf)
+    selected=$(find ~/src/github.com/davegallant ~/src/github.com/rewindio -mindepth 1 -maxdepth 1 -type d | fzf --exact)
 fi
 
 if [[ -z $selected ]]; then
