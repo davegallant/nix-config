@@ -40,14 +40,16 @@
               };
 
               nix = {
-                autoOptimiseStore = true;
-                binaryCaches = [ "https://davegallant.cachix.org" ];
-                binaryCachePublicKeys = [
-                  "davegallant.cachix.org-1:SsUMqL4+tF2R3/G6X903E9laLlY1rES2QKFfePegF08="
-                ];
-                useSandbox = false;
+                settings = {
+                  auto-optimise-store = true;
+                  sandbox = false;
+                  substituters = [ "https://davegallant.cachix.org" ];
+                  trusted-users = [ "root" "dave" ];
+                  trusted-public-keys = [
+                    "davegallant.cachix.org-1:SsUMqL4+tF2R3/G6X903E9laLlY1rES2QKFfePegF08="
+                  ];
+                };
                 registry = { nixpkgs.flake = nixpkgs; };
-                trustedUsers = [ "root" "dave" ];
               };
 
               nixpkgs.overlays = [ (import ./modules/overlays) inputs.neovim-nightly-overlay.overlay ];

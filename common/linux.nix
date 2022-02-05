@@ -7,7 +7,6 @@
   system.stateVersion = "unstable";
   system.autoUpgrade.enable = true;
 
-  nix.autoOptimiseStore = true;
   nix.extraOptions = "experimental-features = nix-command flakes";
   nix.package = pkgs.nixUnstable;
 

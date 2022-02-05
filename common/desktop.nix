@@ -7,7 +7,6 @@
   services.xserver.displayManager.gdm = {
     enable = true;
     wayland = false;
-    nvidiaWayland = false;
   };
   services.xserver.desktopManager.gnome.enable = true;
 
