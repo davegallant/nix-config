@@ -34,6 +34,7 @@ in
         shfmt
         starship
         tokei
+        yq-go
 
         # containers
         docker
