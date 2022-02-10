@@ -47,6 +47,7 @@ in
         cane = "commit -S --amend --no-edit";
         cb = "checkout -b";
         co = "checkout";
+        cmp = "! git checkout main && git pl";
         d = "diff";
         dc = "diff --cached";
         dcn = "diff --cached --name-only";
