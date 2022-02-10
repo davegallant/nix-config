@@ -36,6 +36,9 @@ in
         tokei
         yq-go
 
+        # automation
+        ansible
+
         # containers
         docker
         docker-compose
