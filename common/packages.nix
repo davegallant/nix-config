@@ -199,7 +199,7 @@ in
         spotify
         strace
         usbutils
-        virtmanager
+        /* virtmanager */
         vlc
         # Unsupported / broken on darwin:
         aws-sam-cli
