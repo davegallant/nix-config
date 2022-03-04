@@ -24,8 +24,6 @@ in
     };
   };
 
-  services.opensnitch-ui.enable = stdenv.isLinux;
-
   fonts.fontconfig.enable = true;
 
   programs = {
