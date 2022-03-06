@@ -218,7 +218,6 @@ in
         slack
         steam
         tailscale
-        teams
         traceroute
         wireshark-qt
         zoom-us
