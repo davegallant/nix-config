@@ -109,6 +109,7 @@ in
         dnsutils
         gping
         iperf
+        networkmanager-openvpn
         nmap
         openssl
         openvpn
