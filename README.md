@@ -30,3 +30,7 @@ If there are updates, they should be reflected in [flake.lock](./flake.lock).
 ## Pre-commit hooks
 
 Pre-commit hooks are automatically activated when [direnv](https://github.com/direnv/direnv) is installed.
+
+## Encryption
+
+Overly sensitive configuration is encrypted with [git-crypt](https://www.agwa.name/projects/git-crypt/).
