@@ -153,13 +153,13 @@ in
 
         # python
         mypy
-        python39
-        python39Packages.black
-        python39Packages.ipython
-        python39Packages.pip
-        python39Packages.poetry
-        python39Packages.setuptools
-        python39Packages.virtualenv
+        python310
+        python310Packages.black
+        python310Packages.ipython
+        python310Packages.pip
+        python310Packages.poetry
+        python310Packages.setuptools
+        python310Packages.virtualenv
 
         # ruby
         rbenv
@@ -172,6 +172,7 @@ in
         srv
 
         # security
+        sops
         yubikey-manager
 
       ] ++ lib.optionals stdenv.isLinux ([
