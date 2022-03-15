@@ -9,7 +9,7 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ config.boot.kernelPackages.v4l2loopback.out ];
 
-  powerManagement.cpuFreqGovernor = "performance";
+  powerManagement.cpuFreqGovernor = "balanced";
 
   boot.initrd.luks.devices = {
     luksroot = {
