@@ -16,7 +16,6 @@ in
         zip
 
         # dev tools
-        gcc
         git
         git-crypt
         github-cli
@@ -95,7 +94,6 @@ in
         arp-scan
         dnsutils
         iperf
-        networkmanager-openvpn
         nmap
         openssl
         openvpn
@@ -160,13 +158,11 @@ in
         glibcLocales
         gnome3.gnome-tweaks
         gnomeExtensions.appindicator
-        gptfdisk
         guake
         kazam
         linuxPackages.perf
         pavucontrol
         pinentry-curses
-        pulseeffects-pw
         qemu
         rtorrent
         rustup

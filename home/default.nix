@@ -146,6 +146,7 @@ in
         k = "kubectl";
         l = "exa -la --git --group-directories-first";
         m = "make";
+        pia = "sudo openvpn --config ~/pia/$(find ~/pia -execdir basename {} .ovpn ';' -iname \"*.ovpn\" -type f | fzf --exact).ovpn";
         ps = "procs";
         t = "tmux-sessionizer";
         tree = "exa --tree";
