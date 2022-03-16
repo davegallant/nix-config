@@ -10,8 +10,6 @@
   hardware.nvidia.modesetting.enable = true;
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
 
-  security.pam.u2f.enable = true;
-
   networking.hostName = "hephaestus";
 
   networking = {
