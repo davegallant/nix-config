@@ -9,19 +9,13 @@ in
       common = [
         # utils
         curl
-        du-dust
-        duf
         gnupg
         imagemagick
-        pfetch
         unzip
         xdg_utils
         zip
 
         # dev tools
-        act
-        asciinema
-        dive
         gcc
         git
         git-crypt
@@ -33,8 +27,6 @@ in
         shellcheck
         shfmt
         starship
-        tokei
-        yq-go
 
         # automation
         ansible
@@ -76,7 +68,6 @@ in
 
         # data tools
         dbeaver
-        postgresql
 
         # password managers
         _1password
@@ -97,24 +88,18 @@ in
         nodePackages.prettier
         nodePackages.yarn
 
-        # imaging
-        gifsicle
-
         # video
         youtube-dl
 
         # networking
         arp-scan
-        bandwhich
         dnsutils
-        gping
         iperf
         networkmanager-openvpn
         nmap
         openssl
         openvpn
         sshfs # mac requires https://osxfuse.github.io/
-        tcpdump
         vpngate
         whois
 
@@ -130,9 +115,6 @@ in
         tfswitch
         infracost
 
-        # gcp
-        google-cloud-sdk
-
         # nix
         cachix
         nix-diff
@@ -140,9 +122,6 @@ in
         nixpkgs-fmt
         nixpkgs-review
         rnix-lsp
-
-        # communication
-        element-desktop
 
         ## aws
         aws-connect
@@ -172,25 +151,18 @@ in
         # news
         srv
 
-        # security
-        sops
-        yubikey-manager
-
       ] ++ lib.optionals stdenv.isLinux ([
         _1password-gui
         albert
-        audio-recorder
-        authy
+        /* authy */
         calibre
         cryptsetup
-        firejail
         glibcLocales
         gnome3.gnome-tweaks
         gnomeExtensions.appindicator
         gptfdisk
         guake
         kazam
-        libreoffice
         linuxPackages.perf
         pavucontrol
         pinentry-curses
@@ -201,29 +173,26 @@ in
         spotify
         strace
         usbutils
-        /* virtmanager */
+        virtmanager
         vlc
         # Unsupported / broken on darwin:
         aws-sam-cli
         bitwarden
         brave
-        datasette
         deluge
         discord
         firefox
         gimp
         google-chrome
         minecraft
+        netdata
         postman
         rfd
         signal-desktop
         slack
         steam
         tailscale
-        traceroute
-        wireshark-qt
         zoom-us
-        netdata
       ]);
     in
     common;
