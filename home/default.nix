@@ -334,6 +334,7 @@ in
         gitlinker-nvim
         gitsigns-nvim
         gruvbox-nvim
+        lightspeed-nvim
         lualine-nvim
         nvim-lspconfig
         nvim-tree-lua
