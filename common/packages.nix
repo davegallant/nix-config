@@ -34,6 +34,7 @@ in
         docker
         docker-compose
         kubectl
+        kubernetes-helm
         podman
 
         # language servers
