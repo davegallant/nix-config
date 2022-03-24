@@ -1,7 +1,5 @@
 # nix-config
 
-[![built with nix](https://builtwithnix.org/badge.svg)](https://builtwithnix.org)
-
 This repo stores nix to manage my machines running both [NixOS](https://nixos.org/) and macOS.
 
 The configuration is very specific to my own machines and setup, but it may be a useful reference for anyone else learning or experimenting with nix, whether it be on a personal workstation or a server environment.
