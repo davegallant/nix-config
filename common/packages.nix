@@ -16,6 +16,7 @@ in
         zip
 
         # dev tools
+        ansible-lint
         git
         git-crypt
         github-cli
@@ -85,6 +86,7 @@ in
         gofumpt
 
         # js
+        nodejs
         nodePackages.prettier
         nodePackages.yarn
 

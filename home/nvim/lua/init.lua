@@ -113,6 +113,9 @@ vim.api.nvim_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<C
 vim.api.nvim_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 vim.api.nvim_set_keymap("n", "<space>", "za", { silent = true, noremap = true })
 
+require("lspconfig").ansiblels.setup({
+  cmd = {os.getenv("HOME") .. "/.npm-packages/bin/ansible-language-server", "--stdio"};
+})
 require("lspconfig").bashls.setup({})
 require("lspconfig").gopls.setup({})
 require("lspconfig").pyright.setup({})
