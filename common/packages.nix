@@ -36,6 +36,8 @@ in
         docker-compose
         kubectl
         kubernetes-helm
+        kustomize
+        minikube
         podman
 
         # language servers
