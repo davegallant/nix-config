@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages;
   boot.supportedFilesystems = [ "ntfs" ];
 
   system.stateVersion = "unstable";
@@ -13,7 +13,7 @@
   nixpkgs.config = {
     allowUnfree = true;
     permittedInsecurePackages = [
-      /* "electron-9.4.4" */ # authy is currently stuck on electron_9
+      "electron-9.4.4" # authy is currently stuck on electron_9
     ];
   };
 

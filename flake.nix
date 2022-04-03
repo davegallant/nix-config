@@ -52,7 +52,10 @@
                 registry = { nixpkgs.flake = nixpkgs; };
               };
 
-              nixpkgs.overlays = [ (import ./modules/overlays) inputs.neovim-nightly-overlay.overlay ];
+              nixpkgs.overlays = [
+                (import ./modules/overlays)
+                inputs.neovim-nightly-overlay.overlay
+              ];
 
               home-manager = {
                 useGlobalPkgs = true;
