@@ -157,42 +157,44 @@ in
       ] ++ lib.optionals stdenv.isLinux ([
         _1password-gui
         albert
-        /* authy */
-        calibre
-        cryptsetup
-        glibcLocales
-        gnome3.gnome-tweaks
-        gnomeExtensions.appindicator
-        guake
-        kazam
-        linuxPackages.perf
-        pavucontrol
-        pinentry-curses
-        qemu
-        rtorrent
-        rustup
-        spotify
-        strace
-        usbutils
-        virtmanager
-        vlc
-        # Unsupported / broken on darwin:
+        authy
         aws-sam-cli
         bitwarden
         brave
+        calibre
+        cryptsetup
         deluge
         discord
         firefox
         gimp
+        glibcLocales
+        gnome3.gnome-tweaks
+        gnomeExtensions.appindicator
         google-chrome
+        guake
+        kazam
+        linuxPackages.perf
         minecraft
+        mojave-gtk-theme
         netdata
+        pavucontrol
+        pinentry-curses
         postman
+        qemu
         rfd
+        rtorrent
+        rustup
         signal-desktop
         slack
+        spotify
         steam
+        strace
         tailscale
+        usbutils
+        virtmanager
+        vlc
+        wireshark-qt
+        yaru-theme
         zoom-us
       ]);
     in
