@@ -8,7 +8,10 @@
     enable = true;
     wayland = false;
   };
+
   services.xserver.desktopManager.gnome.enable = true;
+
+  /* services.logrotate.checkConfig = false; */
 
   services.xserver.displayManager = {
     autoLogin.enable = true;

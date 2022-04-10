@@ -83,7 +83,6 @@ in
 
         # golang
         golangci-lint
-        golint
         gopls
         gofumpt
 
