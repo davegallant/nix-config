@@ -41,6 +41,7 @@
 
   virtualisation.docker.enable = true;
   virtualisation.podman.enable = true;
+  virtualisation.libvirtd.enable = true;
 
   programs.gnupg.agent = {
     enable = true;
