@@ -160,7 +160,7 @@ in
         aws-sam-cli
         bitwarden
         brave
-        calibre
+        /* calibre */
         cryptsetup
         deluge
         discord
