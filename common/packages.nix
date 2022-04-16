@@ -9,6 +9,7 @@ in
       common = [
         # utils
         curl
+        gcc
         gnupg
         imagemagick
         unzip
