@@ -147,6 +147,7 @@ in
         # ruby
         rbenv
         rubocop
+        ruby_2_7
         ruby_3_1
         rufo
         rubyPackages.solargraph
