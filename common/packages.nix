@@ -18,6 +18,7 @@ in
 
         # dev tools
         ansible-lint
+        drone-cli
         git
         git-crypt
         github-cli
@@ -131,7 +132,7 @@ in
         aws-role-play
         aws-vault
         awscli2
-        awslogs
+        /* awslogs */
         ssm-session-manager-plugin
 
         # python
@@ -159,7 +160,7 @@ in
         _1password-gui
         albert
         authy
-        aws-sam-cli
+        /* aws-sam-cli */
         bitwarden
         brave
         /* calibre */
