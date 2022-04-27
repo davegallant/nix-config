@@ -12,6 +12,7 @@ in
         gcc
         gnupg
         imagemagick
+        iotop
         unzip
         xdg_utils
         zip
@@ -163,7 +164,7 @@ in
         /* aws-sam-cli */
         bitwarden
         brave
-        /* calibre */
+        calibre
         cryptsetup
         deluge
         discord
