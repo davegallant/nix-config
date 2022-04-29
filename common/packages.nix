@@ -19,6 +19,7 @@ in
 
         # dev tools
         ansible-lint
+        checkov
         drone-cli
         git
         git-crypt
