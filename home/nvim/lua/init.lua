@@ -149,6 +149,11 @@ lspconfig.gopls.setup({
   capabilities = capabilities,
 })
 
+lspconfig.sumneko_lua.setup({
+  capabilities = capabilities,
+})
+
+
 lspconfig.pyright.setup({
   capabilities = capabilities,
 })
