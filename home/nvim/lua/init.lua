@@ -113,32 +113,75 @@ vim.api.nvim_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<C
 vim.api.nvim_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 vim.api.nvim_set_keymap("n", "<space>", "za", { silent = true, noremap = true })
 
-require("lspconfig").ansiblels.setup({
+-------------------------------------------------------------------------------
+-- packer {{{1 -------------------------------------------------------------------
+-------------------------------------------------------------------------------
+require("packer").startup(function()
+	-- use({ "ms-jpq/coq.artifacts", branch = "artifacts" }) 
+end)
+
+-------------------------------------------------------------------------------
+-- lsp {{{1 -------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+require'cmp'.setup {
+  sources = {
+    { name = 'nvim_lsp' },
+    { name = 'path' },
+    { name = 'treesitter' },
+  }
+}
+
+local lspconfig = require "lspconfig"
+
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+lspconfig.ansiblels.setup({
+  capabilities = capabilities,
   cmd = {os.getenv("HOME") .. "/.npm-packages/bin/ansible-language-server", "--stdio"};
 })
-require("lspconfig").bashls.setup({})
-require("lspconfig").gopls.setup({})
-require("lspconfig").pyright.setup({})
-require("lspconfig").rls.setup({})
-require("lspconfig").rnix.setup({})
-require("lspconfig").solargraph.setup({})
-require("lspconfig").terraformls.setup({})
-require("lspconfig").tflint.setup({})
-require("lspconfig").yamlls.setup({})
+
+lspconfig.bashls.setup({
+  capabilities = capabilities,
+})
+
+lspconfig.gopls.setup({
+  capabilities = capabilities,
+})
+
+lspconfig.pyright.setup({
+  capabilities = capabilities,
+})
+
+lspconfig.rls.setup({
+  capabilities = capabilities,
+})
+
+lspconfig.rnix.setup({
+  capabilities = capabilities,
+})
+
+lspconfig.solargraph.setup({
+  capabilities = capabilities,
+})
+
+lspconfig.terraformls.setup({
+  capabilities = capabilities,
+})
+
+lspconfig.tflint.setup({
+  capabilities = capabilities,
+})
+
+lspconfig.yamlls.setup({
+  capabilities = capabilities,
+})
 
 vim.cmd([[autocmd BufWritePre *.tf lua vim.lsp.buf.formatting_sync()]])
 vim.cmd([[autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync()]])
 vim.cmd([[autocmd BufWritePre *.go lua vim.lsp.buf.formatting_sync()]])
 vim.cmd([[autocmd BufWritePre *.rb lua vim.lsp.buf.formatting_sync()]])
 vim.cmd([[autocmd BufWritePre *.nix lua vim.lsp.buf.formatting_sync()]])
-
--------------------------------------------------------------------------------
--- packer {{{1 -------------------------------------------------------------------
--------------------------------------------------------------------------------
-require("packer").startup(function()
-	use({ "ms-jpq/coq_nvim", branch = "coq" }) -- main one
-	use({ "ms-jpq/coq.artifacts", branch = "artifacts" }) -- 9000+ Snippets
-end)
 
 -------------------------------------------------------------------------------
 -- Plugins {{{1 ---------------------------------------------------------------

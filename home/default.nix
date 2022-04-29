@@ -332,11 +332,14 @@ in
       plugins = with pkgs.vimPlugins; [
         completion-nvim
         /* copilot-vim */
+        cmp-nvim-lsp
+        cmp-path
+        cmp-treesitter
         gitlinker-nvim
         gitsigns-nvim
         gruvbox-nvim
-        lightspeed-nvim
         lualine-nvim
+        nvim-cmp
         nvim-lspconfig
         nvim-tree-lua
         nvim-treesitter
