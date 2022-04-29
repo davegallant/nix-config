@@ -31,6 +31,7 @@ in
         shellcheck
         shfmt
         starship
+        sumneko-lua-language-server
 
         # automation
         ansible
