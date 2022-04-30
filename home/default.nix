@@ -330,15 +330,16 @@ in
       extraConfig = "lua require('init')";
 
       plugins = with pkgs.vimPlugins; [
-        completion-nvim
         /* copilot-vim */
         cmp-nvim-lsp
         cmp-path
         cmp-treesitter
+        friendly-snippets
         gitlinker-nvim
         gitsigns-nvim
         gruvbox-nvim
         lualine-nvim
+        luasnip
         nvim-cmp
         nvim-lspconfig
         nvim-tree-lua
@@ -347,7 +348,6 @@ in
         nvim-web-devicons
         packer-nvim
         plenary-nvim
-        supertab
         telescope-fzy-native-nvim
         vim-commentary
         vim-markdown

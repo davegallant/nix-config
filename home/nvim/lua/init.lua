@@ -68,10 +68,6 @@ vim.api.nvim_set_keymap(
 	{ silent = true, noremap = true }
 )
 
--- Use tab as trigger keys
-vim.cmd([[imap <tab> <Plug>(completion_smart_tab)]])
-vim.cmd([[imap <s-tab> <Plug>(completion_smart_s_tab)]])
-
 -- Remember line number
 vim.cmd([[au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif]])
 
@@ -117,19 +113,52 @@ vim.api.nvim_set_keymap("n", "<space>", "za", { silent = true, noremap = true })
 -- packer {{{1 -------------------------------------------------------------------
 -------------------------------------------------------------------------------
 require("packer").startup(function()
-	-- use({ "ms-jpq/coq.artifacts", branch = "artifacts" }) 
+  -- use({ "ms-jpq/coq.artifacts", branch = "artifacts" })
 end)
 
 -------------------------------------------------------------------------------
 -- lsp {{{1 -------------------------------------------------------------------
 -------------------------------------------------------------------------------
 
-require'cmp'.setup {
+local has_words_before = function()
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
+
+local luasnip = require("luasnip")
+local cmp = require("cmp")
+
+cmp.setup {
   sources = {
     { name = 'nvim_lsp' },
     { name = 'path' },
     { name = 'treesitter' },
-  }
+  },
+   mapping = {
+
+    ["<Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+      elseif has_words_before() then
+        cmp.complete()
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
+
+    ["<S-Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
+
+  },
 }
 
 local lspconfig = require "lspconfig"
@@ -151,6 +180,13 @@ lspconfig.gopls.setup({
 
 lspconfig.sumneko_lua.setup({
   capabilities = capabilities,
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = { 'vim' }
+      }
+    }
+  }
 })
 
 
@@ -187,6 +223,10 @@ vim.cmd([[autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync()]])
 vim.cmd([[autocmd BufWritePre *.go lua vim.lsp.buf.formatting_sync()]])
 vim.cmd([[autocmd BufWritePre *.rb lua vim.lsp.buf.formatting_sync()]])
 vim.cmd([[autocmd BufWritePre *.nix lua vim.lsp.buf.formatting_sync()]])
+
+
+require'luasnip'.filetype_extend("go", {"go"})
+require'luasnip'.filetype_extend("ruby", {"rails"})
 
 -------------------------------------------------------------------------------
 -- Plugins {{{1 ---------------------------------------------------------------
@@ -257,9 +297,6 @@ vim.api.nvim_set_keymap("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { sil
 vim.api.nvim_set_keymap("n", "<leader>n", "<cmd>NvimTreeToggle<cr>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>r", "<cmd>NvimTreeRefresh<cr>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>nf", "<cmd>NvimTreeFindFile<cr>", { noremap = true })
-
--- completion-nvim
-vim.cmd([[autocmd BufEnter * lua require'completion'.on_attach()]])
 
 --Set colorscheme
 vim.o.termguicolors = true
