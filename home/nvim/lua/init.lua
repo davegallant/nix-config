@@ -117,7 +117,7 @@ require("packer").startup(function()
 end)
 
 -------------------------------------------------------------------------------
--- lsp {{{1 -------------------------------------------------------------------
+-- completion {{{1 -------------------------------------------------------------------
 -------------------------------------------------------------------------------
 
 local has_words_before = function()
@@ -134,8 +134,7 @@ cmp.setup {
     { name = 'path' },
     { name = 'treesitter' },
   },
-   mapping = {
-
+  mapping = {
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
@@ -157,9 +156,12 @@ cmp.setup {
         fallback()
       end
     end, { "i", "s" }),
-
-  },
+  }
 }
+
+-------------------------------------------------------------------------------
+-- lsp {{{1 -------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
 local lspconfig = require "lspconfig"
 
@@ -207,6 +209,7 @@ lspconfig.solargraph.setup({
 })
 
 lspconfig.terraformls.setup({
+  filetypes={"terraform","tf","hcl"},
   capabilities = capabilities,
 })
 
@@ -217,13 +220,6 @@ lspconfig.tflint.setup({
 lspconfig.yamlls.setup({
   capabilities = capabilities,
 })
-
-vim.cmd([[autocmd BufWritePre *.tf lua vim.lsp.buf.formatting_sync()]])
-vim.cmd([[autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync()]])
-vim.cmd([[autocmd BufWritePre *.go lua vim.lsp.buf.formatting_sync()]])
-vim.cmd([[autocmd BufWritePre *.rb lua vim.lsp.buf.formatting_sync()]])
-vim.cmd([[autocmd BufWritePre *.nix lua vim.lsp.buf.formatting_sync()]])
-
 
 require'luasnip'.filetype_extend("go", {"go"})
 require'luasnip'.filetype_extend("ruby", {"rails"})
