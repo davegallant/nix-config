@@ -7,31 +7,40 @@ in
   environment.systemPackages = with pkgs;
     let
       common = [
-        # utils
+        # essentials
         curl
         gcc
+        git
+        git-crypt
         gnupg
         imagemagick
-        iotop
+        jq
+        ripgrep
         unzip
+        xclip
         xdg_utils
         zip
 
-        # dev tools
+        # dev productivity
         ansible-lint
+        bat
         checkov
+        colordiff
         drone-cli
-        git
-        git-crypt
+        exa
+        fd
         github-cli
         gnumake
+        go-jira
         hadolint
+        httpie
         nodePackages.eslint
         pre-commit
         shellcheck
         shfmt
         starship
-        sumneko-lua-language-server
+        tldr
+        tmux-sessionizer
 
         # automation
         ansible
@@ -47,20 +56,10 @@ in
 
         # language servers
         nodePackages.bash-language-server
-        nodePackages.yaml-language-server
         nodePackages.pyright
-
-        # productivity
-        bat
-        colordiff
-        exa
-        fd
-        go-jira
-        jq
-        ripgrep
-        tldr
-        tmux-sessionizer
-        xclip
+        nodePackages.yaml-language-server
+        rubyPackages.solargraph
+        sumneko-lua-language-server
 
         # blog
         hugo
@@ -72,6 +71,7 @@ in
         ctop
         glances
         htop
+        iotop
         procs
 
         # data tools
@@ -135,7 +135,7 @@ in
         aws-role-play
         aws-vault
         awscli2
-        /* awslogs */
+        awslogs
         ssm-session-manager-plugin
 
         # python
@@ -154,7 +154,6 @@ in
         ruby_2_7
         ruby_3_1
         rufo
-        rubyPackages.solargraph
 
         # news
         srv
