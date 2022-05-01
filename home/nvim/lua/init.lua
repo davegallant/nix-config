@@ -134,6 +134,7 @@ cmp.setup {
     { name = 'path' },
     { name = 'treesitter' },
   },
+  preselect = cmp.PreselectMode.None,
   mapping = {
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
