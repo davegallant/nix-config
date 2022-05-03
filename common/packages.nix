@@ -115,7 +115,7 @@ in
         restic
 
         # infra tools
-        /* terraform-ls */
+        terraform-ls
         terraformer
         tflint
         tfsec
