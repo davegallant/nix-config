@@ -185,7 +185,7 @@ in
         pinentry-curses
         postman
         qemu
-        rfd
+        /* rfd */
         rtorrent
         rustup
         signal-desktop
