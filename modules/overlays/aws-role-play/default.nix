@@ -49,6 +49,5 @@ buildPythonApplication rec {
     homepage = "https://www.rewind.com/";
     description = "A CLI tool that makes assuming IAM roles and exporting temporary credentials easier";
     license = licenses.mit;
-    maintainers = [ davegallant ];
   };
 }
