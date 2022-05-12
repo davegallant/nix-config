@@ -119,7 +119,7 @@ in
         terraformer
         tflint
         tfsec
-        tfswitch
+        /* tfswitch */
         infracost
 
         # nix
