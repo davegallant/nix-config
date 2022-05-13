@@ -162,7 +162,7 @@ in
         _1password-gui
         albert
         authy
-        /* aws-sam-cli */
+        aws-sam-cli
         bitwarden
         brave
         calibre
