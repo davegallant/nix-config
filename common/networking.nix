@@ -7,6 +7,7 @@
     firewall = {
       allowPing = false;
       enable = true;
+      checkReversePath = "loose";
       trustedInterfaces = [ "tailscale0" ];
     };
   };
