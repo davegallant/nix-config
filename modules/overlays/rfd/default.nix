@@ -6,14 +6,14 @@ in
 with py.pkgs;
 buildPythonApplication rec {
   pname = "rfd";
-  version = "v0.8.0";
+  version = "v0.8.1";
   format = "pyproject";
 
   src = fetchFromGitHub {
     owner = "davegallant";
     repo = "rfd";
     rev = version;
-    hash = "sha256-Y98CKy89UMB+KJYHeM4zXkAZ2BnvGu4eyw6ZwcGnMPg=";
+    hash = "sha256-9gOxrKVEqbg2vLO5opoetVSxgwpm/3SV60mK8Le6F48=";
   };
 
   # No tests included
@@ -35,6 +35,5 @@ buildPythonApplication rec {
     homepage = "https://www.redflagdeals.com/";
     description = "View RedFlagDeals from the command line";
     license = licenses.gpl3;
-    maintainers = [ davegallant ];
   };
 }
