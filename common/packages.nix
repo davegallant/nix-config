@@ -21,8 +21,11 @@ in
         xdg_utils
         zip
 
+        # automation
+        /* ansible */
+
         # dev productivity
-        ansible-lint
+        /* ansible-lint */
         bat
         checkov
         colordiff
@@ -41,9 +44,6 @@ in
         starship
         tldr
         tmux-sessionizer
-
-        # automation
-        ansible
 
         # containers
         docker
