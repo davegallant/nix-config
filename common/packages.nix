@@ -22,10 +22,10 @@ in
         zip
 
         # automation
-        /* ansible */
+        ansible
 
         # dev productivity
-        /* ansible-lint */
+        ansible-lint
         bat
         checkov
         colordiff
