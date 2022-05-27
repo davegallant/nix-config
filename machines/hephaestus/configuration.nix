@@ -8,7 +8,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   hardware.nvidia.modesetting.enable = true;
-  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
 
   networking.hostName = "hephaestus";
 
