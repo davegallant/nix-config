@@ -177,6 +177,7 @@ in
         google-chrome
         guake
         kazam
+        keyleds
         linuxPackages.perf
         minecraft
         mojave-gtk-theme

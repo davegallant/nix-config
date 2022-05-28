@@ -2,7 +2,7 @@ final: prev: {
 
   aws-connect = prev.callPackage ./aws-connect { };
   aws-role-play = prev.callPackage ./aws-role-play { };
-  changedetection.io = prev.callPackage ./changedetection.io { };
+  keyleds = prev.callPackage ./keyleds { };
   lpass = prev.callPackage ./lastpass { };
   rfd = prev.callPackage ./rfd { };
   srv = prev.callPackage ./srv { };
