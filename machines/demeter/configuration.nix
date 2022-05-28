@@ -1,11 +1,9 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   nixpkgs.config.allowUnfree = true;
 
-  environment = { variables = { LANG = "en_US.UTF-8"; }; };
+  environment = {variables = {LANG = "en_US.UTF-8";};};
 
-  networking = { hostName = "demeter"; };
+  networking = {hostName = "demeter";};
 
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;

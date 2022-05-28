@@ -1,8 +1,6 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   boot.kernelPackages = pkgs.linuxPackages;
-  boot.supportedFilesystems = [ "ntfs" ];
+  boot.supportedFilesystems = ["ntfs"];
 
   system.stateVersion = "unstable";
   system.autoUpgrade.enable = true;
@@ -19,7 +17,7 @@
 
   users.users.dave = {
     isNormalUser = true;
-    extraGroups = [ "docker" "wheel" "libvirtd" ];
+    extraGroups = ["docker" "wheel" "libvirtd"];
     shell = pkgs.zsh;
   };
 
@@ -36,7 +34,7 @@
   # Enable 32bit for steam
   hardware.pulseaudio.enable = true;
   hardware.opengl.driSupport32Bit = true;
-  hardware.opengl.extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
+  hardware.opengl.extraPackages32 = with pkgs.pkgsi686Linux; [libva];
   hardware.pulseaudio.support32Bit = true;
 
   virtualisation.docker.enable = true;
@@ -47,5 +45,4 @@
     enable = true;
     enableSSHSupport = true;
   };
-
 }

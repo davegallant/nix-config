@@ -1,5 +1,8 @@
-{ lib, fetchFromGitHub, buildGoModule }:
-
+{
+  lib,
+  fetchFromGitHub,
+  buildGoModule,
+}:
 buildGoModule rec {
   pname = "srv";
   version = "v0.1.2";
@@ -16,7 +19,7 @@ buildGoModule rec {
   meta = with lib; {
     description = "a simple rss viewer";
     license = licenses.gpl3;
-    maintainers = with maintainers; [ davegallant ];
+    maintainers = with maintainers; [davegallant];
     platforms = platforms.linux ++ platforms.darwin;
   };
 }

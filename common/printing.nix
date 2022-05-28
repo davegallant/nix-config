@@ -1,5 +1,3 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   services.printing.enable = true;
 }

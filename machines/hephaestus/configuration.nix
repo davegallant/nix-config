@@ -1,7 +1,9 @@
-{ config, pkgs, ... }:
-
 {
-  imports = [ ./hardware.nix ];
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [./hardware.nix];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -14,12 +16,24 @@
     hostName = "hephaestus";
     interfaces.enp34s0 = {
       useDHCP = true;
-      /* ipv4.addresses = [ */
-      /*   { */
-      /*     address = "192.168.1.69"; */
-      /*     prefixLength = 24; */
-      /*   } */
-      /* ]; */
+      /*
+       ipv4.addresses = [
+       */
+      /*
+       {
+       */
+      /*
+       address = "192.168.1.69";
+       */
+      /*
+       prefixLength = 24;
+       */
+      /*
+       }
+       */
+      /*
+       ];
+       */
     };
     defaultGateway = {
       address = "192.168.1.2";
@@ -36,9 +50,9 @@
   };
 
   services.sshd.enable = true;
-  services.tailscale = { enable = true; };
+  services.tailscale = {enable = true;};
   services.xserver = {
-    videoDrivers = [ "nvidia" ];
+    videoDrivers = ["nvidia"];
     deviceSection = ''
       Option    "Coolbits" "4"
     '';
@@ -48,6 +62,4 @@
   services.udev.extraRules = ''
     KERNEL=="hidraw*", SUBSYSTEM=="hidraw", MODE="0666"
   '';
-
 }
-

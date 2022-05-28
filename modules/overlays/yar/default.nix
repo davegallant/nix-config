@@ -1,5 +1,8 @@
-{ lib, fetchFromGitHub, buildGoModule }:
-
+{
+  lib,
+  fetchFromGitHub,
+  buildGoModule,
+}:
 buildGoModule rec {
   pname = "yar";
   version = "master";
@@ -16,7 +19,7 @@ buildGoModule rec {
   meta = with lib; {
     description = "Yar is a tool for plunderin' organizations, users and/or repositories.";
     license = licenses.gpl3;
-    maintainers = with maintainers; [ davegallant ];
+    maintainers = with maintainers; [davegallant];
     platforms = platforms.linux ++ platforms.darwin;
   };
 }

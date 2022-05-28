@@ -1,13 +1,13 @@
 let
-  nix-pre-commit-hooks = import (builtins.fetchTarball
+  nix-pre-commit-hooks =
+    import (builtins.fetchTarball
     "https://github.com/cachix/pre-commit-hooks.nix/tarball/master");
-in
-{
+in {
   pre-commit-check = nix-pre-commit-hooks.run {
     src = ./.;
     hooks = {
       shellcheck.enable = true;
-      nixpkgs-fmt.enable = true;
+      alejandra.enable = true;
     };
   };
 }
