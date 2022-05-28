@@ -10,9 +10,8 @@
   hardware.nvidia.modesetting.enable = true;
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
 
-  networking.hostName = "hephaestus";
-
   networking = {
+    hostName = "hephaestus";
     interfaces.enp34s0 = {
       useDHCP = true;
       /* ipv4.addresses = [ */
@@ -38,6 +37,12 @@
 
   services.sshd.enable = true;
   services.tailscale = { enable = true; };
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver = {
+    videoDrivers = [ "nvidia" ];
+    deviceSection = ''
+      Option    "Coolbits" "4"
+    '';
+    exportConfiguration = true;
+  };
 }
 

@@ -181,6 +181,7 @@ in
         minecraft
         mojave-gtk-theme
         netdata
+        nvfancontrol
         pavucontrol
         pinentry-curses
         postman
