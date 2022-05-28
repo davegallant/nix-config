@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   services.tailscale.enable = true;
 
   networking = {
@@ -8,7 +6,7 @@
       allowPing = false;
       enable = true;
       checkReversePath = "loose";
-      trustedInterfaces = [ "tailscale0" ];
+      trustedInterfaces = ["tailscale0"];
     };
   };
 }

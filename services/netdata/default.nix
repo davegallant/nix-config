@@ -1,10 +1,12 @@
-{ config, pkgs, ... }:
-let
+{
+  config,
+  pkgs,
+  ...
+}: let
   netdata = pkgs.netdata;
   netdataConf = ./netdata.conf;
   netdataDir = "/var/lib/netdata";
-in
-{
+in {
   users.extraGroups.netdata.gid = 220008;
   users.users.netdata.group = "netdata";
   users.extraUsers.netdata = {
@@ -14,8 +16,8 @@ in
     uid = 200008;
   };
   systemd.services.netdata = {
-    wantedBy = [ "multi-user.target" ];
-    after = [ "network.target" ];
+    wantedBy = ["multi-user.target"];
+    after = ["network.target"];
     preStart = ''
       mkdir -p ${netdataDir}/config
       mkdir -p ${netdataDir}/logs
@@ -40,5 +42,4 @@ in
       }
     }
   '';
-
 }

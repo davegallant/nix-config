@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   # Set system-wide fonts.
   fonts.fonts = with pkgs; [
     dejavu_fonts
@@ -18,9 +16,9 @@
 
   # Set default fonts.
   fonts.fontconfig.defaultFonts = {
-    sansSerif = [ "Noto Sans" ];
-    serif = [ "Noto Serif" ];
-    monospace = [ "Noto Sans Mono" ];
-    emoji = [ "Noto Color Emoji" ];
+    sansSerif = ["Noto Sans"];
+    serif = ["Noto Serif"];
+    monospace = ["Noto Sans Mono"];
+    emoji = ["Noto Color Emoji"];
   };
 }

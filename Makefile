@@ -4,7 +4,7 @@ SHELL := bash
 MAKEFLAGS += --warn-undefined-variables
 MAKEFLAGS += --no-builtin-rules
 
-HOSTAME ?= $(shell hostname)
+HOSTNAME ?= $(shell hostname)
 UNAME_S := $(shell uname -s)
 
 ifeq ($(UNAME_S),Linux)
@@ -19,3 +19,6 @@ switch:
 
 update:
 	nix flake update
+
+fmt:
+	alejandra .

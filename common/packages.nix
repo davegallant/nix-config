@@ -1,12 +1,15 @@
-{ config, lib, pkgs, ... }:
-
-let inherit (pkgs) stdenv;
-in
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
+  inherit (pkgs) stdenv;
+in {
   # System-wide packages to install.
-  environment.systemPackages = with pkgs;
-    let
-      common = [
+  environment.systemPackages = with pkgs; let
+    common =
+      [
         # essentials
         curl
         gcc
@@ -119,10 +122,13 @@ in
         terraformer
         tflint
         tfsec
-        /* tfswitch */
+        /*
+         tfswitch
+         */
         infracost
 
         # nix
+        alejandra
         cachix
         nix-diff
         nixfmt
@@ -157,8 +163,8 @@ in
 
         # news
         srv
-
-      ] ++ lib.optionals stdenv.isLinux ([
+      ]
+      ++ lib.optionals stdenv.isLinux [
         _1password-gui
         albert
         authy
@@ -202,8 +208,8 @@ in
         wireshark-qt
         yaru-theme
         zoom-us
-      ]);
-    in
+      ];
+  in
     common;
 
   programs.gnupg.agent.enable = true;

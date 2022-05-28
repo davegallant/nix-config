@@ -1,7 +1,4 @@
-{ ... }:
-
-{
-
+{...}: {
   services.xserver = {
     enable = true;
     displayManager = {

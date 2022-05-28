@@ -1,9 +1,11 @@
-{ lib, pkgs, ... }:
-
-let
+{
+  lib,
+  pkgs,
+  ...
+}: let
   hound-nvim = pkgs.vimUtils.buildVimPlugin {
     name = "hound-nvim";
-    nativeBuildInputs = with pkgs; [ lua53Packages.luacheck stylua ];
+    nativeBuildInputs = with pkgs; [lua53Packages.luacheck stylua];
     src = pkgs.fetchFromGitHub {
       owner = "davegallant";
       repo = "hound.nvim";
@@ -12,9 +14,7 @@ let
     };
   };
   inherit (pkgs) stdenv;
-in
-{
-
+in {
   services = {
     gpg-agent = {
       enable = stdenv.isLinux;
@@ -27,7 +27,6 @@ in
   fonts.fontconfig.enable = true;
 
   programs = {
-
     home-manager.enable = true;
 
     direnv.enable = true;
@@ -50,18 +49,16 @@ in
         dc = "diff --cached";
         dcn = "diff --cached --name-only";
         ds = "! git diff origin | sed -r 's/value: (.*)/value: \"************\"/'";
-        l =
-          "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
+        l = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
         ms = "merge --squash";
         p = "push origin";
         pf = "push -f";
         pl = "! git pull origin $(git rev-parse --abbrev-ref HEAD)";
         st = "status";
-        wip =
-          "for-each-ref --sort='authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' refs/heads";
+        wip = "for-each-ref --sort='authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' refs/heads";
       };
 
-      includes = [{ path = "~/.gitconfig-work"; }];
+      includes = [{path = "~/.gitconfig-work";}];
 
       delta = {
         enable = true;
@@ -79,10 +76,9 @@ in
       };
 
       extraConfig = {
-        push = { default = "current"; };
-        pull = { rebase = true; };
+        push = {default = "current";};
+        pull = {rebase = true;};
       };
-
     };
 
     starship = {
@@ -91,9 +87,9 @@ in
 
       settings = {
         add_newline = false;
-        gcloud = { disabled = true; };
+        gcloud = {disabled = true;};
         scan_timeout = 10;
-        character = { error_symbol = "[✖](bold red)"; };
+        character = {error_symbol = "[✖](bold red)";};
       };
     };
 
@@ -162,7 +158,6 @@ in
           "tmux"
         ];
       };
-
     };
 
     alacritty = {
@@ -175,20 +170,19 @@ in
         mouse.hide_when_typing = true;
 
         font =
-          if stdenv.isLinux then
-            {
-              normal.family = "Fira Code";
-              size = 12;
-            }
-          else
-            {
-              normal.family = "FiraCode Nerd Font";
-              size = 18;
-            };
+          if stdenv.isLinux
+          then {
+            normal.family = "Fira Code";
+            size = 12;
+          }
+          else {
+            normal.family = "FiraCode Nerd Font";
+            size = 18;
+          };
 
         shell = {
           program = "zsh";
-          args = [ "-l" "-c" "tmux" "u" ];
+          args = ["-l" "-c" "tmux" "u"];
         };
 
         colors = {
@@ -330,7 +324,9 @@ in
       extraConfig = "lua require('init')";
 
       plugins = with pkgs.vimPlugins; [
-        /* copilot-vim */
+        /*
+         copilot-vim
+         */
         cmp-nvim-lsp
         cmp-path
         cmp-treesitter
@@ -355,9 +351,7 @@ in
         vim-sneak
         vim-surround
       ];
-
     };
-
   };
 
   home.file.".config/nvim/lua".source = ./nvim/lua;
@@ -374,5 +368,4 @@ in
     70    80
     80    90
   '';
-
 }

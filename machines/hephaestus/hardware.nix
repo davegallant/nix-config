@@ -1,13 +1,16 @@
-{ config, lib, pkgs, modulesPath, ... }:
-
 {
-  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  ...
+}: {
+  imports = [(modulesPath + "/installer/scan/not-detected.nix")];
 
-  boot.initrd.availableKernelModules =
-    [ "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-amd" ];
-  boot.extraModulePackages = [ config.boot.kernelPackages.v4l2loopback.out ];
+  boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod"];
+  boot.initrd.kernelModules = [];
+  boot.kernelModules = ["kvm-amd"];
+  boot.extraModulePackages = [config.boot.kernelPackages.v4l2loopback.out];
 
   powerManagement.cpuFreqGovernor = "balanced";
 
@@ -35,13 +38,11 @@
     fsType = "vfat";
   };
 
-  swapDevices =
-    [{ device = "/dev/disk/by-uuid/aca92a73-2941-40ca-88c4-0dd8607d232a"; }];
+  swapDevices = [{device = "/dev/disk/by-uuid/aca92a73-2941-40ca-88c4-0dd8607d232a";}];
 
   fileSystems."/mnt/storage" = {
     device = "/dev/disk/by-uuid/0f592fca-1d4e-43f7-9bf4-f1c3e19e841f";
     fsType = "ext4";
   };
   hardware.video.hidpi.enable = lib.mkDefault true;
-
 }
