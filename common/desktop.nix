@@ -2,21 +2,17 @@
 
 {
 
-  # Enable the GNOME Desktop Environment.
-  services.xserver.enable = true;
-  services.xserver.displayManager.gdm = {
+  services.xserver = {
     enable = true;
-    wayland = false;
+    displayManager = {
+      startx.enable = true;
+      gdm = {
+        enable = true;
+        wayland = false;
+      };
+    };
+    desktopManager.gnome.enable = true;
   };
-
-  services.xserver.desktopManager.gnome.enable = true;
 
   services.logrotate.checkConfig = false;
-
-  services.xserver.displayManager = {
-    autoLogin.enable = true;
-    autoLogin.user = "dave";
-    job.preStart = "sleep 5";
-  };
-
 }
