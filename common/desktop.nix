@@ -3,9 +3,20 @@
     enable = true;
     displayManager = {
       startx.enable = true;
-      gdm = {
+      /*
+       gdm = {
+       */
+      /*
+       enable = true;
+       */
+      /*
+       wayland = false;
+       */
+      /*
+       };
+       */
+      lightdm = {
         enable = true;
-        wayland = false;
       };
     };
     desktopManager.gnome.enable = true;
