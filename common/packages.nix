@@ -182,6 +182,7 @@ in {
         gnomeExtensions.appindicator
         google-chrome
         guake
+        i3lock-fancy-rapid
         kazam
         keyleds
         linuxPackages.perf
@@ -206,6 +207,7 @@ in {
         virtmanager
         vlc
         wireshark-qt
+        xautolock
         yaru-theme
         zoom-us
       ];

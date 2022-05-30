@@ -39,6 +39,7 @@
 
         ./services/netdata/default.nix
         ./services/keyleds/default.nix
+        ./services/xautolock/default.nix
 
         ({
           config,
