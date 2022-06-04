@@ -176,7 +176,7 @@ in {
         deluge
         discord
         firefox
-        gimp
+        gimp-with-plugins
         glibcLocales
         gnome3.gnome-tweaks
         gnomeExtensions.appindicator
