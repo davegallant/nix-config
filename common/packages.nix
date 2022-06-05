@@ -47,6 +47,7 @@ in {
         starship
         tldr
         tmux-sessionizer
+        vscodium
 
         # containers
         docker
