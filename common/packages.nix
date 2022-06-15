@@ -39,6 +39,7 @@ in {
         gnumake
         go-jira
         hadolint
+        hey
         httpie
         nodePackages.eslint
         pre-commit
