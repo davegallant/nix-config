@@ -20,7 +20,6 @@ in {
     };
 
     brews = [
-      "aws-sam-cli"
       "coreutils"
       "fabianishere/personal/pam_reattach"
       "gnu-sed"
@@ -31,18 +30,17 @@ in {
     ];
 
     casks = [
-      "1password"
       "dbeaver-community"
       "font-fira-code-nerd-font"
       "font-hack-nerd-font"
       "lulu"
       "maccy"
-      "osxfuse"
+      # "osxfuse"
       "rectangle"
+      "vscodium"
     ];
 
     taps = [
-      "aws/tap"
       "homebrew/bundle"
       "homebrew/cask"
       "homebrew/cask-fonts"

@@ -24,13 +24,13 @@ in {
         xdg_utils
         zip
 
-        # automation
-        ansible
+        # ansible
+        # ansible
+        # ansible-lint
 
-        # dev productivity
-        ansible-lint
+        # # dev productivity
         bat
-        checkov
+        # checkov
         colordiff
         drone-cli
         exa
@@ -40,7 +40,7 @@ in {
         go-jira
         hadolint
         hey
-        httpie
+        # httpie
         nodePackages.eslint
         pre-commit
         shellcheck
@@ -48,7 +48,6 @@ in {
         starship
         tldr
         tmux-sessionizer
-        vscodium
 
         # containers
         docker
@@ -57,35 +56,21 @@ in {
         kubernetes-helm
         kustomize
         minikube
-        podman
 
         # language servers
         nodePackages.bash-language-server
         nodePackages.pyright
         nodePackages.yaml-language-server
-        rubyPackages.solargraph
         sumneko-lua-language-server
-
-        # blog
-        hugo
-
-        # printing
-        ghostscript
 
         # monitoring
         ctop
-        glances
+        # glances
         htop
-        iotop
         procs
 
         # data tools
         dbeaver
-
-        # password managers
-        _1password
-        gopass
-        rbw
 
         # lua
         lua53Packages.luacheck
@@ -102,11 +87,11 @@ in {
         nodePackages.yarn
 
         # video
-        youtube-dl
+        # youtube-dl
 
         # networking
         arp-scan
-        dnsutils
+        # dnsutils
         iperf
         nmap
         openssl
@@ -119,14 +104,11 @@ in {
         rclone
         restic
 
-        # infra tools
+        # infra
         terraform-ls
         terraformer
         tflint
-        tfsec
-        /*
-         tfswitch
-         */
+        tfswitch
         infracost
 
         # nix
@@ -138,39 +120,28 @@ in {
         nixpkgs-review
         rnix-lsp
 
-        ## aws
-        aws-connect
-        aws-role-play
-        aws-vault
-        awscli2
-        awslogs
-        ssm-session-manager-plugin
+        # aws
+        # awscli2
+        # ssm-session-manager-plugin
 
         # python
-        mypy
         python310
-        python310Packages.black
+        # python310Packages.black
         python310Packages.ipython
         python310Packages.pip
-        python310Packages.poetry
+        # python310Packages.poetry
         python310Packages.setuptools
         python310Packages.virtualenv
 
-        # ruby
-        rbenv
-        rubocop
-        ruby_2_7
-        ruby_3_1
-        rufo
+        # blog
+        hugo
 
         # news
         srv
       ]
       ++ lib.optionals stdenv.isLinux [
-        _1password-gui
         albert
         authy
-        aws-sam-cli
         bitwarden
         brave
         calibre
@@ -178,6 +149,7 @@ in {
         deluge
         discord
         firefox
+        ghostscript
         gimp-with-plugins
         glibcLocales
         gnome3.gnome-tweaks
@@ -185,6 +157,7 @@ in {
         google-chrome
         guake
         i3lock-fancy-rapid
+        iotop
         kazam
         keyleds
         linuxPackages.perf
@@ -194,6 +167,7 @@ in {
         nvfancontrol
         pavucontrol
         pinentry-curses
+        podman
         postman
         qemu
         rfd
@@ -208,6 +182,7 @@ in {
         usbutils
         virtmanager
         vlc
+        vscodium
         wireshark-qt
         xautolock
         yaru-theme

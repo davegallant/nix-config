@@ -91,15 +91,15 @@
     };
 
     darwinConfigurations = {
-      demeter = darwin.lib.darwinSystem {
-        system = "x86_64-darwin";
+      zelus = darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
 
         modules = [
           home-manager.darwinModules.home-manager
           ./common/darwin.nix
           ./common/packages.nix
 
-          ./machines/demeter/configuration.nix
+          ./machines/zelus/configuration.nix
 
           ./modules/darwin/default.nix
 
@@ -112,7 +112,7 @@
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                users.dave.imports = [./home/default.nix];
+                users."dave.gallant".imports = [./home/default.nix];
               };
             };
           })
