@@ -120,9 +120,10 @@ in {
         nixpkgs-review
         rnix-lsp
 
-        # aws
+        # cloud
         # awscli2
         # ssm-session-manager-plugin
+        google-cloud-sdk
 
         # python
         python310
