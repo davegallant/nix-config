@@ -22,13 +22,14 @@ in {
         unzip
         xclip
         xdg_utils
+        yq-go
         zip
 
         # ansible
         # ansible
         # ansible-lint
 
-        # # dev productivity
+        # productivity
         bat
         # checkov
         colordiff

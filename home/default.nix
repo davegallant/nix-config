@@ -15,6 +15,8 @@
   };
   inherit (pkgs) stdenv;
 in {
+  home.stateVersion = "22.11";
+
   services = {
     gpg-agent = {
       enable = stdenv.isLinux;
@@ -87,7 +89,6 @@ in {
 
       settings = {
         add_newline = false;
-        gcloud = {disabled = true;};
         scan_timeout = 10;
         character = {error_symbol = "[✖](bold red)";};
       };
