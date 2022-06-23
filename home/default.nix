@@ -125,6 +125,8 @@ in {
       initExtra = ''
         setopt noincappendhistory
 
+        source <(kubectl completion zsh)
+
         source $HOME/.zsh-work
 
         eval "$(jira --completion-script-bash)"
