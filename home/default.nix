@@ -182,7 +182,7 @@ in {
           }
           else {
             normal.family = "FiraCode Nerd Font";
-            size = 18;
+            size = 16;
           };
 
         shell = {
