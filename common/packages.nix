@@ -58,6 +58,7 @@ in {
         kubernetes-helm
         kustomize
         minikube
+        stern
 
         # language servers
         nodePackages.bash-language-server
