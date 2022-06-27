@@ -43,6 +43,7 @@ in {
         hey
         # httpie
         nodePackages.eslint
+        postman
         pre-commit
         shellcheck
         shfmt
@@ -170,7 +171,6 @@ in {
         pavucontrol
         pinentry-curses
         podman
-        postman
         qemu
         rfd
         rtorrent
