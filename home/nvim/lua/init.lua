@@ -192,7 +192,6 @@ lspconfig.sumneko_lua.setup({
   }
 })
 
-
 lspconfig.pyright.setup({
   capabilities = capabilities,
 })
@@ -236,6 +235,16 @@ require("lualine").setup({
 	options = {
 		theme = "gruvbox",
 	},
+})
+
+-- nvim-telescope
+require('telescope').setup({
+  defaults = {
+    layout_strategy='vertical',
+    layout_config = {
+      vertical = { width = 0.9 }
+    },
+  },
 })
 
 -- nvim-tree
