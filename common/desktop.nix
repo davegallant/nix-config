@@ -3,7 +3,11 @@
     enable = true;
     displayManager = {
       lightdm = {
+        enable = false;
+      };
+      gdm = {
         enable = true;
+        wayland = false;
       };
     };
     desktopManager = {
