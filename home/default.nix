@@ -97,6 +97,7 @@ in {
     zsh = {
       enable = true;
       enableAutosuggestions = true;
+      enableCompletion = true;
       enableSyntaxHighlighting = true;
       history.size = 1000000;
 
@@ -153,6 +154,7 @@ in {
         t = "tmux-sessionizer";
         tree = "exa --tree";
         v = "nvim";
+        nix-install = "nix-env -iA";
       };
 
       "oh-my-zsh" = {
