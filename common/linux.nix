@@ -10,9 +10,7 @@
 
   nixpkgs.config = {
     allowUnfree = true;
-    permittedInsecurePackages = [
-      "electron-9.4.4" # authy is currently stuck on electron_9
-    ];
+    permittedInsecurePackages = [];
   };
 
   users.users.dave = {
