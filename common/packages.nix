@@ -26,16 +26,21 @@ in {
         zip
 
         # ansible
-        # ansible
-        # ansible-lint
+        /*
+         ansible
+         */
+        /*
+         ansible-lint
+         */
 
         # productivity
         bat
-        # checkov
+        /*
+         checkov
+         */
         colordiff
         drone-cli
         exa
-        # httpie
         fd
         github-cli
         gnumake
@@ -68,7 +73,9 @@ in {
 
         # monitoring
         ctop
-        # glances
+        /*
+         glances
+         */
         htop
         procs
 
@@ -90,11 +97,13 @@ in {
         nodePackages.yarn
 
         # video
-        # youtube-dl
+        youtube-dl
 
         # networking
         arp-scan
-        # dnsutils
+        /*
+         dnsutils
+         */
         iperf
         nmap
         openssl
@@ -124,16 +133,24 @@ in {
         rnix-lsp
 
         # cloud
-        # awscli2
-        # ssm-session-manager-plugin
+        /*
+         awscli2
+         */
+        /*
+         ssm-session-manager-plugin
+         */
         google-cloud-sdk
 
         # python
         python310
-        # python310Packages.black
+        /*
+         python310Packages.black
+         */
         python310Packages.ipython
         python310Packages.pip
-        # python310Packages.poetry
+        /*
+         python310Packages.poetry
+         */
         python310Packages.setuptools
         python310Packages.virtualenv
 
