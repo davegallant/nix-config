@@ -331,9 +331,6 @@ in {
       extraConfig = "lua require('init')";
 
       plugins = with pkgs.vimPlugins; [
-        /*
-         copilot-vim
-         */
         cmp-nvim-lsp
         cmp-path
         cmp-treesitter
