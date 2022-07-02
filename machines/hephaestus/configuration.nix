@@ -9,8 +9,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  hardware.nvidia.modesetting.enable = true;
-  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
+  hardware.opengl.enable = true;
 
   networking = {
     hostName = "hephaestus";
@@ -32,7 +31,9 @@
   };
 
   services.sshd.enable = true;
+
   services.tailscale = {enable = true;};
+
   services.xserver = {
     videoDrivers = ["nvidia"];
     deviceSection = ''
