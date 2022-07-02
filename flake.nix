@@ -28,18 +28,18 @@
     ...
   } @ inputs: {
     nixosConfigurations = let
-      defaultModules = [
-        home-manager.nixosModules.home-manager
-        ./common/desktop.nix
-        ./common/fonts.nix
-        ./common/linux.nix
-        ./common/networking.nix
-        ./common/packages.nix
+      desktopLinuxModules = [
         ./common/printing.nix
-
         ./services/netdata/default.nix
         ./services/keyleds/default.nix
-        ./services/xautolock/default.nix
+        ./common/linux.nix
+        ./common/networking.nix
+        ./common/desktop.nix
+      ];
+      defaultModules = [
+        home-manager.nixosModules.home-manager
+        ./common/fonts.nix
+        ./common/packages.nix
 
         ({
           config,
@@ -85,6 +85,15 @@
           [
             ./machines/hephaestus/configuration.nix
             ./machines/hephaestus/hardware.nix
+          ]
+          ++ defaultModules
+          ++ desktopLinuxModules;
+      };
+      gallantis = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules =
+          [
+            ./machines/gallantis/configuration.nix
           ]
           ++ defaultModules;
       };
