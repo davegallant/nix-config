@@ -1,6 +1,4 @@
 final: prev: {
-  aws-connect = prev.callPackage ./aws-connect {};
-  aws-role-play = prev.callPackage ./aws-role-play {};
   keyleds = prev.callPackage ./keyleds {};
   rfd = prev.callPackage ./rfd {};
   srv = prev.callPackage ./srv {};
