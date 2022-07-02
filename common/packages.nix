@@ -35,14 +35,14 @@ in {
         colordiff
         drone-cli
         exa
+        # httpie
         fd
         github-cli
         gnumake
         go-jira
         hadolint
-        hey
-        # httpie
         nodePackages.eslint
+        oha
         postman
         pre-commit
         shellcheck
