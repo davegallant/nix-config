@@ -28,6 +28,8 @@ in {
 
     # Enable integration with Docker Desktop
     docker.enable = true;
+
+    tailscale.enable = true;
   };
 
   # Enable nix flakes

@@ -23,6 +23,7 @@
           ./modules/build-tarball.nix
           ./modules/wsl-distro.nix
           ./modules/docker-desktop.nix
+          ./modules/tailscale.nix
           ./modules/installer.nix
         ];
       };
