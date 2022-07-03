@@ -28,14 +28,6 @@
     ...
   } @ inputs: {
     nixosConfigurations = let
-      desktopLinuxModules = [
-        ./common/printing.nix
-        ./services/netdata/default.nix
-        ./services/keyleds/default.nix
-        ./common/linux.nix
-        ./common/networking.nix
-        ./common/desktop.nix
-      ];
       defaultModules = [
         home-manager.nixosModules.home-manager
         ./common/fonts.nix
@@ -77,6 +69,14 @@
             };
           };
         })
+      ];
+      desktopLinuxModules = [
+        ./common/printing.nix
+        ./services/netdata/default.nix
+        ./services/keyleds/default.nix
+        ./common/linux.nix
+        ./common/networking.nix
+        ./common/desktop.nix
       ];
     in {
       hephaestus = nixpkgs.lib.nixosSystem {
