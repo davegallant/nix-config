@@ -31,7 +31,7 @@
       defaultModules = [
         home-manager.nixosModules.home-manager
         ./common/fonts.nix
-        ./common/packages.nix
+        ./packages/common.nix
 
         ({
           config,
@@ -71,12 +71,13 @@
         })
       ];
       desktopLinuxModules = [
-        ./common/printing.nix
-        ./services/netdata/default.nix
-        ./services/keyleds/default.nix
+        ./common/desktop.nix
         ./common/linux.nix
         ./common/networking.nix
-        ./common/desktop.nix
+        ./common/printing.nix
+        ./packages/desktop.nix
+        ./services/keyleds/default.nix
+        ./services/netdata/default.nix
       ];
     in {
       hephaestus = nixpkgs.lib.nixosSystem {
@@ -106,7 +107,7 @@
         modules = [
           home-manager.darwinModules.home-manager
           ./common/darwin.nix
-          ./common/packages.nix
+          ./packages/common.nix
 
           ./machines/zelus/configuration.nix
 
