@@ -10,6 +10,9 @@ in {
   environment.systemPackages = with pkgs; let
     linux = [
       cryptsetup
+      docker
+      docker-compose
+      rfd
       glibcLocales
       iotop
       linuxPackages.perf

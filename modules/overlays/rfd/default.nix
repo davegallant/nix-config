@@ -8,14 +8,14 @@ in
   with py.pkgs;
     buildPythonApplication rec {
       pname = "rfd";
-      version = "v0.8.1";
+      version = "v0.9.0";
       format = "pyproject";
 
       src = fetchFromGitHub {
         owner = "davegallant";
         repo = "rfd";
         rev = version;
-        hash = "sha256-9gOxrKVEqbg2vLO5opoetVSxgwpm/3SV60mK8Le6F48=";
+        hash = "sha256-9dOxrKVEqbg2vLO5opoetVSxgwpm/3SV60mK8Le6F48=";
       };
 
       # No tests included
