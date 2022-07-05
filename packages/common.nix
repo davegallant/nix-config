@@ -56,8 +56,6 @@ in {
       tmux-sessionizer
 
       # containers
-      docker
-      docker-compose
       kubectl
       kubernetes-helm
       kustomize
@@ -132,17 +130,19 @@ in {
       /*
        awscli2
        */
-      /*
-       ssm-session-manager-plugin
-       */
+      ssm-session-manager-plugin
       google-cloud-sdk
 
       # python
       python310
-      python310Packages.black
+      /*
+       python310Packages.black
+       */
       python310Packages.ipython
       python310Packages.pip
-      python310Packages.poetry
+      /*
+       python310Packages.poetry
+       */
       python310Packages.setuptools
       python310Packages.virtualenv
 
@@ -150,7 +150,6 @@ in {
       hugo
 
       # news
-      rfd
       srv
     ];
   in
