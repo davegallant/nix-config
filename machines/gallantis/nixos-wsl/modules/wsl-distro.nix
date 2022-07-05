@@ -22,7 +22,7 @@ with lib; {
     };
     defaultUser = mkOption {
       type = str;
-      default = "dave";
+      default = "nixos";
       description = "The name of the default user";
     };
     startMenuLaunchers = mkEnableOption "shortcuts for GUI applications in the windows start menu";
