@@ -152,6 +152,7 @@ in {
         pia = "sudo openvpn --config ~/pia/$(find ~/pia -execdir basename {} .ovpn ';' -iname \"*.ovpn\" -type f | fzf --exact).ovpn";
         ps = "procs";
         t = "tmux-sessionizer";
+        tf = "terraform";
         tree = "exa --tree";
         v = "nvim";
         nix-install = "nix-env -iA";
