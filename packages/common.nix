@@ -19,6 +19,7 @@ in {
       jq
       ripgrep
       unzip
+      viddy
       xclip
       xdg_utils
       yq-go
