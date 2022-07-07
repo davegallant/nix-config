@@ -36,7 +36,6 @@ in {
       "font-hack-nerd-font"
       "lulu"
       "maccy"
-      # "osxfuse"
       "rectangle"
       "vscodium"
     ];
