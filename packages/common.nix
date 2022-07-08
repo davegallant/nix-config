@@ -131,8 +131,9 @@ in {
       /*
        awscli2
        */
-      ssm-session-manager-plugin
+      cloud-sql-proxy
       google-cloud-sdk
+      ssm-session-manager-plugin
 
       # python
       python310
