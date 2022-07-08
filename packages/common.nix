@@ -45,6 +45,7 @@ in {
       github-cli
       gnumake
       go-jira
+      gomplate
       hadolint
       nodePackages.eslint
       oha
