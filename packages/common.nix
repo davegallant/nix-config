@@ -58,6 +58,7 @@ in {
       tmux-sessionizer
 
       # containers
+      kube-score
       kubectl
       kubernetes-helm
       kustomize
