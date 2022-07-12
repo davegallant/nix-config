@@ -138,6 +138,12 @@ in {
 
           alias xdg-open=open
         fi
+
+        # kubecolor
+        source <(kubectl completion zsh)
+        alias kubectl=kubecolor
+        # make completion work with kubecolor
+        compdef kubecolor=kubectl
       '';
 
       shellAliases = {
@@ -146,7 +152,7 @@ in {
         g = "git";
         gho = "gh repo view --web >/dev/null";
         grep = "rg --smart-case";
-        k = "kubectl";
+        k = "kubecolor";
         l = "exa -la --git --group-directories-first";
         m = "make";
         pia = "sudo openvpn --config ~/pia/$(find ~/pia -execdir basename {} .ovpn ';' -iname \"*.ovpn\" -type f | fzf --exact).ovpn";

@@ -60,6 +60,7 @@ in {
       # containers
       kube-score
       kubectl
+      kubecolor
       kubernetes-helm
       kustomize
       minikube
