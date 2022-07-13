@@ -121,12 +121,12 @@ in {
         export GOPATH=~/go
         export GOBIN=$GOPATH/bin
         export PATH=$PATH:$GOBIN
+
+        export PATH=$HOME/.krew/bin:$PATH
       '';
 
       initExtra = ''
         setopt noincappendhistory
-
-        source <(kubectl completion zsh)
 
         source $HOME/.zsh-work
 
@@ -138,6 +138,9 @@ in {
 
           alias xdg-open=open
         fi
+
+        # kubectl
+        source <(kubectl completion zsh)
 
         # kubecolor
         source <(kubectl completion zsh)

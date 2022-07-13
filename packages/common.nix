@@ -58,9 +58,10 @@ in {
       tmux-sessionizer
 
       # containers
+      krew
       kube-score
-      kubectl
       kubecolor
+      kubectl
       kubernetes-helm
       kustomize
       minikube
