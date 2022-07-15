@@ -58,6 +58,7 @@ in {
       tmux-sessionizer
 
       # containers
+      argocd
       krew
       kube-score
       kubecolor
