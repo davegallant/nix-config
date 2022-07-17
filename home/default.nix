@@ -139,6 +139,9 @@ in {
           alias xdg-open=open
         fi
 
+        # helm
+        source <(helm completion zsh)
+
         # kubectl
         source <(kubectl completion zsh)
 
