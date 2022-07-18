@@ -25,14 +25,6 @@ in {
       yq-go
       zip
 
-      # ansible
-      /*
-       ansible
-       */
-      /*
-       ansible-lint
-       */
-
       # productivity
       bat
       /*
