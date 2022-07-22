@@ -123,6 +123,9 @@ in {
         export PATH=$PATH:$GOBIN
 
         export PATH=$HOME/.krew/bin:$PATH
+
+        # homebrew for x86
+        export PATH=$PATH:/usr/local/homebrew/bin
       '';
 
       initExtra = ''
@@ -168,6 +171,7 @@ in {
         tree = "exa --tree";
         v = "nvim";
         nix-install = "nix-env -iA";
+        brew-x86 = "arch -x86_64 /usr/local/homebrew/bin/brew";
       };
 
       "oh-my-zsh" = {
