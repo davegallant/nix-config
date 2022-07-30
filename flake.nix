@@ -90,11 +90,11 @@
           ++ defaultModules
           ++ desktopLinuxModules;
       };
-      gallantis = nixpkgs.lib.nixosSystem {
+      aether = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules =
           [
-            ./machines/gallantis/configuration.nix
+            ./machines/aether/configuration.nix
           ]
           ++ defaultModules;
       };
