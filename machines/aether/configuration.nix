@@ -18,7 +18,7 @@ in {
 
   system.stateVersion = "unstable";
 
-  networking = {hostName = "gallantis";};
+  networking = {hostName = "aether";};
 
   wsl = {
     enable = true;

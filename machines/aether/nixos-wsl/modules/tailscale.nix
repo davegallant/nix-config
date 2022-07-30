@@ -29,6 +29,5 @@ with lib; {
           RestartSec = "30s";
         };
       };
-
     };
 }
