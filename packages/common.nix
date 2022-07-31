@@ -21,6 +21,7 @@ in {
       unzip
       viddy
       xclip
+      wget
       xdg_utils
       yq-go
       zip
