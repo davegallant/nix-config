@@ -13,6 +13,8 @@
 
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
 
+    nix-ld.url = "github:Mic92/nix-ld";
+
     darwin = {
       url = "github:lnl7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -25,6 +27,7 @@
     home-manager,
     nixpkgs,
     nixos-hardware,
+    nix-ld,
     ...
   } @ inputs: {
     nixosConfigurations = let
@@ -95,6 +98,7 @@
         modules =
           [
             ./machines/aether/configuration.nix
+            nix-ld.nixosModules.nix-ld
           ]
           ++ defaultModules;
       };

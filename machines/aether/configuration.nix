@@ -10,9 +10,12 @@ with lib; let
 in {
   imports = [
     "${modulesPath}/profiles/minimal.nix"
+    ./nix-ld-config.nix
 
     nixos-wsl.nixosModules.wsl
   ];
+
+  nix-ld-config.enable = true;
 
   nixpkgs.config.allowUnfree = true;
 
