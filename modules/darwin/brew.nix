@@ -37,7 +37,7 @@ in {
       "lulu"
       "maccy"
       "rectangle"
-      "vscodium"
+      "visual-studio-code"
     ];
 
     taps = [
