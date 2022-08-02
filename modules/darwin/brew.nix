@@ -36,6 +36,7 @@ in {
       "font-hack-nerd-font"
       "lulu"
       "maccy"
+      "postman"
       "rectangle"
       "visual-studio-code"
     ];
