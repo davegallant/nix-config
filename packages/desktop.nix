@@ -36,7 +36,6 @@ in {
       usbutils
       virtmanager
       vlc
-      vscodium
       wireshark-qt
       xautolock
       yaru-theme

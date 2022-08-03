@@ -157,7 +157,7 @@ in {
 
       shellAliases = {
         ".." = "cd ..";
-        c = "codium";
+        c = "code";
         g = "git";
         gho = "gh repo view --web >/dev/null";
         grep = "rg --smart-case";
