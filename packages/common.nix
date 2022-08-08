@@ -52,6 +52,7 @@ in {
 
       # containers
       argocd
+      k9s
       krew
       kube-score
       kubecolor
