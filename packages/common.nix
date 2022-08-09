@@ -57,6 +57,7 @@ in {
       kube-score
       kubecolor
       kubectl
+      kubectx
       kubernetes-helm
       kustomize
       minikube
