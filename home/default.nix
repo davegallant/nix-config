@@ -91,6 +91,14 @@ in {
         add_newline = false;
         scan_timeout = 10;
         character = {error_symbol = "[✖](bold red)";};
+        kubernetes = {
+          disabled = false;
+          context_aliases = {
+            ".*stg_.*" = "stg";
+            ".*test_.*" = "test";
+            ".*prd_.*" = "prd";
+          };
+        };
       };
     };
 
