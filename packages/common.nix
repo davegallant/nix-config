@@ -31,7 +31,6 @@ in {
       /*
        checkov
        */
-      colordiff
       drone-cli
       exa
       fd
