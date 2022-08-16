@@ -28,9 +28,7 @@ in {
 
       # productivity
       bat
-      /*
-       checkov
-       */
+      checkov
       drone-cli
       exa
       fd
@@ -70,9 +68,7 @@ in {
 
       # monitoring
       ctop
-      /*
-       glances
-       */
+      glances
       htop
       procs
 
@@ -127,23 +123,17 @@ in {
       rnix-lsp
 
       # cloud
-      /*
-       awscli2
-       */
+      awscli2
       cloud-sql-proxy
       google-cloud-sdk
       ssm-session-manager-plugin
 
       # python
       python310
-      /*
-       python310Packages.black
-       */
+      python310Packages.black
       python310Packages.ipython
       python310Packages.pip
-      /*
-       python310Packages.poetry
-       */
+      python310Packages.poetry
       python310Packages.setuptools
       python310Packages.virtualenv
 
