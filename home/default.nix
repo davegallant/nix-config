@@ -170,6 +170,8 @@ in {
         gho = "gh repo view --web >/dev/null";
         grep = "rg --smart-case";
         k = "kubecolor";
+        kcx = "kubectx";
+        kns = "kubens";
         l = "exa -la --git --group-directories-first";
         m = "make";
         pia = "sudo openvpn --config ~/pia/$(find ~/pia -execdir basename {} .ovpn ';' -iname \"*.ovpn\" -type f | fzf --exact).ovpn";
