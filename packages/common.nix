@@ -124,6 +124,7 @@ in {
 
       # cloud
       awscli2
+      azure-cli
       cloud-sql-proxy
       google-cloud-sdk
       ssm-session-manager-plugin
