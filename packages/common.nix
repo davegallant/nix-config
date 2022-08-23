@@ -28,7 +28,9 @@ in {
 
       # productivity
       bat
-      checkov
+      /*
+       checkov
+       */
       drone-cli
       exa
       fd
@@ -124,7 +126,9 @@ in {
 
       # cloud
       awscli2
-      azure-cli
+      /*
+       azure-cli
+       */
       cloud-sql-proxy
       google-cloud-sdk
       ssm-session-manager-plugin

@@ -91,6 +91,9 @@ in {
         add_newline = false;
         scan_timeout = 10;
         character = {error_symbol = "[✖](bold red)";};
+        gcloud = {
+          format = "[$symbol($project) ~ $region]($style)";
+        };
         kubernetes = {
           disabled = false;
           context_aliases = {
