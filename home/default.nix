@@ -38,6 +38,8 @@ in {
 
       userName = "Dave Gallant";
 
+      lfs.enable = true;
+
       aliases = {
         aa = "add -A .";
         br = "branch";

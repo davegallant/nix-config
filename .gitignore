@@ -1,3 +1,4 @@
 .pre-commit-config.yaml
-result
+.vscode
 git-crypt-key
+result
