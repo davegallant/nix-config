@@ -12,7 +12,6 @@ in {
       # essentials
       curl
       gcc
-      git
       git-crypt
       gnupg
       imagemagick
