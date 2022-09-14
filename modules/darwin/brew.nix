@@ -14,7 +14,8 @@ in {
 
   homebrew = {
     enable = true;
-    autoUpdate = false;
+    onActivation.autoUpdate = false;
+    onActivation.upgrade = false;
     global = {
       brewfile = true;
     };
