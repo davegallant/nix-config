@@ -172,6 +172,7 @@ in {
         ".." = "cd ..";
         c = "code";
         g = "git";
+        gr = "cd $(git rev-parse --show-toplevel)";
         gho = "gh repo view --web >/dev/null";
         grep = "rg --smart-case";
         k = "kubecolor";
