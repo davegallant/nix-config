@@ -114,6 +114,7 @@ vim.api.nvim_set_keymap("n", "<space>", "za", { silent = true, noremap = true })
 -------------------------------------------------------------------------------
 require("packer").startup(function()
   -- use({ "ms-jpq/coq.artifacts", branch = "artifacts" })
+  use({ "nvim-treesitter/nvim-treesitter" })
 end)
 
 -------------------------------------------------------------------------------
@@ -255,7 +256,7 @@ require('gitsigns').setup()
 
 -- treesitter
 require("nvim-treesitter.configs").setup({
-	ensure_installed = "all",
+  ensure_installed = {},
 
 	highlight = {
 		enable = true,

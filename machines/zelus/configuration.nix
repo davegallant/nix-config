@@ -7,7 +7,7 @@
 
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
-  nix.package = pkgs.nixFlakes;
+  nix.package = pkgs.nixVersions.stable;
 
   programs.zsh = {
     enable = true;
