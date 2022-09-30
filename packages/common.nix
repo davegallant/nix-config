@@ -82,6 +82,9 @@ in {
       gopls
       gofumpt
 
+      # rust
+      rustup
+
       # js
       nodejs
       nodePackages.prettier
