@@ -376,7 +376,9 @@ in {
         nvim-cmp
         nvim-lspconfig
         nvim-tree-lua
-        nvim-treesitter
+        /*
+         nvim-treesitter installed with packer for now
+         */
         nvim-ts-rainbow
         nvim-web-devicons
         packer-nvim
