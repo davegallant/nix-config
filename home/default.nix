@@ -367,6 +367,7 @@ in {
         cmp-nvim-lsp
         cmp-path
         cmp-treesitter
+        diffview-nvim
         friendly-snippets
         gitlinker-nvim
         gitsigns-nvim
