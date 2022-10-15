@@ -115,7 +115,6 @@ in {
       terraformer
       tflint
       tfswitch
-      infracost
 
       # nix
       alejandra
