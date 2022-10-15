@@ -21,8 +21,8 @@ in {
     };
 
     brews = [
+      "bensadeh/circumflex/circumflex"
       "coreutils"
-      "fabianishere/personal/pam_reattach"
       "gnu-sed"
       "gnu-tar"
       "netdata"
