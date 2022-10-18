@@ -4,7 +4,7 @@
     displayManager = {
       gdm = {
         enable = true;
-        wayland = true;
+        wayland = false;
       };
     };
     desktopManager = {
