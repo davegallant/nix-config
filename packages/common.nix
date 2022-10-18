@@ -95,9 +95,7 @@ in {
 
       # networking
       arp-scan
-      /*
-       dnsutils
-       */
+      dnsutils
       iperf
       nmap
       openssl
@@ -127,9 +125,6 @@ in {
 
       # cloud
       awscli2
-      /*
-       azure-cli
-       */
       cloud-sql-proxy
       google-cloud-sdk
       ssm-session-manager-plugin
@@ -139,9 +134,7 @@ in {
       python310Packages.black
       python310Packages.ipython
       python310Packages.pip
-      /*
-       python310Packages.poetry
-       */
+      python310Packages.poetry
       python310Packages.setuptools
       python310Packages.virtualenv
 
