@@ -5,10 +5,6 @@
 }: {
   imports = [./hardware.nix];
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
   hardware.opengl.enable = true;
 
   networking = {
@@ -35,14 +31,6 @@
   services.tailscale = {enable = true;};
 
   services.xserver = {
-    videoDrivers = ["nvidia"];
-    deviceSection = ''
-      Option    "Coolbits" "4"
-    '';
-    exportConfiguration = true;
+    videoDrivers = ["amdgpu"];
   };
-
-  services.udev.extraRules = ''
-    KERNEL=="hidraw*", SUBSYSTEM=="hidraw", MODE="0666"
-  '';
 }

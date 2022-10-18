@@ -19,7 +19,7 @@ in {
       firefox
       ghostscript
       gimp-with-plugins
-      gnome3.gnome-tweaks
+      gnome.gnome-tweaks
       gnomeExtensions.appindicator
       guake
       i3lock-fancy-rapid
@@ -34,7 +34,7 @@ in {
       spotify
       steam
       usbutils
-      virtmanager
+      virt-manager
       vlc
       wireshark-qt
       xautolock

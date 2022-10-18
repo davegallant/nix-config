@@ -28,6 +28,6 @@ stdenv.mkDerivation rec {
     chmod +x $out/bin/set-leds.sh
   '';
 
-  nativeBuildInputs = with pkgs; [cmake pkgconfig];
+  nativeBuildInputs = with pkgs; [cmake pkg-config];
   buildInputs = with pkgs; [xlibsWrapper xorg.libXi libuv systemd luajit libyaml];
 }

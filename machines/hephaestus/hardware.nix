@@ -14,37 +14,43 @@
     xpadneo
   ];
 
-  powerManagement.cpuFreqGovernor = "balanced";
+  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
-  boot.initrd.luks.devices = {
-    luksroot = {
+  boot.loader.grub = {
+    enable = true;
+    device = "nodev";
+    version = 2;
+    efiSupport = true;
+    enableCryptodisk = true;
+  };
+
+  boot.initrd = {
+    luks.devices."root" = {
       allowDiscards = true;
-      device = "/dev/disk/by-uuid/570a2b97-3310-4784-9138-6e09037cea17";
+      device = "/dev/disk/by-uuid/21cd166c-1528-49a4-b31b-0d408d48aa80";
       preLVM = true;
+      keyFile = "./keyfile0.bin";
     };
-
-    luksstorage = {
-      allowDiscards = true;
-      device = "/dev/disk/by-uuid/23b54f60-1eb8-4bf1-b04c-79f8537c228a";
-      preLVM = true;
+    secrets = {
+      "keyfile0.bin" = "/etc/secrets/initrd/keyfile0.bin";
     };
   };
 
+  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.video.hidpi.enable = lib.mkDefault true;
+
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/8cfaf3d2-1cae-48b0-a37b-6c192f0b2680";
+    device = "/dev/disk/by-uuid/a6723178-6f18-428e-b541-9ac901861125";
     fsType = "ext4";
   };
 
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/2368-A8CE";
+  fileSystems."/boot/efi" = {
+    device = "/dev/disk/by-uuid/3CFD-D749";
     fsType = "vfat";
   };
 
-  swapDevices = [{device = "/dev/disk/by-uuid/aca92a73-2941-40ca-88c4-0dd8607d232a";}];
-
-  fileSystems."/mnt/storage" = {
-    device = "/dev/disk/by-uuid/0f592fca-1d4e-43f7-9bf4-f1c3e19e841f";
-    fsType = "ext4";
-  };
-  hardware.video.hidpi.enable = lib.mkDefault true;
+  swapDevices = [
+    {device = "/dev/disk/by-uuid/5d6d0388-2b15-4ff1-9f0f-391818a76090";}
+  ];
 }
