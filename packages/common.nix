@@ -27,9 +27,6 @@ in {
 
       # productivity
       bat
-      /*
-       checkov
-       */
       drone-cli
       exa
       fd
