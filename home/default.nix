@@ -392,20 +392,16 @@ in {
         vim-surround
       ];
     };
+
+    vscode = {
+      enable = true;
+      extensions = with pkgs.vscode-extensions;
+        [] ++ lib.optionals stdenv.isLinux [ms-vsliveshare.vsliveshare];
+    };
   };
 
   home.file.".config/nvim/lua".source = ./nvim/lua;
   home.file.".config/srv".source = ./srv;
 
   home.file."..aws/config".source = ./.aws/config;
-
-  # https://github.com/foucault/nvfancontrol#use-and-configure
-  home.file.".config/nvfancontrol.conf".text = ''
-    25    45
-    45    50
-    50    60
-    60    75
-    70    80
-    80    90
-  '';
 }
