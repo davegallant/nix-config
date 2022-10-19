@@ -9,13 +9,11 @@ in {
   # System-wide packages to install.
   environment.systemPackages = with pkgs; let
     linux = [
-      cpu_x
+      cpu-x
       cryptsetup
       docker
       docker-compose
       glibcLocales
-      iotop
-      linuxPackages.perf
       netdata
       rfd
       pinentry-curses

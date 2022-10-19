@@ -15,7 +15,7 @@ in
         owner = "davegallant";
         repo = "rfd";
         rev = version;
-        hash = "sha256-9dOxrKVEqbg2vLO5opoetVSxgwpm/3SV60mK8Le6F48=";
+        hash = "sha256-lxSd30zh10IIsWkVm5Zm5GR0sieYPaS4QDTqu3ICz8s=";
       };
 
       # No tests included

@@ -83,6 +83,7 @@
         ./common/networking.nix
         ./common/printing.nix
         ./packages/desktop.nix
+        ./packages/linux.nix
         ./services/keyleds/default.nix
         ./services/netdata/default.nix
       ];
