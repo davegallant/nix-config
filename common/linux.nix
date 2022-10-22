@@ -29,6 +29,8 @@
 
   sound.enable = true;
 
+  services.opensnitch.enable = true;
+
   # Enable 32bit for steam
   hardware.pulseaudio.enable = true;
   hardware.opengl.driSupport32Bit = true;

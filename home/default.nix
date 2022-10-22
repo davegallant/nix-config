@@ -24,6 +24,7 @@ in {
       defaultCacheTtlSsh = 3600;
       enableSshSupport = true;
     };
+    opensnitch-ui.enable = stdenv.isLinux;
   };
 
   fonts.fontconfig.enable = true;
@@ -171,6 +172,7 @@ in {
       shellAliases = {
         ".." = "cd ..";
         c = "code";
+        docker = "podman";
         g = "git";
         gr = "cd $(git rev-parse --show-toplevel)";
         gho = "gh repo view --web >/dev/null";
