@@ -15,7 +15,7 @@
 
   users.users.dave = {
     isNormalUser = true;
-    extraGroups = ["docker" "wheel" "libvirtd"];
+    extraGroups = ["docker" "wheel" "libvirtd" "corectrl"];
     shell = pkgs.zsh;
   };
 
@@ -45,4 +45,5 @@
     enable = true;
     enableSSHSupport = true;
   };
+  programs.corectrl.enable = true;
 }
