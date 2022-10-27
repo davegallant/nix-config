@@ -147,8 +147,6 @@ in {
 
         source $HOME/.zsh-work
 
-        eval "$(jira --completion-script-bash)"
-
         if [[ "$OSTYPE" == "darwin"* ]]; then
           export PATH="$(brew --prefix)/opt/gnu-tar/libexec/gnubin:$PATH"
           export PATH="$(brew --prefix)/opt/gnu-sed/libexec/gnubin:$PATH"

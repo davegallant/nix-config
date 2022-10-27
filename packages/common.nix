@@ -32,7 +32,6 @@ in {
       fd
       github-cli
       gnumake
-      go-jira
       gomplate
       hadolint
       nodePackages.eslint
@@ -46,9 +45,7 @@ in {
       tmux-sessionizer
 
       # containers
-      argocd
       k9s
-      krew
       kube-score
       kubecolor
       kubectl
@@ -92,13 +89,15 @@ in {
 
       # networking
       arp-scan
-      dnsutils
+      /*
+       dnsutils
+       */
       iperf
       nmap
       openssl
       openvpn
       sshfs # mac requires https://osxfuse.github.io/
-      #vpngate
+      vpngate
       whois
 
       # backup
