@@ -100,6 +100,10 @@ in {
       vpngate
       whois
 
+      # rice
+      neofetch
+      pfetch
+
       # backup
       rclone
       restic
