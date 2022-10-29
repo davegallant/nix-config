@@ -32,7 +32,6 @@ in {
       signal-desktop
       slack
       spotify
-      steam
       usbutils
       virt-manager
       vlc

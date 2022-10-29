@@ -138,6 +138,9 @@ in {
       python310Packages.setuptools
       python310Packages.virtualenv
 
+      # games
+      steam-tui
+
       # blog
       hugo
 

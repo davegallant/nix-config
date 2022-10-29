@@ -28,9 +28,7 @@
 
   services.sshd.enable = true;
 
-  services.tailscale = {enable = true;};
+  services.tailscale.enable = true;
 
-  services.xserver = {
-    videoDrivers = ["amdgpu"];
-  };
+  services.xserver.videoDrivers = ["amdgpu"];
 }
