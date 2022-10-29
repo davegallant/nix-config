@@ -31,11 +31,20 @@
 
   services.opensnitch.enable = true;
 
-  # Enable 32bit for steam
   hardware.pulseaudio.enable = true;
+
+  # Enable Vulkan
+  hardware.opengl.driSupport = true;
   hardware.opengl.driSupport32Bit = true;
+
+  # Enable Steam
   hardware.opengl.extraPackages32 = with pkgs.pkgsi686Linux; [libva];
   hardware.pulseaudio.support32Bit = true;
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+  };
 
   virtualisation.docker.enable = true;
   virtualisation.podman.enable = true;
