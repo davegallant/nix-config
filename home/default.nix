@@ -209,7 +209,7 @@ in {
         window.padding.y = 10;
         scrolling.history = 100000;
         live_config_reload = true;
-        mouse.hide_when_typing = true;
+        mouse.hide_when_typing = false;
 
         font =
           if stdenv.isLinux
