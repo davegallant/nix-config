@@ -228,29 +228,29 @@ in {
         };
 
         colors = {
-          primary.background = "0x101421";
-          primary.foreground = "0xfffbf6";
+          primary.background = "0x282828";
+          primary.foreground = "0xebdbb2";
 
           normal = {
-            black = "0x2e2e2e";
-            red = "0xeb4129";
-            green = "0xabe047";
-            yellow = "0xf6c744";
-            blue = "0x47a0f3";
-            magenta = "0x7b5cb0";
-            cyan = "0x64dbed";
-            white = "0xe5e9f0";
+            black = "0x282828";
+            red = "0xcc241d";
+            green = "0x98971a";
+            yellow = "0xd79921";
+            blue = "0x458588";
+            magenta = "0xb16286";
+            cyan = "0x689d6a";
+            white = "0xa89984";
           };
 
           bright = {
-            black = "0x565656";
-            red = "0xec5357";
-            green = "0xc0e17d";
-            yellow = "0xf9da6a";
-            blue = "0x49a4f8";
-            magenta = "0xa47de9";
-            cyan = "0x99faf2";
-            white = "0xffffff";
+            black = "0x928374";
+            red = "0xfb4934";
+            green = "0xb8bb26";
+            yellow = "0xfabd2f";
+            blue = "0x83a598";
+            magenta = "0xd3869b";
+            cyan = "0x8ec07c";
+            white = "0xebdbb2";
           };
 
           key_bindings = [
