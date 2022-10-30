@@ -113,8 +113,7 @@ vim.api.nvim_set_keymap("n", "<space>", "za", { silent = true, noremap = true })
 -- packer {{{1 -------------------------------------------------------------------
 -------------------------------------------------------------------------------
 require("packer").startup(function()
-  -- use({ "ms-jpq/coq.artifacts", branch = "artifacts" })
-  use({ "nvim-treesitter/nvim-treesitter" })
+  -- use({ "nvim-treesitter/nvim-treesitter" })
 end)
 
 -------------------------------------------------------------------------------

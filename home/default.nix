@@ -370,7 +370,6 @@ in {
         cmp-path
         cmp-treesitter
         diffview-nvim
-        friendly-snippets
         gitlinker-nvim
         gitsigns-nvim
         gruvbox-nvim
@@ -379,9 +378,7 @@ in {
         nvim-cmp
         nvim-lspconfig
         nvim-tree-lua
-        /*
-         nvim-treesitter installed with packer for now
-         */
+        nvim-treesitter
         nvim-ts-rainbow
         nvim-web-devicons
         packer-nvim
