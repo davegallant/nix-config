@@ -15,11 +15,12 @@ in {
       docker-compose
       glibcLocales
       netdata
-      rfd
       pinentry-curses
+      rfd
       rustup
       strace
       tailscale
+      unityhub
     ];
   in
     linux;
