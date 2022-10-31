@@ -40,6 +40,7 @@ in {
       signal-desktop
       slack
       spotify
+      steam-tui
       usbutils
       virt-manager
       vlc
