@@ -21,11 +21,19 @@ in {
       gimp-with-plugins
       gnome.gnome-tweaks
       gnomeExtensions.appindicator
+      gnomeExtensions.blur-my-shell
+      gnomeExtensions.caffeine
+      gnomeExtensions.clipboard-indicator
+      gnomeExtensions.dash-to-panel
+      gnomeExtensions.openweather
+      /*
+       gnomeExtensions.stocks-extension
+       */
+      gnomeExtensions.tailscale-status
+      gnomeExtensions.vitals
       guake
-      i3lock-fancy-rapid
       kazam
       keyleds
-      nvfancontrol
       pavucontrol
       podman
       qemu
@@ -36,7 +44,6 @@ in {
       virt-manager
       vlc
       wireshark-qt
-      xautolock
       yaru-theme
       zoom-us
     ];
