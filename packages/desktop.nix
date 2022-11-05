@@ -26,9 +26,7 @@ in {
       gnomeExtensions.clipboard-indicator
       gnomeExtensions.dash-to-panel
       gnomeExtensions.openweather
-      /*
-       gnomeExtensions.stocks-extension
-       */
+      gnomeExtensions.stocks-extension
       gnomeExtensions.tailscale-status
       gnomeExtensions.vitals
       guake
@@ -39,7 +37,6 @@ in {
       qemu
       signal-desktop
       slack
-      spotify
       steam-tui
       usbutils
       virt-manager
