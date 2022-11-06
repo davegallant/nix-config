@@ -13,6 +13,4 @@
       };
     };
   };
-
-  services.logrotate.checkConfig = false;
 }

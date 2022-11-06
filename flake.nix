@@ -12,8 +12,8 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     /*
-     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-     */
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    */
 
     nix-ld.url = "github:Mic92/nix-ld";
 
@@ -65,8 +65,8 @@
             nixpkgs.overlays = [
               (import ./modules/overlays)
               /*
-               inputs.neovim-nightly-overlay.overlay
-               */
+              inputs.neovim-nightly-overlay.overlay
+              */
             ];
 
             home-manager = {
@@ -78,11 +78,11 @@
         })
       ];
       desktopLinuxModules = [
-        ./common/desktop.nix
+        ./common/linux-desktop.nix
         ./common/linux.nix
         ./common/networking.nix
         ./common/printing.nix
-        ./packages/desktop.nix
+        ./packages/linux-desktop.nix
         ./packages/linux.nix
         ./services/keyleds/default.nix
         ./services/netdata/default.nix
@@ -126,8 +126,8 @@
             config = {
               nixpkgs.overlays = [
                 /*
-                 inputs.neovim-nightly-overlay.overlay
-                 */
+                inputs.neovim-nightly-overlay.overlay
+                */
                 (import ./modules/overlays)
               ];
               home-manager = {
