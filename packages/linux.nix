@@ -14,6 +14,7 @@ in {
       docker
       docker-compose
       glibcLocales
+      lm_sensors
       netdata
       pinentry-curses
       rfd

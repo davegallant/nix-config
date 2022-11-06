@@ -32,12 +32,14 @@ in {
       guake
       kazam
       keyleds
+      obs-studio
       pavucontrol
       podman
       qemu
       signal-desktop
       slack
       steam-tui
+      superTuxKart
       usbutils
       virt-manager
       vlc
