@@ -370,6 +370,7 @@ in {
         cmp-path
         cmp-treesitter
         diffview-nvim
+        git-blame-nvim
         gitlinker-nvim
         gitsigns-nvim
         gruvbox-nvim

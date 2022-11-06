@@ -294,7 +294,7 @@ vim.g.vim_markdown_new_list_item_indent = 0
 vim.g["prettier#autoformat"] = 1
 
 -- git-blame
-vim.g.gitblame_enabled = 0
+vim.g.gitblame_enabled = 1
 
 vim.api.nvim_set_keymap("n", "<leader>ff", "<cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files,-g,!.git prompt_prefix=🔍<cr>", { silent = true, noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { silent = true, noremap = true })
