@@ -32,6 +32,7 @@ in {
       guake
       kazam
       keyleds
+      mailspring
       obs-studio
       pavucontrol
       podman
