@@ -28,6 +28,7 @@ in {
       "netdata"
       "node"
       "universal-ctags"
+      "podman"
     ];
 
     casks = [
