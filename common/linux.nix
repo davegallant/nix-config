@@ -29,8 +29,6 @@
 
   sound.enable = true;
 
-  services.opensnitch.enable = true;
-
   hardware.pulseaudio.enable = true;
 
   # Enable Vulkan
