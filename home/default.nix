@@ -371,7 +371,6 @@ in {
         cmp-treesitter
         diffview-nvim
         git-blame-nvim
-        gitlinker-nvim
         gitsigns-nvim
         gruvbox-nvim
         lualine-nvim
