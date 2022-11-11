@@ -45,6 +45,7 @@ in {
       usbutils
       virt-manager
       vlc
+      wine64
       wireshark-qt
       yaru-theme
       zoom-us
