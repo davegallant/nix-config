@@ -24,7 +24,6 @@ in {
       defaultCacheTtlSsh = 3600;
       enableSshSupport = true;
     };
-    opensnitch-ui.enable = stdenv.isLinux;
   };
 
   fonts.fontconfig.enable = true;
