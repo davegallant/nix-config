@@ -32,6 +32,7 @@ in {
       guake
       kazam
       keyleds
+      legendary-gl
       mailspring
       obs-studio
       pavucontrol
