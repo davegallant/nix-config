@@ -14,12 +14,14 @@ in {
       bitwarden
       brave
       calibre
+      davinci-resolve
       deluge
       discord
       firefox
       ghostscript
       gimp-with-plugins
       gnome.gnome-tweaks
+      gnome.gnome-sound-recorder
       gnomeExtensions.appindicator
       gnomeExtensions.blur-my-shell
       gnomeExtensions.caffeine
