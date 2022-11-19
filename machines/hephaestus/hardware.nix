@@ -45,6 +45,11 @@
     fsType = "ext4";
   };
 
+  fileSystems."/home" = {
+    device = "/dev/disk/by-uuid/e3ab2e1a-bddf-4ae0-b00a-bf954c6c182b";
+    fsType = "ext4";
+  };
+
   fileSystems."/boot/efi" = {
     device = "/dev/disk/by-uuid/3CFD-D749";
     fsType = "vfat";
