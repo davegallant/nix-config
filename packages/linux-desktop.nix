@@ -27,6 +27,7 @@ in {
       gnomeExtensions.caffeine
       gnomeExtensions.clipboard-indicator
       gnomeExtensions.dash-to-panel
+      gnomeExtensions.notification-banner-reloaded
       gnomeExtensions.openweather
       gnomeExtensions.stocks-extension
       gnomeExtensions.tailscale-status
