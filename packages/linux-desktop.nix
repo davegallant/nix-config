@@ -37,6 +37,7 @@ in {
       keyleds
       legendary-gl
       mailspring
+      prismlauncher
       obs-studio
       pavucontrol
       podman
