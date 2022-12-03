@@ -18,6 +18,7 @@
     };
     firewall = {
       allowedTCPPorts = [
+        25565 # minecraft
         19999 # netdata
       ];
       allowedUDPPorts = [
@@ -31,4 +32,20 @@
   services.tailscale.enable = true;
 
   services.xserver.videoDrivers = ["amdgpu"];
+
+  services.minecraft-server = {
+    enable = false;
+    eula = true;
+    declarative = true;
+
+    serverProperties = {
+      server-port = 25565;
+      gamemode = "survival";
+      motd = "NixOS Minecraft server.";
+      max-players = 5;
+      enable-rcon = true;
+      "rcon.password" = "changeme";
+      level-seed = "10292992";
+    };
+  };
 }
