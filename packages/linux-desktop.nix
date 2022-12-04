@@ -52,6 +52,7 @@ in {
       wine64
       wireshark-qt
       yaru-theme
+      yuzu
       zoom-us
     ];
   in
