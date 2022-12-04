@@ -17,7 +17,9 @@ in {
       lm_sensors
       netdata
       pinentry-curses
+      /*
       rfd
+      */
       rustup
       strace
       tailscale
