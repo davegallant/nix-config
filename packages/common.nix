@@ -90,8 +90,8 @@ in {
       # networking
       arp-scan
       /*
-       dnsutils
-       */
+      dnsutils
+      */
       iperf
       nmap
       openssl
@@ -135,8 +135,8 @@ in {
       python310Packages.ipython
       python310Packages.pip
       /*
-       python310Packages.poetry
-       */
+      python310Packages.poetry
+      */
       python310Packages.setuptools
       python310Packages.virtualenv
 
