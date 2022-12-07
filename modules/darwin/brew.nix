@@ -27,8 +27,9 @@ in {
       "gnu-tar"
       "netdata"
       "node"
-      "universal-ctags"
       "podman"
+      "stats"
+      "universal-ctags"
     ];
 
     casks = [
