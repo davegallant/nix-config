@@ -89,9 +89,7 @@ in {
 
       # networking
       arp-scan
-      /*
       dnsutils
-      */
       iperf
       nmap
       openssl
