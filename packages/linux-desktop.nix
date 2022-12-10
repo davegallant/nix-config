@@ -29,7 +29,6 @@ in {
       gnomeExtensions.dash-to-panel
       gnomeExtensions.notification-banner-reloaded
       gnomeExtensions.openweather
-      gnomeExtensions.stocks-extension
       gnomeExtensions.tailscale-status
       gnomeExtensions.vitals
       guake
@@ -44,6 +43,7 @@ in {
       qemu
       signal-desktop
       slack
+      spotify
       steam-tui
       superTuxKart
       usbutils
