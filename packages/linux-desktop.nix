@@ -43,7 +43,6 @@ in {
       qemu
       signal-desktop
       slack
-      spotify
       steam-tui
       superTuxKart
       usbutils
