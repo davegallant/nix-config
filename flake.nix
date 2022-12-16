@@ -84,7 +84,6 @@
         ./common/printing.nix
         ./packages/linux-desktop.nix
         ./packages/linux.nix
-        ./services/keyleds/default.nix
         ./services/netdata/default.nix
       ];
     in {
