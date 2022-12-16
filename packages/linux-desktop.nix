@@ -27,6 +27,7 @@ in {
       gnomeExtensions.caffeine
       gnomeExtensions.clipboard-indicator
       gnomeExtensions.dash-to-panel
+      gnomeExtensions.night-theme-switcher
       gnomeExtensions.notification-banner-reloaded
       gnomeExtensions.openweather
       gnomeExtensions.tailscale-status
