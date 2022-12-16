@@ -33,7 +33,6 @@ in {
       gnomeExtensions.vitals
       guake
       kazam
-      keyleds
       legendary-gl
       mailspring
       prismlauncher
