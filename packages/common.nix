@@ -116,6 +116,7 @@ in {
       alejandra
       cachix
       nix-diff
+      nix-tree
       nixfmt
       nixpkgs-fmt
       nixpkgs-review
