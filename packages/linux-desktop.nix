@@ -14,7 +14,6 @@ in {
       bitwarden
       brave
       calibre
-      davinci-resolve
       deluge
       discord
       firefox
