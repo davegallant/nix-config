@@ -15,7 +15,7 @@
   };
   inherit (pkgs) stdenv;
 in {
-  home.stateVersion = "22.11";
+  home.stateVersion = "23.05";
 
   services = {
     gpg-agent = {
@@ -23,6 +23,10 @@ in {
       defaultCacheTtl = 3600;
       defaultCacheTtlSsh = 3600;
       enableSshSupport = true;
+    };
+
+    spotifyd = {
+      enable = true;
     };
   };
 
@@ -171,7 +175,6 @@ in {
       shellAliases = {
         ".." = "cd ..";
         c = "code";
-        docker = "podman";
         g = "git";
         gr = "cd $(git rev-parse --show-toplevel)";
         gho = "gh repo view --web >/dev/null";
