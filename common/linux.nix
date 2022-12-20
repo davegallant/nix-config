@@ -2,8 +2,12 @@
   boot.kernelPackages = pkgs.linuxPackages;
   boot.supportedFilesystems = ["ntfs"];
 
-  system.stateVersion = "unstable";
+  system.stateVersion = "23.05";
+
   system.autoUpgrade.enable = true;
+
+  # See: https://github.com/NixOS/nixpkgs/issues/180175
+  systemd.services.NetworkManager-wait-online.enable = false;
 
   nix.extraOptions = "experimental-features = nix-command flakes";
   nix.package = pkgs.nixUnstable;
@@ -45,8 +49,16 @@
   };
 
   virtualisation.docker.enable = true;
-  virtualisation.podman.enable = true;
   virtualisation.libvirtd.enable = true;
+
+  virtualisation = {
+    podman = {
+      enable = true;
+
+      # Required for containers under podman-compose to be able to talk to each other.
+      defaultNetwork.dnsname.enable = true;
+    };
+  };
 
   programs.gnupg.agent = {
     enable = true;
