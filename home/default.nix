@@ -380,9 +380,7 @@ in {
         nvim-cmp
         nvim-lspconfig
         nvim-tree-lua
-        /*
-        nvim-treesitter
-        */
+        nvim-treesitter.withAllGrammars
         nvim-ts-rainbow
         nvim-web-devicons
         packer-nvim
@@ -406,5 +404,5 @@ in {
   home.file.".config/nvim/lua".source = ./nvim/lua;
   home.file.".config/srv".source = ./srv;
 
-  home.file."..aws/config".source = ./.aws/config;
+  home.file.".aws/config".source = ./.aws/config;
 }
