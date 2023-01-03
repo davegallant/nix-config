@@ -19,8 +19,8 @@ in {
       firefox
       ghostscript
       gimp-with-plugins
-      gnome.gnome-tweaks
       gnome.gnome-sound-recorder
+      gnome.gnome-tweaks
       gnomeExtensions.appindicator
       gnomeExtensions.blur-my-shell
       gnomeExtensions.caffeine
@@ -31,6 +31,7 @@ in {
       gnomeExtensions.openweather
       gnomeExtensions.tailscale-status
       gnomeExtensions.vitals
+      google-cloud-sdk
       guake
       kazam
       legendary-gl

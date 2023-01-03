@@ -126,7 +126,6 @@ in {
       # cloud
       awscli2
       cloud-sql-proxy
-      google-cloud-sdk
       ssm-session-manager-plugin
 
       # python
