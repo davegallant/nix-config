@@ -54,6 +54,7 @@ in {
       kustomize
       minikube
       stern
+      skaffold
 
       # language servers
       nodePackages.bash-language-server
