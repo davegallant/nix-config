@@ -41,7 +41,6 @@ in {
       podman
       qemu
       signal-desktop
-      slack
       steam-tui
       superTuxKart
       usbutils
