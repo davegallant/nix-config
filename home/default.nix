@@ -24,10 +24,6 @@ in {
       defaultCacheTtlSsh = 3600;
       enableSshSupport = true;
     };
-
-    spotifyd = {
-      enable = true;
-    };
   };
 
   fonts.fontconfig.enable = true;
