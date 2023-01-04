@@ -10,6 +10,7 @@ in {
   environment.systemPackages = with pkgs; let
     common = [
       # essentials
+      colordiff
       curl
       gcc
       git-crypt
