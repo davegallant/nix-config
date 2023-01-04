@@ -37,6 +37,7 @@ in {
       "dbeaver-community"
       "font-fira-code-nerd-font"
       "font-hack-nerd-font"
+      "karabiner-elements"
       "lulu"
       "maccy"
       "postman"
