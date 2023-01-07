@@ -397,6 +397,8 @@ in {
     };
   };
 
+  home.file.".Xmodmap".source = ./.Xmodmap;
+
   home.file.".config/nvim/lua".source = ./nvim/lua;
   home.file.".config/srv".source = ./srv;
 

@@ -32,7 +32,6 @@ in {
       gnomeExtensions.tailscale-status
       gnomeExtensions.vitals
       google-cloud-sdk
-      guake
       kazam
       legendary-gl
       mailspring
@@ -49,6 +48,7 @@ in {
       vlc
       wine64
       wireshark-qt
+      xorg.xmodmap
       yaru-theme
       yuzu
       zoom-us
