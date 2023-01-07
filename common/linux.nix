@@ -51,14 +51,7 @@
   virtualisation.docker.enable = true;
   virtualisation.libvirtd.enable = true;
 
-  virtualisation = {
-    podman = {
-      enable = true;
-
-      # Required for containers under podman-compose to be able to talk to each other.
-      defaultNetwork.dnsname.enable = true;
-    };
-  };
+  virtualisation.podman.enable = true;
 
   programs.gnupg.agent = {
     enable = true;
