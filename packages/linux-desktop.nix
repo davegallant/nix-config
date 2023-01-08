@@ -40,6 +40,7 @@ in {
       pavucontrol
       podman
       qemu
+      ryujinx
       signal-desktop
       steam-tui
       superTuxKart
