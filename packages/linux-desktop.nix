@@ -29,6 +29,7 @@ in {
       gnomeExtensions.dash-to-panel
       gnomeExtensions.night-theme-switcher
       gnomeExtensions.notification-banner-reloaded
+      gnomeExtensions.tray-icons-reloaded
       gnomeExtensions.openweather
       gnomeExtensions.tailscale-status
       gnomeExtensions.vitals
