@@ -21,6 +21,7 @@ in {
       gimp-with-plugins
       gnome.gnome-sound-recorder
       gnome.gnome-tweaks
+      gnome.seahorse
       gnomeExtensions.appindicator
       gnomeExtensions.blur-my-shell
       gnomeExtensions.caffeine
