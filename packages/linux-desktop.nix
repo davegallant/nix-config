@@ -35,6 +35,7 @@ in {
       gnomeExtensions.tailscale-status
       gnomeExtensions.tray-icons-reloaded
       gnomeExtensions.vitals
+      gnomeExtensions.just-perfection
       google-cloud-sdk
       kazam
       legendary-gl
