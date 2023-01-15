@@ -23,6 +23,7 @@ in {
       gnome.gnome-tweaks
       gnome.seahorse
       gnomeExtensions.appindicator
+      gnomeExtensions.bluetooth-quick-connect
       gnomeExtensions.blur-my-shell
       gnomeExtensions.caffeine
       gnomeExtensions.clipboard-indicator
