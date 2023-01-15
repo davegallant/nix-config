@@ -26,12 +26,13 @@ in {
       gnomeExtensions.blur-my-shell
       gnomeExtensions.caffeine
       gnomeExtensions.clipboard-indicator
-      gnomeExtensions.dash-to-panel
+      gnomeExtensions.grand-theft-focus
       gnomeExtensions.night-theme-switcher
       gnomeExtensions.notification-banner-reloaded
-      gnomeExtensions.tray-icons-reloaded
       gnomeExtensions.openweather
+      gnomeExtensions.quick-settings-tweaker
       gnomeExtensions.tailscale-status
+      gnomeExtensions.tray-icons-reloaded
       gnomeExtensions.vitals
       google-cloud-sdk
       kazam
