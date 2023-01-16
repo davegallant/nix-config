@@ -40,6 +40,7 @@ in {
       "karabiner-elements"
       "lulu"
       "maccy"
+      "notunes"
       "postman"
       "rectangle"
       "visual-studio-code"
