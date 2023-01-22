@@ -141,9 +141,6 @@ in {
       # blog
       hugo
 
-      # news
-      srv
-
       # music
       spotify-tui
     ];
