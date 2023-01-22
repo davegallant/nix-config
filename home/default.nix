@@ -430,7 +430,6 @@ in {
   home.file.".config/autostart/xmodmap.desktop".source = ./xmodmap.desktop;
 
   home.file.".config/nvim/lua".source = ./nvim/lua;
-  home.file.".config/srv".source = ./srv;
 
   home.file.".aws/config".source = ./.aws/config;
 }
