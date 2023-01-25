@@ -18,7 +18,8 @@ in {
       discord
       firefox
       ghostscript
-      gimp-with-plugins
+      # gimp-with-plugins
+
       gnome.gnome-sound-recorder
       gnome.gnome-tweaks
       gnome.seahorse
