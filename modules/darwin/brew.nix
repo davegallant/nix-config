@@ -28,7 +28,6 @@ in {
       "netdata"
       "node"
       "podman"
-      "stats"
       "universal-ctags"
     ];
 
@@ -44,6 +43,7 @@ in {
       "notunes"
       "postman"
       "rectangle"
+      "stats"
       "visual-studio-code"
     ];
 
