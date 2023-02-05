@@ -33,7 +33,6 @@ in {
       fd
       github-cli
       gnumake
-      gomplate
       hadolint
       nodePackages.eslint
       oha
@@ -97,7 +96,7 @@ in {
       openssl
       openvpn
       sshfs # mac requires https://osxfuse.github.io/
-      vpngate
+      # vpngate # tests broken
       whois
 
       # rice
@@ -112,7 +111,6 @@ in {
       terraform-ls
       terraformer
       tflint
-      tfswitch
 
       # nix
       alejandra
@@ -127,22 +125,18 @@ in {
       # cloud
       awscli2
       cloud-sql-proxy
-      ssm-session-manager-plugin
 
       # python
       python310
       python310Packages.black
       python310Packages.ipython
       python310Packages.pip
-      # python310Packages.poetry
+      python310Packages.poetry-core
       python310Packages.setuptools
       python310Packages.virtualenv
 
       # blog
       hugo
-
-      # music
-      spotify-tui
     ];
   in
     common;
