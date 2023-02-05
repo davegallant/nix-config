@@ -50,6 +50,7 @@ in {
       usbutils
       virt-manager
       vlc
+      wine
       wine64
       wireshark-qt
       xorg.xmodmap

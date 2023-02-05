@@ -162,7 +162,7 @@ in {
         export GOBIN=$GOPATH/bin
         export PATH=$PATH:$GOBIN
 
-        export PATH=$HOME/.krew/bin:$PATH
+        export WINEPREFIX=~/.wine32
 
         # homebrew for x86
         export PATH=$PATH:/usr/local/homebrew/bin
