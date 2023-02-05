@@ -13,9 +13,9 @@ in {
       authy
       bitwarden
       brave
-      calibre
       discord
       firefox
+      foliate
       ghostscript
       # gimp-with-plugins
       gnome.gnome-sound-recorder
