@@ -96,7 +96,7 @@ in {
       openssl
       openvpn
       sshfs # mac requires https://osxfuse.github.io/
-      # vpngate # tests broken
+      vpngate
       whois
 
       # rice
