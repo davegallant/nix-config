@@ -21,7 +21,6 @@ in {
       rustup
       strace
       tailscale
-      unityhub
     ];
   in
     linux;

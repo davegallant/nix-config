@@ -14,12 +14,10 @@ in {
       bitwarden
       brave
       calibre
-      deluge
       discord
       firefox
       ghostscript
       # gimp-with-plugins
-
       gnome.gnome-sound-recorder
       gnome.gnome-tweaks
       gnome.seahorse
@@ -49,7 +47,6 @@ in {
       ryujinx
       signal-desktop
       steam-tui
-      superTuxKart
       usbutils
       virt-manager
       vlc
