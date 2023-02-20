@@ -422,7 +422,20 @@ in {
     vscode = {
       enable = true;
       extensions = with pkgs.vscode-extensions;
-        [] ++ lib.optionals stdenv.isLinux [ms-vsliveshare.vsliveshare];
+        [
+          bbenoist.nix
+          github.vscode-pull-request-github
+          golang.go
+          golang.redhat.vscode-yaml
+          hashicorp.terraform
+          ms-dotnettools.csharp
+          ms-kubernetes-tools.vscode-kubernetes-tools
+          ms-pyright.pyright
+          ms-python.python
+        ]
+        ++ lib.optionals stdenv.isLinux [
+          ms-vsliveshare.vsliveshare
+        ];
     };
   };
 
