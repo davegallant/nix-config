@@ -429,11 +429,11 @@ in {
           hashicorp.terraform
           ms-dotnettools.csharp
           ms-kubernetes-tools.vscode-kubernetes-tools
-          ms-python.python
           redhat.vscode-yaml
         ]
         ++ lib.optionals stdenv.isLinux [
           ms-vsliveshare.vsliveshare
+          ms-python.python
         ];
     };
   };
