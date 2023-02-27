@@ -27,7 +27,6 @@ in {
       gnomeExtensions.caffeine
       gnomeExtensions.clipboard-indicator
       gnomeExtensions.grand-theft-focus
-      gnomeExtensions.night-theme-switcher
       gnomeExtensions.notification-banner-reloaded
       gnomeExtensions.openweather
       gnomeExtensions.quick-settings-tweaker
