@@ -123,7 +123,7 @@ in {
       rnix-lsp
 
       # cloud
-      awscli2
+      # awscli2 # broken
       azure-cli
       cloud-sql-proxy
 

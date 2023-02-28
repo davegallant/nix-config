@@ -22,6 +22,7 @@ in {
 
     brews = [
       "bensadeh/circumflex/circumflex"
+      "bicep"
       "coreutils"
       "gnu-sed"
       "gnu-tar"
@@ -48,6 +49,7 @@ in {
     ];
 
     taps = [
+      "azure/bicep"
       "homebrew/bundle"
       "homebrew/cask"
       "homebrew/cask-fonts"
