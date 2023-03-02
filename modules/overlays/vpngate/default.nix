@@ -5,15 +5,15 @@
 }:
 buildGoModule rec {
   pname = "vpngate";
-  version = "v0.1.3";
+  version = "v0.1.4";
 
-  vendorSha256 = "sha256-UTASkJXaqAqqZP77hSqdPfbY21PhLvR0A779YJ7tku8=";
+  vendorSha256 = "sha256-nZ5Ega+P3xPE4p8ehyVC4KBYWF1qUK+y7Slw2cYdq5U=";
 
   src = fetchFromGitHub {
     owner = "davegallant";
     repo = "vpngate";
     rev = version;
-    sha256 = "sha256-74ZqxGKuXaTwv/UtRLRqjwxk9vo0V+nvNs/3L6MjlzQ=";
+    sha256 = "sha256-cLoM/DFLSK22KJvCogSHwLVqLXMMF/tT0BF9a1E0cUY=";
   };
 
   meta = with lib; {
