@@ -17,7 +17,7 @@ in {
       firefox
       foliate
       ghostscript
-      # gimp-with-plugins
+      gimp-with-plugins
       gnome.gnome-sound-recorder
       gnome.gnome-tweaks
       gnome.seahorse

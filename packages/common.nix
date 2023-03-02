@@ -9,35 +9,35 @@ in {
   # System-wide packages to install.
   environment.systemPackages = with pkgs; let
     common = [
-      # essentials
+      # classics
       colordiff
       curl
       gcc
       git-crypt
+      gnumake
       gnupg
       imagemagick
       jq
-      ripgrep
       unzip
       viddy
-      xclip
       wget
+      xclip
       xdg-utils
-      yq-go
       zip
 
-      # productivity
+      # modern cli
       bat
       drone-cli
       exa
       fd
       github-cli
-      gnumake
       hadolint
       nodePackages.eslint
       oha
       postman
       pre-commit
+      ripgrep
+      yq-go
       shellcheck
       shfmt
       starship
@@ -123,7 +123,6 @@ in {
       rnix-lsp
 
       # cloud
-      # awscli2 # broken
       azure-cli
       cloud-sql-proxy
 
