@@ -26,7 +26,7 @@ in {
       gnomeExtensions.blur-my-shell
       gnomeExtensions.caffeine
       gnomeExtensions.clipboard-indicator
-      gnomeExtensions.grand-theft-focus
+      # gnomeExtensions.grand-theft-focus
       gnomeExtensions.notification-banner-reloaded
       gnomeExtensions.openweather
       gnomeExtensions.quick-settings-tweaker
