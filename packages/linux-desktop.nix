@@ -26,14 +26,13 @@ in {
       gnomeExtensions.blur-my-shell
       gnomeExtensions.caffeine
       gnomeExtensions.clipboard-indicator
-      # gnomeExtensions.grand-theft-focus
+      gnomeExtensions.grand-theft-focus
       gnomeExtensions.notification-banner-reloaded
       gnomeExtensions.openweather
       gnomeExtensions.quick-settings-tweaker
       gnomeExtensions.tailscale-status
       gnomeExtensions.tray-icons-reloaded
       gnomeExtensions.vitals
-      gnomeExtensions.just-perfection
       google-cloud-sdk
       kazam
       legendary-gl
