@@ -27,7 +27,6 @@ in {
 
       # modern cli
       bat
-      drone-cli
       exa
       fd
       github-cli
