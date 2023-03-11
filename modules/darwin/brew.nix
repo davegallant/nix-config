@@ -34,7 +34,6 @@ in {
 
     casks = [
       "alfred"
-      "authy"
       "dbeaver-community"
       "font-fira-code-nerd-font"
       "font-hack-nerd-font"
