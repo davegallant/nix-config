@@ -10,7 +10,6 @@ in {
   environment.systemPackages = with pkgs; let
     linuxDesktop = [
       albert
-      authy
       bitwarden
       brave
       discord
