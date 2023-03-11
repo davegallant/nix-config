@@ -30,6 +30,7 @@ in {
       exa
       fd
       github-cli
+      glab
       hadolint
       nodePackages.eslint
       oha
