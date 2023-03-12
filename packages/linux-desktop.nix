@@ -11,6 +11,7 @@ in {
     linuxDesktop = [
       albert
       bitwarden
+      bitwarden-cli
       brave
       discord
       firefox
