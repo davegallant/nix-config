@@ -113,7 +113,8 @@ vim.api.nvim_set_keymap("n", "<space>", "za", { silent = true, noremap = true })
 -- packer {{{1 -------------------------------------------------------------------
 -------------------------------------------------------------------------------
 require("packer").startup(function()
-  -- use({ "nvim-treesitter/nvim-treesitter" })
+  use({ "MunifTanjim/nui.nvim" })
+  use({ "dpayne/CodeGPT.nvim" })
 end)
 
 -------------------------------------------------------------------------------
