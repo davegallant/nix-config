@@ -12,7 +12,7 @@ in {
       albert
       bitwarden
       bitwarden-cli
-      brave
+      chromium
       discord
       firefox
       foliate
