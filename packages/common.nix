@@ -18,7 +18,6 @@ in {
       gnupg
       imagemagick
       jq
-      traceroute
       unzip
       viddy
       wget

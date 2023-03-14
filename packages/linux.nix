@@ -21,6 +21,7 @@ in {
       rustup
       strace
       tailscale
+      traceroute
     ];
   in
     linux;
