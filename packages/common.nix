@@ -85,9 +85,6 @@ in {
       nodePackages.prettier
       nodePackages.yarn
 
-      # video
-      youtube-dl
-
       # networking
       arp-scan
       dnsutils
@@ -136,6 +133,9 @@ in {
       python311Packages.poetry-core
       python311Packages.setuptools
       python311Packages.virtualenv
+
+      # media
+      youtube-dl
 
       # blog
       hugo
