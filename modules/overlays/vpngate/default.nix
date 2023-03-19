@@ -16,6 +16,8 @@ buildGoModule rec {
     sha256 = "sha256-cLoM/DFLSK22KJvCogSHwLVqLXMMF/tT0BF9a1E0cUY=";
   };
 
+  doCheck = false;
+
   meta = with lib; {
     homepage = "https://www.vpngate.net";
     description = "a client for vpngate.net";

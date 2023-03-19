@@ -14,8 +14,8 @@ in {
       bitwarden-cli
       chromium
       discord
-      firefox
       foliate
+      fx_cast_bridge
       ghostscript
       gimp-with-plugins
       gnome.gnome-sound-recorder
