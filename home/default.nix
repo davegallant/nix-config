@@ -201,7 +201,8 @@ in {
         ".." = "cd ..";
         c = "code";
         g = "git";
-        gco = "git checkout $(git branch | fzf| tr -d '[:space:]')";
+        gc = "git checkout $(git branch | fzf)";
+        gco = "git checkout $(git branch -r | sed -e 's/^  origin\\///' | fzf)";
         gr = "cd $(git rev-parse --show-toplevel)";
         gho = "gh repo view --web >/dev/null";
         grep = "rg --smart-case";
