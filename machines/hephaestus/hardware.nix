@@ -45,7 +45,6 @@
   };
 
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-  hardware.video.hidpi.enable = lib.mkDefault true;
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/a6723178-6f18-428e-b541-9ac901861125";
