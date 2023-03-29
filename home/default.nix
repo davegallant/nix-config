@@ -438,6 +438,20 @@ in {
           # ms-python.python
         ];
     };
+
+    firefox = {
+      enable = stdenv.isLinux;
+
+      profiles = {
+        default = {
+          id = 0;
+          isDefault = true;
+          settings = {
+            "privacy.resistFingerprinting" = true;
+          };
+        };
+      };
+    };
   };
 
   home.file.".Xmodmap".source = ./.Xmodmap;
