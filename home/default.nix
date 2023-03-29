@@ -410,7 +410,6 @@ in {
         nvim-treesitter.withAllGrammars
         nvim-ts-rainbow
         nvim-web-devicons
-        packer-nvim
         plenary-nvim
         telescope-fzy-native-nvim
         vim-commentary
