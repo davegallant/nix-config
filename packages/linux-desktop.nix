@@ -51,7 +51,6 @@ in {
       wine
       wine64
       wireshark-qt
-      xorg.xmodmap
       yaru-theme
       yuzu
       zoom-us

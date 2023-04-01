@@ -453,9 +453,6 @@ in {
     };
   };
 
-  home.file.".Xmodmap".source = ./.Xmodmap;
-  home.file.".config/autostart/xmodmap.desktop".source = ./xmodmap.desktop;
-
   home.file.".config/nvim/lua".source = ./nvim/lua;
 
   home.file.".aws/config".source = ./.aws/config;
