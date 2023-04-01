@@ -1,7 +1,0 @@
-[Desktop Entry]
-Name[en_US]=Xmodmap
-Comment[en_US]=xmodmap ~/.Xmodmap
-Exec=sh -c "xmodmap $HOME/.Xmodmap"
-Icon=application-default-icon
-X-GNOME-Autostart-enabled=true
-Type=Application
