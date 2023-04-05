@@ -36,7 +36,6 @@ in {
       google-cloud-sdk
       kazam
       legendary-gl
-      libreoffice
       mailspring
       prismlauncher
       obs-studio
