@@ -16,11 +16,6 @@
 
   services.gnome.gnome-keyring.enable = true;
 
-  programs.firefox = {
-    enable = true;
-    nativeMessagingHosts.fxCast = true;
-  };
-
   services.avahi = {
     enable = true;
     nssmdns = true;
