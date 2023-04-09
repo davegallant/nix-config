@@ -440,6 +440,7 @@ in {
 
     firefox = {
       enable = stdenv.isLinux;
+      package = pkgs.firefox-devedition;
 
       profiles = {
         default = {
