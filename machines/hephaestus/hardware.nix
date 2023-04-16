@@ -66,6 +66,11 @@
     fsType = "nfs";
   };
 
+  fileSystems."/mnt/synology-2b/backups" = {
+    device = "192.168.1.250:/volume1/Backups";
+    fsType = "nfs";
+  };
+
   swapDevices = [
     {device = "/dev/disk/by-uuid/5d6d0388-2b15-4ff1-9f0f-391818a76090";}
   ];
