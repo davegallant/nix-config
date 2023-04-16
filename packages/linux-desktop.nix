@@ -13,6 +13,7 @@ in {
       bitwarden
       bitwarden-cli
       chromium
+      deja-dup
       discord
       foliate
       fx_cast_bridge
