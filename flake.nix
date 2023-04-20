@@ -7,13 +7,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-
-    /*
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-    */
 
     nix-ld.url = "github:Mic92/nix-ld";
 

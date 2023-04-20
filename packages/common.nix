@@ -125,14 +125,13 @@ in {
 
       # python
       poetry
-      pipx
-      python311Full
-      python311Packages.black
-      python311Packages.ipython
-      python311Packages.pip
-      python311Packages.poetry-core
-      python311Packages.setuptools
-      python311Packages.virtualenv
+      python310
+      python310Packages.black
+      python310Packages.ipython
+      python310Packages.pip
+      python310Packages.poetry-core
+      python310Packages.setuptools
+      python310Packages.virtualenv
 
       # media
       youtube-dl
