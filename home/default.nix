@@ -441,7 +441,7 @@ in {
     firefox = {
       enable = stdenv.isLinux;
 
-      package = pkgs.firefox-devedition;
+      package = pkgs.firefox-devedition-bin;
 
       profiles = {
         default = {
@@ -450,6 +450,8 @@ in {
           settings = {
             "privacy.resistFingerprinting" = true;
           };
+          name = "dev-edition-default";
+          path = "6b7pm104.dev-edition-default";
         };
       };
     };
