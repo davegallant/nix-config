@@ -1,8 +1,8 @@
 {pkgs, ...}: {
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages;
   boot.supportedFilesystems = ["ntfs"];
 
-  system.stateVersion = "23.05";
+  system.stateVersion = "22.11";
 
   system.autoUpgrade.enable = true;
 
