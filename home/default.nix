@@ -303,6 +303,11 @@ in {
       };
     };
 
+    autojump = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
     go = {
       enable = true;
     };
