@@ -21,15 +21,13 @@ in {
     };
 
     brews = [
-      "bensadeh/circumflex/circumflex"
-      "bicep"
+      "azure-cli"
       "coreutils"
       "gnu-sed"
       "gnu-tar"
       "netdata"
       "node"
       "podman"
-      "universal-ctags"
     ];
 
     casks = [

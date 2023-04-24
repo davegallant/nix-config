@@ -120,7 +120,6 @@ in {
       rnix-lsp
 
       # cloud
-      azure-cli
       cloud-sql-proxy
 
       # python
