@@ -15,7 +15,7 @@
   };
   inherit (pkgs) stdenv;
 in {
-  home.stateVersion = "23.05";
+  home.stateVersion = "22.11";
 
   services = {
     gpg-agent = {
