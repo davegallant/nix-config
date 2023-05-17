@@ -156,7 +156,8 @@ in {
         export PATH=$PATH:~/.cargo/bin
         export PATH=$PATH:~/.local/bin
         export PATH=$PATH:~/.npm-packages/bin
-        export PATH=$PATH:/opt/homebrew/bin/
+        export PATH=$PATH:/opt/homebrew/bin
+        export PATH=$PATH:~/.krew/bin
         export PATH=$PATH:~/bin
         export GOPATH=~/go
         export GOBIN=$GOPATH/bin

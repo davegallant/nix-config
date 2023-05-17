@@ -46,6 +46,7 @@ in {
 
       # containers
       k9s
+      krew
       kube-score
       kubecolor
       kubectl
@@ -53,8 +54,8 @@ in {
       kubernetes-helm
       kustomize
       minikube
-      stern
       skaffold
+      stern
 
       # language servers
       nodePackages.bash-language-server
