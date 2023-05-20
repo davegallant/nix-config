@@ -30,6 +30,7 @@ in {
       exa
       fd
       github-cli
+      progress
       glab
       hadolint
       nodePackages.eslint
