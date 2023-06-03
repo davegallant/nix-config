@@ -7,7 +7,8 @@
 with builtins;
 with lib; let
   pkgs2storeContents = l:
-    map (x: {
+    map
+    (x: {
       object = x;
       symlink = "none";
     })

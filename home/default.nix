@@ -463,7 +463,11 @@ in {
     };
   };
 
-  home.file.".config/nvim/lua".source = ./nvim/lua;
-
-  home.file.".aws/config".source = ./.aws/config;
+  home.file = {
+    ".config/nvim/lua".source = ./nvim/lua;
+    ".aws/config".source = ./.aws/config;
+    ".config/autostart/albert.desktop" = {
+      source = pkgs.albert + "/share/applications/albert.desktop";
+    };
+  };
 }
