@@ -29,7 +29,6 @@ in {
       gnomeExtensions.clipboard-indicator
       gnomeExtensions.grand-theft-focus
       gnomeExtensions.notification-banner-reloaded
-      gnomeExtensions.openweather
       gnomeExtensions.quick-settings-tweaker
       gnomeExtensions.tailscale-status
       gnomeExtensions.tray-icons-reloaded
