@@ -466,8 +466,9 @@ in {
   home.file = {
     ".config/nvim/lua".source = ./nvim/lua;
     ".aws/config".source = ./.aws/config;
-    ".config/autostart/albert.desktop" = {
-      source = pkgs.albert + "/share/applications/albert.desktop";
-    };
+  };
+
+  home.file.".config/autostart/albert.desktop" = lib.mkIf stdenv.isLinux {
+    source = pkgs.albert + "/share/applications/albert.desktop";
   };
 }
