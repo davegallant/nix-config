@@ -57,6 +57,12 @@
               registry = {nixpkgs.flake = nixpkgs;};
             };
 
+            nix.gc = {
+              automatic = true;
+              dates = "weekly";
+              options = "--delete-older-than 30d";
+            };
+
             nixpkgs.overlays = [
               (import ./modules/overlays)
               /*
