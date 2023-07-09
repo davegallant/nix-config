@@ -8,10 +8,12 @@
   ...
 } @ inputs: {
   nixosConfigurations = let
+    modulesDir = ./modules;
     defaultModules = [
       home-manager.nixosModules.home-manager
       ./common/fonts.nix
       ./packages/common.nix
+      ./modules/upgrade-diff.nix
 
       ({
         config,
