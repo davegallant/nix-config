@@ -8,7 +8,7 @@ HOSTNAME ?= $(shell hostname)
 UNAME_S := $(shell uname -s)
 
 ifeq ($(UNAME_S),Linux)
-	SWITCH_CMD := nixos-rebuild --use-remote-sudo -I nixos-config="machines/$(HOSTNAME)/configuration.nix" switch --flake '.\#' \
+	SWITCH_CMD := nixos-rebuild --use-remote-sudo -I nixos-config="modules/machines/$(HOSTNAME)/configuration.nix" switch --flake '.\#' \
 								--impure # Impure because of: https://discourse.nixos.org/t/vscode-remote-wsl-extension-works-on-nixos-without-patching-thanks-to-nix-ld/14615
 endif
 ifeq ($(UNAME_S),Darwin)
