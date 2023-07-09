@@ -64,15 +64,15 @@
       ./modules/common/printing.nix
       ./modules/packages/linux-desktop.nix
       ./modules/packages/linux.nix
-      ./services/netdata/default.nix
+      ./modules/services/netdata/default.nix
     ];
   in {
     hephaestus = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules =
         [
-          ./machines/hephaestus/configuration.nix
-          ./machines/hephaestus/hardware.nix
+          ./modules/machines/hephaestus/configuration.nix
+          ./modules/machines/hephaestus/hardware.nix
         ]
         ++ defaultModules
         ++ desktopLinuxModules;
@@ -81,39 +81,38 @@
       system = "x86_64-linux";
       modules =
         [
-          ./machines/aether/configuration.nix
+          ./modules/machines/aether/configuration.nix
           nix-ld.nixosModules.nix-ld
         ]
         ++ defaultModules;
     };
+  };
 
-    darwinConfigurations = {
-      zelus = darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
+  darwinConfigurations = {
+    zelus = darwin.lib.darwinSystem {
+      system = "aarch64-darwin";
 
-        modules = [
-          home-manager.darwinModules.home-manager
-          ./modules/common/darwin.nix
-          ./modules/packages/common.nix
+      modules = [
+        home-manager.darwinModules.home-manager
+        ./modules/common/darwin.nix
+        ./modules/packages/common.nix
+        ./modules/machines/zelus/configuration.nix
+        ./modules/darwin/default.nix
+        ./modules/upgrade-diff.nix
 
-          ./machines/zelus/configuration.nix
-
-          ./modules/darwin/default.nix
-
-          ({config, ...}: {
-            config = {
-              nixpkgs.overlays = [
-                (import ./modules/overlays)
-              ];
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                users."dave.gallant".imports = [./home/default.nix];
-              };
+        ({config, ...}: {
+          config = {
+            nixpkgs.overlays = [
+              (import ./modules/overlays)
+            ];
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users."dave.gallant".imports = [./home/default.nix];
             };
-          })
-        ];
-      };
+          };
+        })
+      ];
     };
   };
 }
