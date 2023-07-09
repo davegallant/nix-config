@@ -11,8 +11,8 @@
     modulesDir = ./modules;
     defaultModules = [
       home-manager.nixosModules.home-manager
-      ./common/fonts.nix
-      ./packages/common.nix
+      ./modules/common/fonts.nix
+      ./modules/packages/common.nix
       ./modules/upgrade-diff.nix
 
       ({
@@ -58,12 +58,12 @@
       })
     ];
     desktopLinuxModules = [
-      ./common/linux-desktop.nix
-      ./common/linux.nix
-      ./common/networking.nix
-      ./common/printing.nix
-      ./packages/linux-desktop.nix
-      ./packages/linux.nix
+      ./modules/common/linux-desktop.nix
+      ./modules/common/linux.nix
+      ./modules/common/networking.nix
+      ./modules/common/printing.nix
+      ./modules/packages/linux-desktop.nix
+      ./modules/packages/linux.nix
       ./services/netdata/default.nix
     ];
   in {
@@ -93,8 +93,8 @@
 
         modules = [
           home-manager.darwinModules.home-manager
-          ./common/darwin.nix
-          ./packages/common.nix
+          ./modules/common/darwin.nix
+          ./modules/packages/common.nix
 
           ./machines/zelus/configuration.nix
 
