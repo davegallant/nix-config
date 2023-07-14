@@ -3,12 +3,14 @@
   darwin,
   home-manager,
   nixpkgs,
+  nixpkgs-unstable,
   nixos-hardware,
   nix-ld,
   ...
 } @ inputs: {
   nixosConfigurations = let
     modulesDir = ./modules;
+    unstable = import nixpkgs-unstable {};
     defaultModules = [
       home-manager.nixosModules.home-manager
       ./modules/common/fonts.nix
@@ -53,6 +55,9 @@
             useGlobalPkgs = true;
             useUserPackages = true;
             users.dave.imports = [./home/default.nix];
+            extraSpecialArgs = {
+              inherit unstable;
+            };
           };
         };
       })
@@ -69,6 +74,7 @@
   in {
     hephaestus = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
+      specialArgs = {inherit unstable;};
       modules =
         [
           ./modules/machines/hephaestus/configuration.nix

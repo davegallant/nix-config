@@ -6,7 +6,6 @@
 }: let
   inherit (pkgs) stdenv;
 in {
-  # System-wide packages to install.
   environment.systemPackages = with pkgs; let
     linuxDesktop = [
       albert
@@ -36,7 +35,6 @@ in {
       google-cloud-sdk
       kazam
       legendary-gl
-      mailspring
       prismlauncher
       obs-studio
       pavucontrol
