@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  unstable,
   ...
 }: let
   hound-nvim = pkgs.vimUtils.buildVimPlugin {
@@ -442,6 +443,16 @@ in {
           ms-vsliveshare.vsliveshare
           # ms-python.python
         ];
+    };
+
+    thunderbird = {
+      enable = stdenv.isLinux;
+      package = unstable.thunderbird;
+      profiles = {
+        default = {
+          isDefault = true;
+        };
+      };
     };
 
     firefox = {

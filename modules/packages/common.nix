@@ -6,7 +6,6 @@
 }: let
   inherit (pkgs) stdenv;
 in {
-  # System-wide packages to install.
   environment.systemPackages = with pkgs; let
     common = [
       # classics
