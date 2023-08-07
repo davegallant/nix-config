@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  unstable,
   ...
 }: let
   inherit (pkgs) stdenv;
@@ -50,7 +51,7 @@ in {
       wine64
       wireshark-qt
       yaru-theme
-      yuzu
+      unstable.yuzu
       zoom-us
     ];
   in
