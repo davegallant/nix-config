@@ -25,6 +25,14 @@ make update
 
 If there are updates, they should be reflected in [flake.lock](./flake.lock).
 
+## Rollback
+
+To rollback to the previous generation:
+
+```sh
+make rollback
+```
+
 ## Pre-commit hooks
 
 Pre-commit hooks are automatically activated when [direnv](https://github.com/direnv/direnv) is installed.
