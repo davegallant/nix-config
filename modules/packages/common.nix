@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  unstable,
   ...
 }: let
   inherit (pkgs) stdenv;
@@ -28,7 +29,7 @@ in {
       bat
       exa
       fd
-      github-cli
+      unstable.github-cli
       progress
       glab
       hadolint
@@ -45,16 +46,15 @@ in {
       tmux-sessionizer
 
       # containers
-      k9s
+      unstable.k9s
       krew
       kube-score
       kubecolor
       kubectl
       kubectx
-      kubernetes-helm
       kustomize
       minikube
-      skaffold
+      unstable.skaffold
       stern
 
       # language servers
