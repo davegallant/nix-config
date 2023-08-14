@@ -25,6 +25,7 @@ in {
       "coreutils"
       "gnu-sed"
       "gnu-tar"
+      "helm"
       "netdata"
       "node"
       "podman"

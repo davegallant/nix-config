@@ -94,9 +94,15 @@
     };
   };
 
-  darwinConfigurations = {
+  darwinConfigurations = let
+    system = "aarch64-darwin";
+    unstable = import nixpkgs-unstable {
+      inherit system;
+    };
+  in {
     zelus = darwin.lib.darwinSystem {
-      system = "aarch64-darwin";
+      inherit system;
+      specialArgs = {inherit unstable;};
 
       modules = [
         home-manager.darwinModules.home-manager
@@ -115,6 +121,9 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               users."dave.gallant".imports = [./home/default.nix];
+              extraSpecialArgs = {
+                inherit unstable;
+              };
             };
           };
         })
