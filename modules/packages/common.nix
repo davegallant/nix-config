@@ -46,7 +46,6 @@ in {
       tmux-sessionizer
 
       # containers
-      unstable.k9s
       krew
       kube-score
       kubecolor
@@ -54,8 +53,10 @@ in {
       kubectx
       kustomize
       minikube
-      unstable.skaffold
       stern
+      unstable.helm-docs
+      unstable.k9s
+      unstable.skaffold
 
       # language servers
       nodePackages.bash-language-server
