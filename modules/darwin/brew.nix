@@ -29,6 +29,7 @@ in {
       "netdata"
       "node"
       "podman"
+      "podman-compose"
     ];
 
     casks = [
@@ -37,9 +38,10 @@ in {
       "font-hack-nerd-font"
       "karabiner-elements"
       "lulu"
-      "raycast"
       "notunes"
+      "podman-desktop"
       "postman"
+      "raycast"
       "rectangle"
       "stats"
       "visual-studio-code"
