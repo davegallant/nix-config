@@ -12,11 +12,6 @@
   nix.extraOptions = "experimental-features = nix-command flakes";
   nix.package = pkgs.nixUnstable;
 
-  nixpkgs.config = {
-    allowUnfree = true;
-    permittedInsecurePackages = [];
-  };
-
   users.users.dave = {
     isNormalUser = true;
     extraGroups = ["docker" "wheel" "libvirtd" "corectrl"];

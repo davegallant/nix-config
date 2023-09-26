@@ -7,6 +7,8 @@
 
   hardware.opengl.enable = true;
 
+  nixpkgs.config.allowUnfree = true;
+
   networking = {
     hostName = "hephaestus";
     interfaces.enp34s0 = {

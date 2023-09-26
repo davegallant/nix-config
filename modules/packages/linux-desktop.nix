@@ -36,14 +36,16 @@ in {
       google-cloud-sdk
       kazam
       legendary-gl
-      prismlauncher
       obs-studio
       pavucontrol
       podman
+      prismlauncher
       qemu
       ryujinx
-      signal-desktop
       steam-tui
+      unstable.signal-desktop
+      unstable.yuzu
+      unstable.zoom-us
       usbutils
       virt-manager
       vlc
@@ -51,8 +53,6 @@ in {
       wine64
       wireshark-qt
       yaru-theme
-      unstable.yuzu
-      zoom-us
     ];
   in
     linuxDesktop;
