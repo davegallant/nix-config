@@ -7,6 +7,8 @@ MAKEFLAGS += --no-builtin-rules
 HOSTNAME ?= $(shell hostname)
 UNAME_S := $(shell uname -s)
 
+export NIXPKGS_ALLOW_UNFREE := 1
+
 ifeq ($(UNAME_S),Linux)
 	SWITCH_CMD := nixos-rebuild --use-remote-sudo -I nixos-config="modules/machines/$(HOSTNAME)/configuration.nix" switch --flake '.\#' \
 								--impure # Impure because of: https://discourse.nixos.org/t/vscode-remote-wsl-extension-works-on-nixos-without-patching-thanks-to-nix-ld/14615

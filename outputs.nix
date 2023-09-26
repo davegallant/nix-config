@@ -63,8 +63,8 @@
       })
     ];
     desktopLinuxModules = [
-      ./modules/common/linux-desktop.nix
       ./modules/common/linux.nix
+      ./modules/common/linux-desktop.nix
       ./modules/common/networking.nix
       ./modules/common/printing.nix
       ./modules/packages/linux-desktop.nix
