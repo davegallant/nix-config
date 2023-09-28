@@ -16,7 +16,6 @@ in {
       deja-dup
       discord
       foliate
-      fx_cast_bridge
       ghostscript
       gimp-with-plugins
       gnome.gnome-sound-recorder
