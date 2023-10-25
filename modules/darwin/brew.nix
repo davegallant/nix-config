@@ -42,6 +42,7 @@ in {
       "podman-desktop"
       "postman"
       "raycast"
+      "rectangle"
       "stats"
       "visual-studio-code"
     ];
