@@ -61,12 +61,12 @@
   };
 
   fileSystems."/mnt/synology-2b/media" = {
-    device = "192.168.1.250:/volume1/Media";
+    device = "192.168.1.178:/volume1/Media";
     fsType = "nfs";
   };
 
   fileSystems."/mnt/synology-2b/backups" = {
-    device = "192.168.1.250:/volume1/Backups";
+    device = "192.168.1.178:/volume1/Backups";
     fsType = "nfs";
   };
 
