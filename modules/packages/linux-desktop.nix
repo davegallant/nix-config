@@ -39,6 +39,7 @@ in {
       pavucontrol
       podman
       prismlauncher
+      psst
       qemu
       ryujinx
       steam-tui
