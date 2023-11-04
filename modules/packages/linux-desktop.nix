@@ -33,6 +33,7 @@ in {
       gnomeExtensions.tray-icons-reloaded
       gnomeExtensions.vitals
       google-cloud-sdk
+      
       kazam
       legendary-gl
       obs-studio
