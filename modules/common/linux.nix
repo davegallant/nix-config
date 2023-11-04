@@ -8,6 +8,8 @@
 
   # See: https://github.com/NixOS/nixpkgs/issues/180175
   systemd.services.NetworkManager-wait-online.enable = false;
+  systemd.services.systemd-resolved.enable = true;
+  systemd.services.tailscaled.after = ["network-online.target" "systemd-resolved.service"];
 
   nix.extraOptions = "experimental-features = nix-command flakes";
   nix.package = pkgs.nixUnstable;
