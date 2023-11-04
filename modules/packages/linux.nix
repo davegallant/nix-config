@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  unstable,
   ...
 }: let
   inherit (pkgs) stdenv;
@@ -19,7 +20,7 @@ in {
       nfs-utils
       rustup
       strace
-      tailscale
+      unstable.tailscale
       traceroute
     ];
   in
