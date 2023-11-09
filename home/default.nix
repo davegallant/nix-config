@@ -454,7 +454,7 @@ in {
           id = 0;
           isDefault = true;
           settings = {
-            "privacy.resistFingerprinting" = true;
+            "privacy.resistFingerprinting" = false; # breaks timezone
           };
           name = "dev-edition-default";
           path = "6b7pm104.dev-edition-default";
