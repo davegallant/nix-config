@@ -34,7 +34,6 @@ in {
       gnomeExtensions.tray-icons-reloaded
       gnomeExtensions.vitals
       google-cloud-sdk
-      
       kazam
       legendary-gl
       obs-studio
@@ -46,6 +45,7 @@ in {
       ryujinx
       steam-tui
       unstable.signal-desktop
+      unstable.unityhub
       unstable.yuzu
       unstable.zoom-us
       usbutils
