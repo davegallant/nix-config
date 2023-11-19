@@ -1,6 +1,6 @@
 # nix-config
 
-This repo stores nix to manage my machines running [NixOS](https://nixos.org/), macOS, and Windows (using [NixOS-WSL](https://github.com/nix-community/NixOS-WSL)).
+This repo stores nix to manage my machines running [NixOS](https://nixos.org/) and macOS.
 
 The configuration is very specific to my own machines and setup, but it may be a useful reference for anyone else learning or experimenting with nix, whether it be on a personal workstation or a server environment.
 
