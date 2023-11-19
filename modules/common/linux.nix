@@ -71,6 +71,7 @@
     };
     gnome.gnome-keyring.enable = true;
     printing.enable = true;
+    resolved.enable = true;
 
     xserver = {
       enable = true;
