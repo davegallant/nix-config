@@ -440,7 +440,7 @@ in {
         ]
         ++ lib.optionals stdenv.isLinux [
           ms-vsliveshare.vsliveshare
-          # ms-python.python
+          ms-python.python
         ];
     };
 

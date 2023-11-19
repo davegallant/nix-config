@@ -79,15 +79,6 @@
         ++ defaultModules
         ++ desktopLinuxModules;
     };
-    aether = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules =
-        [
-          ./modules/machines/aether/configuration.nix
-          nix-ld.nixosModules.nix-ld
-        ]
-        ++ defaultModules;
-    };
   };
 
   darwinConfigurations = let
