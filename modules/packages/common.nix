@@ -9,8 +9,7 @@
 in {
   environment.systemPackages = with pkgs; let
     common = [
-      # classics
-      colordiff
+      # essentials
       curl
       gcc
       git-crypt
@@ -51,7 +50,6 @@ in {
       kubecolor
       kubectl
       kubectx
-      kustomize
       minikube
       stern
       unstable.helm-docs
@@ -102,10 +100,6 @@ in {
       neofetch
       pfetch
 
-      # backup
-      rclone
-      restic
-
       # infra
       terraform-ls
       terraformer
@@ -120,9 +114,6 @@ in {
       nixpkgs-fmt
       nixpkgs-review
       rnix-lsp
-
-      # cloud
-      cloud-sql-proxy
 
       # python
       poetry

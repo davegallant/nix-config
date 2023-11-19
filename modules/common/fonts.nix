@@ -1,5 +1,4 @@
 {pkgs, ...}: {
-  # Set system-wide fonts.
   fonts.fonts = with pkgs; [
     dejavu_fonts
     fira-code
@@ -14,7 +13,6 @@
     noto-fonts-extra
   ];
 
-  # Set default fonts.
   fonts.fontconfig.defaultFonts = {
     sansSerif = ["Noto Sans"];
     serif = ["Noto Serif"];

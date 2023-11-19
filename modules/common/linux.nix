@@ -2,13 +2,15 @@
   boot.kernelPackages = pkgs.linuxPackages;
   boot.supportedFilesystems = ["ntfs"];
 
-  system.stateVersion = "23.05";
+  system = {
+    autoUpgrade.enable = true;
+    stateVersion = "23.05";
+  };
 
-  system.autoUpgrade.enable = true;
-
-  systemd.services.tailscaled.after = ["network-online.target" "systemd-resolved.service"];
-  nix.extraOptions = "experimental-features = nix-command flakes";
-  nix.package = pkgs.nixUnstable;
+  nix = {
+    extraOptions = "experimental-features = nix-command flakes";
+    package = pkgs.nixUnstable;
+  };
 
   users.users.dave = {
     isNormalUser = true;
@@ -23,8 +25,6 @@
   };
 
   time.timeZone = "America/Toronto";
-
-  sound.enable = true;
 
   hardware.pulseaudio.enable = true;
 
@@ -41,18 +41,20 @@
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
   };
 
-  virtualisation.docker.enable = true;
-  virtualisation.libvirtd.enable = true;
-
-  virtualisation.podman.enable = true;
-
-  programs.zsh.enable = true;
-
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
+  virtualisation = {
+    docker.enable = true;
+    libvirtd.enable = true;
+    podman.enable = true;
   };
-  programs.corectrl.enable = true;
+
+  programs = {
+    corectrl.enable = true;
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+    };
+    zsh.enable = true;
+  };
 
   services = {
     avahi = {
@@ -69,7 +71,6 @@
     };
     gnome.gnome-keyring.enable = true;
     printing.enable = true;
-    tailscale.enable = true;
 
     xserver = {
       enable = true;
