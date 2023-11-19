@@ -7,7 +7,6 @@
   system.autoUpgrade.enable = true;
 
   systemd.services.tailscaled.after = ["network-online.target" "systemd-resolved.service"];
-
   nix.extraOptions = "experimental-features = nix-command flakes";
   nix.package = pkgs.nixUnstable;
 
@@ -54,4 +53,46 @@
     enableSSHSupport = true;
   };
   programs.corectrl.enable = true;
+
+  services = {
+    avahi = {
+      enable = true;
+      nssmdns = true;
+      publish = {
+        enable = true;
+        addresses = true;
+        domain = true;
+        hinfo = true;
+        userServices = true;
+        workstation = true;
+      };
+    };
+    gnome.gnome-keyring.enable = true;
+    printing.enable = true;
+    tailscale.enable = true;
+
+    xserver = {
+      enable = true;
+      displayManager = {
+        gdm = {
+          enable = true;
+          wayland = false;
+        };
+      };
+      desktopManager = {
+        gnome = {
+          enable = true;
+        };
+      };
+    };
+  };
+
+  networking = {
+    firewall = {
+      allowPing = false;
+      enable = true;
+      checkReversePath = "loose";
+      trustedInterfaces = ["tailscale0"];
+    };
+  };
 }

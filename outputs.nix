@@ -64,10 +64,6 @@
     ];
     desktopLinuxModules = [
       ./modules/common/linux.nix
-      ./modules/common/linux-desktop.nix
-      ./modules/common/networking.nix
-      ./modules/common/printing.nix
-      ./modules/packages/linux-desktop.nix
       ./modules/packages/linux.nix
       ./modules/services/netdata/default.nix
     ];
