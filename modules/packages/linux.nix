@@ -56,6 +56,7 @@ in {
       steam-tui
       strace
       traceroute
+      unstable.obsidian
       unstable.signal-desktop
       unstable.tailscale
       unstable.unityhub
