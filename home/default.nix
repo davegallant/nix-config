@@ -455,6 +455,11 @@ in {
           isDefault = true;
           settings = {
             "privacy.resistFingerprinting" = false; # breaks timezone
+            "dom.push.connection.enabled" = false;
+            "dom.push.enabled" = false;
+            "geo.enabled" = false;
+            "intl.regional_prefs.use_os_locales" = true;
+            "services.sync.prefs.sync.intl.regional._prefs.use_os_locates" = false;
           };
           name = "dev-edition-default";
           path = "6b7pm104.dev-edition-default";
