@@ -42,6 +42,7 @@ in {
       kazam
       legendary-gl
       lm_sensors
+      mullvad-vpn
       netdata
       nfs-utils
       obs-studio

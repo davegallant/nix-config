@@ -70,9 +70,9 @@
       };
     };
     gnome.gnome-keyring.enable = true;
+    mullvad-vpn.enable = true; 
     printing.enable = true;
     resolved.enable = true;
-
     xserver = {
       enable = true;
       displayManager = {
@@ -90,6 +90,7 @@
   };
 
   networking = {
+    iproute2.enable = true; 
     firewall = {
       allowPing = false;
       enable = true;
