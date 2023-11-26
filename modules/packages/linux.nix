@@ -33,6 +33,7 @@ in {
       gnomeExtensions.clipboard-indicator
       gnomeExtensions.dash-to-dock
       gnomeExtensions.grand-theft-focus
+      iputils
       gnomeExtensions.notification-banner-reloaded
       gnomeExtensions.quick-settings-tweaker
       gnomeExtensions.tailscale-status
