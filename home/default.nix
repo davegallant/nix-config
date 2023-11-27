@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  unstable,
   ...
 }: let
   hound-nvim = pkgs.vimUtils.buildVimPlugin {
@@ -428,6 +429,7 @@ in {
 
     vscode = {
       enable = true;
+      package = unstable.vscode;
       extensions = with pkgs.vscode-extensions;
         [
           bbenoist.nix
