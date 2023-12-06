@@ -4,7 +4,7 @@
 
   system = {
     autoUpgrade.enable = true;
-    stateVersion = "23.05";
+    stateVersion = "23.11";
   };
 
   nix = {
@@ -70,7 +70,7 @@
       };
     };
     gnome.gnome-keyring.enable = true;
-    mullvad-vpn.enable = true; 
+    mullvad-vpn.enable = false;
     printing.enable = true;
     resolved.enable = true;
     xserver = {

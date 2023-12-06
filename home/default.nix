@@ -16,7 +16,7 @@
   };
   inherit (pkgs) stdenv;
 in {
-  home.stateVersion = "23.05";
+  home.stateVersion = "23.11";
 
   services = {
     gpg-agent = {
@@ -139,7 +139,7 @@ in {
       enable = true;
       enableAutosuggestions = true;
       enableCompletion = true;
-      enableSyntaxHighlighting = true;
+      syntaxHighlighting.enable = true;
       history.size = 1000000;
 
       localVariables = {
@@ -211,13 +211,13 @@ in {
         k = "kubecolor";
         kcx = "kubectx";
         kns = "kubens";
-        l = "exa -la --git --group-directories-first";
+        l = "eza -la --git --group-directories-first";
         m = "make";
         pia = "sudo openvpn --config ~/pia/$(find ~/pia -execdir basename {} .ovpn ';' -iname \"*.ovpn\" -type f | fzf --exact).ovpn --auth-user-pass ~/pia/pass";
         ps = "procs";
         t = "tmux-sessionizer";
         tf = "terraform";
-        tree = "exa --tree";
+        tree = "eza --tree";
         v = "nvim";
         nix-install = "nix-env -iA";
         brew-x86 = "arch -x86_64 /usr/local/homebrew/bin/brew";

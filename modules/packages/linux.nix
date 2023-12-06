@@ -55,12 +55,11 @@ in {
       qemu
       rustup
       ryujinx
-      steam-tui
       strace
+      tailscale
       traceroute
       unstable.obsidian
       unstable.signal-desktop
-      unstable.tailscale
       unstable.unityhub
       unstable.yuzu
       unstable.zoom-us

@@ -26,7 +26,7 @@ in {
 
       # modern cli
       bat
-      exa
+      eza
       fd
       unstable.github-cli
       progress
@@ -34,7 +34,6 @@ in {
       hadolint
       nodePackages.eslint
       oha
-      postman
       pre-commit
       ripgrep
       yq-go
@@ -46,7 +45,6 @@ in {
 
       # containers
       krew
-      kube-score
       kubecolor
       kubectl
       kubectx

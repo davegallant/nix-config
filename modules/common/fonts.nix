@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
     dejavu_fonts
     fira-code
     fira-code-symbols
