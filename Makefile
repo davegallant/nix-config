@@ -21,7 +21,7 @@ switch:
 	$(SWITCH_CMD)
 
 rollback:
-	nixos-rebuild --use-remote-sudo switch --rollback -I nixos-config="modules/machines/$(HOSTNAME)/configuration.nix
+	nixos-rebuild --use-remote-sudo switch --rollback -I nixos-config="modules/machines/$(HOSTNAME)/configuration.nix"
 
 update:
 	nix flake update
