@@ -54,6 +54,9 @@ in {
       unstable.k9s
       unstable.skaffold
 
+      # cloud
+      unstable.flyctl
+
       # language servers
       nodePackages.bash-language-server
       nodePackages.pyright
