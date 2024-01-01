@@ -449,7 +449,7 @@ in {
     firefox = {
       enable = stdenv.isLinux;
 
-      package = pkgs.firefox-devedition-bin;
+      package = unstable.firefox-devedition;
 
       profiles = {
         default = {
