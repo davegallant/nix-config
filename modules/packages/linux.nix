@@ -33,9 +33,10 @@ in {
       gnomeExtensions.clipboard-indicator
       gnomeExtensions.dash-to-dock
       gnomeExtensions.grand-theft-focus
-      iputils
+      gnomeExtensions.night-theme-switcher
       gnomeExtensions.notification-banner-reloaded
       gnomeExtensions.quick-settings-tweaker
+      iputils
       gnomeExtensions.tailscale-status
       gnomeExtensions.tray-icons-reloaded
       gnomeExtensions.vitals
