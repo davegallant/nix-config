@@ -70,7 +70,6 @@ in {
       wine
       wine64
       wireshark-qt
-      yaru-theme
     ];
   in
     linux;

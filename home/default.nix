@@ -29,33 +29,6 @@ in {
 
   fonts.fontconfig.enable = true;
 
-  gtk = {
-    enable = stdenv.isLinux;
-
-    iconTheme = {
-      name = "Yaru-dark";
-      package = pkgs.yaru-theme;
-    };
-    theme = {
-      name = "Yaru-Theme";
-      package = pkgs.yaru-theme;
-    };
-    cursorTheme = {
-      name = "Yaru";
-      package = pkgs.yaru-theme;
-    };
-    gtk3.extraConfig = {
-      Settings = ''
-        gtk-application-prefer-dark-theme=0
-      '';
-    };
-    gtk4.extraConfig = {
-      Settings = ''
-        gtk-application-prefer-dark-theme=0
-      '';
-    };
-  };
-
   programs = {
     home-manager.enable = true;
 
