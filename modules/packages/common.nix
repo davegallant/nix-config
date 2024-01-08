@@ -95,7 +95,6 @@ in {
       openvpn
       sshfs # mac requires https://osxfuse.github.io/
       vpngate
-      whois
 
       # rice
       neofetch
