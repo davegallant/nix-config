@@ -67,6 +67,7 @@ in {
       usbutils
       virt-manager
       vlc
+      whois
       wine
       wine64
       wireshark-qt

@@ -44,7 +44,6 @@ in {
       "raycast"
       "rectangle"
       "stats"
-      "visual-studio-code"
     ];
 
     taps = [
