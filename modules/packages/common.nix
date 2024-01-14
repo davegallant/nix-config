@@ -74,9 +74,9 @@ in {
       stylua
 
       # golang
+      gofumpt
       golangci-lint
       gopls
-      gofumpt
 
       # rust
       rustup
