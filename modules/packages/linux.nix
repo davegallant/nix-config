@@ -59,6 +59,8 @@ in {
       strace
       tailscale
       traceroute
+      unstable.android-studio
+      unstable.android-tools
       unstable.obsidian
       unstable.signal-desktop
       unstable.unityhub
