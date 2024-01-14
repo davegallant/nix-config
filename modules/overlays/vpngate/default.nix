@@ -7,7 +7,7 @@ buildGoModule rec {
   pname = "vpngate";
   version = "v0.1.5";
 
-  vendorSha256 = "sha256-TQLHvoVAMvDtm/9EQUaNVVjQajyMBnJu8NF6Kt0+RJ8=";
+  vendorHash = "sha256-TQLHvoVAMvDtm/9EQUaNVVjQajyMBnJu8NF6Kt0+RJ8=";
 
   src = fetchFromGitHub {
     owner = "davegallant";
