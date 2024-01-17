@@ -36,11 +36,12 @@ in {
       gnomeExtensions.night-theme-switcher
       gnomeExtensions.notification-banner-reloaded
       gnomeExtensions.quick-settings-tweaker
-      iputils
       gnomeExtensions.tailscale-status
       gnomeExtensions.tray-icons-reloaded
       gnomeExtensions.vitals
       google-cloud-sdk
+      gradience
+      iputils
       kazam
       legendary-gl
       lm_sensors
