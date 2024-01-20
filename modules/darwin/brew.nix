@@ -39,6 +39,7 @@ in {
       "karabiner-elements"
       "lulu"
       "notunes"
+      "obsidian"
       "podman-desktop"
       "postman"
       "raycast"
