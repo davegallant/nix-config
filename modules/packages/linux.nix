@@ -33,14 +33,12 @@ in {
       gnomeExtensions.clipboard-indicator
       gnomeExtensions.dash-to-dock
       gnomeExtensions.grand-theft-focus
-      gnomeExtensions.night-theme-switcher
       gnomeExtensions.notification-banner-reloaded
       gnomeExtensions.quick-settings-tweaker
       gnomeExtensions.tailscale-status
       gnomeExtensions.tray-icons-reloaded
       gnomeExtensions.vitals
       google-cloud-sdk
-      gradience
       iputils
       kazam
       legendary-gl
