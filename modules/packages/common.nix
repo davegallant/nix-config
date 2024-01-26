@@ -55,6 +55,7 @@ in {
       unstable.skaffold
 
       # cloud
+      unstable.google-cloud-sdk
       unstable.flyctl
 
       # language servers
