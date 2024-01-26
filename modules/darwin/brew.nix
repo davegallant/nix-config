@@ -50,10 +50,8 @@ in {
     taps = [
       "azure/bicep"
       "homebrew/bundle"
-      "homebrew/cask"
       "homebrew/cask-fonts"
       "homebrew/cask-versions"
-      "homebrew/core"
       "homebrew/services"
     ];
   };
