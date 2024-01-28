@@ -63,7 +63,6 @@ in {
       unstable.obsidian
       unstable.signal-desktop
       unstable.unityhub
-      unstable.yuzu
       unstable.zoom-us
       usbutils
       virt-manager
@@ -72,6 +71,7 @@ in {
       wine
       wine64
       wireshark-qt
+      yuzu
     ];
   in
     linux;
