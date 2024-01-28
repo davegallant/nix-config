@@ -153,8 +153,7 @@ in {
         export PATH = "$(brew --prefix)/opt/gnu-tar/libexec/gnubin:$PATH"
           export
           PATH="$(brew --prefix)/opt/gnu-sed/libexec/gnubin:$PATH"
-
-        alias xdg-open=open
+          alias xdg-open=open
         fi
 
         # helm
