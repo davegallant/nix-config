@@ -67,6 +67,7 @@ in {
       # monitoring
       ctop
       glances
+      grafana-loki
       htop
       procs
 
