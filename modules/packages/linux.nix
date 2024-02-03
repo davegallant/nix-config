@@ -11,9 +11,7 @@ in {
     linux = [
       albert
       bitwarden
-      bitwarden-cli
       chromium
-      cpu-x
       cryptsetup
       deja-dup
       discord
@@ -23,9 +21,7 @@ in {
       ghostscript
       gimp-with-plugins
       glibcLocales
-      gnome.gnome-sound-recorder
       gnome.gnome-tweaks
-      gnome.seahorse
       gnomeExtensions.appindicator
       gnomeExtensions.bluetooth-quick-connect
       gnomeExtensions.blur-my-shell
@@ -37,7 +33,6 @@ in {
       gnomeExtensions.quick-settings-tweaker
       gnomeExtensions.tailscale-status
       gnomeExtensions.tray-icons-reloaded
-      gnomeExtensions.vitals
       google-cloud-sdk
       iputils
       kazam
@@ -50,7 +45,6 @@ in {
       pavucontrol
       pinentry-curses
       podman
-      prismlauncher
       psst
       qemu
       rustup
@@ -63,6 +57,7 @@ in {
       unstable.obsidian
       unstable.signal-desktop
       unstable.unityhub
+      unstable.yuzu
       unstable.zoom-us
       usbutils
       virt-manager
@@ -71,7 +66,6 @@ in {
       wine
       wine64
       wireshark-qt
-      yuzu
     ];
   in
     linux;
