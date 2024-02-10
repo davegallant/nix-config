@@ -78,7 +78,7 @@
       displayManager = {
         gdm = {
           enable = true;
-          wayland = false;
+          wayland = true;
         };
       };
       desktopManager = {
@@ -90,7 +90,7 @@
   };
 
   networking = {
-    iproute2.enable = true; 
+    iproute2.enable = true;
     firewall = {
       allowPing = false;
       enable = true;
