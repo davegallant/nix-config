@@ -24,6 +24,13 @@
   services = {
     sshd.enable = true;
     tailscale.enable = true;
-    xserver.videoDrivers = ["amdgpu"];
+    xserver.videoDrivers = ["nvidia"];
+  };
+
+  hardware.nvidia = {
+    modesetting.enable = true;
+    open = true;
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 }
