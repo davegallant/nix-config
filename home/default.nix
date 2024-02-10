@@ -360,6 +360,18 @@ in {
       '';
     };
 
+    rofi = {
+      enable = true;
+      plugins = [pkgs.rofi-emoji];
+      terminal = "${pkgs.alacritty}/bin/alacritty";
+      font = "Fira Font Mono 24";
+      theme = "gruvbox-dark";
+      extraConfig = {
+        modi = "drun,run";
+        show-icons = true;
+      };
+    };
+
     fzf = {
       enable = true;
       enableZshIntegration = true;
