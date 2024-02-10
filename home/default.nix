@@ -218,7 +218,7 @@ in {
           if stdenv.isLinux
           then {
             normal.family = "Fira Code";
-            size = 18;
+            size = 12;
           }
           else {
             normal.family = "FiraCode Nerd Font";
