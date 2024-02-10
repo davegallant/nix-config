@@ -218,7 +218,7 @@ in {
           if stdenv.isLinux
           then {
             normal.family = "Fira Code";
-            size = 12;
+            size = 18;
           }
           else {
             normal.family = "FiraCode Nerd Font";
@@ -445,9 +445,5 @@ in {
   home.file = {
     ".config/nvim/lua".source = ./nvim/lua;
     ".aws/config".source = ./.aws/config;
-  };
-
-  home.file.".config/autostart/albert.desktop" = lib.mkIf stdenv.isLinux {
-    source = pkgs.albert + "/share/applications/albert.desktop";
   };
 }

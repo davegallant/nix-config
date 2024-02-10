@@ -9,7 +9,6 @@
 in {
   environment.systemPackages = with pkgs; let
     linux = [
-      albert
       bitwarden
       chromium
       cryptsetup
