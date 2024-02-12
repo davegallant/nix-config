@@ -361,7 +361,7 @@ in {
     };
 
     rofi = {
-      enable = true;
+      enable = stdenv.isLinux;
       plugins = [pkgs.rofi-emoji];
       terminal = "${pkgs.alacritty}/bin/alacritty";
       font = "Fira Font Mono 24";
