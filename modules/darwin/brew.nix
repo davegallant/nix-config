@@ -37,6 +37,7 @@ in {
       "font-fira-code-nerd-font"
       "font-hack-nerd-font"
       "karabiner-elements"
+      "logseq"
       "lulu"
       "notunes"
       "obsidian"
