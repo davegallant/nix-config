@@ -40,6 +40,7 @@ in {
       "logseq"
       "lulu"
       "notunes"
+      "obsidian"
       "podman-desktop"
       "postman"
       "raycast"
