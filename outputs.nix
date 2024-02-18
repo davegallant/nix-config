@@ -39,12 +39,11 @@
               ];
             };
             registry = {nixpkgs.flake = nixpkgs;};
-          };
-
-          nix.gc = {
-            automatic = true;
-            dates = "weekly";
-            options = "--delete-older-than 30d";
+            gc = {
+              automatic = true;
+              dates = "daily";
+              options = "--delete-older-than 14d";
+            };
           };
 
           nixpkgs.overlays = [
@@ -54,7 +53,10 @@
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            users.dave.imports = [./home/default.nix];
+            users.dave.imports = [
+              ./home/default.nix
+              inputs.nixvim.homeManagerModules.nixvim
+            ];
             extraSpecialArgs = {
               inherit unstable;
             };
@@ -107,7 +109,10 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              users."dave.gallant".imports = [./home/default.nix];
+              users."dave.gallant".imports = [
+                ./home/default.nix
+                inputs.nixvim.homeManagerModules.nixvim
+              ];
               extraSpecialArgs = {
                 inherit unstable;
               };

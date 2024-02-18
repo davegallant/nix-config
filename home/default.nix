@@ -4,16 +4,6 @@
   unstable,
   ...
 }: let
-  hound-nvim = pkgs.vimUtils.buildVimPlugin {
-    name = "hound-nvim";
-    nativeBuildInputs = with pkgs; [lua53Packages.luacheck stylua];
-    src = pkgs.fetchFromGitHub {
-      owner = "davegallant";
-      repo = "hound.nvim";
-      rev = "e85ba4f65ece79fe6332d8a0ccc594a0d367f4ed";
-      sha256 = "sha256-fxPtixVB6dVjrxpJ1oP+eA00JSiKxWuii8pMxVeuyMY=";
-    };
-  };
   inherit (pkgs) stdenv;
 in {
   home.stateVersion = "23.11";
@@ -377,38 +367,173 @@ in {
       enableZshIntegration = true;
     };
 
-    neovim = {
+    nixvim = {
       enable = true;
-      viAlias = true;
-      vimAlias = true;
-
-      # home-manager doesn't yet support `init.lua`
-      extraConfig = "lua require('init')";
-
-      plugins = with pkgs.vimPlugins; [
-        cmp-nvim-lsp
-        cmp-path
-        cmp-treesitter
-        diffview-nvim
-        git-blame-nvim
-        gitsigns-nvim
-        gruvbox-nvim
-        lualine-nvim
-        luasnip
-        nvim-cmp
-        nvim-lspconfig
-        nvim-tree-lua
-        nvim-treesitter.withAllGrammars
-        nvim-ts-rainbow
-        nvim-web-devicons
-        plenary-nvim
-        telescope-fzy-native-nvim
-        vim-commentary
-        vim-markdown
-        vim-repeat
-        vim-sneak
-        vim-surround
+      colorschemes.gruvbox.enable = true;
+      keymaps = [
+        {
+          key = "<C-n>";
+          mode = ["n"];
+          action = "<cmd>tabnew<cr>";
+          options = {
+            silent = true;
+          };
+        }
+        # copy to OS clipboard
+        {
+          key = "<leader>y";
+          mode = ["v"];
+          action = "\"+y";
+        }
+        {
+          key = "gD";
+          mode = ["n"];
+          action = "<cmd>lua vim.lsp.buf.declaration()<CR>";
+        }
+        {
+          key = "gd";
+          mode = ["n"];
+          action = "<cmd>lua vim.lsp.buf.definition()<CR>";
+        }
+        {
+          key = "gr";
+          mode = ["n"];
+          action = "<cmd>lua vim.lsp.buf.references()<CR>";
+        }
       ];
+
+      plugins = {
+        cmp-path.enable = true;
+        cmp-treesitter.enable = true;
+        commentary.enable = true;
+        diffview.enable = true;
+        gitblame.enable = true;
+        gitsigns.enable = true;
+        lualine.enable = true;
+        lsp.enable = true;
+        lsp.servers = {
+          #ansiblels.enable = true;
+          bashls.enable = true;
+          #dockerls.enable = true;
+          gopls.enable = true;
+          #helm-ls.enable = true;
+          jsonls.enable = true;
+          pyright.enable = true;
+          rnix-lsp.enable = true;
+          terraformls.enable = true;
+          yamlls.enable = true;
+        };
+        nvim-cmp.enable = true;
+        rainbow-delimiters.enable = true;
+        treesitter.enable = true;
+        telescope = {
+          enable = true;
+          defaults = {
+            layout_strategy = "vertical";
+            layout_config = {
+              vertical = {
+                width = 0.9;
+              };
+            };
+          };
+          package = pkgs.vimPlugins.telescope-fzy-native-nvim;
+          keymaps = {
+            "<leader>ff" = {
+              action = "git_files";
+              desc = "Telescope Git Files";
+            };
+            "<leader>fg" = "live_grep";
+          };
+          keymapsSilent = true;
+        };
+      };
+      extraPlugins = with pkgs.vimPlugins; [
+        nvim-lspconfig
+      ];
+      options = {
+        autoindent = true;
+        backup = false;
+        belloff = "all";
+        completeopt = [
+          "menuone"
+          "noselect"
+        ];
+        cursorline = true;
+        expandtab = true;
+        fillchars = {
+          diff = "∙";
+          eob = " ";
+          vert = "┃";
+        };
+        hlsearch = true;
+        ignorecase = true;
+        incsearch = true;
+        modelines = 5;
+        mouse = "a";
+        number = true;
+        pumblend = 10;
+        scrolloff = 3;
+        shell = "bash";
+        shiftround = false;
+        shiftwidth = 2;
+        showbreak = "↳ ";
+        showcmd = true;
+        sidescroll = 0;
+        sidescrolloff = 3;
+        smartcase = true;
+        smarttab = true;
+        spellcapcheck = "";
+        splitbelow = true;
+        splitright = true;
+        swapfile = false;
+        switchbuf = "usetab";
+        tabstop = 2;
+        termguicolors = true;
+        wildmenu = true;
+      };
+
+      extraConfigLua = ''
+        -- Format JSON
+        vim.cmd([[command! JsonFormat execute "::%!jq '.'"]])
+
+        -- Remember line number
+        vim.cmd([[au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif]])
+
+        -- Replace visual selection
+        vim.cmd([[vnoremap <C-r> "hy:%s/<C-r>h//g<left><left>]])
+
+        -- Indent YAML
+        vim.cmd([[au FileType yaml setlocal ts=2 sts=2 sw=2 expandtab]])
+
+        -- Indent Python
+        vim.cmd([[au BufNewFile,BufRead *.py set tabstop=4 softtabstop=4 shiftwidth=4 textwidth=79 expandtab autoindent fileformat=unix]])
+
+        -- Highlight whitespace
+        vim.cmd([[highlight ExtraWhitespace ctermbg=red guibg=red]])
+        vim.cmd([[match ExtraWhitespace /\s\+$/]])
+
+        -------------------------------------------------------------------------------
+        -- completion {{{1 -------------------------------------------------------------------
+        -------------------------------------------------------------------------------
+
+        local has_words_before = function()
+          local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+          return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+        end
+
+        local cmp = require("cmp")
+
+        -- folding
+        vim.api.nvim_exec(
+        	[[
+            set foldmethod=expr
+            set foldlevel=20
+            set nofoldenable
+            set foldexpr=nvim_treesitter#foldexpr()
+        ]],
+        	true
+        )
+      '';
     };
 
     vscode = {
@@ -455,7 +580,6 @@ in {
   };
 
   home.file = {
-    ".config/nvim/lua".source = ./nvim/lua;
     ".aws/config".source = ./.aws/config;
   };
 }
