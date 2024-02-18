@@ -56,7 +56,7 @@ in {
 
       # cloud
       unstable.google-cloud-sdk
-      unstable.flyctl
+      unstable.awscli2
 
       # language servers
       nodePackages.bash-language-server
