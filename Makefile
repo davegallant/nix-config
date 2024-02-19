@@ -26,7 +26,8 @@ rollback:
 update:
 	nix flake update
 	make
-	git commit -S -m "nix flake update: $(TZ=UTC date +%Y-%m-%d_%H-%M-%S)"
+	git add .
+	git commit -S -m "nix flake update: $$(TZ=UTC date +%Y-%m-%d_%H-%M-%S)"
 	git push
 
 fmt:
