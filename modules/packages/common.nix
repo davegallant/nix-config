@@ -54,8 +54,9 @@ in {
       unstable.skaffold
 
       # cloud
-      unstable.google-cloud-sdk
       unstable.awscli2
+      unstable.azure-cli
+      unstable.google-cloud-sdk
 
       # LSP
       nodePackages.bash-language-server
