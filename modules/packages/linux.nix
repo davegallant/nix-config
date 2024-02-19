@@ -32,7 +32,6 @@ in {
       gnomeExtensions.quick-settings-tweaker
       gnomeExtensions.tailscale-status
       gnomeExtensions.tray-icons-reloaded
-      google-cloud-sdk
       iputils
       kazam
       legendary-gl
@@ -45,6 +44,7 @@ in {
       pavucontrol
       pinentry-curses
       podman
+      podman-compose
       psst
       qemu
       rustup
