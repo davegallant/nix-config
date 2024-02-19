@@ -12,7 +12,6 @@ in {
       # essentials
       curl
       gcc
-      git-crypt
       gnumake
       gnupg
       imagemagick
@@ -58,7 +57,7 @@ in {
       unstable.google-cloud-sdk
       unstable.awscli2
 
-      # language servers
+      # LSP
       nodePackages.bash-language-server
       nodePackages.pyright
       nodePackages.yaml-language-server
