@@ -21,7 +21,6 @@ in {
     };
 
     brews = [
-      "azure-cli"
       "coreutils"
       "gnu-sed"
       "gnu-tar"
@@ -50,7 +49,6 @@ in {
     ];
 
     taps = [
-      "azure/bicep"
       "homebrew/bundle"
       "homebrew/cask-fonts"
       "homebrew/cask-versions"
