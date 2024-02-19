@@ -403,6 +403,7 @@ in {
       ];
 
       plugins = {
+        copilot-vim.enable = true;
         cmp-path.enable = true;
         cmp-treesitter.enable = true;
         commentary.enable = true;
