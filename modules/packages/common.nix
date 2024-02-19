@@ -29,7 +29,6 @@ in {
       fd
       unstable.github-cli
       progress
-      glab
       hadolint
       nodePackages.eslint
       oha
@@ -63,6 +62,7 @@ in {
       nodePackages.pyright
       nodePackages.yaml-language-server
       sumneko-lua-language-server
+      terraform-ls
 
       # monitoring
       ctop
@@ -102,11 +102,6 @@ in {
       neofetch
       pfetch
 
-      # infra
-      terraform-ls
-      terraformer
-      tflint
-
       # nix
       alejandra
       cachix
@@ -126,12 +121,6 @@ in {
       python310Packages.poetry-core
       python310Packages.setuptools
       python310Packages.virtualenv
-
-      # media
-      youtube-dl
-
-      # blog
-      hugo
     ];
   in
     common;
