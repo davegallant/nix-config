@@ -21,6 +21,8 @@
     };
   };
 
+  systemd.services.NetworkManager-wait-online.enable = false;
+
   services = {
     sshd.enable = true;
     tailscale.enable = true;
