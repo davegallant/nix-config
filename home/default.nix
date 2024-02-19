@@ -578,8 +578,4 @@ in {
       };
     };
   };
-
-  home.file = {
-    ".aws/config".source = ./.aws/config;
-  };
 }
