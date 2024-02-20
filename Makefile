@@ -27,7 +27,7 @@ update:
 	nix flake update
 	make
 	git add .
-	git commit -S -m "nix flake update: $$(TZ=UTC date +%Y-%m-%d_%H-%M-%S)"
+	git commit -S -m "nix flake update: $$(TZ=UTC date +%Y-%m-%d %H:%M:%S %Z))"
 	git push
 
 fmt:
