@@ -9,6 +9,7 @@
 in {
   environment.systemPackages = with pkgs; let
     linux = [
+      android-tools
       bitwarden
       chromium
       cryptsetup
@@ -36,7 +37,6 @@ in {
       kazam
       legendary-gl
       lm_sensors
-      logseq
       mullvad-vpn
       netdata
       nfs-utils
@@ -49,14 +49,12 @@ in {
       qemu
       rustup
       ryujinx
+      signal-desktop
       strace
       tailscale
       traceroute
-      unstable.android-studio
-      unstable.android-tools
       unstable.obsidian
-      unstable.signal-desktop
-      unstable.unityhub
+      unstable.logseq
       unstable.yuzu
       unstable.zoom-us
       usbutils
