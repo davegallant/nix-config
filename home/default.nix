@@ -368,6 +368,8 @@ in {
 
     nixvim = {
       enable = true;
+      viAlias = true;
+      vimAlias = true;
       colorschemes.gruvbox.enable = true;
       keymaps = [
         {
@@ -447,9 +449,6 @@ in {
           keymapsSilent = true;
         };
       };
-      extraPlugins = with pkgs.vimPlugins; [
-        nvim-lspconfig
-      ];
       options = {
         autoindent = true;
         backup = false;
