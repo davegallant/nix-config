@@ -40,7 +40,6 @@ in {
       mullvad-vpn
       netdata
       nfs-utils
-      obs-studio
       pavucontrol
       pinentry-curses
       podman
