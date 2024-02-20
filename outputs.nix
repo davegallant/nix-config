@@ -10,7 +10,13 @@
 } @ inputs: {
   nixosConfigurations = let
     modulesDir = ./modules;
-    unstable = import nixpkgs-unstable {};
+    unstable = import nixpkgs-unstable {
+      system = "x86_64-linux";
+      config.allowUnfree = true;
+      config.permittedInsecurePackages = [
+        "electron-25.9.0" # caused by obsidian
+      ];
+    };
     defaultModules = [
       home-manager.nixosModules.home-manager
       ./modules/common/fonts.nix
@@ -71,7 +77,6 @@
     ];
   in {
     hephaestus = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
       specialArgs = {inherit unstable;};
       modules =
         [

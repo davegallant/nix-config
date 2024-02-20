@@ -7,11 +7,8 @@ MAKEFLAGS += --no-builtin-rules
 HOSTNAME ?= $(shell hostname)
 UNAME_S := $(shell uname -s)
 
-export NIXPKGS_ALLOW_UNFREE := 1
-
 ifeq ($(UNAME_S),Linux)
-	SWITCH_CMD := nixos-rebuild --use-remote-sudo -I nixos-config="modules/machines/$(HOSTNAME)/configuration.nix" switch --flake '.\#' \
-								--impure
+	SWITCH_CMD := nixos-rebuild --use-remote-sudo -I nixos-config="modules/machines/$(HOSTNAME)/configuration.nix" switch --flake '.\#'
 endif
 ifeq ($(UNAME_S),Darwin)
 	SWITCH_CMD := exec darwin-rebuild switch --flake .
