@@ -419,7 +419,7 @@ in {
           #helm-ls.enable = true;
           jsonls.enable = true;
           pyright.enable = true;
-          rnix-lsp.enable = true;
+          nixd.enable = true;
           terraformls.enable = true;
           yamlls.enable = true;
         };
