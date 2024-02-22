@@ -21,11 +21,7 @@ rollback:
 	nixos-rebuild --use-remote-sudo switch --rollback -I nixos-config="modules/machines/$(HOSTNAME)/configuration.nix"
 
 update:
-	nix flake update
-	make
-	git add .
-	git commit -S -m "nix flake update: $$(TZ=UTC date '+%Y-%m-%d %H:%M:%S %Z')"
-	git push
+	@./nix-flake-update.sh
 
 fmt:
 	alejandra .
