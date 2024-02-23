@@ -27,19 +27,20 @@ in {
       bat
       eza
       fd
-      unstable.github-cli
-      progress
       hadolint
       nodePackages.eslint
       oha
       pre-commit
+      progress
       ripgrep
-      yq-go
       shellcheck
       shfmt
       starship
       tldr
       tmux-sessionizer
+      unstable.atuin
+      unstable.github-cli
+      yq-go
 
       # containers
       krew

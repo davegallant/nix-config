@@ -146,11 +146,9 @@ in {
           alias xdg-open=open
         fi
 
-        # helm
         source <(helm completion zsh)
-
-        # kubectl
         source <(kubectl completion zsh)
+        eval "$(atuin init zsh)"
 
         # kubecolor
         source <(kubectl completion zsh)
@@ -363,7 +361,6 @@ in {
 
     fzf = {
       enable = true;
-      enableZshIntegration = true;
     };
 
     nixvim = {
