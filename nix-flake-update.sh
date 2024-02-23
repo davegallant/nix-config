@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+git pull
 update_msg=$(nix flake update 2>&1 | grep -v 'warning:')
 make
 git add .
