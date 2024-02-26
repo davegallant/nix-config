@@ -5,8 +5,9 @@
 
   networking = {hostName = "zelus";};
 
-  # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
+
+  nix.extraOptions = "experimental-features = nix-command flakes";
   nix.package = pkgs.nixVersions.stable;
 
   programs.zsh = {
