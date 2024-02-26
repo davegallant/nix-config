@@ -11,7 +11,6 @@ in {
     linux = [
       android-tools
       bitwarden
-      chromium
       cryptsetup
       deja-dup
       discord
@@ -52,8 +51,9 @@ in {
       strace
       tailscale
       traceroute
-      unstable.obsidian
+      ungoogled-chromium
       unstable.logseq
+      unstable.obsidian
       unstable.yuzu
       unstable.zoom-us
       usbutils
