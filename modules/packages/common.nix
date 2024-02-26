@@ -50,6 +50,7 @@ in {
       minikube
       stern
       unstable.helm-docs
+      unstable.kubernetes-helm
       unstable.k9s
       unstable.skaffold
 
