@@ -19,8 +19,8 @@
     };
     defaultModules = [
       home-manager.nixosModules.home-manager
-      ./modules/common/fonts.nix
-      ./modules/packages/common.nix
+      ./modules/fonts.nix
+      ./modules/packages.nix
       ./modules/upgrade-diff.nix
 
       ({
@@ -71,8 +71,6 @@
       })
     ];
     desktopLinuxModules = [
-      ./modules/common/linux.nix
-      ./modules/packages/linux.nix
       ./modules/services/netdata/default.nix
     ];
   in {
@@ -100,10 +98,9 @@
 
       modules = [
         home-manager.darwinModules.home-manager
-        ./modules/common/darwin.nix
-        ./modules/packages/common.nix
+        ./modules/darwin.nix
         ./modules/machines/zelus/configuration.nix
-        ./modules/darwin/default.nix
+        ./modules/packages.nix
         ./modules/upgrade-diff.nix
 
         ({config, ...}: {
