@@ -1,8 +1,17 @@
 {
   config,
+  lib,
   pkgs,
   ...
-}: {
+}: let
+  checkBrew = "command -v brew > /dev/null";
+in {
+  users.users."dave.gallant".home = "/Users/dave.gallant";
+  environment = {
+    extraInit = ''
+      ${checkBrew} || >&2 echo "brew is not installed (install it via https://brew.sh)"
+    '';
+  };
   system.defaults = {
     loginwindow = {
       GuestEnabled = false;
@@ -53,5 +62,48 @@
       AppleShowAllExtensions = true;
       AppleShowScrollBars = "Automatic";
     };
+  };
+
+  homebrew = {
+    enable = true;
+    onActivation.autoUpdate = false;
+    onActivation.upgrade = false;
+    global = {
+      brewfile = true;
+    };
+
+    brews = [
+      "coreutils"
+      "gnu-sed"
+      "gnu-tar"
+      "netdata"
+      "node"
+      "podman"
+      "podman-compose"
+    ];
+
+    casks = [
+      "dbeaver-community"
+      "font-fira-code-nerd-font"
+      "font-hack-nerd-font"
+      "karabiner-elements"
+      "logseq"
+      "lulu"
+      "notunes"
+      "obsidian"
+      "podman-desktop"
+      "postman"
+      "raycast"
+      "rectangle"
+      "stats"
+      "warp"
+    ];
+
+    taps = [
+      "homebrew/bundle"
+      "homebrew/cask-fonts"
+      "homebrew/cask-versions"
+      "homebrew/services"
+    ];
   };
 }
