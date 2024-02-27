@@ -8,7 +8,7 @@ HOSTNAME ?= $(shell hostname)
 UNAME_S := $(shell uname -s)
 
 ifeq ($(UNAME_S),Linux)
-	SWITCH_CMD := nixos-rebuild --use-remote-sudo -I nixos-config="modules/machines/$(HOSTNAME)/configuration.nix" switch --flake '.\#'
+	SWITCH_CMD := nixos-rebuild --use-remote-sudo -I nixos-config="machines/$(HOSTNAME)/configuration.nix" switch --flake '.\#'
 endif
 ifeq ($(UNAME_S),Darwin)
 	SWITCH_CMD := exec darwin-rebuild switch --flake .
@@ -18,7 +18,7 @@ switch:
 	$(SWITCH_CMD)
 
 rollback:
-	nixos-rebuild --use-remote-sudo switch --rollback -I nixos-config="modules/machines/$(HOSTNAME)/configuration.nix"
+	nixos-rebuild --use-remote-sudo switch --rollback -I nixos-config="machines/$(HOSTNAME)/configuration.nix"
 
 update:
 	@./nix-flake-update.sh
