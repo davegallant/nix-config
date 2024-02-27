@@ -31,11 +31,6 @@ in {
       useDHCP = true;
     };
     firewall = {
-      allowedUDPPorts = [
-        41641 # tailscale
-      ];
-    };
-    firewall = {
       allowPing = false;
       enable = true;
       checkReversePath = "loose";
