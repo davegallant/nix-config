@@ -543,7 +543,7 @@ in {
     firefox = {
       enable = stdenv.isLinux;
 
-      package = unstable.firefox-devedition;
+      package = pkgs.firefox-devedition;
 
       profiles = {
         default = {
