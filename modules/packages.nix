@@ -59,7 +59,7 @@ in {
     unstable.azure-cli
     unstable.google-cloud-sdk
 
-    # LSP
+    # lsp
     nodePackages.bash-language-server
     nodePackages.pyright
     nodePackages.yaml-language-server
@@ -72,10 +72,6 @@ in {
     grafana-loki
     htop
     procs
-
-    # lua
-    lua53Packages.luacheck
-    stylua
 
     # golang
     gofumpt
@@ -98,6 +94,7 @@ in {
     openssl
     openvpn
     sshfs # mac requires https://osxfuse.github.io/
+    tcpdump
     vpngate
 
     # rice
@@ -112,16 +109,9 @@ in {
     nixfmt
     nixpkgs-fmt
     nixpkgs-review
-    rnix-lsp
 
     # python
     poetry
-    python310
-    python310Packages.black
-    python310Packages.ipython
-    python310Packages.pip
-    python310Packages.poetry-core
-    python310Packages.setuptools
-    python310Packages.virtualenv
+    python313
   ];
 }
