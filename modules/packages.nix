@@ -24,6 +24,7 @@ in {
 
     # modern cli
     bat
+    doggo
     eza
     fd
     hadolint
