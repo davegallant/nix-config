@@ -19,9 +19,9 @@
     };
     defaultModules = [
       home-manager.nixosModules.home-manager
-      ./modules/fonts.nix
-      ./modules/packages.nix
-      ./modules/upgrade-diff.nix
+      ./fonts.nix
+      ./packages.nix
+      ./upgrade-diff.nix
 
       ({
         config,
@@ -53,7 +53,7 @@
           };
 
           nixpkgs.overlays = [
-            (import ./modules/overlays)
+            (import ./overlays)
           ];
 
           home-manager = {
@@ -71,15 +71,15 @@
       })
     ];
     desktopLinuxModules = [
-      ./modules/services/netdata/default.nix
+      ./services/netdata/default.nix
     ];
   in {
     hephaestus = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit unstable;};
       modules =
         [
-          ./modules/machines/hephaestus/configuration.nix
-          ./modules/machines/hephaestus/hardware.nix
+          ./machines/hephaestus/configuration.nix
+          ./machines/hephaestus/hardware.nix
         ]
         ++ defaultModules
         ++ desktopLinuxModules;
@@ -98,15 +98,15 @@
 
       modules = [
         home-manager.darwinModules.home-manager
-        ./modules/darwin.nix
-        ./modules/machines/zelus/configuration.nix
-        ./modules/packages.nix
-        ./modules/upgrade-diff.nix
+        ./darwin.nix
+        ./machines/zelus/configuration.nix
+        ./packages.nix
+        ./upgrade-diff.nix
 
         ({config, ...}: {
           config = {
             nixpkgs.overlays = [
-              (import ./modules/overlays)
+              (import ./overlays)
             ];
             home-manager = {
               useGlobalPkgs = true;
