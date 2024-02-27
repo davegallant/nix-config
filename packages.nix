@@ -10,7 +10,6 @@ in {
   environment.systemPackages = with pkgs; [
     # essentials
     curl
-    gcc
     gnumake
     gnupg
     imagemagick
@@ -63,13 +62,9 @@ in {
     nodePackages.bash-language-server
     nodePackages.pyright
     nodePackages.yaml-language-server
-    sumneko-lua-language-server
     terraform-ls
 
     # monitoring
-    ctop
-    glances
-    grafana-loki
     htop
     procs
 
@@ -93,7 +88,6 @@ in {
     nmap
     openssl
     openvpn
-    sshfs # mac requires https://osxfuse.github.io/
     tcpdump
     vpngate
 

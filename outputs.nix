@@ -70,9 +70,6 @@
         };
       })
     ];
-    desktopLinuxModules = [
-      ./services/netdata/default.nix
-    ];
   in {
     hephaestus = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit unstable;};
@@ -80,9 +77,9 @@
         [
           ./machines/hephaestus/configuration.nix
           ./machines/hephaestus/hardware.nix
+          ./services/netdata/default.nix
         ]
-        ++ defaultModules
-        ++ desktopLinuxModules;
+        ++ defaultModules;
     };
   };
 
