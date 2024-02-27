@@ -3,7 +3,21 @@
   pkgs,
   unstable,
   ...
-}: {
+}: let
+  gnomeExtensions = with pkgs.gnomeExtensions; [
+    appindicator
+    bluetooth-quick-connect
+    blur-my-shell
+    caffeine
+    clipboard-indicator
+    dash-to-dock
+    grand-theft-focus
+    notification-banner-reloaded
+    quick-settings-tweaker
+    tailscale-status
+    tray-icons-reloaded
+  ];
+in {
   imports = [./hardware.nix];
 
   hardware.opengl.enable = true;
@@ -124,60 +138,50 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    android-tools
-    bitwarden
-    cryptsetup
-    deja-dup
-    discord
-    docker
-    docker-compose
-    foliate
-    ghostscript
-    gimp-with-plugins
-    glibcLocales
-    gnome.gnome-tweaks
-    gnomeExtensions.appindicator
-    gnomeExtensions.bluetooth-quick-connect
-    gnomeExtensions.blur-my-shell
-    gnomeExtensions.caffeine
-    gnomeExtensions.clipboard-indicator
-    gnomeExtensions.dash-to-dock
-    gnomeExtensions.grand-theft-focus
-    gnomeExtensions.notification-banner-reloaded
-    gnomeExtensions.quick-settings-tweaker
-    gnomeExtensions.tailscale-status
-    gnomeExtensions.tray-icons-reloaded
-    iputils
-    kazam
-    legendary-gl
-    lm_sensors
-    mullvad-vpn
-    netdata
-    nfs-utils
-    pavucontrol
-    pinentry-curses
-    podman
-    podman-compose
-    psst
-    qemu
-    rustup
-    ryujinx
-    signal-desktop
-    strace
-    tailscale
-    traceroute
-    ungoogled-chromium
-    unstable.logseq
-    unstable.obsidian
-    unstable.yuzu
-    unstable.zoom-us
-    usbutils
-    virt-manager
-    vlc
-    whois
-    wine
-    wine64
-    wireshark-qt
-  ];
+  environment.systemPackages = with pkgs;
+    [
+      android-tools
+      bitwarden
+      cryptsetup
+      deja-dup
+      discord
+      docker
+      docker-compose
+      foliate
+      ghostscript
+      gimp-with-plugins
+      glibcLocales
+      gnome.gnome-tweaks
+      iputils
+      kazam
+      legendary-gl
+      lm_sensors
+      mullvad-vpn
+      netdata
+      nfs-utils
+      pavucontrol
+      pinentry-curses
+      podman
+      psst
+      qemu
+      rustup
+      ryujinx
+      strace
+      tailscale
+      traceroute
+      ungoogled-chromium
+      unstable.logseq
+      unstable.obsidian
+      unstable.signal-desktop
+      unstable.yuzu
+      unstable.zoom-us
+      usbutils
+      virt-manager
+      vlc
+      whois
+      wine
+      wine64
+      wireshark-qt
+    ]
+    ++ gnomeExtensions;
 }
