@@ -7,4 +7,5 @@ git add .
 git commit -S -m "nix flake update: $(TZ=UTC date '+%Y-%m-%d %H:%M:%S %Z')
 
 $update_msg"
+echo "$update_msg"
 git push
