@@ -86,6 +86,7 @@
   darwinConfigurations = let
     system = "aarch64-darwin";
     unstable = import nixpkgs-unstable {
+      config.allowUnfree = true;
       inherit system;
     };
   in {
