@@ -58,6 +58,7 @@ in {
     unstable.awscli2
     unstable.azure-cli
     unstable.google-cloud-sdk
+    unstable.terraform
 
     # lsp
     nodePackages.bash-language-server
