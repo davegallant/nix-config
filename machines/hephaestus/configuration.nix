@@ -165,6 +165,7 @@ in {
       tailscale
       traceroute
       ungoogled-chromium
+      unstable.burpsuite
       unstable.logseq
       unstable.obsidian
       unstable.signal-desktop
