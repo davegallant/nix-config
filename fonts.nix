@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   fonts.packages = with pkgs; [
     dejavu_fonts
     fira-code
@@ -14,9 +14,9 @@
   ];
 
   fonts.fontconfig.defaultFonts = {
-    sansSerif = ["Noto Sans"];
-    serif = ["Noto Serif"];
-    monospace = ["Noto Sans Mono"];
-    emoji = ["Noto Color Emoji"];
+    sansSerif = [ "Noto Sans" ];
+    serif = [ "Noto Serif" ];
+    monospace = [ "Noto Sans Mono" ];
+    emoji = [ "Noto Color Emoji" ];
   };
 }

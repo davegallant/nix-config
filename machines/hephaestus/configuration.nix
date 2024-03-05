@@ -1,9 +1,9 @@
-{
-  config,
-  pkgs,
-  unstable,
-  ...
-}: let
+{ config
+, pkgs
+, unstable
+, ...
+}:
+let
   gnomeExtensions = with pkgs.gnomeExtensions; [
     appindicator
     bluetooth-quick-connect
@@ -17,8 +17,9 @@
     tailscale-status
     tray-icons-reloaded
   ];
-in {
-  imports = [./hardware.nix];
+in
+{
+  imports = [ ./hardware.nix ];
 
   hardware.opengl.enable = true;
 
@@ -34,14 +35,14 @@ in {
       allowPing = false;
       enable = true;
       checkReversePath = "loose";
-      trustedInterfaces = ["tailscale0"];
+      trustedInterfaces = [ "tailscale0" ];
     };
   };
 
   systemd.services.NetworkManager-wait-online.enable = false;
 
   boot.kernelPackages = pkgs.linuxPackages;
-  boot.supportedFilesystems = ["ntfs"];
+  boot.supportedFilesystems = [ "ntfs" ];
 
   system = {
     autoUpgrade.enable = true;
@@ -55,7 +56,7 @@ in {
 
   users.users.dave = {
     isNormalUser = true;
-    extraGroups = ["docker" "wheel" "libvirtd" "corectrl"];
+    extraGroups = [ "docker" "wheel" "libvirtd" "corectrl" ];
     shell = pkgs.zsh;
   };
 
@@ -74,7 +75,7 @@ in {
   hardware.opengl.driSupport32Bit = true;
 
   # Steam
-  hardware.opengl.extraPackages32 = with pkgs.pkgsi686Linux; [libva];
+  hardware.opengl.extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
   hardware.pulseaudio.support32Bit = true;
   programs.steam = {
     enable = true;
@@ -116,7 +117,7 @@ in {
     resolved.enable = true;
     sshd.enable = true;
     tailscale.enable = true;
-    xserver.videoDrivers = ["amdgpu"];
+    xserver.videoDrivers = [ "amdgpu" ];
     xserver = {
       enable = true;
       displayManager = {

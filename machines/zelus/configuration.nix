@@ -1,9 +1,9 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   nixpkgs.config.allowUnfree = true;
 
-  environment = {variables = {LANG = "en_US.UTF-8";};};
+  environment = { variables = { LANG = "en_US.UTF-8"; }; };
 
-  networking = {hostName = "zelus";};
+  networking = { hostName = "zelus"; };
 
   services.nix-daemon.enable = true;
 
