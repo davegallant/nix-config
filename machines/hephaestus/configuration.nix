@@ -169,7 +169,6 @@ in {
       unstable.logseq
       unstable.obsidian
       unstable.signal-desktop
-      unstable.yuzu
       usbutils
       virt-manager
       vlc
@@ -177,6 +176,7 @@ in {
       wine
       wine64
       wireshark-qt
+      yuzu
       zoom-us
     ]
     ++ gnomeExtensions;
