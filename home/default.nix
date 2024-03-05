@@ -421,6 +421,14 @@ in {
           terraformls.enable = true;
           yamlls.enable = true;
         };
+        lsp-format = {
+          enable = true;
+          setup = {
+            terraform = {};
+            nix = {};
+            go = {};
+          };
+        };
         nvim-cmp.enable = true;
         rainbow-delimiters.enable = true;
         treesitter.enable = true;
