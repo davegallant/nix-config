@@ -406,6 +406,7 @@ in {
         diffview.enable = true;
         gitblame.enable = true;
         gitsigns.enable = true;
+        gitlinker.enable = true;
         lualine.enable = true;
         lsp.enable = true;
         lsp.servers = {
