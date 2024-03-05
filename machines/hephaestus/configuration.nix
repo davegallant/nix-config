@@ -160,7 +160,6 @@ in {
       psst
       qemu
       rustup
-      ryujinx
       strace
       tailscale
       traceroute
@@ -168,6 +167,7 @@ in {
       unstable.burpsuite
       unstable.logseq
       unstable.obsidian
+      unstable.ryujinx
       unstable.signal-desktop
       usbutils
       virt-manager
