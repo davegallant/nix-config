@@ -1,11 +1,12 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   checkBrew = "command -v brew > /dev/null";
-in {
+in
+{
   users.users."dave.gallant".home = "/Users/dave.gallant";
   environment = {
     extraInit = ''

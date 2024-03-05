@@ -1,7 +1,7 @@
-{
-  lib,
-  fetchFromGitHub,
-  buildGoModule,
+{ lib
+, fetchFromGitHub
+, buildGoModule
+,
 }:
 buildGoModule rec {
   pname = "vpngate";
@@ -22,7 +22,7 @@ buildGoModule rec {
     homepage = "https://www.vpngate.net";
     description = "a client for vpngate.net";
     license = licenses.gpl3;
-    maintainers = with maintainers; [davegallant];
+    maintainers = with maintainers; [ davegallant ];
     platforms = platforms.linux ++ platforms.darwin;
   };
 }

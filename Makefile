@@ -24,4 +24,4 @@ update:
 	@./nix-flake-update.sh
 
 fmt:
-	alejandra .
+	nixpkgs-fmt .

@@ -1,11 +1,10 @@
-{
-  config,
-  lib,
-  pkgs,
-  modulesPath,
-  ...
+{ config
+, lib
+, pkgs
+, modulesPath
+, ...
 }: {
-  imports = [(modulesPath + "/installer/scan/not-detected.nix")];
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   nixpkgs.hostPlatform = "x86_64-linux";
 
@@ -17,8 +16,8 @@
     "usbhid"
     "xhci_pci"
   ];
-  boot.initrd.kernelModules = [];
-  boot.kernelModules = ["kvm-amd"];
+  boot.initrd.kernelModules = [ ];
+  boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = with config.boot.kernelPackages; [
     xpadneo
   ];
@@ -73,6 +72,6 @@
   };
 
   swapDevices = [
-    {device = "/dev/disk/by-uuid/5d6d0388-2b15-4ff1-9f0f-391818a76090";}
+    { device = "/dev/disk/by-uuid/5d6d0388-2b15-4ff1-9f0f-391818a76090"; }
   ];
 }

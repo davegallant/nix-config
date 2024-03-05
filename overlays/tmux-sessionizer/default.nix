@@ -1,7 +1,7 @@
-{
-  stdenv,
-  lib,
-  fetchurl,
+{ stdenv
+, lib
+, fetchurl
+,
 }:
 stdenv.mkDerivation rec {
   pname = "tmux-sessionizer";
@@ -9,7 +9,7 @@ stdenv.mkDerivation rec {
 
   executable = ./tmux-sessionizer;
 
-  phases = ["unpackPhase"]; # Remove all other phases
+  phases = [ "unpackPhase" ]; # Remove all other phases
 
   unpackPhase = ''
     mkdir -p $out/bin

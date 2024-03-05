@@ -1,11 +1,12 @@
-{
-  lib,
-  pkgs,
-  unstable,
-  ...
-}: let
+{ lib
+, pkgs
+, unstable
+, ...
+}:
+let
   inherit (pkgs) stdenv;
-in {
+in
+{
   home.stateVersion = "23.11";
 
   services = {
@@ -53,7 +54,7 @@ in {
         wip = "for-each-ref --sort='authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' refs/heads";
       };
 
-      includes = [{path = "~/.gitconfig-work";}];
+      includes = [{ path = "~/.gitconfig-work"; }];
 
       delta = {
         enable = true;
@@ -71,8 +72,8 @@ in {
       };
 
       extraConfig = {
-        push = {default = "current";};
-        pull = {rebase = true;};
+        push = { default = "current"; };
+        pull = { rebase = true; };
       };
     };
 
@@ -83,7 +84,7 @@ in {
       settings = {
         add_newline = false;
         scan_timeout = 10;
-        character = {error_symbol = "[✖](bold red)";};
+        character = { error_symbol = "[✖](bold red)"; };
         gcloud = {
           format = "[$symbol($project) ~ $region]($style)";
         };
@@ -212,7 +213,7 @@ in {
 
         shell = {
           program = "zsh";
-          args = ["-l" "-c" "tmux" "u"];
+          args = [ "-l" "-c" "tmux" "u" ];
         };
 
         colors = {
@@ -347,7 +348,7 @@ in {
 
     rofi = {
       enable = stdenv.isLinux;
-      plugins = [pkgs.rofi-emoji];
+      plugins = [ pkgs.rofi-emoji ];
       terminal = "${pkgs.alacritty}/bin/alacritty";
       font = "Fira Font Mono 24";
       theme = "gruvbox-dark";
@@ -369,7 +370,7 @@ in {
       keymaps = [
         {
           key = "<C-n>";
-          mode = ["n"];
+          mode = [ "n" ];
           action = "<cmd>tabnew<cr>";
           options = {
             silent = true;
@@ -378,22 +379,22 @@ in {
         # copy to OS clipboard
         {
           key = "<leader>y";
-          mode = ["v"];
+          mode = [ "v" ];
           action = "\"+y";
         }
         {
           key = "gD";
-          mode = ["n"];
+          mode = [ "n" ];
           action = "<cmd>lua vim.lsp.buf.declaration()<CR>";
         }
         {
           key = "gd";
-          mode = ["n"];
+          mode = [ "n" ];
           action = "<cmd>lua vim.lsp.buf.definition()<CR>";
         }
         {
           key = "gr";
-          mode = ["n"];
+          mode = [ "n" ];
           action = "<cmd>lua vim.lsp.buf.references()<CR>";
         }
       ];
@@ -424,9 +425,9 @@ in {
         lsp-format = {
           enable = true;
           setup = {
-            terraform = {};
-            nix = {};
-            go = {};
+            terraform = { };
+            nix = { };
+            go = { };
           };
         };
         nvim-cmp.enable = true;
