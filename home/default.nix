@@ -431,6 +431,11 @@ in
           };
         };
         nvim-cmp.enable = true;
+        nvim-tree.enable = true;
+        packer = {
+          enable = true;
+          plugins = [ ];
+        };
         rainbow-delimiters.enable = true;
         treesitter.enable = true;
         telescope = {
