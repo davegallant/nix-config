@@ -177,7 +177,6 @@ in
       wine
       wine64
       wireshark-qt
-      yuzu
       zoom-us
     ]
     ++ gnomeExtensions;
