@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 git pull
 update_msg=$(nix flake update 2>&1 | grep -v 'warning:')
 make
