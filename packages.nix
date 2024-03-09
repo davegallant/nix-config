@@ -13,11 +13,8 @@ in
     curl
     gnumake
     gnupg
-    imagemagick
     jq
     unzip
-    viddy
-    wget
     xclip
     xdg-utils
     zip
@@ -40,6 +37,7 @@ in
     tmux-sessionizer
     unstable.atuin
     unstable.github-cli
+    viddy
     yq-go
 
     # containers
@@ -99,11 +97,7 @@ in
     pfetch
 
     # nix
-    alejandra
-    cachix
-    nix-diff
     nix-tree
-    nixfmt
     nixpkgs-fmt
     nixpkgs-review
 
