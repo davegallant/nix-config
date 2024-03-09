@@ -104,5 +104,6 @@ in
     # python
     poetry
     python313
+    virtualenv
   ];
 }
