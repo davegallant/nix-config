@@ -8,8 +8,6 @@
     home-manager.url = "github:nix-community/home-manager/release-23.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    nix-ld.url = "github:Mic92/nix-ld";
-
     nixos-hardware.url = "github:NixOS/nixos-hardware";
 
     darwin = {
@@ -30,7 +28,6 @@
     , nixpkgs
     , nixpkgs-unstable
     , nixos-hardware
-    , nix-ld
     , ...
     } @ inputs: {
       nixosConfigurations =
