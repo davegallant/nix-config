@@ -49,14 +49,9 @@
 
             ({ config
              , lib
-             , lib'
              , ...
              }: {
               config = {
-                _module.args = {
-                  lib' = lib // import ./lib { inherit config lib; };
-                };
-
                 nix = {
                   settings = {
                     auto-optimise-store = true;
