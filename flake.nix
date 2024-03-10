@@ -116,7 +116,6 @@
 
             modules = [
               home-manager.darwinModules.home-manager
-              ./darwin.nix
               ./machines/zelus/configuration.nix
               ./packages.nix
               ./upgrade-diff.nix
