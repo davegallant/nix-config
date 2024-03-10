@@ -183,11 +183,6 @@ in
 
       "oh-my-zsh" = {
         enable = true;
-        plugins = [
-          "gitfast"
-          "last-working-dir"
-          "tmux"
-        ];
       };
     };
 
