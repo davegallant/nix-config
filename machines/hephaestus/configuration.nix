@@ -238,7 +238,6 @@ in
       podman
       psst
       qemu
-      rustup
       strace
       tailscale
       traceroute
