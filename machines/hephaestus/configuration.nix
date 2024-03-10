@@ -23,7 +23,12 @@ in
 
   hardware.opengl.enable = true;
 
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+    permittedInsecurePackages = [
+      "nix-2.16.2"
+    ];
+  };
 
   networking = {
     iproute2.enable = true;
