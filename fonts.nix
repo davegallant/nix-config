@@ -7,6 +7,7 @@
     font-awesome
     google-fonts
     liberation_ttf
+    nerdfonts
     noto-fonts
     noto-fonts-cjk
     noto-fonts-emoji
