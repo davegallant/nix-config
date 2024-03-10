@@ -13,9 +13,7 @@
       unstable = import nixpkgs-unstable {
         system = "x86_64-linux";
         config.allowUnfree = true;
-        config.permittedInsecurePackages = [
-          "electron-25.9.0" # caused by obsidian
-        ];
+        config.permittedInsecurePackages = [ ];
       };
       defaultModules = [
         home-manager.nixosModules.home-manager
