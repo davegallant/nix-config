@@ -74,7 +74,6 @@
         modules =
           [
             ./machines/hephaestus/configuration.nix
-            ./machines/hephaestus/hardware.nix
             ./services/netdata/default.nix
           ]
           ++ defaultModules;
