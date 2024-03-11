@@ -118,7 +118,9 @@ in
     };
   };
 
-  systemd.services.NetworkManager-wait-online.enable = false;
+  systemd.services = {
+    NetworkManager-wait-online.enable = false;
+  };
 
   system = {
     autoUpgrade.enable = true;
@@ -195,6 +197,9 @@ in
     resolved.enable = true;
     sshd.enable = true;
     tailscale.enable = true;
+    udev.extraRules = ''
+      ACTION=="add", ATTR{idVendor}=="041e", ATTR{idProduct}=="3255", RUN+="${pkgs.sbx-h6-rgb}/bin/sbx-h6-ctl -c c010ff 041e:3255"
+    '';
     xserver.videoDrivers = [ "amdgpu" ];
     xserver = {
       enable = true;
@@ -238,6 +243,7 @@ in
       podman
       psst
       qemu
+      sbx-h6-rgb
       strace
       tailscale
       traceroute
