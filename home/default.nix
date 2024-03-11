@@ -371,11 +371,15 @@ in
             silent = true;
           };
         }
-        # copy to OS clipboard
         {
           key = "<leader>y";
           mode = [ "v" ];
-          action = "\"+y";
+          action = "\"+y"; # copy to OS clipboard
+        }
+        {
+          key = "<leader>t";
+          mode = [ "n" ];
+          action = "<cmd>NvimTreeFindFileToggle<CR>";
         }
         {
           key = "gD";
