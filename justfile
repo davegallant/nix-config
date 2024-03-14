@@ -6,7 +6,7 @@ build-linux:
 	nixos-rebuild --use-remote-sudo -I nixos-config=machines/$host/configuration.nix switch --flake .
 
 build-mac:
-	darwin-rebuild switch --flake .
+	darwin-rebuild switch -I nixos-config="machines/$host/configuration.nix" --flake .
 
 rollback:
 	nixos-rebuild --use-remote-sudo switch --rollback -I nixos-config="machines/$host/configuration.nix"
