@@ -16,3 +16,9 @@ update:
 
 fmt:
 	nixpkgs-fmt .
+
+clean:
+  echo 'Cleaning user...'
+  nix-collect-garbage -d
+  echo 'Cleaning root...'
+  sudo nix-collect-garbage -d
