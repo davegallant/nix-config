@@ -17,7 +17,7 @@ To run a nixos rebuild:
 just build-linux
 ```
 
-To Run a darwin rebuild:
+To run a darwin rebuild:
 
 ```sh
 just build-mac
