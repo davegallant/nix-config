@@ -41,6 +41,14 @@ To rollback to the previous generation:
 just rollback
 ```
 
+## Garbage collection
+
+To cleanup previous files, run nix garbage collection:
+
+```sh
+just clean
+```
+
 ## Pre-commit hooks
 
 Pre-commit hooks are automatically activated when [direnv](https://github.com/direnv/direnv) is installed.
