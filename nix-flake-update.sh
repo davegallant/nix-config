@@ -9,7 +9,7 @@ update_msg=$(nix flake update 2>&1 | grep -v 'warning:')
 if [[ $arch == "Linux" ]]; then
   just build-linux
 elif [[ $arch == "Darwin" ]]; then
-  just build-darwin
+  just build-mac
 else
   echo "Unsupported OS: $arch"
   exit 1
