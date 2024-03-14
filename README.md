@@ -9,10 +9,18 @@ The configuration is very specific to my own machines and setup, but it may be a
 > on macOS: install the latest unstable nix from https://github.com/numtide/nix-unstable-installer (for nix flakes),
 > and nix-darwin: https://github.com/LnL7/nix-darwin
 
-To run a rebuild:
+Recipes are stored in a justfile. [just](https://github.com/casey/just) is required.
+
+To run a nixos rebuild:
 
 ```sh
-make
+just build-linux
+```
+
+To Run a darwin rebuild:
+
+```sh
+just build-mac
 ```
 
 ## Update
@@ -20,7 +28,7 @@ make
 To update nixpkgs defined in [flake.nix](./flake.nix), run:
 
 ```sh
-make update
+just update
 ```
 
 If there are updates, they should be reflected in [flake.lock](./flake.lock).
@@ -30,7 +38,7 @@ If there are updates, they should be reflected in [flake.lock](./flake.lock).
 To rollback to the previous generation:
 
 ```sh
-make rollback
+just rollback
 ```
 
 ## Pre-commit hooks
