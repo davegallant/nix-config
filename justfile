@@ -8,8 +8,11 @@ build-linux:
 build-mac:
 	darwin-rebuild switch -I nixos-config="machines/$host/configuration.nix" --flake .
 
-rollback:
+rollback-linux:
   nixos-rebuild --use-remote-sudo switch --rollback -I nixos-config="machines/$host/configuration.nix"
+
+rollback-mac:
+  darwin-rebuild --rollback -I nixos-config="machines/$host/configuration.nix"
 
 update:
   @./nix-flake-update.sh
