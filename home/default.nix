@@ -9,6 +9,9 @@ in
 {
   home.stateVersion = "23.11";
 
+  home.packages = with pkgs; [ just ];
+
+
   services = {
     gpg-agent = {
       enable = stdenv.isLinux;
@@ -164,21 +167,21 @@ in
         g = "git";
         gc = "git checkout $(git branch | fzf)";
         gco = "git checkout $(git branch -r | sed -e 's/^  origin\\///' | fzf)";
-        gr = "cd $(git rev-parse --show-toplevel)";
         gho = "gh repo view --web >/dev/null";
+        gr = "cd $(git rev-parse --show-toplevel)";
         grep = "rg --smart-case";
+        j = "just";
         k = "kubecolor";
         kcx = "kubectx";
         kns = "kubens";
         l = "eza -la --git --group-directories-first";
         m = "make";
+        nix-install = "nix-env -iA";
         ps = "procs";
         t = "tmux-sessionizer";
         tf = "terraform";
         tree = "eza --tree";
         v = "nvim";
-        nix-install = "nix-env -iA";
-        brew-x86 = "arch -x86_64 /usr/local/homebrew/bin/brew";
       };
 
       "oh-my-zsh" = {
@@ -256,11 +259,6 @@ in
           ];
         };
       };
-    };
-
-    autojump = {
-      enable = true;
-      enableZshIntegration = true;
     };
 
     go = {
