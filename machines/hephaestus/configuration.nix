@@ -74,6 +74,7 @@ in
     [
       android-tools
       bitwarden
+      chromium
       cryptsetup
       deja-dup
       discord
@@ -100,7 +101,6 @@ in
       strace
       tailscale
       traceroute
-      ungoogled-chromium
       unstable.burpsuite
       unstable.logseq
       unstable.obsidian
