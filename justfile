@@ -1,21 +1,15 @@
 set export
 
 config := "machines/$(hostname)/configuration.nix"
-arch := `uname s`
+arch := `uname -s`
 
-cmd := if arch == "Linux" { "nixos-rebuild" } else { "darwin-rebuild" }
+cmd := if arch == "Linux" { "nixos-rebuild --use-remote-sudo" } else { "darwin-rebuild" }
 
-build-linux:
-  nixos-rebuild --use-remote-sudo -I nixos-config=$config switch --flake .
+rebuild:
+  $cmd switch --flake . -I nixos-config=$config
 
-build-mac:
-	darwin-rebuild switch -I nixos-config=$config --flake .
-
-rollback-linux:
-  nixos-rebuild --use-remote-sudo switch --rollback -I nixos-config=$config
-
-rollback-mac:
-  darwin-rebuild --rollback -I nixos-config=$config
+rollback:
+  $cmd switch --rollback -I nixos-config=$config
 
 update:
   @./nix-flake-update.sh
