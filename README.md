@@ -38,7 +38,13 @@ If there are updates, they should be reflected in [flake.lock](./flake.lock).
 To rollback to the previous generation:
 
 ```sh
-just rollback
+just rollback-linux
+```
+
+or on macOS:
+
+```sh
+just rollback-mac
 ```
 
 ## Garbage collection
