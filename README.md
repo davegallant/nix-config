@@ -11,16 +11,10 @@ The configuration is very specific to my own machines and setup, but it may be a
 
 Recipes are stored in a justfile. [just](https://github.com/casey/just) is required.
 
-To run a NixOS rebuild:
+To run a rebuild:
 
 ```sh
-just build-linux
-```
-
-To run a macOS rebuild:
-
-```sh
-just build-mac
+just rebuild
 ```
 
 ## Update
@@ -38,13 +32,7 @@ If there are updates, they should be reflected in [flake.lock](./flake.lock).
 To rollback to the previous generation:
 
 ```sh
-just rollback-linux
-```
-
-or on macOS:
-
-```sh
-just rollback-mac
+just rollback
 ```
 
 ## Garbage collection
