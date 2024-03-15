@@ -65,29 +65,79 @@ in
     };
   };
 
-  fileSystems."/" = {
-    device = "/dev/disk/by-uuid/a6723178-6f18-428e-b541-9ac901861125";
-    fsType = "ext4";
+  console = {
+    font = "Lat2-Terminus16";
+    keyMap = "us";
   };
 
-  fileSystems."/home" = {
-    device = "/dev/disk/by-uuid/e3ab2e1a-bddf-4ae0-b00a-bf954c6c182b";
-    fsType = "ext4";
-  };
+  environment.systemPackages = with pkgs;
+    [
+      android-tools
+      bitwarden
+      cryptsetup
+      deja-dup
+      discord
+      docker
+      docker-compose
+      foliate
+      ghostscript
+      gimp-with-plugins
+      glibcLocales
+      gnome.gnome-tweaks
+      iputils
+      kazam
+      legendary-gl
+      lm_sensors
+      mullvad-vpn
+      netdata
+      nfs-utils
+      pavucontrol
+      pinentry-curses
+      podman
+      psst
+      qemu
+      sbx-h6-rgb
+      strace
+      tailscale
+      traceroute
+      ungoogled-chromium
+      unstable.burpsuite
+      unstable.logseq
+      unstable.obsidian
+      unstable.ryujinx
+      unstable.signal-desktop
+      usbutils
+      virt-manager
+      vlc
+      whois
+      wine
+      wine64
+      wireshark-qt
+      zoom-us
+    ]
+    ++ gnomeExtensions;
 
-  fileSystems."/boot/efi" = {
-    device = "/dev/disk/by-uuid/3CFD-D749";
-    fsType = "vfat";
-  };
-
-  fileSystems."/mnt/synology-2b/media" = {
-    device = "192.168.1.178:/volume1/Media";
-    fsType = "nfs";
-  };
-
-  fileSystems."/mnt/synology-2b/backups" = {
-    device = "192.168.1.178:/volume1/Backups";
-    fsType = "nfs";
+  fileSystems = {
+    "/" = {
+      device = "/dev/disk/by-uuid/a6723178-6f18-428e-b541-9ac901861125";
+      fsType = "ext4";
+    };
+    "/home" = {
+      device = "/dev/disk/by-uuid/e3ab2e1a-bddf-4ae0-b00a-bf954c6c182b";
+      fsType = "ext4";
+    };
+    "/boot/efi" = {
+      device = "/dev/disk/by-uuid/3CFD-D749";
+      fsType = "vfat";
+    };
+    "/mnt/synology-2b/media" = {
+      device = "192.168.1.178:/volume1/Media";
+      fsType = "nfs";
+    };
+    "/mnt/synology-2b/backups" = {
+      device = "192.168.1.178:/volume1/Backups";
+      fsType = "nfs";
+    };
   };
 
   swapDevices = [
@@ -139,10 +189,6 @@ in
   };
 
   i18n.defaultLocale = "en_US.UTF-8";
-  console = {
-    font = "Lat2-Terminus16";
-    keyMap = "us";
-  };
 
   time.timeZone = "America/Toronto";
 
@@ -158,22 +204,15 @@ in
     pulseaudio.support32Bit = true;
   };
 
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true;
-  };
-
-  virtualisation = {
-    docker.enable = true;
-    libvirtd.enable = true;
-    podman.enable = true;
-  };
-
   programs = {
     corectrl.enable = true;
     gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
+    };
+    steam = {
+      enable = true;
+      remotePlay.openFirewall = true;
     };
     zsh.enable = true;
   };
@@ -200,7 +239,6 @@ in
     udev.extraRules = ''
       ACTION=="add", ATTR{idVendor}=="041e", ATTR{idProduct}=="3255", RUN+="${pkgs.sbx-h6-rgb}/bin/sbx-h6-ctl -c c010ff 041e:3255"
     '';
-    xserver.videoDrivers = [ "amdgpu" ];
     xserver = {
       enable = true;
       displayManager = {
@@ -214,53 +252,13 @@ in
           enable = true;
         };
       };
+      videoDrivers = [ "amdgpu" ];
     };
   };
 
-  environment.systemPackages = with pkgs;
-    [
-      android-tools
-      bitwarden
-      cryptsetup
-      deja-dup
-      discord
-      docker
-      docker-compose
-      foliate
-      ghostscript
-      gimp-with-plugins
-      glibcLocales
-      gnome.gnome-tweaks
-      iputils
-      kazam
-      legendary-gl
-      lm_sensors
-      mullvad-vpn
-      netdata
-      nfs-utils
-      pavucontrol
-      pinentry-curses
-      podman
-      psst
-      qemu
-      sbx-h6-rgb
-      strace
-      tailscale
-      traceroute
-      ungoogled-chromium
-      unstable.burpsuite
-      unstable.logseq
-      unstable.obsidian
-      unstable.ryujinx
-      unstable.signal-desktop
-      usbutils
-      virt-manager
-      vlc
-      whois
-      wine
-      wine64
-      wireshark-qt
-      zoom-us
-    ]
-    ++ gnomeExtensions;
+  virtualisation = {
+    docker.enable = true;
+    libvirtd.enable = true;
+    podman.enable = true;
+  };
 }
