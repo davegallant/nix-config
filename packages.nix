@@ -25,7 +25,6 @@ in
     eza
     fd
     hadolint
-    just
     nodePackages.eslint
     oha
     pre-commit
