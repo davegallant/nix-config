@@ -1,18 +1,18 @@
 set export
 
-host := `hostname`
+config := "machines/$(hostname)/configuration.nix"
 
 build-linux:
-  nixos-rebuild --use-remote-sudo -I nixos-config=machines/$host/configuration.nix switch --flake .
+  nixos-rebuild --use-remote-sudo -I nixos-config=$config switch --flake .
 
 build-mac:
-	darwin-rebuild switch -I nixos-config="machines/$host/configuration.nix" --flake .
+	darwin-rebuild switch -I nixos-config=$config --flake .
 
 rollback-linux:
-  nixos-rebuild --use-remote-sudo switch --rollback -I nixos-config="machines/$host/configuration.nix"
+  nixos-rebuild --use-remote-sudo switch --rollback -I nixos-config=$config
 
 rollback-mac:
-  darwin-rebuild --rollback -I nixos-config="machines/$host/configuration.nix"
+  darwin-rebuild --rollback -I nixos-config=$config
 
 update:
   @./nix-flake-update.sh

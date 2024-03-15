@@ -11,13 +11,13 @@ The configuration is very specific to my own machines and setup, but it may be a
 
 Recipes are stored in a justfile. [just](https://github.com/casey/just) is required.
 
-To run a nixos rebuild:
+To run a NixOS rebuild:
 
 ```sh
 just build-linux
 ```
 
-To run a darwin rebuild:
+To run a macOS rebuild:
 
 ```sh
 just build-mac
