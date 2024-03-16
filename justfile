@@ -1,5 +1,7 @@
 set export
 
+alias u := update
+
 config := "machines/$(hostname)/configuration.nix"
 arch := `uname -s`
 
@@ -9,7 +11,7 @@ rebuild:
   $cmd switch --flake . -I nixos-config=$config
 
 rollback:
-  $cmd switch --rollback -I nixos-config=$config
+  $cmd switch --rollback --flake .
 
 update:
   @./nix-flake-update.sh
