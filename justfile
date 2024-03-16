@@ -2,13 +2,12 @@ set export
 
 alias u := update
 
-config := "machines/$(hostname)/configuration.nix"
 arch := `uname -s`
 
 cmd := if arch == "Linux" { "nixos-rebuild --use-remote-sudo" } else { "darwin-rebuild" }
 
 rebuild:
-  $cmd switch --flake . -I nixos-config=$config
+  $cmd switch --flake . -I nixos-config="machines/$(hostname)/configuration.nix"
 
 rollback:
   $cmd switch --rollback --flake .
