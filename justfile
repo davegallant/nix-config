@@ -13,6 +13,8 @@ rollback:
   $cmd switch --rollback --flake .
 
 update:
+  nix-channel --update
+  sudo nix-channel --update
   @./nix-flake-update.sh
 
 fmt:
