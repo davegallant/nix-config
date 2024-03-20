@@ -148,9 +148,7 @@ in
     hostPlatform = "x86_64-linux";
     config = {
       allowUnfree = true;
-      permittedInsecurePackages = [
-        "nix-2.16.2"
-      ];
+      permittedInsecurePackages = [ ];
     };
   };
 
