@@ -32,7 +32,6 @@ in
     ripgrep
     shellcheck
     shfmt
-    starship
     tldr
     tmux-sessionizer
     unstable.atuin
