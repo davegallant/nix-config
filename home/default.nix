@@ -89,7 +89,7 @@ in
         scan_timeout = 10;
         character = { error_symbol = "[✖](bold red)"; };
         gcloud = {
-          format = "[$symbol($project) ~ $region]($style)";
+          format = "";
         };
         kubernetes = {
           disabled = false;
