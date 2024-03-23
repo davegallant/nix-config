@@ -53,7 +53,7 @@ in
 
     # cloud
     aws-vault
-    unstable.awscli2
+    awscli2
     unstable.azure-cli
     unstable.google-cloud-sdk
     unstable.terraform
