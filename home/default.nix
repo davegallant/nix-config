@@ -500,6 +500,11 @@ in
       };
 
       extraConfigLua = ''
+
+        -- Enable copilot for yaml
+        -- https://github.com/orgs/community/discussions/108329
+        vim.cmd([[let g:copilot_filetypes = {'yaml': v:true}]])
+
         -- Format JSON
         vim.cmd([[command! JsonFormat execute "::%!jq '.'"]])
 
