@@ -52,8 +52,8 @@ in
     unstable.skaffold
 
     # cloud
-    aws-vault
-    awscli2
+    unstable.aws-vault
+    unstable.awscli2
     unstable.azure-cli
     unstable.google-cloud-sdk
     unstable.terraform
