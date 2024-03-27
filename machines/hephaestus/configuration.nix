@@ -95,7 +95,6 @@ in
       pavucontrol
       pinentry-curses
       podman
-      psst
       qemu
       sbx-h6-rgb
       strace
