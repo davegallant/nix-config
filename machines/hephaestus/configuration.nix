@@ -12,7 +12,7 @@ let
     blur-my-shell
     caffeine
     clipboard-indicator
-    dash-to-dock
+    dash2dock-lite
     grand-theft-focus
     notification-banner-reloaded
     quick-settings-tweaker
