@@ -215,30 +215,33 @@ in
         };
 
         colors = {
-          primary.background = "0x282828";
-          primary.foreground = "0xebdbb2";
+          primary.background = "#1a1b26";
+          primary.foreground = "#a9b1d6";
 
-          normal = {
-            black = "0x282828";
-            red = "0xcc241d";
-            green = "0x98971a";
-            yellow = "0xd79921";
-            blue = "0x458588";
-            magenta = "0xb16286";
-            cyan = "0x689d6a";
-            white = "0xa89984";
-          };
+          normal =
+            {
+              black = "#32344a";
+              red = "#f7768e";
+              green = "#9ece6a";
+              yellow = "#e0af68";
+              blue = "#7aa2f7";
+              magenta = "#ad8ee6";
+              cyan = "#449dab";
+              white = "#787c99";
+            };
 
-          bright = {
-            black = "0x928374";
-            red = "0xfb4934";
-            green = "0xb8bb26";
-            yellow = "0xfabd2f";
-            blue = "0x83a598";
-            magenta = "0xd3869b";
-            cyan = "0x8ec07c";
-            white = "0xebdbb2";
-          };
+          bright =
+            {
+              black = "#444b6a";
+              red = "#ff7a93";
+              green = "#b9f27c";
+              yellow = "#ff9e64";
+              blue = "#7da6ff";
+              magenta = "#bb9af7";
+              cyan = "#0db9d7";
+              white = "#acb0d0";
+            };
+
 
           key_bindings = [
             {
@@ -268,7 +271,7 @@ in
     tmux = {
       enable = true;
       clock24 = true;
-      terminal = "xterm-256color";
+      terminal = "tmux-256color";
       customPaneNavigationAndResize = true;
       plugins = with pkgs.tmuxPlugins; [
         {
@@ -316,6 +319,13 @@ in
         set-window-option -g automatic-rename on
         set-option -g set-titles on
 
+        # Proper colors
+        set-option -sa terminal-features ',alacritty:RGB'
+
+        # Undercurl
+        set-option -g default-terminal "tmux-256color"
+        set-option -ga terminal-features ",alacritty:usstyle"
+
         set -g mouse on
 
         set -g status-left-length 30
@@ -359,7 +369,10 @@ in
       enable = true;
       viAlias = true;
       vimAlias = true;
-      colorschemes.gruvbox.enable = true;
+      colorschemes.tokyonight = {
+        enable = true;
+        style = "night";
+      };
       keymaps = [
         {
           key = "<C-n>";
@@ -397,7 +410,7 @@ in
       ];
 
       plugins = {
-        auto-save.enable = true;
+        auto-save.enable = false;
         copilot-vim.enable = true;
         cmp-path.enable = true;
         cmp-treesitter.enable = true;
