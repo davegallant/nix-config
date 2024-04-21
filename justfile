@@ -12,9 +12,11 @@ rebuild:
 rollback:
   $cmd switch --rollback --flake .
 
-update:
+channel-update:
   nix-channel --update
   sudo nix-channel --update
+
+update:
   @./nix-flake-update.sh
 
 fmt:
