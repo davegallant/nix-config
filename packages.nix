@@ -49,7 +49,6 @@ in
     unstable.helm-docs
     unstable.kubernetes-helm
     unstable.k9s
-    unstable.skaffold
 
     # cloud
     unstable.aws-vault
