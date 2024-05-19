@@ -11,14 +11,11 @@ in
 
   home.packages = with pkgs; [ just ];
 
-
   stylix = {
     base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
-    # Disable nixvim due to tokyonight module missing
-    targets.nixvim.enable = false;
-    targets.vim.enable = false;
+    targets.nixvim.enable = false; # tokyonight module missing?
+    targets.vscode.enable = false; # overrides synced settings
   };
-
 
   services = {
     gpg-agent = {

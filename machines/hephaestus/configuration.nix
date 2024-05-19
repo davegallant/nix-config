@@ -26,8 +26,6 @@ in
   stylix = {
     base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
     image = "/run/current-system/sw/share/backgrounds/gnome/blobs-l.svg";
-    # Disable nixvim due to tokyonight module missing
-    targets.nixvim.enable = false;
     polarity = "dark";
   };
 
