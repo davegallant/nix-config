@@ -20,6 +20,7 @@
       url = "github:nix-community/nixvim/nixos-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    stylix.url = "github:danth/stylix/release-23.11";
   };
 
   outputs =
@@ -29,6 +30,7 @@
     , nixpkgs
     , nixpkgs-unstable
     , nixos-hardware
+    , stylix
     , ...
     } @ inputs: {
       nixosConfigurations =
@@ -50,6 +52,7 @@
                 ./services/netdata/default.nix
                 ./upgrade-diff.nix
                 home-manager.nixosModules.home-manager
+                stylix.nixosModules.stylix
 
                 ({ config
                  , lib
@@ -110,6 +113,7 @@
 
             modules = [
               home-manager.darwinModules.home-manager
+              stylix.darwinModules.stylix
               ./machines/zelus/configuration.nix
               ./packages.nix
               ./upgrade-diff.nix
