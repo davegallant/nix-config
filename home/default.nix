@@ -347,7 +347,6 @@ in
       enable = stdenv.isLinux;
       plugins = [ pkgs.rofi-emoji ];
       terminal = "${pkgs.alacritty}/bin/alacritty";
-
       extraConfig = {
         modi = "drun,run";
         show-icons = true;
@@ -438,9 +437,7 @@ in
         nvim-tree.enable = true;
         packer = {
           enable = true;
-          plugins = [
-            "folke/tokyonight.nvim"
-          ];
+          plugins = [ ];
         };
         rainbow-delimiters.enable = true;
         treesitter.enable = true;

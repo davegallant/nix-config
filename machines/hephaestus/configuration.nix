@@ -27,6 +27,7 @@ in
     base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
     image = "/run/current-system/sw/share/backgrounds/gnome/blobs-l.svg";
     polarity = "dark";
+    fonts.sizes.desktop = 24;
   };
 
   boot = {
