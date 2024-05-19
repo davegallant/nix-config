@@ -28,6 +28,7 @@ in
     image = "/run/current-system/sw/share/backgrounds/gnome/blobs-l.svg";
     # Disable nixvim due to tokyonight module missing
     targets.nixvim.enable = false;
+    polarity = "dark";
   };
 
   boot = {
