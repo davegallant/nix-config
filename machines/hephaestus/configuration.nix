@@ -23,6 +23,13 @@ in
 
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
+  stylix = {
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
+    image = "/run/current-system/sw/share/backgrounds/gnome/blobs-l.svg";
+    # Disable nixvim due to tokyonight module missing
+    targets.nixvim.enable = false;
+  };
+
   boot = {
     extraModulePackages = with config.boot.kernelPackages; [
       xpadneo
@@ -244,11 +251,7 @@ in
           wayland = false;
         };
       };
-      desktopManager = {
-        gnome = {
-          enable = true;
-        };
-      };
+      desktopManager.gnome.enable = true;
       videoDrivers = [ "amdgpu" ];
     };
   };

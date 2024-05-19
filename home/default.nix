@@ -12,6 +12,14 @@ in
   home.packages = with pkgs; [ just ];
 
 
+  stylix = {
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
+    # Disable nixvim due to tokyonight module missing
+    targets.nixvim.enable = false;
+    targets.vim.enable = false;
+  };
+
+
   services = {
     gpg-agent = {
       enable = stdenv.isLinux;
@@ -198,17 +206,6 @@ in
         live_config_reload = true;
         mouse.hide_when_typing = false;
 
-        font =
-          if stdenv.isLinux
-          then {
-            normal.family = "Fira Code";
-            size = 12;
-          }
-          else {
-            normal.family = "FiraCode Nerd Font";
-            size = 16;
-          };
-
         shell = {
           program = "zsh";
           args = [ "-l" "-c" "tmux" "u" ];
@@ -353,8 +350,7 @@ in
       enable = stdenv.isLinux;
       plugins = [ pkgs.rofi-emoji ];
       terminal = "${pkgs.alacritty}/bin/alacritty";
-      font = "Fira Font Mono 24";
-      theme = "gruvbox-dark";
+
       extraConfig = {
         modi = "drun,run";
         show-icons = true;
@@ -445,7 +441,9 @@ in
         nvim-tree.enable = true;
         packer = {
           enable = true;
-          plugins = [ ];
+          plugins = [
+            "folke/tokyonight.nvim"
+          ];
         };
         rainbow-delimiters.enable = true;
         treesitter.enable = true;
