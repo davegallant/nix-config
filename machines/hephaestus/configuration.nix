@@ -94,6 +94,7 @@ in
       iputils
       kazam
       legendary-gl
+      libation
       lm_sensors
       mullvad-vpn
       netdata
