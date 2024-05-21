@@ -15,6 +15,20 @@ in
     base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
     targets.nixvim.enable = false; # tokyonight module missing?
     targets.vscode.enable = false; # overrides synced settings
+    targets.alacritty.enable = true;
+    targets.tmux.enable = true;
+
+    fonts.sizes.terminal = 16;
+
+    fonts.monospace = {
+      name = "FiraCode Nerd Font Mono";
+      package = "${pkgs.fira-mono}";
+    };
+
+    fonts.sansSerif = {
+      name = "FiraCode Nerd Font";
+      package = "${pkgs.fira-code}";
+    };
   };
 
   services = {
