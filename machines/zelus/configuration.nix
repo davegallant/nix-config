@@ -109,4 +109,8 @@ in
     ];
   };
 
+  stylix.image = "/Library/tokyo-night.jpg";
+
+  stylix.autoEnable = false;
+
 }
