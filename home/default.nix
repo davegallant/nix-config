@@ -18,7 +18,14 @@ in
     targets.alacritty.enable = true;
     targets.tmux.enable = true;
 
-    fonts.sizes.terminal = 16;
+    fonts.sizes =
+      if stdenv.isLinux
+      then {
+        terminal = 14;
+      }
+      else {
+        terminal = 16;
+      };
 
     fonts.monospace = {
       name = "FiraCode Nerd Font Mono";
