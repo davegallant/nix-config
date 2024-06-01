@@ -13,7 +13,6 @@ in
 
   stylix = {
     base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
-    targets.nixvim.enable = false; # tokyonight module missing?
     targets.vscode.enable = false; # overrides synced settings
     targets.tmux.enable = true;
 
@@ -317,9 +316,6 @@ in
 
     wofi = {
       enable = stdenv.isLinux;
-      settings = {
-        location = "center";
-      };
     };
 
     fzf = {
@@ -330,10 +326,6 @@ in
       enable = true;
       viAlias = true;
       vimAlias = true;
-      colorschemes.tokyonight.settings.style = {
-        enable = true;
-        style = "night";
-      };
       keymaps = [
         {
           key = "<C-n>";
