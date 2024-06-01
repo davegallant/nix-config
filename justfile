@@ -1,6 +1,7 @@
 set export
 
 alias u := update
+alias r := rebuild
 
 arch := `uname -s`
 
