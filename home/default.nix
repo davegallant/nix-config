@@ -7,7 +7,7 @@ let
   inherit (pkgs) stdenv;
 in
 {
-  home.stateVersion = "23.11";
+  home.stateVersion = "24.05";
 
   home.packages = with pkgs; [ just ];
 
@@ -15,13 +15,12 @@ in
     base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
     targets.nixvim.enable = false; # tokyonight module missing?
     targets.vscode.enable = false; # overrides synced settings
-    targets.alacritty.enable = true;
     targets.tmux.enable = true;
 
     fonts.sizes =
       if stdenv.isLinux
       then {
-        terminal = 14;
+        terminal = 20;
       }
       else {
         terminal = 16;
@@ -130,7 +129,7 @@ in
 
     zsh = {
       enable = true;
-      enableAutosuggestions = true;
+      autosuggestion.enable = true;
       enableCompletion = true;
       syntaxHighlighting.enable = true;
       history.size = 1000000;
@@ -228,54 +227,6 @@ in
           program = "zsh";
           args = [ "-l" "-c" "tmux" "u" ];
         };
-
-        colors = {
-          primary.background = "#1a1b26";
-          primary.foreground = "#a9b1d6";
-
-          normal =
-            {
-              black = "#32344a";
-              red = "#f7768e";
-              green = "#9ece6a";
-              yellow = "#e0af68";
-              blue = "#7aa2f7";
-              magenta = "#ad8ee6";
-              cyan = "#449dab";
-              white = "#787c99";
-            };
-
-          bright =
-            {
-              black = "#444b6a";
-              red = "#ff7a93";
-              green = "#b9f27c";
-              yellow = "#ff9e64";
-              blue = "#7da6ff";
-              magenta = "#bb9af7";
-              cyan = "#0db9d7";
-              white = "#acb0d0";
-            };
-
-
-          key_bindings = [
-            {
-              key = "Home";
-              mods = "Control";
-              action = "ResetFontSize";
-            }
-            {
-              key = "Plus";
-              mods = "Control";
-              action = "IncreaseFontSize";
-            }
-            {
-              key = "Minus";
-              mods = "Control";
-              action = "DecreaseFontSize";
-            }
-          ];
-        };
       };
     };
 
@@ -364,13 +315,10 @@ in
       '';
     };
 
-    rofi = {
+    wofi = {
       enable = stdenv.isLinux;
-      plugins = [ pkgs.rofi-emoji ];
-      terminal = "${pkgs.alacritty}/bin/alacritty";
-      extraConfig = {
-        modi = "drun,run";
-        show-icons = true;
+      settings = {
+        location = "center";
       };
     };
 
@@ -382,7 +330,7 @@ in
       enable = true;
       viAlias = true;
       vimAlias = true;
-      colorschemes.tokyonight = {
+      colorschemes.tokyonight.settings.style = {
         enable = true;
         style = "night";
       };
@@ -420,6 +368,16 @@ in
           mode = [ "n" ];
           action = "<cmd>lua vim.lsp.buf.references()<CR>";
         }
+        {
+          key = "<leader>ff";
+          mode = [ "n" ];
+          action = "<cmd>Telescope Git Files<CR>";
+        }
+        {
+          key = "<leader>fg";
+          mode = [ "n" ];
+          action = "<cmd>live_grep<CR>";
+        }
       ];
 
       plugins = {
@@ -435,11 +393,11 @@ in
         lualine.enable = true;
         lsp.enable = true;
         lsp.servers = {
-          #ansiblels.enable = true;
+          ansiblels.enable = true;
           bashls.enable = true;
-          #dockerls.enable = true;
+          dockerls.enable = true;
           gopls.enable = true;
-          #helm-ls.enable = true;
+          helm-ls.enable = true;
           jsonls.enable = true;
           pyright.enable = true;
           nixd.enable = true;
@@ -454,7 +412,7 @@ in
             go = { };
           };
         };
-        nvim-cmp.enable = true;
+        cmp.enable = true;
         nvim-tree.enable = true;
         packer = {
           enable = true;
@@ -464,7 +422,7 @@ in
         treesitter.enable = true;
         telescope = {
           enable = true;
-          defaults = {
+          settings.defaults = {
             layout_strategy = "vertical";
             layout_config = {
               vertical = {
@@ -473,17 +431,9 @@ in
             };
           };
           package = pkgs.vimPlugins.telescope-fzy-native-nvim;
-          keymaps = {
-            "<leader>ff" = {
-              action = "git_files";
-              desc = "Telescope Git Files";
-            };
-            "<leader>fg" = "live_grep";
-          };
-          keymapsSilent = true;
         };
       };
-      options = {
+      opts = {
         autoindent = true;
         backup = false;
         belloff = "all";
