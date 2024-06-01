@@ -316,6 +316,11 @@ in
 
     wofi = {
       enable = stdenv.isLinux;
+      style = ''
+        window {
+          font-size: 36px;
+        }
+      '';
     };
 
     fzf = {
