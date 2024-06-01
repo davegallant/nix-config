@@ -24,8 +24,11 @@ in
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   stylix = {
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
-    image = "/run/current-system/sw/share/backgrounds/gnome/blobs-l.svg";
+    base16Scheme = "${unstable.base16-schemes}/share/themes/tokyo-night-dark.yaml";
+    image = pkgs.fetchurl {
+      url = "https://github.com/davegallant/nix-config/blob/main/nixos-wallpaper.png?raw=true";
+      sha256 = "Ztqn9+CHslr6wZdnOTeo/YNi/ICerpcFLyMArsZ/PIY=";
+    };
     polarity = "dark";
     fonts.sizes.desktop = 24;
   };
@@ -178,12 +181,11 @@ in
 
   system = {
     autoUpgrade.enable = true;
-    stateVersion = "23.11";
+    stateVersion = "24.05";
   };
 
   nix = {
     extraOptions = "experimental-features = nix-command flakes";
-    package = pkgs.nixUnstable;
   };
 
   users.users.dave = {
@@ -225,7 +227,7 @@ in
   services = {
     avahi = {
       enable = true;
-      nssmdns = true;
+      nssmdns4 = true;
       publish = {
         enable = true;
         addresses = true;
@@ -249,7 +251,7 @@ in
       displayManager = {
         gdm = {
           enable = true;
-          wayland = false;
+          wayland = true;
         };
       };
       desktopManager.gnome.enable = true;
