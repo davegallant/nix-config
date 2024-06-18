@@ -109,8 +109,9 @@ in
     ];
   };
 
-  stylix.image = "/Library/tokyo-night.jpg";
-
-  stylix.autoEnable = false;
+  stylix = {
+    # enable = true;
+    image = "/Library/tokyo-night.jpg";
+  };
 
 }
