@@ -12,9 +12,15 @@ in
   home.packages = with pkgs; [ just ];
 
   stylix = {
+    enable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
-    targets.vscode.enable = false; # overrides synced settings
-    targets.tmux.enable = true;
+    targets = {
+      alacritty.enable = true;
+      tmux.enable = true;
+      vscode.enable = false; # overrides synced settings
+    };
+
+    opacity.terminal = 1.0;
 
     fonts.sizes =
       if stdenv.isLinux
