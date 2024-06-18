@@ -111,7 +111,6 @@ in
       tailscale
       traceroute
       unstable.burpsuite
-      unstable.logseq
       unstable.obsidian
       unstable.ryujinx
       unstable.signal-desktop
