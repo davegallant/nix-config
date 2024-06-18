@@ -24,6 +24,7 @@ in
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   stylix = {
+    enable = true;
     base16Scheme = "${unstable.base16-schemes}/share/themes/tokyo-night-dark.yaml";
     image = pkgs.fetchurl {
       url = "https://github.com/davegallant/nix-config/blob/main/nixos-wallpaper.png?raw=true";
