@@ -84,7 +84,6 @@ in
     [
       android-tools
       bitwarden
-      chromium
       cryptsetup
       deja-dup
       discord
@@ -95,6 +94,7 @@ in
       gimp-with-plugins
       glibcLocales
       gnome.gnome-tweaks
+      google-chrome
       iputils
       kazam
       legendary-gl
