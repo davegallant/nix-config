@@ -76,6 +76,7 @@ in
     };
 
     brews = [
+      "azure-cli"
       "coreutils"
       "gnu-sed"
       "gnu-tar"
