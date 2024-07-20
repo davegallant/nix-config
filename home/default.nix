@@ -374,12 +374,12 @@ in
         {
           key = "<leader>ff";
           mode = [ "n" ];
-          action = "<cmd>Telescope Git Files<CR>";
+          action = "<cmd>Telescope find_files<CR>";
         }
         {
           key = "<leader>fg";
           mode = [ "n" ];
-          action = "<cmd>live_grep<CR>";
+          action = "<cmd>Telescope live_grep<CR>";
         }
       ];
 
