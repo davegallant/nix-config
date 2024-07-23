@@ -51,7 +51,6 @@ in
     unstable.k9s
 
     # cloud
-    unstable.aws-vault
     unstable.awscli2
     unstable.google-cloud-sdk
     unstable.terraform
