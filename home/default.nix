@@ -187,8 +187,6 @@ in
         alias kubectl=kubecolor
         # make completion work with kubecolor
         compdef kubecolor=kubectl
-
-        pfetch
       '';
 
       shellAliases = {
