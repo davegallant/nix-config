@@ -90,7 +90,6 @@ in
 
     # rice
     neofetch
-    pfetch
 
     # nix
     nix-tree
