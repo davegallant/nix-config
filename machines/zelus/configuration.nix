@@ -1,8 +1,6 @@
 { pkgs, ... }:
-let
-  checkBrew = "command -v brew > /dev/null";
-in
-{
+let checkBrew = "command -v brew > /dev/null";
+in {
   nixpkgs = {
     config = {
       allowUnfree = true;
@@ -58,7 +56,7 @@ in
 
     NSGlobalDomain = {
       "com.apple.sound.beep.feedback" = 0;
-      "com.apple.sound.beep.volume" = 0.000;
+      "com.apple.sound.beep.volume" = 0.0;
       ApplePressAndHoldEnabled = false;
       InitialKeyRepeat = 10;
       KeyRepeat = 2;
@@ -71,9 +69,7 @@ in
     enable = true;
     onActivation.autoUpdate = false;
     onActivation.upgrade = false;
-    global = {
-      brewfile = true;
-    };
+    global = { brewfile = true; };
 
     brews = [
       "azure-cli"
