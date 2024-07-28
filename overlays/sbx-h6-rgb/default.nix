@@ -1,9 +1,4 @@
-{ lib
-, fetchFromGitHub
-, pkgs
-, stdenv
-,
-}:
+{ lib, fetchFromGitHub, pkgs, stdenv, }:
 stdenv.mkDerivation rec {
   pname = "sbx-h6-rgb";
   version = "95b4ef9788ef94e557a4d1e815079d5ea8a70943";
@@ -15,9 +10,7 @@ stdenv.mkDerivation rec {
     sha256 = "sha256-tKKNdzijloBiGBHf5C604824B/BbxBxvCL/ms4orT9M=";
   };
 
-  buildInputs = with pkgs; [
-    hidapi
-  ];
+  buildInputs = with pkgs; [ hidapi ];
 
   buildPhase = ''
     make
@@ -35,4 +28,3 @@ stdenv.mkDerivation rec {
   };
 
 }
-

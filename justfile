@@ -21,7 +21,7 @@ update:
   @./nix-flake-update.sh
 
 fmt:
-  nixpkgs-fmt .
+  nixfmt .
 
 clean:
   echo 'Cleaning user...'
