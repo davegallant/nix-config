@@ -94,12 +94,12 @@ in {
       qemu
       sbx-h6-rgb
       strace
-      tailscale
       traceroute
       unstable.burpsuite
       unstable.obsidian
       unstable.ryujinx
       unstable.signal-desktop
+      unstable.tailscale
       usbutils
       virt-manager
       vlc
@@ -220,7 +220,10 @@ in {
     printing.enable = true;
     resolved.enable = true;
     sshd.enable = true;
-    tailscale.enable = true;
+    tailscale = {
+      enable = true;
+      package = unstable.tailscale;
+    };
     udev.extraRules = ''
       ACTION=="add", ATTR{idVendor}=="041e", ATTR{idProduct}=="3255", RUN+="${pkgs.sbx-h6-rgb}/bin/sbx-h6-ctl -c c010ff 041e:3255"
     '';
