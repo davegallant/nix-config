@@ -300,6 +300,8 @@ in {
 
         set -g status-right '#(gitmux #{pane_current_path})'
 
+        unbind -T copy-mode-vi MouseDragEnd1Pane
+
       '';
     };
 
