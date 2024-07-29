@@ -1,15 +1,15 @@
 { lib, fetchFromGitHub, buildGoModule, }:
 buildGoModule rec {
   pname = "vpngate";
-  version = "v0.2.0";
+  version = "v0.3.0";
 
-  vendorHash = "sha256-C91UAAQuS79W93s/0gqk5JBlYSPsxEHw9EAKJxWxyGI=";
+  vendorHash = "sha256-4JeVXLoiXdZoQM76cHOt5i31ZZGTId0rt8RkMH62/EM=";
 
   src = fetchFromGitHub {
     owner = "davegallant";
     repo = "vpngate";
     rev = version;
-    sha256 = "sha256-IRh1ehxrzBuxduGC8sud/euVlrKM3aZT8DW64Xxr4cU=";
+    sha256 = "sha256-P3eQvdUfjpq4a0Q2Hxby4zZ2uTSPjG1oXHxt8cW6fTQ=";
   };
 
   doCheck = false;
