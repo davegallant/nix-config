@@ -95,6 +95,7 @@ in {
       sbx-h6-rgb
       strace
       traceroute
+      unstable.blender
       unstable.burpsuite
       unstable.obsidian
       unstable.ryujinx
