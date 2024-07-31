@@ -87,6 +87,7 @@ in {
       "font-fira-code-nerd-font"
       "font-hack-nerd-font"
       "karabiner-elements"
+      "iterm2"
       "logseq"
       "lulu"
       "notunes"
