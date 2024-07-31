@@ -245,10 +245,6 @@ in {
           extraConfig = "set -g @plugin 'tmux-plugins/tmux-yank'";
         }
         {
-          plugin = sensible;
-          extraConfig = "set -g @plugin 'tmux-plugins/tmux-sensible'";
-        }
-        {
           plugin = tmux-colors-solarized;
           extraConfig = ''
             set -g @plugin 'seebi/tmux-colors-solarized'
@@ -301,7 +297,6 @@ in {
         set -g status-right '#(gitmux #{pane_current_path})'
 
         unbind -T copy-mode-vi MouseDragEnd1Pane
-
       '';
     };
 
