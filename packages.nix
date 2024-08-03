@@ -39,9 +39,10 @@ in {
     kubectx
     minikube
     stern
+    unstable.dive
     unstable.helm-docs
-    unstable.kubernetes-helm
     unstable.k9s
+    unstable.kubernetes-helm
 
     # cloud
     unstable.awscli2
