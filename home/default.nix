@@ -245,6 +245,10 @@ in {
           extraConfig = "set -g @plugin 'tmux-plugins/tmux-yank'";
         }
         {
+          plugin = copycat;
+          extraConfig = "set -g @plugin 'tmux-plugins/tmux-copycat'";
+        }
+        {
           plugin = tmux-colors-solarized;
           extraConfig = ''
             set -g @plugin 'seebi/tmux-colors-solarized'
