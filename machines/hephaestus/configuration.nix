@@ -101,6 +101,7 @@ in {
       unstable.ryujinx
       unstable.signal-desktop
       unstable.tailscale
+      unstable.zoom-us
       usbutils
       virt-manager
       vlc
@@ -108,7 +109,6 @@ in {
       wine
       wine64
       wireshark-qt
-      zoom-us
     ] ++ gnomeExtensions;
 
   fileSystems = {
