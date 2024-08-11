@@ -97,6 +97,7 @@ in {
       traceroute
       unstable.blender
       unstable.burpsuite
+      unstable.dotnet-sdk_8
       unstable.obsidian
       unstable.ryujinx
       unstable.signal-desktop
