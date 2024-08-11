@@ -101,6 +101,7 @@ in {
       unstable.ryujinx
       unstable.signal-desktop
       unstable.tailscale
+      unstable.unityhub
       unstable.zoom-us
       usbutils
       virt-manager
