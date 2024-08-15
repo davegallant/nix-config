@@ -195,7 +195,7 @@ in {
         m = "make";
         nix-install = "nix-env -iA";
         ps = "procs";
-        t = "tmux-sessionizer";
+        t = "tms";
         tf = "terraform";
         tree = "eza --tree";
         v = "nvim";
