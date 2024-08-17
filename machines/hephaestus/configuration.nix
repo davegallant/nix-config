@@ -74,7 +74,6 @@ in {
       discord
       docker
       docker-compose
-      foliate
       ghostscript
       gimp-with-plugins
       glibcLocales
