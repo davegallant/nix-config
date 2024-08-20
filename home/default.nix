@@ -189,6 +189,7 @@ in {
         grep = "rg --smart-case";
         j = "just";
         k = "kubecolor";
+        kp = "viddy 'kubectl get pods'";
         kcx = "kubectx";
         kns = "kubens";
         l = "eza -la --git --group-directories-first";
@@ -196,6 +197,7 @@ in {
         nix-install = "nix-env -iA";
         ps = "procs";
         t = "tms";
+        ts = "tms switch";
         tf = "terraform";
         tree = "eza --tree";
         v = "nvim";
