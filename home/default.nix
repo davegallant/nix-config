@@ -270,6 +270,12 @@ in {
             set -g @continuum-restore 'on'
           '';
         }
+        {
+          plugin = open;
+          extraConfig = ''
+            set -g @plugin 'tmux-plugins/tmux-open'
+          '';
+        }
       ];
       extraConfig = ''
         set-window-option -g automatic-rename on
@@ -302,7 +308,12 @@ in {
 
         set -g status-right '#(gitmux #{pane_current_path})'
 
-        unbind -T copy-mode-vi MouseDragEnd1Pane
+        #unbind -T copy-mode-vi MouseDragEnd1Pane
+        set-window-option -g mode-keys vi
+        bind-key -T copy-mode-vi v send -X begin-selection
+        bind-key -T copy-mode-vi V send -X select-line
+        bind-key -T copy-mode-vi y send -X copy-pipe-and-cancel 'xclip -in -selection clipboard'
+
       '';
     };
 
