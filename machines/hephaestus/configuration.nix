@@ -94,6 +94,7 @@ in {
       sbx-h6-rgb
       strace
       traceroute
+      ulauncher
       unstable.blender
       unstable.burpsuite
       unstable.dotnet-sdk_8
