@@ -176,6 +176,11 @@ in {
 
   i18n.defaultLocale = "en_US.UTF-8";
 
+  i18n.inputMethod = {
+    enabled = "ibus";
+    ibus.engines = with pkgs.ibus-engines; [ anthy ];
+  };
+
   time.timeZone = "America/Toronto";
 
   hardware = {
