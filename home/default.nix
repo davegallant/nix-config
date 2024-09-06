@@ -39,6 +39,8 @@ in {
     };
   };
 
+  services.lorri.enable = true;
+
   fonts.fontconfig.enable = true;
 
   programs = {
