@@ -39,7 +39,7 @@ in {
     };
   };
 
-  services.lorri.enable = true;
+  services.lorri.enable = stdenv.isLinux;
 
   fonts.fontconfig.enable = true;
 
