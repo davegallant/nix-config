@@ -3,7 +3,8 @@ let
   netdata = pkgs.netdata;
   netdataConf = ./netdata.conf;
   netdataDir = "/var/lib/netdata";
-in {
+in
+{
   users.extraGroups.netdata.gid = 220008;
   users.users.netdata.group = "netdata";
   users.extraUsers.netdata = {

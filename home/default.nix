@@ -1,6 +1,13 @@
-{ lib, pkgs, unstable, ... }:
-let inherit (pkgs) stdenv;
-in {
+{
+  lib,
+  pkgs,
+  unstable,
+  ...
+}:
+let
+  inherit (pkgs) stdenv;
+in
+{
   home.stateVersion = "24.05";
 
   home.packages = with pkgs; [ just ];
@@ -16,8 +23,7 @@ in {
 
     opacity.terminal = 1.0;
 
-    fonts.sizes =
-      if stdenv.isLinux then { terminal = 20; } else { terminal = 16; };
+    fonts.sizes = if stdenv.isLinux then { terminal = 20; } else { terminal = 16; };
 
     fonts.monospace = {
       name = "FiraCode Nerd Font Mono";
@@ -67,20 +73,17 @@ in {
         d = "diff";
         dc = "diff --cached";
         dcn = "diff --cached --name-only";
-        ds =
-          "! git diff origin | sed -r 's/value: (.*)/value: \"************\"/'";
-        l =
-          "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
+        ds = "! git diff origin | sed -r 's/value: (.*)/value: \"************\"/'";
+        l = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
         ms = "merge --squash";
         p = "push origin";
         pf = "push -f";
         pl = "! git pull origin $(git rev-parse --abbrev-ref HEAD)";
         st = "status";
-        wip =
-          "for-each-ref --sort='authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' refs/heads";
+        wip = "for-each-ref --sort='authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' refs/heads";
       };
 
-      includes = [{ path = "~/.gitconfig-work"; }];
+      includes = [ { path = "~/.gitconfig-work"; } ];
 
       delta = {
         enable = true;
@@ -98,8 +101,12 @@ in {
       };
 
       extraConfig = {
-        push = { default = "current"; };
-        pull = { rebase = true; };
+        push = {
+          default = "current";
+        };
+        pull = {
+          rebase = true;
+        };
       };
     };
 
@@ -110,8 +117,12 @@ in {
       settings = {
         add_newline = false;
         scan_timeout = 10;
-        character = { error_symbol = "[✖](bold red)"; };
-        gcloud = { format = ""; };
+        character = {
+          error_symbol = "[✖](bold red)";
+        };
+        gcloud = {
+          format = "";
+        };
         kubernetes = {
           disabled = false;
           context_aliases = {
@@ -205,7 +216,9 @@ in {
         v = "nvim";
       };
 
-      "oh-my-zsh" = { enable = true; };
+      "oh-my-zsh" = {
+        enable = true;
+      };
     };
 
     alacritty = {
@@ -219,12 +232,19 @@ in {
 
         shell = {
           program = "zsh";
-          args = [ "-l" "-c" "tmux" "u" ];
+          args = [
+            "-l"
+            "-c"
+            "tmux"
+            "u"
+          ];
         };
       };
     };
 
-    go = { enable = true; };
+    go = {
+      enable = true;
+    };
 
     tmux = {
       enable = true;
@@ -319,7 +339,9 @@ in {
       '';
     };
 
-    fzf = { enable = true; };
+    fzf = {
+      enable = true;
+    };
 
     nixvim = {
       enable = true;
@@ -330,7 +352,9 @@ in {
           key = "<C-n>";
           mode = [ "n" ];
           action = "<cmd>tabnew<cr>";
-          options = { silent = true; };
+          options = {
+            silent = true;
+          };
         }
         {
           key = "<leader>y";
@@ -413,7 +437,11 @@ in {
           enable = true;
           settings.defaults = {
             layout_strategy = "vertical";
-            layout_config = { vertical = { width = 0.9; }; };
+            layout_config = {
+              vertical = {
+                width = 0.9;
+              };
+            };
           };
           package = pkgs.vimPlugins.telescope-fzy-native-nvim;
         };
@@ -422,7 +450,10 @@ in {
         autoindent = true;
         backup = false;
         belloff = "all";
-        completeopt = [ "menuone" "noselect" ];
+        completeopt = [
+          "menuone"
+          "noselect"
+        ];
         cursorline = true;
         expandtab = true;
         fillchars = {
@@ -499,7 +530,8 @@ in {
     vscode = {
       enable = true;
       package = pkgs.vscode;
-      extensions = with pkgs.vscode-extensions;
+      extensions =
+        with pkgs.vscode-extensions;
         [
           bbenoist.nix
           github.vscode-pull-request-github
@@ -508,7 +540,8 @@ in {
           ms-dotnettools.csharp
           ms-kubernetes-tools.vscode-kubernetes-tools
           redhat.vscode-yaml
-        ] ++ lib.optionals stdenv.isLinux [
+        ]
+        ++ lib.optionals stdenv.isLinux [
           ms-vsliveshare.vsliveshare
           ms-python.python
         ];
@@ -529,8 +562,7 @@ in {
             "dom.push.enabled" = false;
             "geo.enabled" = false;
             "intl.regional_prefs.use_os_locales" = true;
-            "services.sync.prefs.sync.intl.regional._prefs.use_os_locates" =
-              false;
+            "services.sync.prefs.sync.intl.regional._prefs.use_os_locates" = false;
           };
           name = "dev-edition-default";
           path = "6b7pm104.dev-edition-default";
