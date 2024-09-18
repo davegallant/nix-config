@@ -1,6 +1,14 @@
-{ config, lib, pkgs, unstable, ... }:
-let inherit (pkgs) stdenv;
-in {
+{
+  config,
+  lib,
+  pkgs,
+  unstable,
+  ...
+}:
+let
+  inherit (pkgs) stdenv;
+in
+{
   environment.systemPackages = with pkgs; [
     # essentials
     curl
