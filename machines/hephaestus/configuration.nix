@@ -51,7 +51,10 @@ in
       };
     };
 
-    supportedFilesystems = [ "ntfs" ];
+    supportedFilesystems = [
+      "ntfs"
+      "zfs"
+    ];
 
     initrd = {
       availableKernelModules = [
@@ -150,6 +153,10 @@ in
       device = "192.168.1.178:/volume1/Backups";
       fsType = "nfs";
     };
+    "/mnt/zfs/backups" =
+    { device = "zpool/backups";
+      fsType = "zfs";
+    };
   };
 
   swapDevices = [ { device = "/dev/disk/by-uuid/5d6d0388-2b15-4ff1-9f0f-391818a76090"; } ];
@@ -165,6 +172,7 @@ in
   networking = {
     iproute2.enable = true;
     hostName = "hephaestus";
+    hostId = "0e8aad53";
     interfaces.enp34s0 = {
       useDHCP = true;
     };
@@ -270,6 +278,10 @@ in
       };
       desktopManager.gnome.enable = true;
       videoDrivers = [ "amdgpu" ];
+    };
+    zfs = {
+      autoScrub.enable = true;
+      autoSnapshot.enable = true;
     };
   };
 
