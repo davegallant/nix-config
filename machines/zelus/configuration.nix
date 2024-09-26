@@ -99,7 +99,6 @@ in
       "logseq"
       "lulu"
       "notunes"
-      "obsidian"
       "postman"
       "raycast"
       "rectangle"
