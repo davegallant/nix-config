@@ -102,6 +102,7 @@ in
       legendary-gl
       libation
       lm_sensors
+      logseq
       mullvad-vpn
       netdata
       nfs-utils
@@ -116,7 +117,6 @@ in
       unstable.blender
       unstable.burpsuite
       unstable.dotnet-sdk_8
-      unstable.obsidian
       unstable.ryujinx
       unstable.signal-desktop
       unstable.tailscale
@@ -165,7 +165,9 @@ in
     hostPlatform = "x86_64-linux";
     config = {
       allowUnfree = true;
-      permittedInsecurePackages = [ ];
+      permittedInsecurePackages = [ 
+        "electron-27.3.11"
+      ];
     };
   };
 
