@@ -95,6 +95,7 @@ in
       ghostscript
       gimp-with-plugins
       glibcLocales
+      httpie-desktop
       gnome.gnome-tweaks
       google-chrome
       iputils
