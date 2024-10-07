@@ -550,7 +550,7 @@ in
     firefox = {
       enable = stdenv.isLinux;
 
-      package = pkgs.firefox-devedition;
+      package = pkgs.librewolf;
 
       profiles = {
         default = {
@@ -564,8 +564,6 @@ in
             "intl.regional_prefs.use_os_locales" = true;
             "services.sync.prefs.sync.intl.regional._prefs.use_os_locates" = false;
           };
-          name = "dev-edition-default";
-          path = "6b7pm104.dev-edition-default";
         };
       };
     };
