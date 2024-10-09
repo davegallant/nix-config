@@ -91,6 +91,7 @@ in {
       "librewolf"
       "logseq"
       "lulu"
+      "mitmproxy"
       "notunes"
       "postman"
       "raycast"
