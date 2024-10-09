@@ -1,8 +1,6 @@
 { pkgs, ... }:
-let
-  checkBrew = "command -v brew > /dev/null";
-in
-{
+let checkBrew = "command -v brew > /dev/null";
+in {
   nixpkgs = {
     config = {
       allowUnfree = true;
@@ -10,9 +8,7 @@ in
     };
   };
 
-  networking = {
-    hostName = "zelus";
-  };
+  networking = { hostName = "zelus"; };
 
   services.nix-daemon.enable = true;
 
@@ -32,9 +28,7 @@ in
     extraInit = ''
       ${checkBrew} || >&2 echo "brew is not installed (install it via https://brew.sh)"
     '';
-    variables = {
-      LANG = "en_US.UTF-8";
-    };
+    variables = { LANG = "en_US.UTF-8"; };
   };
 
   system.defaults = {
@@ -75,9 +69,7 @@ in
     enable = true;
     onActivation.autoUpdate = false;
     onActivation.upgrade = false;
-    global = {
-      brewfile = true;
-    };
+    global = { brewfile = true; };
 
     brews = [
       "azure-cli"
@@ -96,6 +88,7 @@ in
       "font-hack-nerd-font"
       "karabiner-elements"
       "iterm2"
+      "librewolf"
       "logseq"
       "lulu"
       "notunes"
