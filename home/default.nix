@@ -2,6 +2,7 @@
   lib,
   pkgs,
   unstable,
+  master,
   ...
 }:
 let
@@ -550,7 +551,7 @@ in
     firefox = {
       enable = stdenv.isLinux;
 
-      package = pkgs.librewolf;
+      package = master.librewolf;
 
       profiles = {
         default = {
