@@ -4,6 +4,7 @@
   inputs = {
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs-master.url = "github:NixOS/nixpkgs/master";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
     darwin = {
       url = "github:lnl7/nix-darwin";
@@ -27,6 +28,7 @@
       home-manager,
       nixpkgs,
       nixpkgs-unstable,
+      nixpkgs-master,
       nixos-hardware,
       stylix,
       ...
@@ -38,11 +40,16 @@
             system = "x86_64-linux";
             config.allowUnfree = true;
           };
+          master = import nixpkgs-master {
+            system = "x86_64-linux";
+            config.allowUnfree = true;
+          };
         in
         {
           hephaestus = nixpkgs.lib.nixosSystem {
             specialArgs = {
               inherit unstable;
+              inherit master;
             };
             modules = [
               ./fonts.nix
@@ -89,6 +96,7 @@
                       ];
                       extraSpecialArgs = {
                         inherit unstable;
+                        inherit master;
                       };
                     };
                   };
@@ -105,12 +113,17 @@
             config.allowUnfree = true;
             inherit system;
           };
+          master = import nixpkgs-master {
+            config.allowUnfree = true;
+            inherit system;
+          };
         in
         {
           zelus = darwin.lib.darwinSystem {
             inherit system;
             specialArgs = {
               inherit unstable;
+              inherit master;
             };
 
             modules = [
@@ -134,6 +147,7 @@
                       ];
                       extraSpecialArgs = {
                         inherit unstable;
+                        inherit master;
                       };
                     };
                   };
