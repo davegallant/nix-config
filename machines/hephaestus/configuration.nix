@@ -1,4 +1,11 @@
-{ config, lib, modulesPath, pkgs, unstable, ... }:
+{
+  config,
+  lib,
+  modulesPath,
+  pkgs,
+  unstable,
+  ...
+}:
 let
   gnomeExtensions = with pkgs.gnomeExtensions; [
     appindicator
@@ -12,17 +19,16 @@ let
     tailscale-status
     tray-icons-reloaded
   ];
-in {
+in
+{
 
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   stylix = {
     enable = true;
-    base16Scheme =
-      "${unstable.base16-schemes}/share/themes/tokyo-night-dark.yaml";
+    base16Scheme = "${unstable.base16-schemes}/share/themes/tokyo-night-dark.yaml";
     image = pkgs.fetchurl {
-      url =
-        "https://github.com/davegallant/nix-config/blob/main/nixos-wallpaper.png?raw=true";
+      url = "https://github.com/davegallant/nix-config/blob/main/nixos-wallpaper.png?raw=true";
       sha256 = "Ztqn9+CHslr6wZdnOTeo/YNi/ICerpcFLyMArsZ/PIY=";
     };
     polarity = "dark";
@@ -45,18 +51,29 @@ in {
       };
     };
 
-    supportedFilesystems = [ "ntfs" "zfs" ];
+    supportedFilesystems = [
+      "ntfs"
+      "zfs"
+    ];
 
     initrd = {
-      availableKernelModules =
-        [ "ahci" "nvme" "sd_mod" "usb_storage" "usbhid" "xhci_pci" ];
+      availableKernelModules = [
+        "ahci"
+        "nvme"
+        "sd_mod"
+        "usb_storage"
+        "usbhid"
+        "xhci_pci"
+      ];
       luks.devices."root" = {
         allowDiscards = true;
         device = "/dev/disk/by-uuid/21cd166c-1528-49a4-b31b-0d408d48aa80";
         preLVM = true;
         keyFile = "./keyfile0.bin";
       };
-      secrets = { "keyfile0.bin" = "/etc/secrets/initrd/keyfile0.bin"; };
+      secrets = {
+        "keyfile0.bin" = "/etc/secrets/initrd/keyfile0.bin";
+      };
     };
   };
 
@@ -65,7 +82,8 @@ in {
     keyMap = "us";
   };
 
-  environment.systemPackages = with pkgs;
+  environment.systemPackages =
+    with pkgs;
     [
       android-tools
       bitwarden
@@ -114,7 +132,8 @@ in {
       wine
       wine64
       wireshark-qt
-    ] ++ gnomeExtensions;
+    ]
+    ++ gnomeExtensions;
 
   fileSystems = {
     "/" = {
@@ -143,8 +162,7 @@ in {
     };
   };
 
-  swapDevices =
-    [{ device = "/dev/disk/by-uuid/5d6d0388-2b15-4ff1-9f0f-391818a76090"; }];
+  swapDevices = [ { device = "/dev/disk/by-uuid/5d6d0388-2b15-4ff1-9f0f-391818a76090"; } ];
 
   nixpkgs = {
     hostPlatform = "x86_64-linux";
@@ -158,7 +176,9 @@ in {
     iproute2.enable = true;
     hostName = "hephaestus";
     hostId = "0e8aad53";
-    interfaces.enp34s0 = { useDHCP = true; };
+    interfaces.enp34s0 = {
+      useDHCP = true;
+    };
     firewall = {
       allowPing = false;
       enable = true;
@@ -167,18 +187,27 @@ in {
     };
   };
 
-  systemd.services = { NetworkManager-wait-online.enable = false; };
+  systemd.services = {
+    NetworkManager-wait-online.enable = false;
+  };
 
   system = {
     autoUpgrade.enable = true;
     stateVersion = "24.05";
   };
 
-  nix = { extraOptions = "experimental-features = nix-command flakes"; };
+  nix = {
+    extraOptions = "experimental-features = nix-command flakes";
+  };
 
   users.users.dave = {
     isNormalUser = true;
-    extraGroups = [ "docker" "wheel" "libvirtd" "corectrl" ];
+    extraGroups = [
+      "docker"
+      "wheel"
+      "libvirtd"
+      "corectrl"
+    ];
     shell = pkgs.zsh;
   };
 
@@ -193,8 +222,7 @@ in {
 
   hardware = {
     opengl.enable = true;
-    cpu.amd.updateMicrocode =
-      lib.mkDefault config.hardware.enableRedistributableFirmware;
+    cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
     pulseaudio.enable = true;
     # Vulkan
     opengl.driSupport = true;
