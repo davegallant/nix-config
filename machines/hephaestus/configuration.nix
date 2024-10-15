@@ -106,6 +106,7 @@ in {
       unstable.tailscale
       unstable.unityhub
       unstable.zoom-us
+      unstable.zulip
       usbutils
       virt-manager
       vlc
