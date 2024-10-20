@@ -86,7 +86,6 @@ in
     with pkgs;
     [
       android-tools
-      bitwarden
       cryptsetup
       deja-dup
       discord
