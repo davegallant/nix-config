@@ -86,6 +86,7 @@ in
     with pkgs;
     [
       android-tools
+      cartridges
       cryptsetup
       deja-dup
       discord
