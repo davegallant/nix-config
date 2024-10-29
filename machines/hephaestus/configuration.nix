@@ -109,6 +109,7 @@ in
       netdata
       nfs-utils
       pavucontrol
+      pika-backup
       pinentry-curses
       podman
       qemu
