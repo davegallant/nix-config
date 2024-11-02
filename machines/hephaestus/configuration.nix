@@ -88,7 +88,6 @@ in
       android-tools
       cartridges
       cryptsetup
-      deja-dup
       discord
       docker
       docker-compose
