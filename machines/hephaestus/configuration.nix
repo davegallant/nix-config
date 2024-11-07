@@ -86,6 +86,7 @@ in
     with pkgs;
     [
       android-tools
+      blender
       cartridges
       cryptsetup
       discord
@@ -116,7 +117,6 @@ in
       strace
       traceroute
       ulauncher
-      unstable.blender
       unstable.burpsuite
       unstable.dotnet-sdk_8
       unstable.ryujinx
