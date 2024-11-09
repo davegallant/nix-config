@@ -551,7 +551,7 @@ in
     firefox = {
       enable = stdenv.isLinux;
 
-      package = master.librewolf;
+      package = unstable.librewolf;
 
       profiles = {
         default = {
