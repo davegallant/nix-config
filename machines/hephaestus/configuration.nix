@@ -121,6 +121,7 @@ in
       unstable.dotnet-sdk_8
       unstable.ryujinx
       unstable.signal-desktop
+      unstable.spotify
       unstable.tailscale
       unstable.unityhub
       unstable.zoom-us
