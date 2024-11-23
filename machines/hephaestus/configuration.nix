@@ -96,7 +96,7 @@ in
       gimp-with-plugins
       glibcLocales
       httpie-desktop
-      gnome.gnome-tweaks
+      gnome-tweaks
       google-chrome
       iputils
       kazam
@@ -104,7 +104,7 @@ in
       libation
       lm_sensors
       logseq
-      mitmproxy
+      # mitmproxy
       mullvad-vpn
       netdata
       nfs-utils
@@ -194,7 +194,7 @@ in
 
   system = {
     autoUpgrade.enable = true;
-    stateVersion = "24.05";
+    stateVersion = "24.11";
   };
 
   nix = {
@@ -221,17 +221,9 @@ in
 
   time.timeZone = "America/Toronto";
 
-  hardware = {
-    opengl.enable = true;
-    cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-    pulseaudio.enable = true;
-    # Vulkan
-    opengl.driSupport = true;
-    opengl.driSupport32Bit = true;
-    # Steam
-    opengl.extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
-    pulseaudio.support32Bit = true;
-  };
+  hardware.graphics.enable = true;
+  hardware.graphics.extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
+  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
   programs = {
     corectrl.enable = true;
