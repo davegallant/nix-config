@@ -9,7 +9,7 @@ let
   inherit (pkgs) stdenv;
 in
 {
-  home.stateVersion = "24.05";
+  home.stateVersion = "24.11";
 
   home.packages = with pkgs; [ just ];
 
@@ -411,16 +411,15 @@ in
           bashls.enable = true;
           dockerls.enable = true;
           gopls.enable = true;
-          helm-ls.enable = true;
+          helm_ls.enable = true;
           jsonls.enable = true;
-          pyright.enable = true;
           nixd.enable = true;
           terraformls.enable = true;
           yamlls.enable = true;
         };
         lsp-format = {
           enable = true;
-          setup = {
+          settings = {
             terraform = { };
             nix = { };
             go = { };
@@ -446,6 +445,7 @@ in
           };
           package = pkgs.vimPlugins.telescope-fzy-native-nvim;
         };
+        web-devicons.enable = true;
       };
       opts = {
         autoindent = true;
