@@ -59,7 +59,6 @@ in
 
     # lsp
     nodePackages.bash-language-server
-    nodePackages.pyright
     nodePackages.yaml-language-server
     terraform-ls
 
