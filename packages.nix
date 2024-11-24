@@ -101,5 +101,8 @@ in
     poetry
     python313
     virtualenv
+
+    # media
+    yt-dlp
   ];
 }
