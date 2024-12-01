@@ -228,10 +228,10 @@ in
         window.padding.x = 10;
         window.padding.y = 10;
         scrolling.history = 100000;
-        live_config_reload = true;
+        general.live_config_reload = true;
         mouse.hide_when_typing = false;
 
-        shell = {
+        terminal.shell = {
           program = "zsh";
           args = [
             "-l"
