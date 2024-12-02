@@ -106,7 +106,6 @@ in
       "raycast"
       "rectangle"
       "stats"
-      "warp"
     ];
 
     taps = [
