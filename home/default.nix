@@ -118,9 +118,6 @@ in
       settings = {
         add_newline = false;
         scan_timeout = 10;
-        character = {
-          error_symbol = "[✖](bold red)";
-        };
         gcloud = {
           format = "";
         };
@@ -538,7 +535,6 @@ in
           redhat.vscode-yaml
         ]
         ++ lib.optionals stdenv.isLinux [
-          ms-vsliveshare.vsliveshare
           ms-python.python
         ];
     };
