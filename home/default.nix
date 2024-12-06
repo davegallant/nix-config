@@ -126,11 +126,6 @@ in
         };
         kubernetes = {
           disabled = false;
-          context_aliases = {
-            ".*stg_.*" = "stg";
-            ".*test_.*" = "test";
-            ".*prd_.*" = "prd";
-          };
         };
       };
     };
