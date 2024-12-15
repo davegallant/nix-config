@@ -28,7 +28,7 @@ in
     enable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
     image = pkgs.fetchurl {
-      url = "https://github.com/davegallant/nix-config/blob/main/nixos-wallpaper.png?raw=true";
+      url = "https://raw.githubusercontent.com/davegallant/nix-config/refs/heads/main/nixos-wallpaper.png";
       sha256 = "Ztqn9+CHslr6wZdnOTeo/YNi/ICerpcFLyMArsZ/PIY=";
     };
     polarity = "dark";
