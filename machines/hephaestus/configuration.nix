@@ -105,7 +105,7 @@ in
       libation
       lm_sensors
       logseq
-      master.lutris-unwrapped
+      master.lutris
       mitmproxy
       mullvad-vpn
       netdata
@@ -132,7 +132,6 @@ in
       virt-manager
       vlc
       whois
-      wine64
       wireshark-qt
     ]
     ++ gnomeExtensions;
