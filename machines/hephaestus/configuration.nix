@@ -4,6 +4,7 @@
   modulesPath,
   pkgs,
   unstable,
+  master,
   ...
 }:
 let
@@ -104,7 +105,8 @@ in
       libation
       lm_sensors
       logseq
-      # mitmproxy
+      master.lutris-unwrapped
+      mitmproxy
       mullvad-vpn
       netdata
       nfs-utils
@@ -130,7 +132,6 @@ in
       virt-manager
       vlc
       whois
-      wine
       wine64
       wireshark-qt
     ]

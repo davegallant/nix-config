@@ -155,11 +155,7 @@ in
         export GOPATH=~/go
         export GOBIN=$GOPATH/bin
         export PATH=$PATH:$GOBIN
-
-        export WINEPREFIX=~/.wine32
-
-        # homebrew for x86
-        export PATH=$PATH:/usr/local/homebrew/bin
+        export WINEPREFIX=~/.wine
       '';
 
       initExtra = ''
