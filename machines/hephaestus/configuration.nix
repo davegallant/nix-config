@@ -130,6 +130,7 @@ in
       virt-manager
       vlc
       whois
+      wine
       wireshark-qt
     ]
     ++ gnomeExtensions;
