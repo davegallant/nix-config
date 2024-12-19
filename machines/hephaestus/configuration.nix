@@ -89,7 +89,6 @@ in
       albert
       android-tools
       blender
-      cartridges
       cryptsetup
       discord
       docker
@@ -106,7 +105,6 @@ in
       libation
       lm_sensors
       logseq
-      master.lutris
       mitmproxy
       mullvad-vpn
       netdata
@@ -253,6 +251,7 @@ in
         workstation = true;
       };
     };
+    flatpak.enable = true;
     gnome.gnome-keyring.enable = true;
     mullvad-vpn.enable = false;
     printing.enable = true;
