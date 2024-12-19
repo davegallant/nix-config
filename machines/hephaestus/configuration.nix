@@ -86,6 +86,7 @@ in
   environment.systemPackages =
     with pkgs;
     [
+      albert
       android-tools
       blender
       cartridges
@@ -118,7 +119,6 @@ in
       sbx-h6-rgb
       strace
       traceroute
-      ulauncher
       unstable.burpsuite
       unstable.dotnet-sdk_8
       unstable.ryujinx
