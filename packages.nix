@@ -35,8 +35,9 @@ in
     shfmt
     tldr
     tmux-sessionizer
-    unstable.atuin
-    unstable.github-cli
+    atuin
+    
+    github-cli
     viddy
     yq-go
 
@@ -47,15 +48,15 @@ in
     kubectx
     minikube
     stern
-    unstable.dive
-    unstable.helm-docs
-    unstable.k9s
-    unstable.kubernetes-helm
+    dive
+    helm-docs
+    k9s
+    kubernetes-helm
 
     # cloud
-    unstable.awscli2
-    unstable.google-cloud-sdk
-    unstable.terraform
+    awscli2
+    google-cloud-sdk
+    terraform
 
     # lsp
     nodePackages.bash-language-server
