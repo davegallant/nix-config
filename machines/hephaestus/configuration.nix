@@ -114,16 +114,16 @@ in
       pinentry-curses
       podman
       qemu
+      ryujinx
       sbx-h6-rgb
       strace
       traceroute
+      unityhub
       unstable.burpsuite
       unstable.dotnet-sdk_8
-      unstable.ryujinx
       unstable.signal-desktop
       unstable.spotify
       unstable.tailscale
-      unstable.unityhub
       unstable.zoom-us
       unstable.zulip
       usbutils
