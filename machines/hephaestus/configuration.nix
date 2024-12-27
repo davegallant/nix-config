@@ -37,9 +37,11 @@ in
   };
 
   boot = {
-    extraModulePackages = with config.boot.kernelPackages; [ xpadneo ];
+    extraModulePackages = with config.boot.kernelPackages; [
+      xpadneo # Advanced Linux Driver for Xbox One Wireless Controller
+    ];
     kernelModules = [ "kvm-amd" ];
-    kernelPackages = pkgs.linuxPackages;
+    kernelPackages = pkgs.linuxPackages_latest;
 
     loader = {
       efi.canTouchEfiVariables = true;
