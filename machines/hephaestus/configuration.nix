@@ -56,7 +56,6 @@ in
 
     supportedFilesystems = [
       "ntfs"
-      "zfs"
     ];
 
     initrd = {
@@ -157,10 +156,6 @@ in
     "/mnt/synology-2b/backups" = {
       device = "192.168.1.178:/volume1/Backups";
       fsType = "nfs";
-    };
-    "/mnt/zfs/backups" = {
-      device = "zpool/backups";
-      fsType = "zfs";
     };
   };
 
@@ -277,10 +272,6 @@ in
       };
       desktopManager.gnome.enable = true;
       videoDrivers = [ "amdgpu" ];
-    };
-    zfs = {
-      autoScrub.enable = true;
-      autoSnapshot.enable = true;
     };
   };
 
