@@ -91,12 +91,12 @@ in
     ];
 
     casks = [
+      "capslocknodelay"
       "dbeaver-community"
       "font-fira-code-nerd-font"
       "font-hack-nerd-font"
       "fork"
       "iterm2"
-      "karabiner-elements"
       "librewolf"
       "logseq"
       "lulu"
