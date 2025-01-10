@@ -153,8 +153,8 @@ in
       device = "192.168.1.178:/volume1/Media";
       fsType = "nfs";
     };
-    "/mnt/synology-2b/backups" = {
-      device = "192.168.1.178:/volume1/Backups";
+    "/mnt/truenas/home/backups" = {
+      device = "192.168.1.32:/mnt/wd4t/data/home/backup/";
       fsType = "nfs";
     };
   };
