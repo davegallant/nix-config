@@ -298,6 +298,8 @@ in
         set-option -g default-terminal "tmux-256color"
         set-option -ga terminal-features ",alacritty:usstyle"
 
+        set-option -g default-shell $SHELL
+
         set -g mouse on
 
         set -g status-left-length 30
@@ -318,7 +320,6 @@ in
 
         set -g status-right '#(gitmux #{pane_current_path})'
 
-        #unbind -T copy-mode-vi MouseDragEnd1Pane
         set-window-option -g mode-keys vi
         bind-key -T copy-mode-vi v send -X begin-selection
         bind-key -T copy-mode-vi V send -X select-line
