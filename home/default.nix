@@ -261,13 +261,6 @@ in
           extraConfig = "set -g @plugin 'tmux-plugins/tmux-copycat'";
         }
         {
-          plugin = tmux-colors-solarized;
-          extraConfig = ''
-            set -g @plugin 'seebi/tmux-colors-solarized'
-            set -g @colors-solarized 'dark'
-          '';
-        }
-        {
           plugin = resurrect;
           extraConfig = ''
             set -g @plugin 'tmux-plugins/tmux-resurrect'
@@ -291,16 +284,9 @@ in
         set-window-option -g automatic-rename on
         set-option -g set-titles on
 
-        # Proper colors
-        set-option -sa terminal-features ',alacritty:RGB'
-
-        # Undercurl
-        set-option -g default-terminal "tmux-256color"
-        set-option -ga terminal-features ",alacritty:usstyle"
-
-        set-option -g default-shell $SHELL
-
         set -g mouse on
+
+        set -g default-command "zsh" 
 
         set -g status-left-length 30
         set -g status-right-length 150
