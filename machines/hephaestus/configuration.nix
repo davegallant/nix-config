@@ -87,7 +87,6 @@ in
   environment.systemPackages =
     with pkgs;
     [
-      albert
       android-tools
       blender
       cryptsetup
@@ -120,6 +119,7 @@ in
       strace
       traceroute
       unityhub
+      unstable.albert
       unstable.burpsuite
       unstable.dotnet-sdk_8
       unstable.signal-desktop
