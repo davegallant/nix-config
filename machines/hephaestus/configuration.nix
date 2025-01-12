@@ -13,7 +13,6 @@ let
     bluetooth-quick-connect
     blur-my-shell
     caffeine
-    clipboard-indicator
     grand-theft-focus
     notification-banner-reloaded
     quick-settings-tweaker
