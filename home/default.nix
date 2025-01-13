@@ -209,27 +209,6 @@ in
       };
     };
 
-    alacritty = {
-      enable = true;
-      settings = {
-        window.padding.x = 10;
-        window.padding.y = 10;
-        scrolling.history = 100000;
-        general.live_config_reload = true;
-        mouse.hide_when_typing = false;
-
-        terminal.shell = {
-          program = "zsh";
-          args = [
-            "-l"
-            "-c"
-            "tmux"
-            "u"
-          ];
-        };
-      };
-    };
-
     go = {
       enable = true;
     };
