@@ -100,12 +100,10 @@ in
       google-chrome
       iputils
       kazam
-      legendary-gl
       libation
       lm_sensors
       logseq
       mitmproxy
-      mullvad-vpn
       netdata
       nfs-utils
       pavucontrol
@@ -116,7 +114,6 @@ in
       ryujinx
       sbx-h6-rgb
       strace
-      traceroute
       unityhub
       unstable.albert
       unstable.burpsuite
