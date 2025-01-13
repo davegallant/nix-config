@@ -220,24 +220,12 @@ in
       customPaneNavigationAndResize = true;
       plugins = with pkgs.tmuxPlugins; [
         {
-          plugin = pain-control;
-          extraConfig = "set -g @plugin 'tmux-plugins/tmux-pain-control'";
-        }
-        {
           plugin = sensible;
           extraConfig = "set -g @plugin 'tmux-plugins/tmux-sensible'";
         }
         {
-          plugin = sessionist;
-          extraConfig = "set -g @plugin 'tmux-plugins/tmux-sessionist'";
-        }
-        {
           plugin = yank;
           extraConfig = "set -g @plugin 'tmux-plugins/tmux-yank'";
-        }
-        {
-          plugin = copycat;
-          extraConfig = "set -g @plugin 'tmux-plugins/tmux-copycat'";
         }
         {
           plugin = resurrect;
@@ -261,35 +249,20 @@ in
       ];
       extraConfig = ''
         set-window-option -g automatic-rename on
-        set-option -g set-titles on
-
-        set -g mouse on
-
-        set -g default-command "zsh" 
-
-        set -g status-left-length 30
-        set -g status-right-length 150
-
-        set -g xterm-keys on
-
-        set -g pane-border-status top
-
-        set -g set-titles on
-        set -g display-panes-time 800
-        set -g display-time 2000
-
-        set -q -g utf8 on
-
-        set -g monitor-activity on
-        set -g visual-activity off
-
-        set -g status-right '#(gitmux #{pane_current_path})'
-
         set-window-option -g mode-keys vi
+
         bind-key -T copy-mode-vi v send -X begin-selection
         bind-key -T copy-mode-vi V send -X select-line
-        bind-key -T copy-mode-vi y send -X copy-pipe-and-cancel 'xclip -in -selection clipboard'
 
+        set-option -g set-titles on
+        set -g mouse on
+        set -g default-command "zsh" 
+        set -g status-left-length 30
+        set -g status-right-length 150
+        set -g xterm-keys on
+        set -g monitor-activity on
+        set -g status-right '#(gitmux #{pane_current_path})'
+        set -g @yank_action 'copy-pipe'
       '';
     };
 
