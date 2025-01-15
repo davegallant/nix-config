@@ -220,6 +220,10 @@ in
       customPaneNavigationAndResize = true;
       plugins = with pkgs.tmuxPlugins; [
         {
+          plugin = sessionist;
+          extraConfig = "set -g @plugin 'tmux-plugins/tmux-sessionist'";
+        }
+        {
           plugin = sensible;
           extraConfig = "set -g @plugin 'tmux-plugins/tmux-sensible'";
         }
