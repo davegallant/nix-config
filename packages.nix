@@ -36,7 +36,7 @@ in
     tldr
     tmux-sessionizer
     atuin
-    
+
     github-cli
     viddy
     yq-go
