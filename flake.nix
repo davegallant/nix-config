@@ -10,9 +10,6 @@
       url = "github:lnl7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    ghostty = {
-      url = "github:ghostty-org/ghostty";
-    };
     home-manager = {
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -28,7 +25,6 @@
     {
       self,
       darwin,
-      ghostty,
       home-manager,
       nixpkgs,
       nixpkgs-unstable,
@@ -63,11 +59,6 @@
               ./upgrade-diff.nix
               home-manager.nixosModules.home-manager
               stylix.nixosModules.stylix
-              {
-                environment.systemPackages = [
-                  ghostty.packages.x86_64-linux.default
-                ];
-              }
               (
                 { config, lib, ... }:
                 {

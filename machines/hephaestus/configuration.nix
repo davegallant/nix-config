@@ -86,6 +86,7 @@ in
   environment.systemPackages =
     with pkgs;
     [
+      albert
       android-tools
       blender
       cryptsetup
@@ -115,9 +116,9 @@ in
       sbx-h6-rgb
       strace
       unityhub
-      unstable.albert
       unstable.burpsuite
       unstable.dotnet-sdk_8
+      unstable.ghostty
       unstable.signal-desktop
       unstable.spotify
       unstable.tailscale
