@@ -158,7 +158,7 @@ in
 
   swapDevices = [
     {
-      device = "/dev/disk/by-uuid/5d6d0388-2b15-4ff1-9f0f-391818a76090";
+      device = "/dev/vg/swap";
       size = 16 * 1024;
     }
   ];
