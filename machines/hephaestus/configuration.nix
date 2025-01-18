@@ -111,6 +111,7 @@ in
       pika-backup
       pinentry-curses
       podman
+      prismlauncher
       qemu
       ryujinx
       sbx-h6-rgb
@@ -159,7 +160,6 @@ in
   swapDevices = [
     {
       device = "/dev/vg/swap";
-      size = 16 * 1024;
     }
   ];
 
