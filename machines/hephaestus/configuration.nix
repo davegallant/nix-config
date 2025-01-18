@@ -128,6 +128,7 @@ in
       usbutils
       virt-manager
       vlc
+      virtiofsd
       whois
       wine
       wireshark-qt
