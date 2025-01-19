@@ -91,7 +91,7 @@ in
     vpngate
 
     # rice
-    neofetch
+    fastfetch
 
     # nix
     nix-tree
