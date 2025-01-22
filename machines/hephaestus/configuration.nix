@@ -158,12 +158,6 @@ in
     };
   };
 
-  swapDevices = [
-    {
-      device = "/dev/vg/swap";
-    }
-  ];
-
   nixpkgs = {
     hostPlatform = "x86_64-linux";
     config = {
