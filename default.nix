@@ -8,7 +8,6 @@ in
     src = ./.;
     hooks = {
       shellcheck.enable = true;
-      nixfmt.enable = true;
     };
   };
 }

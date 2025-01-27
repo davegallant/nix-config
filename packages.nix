@@ -34,7 +34,6 @@ in
     shellcheck
     shfmt
     tldr
-    tmux-sessionizer
     atuin
 
     github-cli
