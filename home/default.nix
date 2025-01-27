@@ -18,7 +18,6 @@ in
     base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
     targets = {
       alacritty.enable = true;
-      tmux.enable = true;
       vscode.enable = false; # overrides synced settings
     };
 
@@ -145,6 +144,7 @@ in
       envExtra = ''
         export PAGER=less
         export EDITOR=vim
+        export DOCKER_CLI_HINTS=false
 
         export PATH=$PATH:~/.cargo/bin
         export PATH=$PATH:~/.local/bin
@@ -211,64 +211,6 @@ in
 
     go = {
       enable = true;
-    };
-
-    tmux = {
-      enable = true;
-      clock24 = true;
-      terminal = "tmux-256color";
-      customPaneNavigationAndResize = true;
-      plugins = with pkgs.tmuxPlugins; [
-        {
-          plugin = sessionist;
-          extraConfig = "set -g @plugin 'tmux-plugins/tmux-sessionist'";
-        }
-        {
-          plugin = sensible;
-          extraConfig = "set -g @plugin 'tmux-plugins/tmux-sensible'";
-        }
-        {
-          plugin = yank;
-          extraConfig = "set -g @plugin 'tmux-plugins/tmux-yank'";
-        }
-        {
-          plugin = resurrect;
-          extraConfig = ''
-            set -g @plugin 'tmux-plugins/tmux-resurrect'
-          '';
-        }
-        {
-          plugin = continuum;
-          extraConfig = ''
-            set -g @plugin 'tmux-plugins/tmux-continuum'
-            set -g @continuum-restore 'on'
-          '';
-        }
-        {
-          plugin = open;
-          extraConfig = ''
-            set -g @plugin 'tmux-plugins/tmux-open'
-          '';
-        }
-      ];
-      extraConfig = ''
-        set-window-option -g automatic-rename on
-        set-window-option -g mode-keys vi
-
-        bind-key -T copy-mode-vi v send -X begin-selection
-        bind-key -T copy-mode-vi V send -X select-line
-        unbind-key -T copy-mode-vi MouseDragEnd1Pane
-
-        set-option -g set-titles on
-        set -g mouse on
-        set -g default-command "zsh" 
-        set -g status-left-length 30
-        set -g status-right-length 150
-        set -g xterm-keys on
-        set -g monitor-activity on
-        set -g status-right '#(gitmux #{pane_current_path})'
-        set -g @yank_action 'copy-pipe'
-      '';
     };
 
     fzf = {
@@ -473,9 +415,7 @@ in
           ms-kubernetes-tools.vscode-kubernetes-tools
           redhat.vscode-yaml
         ]
-        ++ lib.optionals stdenv.isLinux [
-          ms-python.python
-        ];
+        ++ lib.optionals stdenv.isLinux [ ms-python.python ];
     };
 
     firefox = {

@@ -1,7 +1,4 @@
 { pkgs, ... }:
-let
-  checkBrew = "command -v brew > /dev/null";
-in
 {
   nixpkgs = {
     config = {
@@ -29,9 +26,6 @@ in
   users.users."dave.gallant".home = "/Users/dave.gallant";
 
   environment = {
-    extraInit = ''
-      ${checkBrew} || >&2 echo "brew is not installed (install it via https://brew.sh)"
-    '';
     variables = {
       LANG = "en_US.UTF-8";
     };
