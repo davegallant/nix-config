@@ -114,7 +114,6 @@ in
       prismlauncher
       qemu
       ryujinx
-      sbx-h6-rgb
       strace
       unityhub
       unstable.burpsuite
@@ -256,9 +255,6 @@ in
       enable = true;
       package = unstable.tailscale;
     };
-    udev.extraRules = ''
-      ACTION=="add", ATTR{idVendor}=="041e", ATTR{idProduct}=="3255", RUN+="${pkgs.sbx-h6-rgb}/bin/sbx-h6-ctl -c c010ff 041e:3255"
-    '';
     xserver = {
       enable = true;
       displayManager = {

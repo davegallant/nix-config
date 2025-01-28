@@ -198,7 +198,6 @@ in
         nix-install = "nix-env -iA";
         ps = "procs";
         t = "cd-fzf";
-        ts = "tms switch";
         tf = "terraform";
         tree = "eza --tree";
         v = "nvim";
