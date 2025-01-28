@@ -197,7 +197,7 @@ in
         m = "make";
         nix-install = "nix-env -iA";
         ps = "procs";
-        t = "tms";
+        t = "cd-fzf";
         ts = "tms switch";
         tf = "terraform";
         tree = "eza --tree";

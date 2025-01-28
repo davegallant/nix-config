@@ -22,6 +22,7 @@ in
 
     # modern cli
     bat
+    cd-fzf
     doggo
     eza
     fd

@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+readarray -t directories < ~/.config/cd-fzf
+
+if [[ $# -eq 1 ]]; then
+    selected=$1
+else
+    selected=$(find "${directories[@]}" -mindepth 1 -maxdepth 1 -type d | fzf --exact)
+fi
+if [[ -z $selected ]]; then
+    exit 0
+fi
+
+cd "$selected"
+$SHELL
