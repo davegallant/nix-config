@@ -145,6 +145,7 @@ in
         export PAGER=less
         export EDITOR=vim
         export DOCKER_CLI_HINTS=false
+        export TERM=xterm-256color
 
         export PATH=$PATH:~/.cargo/bin
         export PATH=$PATH:~/.local/bin
