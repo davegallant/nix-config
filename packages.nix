@@ -88,6 +88,7 @@ in
     openssl
     openvpn
     tcpdump
+    traceroute
     vpngate
 
     # rice
