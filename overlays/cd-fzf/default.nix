@@ -1,4 +1,8 @@
-{ stdenv, lib, fetchurl, }:
+{
+  stdenv,
+  lib,
+  fetchurl,
+}:
 stdenv.mkDerivation rec {
   pname = "cd-fzf";
   version = "0.0.1";
@@ -9,8 +13,7 @@ stdenv.mkDerivation rec {
     cp ${executable} $out/bin/cd-fzf
   '';
   meta = with lib; {
-    description =
-      "\n      Fuzzy find change directory";
+    description = "\n      Fuzzy find change directory";
     platforms = platforms.unix;
   };
 }
