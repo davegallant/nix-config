@@ -115,6 +115,7 @@ in
       qemu
       ryujinx
       strace
+      traceroute
       unityhub
       unstable.burpsuite
       unstable.dotnet-sdk_8
