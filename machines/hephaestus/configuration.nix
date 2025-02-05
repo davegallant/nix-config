@@ -40,7 +40,7 @@ in
       xpadneo # Advanced Linux Driver for Xbox One Wireless Controller
     ];
     kernelModules = [ "kvm-amd" ];
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages;
 
     loader = {
       efi.canTouchEfiVariables = true;
