@@ -104,6 +104,7 @@ in
       libation
       lm_sensors
       logseq
+      mission-center
       mitmproxy
       netdata
       nfs-utils
