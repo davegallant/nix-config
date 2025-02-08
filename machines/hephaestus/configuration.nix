@@ -87,6 +87,7 @@ in
     with pkgs;
     [
       albert
+      android-studio
       android-tools
       blender
       cryptsetup
