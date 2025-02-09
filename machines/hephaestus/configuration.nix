@@ -95,6 +95,7 @@ in
       discord
       docker
       docker-compose
+      freefilesync
       ghostscript
       gimp-with-plugins
       glibcLocales
@@ -298,6 +299,29 @@ in
   services.opensnitch = {
     enable = true;
     rules = {
+      avahi-ipv4 = {
+        name = "Allow avahi daemon IPv4";
+        enabled = true;
+        action = "allow";
+        duration = "always";
+        operator = {
+          type = "list";
+          operand = "list";
+          list = [
+            {
+              type = "simple";
+              operand = "process.path";
+              sensitive = false;
+              data = "${lib.getBin pkgs.avahi}/bin/avahi-daemon";
+            }
+            {
+              type = "network";
+              operand = "dest.network";
+              data = "224.0.0.0/24";
+            }
+          ];
+        };
+      };
       systemd-timesyncd = {
         name = "systemd-timesyncd";
         enabled = true;
