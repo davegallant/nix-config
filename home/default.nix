@@ -268,8 +268,7 @@ in
       ];
 
       plugins = {
-        auto-save.enable = false;
-        copilot-vim.enable = true;
+        auto-save.enable = true;
         cmp-path.enable = true;
         cmp-treesitter.enable = true;
         commentary.enable = true;
