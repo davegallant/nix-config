@@ -89,6 +89,7 @@ in
       albert
       android-studio
       android-tools
+      bleachbit
       blender
       cryptsetup
       discord
