@@ -110,6 +110,7 @@ in
       mitmproxy
       netdata
       nfs-utils
+      opensnitch-ui
       pavucontrol
       pika-backup
       pinentry-curses
@@ -291,6 +292,127 @@ in
       };
       desktopManager.gnome.enable = true;
       videoDrivers = [ "amdgpu" ];
+    };
+  };
+
+  services.opensnitch = {
+    enable = true;
+    rules = {
+      systemd-timesyncd = {
+        name = "systemd-timesyncd";
+        enabled = true;
+        action = "allow";
+        duration = "always";
+        operator = {
+          type = "simple";
+          sensitive = false;
+          operand = "process.path";
+          data = "${lib.getBin pkgs.systemd}/lib/systemd/systemd-timesyncd";
+        };
+      };
+      systemd-resolved = {
+        name = "systemd-resolved";
+        enabled = true;
+        action = "allow";
+        duration = "always";
+        operator = {
+          type = "simple";
+          sensitive = false;
+          operand = "process.path";
+          data = "${lib.getBin pkgs.systemd}/lib/systemd/systemd-resolved";
+        };
+      };
+      localhost = {
+        name = "Allow all localhost";
+        enabled = true;
+        action = "allow";
+        duration = "always";
+        operator = {
+          type = "regexp";
+          operand = "dest.ip";
+          sensitive = false;
+          data = "^(127\\.0\\.0\\.1|::1)$";
+          list = [ ];
+        };
+      };
+      nix-update = {
+        name = "Allow Nix";
+        enabled = true;
+        action = "allow";
+        duration = "always";
+        operator = {
+          type = "list";
+          operand = "list";
+          list = [
+            {
+              type = "simple";
+              sensitive = false;
+              operand = "process.path";
+              data = "${lib.getBin pkgs.nix}/bin/nix";
+            }
+            {
+              type = "regexp";
+              operand = "dest.host";
+              sensitive = false;
+              data = "^(([a-z0-9|-]+\\.)*github\\.com|([a-z0-9|-]+\\.)*nixos\\.org)$";
+            }
+          ];
+        };
+      };
+      NetworkManager = {
+        name = "Allow NetworkManager";
+        enabled = true;
+        action = "allow";
+        duration = "always";
+        operator = {
+          type = "list";
+          operand = "list";
+          list = [
+            {
+              type = "simple";
+              sensitive = false;
+              operand = "process.path";
+              data = "${lib.getBin pkgs.networkmanager}/bin/NetworkManager";
+            }
+            {
+              type = "simple";
+              operand = "dest.port";
+              sensitive = false;
+              data = "67";
+            }
+            {
+              type = "simple";
+              operand = "protocol";
+              sensitive = false;
+              data = "udp";
+            }
+          ];
+        };
+      };
+      ssh-github = {
+        name = "Allow SSH to github";
+        enabled = true;
+        action = "allow";
+        duration = "always";
+        operator = {
+          type = "list";
+          operand = "list";
+          list = [
+            {
+              type = "simple";
+              sensitive = false;
+              operand = "process.path";
+              data = "${lib.getBin pkgs.openssh}/bin/ssh";
+            }
+            {
+              type = "simple";
+              operand = "dest.host";
+              sensitive = false;
+              data = "github.com";
+            }
+          ];
+        };
+      };
     };
   };
 
