@@ -287,6 +287,10 @@ in
     environmentVariables = {
       HSA_OVERRIDE_GFX_VERSION = "11.0.2";
     };
+    loadModels = [
+      "deepseek-r1:8b"
+      "dolphin3:8b"
+    ];
   };
 
   services.open-webui = {
