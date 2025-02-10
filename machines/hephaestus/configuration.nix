@@ -116,7 +116,6 @@ in
       pika-backup
       pinentry-curses
       podman
-      prismlauncher
       qemu
       ryujinx
       strace
@@ -126,7 +125,6 @@ in
       unstable.dotnet-sdk_8
       unstable.ghostty
       unstable.signal-desktop
-      unstable.spotify
       unstable.tailscale
       unstable.zoom-us
       unstable.zulip
@@ -242,57 +240,65 @@ in
     zsh.enable = true;
   };
 
-  services = {
-    avahi = {
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    publish = {
       enable = true;
-      nssmdns4 = true;
-      publish = {
+      addresses = true;
+      domain = true;
+      hinfo = true;
+      userServices = true;
+      workstation = true;
+    };
+  };
+
+  services.flatpak.enable = true;
+
+  services.gnome.gnome-keyring.enable = true;
+
+  services.printing.enable = true;
+
+  services.resolved.enable = true;
+
+  services.sshd.enable = true;
+
+  services.tailscale = {
+    enable = true;
+    package = unstable.tailscale;
+  };
+
+  services.xserver = {
+    enable = true;
+    displayManager = {
+      gdm = {
         enable = true;
-        addresses = true;
-        domain = true;
-        hinfo = true;
-        userServices = true;
-        workstation = true;
+        wayland = true;
       };
     };
-    flatpak.enable = true;
-    gnome.gnome-keyring.enable = true;
-    ollama = {
-      package = unstable.ollama;
-      enable = true;
-      acceleration = "rocm";
-      environmentVariables = {
-        HSA_OVERRIDE_GFX_VERSION = "11.0.2";
-      };
+    desktopManager.gnome.enable = true;
+    videoDrivers = [ "amdgpu" ];
+  };
+
+  services.ollama = {
+    package = unstable.ollama;
+    enable = true;
+    acceleration = "rocm";
+    environmentVariables = {
+      HSA_OVERRIDE_GFX_VERSION = "11.0.2";
     };
-    open-webui = {
-      enable = true;
-      package = unstable.open-webui;
-      environment = {
-        ANONYMIZED_TELEMETRY = "False";
-        DO_NOT_TRACK = "True";
-        SCARF_NO_ANALYTICS = "True";
-        OLLAMA_API_BASE_URL = "http://127.0.0.1:11434/api";
-        OLLAMA_BASE_URL = "http://127.0.0.1:11434";
-      };
-    };
-    printing.enable = true;
-    resolved.enable = true;
-    sshd.enable = true;
-    tailscale = {
-      enable = true;
-      package = unstable.tailscale;
-    };
-    xserver = {
-      enable = true;
-      displayManager = {
-        gdm = {
-          enable = true;
-          wayland = true;
-        };
-      };
-      desktopManager.gnome.enable = true;
-      videoDrivers = [ "amdgpu" ];
+  };
+
+  services.open-webui = {
+    enable = true;
+    package = unstable.open-webui;
+    host = "0.0.0.0";
+    environment = {
+      ANONYMIZED_TELEMETRY = "False";
+      DO_NOT_TRACK = "True";
+      SCARF_NO_ANALYTICS = "True";
+      OLLAMA_API_BASE_URL = "http://127.0.0.1:11434/api";
+      OLLAMA_BASE_URL = "http://127.0.0.1:11434";
     };
   };
 
