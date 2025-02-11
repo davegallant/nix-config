@@ -91,6 +91,7 @@
       "font-hack-nerd-font"
       "fork"
       "iterm2"
+      "knockknock"
       "librewolf"
       "logseq"
       "lulu"
@@ -100,6 +101,7 @@
       "raycast"
       "rectangle"
       "stats"
+      "taskexplorer"
     ];
 
     taps = [
