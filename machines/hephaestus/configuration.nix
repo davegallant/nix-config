@@ -111,6 +111,7 @@ in
       mitmproxy
       netdata
       nfs-utils
+      onlyoffice-desktopeditors
       opensnitch-ui
       pavucontrol
       pika-backup
