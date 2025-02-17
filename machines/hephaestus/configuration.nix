@@ -91,6 +91,7 @@ in
       android-tools
       bleachbit
       blender
+      calibre
       cryptsetup
       discord
       docker
