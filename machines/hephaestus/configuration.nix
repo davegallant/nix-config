@@ -118,6 +118,7 @@ in
       pika-backup
       pinentry-curses
       podman
+      protonvpn-gui
       qemu
       ryujinx
       strace
