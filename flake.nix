@@ -23,13 +23,11 @@
 
   outputs =
     {
-      self,
       darwin,
       home-manager,
       nixpkgs,
       nixpkgs-unstable,
       nixpkgs-master,
-      nixos-hardware,
       stylix,
       ...
     }@inputs:
@@ -60,7 +58,7 @@
               home-manager.nixosModules.home-manager
               stylix.nixosModules.stylix
               (
-                { config, lib, ... }:
+                { ... }:
                 {
                   config = {
                     nix = {
@@ -133,7 +131,7 @@
               ./upgrade-diff.nix
 
               (
-                { config, ... }:
+                { ... }:
                 {
                   config = {
                     nixpkgs.overlays = [ (import ./overlays) ];
