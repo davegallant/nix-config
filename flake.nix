@@ -2,7 +2,6 @@
   description = "nixos and macos configurations";
 
   inputs = {
-    nixos-hardware.url = "github:NixOS/nixos-hardware";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
@@ -23,13 +22,11 @@
 
   outputs =
     {
-      self,
       darwin,
       home-manager,
       nixpkgs,
       nixpkgs-unstable,
       nixpkgs-master,
-      nixos-hardware,
       stylix,
       ...
     }@inputs:
@@ -60,7 +57,7 @@
               home-manager.nixosModules.home-manager
               stylix.nixosModules.stylix
               (
-                { config, lib, ... }:
+                { ... }:
                 {
                   config = {
                     nix = {
@@ -133,7 +130,7 @@
               ./upgrade-diff.nix
 
               (
-                { config, ... }:
+                { ... }:
                 {
                   config = {
                     nixpkgs.overlays = [ (import ./overlays) ];
