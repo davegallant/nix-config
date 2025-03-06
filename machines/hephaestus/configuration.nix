@@ -37,7 +37,7 @@ in
 
   boot = {
     kernelModules = [ "kvm-amd" ];
-    kernelPackages = pkgs.linuxPackages;
+    kernelPackages = pkgs.linuxPackages_latest;
 
     loader = {
       efi.canTouchEfiVariables = true;
