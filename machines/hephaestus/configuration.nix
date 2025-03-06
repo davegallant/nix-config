@@ -99,7 +99,6 @@ in
       glibcLocales
       httpie-desktop
       gnome-tweaks
-      google-chrome
       iputils
       kazam
       libation
