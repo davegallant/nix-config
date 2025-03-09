@@ -451,7 +451,10 @@ in
 
   virtualisation = {
     docker.enable = true;
-    libvirtd.enable = true;
     podman.enable = true;
+    libvirtd = {
+      enable = true;
+      qemuSwtpm = true;
+    };
   };
 }
