@@ -18,9 +18,6 @@ let
     tailscale-status
     tray-icons-reloaded
   ];
-  logseq-patch = pkgs.logseq.override {
-    electron_27 = pkgs.electron_34;
-  };
 in
 {
 
@@ -99,7 +96,6 @@ in
       gnome-tweaks
       iputils
       libation
-      logseq-patch
       mission-center
       netdata
       nfs-utils
@@ -114,6 +110,7 @@ in
       traceroute
       unityhub
       unstable.ghostty
+      unstable.obsidian
       unstable.signal-desktop
       unstable.tailscale
       unstable.zoom-us
