@@ -4,7 +4,6 @@
   modulesPath,
   pkgs,
   unstable,
-  master,
   ...
 }:
 let
@@ -19,6 +18,9 @@ let
     tailscale-status
     tray-icons-reloaded
   ];
+  logseq-patch = pkgs.logseq.override {
+    electron_27 = pkgs.electron_34;
+  };
 in
 {
 
@@ -87,25 +89,18 @@ in
       android-studio
       android-tools
       bleachbit
-      blender
       calibre
       cryptsetup
       discord
-      docker
       docker-compose
       freefilesync
-      ghostscript
       gimp-with-plugins
-      glibcLocales
       httpie-desktop
       gnome-tweaks
       iputils
-      kazam
       libation
-      lm_sensors
-      logseq
+      logseq-patch
       mission-center
-      mitmproxy
       netdata
       nfs-utils
       onlyoffice-desktopeditors
@@ -113,15 +108,11 @@ in
       pavucontrol
       pika-backup
       pinentry-curses
-      podman
       protonvpn-gui
       qemu
       ryujinx
-      strace
       traceroute
       unityhub
-      unstable.burpsuite
-      unstable.dotnet-sdk_8
       unstable.ghostty
       unstable.signal-desktop
       unstable.tailscale
@@ -130,10 +121,8 @@ in
       usbutils
       virt-manager
       vlc
-      virtiofsd
       whois
       wine
-      wireshark-qt
     ]
     ++ gnomeExtensions;
 
@@ -164,7 +153,6 @@ in
     hostPlatform = "x86_64-linux";
     config = {
       allowUnfree = true;
-      permittedInsecurePackages = [ "electron-27.3.11" ];
     };
   };
 
@@ -454,7 +442,7 @@ in
     podman.enable = true;
     libvirtd = {
       enable = true;
-      qemuSwtpm = true;
+      qemu.swtpm.enable = true;
     };
   };
 }
