@@ -114,7 +114,6 @@ in
       unstable.signal-desktop
       unstable.tailscale
       unstable.zoom-us
-      unstable.zulip
       usbutils
       virt-manager
       vlc
