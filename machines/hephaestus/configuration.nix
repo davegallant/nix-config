@@ -87,6 +87,7 @@ in
       android-tools
       bleachbit
       calibre
+      chromium
       cryptsetup
       discord
       docker-compose
