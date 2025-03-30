@@ -8,15 +8,7 @@
 }:
 let
   gnomeExtensions = with pkgs.gnomeExtensions; [
-    appindicator
-    bluetooth-quick-connect
-    blur-my-shell
     caffeine
-    grand-theft-focus
-    notification-banner-reloaded
-    quick-settings-tweaker
-    tailscale-status
-    tray-icons-reloaded
   ];
 in
 {
