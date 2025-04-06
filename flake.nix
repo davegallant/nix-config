@@ -4,18 +4,18 @@
   inputs = {
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/3.2.1.tar.gz";
     fh.url = "https://flakehub.com/f/DeterminateSystems/fh/*";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nixpkgs-master.url = "github:NixOS/nixpkgs/master";
-    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/*";
+    nixpkgs-unstable.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1";
+    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.2411.716687.tar.gz";
     darwin = {
       url = "github:lnl7/nix-darwin/nix-darwin-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    home-manager.url = "https://flakehub.com/f/nix-community/home-manager/*";
+    home-manager.url = "https://flakehub.com/f/nix-community/home-manager/0.2411.3887.tar.gz";
     nixvim = {
       url = "github:nix-community/nixvim/nixos-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # stylix.url = "https://flakehub.com/f/danth/stylix/0.1.717.tar.gz";
     stylix.url = "github:danth/stylix/release-24.11";
   };
 
@@ -26,7 +26,6 @@
       determinate,
       home-manager,
       nixpkgs,
-      nixpkgs-master,
       nixpkgs-unstable,
       stylix,
       ...
@@ -38,16 +37,11 @@
             system = "x86_64-linux";
             config.allowUnfree = true;
           };
-          master = import nixpkgs-master {
-            system = "x86_64-linux";
-            config.allowUnfree = true;
-          };
         in
         {
           hephaestus = nixpkgs.lib.nixosSystem {
             specialArgs = {
               inherit fh;
-              inherit master;
               inherit unstable;
             };
             modules = [
@@ -95,7 +89,6 @@
                       ];
                       extraSpecialArgs = {
                         inherit unstable;
-                        inherit master;
                       };
                     };
                   };
@@ -112,17 +105,12 @@
             config.allowUnfree = true;
             inherit system;
           };
-          master = import nixpkgs-master {
-            config.allowUnfree = true;
-            inherit system;
-          };
         in
         {
           zelus = darwin.lib.darwinSystem {
             inherit system;
             specialArgs = {
               inherit unstable;
-              inherit master;
             };
 
             modules = [
@@ -146,7 +134,6 @@
                       ];
                       extraSpecialArgs = {
                         inherit unstable;
-                        inherit master;
                       };
                     };
                   };
