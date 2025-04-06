@@ -67,11 +67,6 @@ in
     };
   };
 
-  console = {
-    font = "Lat2-Terminus16";
-    keyMap = "us";
-  };
-
   environment.systemPackages =
     with pkgs;
     [
@@ -87,8 +82,8 @@ in
       fh.packages.x86_64-linux.default
       freefilesync
       gimp-with-plugins
-      httpie-desktop
       gnome-tweaks
+      httpie-desktop
       iputils
       libation
       mission-center
@@ -200,12 +195,14 @@ in
 
   time.timeZone = "America/Toronto";
 
-  hardware.graphics.enable = true;
-  hardware.graphics.extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
+
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
   programs = {
-    corectrl.enable = true;
     gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
