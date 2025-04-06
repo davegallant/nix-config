@@ -2,7 +2,6 @@
   lib,
   pkgs,
   unstable,
-  master,
   ...
 }:
 let
