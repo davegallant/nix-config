@@ -2,17 +2,16 @@
   description = "nixos and macos configurations";
 
   inputs = {
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/3.2.1.tar.gz";
+    fh.url = "https://flakehub.com/f/DeterminateSystems/fh/*";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/*";
     darwin = {
       url = "github:lnl7/nix-darwin/nix-darwin-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    home-manager.url = "https://flakehub.com/f/nix-community/home-manager/*";
     nixvim = {
       url = "github:nix-community/nixvim/nixos-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -23,10 +22,12 @@
   outputs =
     {
       darwin,
+      fh,
+      determinate,
       home-manager,
       nixpkgs,
-      nixpkgs-unstable,
       nixpkgs-master,
+      nixpkgs-unstable,
       stylix,
       ...
     }@inputs:
@@ -45,8 +46,9 @@
         {
           hephaestus = nixpkgs.lib.nixosSystem {
             specialArgs = {
-              inherit unstable;
+              inherit fh;
               inherit master;
+              inherit unstable;
             };
             modules = [
               ./fonts.nix
@@ -54,6 +56,7 @@
               ./packages.nix
               ./services/netdata/default.nix
               ./upgrade-diff.nix
+              determinate.nixosModules.default
               home-manager.nixosModules.home-manager
               stylix.nixosModules.stylix
               (
