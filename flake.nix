@@ -2,20 +2,20 @@
   description = "nixos and macos configurations";
 
   inputs = {
-    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/3.2.1.tar.gz";
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
     fh.url = "https://flakehub.com/f/DeterminateSystems/fh/*";
     nixpkgs-unstable.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1";
-    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.2411.716687.tar.gz";
+    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/*";
     darwin = {
       url = "github:lnl7/nix-darwin/nix-darwin-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    home-manager.url = "https://flakehub.com/f/nix-community/home-manager/0.2411.3887.tar.gz";
+    home-manager.url = "https://flakehub.com/f/nix-community/home-manager/*";
     nixvim = {
       url = "github:nix-community/nixvim/nixos-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # stylix.url = "https://flakehub.com/f/danth/stylix/0.1.717.tar.gz";
+    # stylix.url = "https://flakehub.com/f/danth/stylix/*";
     stylix.url = "github:danth/stylix/release-24.11";
   };
 
