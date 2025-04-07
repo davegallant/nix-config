@@ -88,7 +88,6 @@ in
     openssl
     openvpn
     tcpdump
-    vpngate
 
     # rice
     fastfetch

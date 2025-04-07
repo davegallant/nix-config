@@ -15,8 +15,8 @@
       url = "github:nix-community/nixvim/nixos-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # stylix.url = "https://flakehub.com/f/danth/stylix/*";
     stylix.url = "github:danth/stylix/release-24.11";
+    vpngate.url = "github:davegallant/vpngate";
   };
 
   outputs =
@@ -28,6 +28,7 @@
       nixpkgs,
       nixpkgs-unstable,
       stylix,
+      vpngate,
       ...
     }@inputs:
     {
@@ -43,6 +44,7 @@
             specialArgs = {
               inherit fh;
               inherit unstable;
+              inherit vpngate;
             };
             modules = [
               ./fonts.nix
