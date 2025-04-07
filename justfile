@@ -18,7 +18,7 @@ channel-update:
   sudo nix-channel --update
 
 update:
-  @./nix-flake-update.sh
+  @./update-flake.sh
 
 fmt:
   nixfmt .
