@@ -5,6 +5,7 @@
   modulesPath,
   pkgs,
   unstable,
+  vpngate,
   ...
 }:
 let
@@ -107,6 +108,7 @@ in
       usbutils
       virt-manager
       vlc
+      vpngate.packages.x86_64-linux.default
       whois
       wine
     ]
