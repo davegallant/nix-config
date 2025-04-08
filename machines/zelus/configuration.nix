@@ -10,10 +10,7 @@
     hostName = "zelus";
   };
 
-  services.nix-daemon.enable = true;
-
-  nix.extraOptions = "experimental-features = nix-command flakes";
-  nix.package = pkgs.nixVersions.stable;
+  nix.enable = false;
 
   programs.zsh = {
     enable = true;
@@ -22,13 +19,8 @@
   };
 
   system.stateVersion = 4;
-  users.users."dave.gallant".home = "/Users/dave.gallant";
 
-  environment = {
-    variables = {
-      LANG = "en_US.UTF-8";
-    };
-  };
+  users.users."dave.gallant".home = "/Users/dave.gallant";
 
   system.defaults = {
 

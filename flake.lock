@@ -739,12 +739,12 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1743827369,
-        "narHash": "sha256-rpqepOZ8Eo1zg+KJeWoq1HAOgoMCDloqv5r2EAa9TSA=",
-        "rev": "42a1c966be226125b48c384171c44c651c236c22",
-        "revCount": 779115,
+        "lastModified": 1743964447,
+        "narHash": "sha256-nEo1t3Q0F+0jQ36HJfbJtiRU4OI+/0jX/iITURKe3EE=",
+        "rev": "063dece00c5a77e4a0ea24e5e5a5bd75232806f8",
+        "revCount": 780010,
         "type": "tarball",
-        "url": "https://api.flakehub.com/f/pinned/NixOS/nixpkgs/0.1.779115%2Brev-42a1c966be226125b48c384171c44c651c236c22/01960881-4b41-7d70-9302-91f764149479/source.tar.gz"
+        "url": "https://api.flakehub.com/f/pinned/NixOS/nixpkgs/0.1.780010%2Brev-063dece00c5a77e4a0ea24e5e5a5bd75232806f8/0196123c-6803-772b-b528-134c1f0c55d1/source.tar.gz"
       },
       "original": {
         "type": "tarball",
@@ -797,12 +797,12 @@
     },
     "nixpkgs_5": {
       "locked": {
-        "lastModified": 1743813633,
-        "narHash": "sha256-BgkBz4NpV6Kg8XF7cmHDHRVGZYnKbvG0Y4p+jElwxaM=",
-        "rev": "7819a0d29d1dd2bc331bec4b327f0776359b1fa6",
-        "revCount": 716716,
+        "lastModified": 1743975612,
+        "narHash": "sha256-o4FjFOUmjSRMK7dn0TFdAT0RRWUWD+WsspPHa+qEQT8=",
+        "rev": "a880f49904d68b5e53338d1e8c7bf80f59903928",
+        "revCount": 716793,
         "type": "tarball",
-        "url": "https://api.flakehub.com/f/pinned/NixOS/nixpkgs/0.2411.716716%2Brev-7819a0d29d1dd2bc331bec4b327f0776359b1fa6/01960b10-f89a-7059-b415-3ab3bcf1214f/source.tar.gz"
+        "url": "https://api.flakehub.com/f/pinned/NixOS/nixpkgs/0.2411.716793%2Brev-a880f49904d68b5e53338d1e8c7bf80f59903928/01961286-30fb-7ec7-9d2b-20b3bb244b1b/source.tar.gz"
       },
       "original": {
         "type": "tarball",
@@ -1078,11 +1078,11 @@
         "nixpkgs": "nixpkgs_7"
       },
       "locked": {
-        "lastModified": 1743991336,
-        "narHash": "sha256-6A+EMHqSVIsdH9A/h21Y1agDJsW/7RK2mQQcDxfRNcY=",
+        "lastModified": 1743991519,
+        "narHash": "sha256-PW2W6OjAPwU867e7RVRK/5E44OqEHo6y+rSFxEjjA4k=",
         "owner": "davegallant",
         "repo": "vpngate",
-        "rev": "30aecfc5c8113523fa571b90ed47c93979b3ceeb",
+        "rev": "5c069cb289145a38d14e09f03c9674d52a18fecf",
         "type": "github"
       },
       "original": {
