@@ -1,17 +1,17 @@
 # nix-config
 
-This repo stores nix to manage my machines running [NixOS](https://nixos.org/) and macOS.
+This repo stores nix configuration to manage my machines running [NixOS](https://nixos.org/) and macOS.
 
 The configuration is very specific to my own machines and setup, but it may be a useful reference for anyone else learning or experimenting with nix, whether it be on a personal workstation or a server environment.
 
-## Setup
+## Prerequisites
 
-> on macOS: install the latest unstable nix from https://github.com/numtide/nix-unstable-installer (for nix flakes),
-> and nix-darwin: https://github.com/LnL7/nix-darwin
+- [Determine Nix](https://determinate.systems/nix-installer)
+- [just](https://github.com/casey/just)
 
-Recipes are stored in a justfile. [just](https://github.com/casey/just) is required.
+## Build
 
-To run a rebuild:
+To run a build/rebuild:
 
 ```sh
 just rebuild
