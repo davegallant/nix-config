@@ -34,15 +34,18 @@
 
     dock = {
       autohide = true;
-      autohide-delay = 0.0;
-      autohide-time-modifier = 1.0;
       tilesize = 50;
-      static-only = false;
-      showhidden = false;
-      show-recents = false;
-      show-process-indicators = true;
       orientation = "bottom";
-      mru-spaces = false;
+      persistent-apps = [
+        "/Applications/Ghostty.app"
+        "/Applications/Google Chrome.app"
+        "/Applications/LibreWolf.app"
+        "/Applications/Logseq.app"
+        "/Applications/Slack.app"
+        "/Applications/Spotify.app"
+        "/Applications/Visual Studio Code.app"
+        "/Applications/zoom.us.app"
+      ];
     };
 
     NSGlobalDomain = {
