@@ -387,7 +387,7 @@ in
     };
 
     vscode = {
-      enable = true;
+      enable = stdenv.isLinux;
       package = pkgs.vscode;
       extensions =
         with pkgs.vscode-extensions;

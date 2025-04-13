@@ -48,15 +48,23 @@
       ];
     };
 
-    NSGlobalDomain = {
-      "com.apple.sound.beep.feedback" = 0;
-      "com.apple.sound.beep.volume" = 0.0;
-      ApplePressAndHoldEnabled = false;
-      InitialKeyRepeat = 10;
-      KeyRepeat = 2;
-      AppleShowAllExtensions = true;
-      AppleShowScrollBars = "Automatic";
-    };
+    NSGlobalDomain.AppleShowAllExtensions = true;
+    NSGlobalDomain.AppleShowScrollBars = "Always";
+    NSGlobalDomain.NSUseAnimatedFocusRing = false;
+    NSGlobalDomain.NSNavPanelExpandedStateForSaveMode = true;
+    NSGlobalDomain.NSNavPanelExpandedStateForSaveMode2 = true;
+    NSGlobalDomain.PMPrintingExpandedStateForPrint = true;
+    NSGlobalDomain.PMPrintingExpandedStateForPrint2 = true;
+    NSGlobalDomain.NSDocumentSaveNewDocumentsToCloud = false;
+    NSGlobalDomain.ApplePressAndHoldEnabled = false;
+    NSGlobalDomain.InitialKeyRepeat = 25;
+    NSGlobalDomain.KeyRepeat = 2;
+    NSGlobalDomain."com.apple.mouse.tapBehavior" = 1;
+    NSGlobalDomain.NSWindowShouldDragOnGesture = true;
+    NSGlobalDomain.NSAutomaticSpellingCorrectionEnabled = false;
+    LaunchServices.LSQuarantine = false; # disables "Are you sure?" for new apps
+    loginwindow.GuestEnabled = false;
+    finder.FXPreferredViewStyle = "Nlsv";
   };
 
   security.pam.enableSudoTouchIdAuth = true;
@@ -77,7 +85,6 @@
       "coreutils"
       "gnu-sed"
       "gnu-tar"
-      "netdata"
       "node"
       "oras"
       "k6"
@@ -99,7 +106,6 @@
       "mitmproxy"
       "notunes"
       "ollama"
-      "postman"
       "raycast"
       "rectangle"
       "signal"
