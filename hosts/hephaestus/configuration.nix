@@ -102,7 +102,7 @@ in
       unityhub
       unstable.ghostty
       unstable.obsidian
-      unstable.signal-desktop
+      unstable.signal-desktop-bin
       unstable.tailscale
       unstable.zoom-us
       usbutils
