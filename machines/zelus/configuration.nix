@@ -59,10 +59,15 @@
     };
   };
 
+  security.pam.enableSudoTouchIdAuth = true;
+
   homebrew = {
     enable = true;
-    onActivation.autoUpdate = false;
-    onActivation.upgrade = false;
+    onActivation = {
+      cleanup = "zap";
+      autoUpdate = true;
+      upgrade = true;
+    };
     global = {
       brewfile = true;
     };
@@ -74,28 +79,37 @@
       "gnu-tar"
       "netdata"
       "node"
-      "podman"
-      "podman-compose"
+      "oras"
+      "k6"
     ];
 
     casks = [
-      "karabiner-elements"
+      "discord"
       "dbeaver-community"
       "font-fira-code-nerd-font"
       "font-hack-nerd-font"
       "fork"
+      "ghostty"
       "iterm2"
+      "karabiner-elements"
       "knockknock"
       "librewolf"
       "logseq"
       "lulu"
       "mitmproxy"
       "notunes"
+      "ollama"
       "postman"
       "raycast"
       "rectangle"
+      "signal"
+      "slack"
+      "spotify"
       "stats"
+      "steam"
       "taskexplorer"
+      "tailscale"
+      "vlc"
     ];
 
     taps = [
