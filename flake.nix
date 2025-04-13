@@ -48,7 +48,7 @@
             };
             modules = [
               ./fonts.nix
-              ./machines/hephaestus/configuration.nix
+              ./hosts/hephaestus/configuration.nix
               ./packages.nix
               ./services/netdata/default.nix
               ./upgrade-diff.nix
@@ -118,7 +118,7 @@
             modules = [
               home-manager.darwinModules.home-manager
               stylix.darwinModules.stylix
-              ./machines/zelus/configuration.nix
+              ./hosts/zelus/configuration.nix
               ./packages.nix
               ./upgrade-diff.nix
 
