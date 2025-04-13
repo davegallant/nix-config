@@ -45,4 +45,4 @@ just clean
 
 ## Pre-commit hooks
 
-Pre-commit hooks are automatically activated when [direnv](https://github.com/direnv/direnv) is installed.
+Run `nix develop` to install the pre-commit hooks.
