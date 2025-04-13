@@ -6,6 +6,7 @@
     fh.url = "https://flakehub.com/f/DeterminateSystems/fh/*";
     nixpkgs-unstable.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1";
     nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/*";
+    pre-commit-hooks.url = "github:cachix/git-hooks.nix";
     darwin = {
       url = "github:lnl7/nix-darwin/nix-darwin-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -21,6 +22,7 @@
 
   outputs =
     {
+      self,
       darwin,
       fh,
       determinate,
@@ -31,7 +33,31 @@
       vpngate,
       ...
     }@inputs:
+    let
+      supportedSystems = [
+        "x86_64-linux"
+        "aarch64-linux"
+        "x86_64-darwin"
+        "aarch64-darwin"
+      ];
+
+      forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
+    in
     {
+      checks = forAllSystems (system: {
+        pre-commit-check = inputs.pre-commit-hooks.lib.${system}.run {
+          src = ./.;
+          hooks = {
+            nixfmt-rfc-style.enable = true;
+          };
+        };
+      });
+      devShells = forAllSystems (system: {
+        default = nixpkgs.legacyPackages.${system}.mkShell {
+          inherit (self.checks.${system}.pre-commit-check) shellHook;
+          buildInputs = self.checks.${system}.pre-commit-check.enabledPackages;
+        };
+      });
       nixosConfigurations =
         let
           unstable = import nixpkgs-unstable {
@@ -68,7 +94,9 @@
                           "root"
                           "dave"
                         ];
-                        trusted-public-keys = [ "davegallant.cachix.org-1:SsUMqL4+tF2R3/G6X903E9laLlY1rES2QKFfePegF08=" ];
+                        trusted-public-keys = [
+                          "davegallant.cachix.org-1:SsUMqL4+tF2R3/G6X903E9laLlY1rES2QKFfePegF08="
+                        ];
                       };
                       registry = {
                         nixpkgs.flake = nixpkgs;
