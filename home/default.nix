@@ -58,6 +58,8 @@ in
 
       userName = "Dave Gallant";
 
+      diff-so-fancy.enable = true;
+
       lfs.enable = true;
 
       aliases = {
@@ -83,21 +85,6 @@ in
       };
 
       includes = [ { path = "~/.gitconfig-work"; } ];
-
-      delta = {
-        enable = true;
-
-        options = {
-          features = "line-numbers decorations";
-          whitespace-error-style = "22 reverse";
-          plus-style = "green bold ul '#198214'";
-          decorations = {
-            commit-decoration-style = "bold yellow box ul";
-            file-style = "bold yellow ul";
-            file-decoration-style = "none";
-          };
-        };
-      };
 
       extraConfig = {
         push = {
