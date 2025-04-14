@@ -29,8 +29,17 @@ in
   };
 
   boot = {
-    kernelModules = [ "kvm-amd" ];
+    kernelModules = [
+      "kvm-amd"
+      "vfio_pci"
+      "vfio"
+      "vfio_iommu_type1"
+      "vfio_virqfd"
+    ];
     kernelPackages = pkgs.linuxPackages_latest;
+    kernelParams = [
+      "amd_iommu=on"
+    ];
 
     loader = {
       efi.canTouchEfiVariables = true;
