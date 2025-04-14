@@ -81,6 +81,7 @@
     };
 
     brews = [
+      "argocd"
       "azure-cli"
       "coreutils"
       "gnu-sed"
