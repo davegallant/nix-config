@@ -102,7 +102,6 @@ in
 
       settings = {
         add_newline = false;
-        scan_timeout = 10;
         gcloud = {
           format = "";
         };
