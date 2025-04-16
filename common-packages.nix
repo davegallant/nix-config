@@ -1,13 +1,7 @@
 {
-  config,
-  lib,
   pkgs,
-  unstable,
   ...
 }:
-let
-  inherit (pkgs) stdenv;
-in
 {
   environment.systemPackages = with pkgs; [
     # essentials

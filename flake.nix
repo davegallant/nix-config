@@ -74,8 +74,8 @@
             };
             modules = [
               ./fonts.nix
-              ./hosts/hephaestus/configuration.nix
-              ./packages.nix
+              ./hosts/hephaestus.nix
+              ./common-packages.nix
               ./services/netdata/default.nix
               ./upgrade-diff.nix
               determinate.nixosModules.default
@@ -113,7 +113,7 @@
                       useGlobalPkgs = true;
                       useUserPackages = true;
                       users.dave.imports = [
-                        ./home/default.nix
+                        ./home.nix
                         inputs.nixvim.homeManagerModules.nixvim
                       ];
                       extraSpecialArgs = {
@@ -145,8 +145,8 @@
             modules = [
               home-manager.darwinModules.home-manager
               stylix.darwinModules.stylix
-              ./hosts/zelus/configuration.nix
-              ./packages.nix
+              ./hosts/zelus.nix
+              ./common-packages.nix
               ./upgrade-diff.nix
 
               (
@@ -158,7 +158,7 @@
                       useGlobalPkgs = true;
                       useUserPackages = true;
                       users."dave.gallant".imports = [
-                        ./home/default.nix
+                        ./home.nix
                         inputs.nixvim.homeManagerModules.nixvim
                       ];
                       extraSpecialArgs = {

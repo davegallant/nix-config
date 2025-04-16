@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 let
   netdata = pkgs.netdata;
   netdataConf = ./netdata.conf;
