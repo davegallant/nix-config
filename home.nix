@@ -15,14 +15,6 @@ in
   stylix = {
     enable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
-    targets = {
-      alacritty.enable = true;
-      vscode.enable = false; # overrides synced settings
-    };
-
-    opacity.terminal = 1.0;
-
-    fonts.sizes = if stdenv.isLinux then { terminal = 20; } else { terminal = 16; };
 
     fonts.monospace = {
       name = "FiraCode Nerd Font Mono";
