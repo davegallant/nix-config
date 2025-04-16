@@ -128,7 +128,7 @@
   };
 
   stylix = {
-    # enable = true;
+    enable = true;
     image = "/Library/tokyo-night.jpg";
   };
 
