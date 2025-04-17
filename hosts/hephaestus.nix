@@ -97,7 +97,6 @@ in
       iputils
       libation
       mission-center
-      netdata
       nfs-utils
       onlyoffice-desktopeditors
       opensnitch-ui

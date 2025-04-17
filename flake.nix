@@ -76,7 +76,6 @@
               ./fonts.nix
               ./hosts/hephaestus.nix
               ./common-packages.nix
-              ./services/netdata/default.nix
               ./upgrade-diff.nix
               determinate.nixosModules.default
               home-manager.nixosModules.home-manager
