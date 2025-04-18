@@ -73,7 +73,6 @@
               inherit vpngate;
             };
             modules = [
-              ./fonts.nix
               ./hosts/hephaestus.nix
               ./common-packages.nix
               ./upgrade-diff.nix
