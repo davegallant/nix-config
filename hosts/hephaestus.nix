@@ -108,6 +108,7 @@ in
       ryujinx
       traceroute
       unityhub
+      unstable.beszel
       unstable.ghostty
       unstable.obsidian
       unstable.signal-desktop-bin
@@ -171,8 +172,33 @@ in
     };
   };
 
+  users.users.beszel = {
+    isSystemUser = true;
+    group = "beszel";
+    description = "Beszel Agent service user";
+  };
+  users.groups.beszel = { };
+
   systemd.services = {
     NetworkManager-wait-online.enable = false;
+
+    beszel-agent = {
+      description = "Beszel Agent Service";
+      after = [ "network-online.target" ];
+      wants = [ "network-online.target" ];
+      wantedBy = [ "multi-user.target" ];
+
+      serviceConfig = {
+        Environment = [
+          "PORT=45876"
+          ''KEY="ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEaNtnkc+3+fJU+bTO6fibID9FHgFjei0sjJNqvcYtG8"''
+        ];
+        ExecStart = "${lib.getBin unstable.beszel}/bin/beszel-agent";
+        User = "beszel";
+        Restart = "always";
+        RestartSec = 5;
+      };
+    };
   };
 
   system = {
