@@ -11,6 +11,7 @@
 let
   gnomeExtensions = with pkgs.gnomeExtensions; [
     caffeine
+    grand-theft-focus
   ];
 in
 {
