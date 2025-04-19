@@ -142,7 +142,7 @@ in
       fsType = "nfs";
     };
     "/mnt/truenas/home/backups" = {
-      device = "192.168.1.32:/mnt/wd4t/data/home/backup/";
+      device = "192.168.1.132:/mnt/wd4t/data/home/backup/";
       fsType = "nfs";
     };
   };
