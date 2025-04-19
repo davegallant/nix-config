@@ -58,6 +58,7 @@ in
         aa = "add -A .";
         br = "branch";
         c = "commit -S";
+        cm = "commit -S -m";
         ca = "commit -S --amend";
         cane = "commit -S --amend --no-edit";
         cb = "checkout -b";
