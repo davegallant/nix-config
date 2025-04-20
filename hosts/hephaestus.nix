@@ -102,6 +102,7 @@ in
       onlyoffice-desktopeditors
       opensnitch-ui
       pavucontrol
+      pciutils
       pika-backup
       pinentry-curses
       protonvpn-gui
