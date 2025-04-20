@@ -380,9 +380,9 @@ in
 
     vscode = {
       enable = stdenv.isLinux;
-      package = pkgs.vscode;
+      package = unstable.vscode;
       extensions =
-        with pkgs.vscode-extensions;
+        with unstable.vscode-extensions;
         [
           bbenoist.nix
           github.vscode-pull-request-github
