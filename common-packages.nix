@@ -1,5 +1,6 @@
 {
   pkgs,
+  unstable,
   ...
 }:
 {
@@ -36,16 +37,13 @@
     yq-go
 
     # containers
-    krew
-    kubecolor
-    kubectl
-    kubectx
-    minikube
-    stern
-    dive
-    helm-docs
-    k9s
-    kubernetes-helm
+    unstable.k9s
+    unstable.krew
+    unstable.kubecolor
+    unstable.kubectl
+    unstable.kubectx
+    unstable.kubernetes-helm
+    unstable.stern
 
     # cloud
     awscli2
