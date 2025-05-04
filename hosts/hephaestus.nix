@@ -98,6 +98,7 @@ in
       iputils
       libation
       mission-center
+      mupen64plus
       nfs-utils
       onlyoffice-desktopeditors
       opensnitch-ui
