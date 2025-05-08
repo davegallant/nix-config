@@ -29,6 +29,12 @@ in
     fonts.sizes.desktop = 24;
   };
 
+  security.sudo-rs = {
+    enable = true;
+    execWheelOnly = true;
+    wheelNeedsPassword = true;
+  };
+
   boot = {
     kernelModules = [
       "kvm-amd"
