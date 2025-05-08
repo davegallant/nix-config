@@ -6,7 +6,7 @@ The configuration is very specific to my own machines and setup, but it may be a
 
 ## Prerequisites
 
-- [Determine Nix](https://determinate.systems/nix-installer)
+- [Determinate Nix](https://determinate.systems/nix-installer)
 - [just](https://github.com/casey/just)
 
 ## Build
