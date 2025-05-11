@@ -122,6 +122,7 @@ in
       unstable.ghostty
       unstable.obsidian
       unstable.signal-desktop-bin
+      unstable.spotify
       unstable.tailscale
       unstable.zoom-us
       usbutils
