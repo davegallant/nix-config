@@ -75,7 +75,6 @@
       },
       "locked": {
         "lastModified": 1743127615,
-        "narHash": "sha256-+sMGqywrSr50BGMLMeY789mSrzjkoxZiu61eWjYS/8o=",
         "owner": "lnl7",
         "repo": "nix-darwin",
         "rev": "fc843893cecc1838a59713ee3e50e9e7edc6207c",
@@ -830,12 +829,12 @@
     },
     "nixpkgs_5": {
       "locked": {
-        "lastModified": 1746557022,
-        "narHash": "sha256-QkNoyEf6TbaTW5UZYX0OkwIJ/ZMeKSSoOMnSDPQuol0=",
-        "rev": "1d3aeb5a193b9ff13f63f4d9cc169fb88129f860",
-        "revCount": 717738,
+        "lastModified": 1746810718,
+        "narHash": "sha256-VljtYzyttmvkWUKTVJVW93qAsJsrBbgAzy7DdnJaQfI=",
+        "rev": "0c0bf9c057382d5f6f63d54fd61f1abd5e1c2f63",
+        "revCount": 717822,
         "type": "tarball",
-        "url": "https://api.flakehub.com/f/pinned/NixOS/nixpkgs/0.2411.717738%2Brev-1d3aeb5a193b9ff13f63f4d9cc169fb88129f860/0196a994-b117-7203-b225-ee2c1be7af8d/source.tar.gz"
+        "url": "https://api.flakehub.com/f/pinned/NixOS/nixpkgs/0.2411.717822%2Brev-0c0bf9c057382d5f6f63d54fd61f1abd5e1c2f63/0196bcc7-50a0-7060-9bab-c9a170c69923/source.tar.gz"
       },
       "original": {
         "type": "tarball",
@@ -906,7 +905,6 @@
       },
       "locked": {
         "lastModified": 1745963276,
-        "narHash": "sha256-MpLljx/1dGnBIQlUswaUz/ZeOp44R3ngc1iBf4tyzyc=",
         "owner": "nix-community",
         "repo": "nixvim",
         "rev": "5bef8e43ce16ee704c7b9fa9f48a07ce81c5c05d",
@@ -950,7 +948,6 @@
       },
       "locked": {
         "lastModified": 1746537231,
-        "narHash": "sha256-Wb2xeSyOsCoTCTj7LOoD6cdKLEROyFAArnYoS+noCWo=",
         "owner": "cachix",
         "repo": "git-hooks.nix",
         "rev": "fa466640195d38ec97cf0493d6d6882bc4d14969",
@@ -1013,7 +1010,6 @@
       },
       "locked": {
         "lastModified": 1746143246,
-        "narHash": "sha256-O8rZjqJUIkUva66XTOZy0wcgfBP2eaxU9+Xt7ZHtfhI=",
         "owner": "danth",
         "repo": "stylix",
         "rev": "20ace60f9cb5e179cb2256abaee505780df8e804",
@@ -1149,7 +1145,6 @@
       },
       "locked": {
         "lastModified": 1743991519,
-        "narHash": "sha256-PW2W6OjAPwU867e7RVRK/5E44OqEHo6y+rSFxEjjA4k=",
         "owner": "davegallant",
         "repo": "vpngate",
         "rev": "5c069cb289145a38d14e09f03c9674d52a18fecf",
