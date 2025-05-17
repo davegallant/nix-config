@@ -114,7 +114,6 @@ in
       pinentry-curses
       protonvpn-gui
       qemu
-      remmina
       ryujinx
       traceroute
       unityhub
