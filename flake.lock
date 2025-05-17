@@ -75,6 +75,7 @@
       },
       "locked": {
         "lastModified": 1743127615,
+        "narHash": "sha256-+sMGqywrSr50BGMLMeY789mSrzjkoxZiu61eWjYS/8o=",
         "owner": "lnl7",
         "repo": "nix-darwin",
         "rev": "fc843893cecc1838a59713ee3e50e9e7edc6207c",
@@ -574,12 +575,12 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1747020534,
-        "narHash": "sha256-D/6rkiC6w2p+4SwRiVKrWIeYzun8FBg7NlMKMwQMxO0=",
-        "rev": "b4bbdc6fde16fc2051fcde232f6e288cd22007ca",
-        "revCount": 3912,
+        "lastModified": 1747331121,
+        "narHash": "sha256-3MmiUN/jOHBHQUnjqzg6qKArc17j2OS6jisEppDY4g8=",
+        "rev": "1eec32f0efe3b830927989767a9e6ece0d82d608",
+        "revCount": 3913,
         "type": "tarball",
-        "url": "https://api.flakehub.com/f/pinned/nix-community/home-manager/0.2411.3912%2Brev-b4bbdc6fde16fc2051fcde232f6e288cd22007ca/0196c301-e705-72df-a9b8-e70f16219755/source.tar.gz"
+        "url": "https://api.flakehub.com/f/pinned/nix-community/home-manager/0.2411.3913%2Brev-1eec32f0efe3b830927989767a9e6ece0d82d608/0196d79b-4803-7628-b40e-2a259f055557/source.tar.gz"
       },
       "original": {
         "type": "tarball",
@@ -905,6 +906,7 @@
       },
       "locked": {
         "lastModified": 1745963276,
+        "narHash": "sha256-MpLljx/1dGnBIQlUswaUz/ZeOp44R3ngc1iBf4tyzyc=",
         "owner": "nix-community",
         "repo": "nixvim",
         "rev": "5bef8e43ce16ee704c7b9fa9f48a07ce81c5c05d",
@@ -947,10 +949,11 @@
         "nixpkgs": "nixpkgs_6"
       },
       "locked": {
-        "lastModified": 1746537231,
+        "lastModified": 1747372754,
+        "narHash": "sha256-2Y53NGIX2vxfie1rOW0Qb86vjRZ7ngizoo+bnXU9D9k=",
         "owner": "cachix",
         "repo": "git-hooks.nix",
-        "rev": "fa466640195d38ec97cf0493d6d6882bc4d14969",
+        "rev": "80479b6ec16fefd9c1db3ea13aeb038c60530f46",
         "type": "github"
       },
       "original": {
@@ -1010,6 +1013,7 @@
       },
       "locked": {
         "lastModified": 1746143246,
+        "narHash": "sha256-O8rZjqJUIkUva66XTOZy0wcgfBP2eaxU9+Xt7ZHtfhI=",
         "owner": "danth",
         "repo": "stylix",
         "rev": "20ace60f9cb5e179cb2256abaee505780df8e804",
@@ -1145,6 +1149,7 @@
       },
       "locked": {
         "lastModified": 1743991519,
+        "narHash": "sha256-PW2W6OjAPwU867e7RVRK/5E44OqEHo6y+rSFxEjjA4k=",
         "owner": "davegallant",
         "repo": "vpngate",
         "rev": "5c069cb289145a38d14e09f03c9674d52a18fecf",
