@@ -4,6 +4,7 @@
   inputs = {
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
     nixpkgs-unstable.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1";
+    nixpkgs-master.url = "github:NixOs/nixpkgs/master";
     nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/*";
     pre-commit-hooks.url = "github:cachix/git-hooks.nix";
     darwin = {
@@ -27,6 +28,7 @@
       home-manager,
       nixpkgs,
       nixpkgs-unstable,
+      nixpkgs-master,
       stylix,
       vpngate,
       ...
@@ -62,11 +64,16 @@
             system = "x86_64-linux";
             config.allowUnfree = true;
           };
+          master = import nixpkgs-master {
+            system = "x86_64-linux";
+            config.allowUnfree = true;
+          };
         in
         {
           hephaestus = nixpkgs.lib.nixosSystem {
             specialArgs = {
               inherit unstable;
+              inherit master;
               inherit vpngate;
             };
             modules = [
@@ -113,6 +120,7 @@
                       ];
                       extraSpecialArgs = {
                         inherit unstable;
+                        inherit master;
                       };
                     };
                   };
@@ -129,12 +137,17 @@
             config.allowUnfree = true;
             inherit system;
           };
+          master = import nixpkgs-master {
+            config.allowUnfree = true;
+            inherit system;
+          };
         in
         {
           zelus = darwin.lib.darwinSystem {
             inherit system;
             specialArgs = {
               inherit unstable;
+              inherit master;
             };
 
             modules = [
@@ -158,6 +171,7 @@
                       ];
                       extraSpecialArgs = {
                         inherit unstable;
+                        inherit master;
                       };
                     };
                   };
