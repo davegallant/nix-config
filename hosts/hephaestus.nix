@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  master,
   modulesPath,
   pkgs,
   unstable,
@@ -322,7 +323,7 @@ in
   };
 
   services.ollama = {
-    package = unstable.ollama;
+    package = master.ollama;
     enable = true;
     acceleration = "rocm";
     host = "0.0.0.0";
