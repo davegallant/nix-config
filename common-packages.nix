@@ -91,10 +91,16 @@
 
     # python
     poetry
-    python313
+    (unstable.python3.withPackages (ps: [
+      ps.llm
+      ps.llm-ollama
+    ]))
     virtualenv
 
     # media
     yt-dlp
+
+    # llm
+    llm
   ];
 }
