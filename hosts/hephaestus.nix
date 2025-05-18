@@ -1,6 +1,5 @@
 {
   config,
-  fh,
   lib,
   modulesPath,
   pkgs,
@@ -96,7 +95,6 @@ in
       cryptsetup
       discord
       docker-compose
-      fh.packages.x86_64-linux.default
       freefilesync
       gimp-with-plugins
       gnome-tweaks

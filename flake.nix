@@ -3,7 +3,6 @@
 
   inputs = {
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
-    fh.url = "https://flakehub.com/f/DeterminateSystems/fh/*";
     nixpkgs-unstable.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1";
     nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/*";
     pre-commit-hooks.url = "github:cachix/git-hooks.nix";
@@ -11,7 +10,7 @@
       url = "github:lnl7/nix-darwin/nix-darwin-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    home-manager.url = "https://flakehub.com/f/nix-community/home-manager/*";
+    home-manager.url = "https://flakehub.com/f/nix-community/home-manager/0.2411.3913";
     nixvim = {
       url = "github:nix-community/nixvim/nixos-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -24,7 +23,6 @@
     {
       self,
       darwin,
-      fh,
       determinate,
       home-manager,
       nixpkgs,
@@ -68,7 +66,6 @@
         {
           hephaestus = nixpkgs.lib.nixosSystem {
             specialArgs = {
-              inherit fh;
               inherit unstable;
               inherit vpngate;
             };
