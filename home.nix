@@ -8,7 +8,7 @@ let
   inherit (pkgs) stdenv;
 in
 {
-  home.stateVersion = "24.11";
+  home.stateVersion = "25.05";
 
   home.packages = with pkgs; [ just ];
 
@@ -136,7 +136,7 @@ in
         export PATH=$PATH:$GOBIN
       '';
 
-      initExtra = ''
+      initContent = ''
         setopt noincappendhistory
 
         source $HOME/.zsh-work
@@ -277,10 +277,6 @@ in
         };
         cmp.enable = true;
         nvim-tree.enable = true;
-        packer = {
-          enable = true;
-          plugins = [ ];
-        };
         rainbow-delimiters.enable = true;
         treesitter.enable = true;
         telescope = {
@@ -381,7 +377,7 @@ in
     vscode = {
       enable = stdenv.isLinux;
       package = unstable.vscode;
-      extensions =
+      profiles.default.extensions =
         with unstable.vscode-extensions;
         [
           bbenoist.nix
