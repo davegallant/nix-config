@@ -157,13 +157,15 @@ in
 
   fonts.packages = with pkgs; [
     dejavu_fonts
-    fira-code
-    fira-code-symbols
     fira-mono
     font-awesome
     google-fonts
     liberation_ttf
-    nerdfonts
+    nerd-fonts.droid-sans-mono
+    nerd-fonts.fira-code
+    nerd-fonts.symbols-only
+    nerd-fonts.ubuntu
+    nerd-fonts.ubuntu-mono
     noto-fonts
     noto-fonts-cjk-sans
     noto-fonts-emoji
@@ -234,7 +236,7 @@ in
 
   system = {
     autoUpgrade.enable = true;
-    stateVersion = "24.11";
+    stateVersion = "25.05";
   };
 
   nix = {
