@@ -22,6 +22,8 @@
 
   users.users."dave.gallant".home = "/Users/dave.gallant";
 
+  system.primaryUser = "dave.gallant";
+
   system.defaults = {
 
     trackpad = {
@@ -67,7 +69,7 @@
     finder.FXPreferredViewStyle = "Nlsv";
   };
 
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
 
   homebrew = {
     enable = true;
