@@ -105,7 +105,6 @@
       "knockknock"
       "librewolf"
       "lulu"
-      "mitmproxy"
       "notunes"
       "obsidian"
       "ollama"
