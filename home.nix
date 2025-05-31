@@ -175,7 +175,6 @@ in
         l = "eza -la --git --group-directories-first";
         m = "make";
         nix-install = "nix-env -iA";
-        ps = "procs";
         t = "cd-fzf";
         tf = "terraform";
         tree = "eza --tree";

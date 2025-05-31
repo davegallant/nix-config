@@ -16,23 +16,20 @@
     zip
 
     # modern cli
+    atuin
     bat
     cd-fzf
     doggo
     eza
     fd
+    github-cli
     hadolint
     nodePackages.eslint
-    oha
     pre-commit
     progress
     ripgrep
     shellcheck
     shfmt
-    tldr
-    atuin
-
-    github-cli
     viddy
     yq-go
 
@@ -57,7 +54,6 @@
 
     # monitoring
     htop
-    procs
 
     # golang
     gofumpt
