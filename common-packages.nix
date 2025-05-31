@@ -24,7 +24,6 @@
     fd
     github-cli
     hadolint
-    nodePackages.eslint
     pre-commit
     progress
     ripgrep
@@ -49,6 +48,7 @@
 
     # lsp
     nodePackages.bash-language-server
+    nodePackages.eslint
     nodePackages.yaml-language-server
     terraform-ls
 
