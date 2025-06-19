@@ -53,7 +53,7 @@
     terraform-ls
 
     # monitoring
-    htop
+    btop
 
     # golang
     gofumpt
