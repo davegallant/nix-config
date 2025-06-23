@@ -11,6 +11,7 @@
 let
   gnomeExtensions = with pkgs.gnomeExtensions; [
     caffeine
+    clipboard-history
     grand-theft-focus
   ];
 in
@@ -87,7 +88,6 @@ in
   environment.systemPackages =
     with pkgs;
     [
-      albert
       android-studio
       android-tools
       bleachbit
