@@ -99,6 +99,7 @@ in
       freefilesync
       gimp-with-plugins
       gnome-tweaks
+      google-chrome
       httpie-desktop
       iputils
       libation
