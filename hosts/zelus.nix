@@ -39,7 +39,7 @@
       tilesize = 50;
       orientation = "bottom";
       persistent-apps = [
-        "/Applications/Ghostty.app"
+        "/Applications/iTerm.app"
         "/Applications/Google Chrome.app"
         "/Applications/LibreWolf.app"
         "/Applications/Obsidian.app"
@@ -99,7 +99,7 @@
       "font-fira-code-nerd-font"
       "font-hack-nerd-font"
       "fork"
-      "ghostty"
+      "freelens"
       "iterm2"
       "karabiner-elements"
       "knockknock"

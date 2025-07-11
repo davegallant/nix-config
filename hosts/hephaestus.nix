@@ -119,7 +119,6 @@ in
       traceroute
       unityhub
       unstable.beszel
-      unstable.ghostty
       unstable.obsidian
       unstable.signal-desktop-bin
       unstable.spotify
