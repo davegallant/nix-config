@@ -115,6 +115,7 @@ in
       protonvpn-gui
       qemu
       ryujinx
+      terminator
       traceroute
       unityhub
       unstable.beszel
