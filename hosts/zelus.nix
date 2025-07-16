@@ -88,9 +88,10 @@
       "coreutils"
       "gnu-sed"
       "gnu-tar"
+      "k6"
       "node"
       "oras"
-      "k6"
+      "vault"
     ];
 
     casks = [
@@ -121,6 +122,7 @@
     ];
 
     taps = [
+      "hashicorp/tap"
       "homebrew/bundle"
       "homebrew/cask-fonts"
       "homebrew/cask-versions"
