@@ -114,12 +114,12 @@ in
       pinentry-curses
       protonvpn-gui
       qemu
-      ryujinx
       terminator
       traceroute
       unityhub
       unstable.beszel
       unstable.obsidian
+      unstable.ryubing
       unstable.signal-desktop-bin
       unstable.spotify
       unstable.tailscale
