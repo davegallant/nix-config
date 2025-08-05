@@ -44,7 +44,6 @@
         "/Applications/LibreWolf.app"
         "/Applications/Obsidian.app"
         "/Applications/Slack.app"
-        "/Applications/Spotify.app"
         "/Applications/Visual Studio Code.app"
         "/Applications/zoom.us.app"
       ];
