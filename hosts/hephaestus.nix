@@ -94,6 +94,7 @@ in
       calibre
       chromium
       cryptsetup
+      dbeaver-bin
       discord
       docker-compose
       freefilesync
