@@ -27,7 +27,6 @@ in
       sha256 = "Ztqn9+CHslr6wZdnOTeo/YNi/ICerpcFLyMArsZ/PIY=";
     };
     polarity = "dark";
-    fonts.sizes.desktop = 24;
   };
 
   security.sudo-rs = {
