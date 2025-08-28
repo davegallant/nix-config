@@ -390,6 +390,20 @@ in
         ++ lib.optionals stdenv.isLinux [ ms-python.python ];
     };
 
+    zed-editor = {
+      enable = true;
+      package = unstable.zed-editor;
+      userSettings = {
+        features = {
+          edit_prediction_provider = "zed";
+        };
+        vim_mode = true;
+        ui_font_size = lib.mkForce 24;
+        buffer_font_size = lib.mkForce 22;
+        autosave = "on_focus_change";
+      };
+    };
+
     firefox = {
       enable = stdenv.isLinux;
 
