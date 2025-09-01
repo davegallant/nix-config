@@ -114,7 +114,6 @@ in
       pinentry-curses
       protonvpn-gui
       qemu
-      terminator
       traceroute
       unityhub
       unstable.beszel

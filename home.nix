@@ -89,6 +89,25 @@ in
       };
     };
 
+    alacritty = {
+      enable = stdenv.isLinux;
+      settings = {
+        window.padding.x = 10;
+        window.padding.y = 10;
+        scrolling.history = 100000;
+        general.live_config_reload = true;
+        terminal.shell = {
+          program = "zsh";
+        };
+        font = {
+          size = lib.mkForce 18.0;
+        };
+        window = {
+          opacity = lib.mkForce 0.9;
+        };
+      };
+    };
+
     starship = {
       enable = true;
       enableZshIntegration = true;
