@@ -144,6 +144,8 @@ in
         export DOCKER_CLI_HINTS=false
         export TERM=xterm-256color
 
+        export NNN_FIFO="$XDG_RUNTIME_DIR/nnn.fifo";
+
         export PATH=$PATH:~/.cargo/bin
         export PATH=$PATH:~/.local/bin
         export PATH=$PATH:~/.npm-packages/bin
@@ -211,6 +213,34 @@ in
 
     fzf = {
       enable = true;
+    };
+
+    nnn = {
+      enable = true;
+      package = pkgs.nnn.override ({ withNerdIcons = true; });
+      bookmarks = {
+        d = "~/Downloads";
+        p = "~/src/";
+        c = "~/.config";
+        h = "~";
+      };
+      extraPackages =
+        with pkgs;
+        [
+          bat
+          eza
+          fzf
+          imv
+          mediainfo
+        ]
+        ++ lib.optionals (!stdenv.isDarwin) [ ffmpegthumbnailer ];
+      plugins = {
+        src = "${pkgs.nnn.src}/plugins";
+        mappings = {
+          p = "preview-tui";
+          o = "fzopen";
+        };
+      };
     };
 
     nixvim = {
@@ -414,7 +444,7 @@ in
       package = unstable.zed-editor;
       userSettings = {
         features = {
-          edit_prediction_provider = "zed";
+          edit_prediction_provider = "copilot";
         };
         vim_mode = true;
         ui_font_size = lib.mkForce 24;
