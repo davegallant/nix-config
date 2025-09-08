@@ -216,7 +216,7 @@ in
     };
 
     nnn = {
-      enable = true;
+      enable = stdenv.isLinux;
       package = pkgs.nnn.override ({ withNerdIcons = true; });
       bookmarks = {
         d = "~/Downloads";
@@ -224,16 +224,14 @@ in
         c = "~/.config";
         h = "~";
       };
-      extraPackages =
-        with pkgs;
-        [
-          bat
-          eza
-          fzf
-          imv
-          mediainfo
-        ]
-        ++ lib.optionals (!stdenv.isDarwin) [ ffmpegthumbnailer ];
+      extraPackages = with pkgs; [
+        bat
+        eza
+        fzf
+        imv
+        mediainfo
+        ffmpegthumbnailer
+      ];
       plugins = {
         src = "${pkgs.nnn.src}/plugins";
         mappings = {
@@ -447,10 +445,17 @@ in
           edit_prediction_provider = "copilot";
         };
         vim_mode = true;
-        ui_font_size = lib.mkForce 24;
-        buffer_font_size = lib.mkForce 22;
         autosave = "on_focus_change";
-      };
+      }
+      // (
+        if pkgs.stdenv.isLinux then
+          {
+            ui_font_size = lib.mkForce 24;
+            buffer_font_size = lib.mkForce 22;
+          }
+        else
+          { }
+      );
     };
 
     firefox = {
