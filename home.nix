@@ -420,23 +420,6 @@ in
       '';
     };
 
-    vscode = {
-      enable = stdenv.isLinux;
-      package = unstable.vscode;
-      profiles.default.extensions =
-        with unstable.vscode-extensions;
-        [
-          bbenoist.nix
-          github.vscode-pull-request-github
-          golang.go
-          hashicorp.terraform
-          ms-dotnettools.csharp
-          ms-kubernetes-tools.vscode-kubernetes-tools
-          redhat.vscode-yaml
-        ]
-        ++ lib.optionals stdenv.isLinux [ ms-python.python ];
-    };
-
     zed-editor = {
       enable = true;
       package = unstable.zed-editor;
