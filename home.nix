@@ -440,7 +440,20 @@ in
     zed-editor = {
       enable = true;
       package = unstable.zed-editor;
+      extensions = [
+        "ansible"
+        "color-highlight"
+        "dockerfile"
+        "material-icon-theme"
+        "html"
+        "make"
+        "nix"
+        "vue"
+        "toml"
+      ];
       userSettings = {
+        icon_theme = "Material Icon Theme";
+        theme = "Base16 Tokyo Night Dark";
         features = {
           edit_prediction_provider = "copilot";
         };
