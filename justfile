@@ -11,7 +11,7 @@ rebuild:
   sudo $cmd switch --flake . -I nixos-config="hosts/$(hostname).nix"
 
 rollback:
-  $cmd switch --rollback --flake .
+  sudo $cmd switch --rollback --flake .
 
 channel-update:
   nix-channel --update
