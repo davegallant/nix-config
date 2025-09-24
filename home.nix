@@ -436,7 +436,7 @@ in
       ];
       userSettings = {
         icon_theme = "Material Icon Theme";
-        theme = "Base16 Tokyo Night Dark";
+        theme = lib.mkForce "Tokyo Night";
         features = {
           edit_prediction_provider = "copilot";
         };
