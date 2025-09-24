@@ -443,6 +443,7 @@ in
         };
         vim_mode = true;
         autosave = "on_focus_change";
+        format_on_save = "off";
       }
       // (
         if pkgs.stdenv.isLinux then
