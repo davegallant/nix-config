@@ -427,12 +427,13 @@ in
         "ansible"
         "color-highlight"
         "dockerfile"
-        "material-icon-theme"
         "html"
         "make"
+        "material-icon-theme"
         "nix"
-        "vue"
+        "tokyo-night"
         "toml"
+        "vue"
       ];
       userSettings = {
         icon_theme = "Material Icon Theme";
