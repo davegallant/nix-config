@@ -144,6 +144,7 @@ in
         export DOCKER_CLI_HINTS=false
         export TERM=xterm-256color
 
+        export DOCKER_DEFAULT_PLATFORM=linux/amd64
         export NNN_FIFO="$XDG_RUNTIME_DIR/nnn.fifo";
 
         export PATH=$PATH:~/.cargo/bin
