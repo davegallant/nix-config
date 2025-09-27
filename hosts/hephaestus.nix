@@ -95,7 +95,6 @@ in
       cryptsetup
       dbeaver-bin
       discord
-      docker-compose
       freefilesync
       gimp-with-plugins
       gnome-tweaks
@@ -112,6 +111,9 @@ in
       pciutils
       pika-backup
       pinentry-curses
+      podman
+      podman-compose
+      podman-desktop
       protonvpn-gui
       qemu
       traceroute
@@ -246,7 +248,6 @@ in
   users.users.dave = {
     isNormalUser = true;
     extraGroups = [
-      "docker"
       "wheel"
       "libvirtd"
       "corectrl"
@@ -497,7 +498,6 @@ in
   };
 
   virtualisation = {
-    docker.enable = true;
     podman.enable = true;
     libvirtd = {
       enable = true;
