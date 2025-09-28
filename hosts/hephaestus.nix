@@ -111,9 +111,9 @@ in
       pciutils
       pika-backup
       pinentry-curses
-      podman
-      podman-compose
-      podman-desktop
+      unstable.podman
+      unstable.podman-compose
+      unstable.podman-desktop
       protonvpn-gui
       qemu
       traceroute
