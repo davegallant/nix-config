@@ -33,6 +33,7 @@
     yq-go
 
     # containers
+    unstable.argocd
     unstable.k9s
     unstable.krew
     unstable.kubecolor
