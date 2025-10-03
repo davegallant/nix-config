@@ -111,13 +111,14 @@ in
       pciutils
       pika-backup
       pinentry-curses
-      unstable.podman
-      unstable.podman-compose
-      unstable.podman-desktop
+      pinta
       protonvpn-gui
       qemu
       traceroute
       unityhub
+      unstable.podman
+      unstable.podman-compose
+      unstable.podman-desktop
       unstable.beszel
       unstable.obsidian
       unstable.ryubing
