@@ -44,7 +44,6 @@
         "/Applications/LibreWolf.app"
         "/Applications/Obsidian.app"
         "/Applications/Slack.app"
-        "/Applications/Zed.app"
         "/Applications/zoom.us.app"
       ];
     };
