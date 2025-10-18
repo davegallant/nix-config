@@ -87,8 +87,6 @@ in
   environment.systemPackages =
     with pkgs;
     [
-      android-studio
-      android-tools
       bleachbit
       calibre
       chromium
@@ -115,7 +113,6 @@ in
       protonvpn-gui
       qemu
       traceroute
-      unityhub
       unstable.podman
       unstable.podman-compose
       unstable.podman-desktop
@@ -327,9 +324,9 @@ in
   };
 
   services.ollama = {
-    package = master.ollama;
+    package = pkgs.ollama;
     enable = true;
-    acceleration = "rocm";
+    # acceleration = "rocm";
     host = "0.0.0.0";
     environmentVariables = {
       HSA_OVERRIDE_GFX_VERSION = "11.0.2";

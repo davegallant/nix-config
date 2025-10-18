@@ -80,7 +80,6 @@
               ./hosts/hephaestus.nix
               ./common-packages.nix
               ./upgrade-diff.nix
-              determinate.nixosModules.default
               home-manager.nixosModules.home-manager
               stylix.nixosModules.stylix
               (
