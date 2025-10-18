@@ -96,8 +96,5 @@
 
     # media
     yt-dlp
-
-    # llm
-    llm
   ];
 }
