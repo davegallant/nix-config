@@ -100,7 +100,7 @@ in
           program = "zsh";
         };
         font = {
-          size = lib.mkForce 18.0;
+          size = lib.mkForce 14.0;
         };
         window = {
           opacity = lib.mkForce 0.9;
