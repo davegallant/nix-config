@@ -452,8 +452,8 @@ in
       // (
         if pkgs.stdenv.isLinux then
           {
-            ui_font_size = lib.mkForce 24;
-            buffer_font_size = lib.mkForce 22;
+            ui_font_size = lib.mkForce 20;
+            buffer_font_size = lib.mkForce 18;
           }
         else
           { }
