@@ -97,8 +97,15 @@ in
       gimp-with-plugins
       gnome-tweaks
       google-chrome
+      hardinfo2
       httpie-desktop
       iputils
+      kdePackages.kcalc
+      kdePackages.kcharselect
+      kdePackages.kclock
+      kdePackages.kcolorchooser
+      kdePackages.ksystemlog
+      kdePackages.sddm-kcm
       libation
       mission-center
       mupen64plus
@@ -113,11 +120,11 @@ in
       protonvpn-gui
       qemu
       traceroute
+      unstable.beszel
+      unstable.obsidian
       unstable.podman
       unstable.podman-compose
       unstable.podman-desktop
-      unstable.beszel
-      unstable.obsidian
       unstable.ryubing
       unstable.signal-desktop-bin
       unstable.spotify
@@ -127,8 +134,10 @@ in
       virt-manager
       vlc
       vpngate.packages.x86_64-linux.default
+      wayland-utils
       whois
       wine
+      wl-clipboard
     ]
     ++ gnomeExtensions;
 
@@ -296,6 +305,12 @@ in
     };
   };
 
+  services = {
+    desktopManager.plasma6.enable = true;
+    displayManager.sddm.enable = true;
+    displayManager.sddm.wayland.enable = true;
+  };
+
   services.flatpak.enable = true;
 
   services.gnome.gnome-keyring.enable = true;
@@ -312,14 +327,14 @@ in
   };
 
   services.xserver = {
-    enable = true;
+    enable = false;
     displayManager = {
       gdm = {
-        enable = true;
+        enable = false;
         wayland = true;
       };
     };
-    desktopManager.gnome.enable = true;
+    desktopManager.gnome.enable = false;
     videoDrivers = [ "amdgpu" ];
   };
 
