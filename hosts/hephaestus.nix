@@ -8,13 +8,6 @@
   vpngate,
   ...
 }:
-let
-  gnomeExtensions = with pkgs.gnomeExtensions; [
-    caffeine
-    clipboard-history
-    grand-theft-focus
-  ];
-in
 {
 
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
@@ -95,7 +88,6 @@ in
       discord
       freefilesync
       gimp-with-plugins
-      gnome-tweaks
       google-chrome
       hardinfo2
       httpie-desktop
@@ -138,8 +130,8 @@ in
       whois
       wine
       wl-clipboard
-    ]
-    ++ gnomeExtensions;
+    ];
+
 
   fileSystems = {
     "/" = {
@@ -316,8 +308,6 @@ in
 
   services.flatpak.enable = true;
 
-  services.gnome.gnome-keyring.enable = true;
-
   services.printing.enable = true;
 
   services.resolved.enable = true;
@@ -327,18 +317,6 @@ in
   services.tailscale = {
     enable = true;
     package = unstable.tailscale;
-  };
-
-  services.xserver = {
-    enable = false;
-    displayManager = {
-      gdm = {
-        enable = false;
-        wayland = true;
-      };
-    };
-    desktopManager.gnome.enable = false;
-    videoDrivers = [ "amdgpu" ];
   };
 
   services.ollama = {
