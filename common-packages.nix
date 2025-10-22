@@ -24,7 +24,6 @@
     fd
     github-cli
     hadolint
-    pre-commit
     progress
     ripgrep
     shellcheck
