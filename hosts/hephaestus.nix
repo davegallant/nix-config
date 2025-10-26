@@ -113,6 +113,7 @@
       traceroute
       unstable.beszel
       unstable.obsidian
+      unstable.mcpelauncher-ui-qt
       unstable.podman
       unstable.podman-compose
       unstable.podman-desktop
