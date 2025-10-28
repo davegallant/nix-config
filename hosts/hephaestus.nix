@@ -92,13 +92,14 @@
       hardinfo2
       httpie-desktop
       iputils
-      kdePackages.kcalc
+      kdePackages.bluedevil
       kdePackages.kcharselect
       kdePackages.kclock
       kdePackages.kcolorchooser
       kdePackages.ksystemlog
       kdePackages.sddm-kcm
       libation
+      libsForQt5.bluez-qt
       mission-center
       mupen64plus
       nfs-utils
