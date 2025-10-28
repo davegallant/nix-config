@@ -117,6 +117,7 @@
       "taskexplorer"
       "tailscale"
       "vlc"
+      "zed"
     ];
 
     taps = [

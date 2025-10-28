@@ -422,7 +422,7 @@ in
     };
 
     zed-editor = {
-      enable = true;
+      enable = stdenv.isLinux;
       package = unstable.zed-editor;
       extensions = [
         "ansible"
@@ -444,7 +444,7 @@ in
         };
         vim_mode = true;
         vim = {
-           use_system_clipboard = "on_yank";
+          use_system_clipboard = "on_yank";
         };
         autosave = "on_focus_change";
         format_on_save = "off";
