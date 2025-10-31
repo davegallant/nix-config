@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  inputs,
   master,
   modulesPath,
   pkgs,
@@ -131,6 +132,7 @@
       whois
       wine
       wl-clipboard
+      inputs.nixos-needsreboot.packages.${pkgs.system}.default
     ];
 
 
@@ -239,6 +241,26 @@
   system = {
     autoUpgrade.enable = true;
     stateVersion = "25.05";
+    activationScripts = {
+      diff = {
+        supportsDryActivation = true;
+        text = ''
+          if [[ -e /run/current-system ]]; then
+            echo -e "\e[36mPackage version diffs:\e[0m"
+            ${pkgs.nvd}/bin/nvd --nix-bin-dir=${pkgs.nix}/bin diff /run/current-system "$systemConfig"
+          fi
+        '';
+      };
+      needsreboot = {
+        supportsDryActivation = true;
+        text = ''
+          if [[ -e /run/current-system ]]; then
+            echo -e "\e[36mSystem changes requiring a reboot:\e[0m"
+          ${inputs.nixos-needsreboot.packages.${pkgs.system}.default}/bin/nixos-needsreboot --dry-run
+          fi
+        '';
+      };
+    };
   };
 
   nix = {

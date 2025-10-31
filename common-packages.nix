@@ -84,6 +84,7 @@
     nix-tree
     nixfmt-rfc-style
     nixpkgs-review
+    nvd
 
     # python
     poetry

@@ -6,6 +6,7 @@
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixos-needsreboot.url = "github:thefossguy/nixos-needsreboot/master";
     pre-commit-hooks.url = "github:cachix/git-hooks.nix";
     darwin = {
       url = "github:lnl7/nix-darwin/nix-darwin-25.05";
@@ -31,6 +32,7 @@
       nixpkgs-master,
       stylix,
       vpngate,
+      nixos-needsreboot,
       ...
     }@inputs:
     let
@@ -75,11 +77,11 @@
               inherit unstable;
               inherit master;
               inherit vpngate;
+              inherit inputs;
             };
             modules = [
               ./hosts/hephaestus.nix
               ./common-packages.nix
-              ./upgrade-diff.nix
               home-manager.nixosModules.home-manager
               stylix.nixosModules.stylix
               (
@@ -154,8 +156,6 @@
               stylix.darwinModules.stylix
               ./hosts/zelus.nix
               ./common-packages.nix
-              ./upgrade-diff.nix
-
               (
                 { ... }:
                 {
