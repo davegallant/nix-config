@@ -111,6 +111,7 @@
       pinentry-curses
       pinta
       protonvpn-gui
+      qalculate-qt
       qemu
       traceroute
       unstable.beszel
