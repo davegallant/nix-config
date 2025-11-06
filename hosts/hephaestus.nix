@@ -255,10 +255,8 @@
       needsreboot = {
         supportsDryActivation = true;
         text = ''
-          if [[ -e /run/current-system ]]; then
-            echo -e "\e[36mSystem changes requiring a reboot:\e[0m"
-          ${inputs.nixos-needsreboot.packages.${pkgs.system}.default}/bin/nixos-needsreboot --dry-run
-          fi
+          echo -e "\e[36mSystem changes requiring a reboot:\e[0m"
+          ${inputs.nixos-needsreboot.packages.${pkgs.system}.default}/bin/nixos-needsreboot --dry-run || true
         '';
       };
     };

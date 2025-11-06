@@ -8,7 +8,7 @@ arch := `uname -s`
 cmd := if arch == "Linux" { "nixos-rebuild --use-remote-sudo" } else { "darwin-rebuild" }
 
 rebuild:
-  sudo $cmd switch --flake . -I nixos-config="hosts/$(hostname).nix" --print-build-logs
+  sudo $cmd switch --flake . -I nixos-config="hosts/$(hostname).nix" --show-trace
 
 rollback:
   sudo $cmd switch --rollback --flake .
