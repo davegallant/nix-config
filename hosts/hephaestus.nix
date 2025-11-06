@@ -122,7 +122,6 @@
       unstable.podman-desktop
       unstable.ryubing
       unstable.signal-desktop-bin
-      unstable.spotify
       unstable.tailscale
       unstable.zoom-us
       usbutils
