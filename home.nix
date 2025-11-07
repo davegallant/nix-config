@@ -448,16 +448,20 @@ in
         };
         autosave = "on_focus_change";
         format_on_save = "off";
-      }
-      // (
-        if pkgs.stdenv.isLinux then
-          {
-            ui_font_size = lib.mkForce 20;
-            buffer_font_size = lib.mkForce 18;
-          }
-        else
-          { }
-      );
+        ui_font_size = lib.mkForce 20;
+        buffer_font_size = lib.mkForce 18;
+      };
+      userKeymaps = [
+           {
+             context = "Editor && !menu";
+             bindings = {
+               "ctrl-c" = "editor::Copy";
+               "ctrl-x" = "editor::Cut";
+               "ctrl-v" = "editor::Paste";
+               "ctrl-z" = "editor::Undo";
+             };
+           }
+         ];
     };
 
     firefox = {
