@@ -101,7 +101,6 @@
       kdePackages.sddm-kcm
       libation
       libsForQt5.bluez-qt
-      mission-center
       mupen64plus
       nfs-utils
       onlyoffice-desktopeditors
