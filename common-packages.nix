@@ -88,10 +88,6 @@
 
     # python
     poetry
-    (unstable.python3.withPackages (ps: [
-      ps.llm
-      ps.llm-ollama
-    ]))
     virtualenv
 
     # media
