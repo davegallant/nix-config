@@ -97,7 +97,7 @@ in
         scrolling.history = 100000;
         general.live_config_reload = true;
         terminal.shell = {
-          program = "bash";
+          program = "fish";
         };
         font = {
           size = lib.mkForce 14.0;
@@ -110,6 +110,7 @@ in
 
     starship = {
       enable = true;
+      enableFishIntegration = true;
       settings = {
         add_newline = false;
         gcloud = {
@@ -121,45 +122,39 @@ in
       };
     };
 
-    bash = {
+    fish = {
       enable = true;
-      # autosuggestion.enable = true;
-      historySize = 1000000;
 
-      initExtra = ''
-        export PAGER=less
-        export EDITOR=vim
-        export DOCKER_CLI_HINTS=false
-        export TERM=xterm-256color
+      interactiveShellInit = ''
+        set fish_greeting # Disable greeting
 
-        export DOCKER_DEFAULT_PLATFORM=linux/amd64
-        export NNN_FIFO="$XDG_RUNTIME_DIR/nnn.fifo";
+        # environment variables
+        set -x PAGER less
+        set -x EDITOR vim
+        set -x DOCKER_CLI_HINTS false
+        set -x TERM xterm-256color
+        set -x DOCKER_DEFAULT_PLATFORM linux/amd64
+        set -x NNN_FIFO "$XDG_RUNTIME_DIR/nnn.fifo"
 
-        export PATH=$PATH:~/.cargo/bin
-        export PATH=$PATH:~/.local/bin
-        export PATH=$PATH:~/.npm-packages/bin
-        export PATH=$PATH:/opt/homebrew/bin
-        export PATH=$PATH:~/.krew/bin
-        export PATH=$PATH:~/bin
-        export GOPATH=~/go
-        export GOBIN=$GOPATH/bin
-        export PATH=$PATH:$GOBIN
+        # PATH
+        set -x PATH $PATH ~/.cargo/bin
+        set -x PATH $PATH ~/.local/bin
+        set -x PATH $PATH ~/.npm-packages/bin
+        set -x PATH $PATH /opt/homebrew/bin
+        set -x PATH $PATH ~/.krew/bin
+        set -x PATH $PATH ~/bin
 
-        source $HOME/.bash-work
+        # Go-related environment
+        set -x GOPATH ~/go
+        set -x GOBIN $GOPATH/bin
+        set -x PATH $PATH $GOBIN
 
-        if [[ "$OSTYPE" == "darwin"* ]];
-        then
-          export PATH="$(brew --prefix)/opt/gnu-tar/libexec/gnubin:$PATH"
-        fi
+        source $HOME/work.fish
 
-        source <(helm completion bash)
-        source <(kubectl completion bash)
-        eval "$(atuin init bash)"
-
-        # kubecolor
-        source <(kubectl completion bash)
-        alias kubectl=kubecolor
-      '';
+        atuin init fish | source
+        helm completion fish | source
+        kubectl completion fish | source
+      # '';
 
       shellAliases = {
         ".." = "cd ..";
@@ -172,6 +167,7 @@ in
         grep = "rg --smart-case";
         j = "just";
         k = "kubecolor";
+        kubectl = "kubecolor";
         kp = "viddy 'kubectl get pods'";
         kcx = "kubectx";
         kns = "kubens";

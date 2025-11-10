@@ -271,7 +271,7 @@
       "libvirtd"
       "corectrl"
     ];
-    shell = pkgs.bash;
+    shell = pkgs.fish;
   };
 
   i18n.defaultLocale = "en_US.UTF-8";
@@ -293,7 +293,10 @@
 
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
+  documentation.man.generateCaches = false;
+
   programs = {
+    fish.enable = true;
     gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
