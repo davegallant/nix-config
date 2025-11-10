@@ -12,12 +12,6 @@
 
   nix.enable = false;
 
-  programs.zsh = {
-    enable = true;
-    # https://github.com/nix-community/home-manager/issues/108#issuecomment-340397178
-    enableCompletion = false;
-  };
-
   system.stateVersion = 4;
 
   users.users."dave.gallant".home = "/Users/dave.gallant";
