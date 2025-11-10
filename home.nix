@@ -97,7 +97,7 @@ in
         scrolling.history = 100000;
         general.live_config_reload = true;
         terminal.shell = {
-          program = "zsh";
+          program = "bash";
         };
         font = {
           size = lib.mkForce 14.0;
@@ -110,8 +110,6 @@ in
 
     starship = {
       enable = true;
-      enableZshIntegration = true;
-
       settings = {
         add_newline = false;
         gcloud = {
@@ -123,22 +121,12 @@ in
       };
     };
 
-    zsh = {
+    bash = {
       enable = true;
-      autosuggestion.enable = true;
-      enableCompletion = true;
-      syntaxHighlighting.enable = true;
-      history.size = 1000000;
+      # autosuggestion.enable = true;
+      historySize = 1000000;
 
-      localVariables = {
-        CASE_SENSITIVE = "true";
-        DISABLE_UNTRACKED_FILES_DIRTY = "true";
-        RPROMPT = ""; # override because macOS defaults to filepath
-        ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE = "fg=#838383,underline";
-        ZSH_DISABLE_COMPFIX = "true";
-      };
-
-      envExtra = ''
+      initExtra = ''
         export PAGER=less
         export EDITOR=vim
         export DOCKER_CLI_HINTS=false
@@ -156,28 +144,21 @@ in
         export GOPATH=~/go
         export GOBIN=$GOPATH/bin
         export PATH=$PATH:$GOBIN
-      '';
 
-      initContent = ''
-        setopt noincappendhistory
-
-        source $HOME/.zsh-work
+        source $HOME/.bash-work
 
         if [[ "$OSTYPE" == "darwin"* ]];
         then
           export PATH="$(brew --prefix)/opt/gnu-tar/libexec/gnubin:$PATH"
-          alias xdg-open=open
         fi
 
-        source <(helm completion zsh)
-        source <(kubectl completion zsh)
-        eval "$(atuin init zsh)"
+        source <(helm completion bash)
+        source <(kubectl completion bash)
+        eval "$(atuin init bash)"
 
         # kubecolor
-        source <(kubectl completion zsh)
+        source <(kubectl completion bash)
         alias kubectl=kubecolor
-        # make completion work with kubecolor
-        compdef kubecolor=kubectl
       '';
 
       shellAliases = {
@@ -201,10 +182,6 @@ in
         tf = "terraform";
         tree = "eza --tree";
         v = "nvim";
-      };
-
-      "oh-my-zsh" = {
-        enable = true;
       };
     };
 

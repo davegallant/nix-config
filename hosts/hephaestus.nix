@@ -271,7 +271,7 @@
       "libvirtd"
       "corectrl"
     ];
-    shell = pkgs.zsh;
+    shell = pkgs.bash;
   };
 
   i18n.defaultLocale = "en_US.UTF-8";
@@ -304,7 +304,6 @@
       enable = true;
       remotePlay.openFirewall = true;
     };
-    zsh.enable = true;
   };
 
   services.avahi = {
