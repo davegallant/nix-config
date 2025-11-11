@@ -45,7 +45,3 @@ To cleanup previous files, run nix garbage collection:
 ```sh
 just clean
 ```
-
-## Pre-commit hooks
-
-Run `nix develop` to install the pre-commit hooks.
