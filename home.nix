@@ -67,7 +67,6 @@ in
         d = "diff";
         dc = "diff --cached";
         dcn = "diff --cached --name-only";
-        ds = "! git diff origin | sed -r 's/value: (.*)/value: \"************\"/'";
         l = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
         ms = "merge --squash";
         p = "push origin";
@@ -126,25 +125,24 @@ in
       enable = true;
 
       interactiveShellInit = ''
-        set fish_greeting # Disable greeting
+        set fish_greeting
 
-        # environment variables
-        set -x PAGER less
-        set -x EDITOR vim
         set -x DOCKER_CLI_HINTS false
-        set -x TERM xterm-256color
         set -x DOCKER_DEFAULT_PLATFORM linux/amd64
+        set -x EDITOR vim
         set -x NNN_FIFO "$XDG_RUNTIME_DIR/nnn.fifo"
+        set -x PAGER less
+        set -x TERM xterm-256color
 
-        # PATH
-        set -x PATH $PATH ~/.cargo/bin
-        set -x PATH $PATH ~/.local/bin
-        set -x PATH $PATH ~/.npm-packages/bin
-        set -x PATH $PATH /opt/homebrew/bin
-        set -x PATH $PATH ~/.krew/bin
-        set -x PATH $PATH ~/bin
+        set -x PATH $PATH \
+          ~/.cargo/bin \
+          ~/.local/bin \
+          ~/.npm-packages/bin \
+          /opt/homebrew/bin \
+          ~/.krew/bin \
+          ~/bin
 
-        # Go-related environment
+        # golang
         set -x GOPATH ~/go
         set -x GOBIN $GOPATH/bin
         set -x PATH $PATH $GOBIN
@@ -158,7 +156,6 @@ in
 
       shellAliases = {
         ".." = "cd ..";
-        c = "code";
         g = "git";
         gc = "git checkout $(git branch | fzf)";
         gco = "git checkout $(git branch -r | sed -e 's/^  origin\\///' | fzf)";
@@ -428,9 +425,9 @@ in
            {
              context = "Editor && !menu";
              bindings = {
-               "ctrl-c" = "editor::Copy";
-               "ctrl-x" = "editor::Cut";
-               "ctrl-v" = "editor::Paste";
+               "ctrl-shift-c" = "editor::Copy";
+               "ctrl-shift-x" = "editor::Cut";
+               "ctrl-shift-v" = "editor::Paste";
                "ctrl-z" = "editor::Undo";
              };
            }
