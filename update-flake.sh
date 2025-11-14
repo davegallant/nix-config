@@ -2,6 +2,10 @@
 
 set -euo pipefail
 
+if ! git diff-index --quiet HEAD --; then
+  git stash push -m "Auto-stash via update-flash.sh on $(date)"
+fi
+
 git pull
 update_msg=$(nix flake update 2>&1 | grep -v 'warning:')
 just rebuild
