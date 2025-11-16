@@ -113,9 +113,10 @@
       qalculate-qt
       qemu
       traceroute
+      unrar
       unstable.beszel
-      unstable.obsidian
       unstable.mcpelauncher-ui-qt
+      unstable.obsidian
       unstable.podman
       unstable.podman-compose
       unstable.podman-desktop
