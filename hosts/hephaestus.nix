@@ -98,6 +98,7 @@
       kdePackages.kclock
       kdePackages.kcolorchooser
       kdePackages.ksystemlog
+      kdePackages.partitionmanager
       kdePackages.sddm-kcm
       libation
       libsForQt5.bluez-qt
