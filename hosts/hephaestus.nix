@@ -100,6 +100,7 @@
       kdePackages.ksystemlog
       kdePackages.partitionmanager
       kdePackages.sddm-kcm
+      kdePackages.yakuake
       libation
       libsForQt5.bluez-qt
       mupen64plus
