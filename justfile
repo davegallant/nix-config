@@ -5,7 +5,7 @@ alias r := rebuild
 
 arch := `uname -s`
 
-cmd := if arch == "Linux" { "nixos-rebuild --use-remote-sudo" } else { "darwin-rebuild" }
+cmd := if arch == "Linux" { "nixos-rebuild --sudo" } else { "darwin-rebuild" }
 
 rebuild:
   sudo $cmd switch --flake . -I nixos-config="hosts/$(hostname).nix" --show-trace
