@@ -5,18 +5,18 @@
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixos-needsreboot.url = "github:thefossguy/nixos-needsreboot/master";
     darwin = {
       url = "github:lnl7/nix-darwin/nix-darwin-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    home-manager.url = "github:nix-community/home-manager/release-25.05";
+    home-manager.url = "github:nix-community/home-manager/release-25.11";
     nixvim = {
-      url = "github:nix-community/nixvim/nixos-25.05";
+      url = "github:nix-community/nixvim/nixos-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    stylix.url = "github:nix-community/stylix/release-25.05";
+    stylix.url = "github:nix-community/stylix/release-25.11";
     vpngate.url = "github:davegallant/vpngate";
   };
 
@@ -102,7 +102,7 @@
                       useUserPackages = true;
                       users.dave.imports = [
                         ./home.nix
-                        inputs.nixvim.homeManagerModules.nixvim
+                        inputs.nixvim.homeModules.nixvim
                       ];
                       extraSpecialArgs = {
                         inherit unstable;
@@ -151,7 +151,7 @@
                       useUserPackages = true;
                       users."dave.gallant".imports = [
                         ./home.nix
-                        inputs.nixvim.homeManagerModules.nixvim
+                        inputs.nixvim.homeModules.nixvim
                       ];
                       extraSpecialArgs = {
                         inherit unstable;

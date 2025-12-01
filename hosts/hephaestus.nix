@@ -102,7 +102,6 @@
       kdePackages.sddm-kcm
       kdePackages.yakuake
       libation
-      libsForQt5.bluez-qt
       mupen64plus
       nfs-utils
       onlyoffice-desktopeditors
@@ -174,8 +173,8 @@
     nerd-fonts.ubuntu-mono
     noto-fonts
     noto-fonts-cjk-sans
-    noto-fonts-emoji
-    noto-fonts-extra
+    noto-fonts-color-emoji
+    noto-fonts
   ];
 
   fonts.fontconfig.defaultFonts = {
@@ -242,7 +241,7 @@
 
   system = {
     autoUpgrade.enable = true;
-    stateVersion = "25.05";
+    stateVersion = "25.11";
     activationScripts = {
       diff = {
         supportsDryActivation = true;

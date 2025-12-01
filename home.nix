@@ -8,7 +8,7 @@ let
   inherit (pkgs) stdenv;
 in
 {
-  home.stateVersion = "25.05";
+  home.stateVersion = "25.11";
 
   home.packages = with pkgs; [ just ];
 
@@ -45,40 +45,39 @@ in
 
     direnv.enable = true;
 
+    diff-so-fancy = {
+      enable = true;
+      enableGitIntegration = true;
+    };
+
     git = {
       enable = true;
 
-      userName = "Dave Gallant";
-
-      diff-so-fancy.enable = true;
-
       lfs.enable = true;
 
-      aliases = {
-        aa = "add -A .";
-        br = "branch";
-        c = "commit -S";
-        cm = "commit -S -m";
-        ca = "commit -S --amend";
-        cane = "commit -S --amend --no-edit";
-        cb = "checkout -b";
-        co = "checkout";
-        cmp = "! git checkout main && git pl";
-        d = "diff";
-        dc = "diff --cached";
-        dcn = "diff --cached --name-only";
-        l = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
-        ms = "merge --squash";
-        p = "push origin";
-        pf = "push -f";
-        pl = "! git pull origin $(git rev-parse --abbrev-ref HEAD)";
-        st = "status";
-        wip = "for-each-ref --sort='authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' refs/heads";
-      };
-
-      includes = [ { path = "~/.gitconfig-work"; } ];
-
-      extraConfig = {
+      settings = {
+        user.name = "Dave Gallant";
+        alias = {
+          aa = "add -A .";
+          br = "branch";
+          c = "commit -S";
+          cm = "commit -S -m";
+          ca = "commit -S --amend";
+          cane = "commit -S --amend --no-edit";
+          cb = "checkout -b";
+          co = "checkout";
+          cmp = "! git checkout main && git pl";
+          d = "diff";
+          dc = "diff --cached";
+          dcn = "diff --cached --name-only";
+          l = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
+          ms = "merge --squash";
+          p = "push origin";
+          pf = "push -f";
+          pl = "! git pull origin $(git rev-parse --abbrev-ref HEAD)";
+          st = "status";
+          wip = "for-each-ref --sort='authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' refs/heads";
+        };
         push = {
           default = "current";
         };
@@ -86,6 +85,9 @@ in
           rebase = true;
         };
       };
+
+      includes = [ { path = "~/.gitconfig-work"; } ];
+
     };
 
     alacritty = {
@@ -274,7 +276,6 @@ in
         lualine.enable = true;
         lsp.enable = true;
         lsp.servers = {
-          ansiblels.enable = true;
           bashls.enable = true;
           dockerls.enable = true;
           gopls.enable = true;
