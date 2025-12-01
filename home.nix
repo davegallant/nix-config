@@ -25,6 +25,12 @@ in
       name = "FiraCode Nerd Font";
       package = "${pkgs.fira-code}";
     };
+
+    targets = {
+      firefox.profileNames = [ "default" ];
+      qt.platform = "qtct";
+    };
+
   };
 
   services = {
