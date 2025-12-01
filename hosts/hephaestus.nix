@@ -133,7 +133,7 @@
       whois
       wine
       wl-clipboard
-      inputs.nixos-needsreboot.packages.${pkgs.system}.default
+      inputs.nixos-needsreboot.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
 
 
@@ -256,7 +256,7 @@
         supportsDryActivation = true;
         text = ''
           echo -e "\e[36mSystem changes requiring a reboot:\e[0m"
-          ${inputs.nixos-needsreboot.packages.${pkgs.system}.default}/bin/nixos-needsreboot --dry-run || true
+          ${inputs.nixos-needsreboot.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/nixos-needsreboot --dry-run || true
         '';
       };
     };
