@@ -6,7 +6,6 @@
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
-    nixos-needsreboot.url = "github:thefossguy/nixos-needsreboot/master";
     darwin = {
       url = "github:lnl7/nix-darwin/nix-darwin-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -31,7 +30,6 @@
       nixpkgs-master,
       stylix,
       vpngate,
-      nixos-needsreboot,
       ...
     }@inputs:
     let
