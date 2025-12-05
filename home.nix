@@ -28,7 +28,6 @@ in
 
     targets = {
       firefox.profileNames = [ "default" ];
-      qt.platform = "qtct";
     };
 
   };
