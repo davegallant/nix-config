@@ -90,6 +90,7 @@
     ];
 
     casks = [
+      "claude-code"
       "discord"
       "dbeaver-community"
       "font-fira-code-nerd-font"
