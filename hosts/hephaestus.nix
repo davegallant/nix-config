@@ -100,7 +100,6 @@
       kdePackages.ksystemlog
       kdePackages.partitionmanager
       kdePackages.sddm-kcm
-      kdePackages.yakuake
       libation
       mupen64plus
       nfs-utils
