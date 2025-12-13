@@ -16,7 +16,7 @@
 
   users.users."dave.gallant".home = "/Users/dave.gallant";
   users.users."dave.gallant".shell = pkgs.fish;
-  
+
   programs.fish.enable = true;
 
   system.primaryUser = "dave.gallant";
@@ -104,7 +104,6 @@
       "lulu"
       "notunes"
       "obsidian"
-      "ollama"
       "raycast"
       "rectangle"
       "signal"
