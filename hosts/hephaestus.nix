@@ -32,10 +32,6 @@
   boot = {
     kernelModules = [
       "kvm-amd"
-      "vfio_pci"
-      "vfio"
-      "vfio_iommu_type1"
-      "vfio_virqfd"
     ];
     kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [
@@ -332,34 +328,6 @@
   services.tailscale = {
     enable = true;
     package = unstable.tailscale;
-  };
-
-  services.ollama = {
-    package = pkgs.ollama;
-    enable = true;
-    # acceleration = "rocm";
-    host = "0.0.0.0";
-    environmentVariables = {
-      HSA_OVERRIDE_GFX_VERSION = "11.0.2";
-    };
-    loadModels = [
-      "dolphin3:8b"
-      "llama3.1"
-      "llava"
-    ];
-  };
-
-  services.open-webui = {
-    enable = true;
-    package = pkgs.open-webui;
-    host = "0.0.0.0";
-    environment = {
-      ANONYMIZED_TELEMETRY = "False";
-      DO_NOT_TRACK = "True";
-      SCARF_NO_ANALYTICS = "True";
-      OLLAMA_API_BASE_URL = "http://127.0.0.1:11434/api";
-      OLLAMA_BASE_URL = "http://127.0.0.1:11434";
-    };
   };
 
   services.opensnitch = {
