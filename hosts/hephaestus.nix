@@ -318,8 +318,6 @@
     displayManager.sddm.wayland.enable = true;
   };
 
-  services.flatpak.enable = true;
-
   services.printing.enable = true;
 
   services.resolved.enable = true;
