@@ -42,13 +42,16 @@ in
 
       settings = {
         user.name = "Dave Gallant";
+        user.signingkey = "5A548984C7377E4D";
+        commit.gpgsign = true;
+        tag.gpgsign = true;
         alias = {
           aa = "add -A .";
           br = "branch";
-          c = "commit -S";
-          cm = "commit -S -m";
-          ca = "commit -S --amend";
-          cane = "commit -S --amend --no-edit";
+          c = "commit";
+          cm = "commit -m";
+          ca = "commit --amend";
+          cane = "commit --amend --no-edit";
           cb = "checkout -b";
           co = "checkout";
           cmp = "! git checkout main && git pl";

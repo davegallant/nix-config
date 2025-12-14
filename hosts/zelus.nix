@@ -124,5 +124,6 @@
       "homebrew/cask-versions"
       "homebrew/services"
     ];
+  };
 
 }
