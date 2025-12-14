@@ -13,16 +13,6 @@
 
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-  stylix = {
-    enable = true;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
-    image = pkgs.fetchurl {
-      url = "https://raw.githubusercontent.com/davegallant/nix-config/refs/heads/main/nixos-wallpaper.png";
-      sha256 = "Ztqn9+CHslr6wZdnOTeo/YNi/ICerpcFLyMArsZ/PIY=";
-    };
-    polarity = "dark";
-  };
-
   security.sudo-rs = {
     enable = true;
     execWheelOnly = true;

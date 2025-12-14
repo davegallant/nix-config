@@ -15,7 +15,6 @@
       url = "github:nix-community/nixvim/nixos-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    stylix.url = "github:nix-community/stylix/release-25.11";
     vpngate.url = "github:davegallant/vpngate";
   };
 
@@ -28,7 +27,6 @@
       nixpkgs,
       nixpkgs-unstable,
       nixpkgs-master,
-      stylix,
       vpngate,
       ...
     }@inputs:
@@ -66,7 +64,6 @@
               ./hosts/hephaestus.nix
               ./common-packages.nix
               home-manager.nixosModules.home-manager
-              stylix.nixosModules.stylix
               (
                 { ... }:
                 {
@@ -136,7 +133,6 @@
 
             modules = [
               home-manager.darwinModules.home-manager
-              stylix.darwinModules.stylix
               ./hosts/zelus.nix
               ./common-packages.nix
               (

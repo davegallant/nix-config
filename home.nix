@@ -12,26 +12,6 @@ in
 
   home.packages = with pkgs; [ just ];
 
-  stylix = {
-    enable = true;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
-
-    fonts.monospace = {
-      name = "FiraCode Nerd Font Mono";
-      package = "${pkgs.fira-mono}";
-    };
-
-    fonts.sansSerif = {
-      name = "FiraCode Nerd Font";
-      package = "${pkgs.fira-code}";
-    };
-
-    targets = {
-      firefox.profileNames = [ "default" ];
-    };
-
-  };
-
   services = {
     gpg-agent = {
       enable = stdenv.isLinux;
