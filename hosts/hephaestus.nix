@@ -97,6 +97,7 @@
       kdePackages.partitionmanager
       kdePackages.sddm-kcm
       libation
+      lutris
       mupen64plus
       nfs-utils
       onlyoffice-desktopeditors
