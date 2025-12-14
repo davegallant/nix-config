@@ -124,11 +124,5 @@
       "homebrew/cask-versions"
       "homebrew/services"
     ];
-  };
-
-  stylix = {
-    enable = true;
-    image = "/Library/tokyo-night.jpg";
-  };
 
 }
