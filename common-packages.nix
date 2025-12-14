@@ -24,6 +24,7 @@
     fd
     github-cli
     hadolint
+    lazygit
     progress
     ripgrep
     shellcheck
