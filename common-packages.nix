@@ -77,9 +77,6 @@
     openvpn
     tcpdump
 
-    # rice
-    fastfetch
-
     # nix
     nix-tree
     nixfmt-rfc-style
