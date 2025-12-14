@@ -388,13 +388,11 @@ in
         "make"
         "material-icon-theme"
         "nix"
-        "tokyo-night"
         "toml"
         "vue"
       ];
       userSettings = {
         icon_theme = "Material Icon Theme";
-        theme = lib.mkForce "Tokyo Night";
         features = {
           edit_prediction_provider = "copilot";
         };
@@ -404,8 +402,8 @@ in
         };
         autosave = "on_focus_change";
         format_on_save = "off";
-        ui_font_size = lib.mkForce 20;
-        buffer_font_size = lib.mkForce 18;
+        ui_font_size = lib.mkForce 18;
+        buffer_font_size = lib.mkForce 16;
       };
       userKeymaps = [
         {
