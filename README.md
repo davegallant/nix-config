@@ -5,14 +5,24 @@ This repo stores nix configuration to manage my hosts running [NixOS](https://ni
 The configuration is very specific to my own machines and setup, but it may be a useful reference for anyone else learning or experimenting with nix, whether it be on a personal workstation or a server environment.
 
 ```console
-❯ nerdfetch
-      ___     dave@hephaestus
-     (.. \    󱄅  NixOS 25.11 (Xantusia)  󱄅 
-     (<> |      6.12.61
-    //  \ \   󰍛  10700/32020 MiB (33%)
-   ( |  | /|  󰏔  2346 (nix-env)
-  _/\ __)/_)  󰅶  22 mins
-  \/-____\/     ██████████████████
+❯ macchina
+
+        a8888b.           Host        -  dave@hephaestus
+       d888888b.          Machine     -  Micro-Star International Co., Ltd MS-7C02 1.0
+       8P"YP"Y88          Kernel      -  6.12.61
+       8|o||o|88          Distro      -  NixOS 25.11 (Xantusia)
+       8'    .88          DE          -  KDE
+       8`._.' Y8.         Packages    -  1 (cargo), 10998 (nix)
+      d/      `8b.        Shell       -  fish
+     dP        Y8b.       Terminal    -  alacritty
+    d8:       ::88b.      Resolution  -  2560x1440, 3840x2160
+   d8"         'Y88b      Uptime      -  26m
+  :8P           :888      CPU         -  AMD Ryzen 7 5700X 8-Core Processor (16)
+   8a.         _a88P      CPU Load    -  8%
+ ._/"Yaa     .| 88P|      Memory      -  10.7 GB / 32.8 GB
+ \    YP"    `|     `.
+ /     \.___.d|    .'
+ `--..__)     `._.'
 ```
 
 ## Prerequisites
