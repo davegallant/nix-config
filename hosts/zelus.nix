@@ -114,6 +114,7 @@
       "taskexplorer"
       "tailscale"
       "vlc"
+      "whisky"
       "zed"
     ];
 
