@@ -8,7 +8,10 @@ arch := `uname -s`
 cmd := if arch == "Linux" { "nixos-rebuild --sudo" } else { "darwin-rebuild" }
 
 rebuild:
-  sudo $cmd switch --flake . -I nixos-config="hosts/$(hostname).nix" --show-trace
+  $cmd switch --flake .
+
+rebuild-boot:
+  $cmd boot --flake . --install-bootloader
 
 rollback:
   sudo $cmd switch --rollback --flake .
