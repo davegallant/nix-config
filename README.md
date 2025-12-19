@@ -64,3 +64,23 @@ To cleanup previous files, run nix garbage collection:
 ```sh
 just clean
 ```
+
+## Restoring from a live USB
+
+If the bootloader for some reason breaks (i.e. motherboard firmware upgrade), restore it from a live USB by running the following commands:
+
+```console
+$ sudo cryptsetup luksOpen /dev/nvme0n1p2 crypted-nixos
+Enter passphrase for /dev/nvme0n1p2: ********
+$ sudo mount /dev/vg/root /mnt
+$ sudo mount /dev/nvme0n1p1 /mnt/boot/efi
+$ sudo mount /dev/vg/home /mnt/home
+$ sudo nixos-enter /mnt
+$ hostname <hostname>
+```
+
+Navigate to the nix-config directory and run:
+
+```sh
+just rebuild-boot
+```
