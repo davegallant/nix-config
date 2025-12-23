@@ -25,6 +25,8 @@
     github-cli
     hadolint
     lazygit
+    macchina
+    ncdu
     progress
     ripgrep
     shellcheck
