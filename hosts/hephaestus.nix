@@ -80,6 +80,7 @@
       httpie-desktop
       iputils
       kdePackages.bluedevil
+      kdePackages.kcalc
       kdePackages.kcharselect
       kdePackages.kclock
       kdePackages.kcolorchooser
@@ -97,7 +98,6 @@
       pinentry-curses
       pinta
       protonvpn-gui
-      qalculate-qt
       qemu
       traceroute
       unrar
