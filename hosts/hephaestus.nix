@@ -242,7 +242,7 @@
 
   nix = {
     extraOptions = "experimental-features = nix-command flakes";
-    settings.trustedUsers = [ "root" "@wheel" ];
+    settings.trusted-users = [ "root" "@wheel" ];
   };
 
   users.users.dave = {
