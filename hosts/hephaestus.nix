@@ -242,7 +242,7 @@
 
   nix = {
     extraOptions = "experimental-features = nix-command flakes";
-    trustedUsers = [ "root" "@wheel" ];
+    settings.trustedUsers = [ "root" "@wheel" ];
   };
 
   users.users.dave = {
@@ -250,7 +250,6 @@
     extraGroups = [
       "wheel"
       "libvirtd"
-      "corectrl"
     ];
     shell = pkgs.fish;
   };
