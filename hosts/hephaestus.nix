@@ -71,6 +71,7 @@
       bleachbit
       calibre
       chromium
+      clamtk
       cryptsetup
       dbeaver-bin
       discord
@@ -79,6 +80,7 @@
       google-chrome
       hardinfo2
       httpie-desktop
+      heroic
       iputils
       kdePackages.bluedevil
       kdePackages.kcalc
