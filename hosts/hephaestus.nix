@@ -1,4 +1,5 @@
 {
+
   config,
   lib,
   inputs,
@@ -54,7 +55,7 @@
       ];
       luks.devices."root" = {
         allowDiscards = true;
-        device = "/dev/disk/by-uuid/21cd166c-1528-49a4-b31b-0d408d48aa80";
+        device = "/dev/disk/by-uuid/89a14ac5-7723-4a0a-bb95-fb2fb2e92160";
         preLVM = true;
         keyFile = "./keyfile0.bin";
       };
@@ -124,15 +125,11 @@
 
   fileSystems = {
     "/" = {
-      device = "/dev/disk/by-uuid/a6723178-6f18-428e-b541-9ac901861125";
-      fsType = "ext4";
-    };
-    "/home" = {
-      device = "/dev/disk/by-uuid/e3ab2e1a-bddf-4ae0-b00a-bf954c6c182b";
+      device = "/dev/disk/by-uuid/7f4f0948-041c-47e9-ab28-53132026f158";
       fsType = "ext4";
     };
     "/boot/efi" = {
-      device = "/dev/disk/by-uuid/3CFD-D749";
+      device = "/dev/disk/by-uuid/F1BD-5227";
       fsType = "vfat";
     };
     "/mnt/synology-2b/media" = {
