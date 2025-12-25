@@ -74,8 +74,7 @@ $ sudo cryptsetup luksOpen /dev/nvme0n1p2 crypted-nixos
 Enter passphrase for /dev/nvme0n1p2: ********
 $ sudo mount /dev/vg/root /mnt
 $ sudo mount /dev/nvme0n1p1 /mnt/boot/efi
-$ sudo mount /dev/vg/home /mnt/home
-$ sudo nixos-enter /mnt
+$ sudo nixos-enter --root /mnt
 $ hostname <hostname>
 ```
 
