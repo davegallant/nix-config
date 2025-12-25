@@ -99,6 +99,7 @@
       pinentry-curses
       pinta
       protonvpn-gui
+      qbittorrent
       qemu
       traceroute
       unrar
