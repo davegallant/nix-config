@@ -101,7 +101,6 @@
       pinentry-curses
       pinta
       protonup-qt
-      protonvpn-gui
       qbittorrent
       qemu
       traceroute
