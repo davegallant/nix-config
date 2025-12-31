@@ -224,6 +224,13 @@
     };
   };
 
+  services = {
+     mullvad-vpn = {
+       enable = true;
+       package = pkgs.mullvad-vpn;
+     };
+  }
+
   system = {
     autoUpgrade.enable = true;
     stateVersion = "25.11";
