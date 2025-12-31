@@ -106,6 +106,7 @@
       traceroute
       unrar
       unstable.beszel
+      unstable.ktailctl
       unstable.mcpelauncher-ui-qt
       unstable.obsidian
       unstable.podman
@@ -229,7 +230,7 @@
        enable = true;
        package = pkgs.mullvad-vpn;
      };
-  }
+  };
 
   system = {
     autoUpgrade.enable = true;
