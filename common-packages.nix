@@ -87,7 +87,6 @@
     nvd
 
     # python
-    poetry
     virtualenv
 
     # media
