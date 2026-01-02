@@ -150,7 +150,6 @@
     dejavu_fonts
     fira-mono
     font-awesome
-    google-fonts
     liberation_ttf
     nerd-fonts.droid-sans-mono
     nerd-fonts.fira-code
