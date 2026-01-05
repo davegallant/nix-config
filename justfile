@@ -5,7 +5,7 @@ alias r := rebuild
 
 arch := `uname -s`
 
-cmd := if arch == "Linux" { "nixos-rebuild --sudo" } else { "darwin-rebuild" }
+cmd := if arch == "Linux" { "nixos-rebuild --sudo" } else { "sudo darwin-rebuild" }
 
 rebuild:
   $cmd switch --flake .
