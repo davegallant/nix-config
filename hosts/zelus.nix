@@ -112,7 +112,7 @@
       "stats"
       "steam"
       "taskexplorer"
-      "tailscale"
+      "tailscale-app"
       "vlc"
       "whisky"
       "zed"
