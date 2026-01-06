@@ -138,11 +138,13 @@ in
           set -x PATH $PATH $GOBIN
 
           source $HOME/work.fish
-
-          atuin init fish | source
-          helm completion fish | source
-          kubectl completion fish | source
         # '';
+
+      shellInit = ''
+        atuin init fish | source
+        helm completion fish | source
+        kubectl completion fish | source
+      '';
 
       shellAliases = {
         ".." = "cd ..";
