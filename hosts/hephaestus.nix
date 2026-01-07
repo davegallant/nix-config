@@ -70,7 +70,6 @@
     [
       bleachbit
       calibre
-      chromium
       clamtk
       cryptsetup
       dbeaver-bin
