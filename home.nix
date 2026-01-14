@@ -53,8 +53,8 @@ in
           ca = "commit --amend";
           cane = "commit --amend --no-edit";
           cb = "checkout -b";
-          co = "checkout";
           cmp = "! git checkout main && git pl";
+          co = "checkout";
           d = "diff";
           dc = "diff --cached";
           dcn = "diff --cached --name-only";
@@ -63,6 +63,7 @@ in
           p = "push origin";
           pf = "push -f";
           pl = "! git pull origin $(git rev-parse --abbrev-ref HEAD)";
+          pom = "pull origin main";
           st = "status";
           wip = "for-each-ref --sort='authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' refs/heads";
         };
