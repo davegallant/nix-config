@@ -385,6 +385,15 @@ in
       '';
     };
 
+    mangohud = {
+      enable = stdenv.isLinux;
+      settings = {
+        font_size = 16;
+        position = "top-right";
+        toggle_hud = "Shift_R+F1";
+      };
+    };
+
     zed-editor = {
       enable = stdenv.isLinux;
       package = unstable.zed-editor;
