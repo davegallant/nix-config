@@ -91,7 +91,6 @@
       kdePackages.sddm-kcm
       libation
       lutris
-      mangohud
       mupen64plus
       nfs-utils
       onlyoffice-desktopeditors
