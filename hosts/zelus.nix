@@ -96,7 +96,7 @@
       "font-fira-code-nerd-font"
       "font-hack-nerd-font"
       "fork"
-      "freelens"
+      "headlamp"
       "iterm2"
       "karabiner-elements"
       "knockknock"
