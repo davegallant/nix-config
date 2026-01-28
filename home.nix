@@ -170,6 +170,7 @@ in
         tf = "terraform";
         tree = "eza --tree";
         v = "nvim";
+        zed = "zeditor";
       };
     };
 
