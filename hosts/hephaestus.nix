@@ -108,8 +108,6 @@
       unstable.ktailctl
       unstable.mcpelauncher-ui-qt
       unstable.obsidian
-      unstable.podman
-      unstable.podman-compose
       unstable.podman-desktop
       unstable.ryubing
       unstable.signal-desktop-bin
@@ -254,8 +252,9 @@
   users.users.dave = {
     isNormalUser = true;
     extraGroups = [
-      "wheel"
+      "docker"
       "libvirtd"
+      "wheel"
     ];
     shell = pkgs.fish;
   };
@@ -473,7 +472,7 @@
   };
 
   virtualisation = {
-    podman.enable = true;
+    docker.enable = true;
     libvirtd = {
       enable = true;
       qemu.swtpm.enable = true;
