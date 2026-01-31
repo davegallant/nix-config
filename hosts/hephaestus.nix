@@ -65,64 +65,62 @@
     };
   };
 
-  environment.systemPackages =
-    with pkgs;
-    [
-      bleachbit
-      calibre
-      clamtk
-      cryptsetup
-      dbeaver-bin
-      discord
-      freefilesync
-      gimp-with-plugins
-      google-chrome
-      hardinfo2
-      httpie-desktop
-      heroic
-      iputils
-      kdePackages.bluedevil
-      kdePackages.kcalc
-      kdePackages.kcharselect
-      kdePackages.kclock
-      kdePackages.kcolorchooser
-      kdePackages.ksystemlog
-      kdePackages.partitionmanager
-      kdePackages.sddm-kcm
-      libation
-      lutris
-      mupen64plus
-      nfs-utils
-      onlyoffice-desktopeditors
-      opensnitch-ui
-      pciutils
-      pika-backup
-      pinentry-curses
-      pinta
-      protonup-qt
-      qbittorrent
-      qemu
-      traceroute
-      unrar
-      unstable.beszel
-      unstable.ktailctl
-      unstable.mcpelauncher-ui-qt
-      unstable.obsidian
-      unstable.podman-desktop
-      unstable.ryubing
-      unstable.signal-desktop-bin
-      unstable.tailscale
-      unstable.zoom-us
-      usbutils
-      virt-manager
-      vlc
-      vpngate.packages.x86_64-linux.default
-      wayland-utils
-      whois
-      wine
-      wl-clipboard
-    ];
-
+  environment.systemPackages = with pkgs; [
+    bleachbit
+    calibre
+    clamtk
+    cryptsetup
+    dbeaver-bin
+    discord
+    freefilesync
+    gimp-with-plugins
+    google-chrome
+    hardinfo2
+    httpie-desktop
+    heroic
+    iputils
+    kdePackages.bluedevil
+    kdePackages.kcalc
+    kdePackages.kcharselect
+    kdePackages.kclock
+    kdePackages.kcolorchooser
+    kdePackages.ksystemlog
+    kdePackages.partitionmanager
+    kdePackages.sddm-kcm
+    libation
+    lutris
+    ludusavi
+    mupen64plus
+    nfs-utils
+    onlyoffice-desktopeditors
+    opensnitch-ui
+    pciutils
+    pika-backup
+    pinentry-curses
+    pinta
+    protonup-qt
+    qbittorrent
+    qemu
+    traceroute
+    unrar
+    unstable.beszel
+    unstable.ktailctl
+    unstable.mcpelauncher-ui-qt
+    unstable.obsidian
+    unstable.podman-desktop
+    unstable.ryubing
+    unstable.signal-desktop-bin
+    unstable.tailscale
+    unstable.zoom-us
+    usbutils
+    virt-manager
+    vlc
+    vpngate.packages.x86_64-linux.default
+    wayland-utils
+    whois
+    wine
+    wl-clipboard
+  ];
 
   fileSystems = {
     "/" = {
@@ -222,10 +220,10 @@
   };
 
   services = {
-     mullvad-vpn = {
-       enable = true;
-       package = pkgs.mullvad-vpn;
-     };
+    mullvad-vpn = {
+      enable = true;
+      package = pkgs.mullvad-vpn;
+    };
   };
 
   system = {
@@ -246,7 +244,10 @@
 
   nix = {
     extraOptions = "experimental-features = nix-command flakes";
-    settings.trusted-users = [ "root" "@wheel" ];
+    settings.trusted-users = [
+      "root"
+      "@wheel"
+    ];
   };
 
   users.users.dave = {
