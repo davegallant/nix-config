@@ -166,7 +166,7 @@ in
         l = "eza -la --git --group-directories-first";
         m = "make";
         nix-install = "nix-env -iA";
-        t = "cd-fzf";
+        t = "cd $(cd-fzf)";
         tf = "terraform";
         tree = "eza --tree";
         v = "nvim";
