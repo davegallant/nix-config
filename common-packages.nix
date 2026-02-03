@@ -66,11 +66,6 @@
     # rust
     rustup
 
-    # js
-    nodejs
-    nodePackages.prettier
-    nodePackages.yarn
-
     # networking
     arp-scan
     dnsutils
