@@ -88,10 +88,13 @@
     kdePackages.partitionmanager
     kdePackages.sddm-kcm
     libation
-    lutris
     ludusavi
+    lutris
     mupen64plus
     nfs-utils
+    nodePackages.prettier
+    nodePackages.yarn
+    nodejs
     onlyoffice-desktopeditors
     opensnitch-ui
     pciutils
