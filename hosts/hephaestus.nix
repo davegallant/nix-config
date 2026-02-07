@@ -2,8 +2,6 @@
 
   config,
   lib,
-  inputs,
-  master,
   modulesPath,
   pkgs,
   unstable,
@@ -66,6 +64,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    bitwarden-desktop
     bleachbit
     calibre
     clamtk
@@ -310,7 +309,6 @@
       workstation = true;
     };
   };
-
 
   security.rtkit.enable = true;
   services.pipewire.enable = true;
