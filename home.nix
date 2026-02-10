@@ -171,6 +171,7 @@ in
         tf = "terraform";
         tree = "eza --tree";
         v = "nvim";
+      } // lib.optionalAttrs stdenv.isLinux {
         zed = "zeditor";
       };
     };
