@@ -178,6 +178,7 @@ in
 
     go = {
       enable = true;
+      package = unstable.go;
     };
 
     fzf = {
