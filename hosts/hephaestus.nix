@@ -64,20 +64,34 @@
   };
 
   environment.systemPackages = with pkgs; [
+    # desktop apps
     bitwarden-desktop
-    bleachbit
-    calibre
-    clamtk
-    cryptsetup
     dbeaver-bin
     discord
     freefilesync
     gimp-with-plugins
     google-chrome
-    hardinfo2
     httpie-desktop
+    onlyoffice-desktopeditors
+    pika-backup
+    pinta
+    qbittorrent
+    unstable.obsidian
+    unstable.podman-desktop
+    unstable.signal-desktop-bin
+    unstable.zoom-us
+
+    # gaming
     heroic
-    iputils
+    ludusavi
+    lutris
+    mupen64plus
+    protonup-qt
+    unstable.mcpelauncher-ui-qt
+    unstable.ryubing
+    wine
+
+    # kde
     kdePackages.bluedevil
     kdePackages.kcalc
     kdePackages.kcharselect
@@ -86,43 +100,44 @@
     kdePackages.ksystemlog
     kdePackages.partitionmanager
     kdePackages.sddm-kcm
+
+    # media
+    calibre
     libation
-    ludusavi
-    lutris
-    mupen64plus
+    unstable.spotify
+    vlc
+
+    # networking
+    iputils
+    traceroute
+    unstable.ktailctl
+    unstable.tailscale
+    vpngate.packages.x86_64-linux.default
+    whois
+
+    # security
+    bleachbit
+    clamtk
+    cryptsetup
+    opensnitch-ui
+    pinentry-curses
+
+    # system utilities
+    hardinfo2
     nfs-utils
+    pciutils
+    qemu
+    unrar
+    unstable.beszel
+    usbutils
+    virt-manager
+    wayland-utils
+    wl-clipboard
+
+    # development
     nodePackages.prettier
     nodePackages.yarn
     nodejs
-    onlyoffice-desktopeditors
-    opensnitch-ui
-    pciutils
-    pika-backup
-    pinentry-curses
-    pinta
-    protonup-qt
-    qbittorrent
-    qemu
-    traceroute
-    unrar
-    unstable.beszel
-    unstable.ktailctl
-    unstable.mcpelauncher-ui-qt
-    unstable.obsidian
-    unstable.podman-desktop
-    unstable.ryubing
-    unstable.signal-desktop-bin
-    unstable.spotify
-    unstable.tailscale
-    unstable.zoom-us
-    usbutils
-    virt-manager
-    vlc
-    vpngate.packages.x86_64-linux.default
-    wayland-utils
-    whois
-    wine
-    wl-clipboard
   ];
 
   fileSystems = {
@@ -167,12 +182,7 @@
     emoji = [ "Noto Color Emoji" ];
   };
 
-  nixpkgs = {
-    hostPlatform = "x86_64-linux";
-    config = {
-      allowUnfree = true;
-    };
-  };
+  nixpkgs.hostPlatform = "x86_64-linux";
 
   networking = {
     iproute2.enable = true;

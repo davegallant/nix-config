@@ -55,10 +55,12 @@
         {
           hephaestus = nixpkgs.lib.nixosSystem {
             specialArgs = {
-              inherit unstable;
-              inherit master;
-              inherit vpngate;
-              inherit inputs;
+              inherit
+                unstable
+                master
+                vpngate
+                inputs
+                ;
             };
             modules = [
               ./hosts/hephaestus.nix
@@ -90,6 +92,7 @@
                       };
                     };
 
+                    nixpkgs.config.allowUnfree = true;
                     nixpkgs.overlays = [ (import ./overlays) ];
 
                     home-manager = {
@@ -99,10 +102,7 @@
                         ./home.nix
                         inputs.nixvim.homeModules.nixvim
                       ];
-                      extraSpecialArgs = {
-                        inherit unstable;
-                        inherit master;
-                      };
+                      extraSpecialArgs = { inherit unstable master; };
                     };
                   };
                 }
@@ -126,10 +126,7 @@
         {
           zelus = darwin.lib.darwinSystem {
             inherit system;
-            specialArgs = {
-              inherit unstable;
-              inherit master;
-            };
+            specialArgs = { inherit unstable master; };
 
             modules = [
               home-manager.darwinModules.home-manager
@@ -139,6 +136,7 @@
                 { ... }:
                 {
                   config = {
+                    nixpkgs.config.allowUnfree = true;
                     nixpkgs.overlays = [ (import ./overlays) ];
                     home-manager = {
                       useGlobalPkgs = true;
@@ -147,10 +145,7 @@
                         ./home.nix
                         inputs.nixvim.homeModules.nixvim
                       ];
-                      extraSpecialArgs = {
-                        inherit unstable;
-                        inherit master;
-                      };
+                      extraSpecialArgs = { inherit unstable master; };
                     };
                   };
                 }

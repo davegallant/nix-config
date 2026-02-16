@@ -1,11 +1,5 @@
 { pkgs, ... }:
 {
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-    };
-  };
-
   networking = {
     hostName = "zelus";
   };
