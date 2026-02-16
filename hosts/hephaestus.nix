@@ -68,6 +68,7 @@
     bitwarden-desktop
     dbeaver-bin
     discord
+    feishin
     freefilesync
     gimp-with-plugins
     google-chrome
