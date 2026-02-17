@@ -233,11 +233,22 @@
     };
   };
 
-  services = {
-    mullvad-vpn = {
+  services.mullvad-vpn = {
       enable = true;
       package = pkgs.mullvad-vpn;
     };
+
+  services.ollama = {
+    package = pkgs.ollama;
+    enable = true;
+    acceleration = "rocm";
+    host = "0.0.0.0";
+    environmentVariables = {
+      HSA_OVERRIDE_GFX_VERSION = "11.0.2";
+    };
+    loadModels = [
+      "qwen2.5-coder:7b"
+    ];
   };
 
   system = {
