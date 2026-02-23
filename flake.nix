@@ -16,18 +16,18 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     vpngate.url = "github:davegallant/vpngate";
+    weathr.url = "github:Veirt/weathr";
   };
 
   outputs =
     {
-      self,
       darwin,
-      determinate,
       home-manager,
       nixpkgs,
       nixpkgs-unstable,
       nixpkgs-master,
       vpngate,
+      weathr,
       ...
     }@inputs:
     let
@@ -101,6 +101,7 @@
                       users.dave.imports = [
                         ./home.nix
                         inputs.nixvim.homeModules.nixvim
+                        weathr.homeModules.weathr
                       ];
                       extraSpecialArgs = { inherit unstable master; };
                     };
@@ -144,6 +145,7 @@
                       users."dave.gallant".imports = [
                         ./home.nix
                         inputs.nixvim.homeModules.nixvim
+                        weathr.homeModules.weathr
                       ];
                       extraSpecialArgs = { inherit unstable master; };
                     };
