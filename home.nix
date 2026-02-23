@@ -171,7 +171,8 @@ in
         tf = "terraform";
         tree = "eza --tree";
         v = "nvim";
-      } // lib.optionalAttrs stdenv.isLinux {
+      }
+      // lib.optionalAttrs stdenv.isLinux {
         zed = "zeditor";
       };
     };
@@ -395,6 +396,13 @@ in
         font_size = 16;
         position = "top-right";
         toggle_hud = "Shift_R+F1";
+      };
+    };
+
+    weathr = {
+      enable = true;
+      settings = {
+        hide_hud = true;
       };
     };
 
