@@ -113,10 +113,6 @@
 
     taps = [
       "hashicorp/tap"
-      "homebrew/bundle"
-      "homebrew/cask-fonts"
-      "homebrew/cask-versions"
-      "homebrew/services"
     ];
   };
 

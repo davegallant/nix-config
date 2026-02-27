@@ -3,7 +3,7 @@
 set -euo pipefail
 
 if ! git diff-index --quiet HEAD --; then
-  git stash push -m "Auto-stash via update-flash.sh on $(date)"
+  git stash push -m "Auto-stash via update-flake.sh on $(date)"
 fi
 
 git pull

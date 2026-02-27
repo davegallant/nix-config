@@ -16,10 +16,8 @@ jobs:
     steps:
     - uses: actions/checkout@v6
     - uses: cachix/install-nix-action@v31
-      with:
-        nix_path: nixpkgs=channel:nixos-unstable
     - uses: cachix/cachix-action@v16
       with:
         name: davegallant
         authToken: '${{ secrets.CACHIX_API_KEY }}'
-    - run: nix-build | cachix push davegallant
+    - run: nix build .#nixosConfigurations.hephaestus.config.system.build.toplevel --json | jq -r '.[].outputs | to_entries[].value' | cachix push davegallant

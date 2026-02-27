@@ -28,7 +28,6 @@ The configuration is very specific to my own machines and setup, but it may be a
 ## Prerequisites
 
 - [NixOS](nixos.org) (Linux)
-- [Determinate Nix](https://determinate.systems/nix-installer) (macOS)
 - [just](https://github.com/casey/just)
 
 ## Build

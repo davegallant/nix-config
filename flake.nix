@@ -2,9 +2,7 @@
   description = "nixos and macos configurations";
 
   inputs = {
-    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-master.url = "github:NixOS/nixpkgs/master";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     darwin = {
       url = "github:lnl7/nix-darwin/nix-darwin-25.11";
@@ -25,59 +23,82 @@
       home-manager,
       nixpkgs,
       nixpkgs-unstable,
-      nixpkgs-master,
       vpngate,
       weathr,
       ...
     }@inputs:
     let
-      supportedSystems = [
-        "x86_64-linux"
-        "aarch64-linux"
-        "x86_64-darwin"
-        "aarch64-darwin"
-      ];
+      mkUnstable =
+        system:
+        import nixpkgs-unstable {
+          inherit system;
+          config.allowUnfree = true;
+        };
 
-      forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
+      mkSharedModules =
+        {
+          username,
+          system,
+          hmModule,
+          extraModules ? [ ],
+        }:
+        let
+          unstable = mkUnstable system;
+        in
+        [
+          ./packages.nix
+          hmModule
+          (
+            { ... }:
+            {
+              config = {
+                nixpkgs.config.allowUnfree = true;
+                nixpkgs.overlays = [ (import ./overlays) ];
+                home-manager = {
+                  useGlobalPkgs = true;
+                  useUserPackages = true;
+                  users.${username}.imports = [
+                    ./home.nix
+                    inputs.nixvim.homeModules.nixvim
+                    weathr.homeModules.weathr
+                  ];
+                  extraSpecialArgs = { inherit unstable; };
+                };
+              };
+            }
+          )
+        ]
+        ++ extraModules;
     in
     {
       nixosConfigurations =
         let
-          unstable = import nixpkgs-unstable {
-            system = "x86_64-linux";
-            config.allowUnfree = true;
-          };
-          master = import nixpkgs-master {
-            system = "x86_64-linux";
-            config.allowUnfree = true;
-          };
+          system = "x86_64-linux";
+          unstable = mkUnstable system;
         in
         {
           hephaestus = nixpkgs.lib.nixosSystem {
             specialArgs = {
               inherit
                 unstable
-                master
                 vpngate
                 inputs
                 ;
             };
-            modules = [
-              ./hosts/hephaestus.nix
-              ./common-packages.nix
-              home-manager.nixosModules.home-manager
-              (
-                { ... }:
-                {
-                  config = {
-                    nix = {
+            modules = mkSharedModules {
+              username = "dave";
+              inherit system;
+              hmModule = home-manager.nixosModules.home-manager;
+              extraModules = [
+                ./hosts/hephaestus.nix
+                (
+                  { ... }:
+                  {
+                    config.nix = {
                       settings = {
                         auto-optimise-store = true;
-                        sandbox = false;
                         substituters = [ "https://davegallant.cachix.org" ];
-                        trusted-users = [
-                          "root"
-                        ];
+                        trusted-users = [ "root" ];
                         trusted-public-keys = [
                           "davegallant.cachix.org-1:SsUMqL4+tF2R3/G6X903E9laLlY1rES2QKFfePegF08="
                         ];
@@ -91,68 +112,32 @@
                         options = "--delete-older-than 14d";
                       };
                     };
-
-                    nixpkgs.config.allowUnfree = true;
-                    nixpkgs.overlays = [ (import ./overlays) ];
-
-                    home-manager = {
-                      useGlobalPkgs = true;
-                      useUserPackages = true;
-                      users.dave.imports = [
-                        ./home.nix
-                        inputs.nixvim.homeModules.nixvim
-                        weathr.homeModules.weathr
-                      ];
-                      extraSpecialArgs = { inherit unstable master; };
-                    };
-                  };
-                }
-              )
-            ];
+                  }
+                )
+              ];
+            };
           };
         };
 
       darwinConfigurations =
         let
           system = "aarch64-darwin";
-          unstable = import nixpkgs-unstable {
-            config.allowUnfree = true;
-            inherit system;
-          };
-          master = import nixpkgs-master {
-            config.allowUnfree = true;
-            inherit system;
-          };
+          unstable = mkUnstable system;
         in
         {
           zelus = darwin.lib.darwinSystem {
             inherit system;
-            specialArgs = { inherit unstable master; };
-
-            modules = [
-              home-manager.darwinModules.home-manager
-              ./hosts/zelus.nix
-              ./common-packages.nix
-              (
-                { ... }:
-                {
-                  config = {
-                    nixpkgs.config.allowUnfree = true;
-                    nixpkgs.overlays = [ (import ./overlays) ];
-                    home-manager = {
-                      useGlobalPkgs = true;
-                      useUserPackages = true;
-                      users."dave.gallant".imports = [
-                        ./home.nix
-                        inputs.nixvim.homeModules.nixvim
-                        weathr.homeModules.weathr
-                      ];
-                      extraSpecialArgs = { inherit unstable master; };
-                    };
-                  };
-                }
-              )
-            ];
+            specialArgs = {
+              inherit unstable inputs;
+            };
+            modules = mkSharedModules {
+              username = "dave.gallant";
+              inherit system;
+              hmModule = home-manager.darwinModules.home-manager;
+              extraModules = [
+                ./hosts/zelus.nix
+              ];
+            };
           };
         };
     };
