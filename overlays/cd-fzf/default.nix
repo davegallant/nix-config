@@ -1,19 +1,13 @@
-{
-  stdenv,
-  lib,
-  fetchurl,
-}:
-stdenv.mkDerivation rec {
+{ stdenv, lib }:
+stdenv.mkDerivation {
   pname = "cd-fzf";
   version = "0.0.1";
-  executable = ./cd-fzf;
-  phases = [ "unpackPhase" ]; # Remove all other phases
-  unpackPhase = ''
-    mkdir -p $out/bin
-    cp ${executable} $out/bin/cd-fzf
+  src = ./.;
+  installPhase = ''
+    install -Dm755 cd-fzf $out/bin/cd-fzf
   '';
-  meta = with lib; {
-    description = "\n      Fuzzy find change directory";
-    platforms = platforms.unix;
+  meta = {
+    description = "Fuzzy find change directory";
+    platforms = lib.platforms.unix;
   };
 }

@@ -1,11 +1,9 @@
 {
-
   config,
   lib,
   modulesPath,
   pkgs,
   unstable,
-  vpngate,
   ...
 }:
 {
@@ -63,84 +61,6 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    # desktop apps
-    bitwarden-desktop
-    dbeaver-bin
-    discord
-    feishin
-    freefilesync
-    gimp-with-plugins
-    google-chrome
-    httpie-desktop
-    onlyoffice-desktopeditors
-    pika-backup
-    pinta
-    qbittorrent
-    unstable.obsidian
-    unstable.podman-desktop
-    unstable.signal-desktop-bin
-    unstable.zoom-us
-
-    # gaming
-    heroic
-    ludusavi
-    lutris
-    mupen64plus
-    protonup-qt
-    unstable.mcpelauncher-ui-qt
-    unstable.ryubing
-    wine
-
-    # kde
-    kdePackages.bluedevil
-    kdePackages.kcalc
-    kdePackages.kcharselect
-    kdePackages.kclock
-    kdePackages.kcolorchooser
-    kdePackages.ksystemlog
-    kdePackages.partitionmanager
-    kdePackages.sddm-kcm
-
-    # media
-    calibre
-    libation
-    unstable.spotify
-    vlc
-
-    # networking
-    iputils
-    traceroute
-    unstable.ktailctl
-    unstable.tailscale
-    vpngate.packages.x86_64-linux.default
-    whois
-
-    # security
-    bleachbit
-    clamtk
-    cryptsetup
-    opensnitch-ui
-    pinentry-curses
-
-    # system utilities
-    hardinfo2
-    nfs-utils
-    pciutils
-    qemu
-    unrar
-    unstable.beszel
-    usbutils
-    virt-manager
-    wayland-utils
-    wl-clipboard
-
-    # development
-    nodePackages.prettier
-    nodePackages.yarn
-    nodejs
-  ];
-
   fileSystems = {
     "/" = {
       device = "/dev/disk/by-uuid/7f4f0948-041c-47e9-ab28-53132026f158";
@@ -173,7 +93,6 @@
     noto-fonts
     noto-fonts-cjk-sans
     noto-fonts-color-emoji
-    noto-fonts
   ];
 
   fonts.fontconfig.defaultFonts = {
