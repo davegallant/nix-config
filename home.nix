@@ -21,8 +21,6 @@ in
     };
   };
 
-  services.lorri.enable = stdenv.isLinux;
-
   fonts.fontconfig.enable = true;
 
   programs = {
@@ -116,33 +114,33 @@ in
       enable = true;
 
       interactiveShellInit = ''
-          set fish_greeting
+        set fish_greeting
 
-          bind \cw backward-kill-word
+        bind \cw backward-kill-word
 
-          set -x DOCKER_CLI_HINTS false
-          set -x DOCKER_DEFAULT_PLATFORM linux/amd64
-          set -x EDITOR vim
-          set -x NNN_FIFO "$XDG_RUNTIME_DIR/nnn.fifo"
-          set -x PAGER less
-          ${lib.optionalString pkgs.stdenv.isLinux "set -x SSH_AUTH_SOCK /home/dave/.bitwarden-ssh-agent.sock"}
-          set -x TERM xterm-256color
+        set -x DOCKER_CLI_HINTS false
+        set -x DOCKER_DEFAULT_PLATFORM linux/amd64
+        set -x EDITOR vim
+        set -x NNN_FIFO "$XDG_RUNTIME_DIR/nnn.fifo"
+        set -x PAGER less
+        ${lib.optionalString pkgs.stdenv.isLinux "set -x SSH_AUTH_SOCK /home/dave/.bitwarden-ssh-agent.sock"}
+        set -x TERM xterm-256color
 
-          set -x PATH $PATH \
-            ~/.cargo/bin \
-            ~/.local/bin \
-            ~/.npm-packages/bin \
-            /opt/homebrew/bin \
-            ~/.krew/bin \
-            ~/bin
+        set -x PATH $PATH \
+          ~/.cargo/bin \
+          ~/.local/bin \
+          ~/.npm-packages/bin \
+          /opt/homebrew/bin \
+          ~/.krew/bin \
+          ~/bin
 
-          # golang
-          set -x GOPATH ~/go
-          set -x GOBIN $GOPATH/bin
-          set -x PATH $PATH $GOBIN
+        # golang
+        set -x GOPATH ~/go
+        set -x GOBIN $GOPATH/bin
+        set -x PATH $PATH $GOBIN
 
-          source $HOME/work.fish
-        # '';
+        source $HOME/work.fish
+      '';
 
       shellInit = ''
         atuin init fish | source
