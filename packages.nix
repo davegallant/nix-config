@@ -86,7 +86,7 @@ in
       xclip
       xdg-utils
 
-      # networking (linux-specific)
+      # networking
       arp-scan
       dnsutils
       iperf
@@ -165,10 +165,5 @@ in
       virt-manager
       wayland-utils
       wl-clipboard
-
-      # development
-      nodePackages.prettier
-      nodePackages.yarn
-      nodejs
     ];
 }
