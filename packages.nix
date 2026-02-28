@@ -118,7 +118,6 @@ in
       ludusavi
       mupen64plus
       protonup-qt
-      unstable.mcpelauncher-ui-qt
       unstable.ryubing
       unstable.lutris
       wine
