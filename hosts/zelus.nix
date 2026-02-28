@@ -80,6 +80,7 @@
       "k6"
       "node"
       "oras"
+      "peon-ping"
       "vault"
     ];
 
@@ -113,6 +114,7 @@
 
     taps = [
       "hashicorp/tap"
+      "PeonPing/tap"
     ];
   };
 
