@@ -409,7 +409,6 @@ in
       package = unstable.zed-editor;
       extensions = [
         "ansible"
-        "color-highlight"
         "dockerfile"
         "html"
         "make"
@@ -420,17 +419,14 @@ in
       ];
       userSettings = {
         icon_theme = "Material Icon Theme";
-        features = {
-          edit_prediction_provider = "copilot";
-        };
         vim_mode = true;
         vim = {
           use_system_clipboard = "on_yank";
         };
         autosave = "on_focus_change";
         format_on_save = "off";
-        ui_font_size = lib.mkForce 18;
-        buffer_font_size = lib.mkForce 16;
+        ui_font_size = 18;
+        buffer_font_size = 16;
       };
       userKeymaps = [
         {
@@ -440,6 +436,13 @@ in
             "ctrl-shift-x" = "editor::Cut";
             "ctrl-shift-v" = "editor::Paste";
             "ctrl-z" = "editor::Undo";
+          };
+        }
+        {
+          context = "vim_mode == normal";
+          bindings = {
+            "g space" = "editor::OpenExcerpts";
+            "shift-v" = "vim::ToggleVisualLine";
           };
         }
       ];
