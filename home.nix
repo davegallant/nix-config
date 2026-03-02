@@ -265,6 +265,19 @@ in
         cmp-path.enable = true;
         cmp-treesitter.enable = true;
         commentary.enable = true;
+        codecompanion = {
+          enable = true;
+          settings = {
+            interactions = {
+              chat = {
+                adapter = "copilot";
+              };
+              inline = {
+                adapter = "copilot";
+              };
+            };
+          };
+        };
         diffview.enable = true;
         gitblame.enable = true;
         gitsigns.enable = true;
