@@ -30,7 +30,7 @@
       tilesize = 50;
       orientation = "bottom";
       persistent-apps = [
-        "/Applications/iTerm.app"
+        "/Applications/ghostty.app"
         "/Applications/Google Chrome.app"
         "/Applications/LibreWolf.app"
         "/Applications/Obsidian.app"
@@ -94,6 +94,7 @@
       "iterm2"
       "karabiner-elements"
       "knockknock"
+      "ghostty"
       "librewolf"
       "lulu"
       "notunes"
