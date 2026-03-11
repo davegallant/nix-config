@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-master.url = "github:NixOS/nixpkgs/master";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     darwin = {
       url = "github:lnl7/nix-darwin/nix-darwin-25.11";
@@ -23,6 +24,7 @@
       home-manager,
       nixpkgs,
       nixpkgs-unstable,
+      nixpkgs-master,
       vpngate,
       weathr,
       ...
@@ -35,6 +37,13 @@
           config.allowUnfree = true;
         };
 
+        mkMaster =
+          system:
+          import nixpkgs-master {
+            inherit system;
+            config.allowUnfree = true;
+          };
+
       mkSharedModules =
         {
           username,
@@ -44,6 +53,7 @@
         }:
         let
           unstable = mkUnstable system;
+          master = mkMaster system;
         in
         [
           ./packages.nix
@@ -62,7 +72,7 @@
                     inputs.nixvim.homeModules.nixvim
                     weathr.homeModules.weathr
                   ];
-                  extraSpecialArgs = { inherit unstable; };
+                  extraSpecialArgs = { inherit unstable; inherit master; };
                 };
               };
             }
@@ -75,12 +85,14 @@
         let
           system = "x86_64-linux";
           unstable = mkUnstable system;
+          master = mkMaster system;
         in
         {
           hephaestus = nixpkgs.lib.nixosSystem {
             specialArgs = {
               inherit
                 unstable
+                master
                 vpngate
                 inputs
                 ;
@@ -123,6 +135,7 @@
         let
           system = "aarch64-darwin";
           unstable = mkUnstable system;
+          master = mkMaster system;
         in
         {
           zelus = darwin.lib.darwinSystem {
