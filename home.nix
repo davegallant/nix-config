@@ -162,6 +162,7 @@ in
         kp = "viddy 'kubectl get pods'";
         kcx = "kubectx";
         kns = "kubens";
+        krun = "kubectl run ubuntu-shell --image=ubuntu --restart=Never -it --rm -- /bin/bash";
         l = "eza -la --git --group-directories-first";
         m = "make";
         nix-install = "nix-env -iA";
