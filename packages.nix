@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  master,
   unstable,
   vpngate,
   ...
@@ -157,6 +158,7 @@ in
       hardinfo2
       nfs-utils
       pciutils
+      master.ghostty
       qemu
       unrar
       unstable.beszel
