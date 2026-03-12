@@ -111,7 +111,7 @@ in
       qbittorrent
       unstable.obsidian
       unstable.podman-desktop
-      unstable.signal-desktop-bin
+      unstable.signal-desktop
       unstable.zoom-us
 
       # gaming
