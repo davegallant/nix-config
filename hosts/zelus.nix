@@ -116,6 +116,7 @@
     taps = [
       "hashicorp/tap"
       "PeonPing/tap"
+      "akdev1l/apps"
     ];
   };
 
