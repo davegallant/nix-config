@@ -32,7 +32,7 @@
       persistent-apps = [
         "/Applications/ghostty.app"
         "/Applications/Google Chrome.app"
-        "/Applications/LibreWolf.app"
+        "/Applications/Brave Browser.app"
         "/Applications/Obsidian.app"
         "/Applications/Slack.app"
         "/Applications/zoom.us.app"
@@ -85,6 +85,7 @@
     ];
 
     casks = [
+      "brave-browser"
       "discord"
       "dbeaver-community"
       "font-fira-code-nerd-font"
@@ -95,7 +96,6 @@
       "karabiner-elements"
       "knockknock"
       "ghostty"
-      "librewolf"
       "lulu"
       "notunes"
       "obsidian"
@@ -116,7 +116,6 @@
     taps = [
       "hashicorp/tap"
       "PeonPing/tap"
-      "akdev1l/apps"
     ];
   };
 
