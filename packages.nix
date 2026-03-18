@@ -103,12 +103,12 @@ in
       feishin
       freefilesync
       gimp-with-plugins
-      google-chrome
       httpie-desktop
       onlyoffice-desktopeditors
       pika-backup
       pinta
       qbittorrent
+      unstable.brave
       unstable.obsidian
       unstable.podman-desktop
       unstable.signal-desktop
