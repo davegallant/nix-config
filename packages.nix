@@ -33,6 +33,7 @@ in
       lazygit
       macchina
       ncdu
+      opencode
       progress
       ripgrep
       shellcheck
