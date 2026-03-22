@@ -145,7 +145,7 @@ in
       traceroute
       unstable.ktailctl
       unstable.tailscale
-      vpngate.packages.x86_64-linux.default
+      vpngate.packages.${pkgs.stdenv.hostPlatform.system}.default
       whois
 
       # security

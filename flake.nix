@@ -9,13 +9,19 @@
       url = "github:lnl7/nix-darwin/nix-darwin-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    home-manager.url = "github:nix-community/home-manager/release-25.11";
+    home-manager = {
+      url = "github:nix-community/home-manager/release-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixvim = {
       url = "github:nix-community/nixvim/nixos-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     vpngate.url = "github:davegallant/vpngate";
-    weathr.url = "github:Veirt/weathr";
+    weathr = {
+      url = "github:Veirt/weathr";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -37,12 +43,12 @@
           config.allowUnfree = true;
         };
 
-        mkMaster =
-          system:
-          import nixpkgs-master {
-            inherit system;
-            config.allowUnfree = true;
-          };
+      mkMaster =
+        system:
+        import nixpkgs-master {
+          inherit system;
+          config.allowUnfree = true;
+        };
 
       mkSharedModules =
         {
@@ -68,11 +74,14 @@
                   useGlobalPkgs = true;
                   useUserPackages = true;
                   users.${username}.imports = [
-                    ./home.nix
+                    ./home
                     inputs.nixvim.homeModules.nixvim
                     weathr.homeModules.weathr
                   ];
-                  extraSpecialArgs = { inherit unstable; inherit master; };
+                  extraSpecialArgs = {
+                    inherit unstable;
+                    inherit master;
+                  };
                 };
               };
             }
