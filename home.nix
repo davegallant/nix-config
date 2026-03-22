@@ -394,9 +394,6 @@ in
 
     weathr = {
       enable = true;
-      settings = {
-        hide_hud = true;
-      };
     };
 
     zed-editor = {
