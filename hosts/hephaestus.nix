@@ -254,9 +254,6 @@
     };
   };
 
-  security.rtkit.enable = true;
-  services.pipewire.enable = true;
-
   services = {
     desktopManager.plasma6.enable = true;
     displayManager.sddm.enable = true;
