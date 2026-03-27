@@ -116,7 +116,7 @@
       };
     };
     firewall = {
-      allowPing = false;
+      allowPing = true;
       enable = true;
       checkReversePath = "loose";
       trustedInterfaces = [ "tailscale0" ];
