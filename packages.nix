@@ -115,6 +115,9 @@ in
       unstable.signal-desktop
       unstable.zoom-us
 
+      # keyboard
+      via
+
       # gaming
       heroic
       ludusavi
