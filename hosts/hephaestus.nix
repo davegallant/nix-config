@@ -200,6 +200,8 @@
       "docker"
       "libvirtd"
       "wheel"
+      "input"
+      "plugdev"
     ];
     shell = pkgs.fish;
   };
@@ -215,6 +217,8 @@
   time.timeZone = "America/Toronto";
 
   hardware.bluetooth.enable = true;
+
+  hardware.keyboard.qmk.enable = true;
 
   hardware.graphics = {
     enable = true;
