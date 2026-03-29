@@ -77,7 +77,6 @@ in
         krun = "kubectl run ubuntu-shell --image=ubuntu --restart=Never -it --rm -- /bin/bash";
         l = "eza -la --git --group-directories-first";
         m = "make";
-        nix-install = "nix-env -iA";
         t = "cd $(cd-fzf)";
         tf = "terraform";
         tree = "eza --tree";
