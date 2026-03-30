@@ -86,6 +86,7 @@
 
     casks = [
       "brave-browser"
+      "capslocknodelay"
       "discord"
       "dbeaver-community"
       "font-fira-code-nerd-font"
@@ -93,7 +94,6 @@
       "fork"
       "headlamp"
       "iterm2"
-      "karabiner-elements"
       "knockknock"
       "ghostty"
       "lulu"
