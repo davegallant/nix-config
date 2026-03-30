@@ -55,19 +55,6 @@
       cmp-path.enable = true;
       cmp-treesitter.enable = true;
       commentary.enable = true;
-      codecompanion = {
-        enable = true;
-        settings = {
-          interactions = {
-            chat = {
-              adapter = "copilot";
-            };
-            inline = {
-              adapter = "copilot";
-            };
-          };
-        };
-      };
       diffview.enable = true;
       gitblame.enable = true;
       gitsigns.enable = true;
@@ -152,40 +139,60 @@
       wildmenu = true;
     };
 
+    extraPlugins = [
+      pkgs.vimPlugins.opencode-nvim
+    ];
+
     extraConfigLua = ''
 
-      -- https://github.com/orgs/community/discussions/108329
-      vim.cmd([[let g:copilot_filetypes = {'yaml': v:true, 'gitcommit': v:true}]])
+        -- https://github.com/orgs/community/discussions/108329
+        vim.cmd([[let g:copilot_filetypes = {'yaml': v:true, 'gitcommit': v:true}]])
 
-      -- Format JSON
-      vim.cmd([[command! JsonFormat execute "::%!jq '.'"]])
+        -- Format JSON
+        vim.cmd([[command! JsonFormat execute "::%!jq '.'"]])
 
-      -- Remember line number
-      vim.cmd([[au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif]])
+        -- Remember line number
+        vim.cmd([[au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif]])
 
-      -- Replace visual selection
-      vim.cmd([[vnoremap <C-r> "hy:%s/<C-r>h//g<left><left>]])
+        -- Replace visual selection
+        vim.cmd([[vnoremap <C-r> "hy:%s/<C-r>h//g<left><left>]])
 
-      -- Indent YAML
-      vim.cmd([[au FileType yaml setlocal ts=2 sts=2 sw=2 expandtab]])
+        -- Indent YAML
+        vim.cmd([[au FileType yaml setlocal ts=2 sts=2 sw=2 expandtab]])
 
-      -- Indent Python
-      vim.cmd([[au BufNewFile,BufRead *.py set tabstop=4 softtabstop=4 shiftwidth=4 textwidth=79 expandtab autoindent fileformat=unix]])
+        -- Indent Python
+        vim.cmd([[au BufNewFile,BufRead *.py set tabstop=4 softtabstop=4 shiftwidth=4 textwidth=79 expandtab autoindent fileformat=unix]])
 
-      -- Highlight whitespace
-      vim.cmd([[highlight ExtraWhitespace ctermbg=red guibg=red]])
-      vim.cmd([[match ExtraWhitespace /\s\+$/]])
+        -- Highlight whitespace
+        vim.cmd([[highlight ExtraWhitespace ctermbg=red guibg=red]])
+        vim.cmd([[match ExtraWhitespace /\s\+$/]])
 
-      -- folding
-      vim.api.nvim_exec(
-      	[[
-          set foldmethod=expr
-          set foldlevel=20
-          set nofoldenable
-          set foldexpr=nvim_treesitter#foldexpr()
-      ]],
-      	true
-      )
+        -- folding
+        vim.api.nvim_exec(
+        	[[
+            set foldmethod=expr
+            set foldlevel=20
+            set nofoldenable
+            set foldexpr=nvim_treesitter#foldexpr()
+        ]],
+        	true
+        )
+
+      -- opencode.nvim
+      vim.o.autoread = true -- Required for `opts.events.reload`
+      vim.keymap.set({ "n", "x" }, "<C-a>", function() require("opencode").ask("@this: ", { submit = true }) end, { desc = "Ask opencode…" })
+      vim.keymap.set({ "n", "x" }, "<C-x>", function() require("opencode").select() end,                          { desc = "Execute opencode action…" })
+      vim.keymap.set({ "n", "t" }, "<C-.>", function() require("opencode").toggle() end,                          { desc = "Toggle opencode" })
+
+      vim.keymap.set({ "n", "x" }, "go",  function() return require("opencode").operator("@this ") end,        { desc = "Add range to opencode", expr = true })
+      vim.keymap.set("n",          "goo", function() return require("opencode").operator("@this ") .. "_" end, { desc = "Add line to opencode", expr = true })
+
+      vim.keymap.set("n", "<S-C-u>", function() require("opencode").command("session.half.page.up") end,   { desc = "Scroll opencode up" })
+      vim.keymap.set("n", "<S-C-d>", function() require("opencode").command("session.half.page.down") end, { desc = "Scroll opencode down" })
+
+      -- You may want these if you use the opinionated `<C-a>` and `<C-x>` keymaps above — otherwise consider `<leader>o…` (and remove terminal mode from the `toggle` keymap)
+      vim.keymap.set("n", "+", "<C-a>", { desc = "Increment under cursor", noremap = true })
+      vim.keymap.set("n", "-", "<C-x>", { desc = "Decrement under cursor", noremap = true })
     '';
   };
 }
