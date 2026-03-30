@@ -20,6 +20,7 @@ in
       jq
       unzip
       zip
+      lsof
 
       # modern cli
       atuin
@@ -33,11 +34,11 @@ in
       lazygit
       macchina
       ncdu
-      opencode
       progress
       ripgrep
       shellcheck
       shfmt
+      unstable.opencode
       viddy
       yq-go
 
