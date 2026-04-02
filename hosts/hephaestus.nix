@@ -221,10 +221,9 @@
   hardware.keyboard.qmk.enable = true;
 
   services.udev.extraRules = ''
-    # Prevent RDMCTMZT keyboard's extra HID interfaces from being detected as joystick/gamepad
+    # Prevent epomaker TH85's extra HID interfaces from being detected as joystick/gamepad
     ATTRS{idVendor}=="36b0", ATTRS{idProduct}=="3002", \
-    ENV{ID_INPUT_JOYSTICK}="", ENV{ID_INPUT_ACCELEROMETER}="", \
-    ENV{ID_INPUT_KEY}=""
+    ENV{ID_INPUT_JOYSTICK}="", ENV{ID_INPUT_ACCELEROMETER}=""
   '';
 
   hardware.graphics = {
