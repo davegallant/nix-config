@@ -158,7 +158,7 @@
   };
 
   services.ollama = {
-    package = pkgs.ollama;
+    package = unstable.ollama;
     enable = true;
     acceleration = "rocm";
     host = "0.0.0.0";
@@ -166,7 +166,7 @@
       HSA_OVERRIDE_GFX_VERSION = "11.0.2";
     };
     loadModels = [
-      "qwen2.5-coder:7b"
+      "qwen3.5:9b"
     ];
   };
 
