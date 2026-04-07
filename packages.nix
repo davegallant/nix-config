@@ -142,6 +142,7 @@ in
       alsa-utils
       calibre
       libation
+      pulseaudio
       unstable.spotify
       vlc
 
