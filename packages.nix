@@ -171,5 +171,8 @@ in
       virt-manager
       wayland-utils
       wl-clipboard
+
+      # llm
+      bun
     ];
 }
