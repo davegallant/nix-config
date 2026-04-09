@@ -81,6 +81,7 @@
       "node"
       "oras"
       "peon-ping"
+      "python@3.14"
       "vault"
     ];
 
