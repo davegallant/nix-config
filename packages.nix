@@ -165,7 +165,7 @@ in
       hardinfo2
       nfs-utils
       pciutils
-      master.ghostty
+      unstable.ghostty
       qemu
       unrar
       unstable.beszel
@@ -176,5 +176,6 @@ in
 
       # llm
       bun
+      unstable.code-cursor
     ];
 }
