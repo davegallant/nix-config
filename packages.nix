@@ -38,7 +38,6 @@ in
       ripgrep
       shellcheck
       shfmt
-      unstable.opencode
       viddy
       yq-go
 
