@@ -139,10 +139,8 @@ in
       kdePackages.sddm-kcm
 
       # media
-      alsa-utils
       calibre
       libation
-      pulseaudio
       unstable.spotify
       vlc
 
