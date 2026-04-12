@@ -106,6 +106,7 @@ in
       freefilesync
       gimp-with-plugins
       httpie-desktop
+      mission-center
       onlyoffice-desktopeditors
       pika-backup
       pinta
