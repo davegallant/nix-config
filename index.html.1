@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <input type="hidden" id="http" name="http" value="5000">
+        <input type="hidden" id="https" name="https" value="5001">
+        <input type="hidden" id="prefer_https" name="prefer_https" value="false">
+    </body>
+    <script type="text/javascript">
+        var protocol=location.protocol;
+        var port=location.protocol === "https:" ? 5001 : 5000;
+        var URL=protocol+"//"+location.hostname+":"+port+location.pathname+location.search;
+        location.replace(URL);
+    </script>
+</html>

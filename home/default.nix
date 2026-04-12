@@ -12,12 +12,15 @@ in
     ./firefox.nix
     ./git.nix
     ./nixvim.nix
+    ./opencode.nix
     ./zed.nix
   ];
 
   home.stateVersion = "25.11";
 
-  home.packages = with pkgs; [ just ];
+  home.packages = with pkgs; [
+    just
+  ];
 
   services = {
     gpg-agent = {
