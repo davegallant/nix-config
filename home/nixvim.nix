@@ -140,10 +140,21 @@
     };
 
     extraPlugins = [
-      pkgs.vimPlugins.opencode-nvim
+      (pkgs.vimUtils.buildVimPlugin {
+        name = "ghostty-default-style-dark-nvim";
+        src = pkgs.fetchFromGitHub {
+          owner = "nkxxll";
+          repo = "ghostty-default-style-dark.nvim";
+          rev = "master";
+          sha256 = "sha256-Qxj2f8f1lS/kAxpWNVz/cjYCvO9WSamgj6mrgDdvziM=";
+        };
+        doCheck = false;
+      })
     ];
 
     extraConfigLua = ''
+
+        vim.cmd.colorscheme("ghostty-default-style-dark")
 
         -- https://github.com/orgs/community/discussions/108329
         vim.cmd([[let g:copilot_filetypes = {'yaml': v:true, 'gitcommit': v:true}]])
@@ -178,11 +189,6 @@
         	true
         )
 
-      -- opencode.nvim
-      vim.o.autoread = true -- Required for `opts.events.reload`
-      vim.keymap.set({ "n", "x" }, "<C-a>", function() require("opencode").ask("@this: ", { submit = true }) end, { desc = "Ask opencode…" })
-      vim.keymap.set({ "n", "x" }, "<C-x>", function() require("opencode").select() end,                          { desc = "Execute opencode action…" })
-      vim.keymap.set({ "n", "t" }, "<C-.>", function() require("opencode").toggle() end,                          { desc = "Toggle opencode" })
 
       vim.keymap.set({ "n", "x" }, "go",  function() return require("opencode").operator("@this ") end,        { desc = "Add range to opencode", expr = true })
       vim.keymap.set("n",          "goo", function() return require("opencode").operator("@this ") .. "_" end, { desc = "Add line to opencode", expr = true })
