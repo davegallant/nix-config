@@ -159,9 +159,6 @@
         -- https://github.com/orgs/community/discussions/108329
         vim.cmd([[let g:copilot_filetypes = {'yaml': v:true, 'gitcommit': v:true}]])
 
-        -- Format JSON
-        vim.cmd([[command! JsonFormat execute "::%!jq '.'"]])
-
         -- Remember line number
         vim.cmd([[au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif]])
 
