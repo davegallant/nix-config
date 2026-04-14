@@ -13,6 +13,7 @@
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    niri.url = "github:sodiboo/niri-flake";
     nixvim = {
       url = "github:nix-community/nixvim/nixos-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -69,7 +70,10 @@
             {
               config = {
                 nixpkgs.config.allowUnfree = true;
-                nixpkgs.overlays = [ (import ./overlays) ];
+                nixpkgs.overlays = [
+                  (import ./overlays)
+                  inputs.niri.overlays.niri
+                ];
                 home-manager = {
                   useGlobalPkgs = true;
                   useUserPackages = true;

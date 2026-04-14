@@ -21,6 +21,12 @@ just rebuild    # or: just r
 On Linux runs `nixos-rebuild --sudo switch --flake .`
 On macOS runs `sudo darwin-rebuild switch --flake .`
 
+### Rebuild and install bootloader
+```sh
+just rebuild-boot
+```
+Runs `$cmd boot --flake . --install-bootloader`. Use after bootloader changes.
+
 ### Build without switching (CI / dry-run)
 ```sh
 nix build .#nixosConfigurations.hephaestus.config.system.build.toplevel
@@ -37,6 +43,7 @@ Always run `just fmt` before committing changes.
 ```sh
 just update     # or: just u (runs update-flake.sh)
 ```
+`update-flake.sh` is interactive: stashes uncommitted changes, `git pull`, `nix flake update`, `just rebuild`, then prompts to GPG-sign and push a timestamped commit. Do not run non-interactively.
 
 ### Garbage collection
 ```sh
@@ -64,7 +71,9 @@ home/              # home-manager modules (one concern per file)
   fish.nix         # Fish shell + Starship prompt
   firefox.nix      # Librewolf browser config
   git.nix          # Git configuration
+  niri.nix         # Niri Wayland compositor + Waybar/Fuzzel/Mako/Swaylock
   nixvim.nix       # Neovim (nixvim) configuration
+  opencode.nix     # `oc` wrapper: runs opencode via Docker
   zed.nix          # Zed editor configuration
 hosts/             # Per-machine system configurations (flat files, not dirs)
   hephaestus.nix   # NixOS desktop
@@ -144,13 +153,13 @@ imports = [
 - Use `lib.optionals stdenv.isLinux [ ... ]` for conditional list items.
 - Use `lib.optionalAttrs stdenv.isLinux { ... }` for conditional attribute sets.
 - Use `lib.optionalString stdenv.isLinux "..."` for conditional strings.
-- Do NOT use `lib.mkIf` -- this codebase prefers direct conditionals.
+- Prefer direct conditionals over `lib.mkIf`. Exception: `lib.mkIf` is acceptable as a whole-module guard (e.g., `config = lib.mkIf stdenv.isLinux { ... }` in `niri.nix`).
 
 ### Package References
 Three nixpkgs tiers, passed via `specialArgs`/`extraSpecialArgs`:
 - `pkgs.foo` -- stable (default for most packages)
 - `unstable.foo` -- nixpkgs-unstable (for packages needing newer versions)
-- `master.foo` -- nixpkgs-master (for the very latest, e.g., `master.ghostty`)
+- `master.foo` -- nixpkgs-master (available but currently unused in module bodies; `master` arg is accepted by `packages.nix` signature but nothing uses it)
 - Binary paths in services: `"${lib.getBin pkg}/bin/name"`
 - Flake input packages: `input.packages.${pkgs.stdenv.hostPlatform.system}.default`
 

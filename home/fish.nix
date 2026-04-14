@@ -81,9 +81,6 @@ in
         tf = "terraform";
         tree = "eza --tree";
         v = "nvim";
-      }
-      // lib.optionalAttrs stdenv.isLinux {
-        zed = "env WAYLAND_DISPLAY='' zeditor"; # BUG: zed captures shift+v and g space on wayland
       };
     };
   };
