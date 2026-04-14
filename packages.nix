@@ -128,16 +128,6 @@ in
       unstable.lutris
       wine
 
-      # kde
-      kdePackages.bluedevil
-      kdePackages.kcalc
-      kdePackages.kcharselect
-      kdePackages.kclock
-      kdePackages.kcolorchooser
-      kdePackages.ksystemlog
-      kdePackages.partitionmanager
-      kdePackages.sddm-kcm
-
       # media
       calibre
       libation
@@ -156,6 +146,7 @@ in
       bleachbit
       clamtk
       cryptsetup
+      libsecret # D-Bus secret service client (used by Electron apps)
       opensnitch-ui
       pinentry-curses
 

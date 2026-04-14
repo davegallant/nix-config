@@ -1,5 +1,6 @@
 {
   config,
+  inputs,
   lib,
   modulesPath,
   pkgs,
@@ -8,7 +9,10 @@
 }:
 {
 
-  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
+  imports = [
+    (modulesPath + "/installer/scan/not-detected.nix")
+    inputs.niri.nixosModules.niri
+  ];
 
   security.sudo-rs = {
     enable = true;
@@ -244,7 +248,10 @@
       enable = true;
       enableSSHSupport = true;
     };
-    kdeconnect.enable = true;
+    niri = {
+      enable = true;
+      package = pkgs.niri-unstable;
+    };
     nix-ld.enable = true;
     steam = {
       enable = true;
@@ -267,10 +274,12 @@
     };
   };
 
-  services = {
-    desktopManager.plasma6.enable = true;
-    displayManager.sddm.enable = true;
-    displayManager.sddm.wayland.enable = true;
+  services.greetd = {
+    enable = true;
+    settings.default_session = {
+      command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --remember --cmd niri-session";
+      user = "greeter";
+    };
   };
 
   services.printing.enable = true;
