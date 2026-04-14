@@ -12,6 +12,7 @@ in
     ./firefox.nix
     ./git.nix
     ./nixvim.nix
+    ./niri.nix
     ./opencode.nix
     ./zed.nix
   ];
@@ -23,6 +24,12 @@ in
   ];
 
   services = {
+    gnome-keyring = {
+      enable = stdenv.isLinux;
+      components = [
+        "secrets"
+      ];
+    };
     gpg-agent = {
       enable = stdenv.isLinux;
       defaultCacheTtl = 3600;

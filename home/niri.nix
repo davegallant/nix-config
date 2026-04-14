@@ -1,0 +1,524 @@
+# home/niri.nix
+#
+# Niri scrollable-tiling Wayland compositor setup.
+
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+
+{
+  config = lib.mkIf pkgs.stdenv.isLinux {
+    home.pointerCursor = {
+      package = pkgs.bibata-cursors;
+      name = "Bibata-Modern-Classic";
+      size = 24;
+      gtk.enable = true;
+      x11.enable = true;
+    };
+
+    home.packages = with pkgs; [
+      xwayland-satellite # XWayland for non-Wayland apps
+      swaybg # wallpaper setter
+      nwg-dock # dock
+      nwg-look # GTK theme picker (useful for first-time setup)
+      wl-clipboard # wl-copy / wl-paste
+      grim # screenshot (used by niri's built-in action)
+      slurp # region selection for screenshots
+      playerctl # media key support
+      brightnessctl # brightness keys
+      networkmanagerapplet # nm-applet for system tray wifi management
+    ];
+
+    programs.niri.settings = {
+      environment = {
+        "NIXOS_OZONE_WL" = "1"; # Electron apps use Wayland natively
+        "DISPLAY" = ":0"; # XWayland display set by xwayland-satellite
+      };
+
+      cursor = {
+        theme = "Bibata-Modern-Classic";
+        size = 24;
+      };
+
+      gestures = {
+        hot-corners = {
+          enable = false;
+        };
+      };
+
+      input = {
+        keyboard = {
+          xkb.layout = "us";
+          repeat-delay = 300;
+          repeat-rate = 50;
+        };
+        mouse = {
+          left-handed = true;
+        };
+        focus-follows-mouse = {
+          enable = true;
+          max-scroll-amount = "0%";
+        };
+        warp-mouse-to-focus.enable = false;
+      };
+
+      layout = {
+        gaps = 8;
+        center-focused-column = "never";
+        default-column-width = {
+          proportion = 0.5;
+        };
+        focus-ring = {
+          enable = true;
+          width = 2;
+        };
+        border = {
+          enable = false;
+        };
+      };
+
+      workspaces = {
+        "1" = {
+          name = "main";
+        };
+        "2" = {
+          name = "chat";
+        };
+        "3" = {
+          name = "play";
+        };
+      };
+
+      animations = {
+        enable = true;
+        slowdown = 1.0;
+      };
+
+      spawn-at-startup = [
+        {
+          argv = [
+            "sh"
+            "-c"
+            "systemctl --user reset-failed waybar.service; true"
+          ];
+        }
+        { argv = [ "xwayland-satellite" ]; }
+        {
+          argv = [
+            "nm-applet"
+            "--indicator"
+          ];
+        }
+        { argv = [ "mako" ]; }
+        {
+          argv = [
+            "swaybg"
+            "-m"
+            "fill"
+            "-i"
+            "${../wallpaper.png}"
+          ];
+        }
+        # Dock – anchored to the bottom, shows pinned + running apps
+        {
+          argv = [
+            "nwg-dock"
+            "-p"
+            "bottom" # position
+            "-l"
+            "LB" # layer: LayerShell Bottom
+            "-mb"
+            "8" # margin-bottom
+            "-i"
+            "48" # icon size
+            "-hd"
+            "200" # auto-hide delay ms (0 = always visible)
+          ];
+        }
+      ];
+
+      window-rules = [
+        # File picker dialogs
+        {
+          matches = [
+            { app-id = "xdg-desktop-portal"; }
+            { app-id = "xdg-desktop-portal-gtk"; }
+          ];
+          open-floating = true;
+        }
+        {
+          matches = [
+            { app-id = "pavucontrol"; }
+            { app-id = "nm-connection-editor"; }
+            { app-id = "blueman-manager"; }
+            { app-id = "org.gnome.Calculator"; }
+            { title = "About Mozilla Firefox"; }
+          ];
+          open-floating = true;
+          default-column-width = {
+            proportion = 0.4;
+          };
+        }
+        {
+          matches = [ { app-id = "com.mitchellh.ghostty"; } ];
+          open-floating = false;
+        }
+        {
+          matches = [ { app-id = "steam"; } ];
+          open-floating = true;
+        }
+      ];
+
+      binds =
+        let
+          inherit (config.lib.niri.actions)
+            center-column
+            close-window
+            consume-or-expel-window-left
+            consume-or-expel-window-right
+            focus-column-left
+            focus-column-right
+            focus-window-down
+            focus-window-up
+            focus-workspace
+            focus-workspace-down
+            focus-workspace-up
+            fullscreen-window
+            maximize-column
+            move-column-left
+            move-column-right
+            move-window-down
+            move-window-up
+            next-we
+            power-off-monitors
+            quit
+            reset-window-height
+            switch-focus-between-floating-and-tiling
+            switch-preset-column-width
+            toggle-overview
+            toggle-window-floating
+            ;
+          mod = "Super";
+        in
+        {
+          # ── Launchers / system ──────────────────────────────────────────
+          "${mod}+Return".action = {
+            spawn = [ "ghostty" ];
+          };
+          "${mod}+D".action = {
+            spawn = [ "fuzzel" ];
+          };
+          "${mod}+L".action = {
+            spawn = [ "swaylock" ];
+          };
+          "${mod}+Shift+E".action = quit;
+          "${mod}+Shift+P".action = power-off-monitors;
+
+          # ── Screenshots ─────────────────────────────────────────────────
+          "Print".action.screenshot = { };
+          "Ctrl+Print".action.screenshot-screen = { };
+          "Alt+Print".action.screenshot-window = { };
+
+          # ── Focus movement ──────────────────────────────────────────────
+          "${mod}+Left".action = focus-column-left;
+          "${mod}+Right".action = focus-column-right;
+          "${mod}+Down".action = focus-window-down;
+          "${mod}+Up".action = focus-window-up;
+
+          # ── Window movement ─────────────────────────────────────────────
+          "${mod}+Shift+Left".action = move-column-left;
+          "${mod}+Shift+Right".action = move-column-right;
+          "${mod}+Shift+Down".action = move-window-down;
+          "${mod}+Shift+Up".action = move-window-up;
+
+          # ── Column sizing ───────────────────────────────────────────────
+          "${mod}+R".action = switch-preset-column-width;
+          "${mod}+Shift+R".action = reset-window-height;
+          "${mod}+F".action = maximize-column;
+          "${mod}+Shift+F".action = fullscreen-window;
+          "${mod}+C".action = center-column;
+
+          # ── Floating toggle ─────────────────────────────────────────────
+          "${mod}+V".action = toggle-window-floating;
+          "${mod}+Shift+V".action = switch-focus-between-floating-and-tiling;
+
+          # ── Consume / expel from column ─────────────────────────────────
+          "${mod}+BracketLeft".action = consume-or-expel-window-left;
+          "${mod}+BracketRight".action = consume-or-expel-window-right;
+
+          # ── Close ───────────────────────────────────────────────────────
+          "${mod}+Q".action = close-window;
+
+          # ── Workspace switching ─────────────────────────────────────────
+          "${mod}+1".action = focus-workspace 1;
+          "${mod}+2".action = focus-workspace 2;
+          "${mod}+3".action = focus-workspace 3;
+
+          # ── Move window to workspace ────────────────────────────────────
+          "${mod}+Shift+1".action.move-column-to-workspace = 1;
+          "${mod}+Shift+2".action.move-column-to-workspace = 2;
+          "${mod}+Shift+3".action.move-column-to-workspace = 3;
+
+          # ── Scroll workspaces ───────────────────────────────────────────
+          "${mod}+WheelScrollDown".action = focus-workspace-down;
+          "${mod}+WheelScrollUp".action = focus-workspace-up;
+
+          # ── Overview (birds-eye) ────────────────────────────────────────
+          "${mod}+O".action = toggle-overview;
+
+          "${mod}+Shift+S".action = {
+            spawn = [
+              "sh"
+              "-c"
+              "swaylock -f && systemctl suspend"
+            ];
+          };
+
+          # ── Media / brightness ──────────────────────────────────────────
+          "XF86AudioPlay".action = {
+            spawn = [
+              "playerctl"
+              "play-pause"
+            ];
+          };
+          "XF86AudioNext".action = {
+            spawn = [
+              "playerctl"
+              "next"
+            ];
+          };
+          "XF86AudioPrev".action = {
+            spawn = [
+              "playerctl"
+              "previous"
+            ];
+          };
+          "XF86AudioRaiseVolume".action = {
+            spawn = [
+              "wpctl"
+              "set-volume"
+              "@DEFAULT_AUDIO_SINK@"
+              "5%+"
+            ];
+          };
+          "XF86AudioLowerVolume".action = {
+            spawn = [
+              "wpctl"
+              "set-volume"
+              "@DEFAULT_AUDIO_SINK@"
+              "5%-"
+            ];
+          };
+          "XF86AudioMute".action = {
+            spawn = [
+              "wpctl"
+              "set-mute"
+              "@DEFAULT_AUDIO_SINK@"
+              "toggle"
+            ];
+          };
+          "XF86MonBrightnessUp".action = {
+            spawn = [
+              "brightnessctl"
+              "set"
+              "5%+"
+            ];
+          };
+          "XF86MonBrightnessDown".action = {
+            spawn = [
+              "brightnessctl"
+              "set"
+              "5%-"
+            ];
+          };
+        };
+
+      # ── Screenshot path ───────────────────────────────────────────────────
+      screenshot-path = "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png";
+
+    };
+
+    # ── Waybar ────────────────────────────────────────────────────────────────
+    programs.waybar = {
+      enable = true;
+      systemd = {
+        enable = true;
+        target = "niri.service";
+      };
+
+      settings = [
+        {
+          layer = "top";
+          position = "top";
+          height = 32;
+
+          modules-left = [
+            "niri/workspaces"
+            "niri/window"
+          ];
+          modules-center = [ "clock" ];
+          modules-right = [
+            "pulseaudio"
+            "network"
+            "cpu"
+            "memory"
+            "tray"
+          ];
+
+          "niri/workspaces" = {
+            format = "{icon} {name}";
+            format-icons = {
+              active = "●";
+              default = "○";
+              urgent = "!";
+            };
+            all-outputs = false;
+          };
+
+          "niri/window" = {
+            icon = true;
+            max-length = 60;
+          };
+
+          clock = {
+            format = "{:%H:%M  %a %b %d}";
+            tooltip-format = "<tt><small>{calendar}</small></tt>";
+          };
+
+          pulseaudio = {
+            format = "{icon} {volume}%";
+            format-muted = "󰝟";
+            format-icons = {
+              default = [
+                ""
+                ""
+                ""
+              ];
+              headphone = "";
+            };
+            on-click = "pavucontrol";
+            scroll-step = 5;
+          };
+
+          network = {
+            format-wifi = " {essid}";
+            format-ethernet = " {ifname}";
+            format-disconnected = "⚠ Disconnected";
+            tooltip-format = "{ipaddr}/{cidr}";
+            on-click = "nm-connection-editor";
+          };
+
+          cpu = {
+            format = " {usage}%";
+            interval = 5;
+          };
+
+          memory = {
+            format = " {percentage}%";
+            interval = 10;
+          };
+
+          tray = {
+            spacing = 8;
+          };
+        }
+      ];
+
+      style = ''
+        * {
+          font-family: "JetBrainsMono Nerd Font", monospace;
+          font-size: 13px;
+        }
+        window#waybar {
+          background-color: rgba(26, 27, 38, 0.92);
+          color: #c0caf5;
+          border-bottom: 2px solid #7fc8ff;
+        }
+        #workspaces button {
+          padding: 0 8px;
+          color: #737aa2;
+        }
+        #workspaces button.active {
+          color: #7fc8ff;
+          font-weight: bold;
+        }
+        #workspaces button.urgent {
+          color: #f7768e;
+        }
+        #clock, #pulseaudio, #network, #cpu, #memory, #tray {
+          padding: 0 10px;
+          color: #c0caf5;
+        }
+        #tray > .passive { -gtk-icon-effect: dim; }
+        #tray > .needs-attention { -gtk-icon-effect: highlight; }
+      '';
+    };
+
+    # ── Fuzzel launcher ───────────────────────────────────────────────────────
+    programs.fuzzel = {
+      enable = true;
+      settings = {
+        main = {
+          font = "JetBrainsMono Nerd Font:size=13";
+          terminal = "ghostty -e";
+          width = 40;
+          lines = 10;
+          horizontal-pad = 20;
+          vertical-pad = 10;
+          inner-pad = 5;
+        };
+        colors = {
+          background = "1a1b26f2";
+          text = "c0caf5ff";
+          selection = "283457ff";
+          selection-text = "7fc8ffff";
+          border = "7fc8ffff";
+          match = "7fc8ffff";
+        };
+        border = {
+          width = 2;
+          radius = 6;
+        };
+      };
+    };
+
+    # ── Mako notifications ────────────────────────────────────────────────────
+    services.mako = {
+      enable = true;
+      settings = {
+        default-timeout = 5000;
+        background-color = "#1a1b26ee";
+        text-color = "#c0caf5";
+        border-color = "#7fc8ff";
+        border-radius = 6;
+        border-size = 2;
+        font = "JetBrainsMono Nerd Font 12";
+        max-visible = 5;
+        sort = "-time";
+        "urgency=high" = {
+          border-color = "#f7768e";
+          default-timeout = 0;
+        };
+      };
+    };
+
+    # ── Swaylock screen locker ────────────────────────────────────────────────
+    programs.swaylock = {
+      enable = true;
+      settings = {
+        color = "1a1b26";
+        ring-color = "7fc8ff";
+        key-hl-color = "7fc8ff";
+        line-color = "1a1b26";
+        inside-color = "1a1b2699";
+        text-color = "c0caf5";
+        indicator-radius = 100;
+        indicator-thickness = 7;
+        show-failed-attempts = true;
+      };
+    };
+  };
+}
