@@ -40,6 +40,18 @@ let
     git_mounts=()
     [[ -f "$HOME/.gitconfig" ]] && git_mounts+=(-v "$HOME/.gitconfig:/root/.gitconfig:ro")
 
+    extra_args=()
+    web_port="''${OPENCODE_WEB_PORT:-4096}"
+    port_flags=()
+    for arg in "$@"; do
+      if [[ "$arg" == "web" ]]; then
+        port_flags+=(-p "127.0.0.1:''${web_port}:''${web_port}")
+        extra_args+=(--hostname 0.0.0.0 --port "''${web_port}")
+        echo "→ web mode: http://localhost:''${web_port}" >&2
+        break
+      fi
+    done
+
     echo "→ opencode sandbox: $(pwd)" >&2
     echo "→ image: $IMAGE" >&2
 
@@ -54,9 +66,10 @@ let
       "''${auth_mounts[@]+"''${auth_mounts[@]}"}" \
       "''${ssh_mounts[@]+"''${ssh_mounts[@]}"}" \
       "''${git_mounts[@]+"''${git_mounts[@]}"}" \
+      "''${port_flags[@]+"''${port_flags[@]}"}" \
       "$IMAGE" \
-      "''${@:+"$@"}"
-
+      "''${@:+"$@"}" \
+      "''${extra_args[@]+"''${extra_args[@]}"}"
   '';
 in
 {
