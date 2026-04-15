@@ -224,6 +224,9 @@
   time.timeZone = "America/Toronto";
 
   hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+
+  services.blueman.enable = true;
 
   hardware.keyboard.qmk.enable = true;
 
@@ -277,7 +280,7 @@
   services.greetd = {
     enable = true;
     settings.default_session = {
-      command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --remember --cmd niri-session";
+      command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --cmd niri-session";
       user = "greeter";
     };
   };
