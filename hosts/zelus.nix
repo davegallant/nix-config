@@ -60,6 +60,30 @@
 
   security.pam.services.sudo_local.touchIdAuth = true;
 
+  services.paneru = {
+    enable = true;
+    settings = {
+      options = {
+        focus_follows_mouse = true;
+        mouse_follows_focus = true;
+        preset_column_widths = [
+          0.25
+          0.5
+          0.75
+          1
+        ];
+      };
+      bindings = {
+        window_focus_west = "cmd - leftarrow";
+        window_focus_east = "cmd - rightarrow";
+        window_resize = "alt - r";
+        window_center = "alt - c";
+        window_fullwidth = "cmd - return";
+        quit = "ctrl + alt - q";
+      };
+    };
+  };
+
   homebrew = {
     enable = true;
     onActivation = {
@@ -101,7 +125,6 @@
       "notunes"
       "obsidian"
       "raycast"
-      "rectangle"
       "signal"
       "slack"
       "spotify"
