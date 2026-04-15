@@ -124,6 +124,34 @@
             "${../wallpaper.png}"
           ];
         }
+        # clipboard history daemons
+        {
+          argv = [
+            "wl-clip-persist"
+            "--clipboard"
+            "both"
+          ];
+        }
+        {
+          argv = [
+            "wl-paste"
+            "--type"
+            "text"
+            "--watch"
+            "cliphist"
+            "store"
+          ];
+        }
+        {
+          argv = [
+            "wl-paste"
+            "--type"
+            "image"
+            "--watch"
+            "cliphist"
+            "store"
+          ];
+        }
       ];
 
       window-rules = [
@@ -196,6 +224,13 @@
           };
           "${mod}+D".action = {
             spawn = [ "fuzzel" ];
+          };
+          "${mod}+V".action = {
+            spawn = [
+              "sh"
+              "-c"
+              "cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"
+            ];
           };
           "${mod}+L".action = {
             spawn = [ "swaylock" ];
