@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-master.url = "github:NixOS/nixpkgs/master";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     darwin = {
       url = "github:lnl7/nix-darwin/nix-darwin-25.11";
@@ -35,7 +34,6 @@
       home-manager,
       nixpkgs,
       nixpkgs-unstable,
-      nixpkgs-master,
       vpngate,
       weathr,
       ...
@@ -44,13 +42,6 @@
       mkUnstable =
         system:
         import nixpkgs-unstable {
-          inherit system;
-          config.allowUnfree = true;
-        };
-
-      mkMaster =
-        system:
-        import nixpkgs-master {
           inherit system;
           config.allowUnfree = true;
         };
@@ -64,7 +55,6 @@
         }:
         let
           unstable = mkUnstable system;
-          master = mkMaster system;
         in
         [
           ./packages.nix
@@ -92,7 +82,6 @@
                   );
                   extraSpecialArgs = {
                     inherit unstable;
-                    inherit master;
                   };
                 };
               };
@@ -106,14 +95,12 @@
         let
           system = "x86_64-linux";
           unstable = mkUnstable system;
-          master = mkMaster system;
         in
         {
           hephaestus = nixpkgs.lib.nixosSystem {
             specialArgs = {
               inherit
                 unstable
-                master
                 vpngate
                 inputs
                 ;
@@ -131,7 +118,6 @@
                       settings = {
                         auto-optimise-store = true;
                         substituters = [ "https://davegallant.cachix.org" ];
-                        trusted-users = [ "root" ];
                         trusted-public-keys = [
                           "davegallant.cachix.org-1:SsUMqL4+tF2R3/G6X903E9laLlY1rES2QKFfePegF08="
                         ];
@@ -156,7 +142,6 @@
         let
           system = "aarch64-darwin";
           unstable = mkUnstable system;
-          master = mkMaster system;
         in
         {
           zelus = darwin.lib.darwinSystem {

@@ -1,7 +1,6 @@
 {
   pkgs,
   lib,
-  master,
   unstable,
   vpngate,
   ...
@@ -165,7 +164,6 @@ in
       usbutils
       virt-manager
       wayland-utils
-      wl-clipboard
 
       # llm
       bun
