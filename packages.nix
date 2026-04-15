@@ -99,7 +99,6 @@ in
 
       # desktop apps
       bitwarden-desktop
-      dbeaver-bin
       discord
       feishin
       freefilesync
@@ -110,6 +109,7 @@ in
       pika-backup
       pinta
       qbittorrent
+      unstable.beekeeper-studio
       unstable.brave
       unstable.obsidian
       unstable.podman-desktop
