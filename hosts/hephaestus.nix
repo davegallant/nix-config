@@ -175,7 +175,6 @@
   };
 
   system = {
-    autoUpgrade.enable = true;
     stateVersion = "25.11";
     activationScripts = {
       diff = {
@@ -247,10 +246,6 @@
 
   programs = {
     fish.enable = true;
-    gnupg.agent = {
-      enable = true;
-      enableSSHSupport = true;
-    };
     niri = {
       enable = true;
       package = pkgs.niri-unstable;

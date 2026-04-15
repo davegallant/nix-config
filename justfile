@@ -16,10 +16,6 @@ rebuild-boot:
 rollback:
   sudo $cmd switch --rollback --flake .
 
-channel-update:
-  nix-channel --update
-  sudo nix-channel --update
-
 update:
   @./update-flake.sh
 
