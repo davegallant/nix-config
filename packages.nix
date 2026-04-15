@@ -150,6 +150,10 @@ in
       opensnitch-ui
       pinentry-curses
 
+      # clipboard
+      cliphist
+      wl-clip-persist
+
       # system utilities
       hardinfo2
       nfs-utils
