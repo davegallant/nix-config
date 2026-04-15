@@ -266,9 +266,12 @@
           "${mod}+T".action = toggle-window-floating;
           "${mod}+Shift+T".action = {
             spawn = [
-              "niri-float-sticky"
-              "-ipc"
-              "toggle_sticky"
+              "sh"
+              "-c"
+              ''
+                niri msg action toggle-window-floating &&
+                niri-float-sticky -ipc set_sticky
+              ''
             ];
           };
           "${mod}+Shift+V".action = switch-focus-between-floating-and-tiling;
