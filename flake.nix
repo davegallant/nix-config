@@ -83,6 +83,7 @@
                   useUserPackages = true;
                   users.${username}.imports = [
                     ./home
+                    inputs.niri.homeModules.niri
                     inputs.nixvim.homeModules.nixvim
                     weathr.homeModules.weathr
                   ];
