@@ -30,6 +30,7 @@
       playerctl # media key support
       brightnessctl # brightness keys
       networkmanagerapplet # nm-applet for system tray wifi management
+      blueman # blueman-applet for system tray bluetooth management
     ];
 
     programs.niri.settings = {
@@ -112,6 +113,7 @@
             "--indicator"
           ];
         }
+        { argv = [ "blueman-applet" ]; }
         { argv = [ "mako" ]; }
         {
           argv = [
@@ -120,22 +122,6 @@
             "fill"
             "-i"
             "${../wallpaper.png}"
-          ];
-        }
-        # Dock – anchored to the bottom, shows pinned + running apps
-        {
-          argv = [
-            "nwg-dock"
-            "-p"
-            "bottom" # position
-            "-l"
-            "LB" # layer: LayerShell Bottom
-            "-mb"
-            "8" # margin-bottom
-            "-i"
-            "48" # icon size
-            "-hd"
-            "200" # auto-hide delay ms (0 = always visible)
           ];
         }
       ];
@@ -242,7 +228,7 @@
           "${mod}+C".action = center-column;
 
           # ── Floating toggle ─────────────────────────────────────────────
-          "${mod}+V".action = toggle-window-floating;
+          "${mod}+T".action = toggle-window-floating;
           "${mod}+Shift+V".action = switch-focus-between-floating-and-tiling;
 
           # ── Consume / expel from column ─────────────────────────────────
@@ -336,12 +322,10 @@
           };
         };
 
-      # ── Screenshot path ───────────────────────────────────────────────────
       screenshot-path = "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png";
 
     };
 
-    # ── Waybar ────────────────────────────────────────────────────────────────
     programs.waybar = {
       enable = true;
       systemd = {
@@ -485,7 +469,6 @@
       };
     };
 
-    # ── Mako notifications ────────────────────────────────────────────────────
     services.mako = {
       enable = true;
       settings = {
@@ -505,7 +488,6 @@
       };
     };
 
-    # ── Swaylock screen locker ────────────────────────────────────────────────
     programs.swaylock = {
       enable = true;
       settings = {
