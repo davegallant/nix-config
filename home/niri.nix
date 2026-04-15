@@ -20,17 +20,16 @@
     };
 
     home.packages = with pkgs; [
+      blueman
+      brightnessctl
+      grim
+      networkmanagerapplet
+      niri-float-sticky
+      playerctl
+      slurp
+      swaybg
+      wl-clipboard
       xwayland-satellite # XWayland for non-Wayland apps
-      swaybg # wallpaper setter
-      nwg-dock # dock
-      nwg-look # GTK theme picker (useful for first-time setup)
-      wl-clipboard # wl-copy / wl-paste
-      grim # screenshot (used by niri's built-in action)
-      slurp # region selection for screenshots
-      playerctl # media key support
-      brightnessctl # brightness keys
-      networkmanagerapplet # nm-applet for system tray wifi management
-      blueman # blueman-applet for system tray bluetooth management
     ];
 
     programs.niri.settings = {
@@ -124,6 +123,7 @@
             "${../wallpaper.png}"
           ];
         }
+        { argv = [ "niri-float-sticky" ]; }
         # clipboard history daemons
         {
           argv = [
@@ -264,6 +264,13 @@
 
           # ── Floating toggle ─────────────────────────────────────────────
           "${mod}+T".action = toggle-window-floating;
+          "${mod}+Shift+T".action = {
+            spawn = [
+              "niri-float-sticky"
+              "-ipc"
+              "toggle_sticky"
+            ];
+          };
           "${mod}+Shift+V".action = switch-focus-between-floating-and-tiling;
 
           # ── Consume / expel from column ─────────────────────────────────
@@ -476,7 +483,6 @@
       '';
     };
 
-    # ── Fuzzel launcher ───────────────────────────────────────────────────────
     programs.fuzzel = {
       enable = true;
       settings = {
