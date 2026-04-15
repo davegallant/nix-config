@@ -19,6 +19,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     vpngate.url = "github:davegallant/vpngate";
+    paneru = {
+      url = "github:karinushka/paneru";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     weathr = {
       url = "github:Veirt/weathr";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -79,6 +83,7 @@
                   useUserPackages = true;
                   users.${username}.imports = [
                     ./home
+                    inputs.niri.homeModules.niri
                     inputs.nixvim.homeModules.nixvim
                     weathr.homeModules.weathr
                   ];
@@ -162,6 +167,7 @@
               hmModule = home-manager.darwinModules.home-manager;
               extraModules = [
                 ./hosts/zelus.nix
+                inputs.paneru.darwinModules.paneru
               ];
             };
           };
