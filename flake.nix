@@ -83,10 +83,13 @@
                   useUserPackages = true;
                   users.${username}.imports = [
                     ./home
-                    inputs.niri.homeModules.niri
                     inputs.nixvim.homeModules.nixvim
                     weathr.homeModules.weathr
-                  ];
+                  ] ++ (
+                    if system != "x86_64-linux"
+                    then [ inputs.niri.homeModules.niri ]
+                    else [ ]
+                  );
                   extraSpecialArgs = {
                     inherit unstable;
                     inherit master;
