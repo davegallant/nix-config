@@ -79,6 +79,7 @@
         window_resize = "alt - r";
         window_center = "alt - c";
         window_fullwidth = "cmd - return";
+        window_manage = "alt - t";
         quit = "ctrl + alt - q";
       };
     };
