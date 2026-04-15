@@ -75,11 +75,8 @@
                     ./home
                     inputs.nixvim.homeModules.nixvim
                     weathr.homeModules.weathr
-                  ] ++ (
-                    if system != "x86_64-linux"
-                    then [ inputs.niri.homeModules.niri ]
-                    else [ ]
-                  );
+                  ]
+                  ++ (if system != "x86_64-linux" then [ inputs.niri.homeModules.niri ] else [ ]);
                   extraSpecialArgs = {
                     inherit unstable;
                   };
