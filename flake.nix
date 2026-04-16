@@ -12,7 +12,10 @@
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    niri.url = "github:sodiboo/niri-flake";
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixvim = {
       url = "github:nix-community/nixvim/nixos-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -50,12 +53,10 @@
         {
           username,
           system,
+          unstable,
           hmModule,
           extraModules ? [ ],
         }:
-        let
-          unstable = mkUnstable system;
-        in
         [
           ./packages.nix
           hmModule
@@ -104,7 +105,7 @@
             };
             modules = mkSharedModules {
               username = "dave";
-              inherit system;
+              inherit system unstable;
               hmModule = home-manager.nixosModules.home-manager;
               extraModules = [
                 ./hosts/hephaestus.nix
@@ -148,7 +149,7 @@
             };
             modules = mkSharedModules {
               username = "dave.gallant";
-              inherit system;
+              inherit system unstable;
               hmModule = home-manager.darwinModules.home-manager;
               extraModules = [
                 ./hosts/zelus.nix
