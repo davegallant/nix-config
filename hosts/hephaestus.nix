@@ -257,6 +257,20 @@
 
   services.flatpak.enable = true;
 
+  xdg.portal = {
+    enable = true;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-gnome
+    ];
+    config.niri.default = [
+      "gnome"
+      "gtk"
+    ];
+    config.niri."org.freedesktop.impl.portal.FileChooser" = [ "gtk" ]; # skip nautilus
+
+  };
+
   services.avahi = {
     enable = true;
     nssmdns4 = true;
