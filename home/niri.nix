@@ -206,7 +206,6 @@
             move-column-right
             move-window-down
             move-window-up
-            next-we
             power-off-monitors
             quit
             reset-window-height
