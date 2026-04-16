@@ -3,9 +3,6 @@
   pkgs,
   ...
 }:
-let
-  inherit (pkgs) stdenv;
-in
 {
   programs = {
     starship = {

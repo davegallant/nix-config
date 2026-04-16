@@ -91,6 +91,7 @@
     liberation_ttf
     nerd-fonts.droid-sans-mono
     nerd-fonts.fira-code
+    nerd-fonts.jetbrains-mono
     nerd-fonts.symbols-only
     nerd-fonts.ubuntu
     nerd-fonts.ubuntu-mono
@@ -161,10 +162,7 @@
     };
   };
 
-  services.mullvad-vpn = {
-    enable = true;
-    package = pkgs.mullvad-vpn;
-  };
+  services.mullvad-vpn.enable = true;
 
   services.ollama = {
     package = unstable.ollama-rocm;
