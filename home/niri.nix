@@ -23,19 +23,24 @@
       blueman
       brightnessctl
       grim
+      nautilus
       networkmanagerapplet
       niri-float-sticky
       playerctl
       slurp
       swaybg
       wl-clipboard
-      xwayland-satellite # XWayland for non-Wayland apps
+      xclip
+      xdg-utils
+      xwayland-satellite
     ];
 
     programs.niri.settings = {
       environment = {
         "NIXOS_OZONE_WL" = "1"; # Electron apps use Wayland natively
         "DISPLAY" = ":0"; # XWayland display set by xwayland-satellite
+        "GTK_USE_PORTAL" = "1"; # route GTK file dialogs through xdg-desktop-portal
+        "XDG_CURRENT_DESKTOP" = "niri"; # portal backend detection
       };
 
       cursor = {
