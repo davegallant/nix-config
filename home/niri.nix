@@ -218,7 +218,7 @@
         in
         {
           # ── Launchers / system ──────────────────────────────────────────
-          "${mod}+Return".action = {
+          "Ctrl+Super+T".action = {
             spawn = [ "ghostty" ];
           };
           "${mod}+D".action = {
@@ -258,7 +258,7 @@
           "${mod}+R".action = switch-preset-column-width;
           "${mod}+Shift+R".action = reset-window-height;
           "${mod}+F".action = maximize-column;
-          "${mod}+Shift+F".action = fullscreen-window;
+          "${mod}+Return".action = fullscreen-window;
           "${mod}+C".action = center-column;
 
           # ── Floating toggle ─────────────────────────────────────────────
