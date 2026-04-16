@@ -54,6 +54,13 @@ in
       enable = true;
     };
 
+    zathura = {
+      enable = stdenv.isLinux;
+      options = {
+        selection-clipboard = "clipboard";
+      };
+    };
+
     nnn = {
       enable = stdenv.isLinux;
       package = pkgs.nnn.override ({ withNerdIcons = true; });
