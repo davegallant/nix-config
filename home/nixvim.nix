@@ -156,9 +156,6 @@
 
         vim.cmd.colorscheme("ghostty-default-style-dark")
 
-        -- https://github.com/orgs/community/discussions/108329
-        vim.cmd([[let g:copilot_filetypes = {'yaml': v:true, 'gitcommit': v:true}]])
-
         -- Remember line number
         vim.cmd([[au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif]])
 
@@ -187,13 +184,6 @@
         )
 
 
-      vim.keymap.set({ "n", "x" }, "go",  function() return require("opencode").operator("@this ") end,        { desc = "Add range to opencode", expr = true })
-      vim.keymap.set("n",          "goo", function() return require("opencode").operator("@this ") .. "_" end, { desc = "Add line to opencode", expr = true })
-
-      vim.keymap.set("n", "<S-C-u>", function() require("opencode").command("session.half.page.up") end,   { desc = "Scroll opencode up" })
-      vim.keymap.set("n", "<S-C-d>", function() require("opencode").command("session.half.page.down") end, { desc = "Scroll opencode down" })
-
-      -- You may want these if you use the opinionated `<C-a>` and `<C-x>` keymaps above — otherwise consider `<leader>o…` (and remove terminal mode from the `toggle` keymap)
       vim.keymap.set("n", "+", "<C-a>", { desc = "Increment under cursor", noremap = true })
       vim.keymap.set("n", "-", "<C-x>", { desc = "Decrement under cursor", noremap = true })
     '';
