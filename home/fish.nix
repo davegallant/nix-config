@@ -78,6 +78,9 @@
         tf = "terraform";
         tree = "eza --tree";
         v = "nvim";
+      }
+      // lib.optionalAttrs pkgs.stdenv.isLinux {
+        zed = "zeditor";
       };
     };
   };
