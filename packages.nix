@@ -84,9 +84,6 @@ in
       yt-dlp
     ]
     ++ lib.optionals stdenv.isLinux [
-      xclip
-      xdg-utils
-
       # networking
       arp-scan
       dnsutils
