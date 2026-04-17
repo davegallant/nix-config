@@ -418,8 +418,8 @@
           };
 
           network = {
-            format-wifi = "{essid} ({signalStrength}%) ";
-            format-ethernet = "{ifname} ";
+            format-wifi = " {essid} ({signalStrength}%)";
+            format-ethernet = " {ifname}";
             format-disconnected = "Disconnected ⚠";
             tooltip-format = "{ipaddr}/{cidr}";
             on-click = "nm-connection-editor";
