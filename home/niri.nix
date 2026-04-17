@@ -252,8 +252,8 @@
           "${mod}+C".action = center-column;
 
           # ── Floating toggle ─────────────────────────────────────────────
-          "${mod}+T".action = toggle-window-floating;
-          "${mod}+Shift+T".action = {
+          "Alt+T".action = toggle-window-floating;
+          "Alt+Shift+T".action = {
             spawn = [
               "sh"
               "-c"
