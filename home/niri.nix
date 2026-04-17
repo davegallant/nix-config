@@ -85,22 +85,7 @@
         };
       };
 
-      workspaces = {
-        "1" = {
-          name = "main";
-        };
-        "2" = {
-          name = "chat";
-        };
-        "3" = {
-          name = "play";
-        };
-      };
-
-      animations = {
-        enable = true;
-        slowdown = 1.0;
-      };
+      animations.enable = false;
 
       spawn-at-startup = [
         {
@@ -263,7 +248,7 @@
           "${mod}+R".action = switch-preset-column-width;
           "${mod}+Shift+R".action = reset-window-height;
           "${mod}+F".action = maximize-column;
-          "${mod}+Return".action = fullscreen-window;
+          "${mod}+Shift+Return".action = fullscreen-window;
           "${mod}+C".action = center-column;
 
           # ── Floating toggle ─────────────────────────────────────────────
@@ -386,34 +371,30 @@
         {
           layer = "top";
           position = "top";
-          height = 32;
+          height = 28;
 
           modules-left = [
             "niri/workspaces"
             "niri/window"
           ];
-          modules-center = [ "clock" ];
+          modules-center = [ ];
           modules-right = [
-            "pulseaudio"
-            "network"
             "cpu"
             "memory"
+            "network"
+            "pulseaudio"
             "tray"
+            "clock"
           ];
 
           "niri/workspaces" = {
-            format = "{icon} {name}";
-            format-icons = {
-              active = "●";
-              default = "○";
-              urgent = "!";
-            };
+            format = "{index}";
             all-outputs = false;
           };
 
           "niri/window" = {
-            icon = true;
-            max-length = 60;
+            icon = false;
+            max-length = 80;
           };
 
           clock = {
@@ -422,40 +403,40 @@
           };
 
           pulseaudio = {
-            format = "{icon} {volume}%";
-            format-muted = "󰝟";
+            format = "  {volume}%";
+            format-muted = " muted";
             format-icons = {
               default = [
-                ""
-                ""
-                ""
+                ""
+                ""
+                ""
               ];
-              headphone = "";
+              headphone = "";
             };
             on-click = "pavucontrol";
             scroll-step = 5;
           };
 
           network = {
-            format-wifi = " {essid}";
-            format-ethernet = " {ifname}";
-            format-disconnected = "⚠ Disconnected";
+            format-wifi = "{essid} ({signalStrength}%) ";
+            format-ethernet = "{ifname} ";
+            format-disconnected = "Disconnected ⚠";
             tooltip-format = "{ipaddr}/{cidr}";
             on-click = "nm-connection-editor";
           };
 
           cpu = {
-            format = " {usage}%";
+            format = " {usage}%";
             interval = 5;
           };
 
           memory = {
-            format = " {percentage}%";
+            format = " {percentage}%";
             interval = 10;
           };
 
           tray = {
-            spacing = 8;
+            spacing = 6;
           };
         }
       ];
@@ -463,30 +444,78 @@
       style = ''
         * {
           font-family: "JetBrainsMono Nerd Font", monospace;
-          font-size: 13px;
+          font-size: 14px;
+          min-height: 0;
+          border: none;
+          border-radius: 0;
         }
         window#waybar {
-          background-color: rgba(26, 27, 38, 0.92);
+          background-color: #0d0f18;
           color: #c0caf5;
-          border-bottom: 2px solid #7fc8ff;
+        }
+        #workspaces {
+          margin: 0;
+          padding: 0;
         }
         #workspaces button {
           padding: 0 8px;
-          color: #737aa2;
+          margin: 0;
+          color: #565f89;
+          background: transparent;
+          border-bottom: 2px solid transparent;
         }
         #workspaces button.active {
-          color: #7fc8ff;
-          font-weight: bold;
+          color: #c0caf5;
+          background-color: #1e2030;
+          border-bottom: 2px solid #7aa2f7;
         }
         #workspaces button.urgent {
           color: #f7768e;
         }
-        #clock, #pulseaudio, #network, #cpu, #memory, #tray {
+        #window {
           padding: 0 10px;
+          color: #a9b1d6;
+        }
+        #cpu {
+          padding: 0 10px;
+          background-color: #1abc9c;
+          color: #0d0f18;
+        }
+        #pulseaudio {
+          padding: 0 10px;
+          background-color: #1e6799;
           color: #c0caf5;
+        }
+        #pulseaudio.muted {
+          background-color: #3b4261;
+          color: #737aa2;
+        }
+        #network {
+          padding: 0 10px;
+          background-color: #2d7a4f;
+          color: #c0caf5;
+        }
+        #network.disconnected {
+          background-color: #f7768e;
+          color: #0d0f18;
+        }
+        #memory {
+          padding: 0 10px;
+          background-color: #9d7cd8;
+          color: #0d0f18;
+        }
+        #tray {
+          padding: 0 8px;
+          background-color: #1e2030;
         }
         #tray > .passive { -gtk-icon-effect: dim; }
         #tray > .needs-attention { -gtk-icon-effect: highlight; }
+        #clock {
+          padding: 0 12px;
+          background-color: #1e2030;
+          color: #c0caf5;
+          font-weight: bold;
+        }
       '';
     };
 
