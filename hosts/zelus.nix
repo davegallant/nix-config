@@ -114,6 +114,7 @@
     ];
 
     casks = [
+      "beekeeper-studio"
       "brave-browser"
       "capslocknodelay"
       "discord"
