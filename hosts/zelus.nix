@@ -80,7 +80,7 @@
         window_swap_east = "cmd + shift - rightarrow";
         window_resize = "alt - r";
         window_center = "alt - c";
-        window_fullwidth = "cmd - return";
+        window_fullwidth = "cmd + shift - return";
         window_manage = "alt - t";
         quit = "ctrl + alt - q";
       };
