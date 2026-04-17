@@ -109,6 +109,7 @@
       "oras"
       "peon-ping"
       "python@3.14"
+      "sleepwatcher"
       "vault"
     ];
 
