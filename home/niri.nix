@@ -1,5 +1,3 @@
-# home/niri.nix
-#
 # Niri scrollable-tiling Wayland compositor setup.
 
 {
@@ -52,6 +50,21 @@
         hot-corners = {
           enable = false;
         };
+      };
+
+      layout = {
+        preset-window-heights = [
+           { proportion = 0.25; }
+           { proportion = 0.5; }
+           { proportion = 0.75; }
+           { proportion = 1.0; }
+         ];
+        preset-column-widths = [
+          { proportion = 0.25; }
+          { proportion = 0.5; }
+          { proportion = 0.75; }
+          { proportion = 1.0; }
+        ];
       };
 
       input = {
@@ -198,9 +211,11 @@
             move-window-up
             power-off-monitors
             quit
-            reset-window-height
             switch-focus-between-floating-and-tiling
+            switch-preset-window-height
+            switch-preset-window-height-back
             switch-preset-column-width
+            switch-preset-column-width-back
             toggle-overview
             toggle-window-floating
             ;
@@ -228,8 +243,8 @@
           "${mod}+Shift+P".action = power-off-monitors;
 
           # ── Screenshots ─────────────────────────────────────────────────
-          "Print".action.screenshot = { };
-          "Ctrl+Print".action.screenshot-screen = { };
+          "Print".action.screenshot-screen = { };
+          "Ctrl+Print".action.screenshot = { };
           "Alt+Print".action.screenshot-window = { };
 
           # ── Focus movement ──────────────────────────────────────────────
@@ -245,8 +260,10 @@
           "${mod}+Shift+Up".action = move-window-up;
 
           # ── Column sizing ───────────────────────────────────────────────
+          "${mod}+H".action = switch-preset-window-height;
+          "${mod}+Shift+H".action = switch-preset-window-height-back;
           "${mod}+R".action = switch-preset-column-width;
-          "${mod}+Shift+R".action = reset-window-height;
+          "${mod}+Shift+R".action = switch-preset-column-width-back;
           "${mod}+F".action = maximize-column;
           "${mod}+Shift+Return".action = fullscreen-window;
           "${mod}+C".action = center-column;
