@@ -565,6 +565,30 @@
       };
     };
 
+    services.swayidle = {
+      enable = true;
+      timeouts = [
+        {
+          timeout = 840; # 14 min: lock before suspend
+          command = "${pkgs.swaylock}/bin/swaylock -f";
+        }
+        {
+          timeout = 900; # 15 min: suspend
+          command = "systemctl suspend";
+        }
+      ];
+      events = [
+        {
+          event = "before-sleep";
+          command = "${pkgs.swaylock}/bin/swaylock -f";
+        }
+        {
+          event = "after-resume";
+          command = "${pkgs.swaylock}/bin/swaylock -f";
+        }
+      ];
+    };
+
     programs.swaylock = {
       enable = true;
       settings = {
