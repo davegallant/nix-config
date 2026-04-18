@@ -574,7 +574,7 @@
         }
         {
           timeout = 900; # 15 min: suspend
-          command = "${pkgs.systemd}/bin/loginctl suspend";
+          command = "${pkgs.systemd}/bin/systemctl suspend";
         }
       ];
       events = [
