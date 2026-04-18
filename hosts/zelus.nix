@@ -79,6 +79,7 @@
         window_swap_west = "cmd + shift - leftarrow";
         window_swap_east = "cmd + shift - rightarrow";
         window_resize = "alt - r";
+        window_shrink = "alt + shift - r";
         window_center = "alt - c";
         window_fullwidth = "cmd + shift - return";
         window_manage = "alt - t";
