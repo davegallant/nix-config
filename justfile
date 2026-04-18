@@ -8,7 +8,7 @@ arch := `uname -s`
 cmd := if arch == "Linux" { "nixos-rebuild --sudo" } else { "sudo darwin-rebuild" }
 
 rebuild:
-  $cmd switch --flake .
+  $cmd switch --flake . --option warn-dirty false
 
 rebuild-boot:
   $cmd boot --flake . --install-bootloader
