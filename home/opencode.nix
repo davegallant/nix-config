@@ -3,7 +3,7 @@ let
   opencode-sandbox = pkgs.writeShellScriptBin "oc" ''
     set -euo pipefail
 
-    VERSION="1.4.3"
+    VERSION="1.4.11"
     IMAGE="''${OPENCODE_IMAGE:-ghcr.io/anomalyco/opencode:$VERSION}"
     CONTAINER_NAME="opencode-$(basename "$PWD")-$$"
 
