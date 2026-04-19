@@ -59,6 +59,7 @@
         pwvucontrol
         slurp
         swaybg
+        trayscale
         wl-clipboard
         xclip
         xdg-utils
@@ -141,6 +142,12 @@
             ];
           }
           { argv = [ "xwayland-satellite" ]; }
+          {
+            argv = [
+              "trayscale"
+              "--hide-window"
+            ];
+          }
           {
             argv = [
               "nm-applet"
