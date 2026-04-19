@@ -20,6 +20,14 @@
         f2=$(printf '\U'$(printf '%08x' $((0x1F1E6 + c2 - 65))))
         printf '{"text":"%s %s","tooltip":"%s"}\n' "$f1$f2" "$ip" "$country"
       '';
+      gpuUsageScript = pkgs.writeShellScriptBin "gpu-usage" ''
+        GPU=$(cat /sys/class/drm/card*/device/gpu_busy_percent 2>/dev/null | head -1)
+        MEM=$(cat /sys/class/drm/card*/device/mem_info_vram_used 2>/dev/null | head -1)
+        [[ -z "$GPU" ]] && exit 0
+        MEM_MB=$(( MEM / 1024 / 1024 ))
+        printf '{"text":"%s%%","tooltip":"GPU %s%% VRAM %s MiB","percentage":%s}\n' \
+        "$GPU" "$GPU" "$MEM_MB" "$GPU"
+      '';
     in
     lib.mkIf pkgs.stdenv.isLinux {
       home.pointerCursor = {
@@ -38,6 +46,7 @@
         nautilus
         networkmanagerapplet
         niri-float-sticky
+        nvtopPackages.amd
         playerctl
         pwvucontrol
         slurp
@@ -413,6 +422,7 @@
             modules-right = [
               "cpu"
               "memory"
+              "custom/gpu"
               "network"
               "custom/external-ip"
               "pulseaudio"
@@ -489,6 +499,17 @@
               format = "{}";
               return-type = "json";
               on-click = "${pkgs.curl}/bin/curl -s https://icanhazip.com | ${pkgs.wl-clipboard}/bin/wl-copy";
+            };
+            "custom/gpu" = {
+              exec = "${gpuUsageScript}/bin/gpu-usage";
+              return-type = "json";
+              interval = 2;
+              format = "󰾲  {percentage}%";
+              states = {
+                warning = 75;
+                critical = 90;
+              };
+              on-click = "ghostty -e nvtop";
             };
           }
         ];
