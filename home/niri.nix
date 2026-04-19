@@ -402,6 +402,7 @@
             "memory"
             "network"
             "pulseaudio"
+            "idle_inhibitor"
             "tray"
             "clock"
           ];
@@ -459,6 +460,14 @@
           tray = {
             spacing = 6;
           };
+
+          idle_inhibitor = {
+            format = "{icon}";
+            format-icons = {
+              activated = "🔒";
+              deactivated = "💤";
+            };
+          };
         }
       ];
 
@@ -513,7 +522,7 @@
         }
         #network {
           padding: 0 10px;
-          background-color: #2d7a4f;
+          background-color: #262626;
           color: #c0caf5;
         }
         #network.disconnected {
