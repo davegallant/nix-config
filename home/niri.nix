@@ -346,63 +346,23 @@
               ];
             };
 
-            # ── Media / brightness ──────────────────────────────────────────
-            "XF86AudioPlay".action = {
-              spawn = [
-                "playerctl"
-                "play-pause"
-              ];
-            };
-            "XF86AudioNext".action = {
-              spawn = [
-                "playerctl"
-                "next"
-              ];
-            };
-            "XF86AudioPrev".action = {
-              spawn = [
-                "playerctl"
-                "previous"
-              ];
-            };
-            "XF86AudioRaiseVolume".action = {
-              spawn = [
-                "wpctl"
-                "set-volume"
-                "@DEFAULT_AUDIO_SINK@"
-                "5%+"
-              ];
-            };
-            "XF86AudioLowerVolume".action = {
-              spawn = [
-                "wpctl"
-                "set-volume"
-                "@DEFAULT_AUDIO_SINK@"
-                "5%-"
-              ];
-            };
-            "XF86AudioMute".action = {
-              spawn = [
-                "wpctl"
-                "set-mute"
-                "@DEFAULT_AUDIO_SINK@"
-                "toggle"
-              ];
-            };
-            "XF86MonBrightnessUp".action = {
-              spawn = [
-                "brightnessctl"
-                "set"
-                "5%+"
-              ];
-            };
-            "XF86MonBrightnessDown".action = {
-              spawn = [
-                "brightnessctl"
-                "set"
-                "5%-"
-              ];
-            };
+            # ── Media ──────────────────────────────────────────
+            "XF86AudioRaiseVolume".action.spawn = [
+              "swayosd-client"
+              "--output-volume"
+              "raise"
+            ];
+            "XF86AudioLowerVolume".action.spawn = [
+              "swayosd-client"
+              "--output-volume"
+              "lower"
+            ];
+            "XF86AudioMute".action.spawn = [
+              "swayosd-client"
+              "--output-volume"
+              "mute-toggle"
+            ];
+
           };
 
         screenshot-path = "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png";
@@ -638,6 +598,8 @@
           };
         };
       };
+
+      services.swayosd.enable = true;
 
       services.mako = {
         enable = true;
