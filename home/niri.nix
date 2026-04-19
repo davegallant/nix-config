@@ -29,7 +29,12 @@
         "$GPU" "$GPU" "$MEM_MB" "$GPU"
       '';
       weatherScript = pkgs.writeShellScriptBin "wttr" ''
-        ${pkgs.curl}/bin/curl -s "https://wttr.in/42.982,-81.249?format=%c+%t" | tr -s ' '
+        for i in 1 2 3 4 5; do
+          result=$(${pkgs.curl}/bin/curl -s --max-time 5 "https://wttr.in/42.982,-81.249?format=%c+%t")
+          [ -n "$result" ] && echo "$result" | tr -s ' ' && exit 0
+          sleep 3
+        done
+        echo "no network"
       '';
     in
     lib.mkIf pkgs.stdenv.isLinux {
