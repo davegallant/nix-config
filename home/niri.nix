@@ -14,7 +14,8 @@
         data=$(${pkgs.curl}/bin/curl -s https://ipinfo.io/json)
         ip=$(echo "$data" | ${pkgs.jq}/bin/jq -r '.ip')
         country=$(echo "$data" | ${pkgs.jq}/bin/jq -r '.country')
-        printf '{"text":"%s","tooltip":"%s"}\n' "$country" "$ip"
+        country_name=$(echo "$data" | ${pkgs.jq}/bin/jq -r '.country' | ${pkgs.curl}/bin/curl -s "https://restcountries.com/v3.1/alpha/$(cat -)" | ${pkgs.jq}/bin/jq -r '.[0].name.common')
+        printf '{"text":"%s","tooltip":"%s"}\n' "$country_name" "$ip"
       '';
     in
     lib.mkIf pkgs.stdenv.isLinux {
