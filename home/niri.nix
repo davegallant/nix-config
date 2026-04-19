@@ -18,7 +18,7 @@
         c2=$(printf '%d' "'$(echo "$country" | cut -c2)")
         f1=$(printf '\U'$(printf '%08x' $((0x1F1E6 + c1 - 65))))
         f2=$(printf '\U'$(printf '%08x' $((0x1F1E6 + c2 - 65))))
-        printf '{"text":"%s %s","tooltip":"%s"}\n' "$f1$f2" "$ip" "$country"
+        printf '{"text":"%s","tooltip":"%s"}\n' "$f1$f2" "$ip"
       '';
       gpuUsageScript = pkgs.writeShellScriptBin "gpu-usage" ''
         GPU=$(cat /sys/class/drm/card*/device/gpu_busy_percent 2>/dev/null | head -1)
