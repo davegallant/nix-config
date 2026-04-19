@@ -18,6 +18,7 @@
     };
 
     home.packages = with pkgs; [
+      bandwhich
       blueman
       brightnessctl
       grim
@@ -436,20 +437,23 @@
           };
 
           network = {
-            format-wifi = " {essid} ({signalStrength}%)";
-            format-ethernet = " {ifname}";
+            format-ethernet = "▲ {bandwidthUpBits} ▼ {bandwidthDownBits}";
             format-disconnected = "Disconnected ⚠";
             tooltip-format = "{ipaddr}/{cidr}";
+            on-click = "ghostty -e sudo bandwhich";
+            interval = 2;
           };
 
           cpu = {
             format = " {usage}%";
             interval = 5;
+            on-click = "missioncenter";
           };
 
           memory = {
             format = " {percentage}%";
             interval = 10;
+            on-click = "missioncenter";
           };
 
           tray = {
