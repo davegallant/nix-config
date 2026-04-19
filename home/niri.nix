@@ -25,6 +25,7 @@
       networkmanagerapplet
       niri-float-sticky
       playerctl
+      pwvucontrol
       slurp
       swaybg
       wl-clipboard
@@ -54,11 +55,11 @@
 
       layout = {
         preset-window-heights = [
-           { proportion = 0.25; }
-           { proportion = 0.5; }
-           { proportion = 0.75; }
-           { proportion = 1.0; }
-         ];
+          { proportion = 0.25; }
+          { proportion = 0.5; }
+          { proportion = 0.75; }
+          { proportion = 1.0; }
+        ];
         preset-column-widths = [
           { proportion = 0.25; }
           { proportion = 0.5; }
@@ -430,7 +431,7 @@
               ];
               headphone = "";
             };
-            on-click = "pavucontrol";
+            on-click = "pwvucontrol";
             scroll-step = 5;
           };
 
@@ -439,7 +440,6 @@
             format-ethernet = " {ifname}";
             format-disconnected = "Disconnected ⚠";
             tooltip-format = "{ipaddr}/{cidr}";
-            on-click = "nm-connection-editor";
           };
 
           cpu = {
