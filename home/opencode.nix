@@ -1,6 +1,6 @@
 { pkgs, ... }:
 let
-  opencode-sandbox = pkgs.writeShellScriptBin "oc" ''
+  opencode-sandbox = pkgs.writeShellScriptBin "opencode" ''
     set -euo pipefail
 
     VERSION="1.4.17"
