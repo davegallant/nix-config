@@ -28,6 +28,9 @@
         printf '{"text":"%s%%","tooltip":"GPU %s%% VRAM %s MiB","percentage":%s}\n' \
         "$GPU" "$GPU" "$MEM_MB" "$GPU"
       '';
+      weatherScript = pkgs.writeShellScriptBin "wttr" ''
+        ${pkgs.curl}/bin/curl -s "https://wttr.in/42.982,-81.249?format=%c+%t" | tr -s ' '
+      '';
     in
     lib.mkIf pkgs.stdenv.isLinux {
       home.pointerCursor = {
@@ -428,6 +431,7 @@
               "pulseaudio"
               "idle_inhibitor"
               "tray"
+              "custom/weather"
               "clock"
             ];
 
@@ -510,6 +514,12 @@
                 critical = 90;
               };
               on-click = "ghostty -e nvtop";
+            };
+            "custom/weather" = {
+              exec = "${weatherScript}/bin/wttr";
+              interval = 3600;
+              format = "{}";
+              on-click = "xdg-open 'https://weather.gc.ca/en/location/index.html?coords=42.982,-81.249'";
             };
           }
         ];
