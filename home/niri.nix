@@ -66,6 +66,10 @@
         xwayland-satellite
       ];
 
+      home.sessionVariables = {
+        GTK_THEME = "adw-gtk3-dark";
+      };
+
       programs.niri.settings = {
         environment = {
           "NIXOS_OZONE_WL" = "1"; # Electron apps use Wayland natively
@@ -577,6 +581,23 @@
             font-weight: bold;
           }
         '';
+      };
+
+      gtk = {
+        enable = true;
+        theme = {
+          name = "adw-gtk3-dark";
+          package = pkgs.adw-gtk3;
+        };
+        gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
+        gtk4.extraConfig.gtk-application-prefer-dark-theme = true;
+      };
+
+      dconf.settings = {
+        "org/gnome/desktop/interface" = {
+          color-scheme = "prefer-dark";
+          gtk-theme = "adw-gtk3-dark";
+        };
       };
 
       programs.fuzzel = {
