@@ -86,6 +86,8 @@
 
   hardware.graphics.enable = true;
 
+  services.libinput.enable = true;
+
   services.greetd = {
     enable = true;
     settings.default_session = {
