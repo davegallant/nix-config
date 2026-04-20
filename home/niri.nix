@@ -54,6 +54,7 @@
           blueman
           brightnessctl
           grim
+          gnome-calculator
           nautilus
           networkmanagerapplet
           niri-float-sticky
