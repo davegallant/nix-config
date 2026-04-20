@@ -140,5 +140,7 @@
 
   environment.systemPackages = [ unstable.claude-code ];
 
+  services.opensnitch.enable = true;
+
   services.sshd.enable = true;
 }
