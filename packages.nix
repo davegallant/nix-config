@@ -41,7 +41,6 @@ in
       yq-go
 
       # containers
-      unstable.k9s
       unstable.krew
       unstable.kubecolor
       unstable.kubectl
