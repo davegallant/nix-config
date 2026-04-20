@@ -55,6 +55,7 @@
           system,
           unstable,
           hmModule,
+          hostname ? "",
           extraModules ? [ ],
         }:
         [
@@ -79,7 +80,7 @@
                   ]
                   ++ (if nixpkgs.lib.hasSuffix "-darwin" system then [ inputs.niri.homeModules.niri ] else [ ]);
                   extraSpecialArgs = {
-                    inherit unstable;
+                    inherit unstable hostname;
                   };
                 };
               };
@@ -110,7 +111,7 @@
                   ;
               };
               modules = mkSharedModules {
-                inherit username system unstable;
+                inherit username system unstable hostname;
                 hmModule = home-manager.nixosModules.home-manager;
                 extraModules = [ ./hosts/${hostname}.nix ] ++ extraModules;
               };
