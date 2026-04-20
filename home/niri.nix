@@ -47,24 +47,27 @@
         x11.enable = true;
       };
 
-      home.packages = with pkgs; [
-        bandwhich
-        blueman
-        brightnessctl
-        grim
-        nautilus
-        networkmanagerapplet
-        niri-float-sticky
-        playerctl
-        pwvucontrol
-        slurp
-        swaybg
-        trayscale
-        wl-clipboard
-        xclip
-        xdg-utils
-        xwayland-satellite
-      ] ++ lib.optional stdenv.hostPlatform.isx86_64 pkgs.nvtopPackages.amd;
+      home.packages =
+        with pkgs;
+        [
+          bandwhich
+          blueman
+          brightnessctl
+          grim
+          nautilus
+          networkmanagerapplet
+          niri-float-sticky
+          playerctl
+          pwvucontrol
+          slurp
+          swaybg
+          trayscale
+          wl-clipboard
+          xclip
+          xdg-utils
+          xwayland-satellite
+        ]
+        ++ lib.optional stdenv.hostPlatform.isx86_64 pkgs.nvtopPackages.amd;
 
       home.sessionVariables = {
         GTK_THEME = "adw-gtk3-dark";
@@ -276,7 +279,7 @@
             "${mod}+D".action = {
               spawn = [ "fuzzel" ];
             };
-            "${mod}+V".action = {
+            "${mod}+Y".action = {
               spawn = [
                 "sh"
                 "-c"
@@ -312,7 +315,7 @@
             "${mod}+R".action = switch-preset-column-width;
             "${mod}+Shift+R".action = switch-preset-column-width-back;
             "${mod}+F".action = maximize-column;
-            "${mod}+Shift+Return".action = fullscreen-window;
+            "${mod}+Shift+F".action = fullscreen-window;
             "${mod}+C".action = center-column;
 
             # ── Floating toggle ─────────────────────────────────────────────
@@ -378,10 +381,22 @@
               "mute-toggle"
             ];
 
-            "XF86AudioPlay".action.spawn = [ "playerctl" "play-pause" ];
-            "XF86AudioStop".action.spawn = [ "playerctl" "stop" ];
-            "XF86AudioNext".action.spawn = [ "playerctl" "next" ];
-            "XF86AudioPrev".action.spawn = [ "playerctl" "previous" ];
+            "XF86AudioPlay".action.spawn = [
+              "playerctl"
+              "play-pause"
+            ];
+            "XF86AudioStop".action.spawn = [
+              "playerctl"
+              "stop"
+            ];
+            "XF86AudioNext".action.spawn = [
+              "playerctl"
+              "next"
+            ];
+            "XF86AudioPrev".action.spawn = [
+              "playerctl"
+              "previous"
+            ];
 
           };
 

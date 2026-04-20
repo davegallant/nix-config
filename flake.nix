@@ -111,7 +111,12 @@
                   ;
               };
               modules = mkSharedModules {
-                inherit username system unstable hostname;
+                inherit
+                  username
+                  system
+                  unstable
+                  hostname
+                  ;
                 hmModule = home-manager.nixosModules.home-manager;
                 extraModules = [ ./hosts/${hostname}.nix ] ++ extraModules;
               };
