@@ -169,6 +169,7 @@
           }
           { argv = [ "blueman-applet" ]; }
           { argv = [ "mako" ]; }
+          { argv = [ "opensnitch-ui" ]; }
           {
             argv = [
               "swaybg"
