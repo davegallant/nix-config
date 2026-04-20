@@ -59,6 +59,29 @@
 
   programs.fish.enable = true;
 
+  fonts.packages = with pkgs; [
+    dejavu_fonts
+    fira-mono
+    font-awesome
+    liberation_ttf
+    nerd-fonts.droid-sans-mono
+    nerd-fonts.fira-code
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.symbols-only
+    nerd-fonts.ubuntu
+    nerd-fonts.ubuntu-mono
+    noto-fonts
+    noto-fonts-cjk-sans
+    noto-fonts-color-emoji
+  ];
+
+  fonts.fontconfig.defaultFonts = {
+    sansSerif = [ "Noto Sans" ];
+    serif = [ "Noto Serif" ];
+    monospace = [ "Noto Sans Mono" ];
+    emoji = [ "Noto Color Emoji" ];
+  };
+
   time.timeZone = "America/Toronto";
 
   hardware.graphics.enable = true;
