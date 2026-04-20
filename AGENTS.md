@@ -7,7 +7,7 @@ Guidelines for AI coding agents working in this repository.
 Nix Flake-based configuration managing NixOS (Linux) and macOS (nix-darwin) systems
 with home-manager for user-level configuration. Uses nixvim for Neovim configuration.
 
-- **Hosts**: `hephaestus` (x86_64-linux NixOS desktop), `zelus` (aarch64-darwin macOS)
+- **Hosts**: `hephaestus` (x86_64-linux NixOS desktop), `kratos` (aarch64-linux NixOS Parallels VM), `zelus` (aarch64-darwin macOS)
 - **Nix channel**: nixpkgs 25.11 (stable), plus unstable channel
 - **Shell**: Fish (primary), with Starship prompt
 - **Task runner**: `just` (not Make)
@@ -71,16 +71,19 @@ home/              # home-manager modules (one concern per file)
   fish.nix         # Fish shell + Starship prompt
   firefox.nix      # Librewolf browser config
   git.nix          # Git configuration
+  k9s.nix          # k9s Kubernetes TUI
   niri.nix         # Niri Wayland compositor + Waybar/Fuzzel/Mako/Swaylock
   nixvim.nix       # Neovim (nixvim) configuration
   opencode.nix     # `oc` wrapper: runs opencode via Docker
   zed.nix          # Zed editor configuration
 hosts/             # Per-machine system configurations (flat files, not dirs)
-  hephaestus.nix   # NixOS desktop
+  hephaestus.nix   # NixOS desktop (x86_64-linux)
+  kratos.nix       # NixOS Parallels VM (aarch64-linux)
   zelus.nix        # macOS (nix-darwin)
 overlays/          # Nixpkgs overlays
   default.nix      # Overlay entry point
   cd-fzf/          # Custom package
+  niri-float-sticky/ # Custom package (Go, niri window management)
 ```
 
 ## Code Style Guidelines
