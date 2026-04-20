@@ -77,7 +77,7 @@
                     inputs.nixvim.homeModules.nixvim
                     weathr.homeModules.weathr
                   ]
-                  ++ (if system != "x86_64-linux" then [ inputs.niri.homeModules.niri ] else [ ]);
+                  ++ (if nixpkgs.lib.hasSuffix "-darwin" system then [ inputs.niri.homeModules.niri ] else [ ]);
                   extraSpecialArgs = {
                     inherit unstable;
                   };

@@ -54,7 +54,6 @@
         nautilus
         networkmanagerapplet
         niri-float-sticky
-        nvtopPackages.amd
         playerctl
         pwvucontrol
         slurp
@@ -64,7 +63,7 @@
         xclip
         xdg-utils
         xwayland-satellite
-      ];
+      ] ++ lib.optional stdenv.hostPlatform.isx86_64 pkgs.nvtopPackages.amd;
 
       home.sessionVariables = {
         GTK_THEME = "adw-gtk3-dark";
