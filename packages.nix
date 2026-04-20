@@ -95,9 +95,7 @@ in
 
       # desktop apps
       bitwarden-desktop
-      discord
       feishin
-      freefilesync
       gimp-with-plugins
       httpie-desktop
       mission-center
@@ -105,24 +103,10 @@ in
       pika-backup
       pinta
       qbittorrent
-      unstable.beekeeper-studio
       unstable.brave
       unstable.obsidian
       unstable.podman-desktop
       unstable.signal-desktop
-      unstable.zoom-us
-
-      # keyboard
-      via
-
-      # gaming
-      heroic
-      ludusavi
-      mupen64plus
-      protonup-qt
-      unstable.ryubing
-      unstable.lutris
-      wine
 
       # media
       calibre
@@ -141,7 +125,7 @@ in
       bleachbit
       clamtk
       cryptsetup
-      libsecret # D-Bus secret service client (used by Electron apps)
+      libsecret
       opensnitch-ui
       pinentry-curses
 
@@ -163,6 +147,25 @@ in
 
       # llm
       bun
+    ]
+    ++ lib.optionals (stdenv.isLinux && stdenv.hostPlatform.isx86_64) [
+      # x86_64-only desktop apps
+      discord
+      freefilesync
+      unstable.beekeeper-studio
+      unstable.zoom-us
       unstable.code-cursor
+
+      # keyboard
+      via
+
+      # gaming
+      heroic
+      ludusavi
+      mupen64plus
+      protonup-qt
+      unstable.ryubing
+      unstable.lutris
+      wine
     ];
 }
