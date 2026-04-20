@@ -8,7 +8,7 @@ let
 in
 {
   programs.zed-editor = {
-    enable = stdenv.isLinux;
+    enable = stdenv.isLinux && stdenv.hostPlatform.isx86_64;
     package = unstable.zed-editor;
     extensions = [
       "ansible"
