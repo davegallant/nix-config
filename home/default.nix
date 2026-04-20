@@ -11,6 +11,7 @@ in
     ./fish.nix
     ./firefox.nix
     ./git.nix
+    ./k9s.nix
     ./nixvim.nix
     ./niri.nix
     ./opencode.nix
