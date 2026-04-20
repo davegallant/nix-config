@@ -35,6 +35,7 @@ in
       defaultCacheTtl = 3600;
       defaultCacheTtlSsh = 3600;
       enableSshSupport = true;
+      pinentry.package = pkgs.pinentry-gnome3;
     };
   };
 
