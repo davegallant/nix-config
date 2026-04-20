@@ -138,5 +138,7 @@
     package = unstable.tailscale;
   };
 
+  environment.systemPackages = [ unstable.claude-code ];
+
   services.sshd.enable = true;
 }
