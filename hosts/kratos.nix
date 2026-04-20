@@ -1,6 +1,7 @@
 {
   inputs,
   pkgs,
+  unstable,
   ...
 }:
 {
@@ -95,6 +96,11 @@
       command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --cmd niri-session";
       user = "greeter";
     };
+  };
+
+  services.tailscale = {
+    enable = true;
+    package = unstable.tailscale;
   };
 
   services.sshd.enable = true;
