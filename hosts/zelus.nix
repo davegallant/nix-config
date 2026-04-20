@@ -108,7 +108,6 @@
       "k6"
       "node"
       "oras"
-      "peon-ping"
       "python@3.14"
       "sleepwatcher"
       "vault"
@@ -145,7 +144,6 @@
 
     taps = [
       "hashicorp/tap"
-      "PeonPing/tap"
     ];
   };
 
