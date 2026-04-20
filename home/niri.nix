@@ -3,6 +3,7 @@
 {
   config,
   lib,
+  osConfig,
   pkgs,
   ...
 }:
@@ -110,7 +111,11 @@
             repeat-rate = 50;
           };
           mouse = {
-            left-handed = true;
+            left-handed = lib.mkIf (osConfig.networking.hostName == "hephaestus") true;
+          };
+          touchpad = {
+            tap = true;
+            natural-scroll = true;
           };
           focus-follows-mouse = {
             enable = true;
