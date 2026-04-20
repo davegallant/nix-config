@@ -60,34 +60,6 @@
 
   security.pam.services.sudo_local.touchIdAuth = true;
 
-  services.paneru = {
-    enable = true;
-    settings = {
-      options = {
-        focus_follows_mouse = false;
-        mouse_follows_focus = false;
-        preset_column_widths = [
-          0.33
-          0.5
-          0.66
-          1
-        ];
-      };
-      bindings = {
-        window_focus_west = "ctrl + cmd - leftarrow";
-        window_focus_east = "ctrl + cmd - rightarrow";
-        window_swap_west = "ctrl + cmd + shift - leftarrow";
-        window_swap_east = "ctrl + cmd + shift - rightarrow";
-        window_resize = "alt - r";
-        window_shrink = "alt + shift - r";
-        window_center = "alt - c";
-        window_fullwidth = "cmd + shift - return";
-        window_manage = "alt - t";
-        quit = "ctrl + alt - q";
-      };
-    };
-  };
-
   homebrew = {
     enable = true;
     onActivation = {
