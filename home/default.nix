@@ -14,7 +14,6 @@ in
     ./nixvim.nix
     ./niri.nix
     ./opencode.nix
-    ./wakeup.nix
     ./zed.nix
   ];
 

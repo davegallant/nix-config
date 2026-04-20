@@ -340,9 +340,9 @@
             "${mod}+Q".action = close-window;
 
             # ── Workspace switching ─────────────────────────────────────────
-            "Control+1".action = focus-workspace 1;
-            "Control+2".action = focus-workspace 2;
-            "Control+3".action = focus-workspace 3;
+            "${mod}+1".action = focus-workspace 1;
+            "${mod}+2".action = focus-workspace 2;
+            "${mod}+3".action = focus-workspace 3;
 
             # ── Move window to workspace ────────────────────────────────────
             "${mod}+Shift+1".action.move-column-to-workspace = 1;
