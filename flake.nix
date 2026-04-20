@@ -91,48 +91,64 @@
     {
       nixosConfigurations =
         let
-          system = "x86_64-linux";
-          unstable = mkUnstable system;
+          mkNixos =
+            {
+              system,
+              hostname,
+              username ? "dave",
+              extraModules ? [ ],
+            }:
+            let
+              unstable = mkUnstable system;
+            in
+            nixpkgs.lib.nixosSystem {
+              specialArgs = {
+                inherit
+                  unstable
+                  vpngate
+                  inputs
+                  ;
+              };
+              modules = mkSharedModules {
+                inherit username system unstable;
+                hmModule = home-manager.nixosModules.home-manager;
+                extraModules = [ ./hosts/${hostname}.nix ] ++ extraModules;
+              };
+            };
         in
         {
-          hephaestus = nixpkgs.lib.nixosSystem {
-            specialArgs = {
-              inherit
-                unstable
-                vpngate
-                inputs
-                ;
-            };
-            modules = mkSharedModules {
-              username = "dave";
-              inherit system unstable;
-              hmModule = home-manager.nixosModules.home-manager;
-              extraModules = [
-                ./hosts/hephaestus.nix
-                (
-                  { ... }:
-                  {
-                    config.nix = {
-                      settings = {
-                        auto-optimise-store = true;
-                        substituters = [ "https://davegallant.cachix.org" ];
-                        trusted-public-keys = [
-                          "davegallant.cachix.org-1:SsUMqL4+tF2R3/G6X903E9laLlY1rES2QKFfePegF08="
-                        ];
-                      };
-                      registry = {
-                        nixpkgs.flake = nixpkgs;
-                      };
-                      gc = {
-                        automatic = true;
-                        dates = "daily";
-                        options = "--delete-older-than 14d";
-                      };
+          hephaestus = mkNixos {
+            system = "x86_64-linux";
+            hostname = "hephaestus";
+            extraModules = [
+              (
+                { ... }:
+                {
+                  config.nix = {
+                    settings = {
+                      auto-optimise-store = true;
+                      substituters = [ "https://davegallant.cachix.org" ];
+                      trusted-public-keys = [
+                        "davegallant.cachix.org-1:SsUMqL4+tF2R3/G6X903E9laLlY1rES2QKFfePegF08="
+                      ];
                     };
-                  }
-                )
-              ];
-            };
+                    registry = {
+                      nixpkgs.flake = nixpkgs;
+                    };
+                    gc = {
+                      automatic = true;
+                      dates = "daily";
+                      options = "--delete-older-than 14d";
+                    };
+                  };
+                }
+              )
+            ];
+          };
+
+          kratos = mkNixos {
+            system = "aarch64-linux";
+            hostname = "kratos";
           };
         };
 
