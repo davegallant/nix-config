@@ -110,7 +110,6 @@ in
       # media
       calibre
       libation
-      unstable.spotify
       vlc
 
       # networking
@@ -148,12 +147,15 @@ in
       bun
     ]
     ++ lib.optionals (stdenv.isLinux && stdenv.hostPlatform.isx86_64) [
-      # x86_64-only desktop apps
+      # desktop apps
       discord
       freefilesync
       unstable.beekeeper-studio
       unstable.zoom-us
       unstable.code-cursor
+
+      # media
+      unstable.spotify
 
       # keyboard
       via
