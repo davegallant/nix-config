@@ -373,6 +373,11 @@
               "mute-toggle"
             ];
 
+            "XF86AudioPlay".action.spawn = [ "playerctl" "play-pause" ];
+            "XF86AudioStop".action.spawn = [ "playerctl" "stop" ];
+            "XF86AudioNext".action.spawn = [ "playerctl" "next" ];
+            "XF86AudioPrev".action.spawn = [ "playerctl" "previous" ];
+
           };
 
         screenshot-path = "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png";
