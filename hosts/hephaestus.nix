@@ -11,7 +11,6 @@
 
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
-    inputs.niri.nixosModules.niri
   ];
 
   security.sudo-rs = {
@@ -84,29 +83,6 @@
     };
   };
 
-  fonts.packages = with pkgs; [
-    dejavu_fonts
-    fira-mono
-    font-awesome
-    liberation_ttf
-    nerd-fonts.droid-sans-mono
-    nerd-fonts.fira-code
-    nerd-fonts.jetbrains-mono
-    nerd-fonts.symbols-only
-    nerd-fonts.ubuntu
-    nerd-fonts.ubuntu-mono
-    noto-fonts
-    noto-fonts-cjk-sans
-    noto-fonts-color-emoji
-  ];
-
-  fonts.fontconfig.defaultFonts = {
-    sansSerif = [ "Noto Sans" ];
-    serif = [ "Noto Serif" ];
-    monospace = [ "Noto Sans Mono" ];
-    emoji = [ "Noto Color Emoji" ];
-  };
-
   nixpkgs.hostPlatform = "x86_64-linux";
 
   networking = {
@@ -173,42 +149,31 @@
     rocmOverrideGfx = "11.0.2";
   };
 
-  system = {
-    stateVersion = "25.11";
-    activationScripts = {
-      diff = {
-        supportsDryActivation = true;
-        text = ''
-          if [[ -e /run/current-system ]]; then
-            echo -e "\e[36mPackage version diffs:\e[0m"
-            ${pkgs.nvd}/bin/nvd --nix-bin-dir=${pkgs.nix}/bin diff /run/current-system "$systemConfig"
-          fi
-        '';
-      };
+  system.stateVersion = "25.11";
+
+  nix = {
+    settings = {
+      auto-optimise-store = true;
+      substituters = [ "https://davegallant.cachix.org" ];
+      trusted-public-keys = [
+        "davegallant.cachix.org-1:SsUMqL4+tF2R3/G6X903E9laLlY1rES2QKFfePegF08="
+      ];
+    };
+    registry.nixpkgs.flake = inputs.nixpkgs;
+    gc = {
+      automatic = true;
+      dates = "daily";
+      options = "--delete-older-than 14d";
     };
   };
 
-  nix = {
-    extraOptions = "experimental-features = nix-command flakes";
-    settings.trusted-users = [
-      "root"
-      "@wheel"
-    ];
-  };
-
-  users.users.dave = {
-    isNormalUser = true;
-    extraGroups = [
-      "docker"
-      "libvirtd"
-      "wheel"
-      "input"
-      "plugdev"
-    ];
-    shell = pkgs.fish;
-  };
-
-  i18n.defaultLocale = "en_US.UTF-8";
+  users.users.dave.extraGroups = [
+    "docker"
+    "libvirtd"
+    "wheel"
+    "input"
+    "plugdev"
+  ];
 
   i18n.inputMethod = {
     enable = true;
@@ -218,8 +183,6 @@
       fcitx5-gtk
     ];
   };
-
-  time.timeZone = "America/Toronto";
 
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
@@ -244,11 +207,6 @@
   documentation.man.generateCaches = false;
 
   programs = {
-    fish.enable = true;
-    niri = {
-      enable = true;
-      package = pkgs.niri-unstable;
-    };
     nix-ld.enable = true;
     steam = {
       enable = true;
@@ -285,24 +243,9 @@
     };
   };
 
-  services.greetd = {
-    enable = true;
-    settings.default_session = {
-      command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --cmd niri-session";
-      user = "greeter";
-    };
-  };
-
   services.printing.enable = true;
 
   services.resolved.enable = true;
-
-  services.sshd.enable = true;
-
-  services.tailscale = {
-    enable = true;
-    package = unstable.tailscale;
-  };
 
   services.clamav.daemon.enable = true;
   services.clamav.updater.enable = true;

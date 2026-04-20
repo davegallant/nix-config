@@ -114,7 +114,11 @@
                   hostname
                   ;
                 hmModule = home-manager.nixosModules.home-manager;
-                extraModules = [ ./hosts/${hostname}.nix ] ++ extraModules;
+                extraModules = [
+                  inputs.niri.nixosModules.niri
+                  ./hosts/common.nix
+                  ./hosts/${hostname}.nix
+                ] ++ extraModules;
               };
             };
         in
@@ -122,30 +126,6 @@
           hephaestus = mkNixos {
             system = "x86_64-linux";
             hostname = "hephaestus";
-            extraModules = [
-              (
-                { ... }:
-                {
-                  config.nix = {
-                    settings = {
-                      auto-optimise-store = true;
-                      substituters = [ "https://davegallant.cachix.org" ];
-                      trusted-public-keys = [
-                        "davegallant.cachix.org-1:SsUMqL4+tF2R3/G6X903E9laLlY1rES2QKFfePegF08="
-                      ];
-                    };
-                    registry = {
-                      nixpkgs.flake = nixpkgs;
-                    };
-                    gc = {
-                      automatic = true;
-                      dates = "daily";
-                      options = "--delete-older-than 14d";
-                    };
-                  };
-                }
-              )
-            ];
           };
 
           kratos = mkNixos {
