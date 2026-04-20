@@ -125,7 +125,6 @@ in
       cryptsetup
       libsecret
       opensnitch-ui
-      pinentry-curses
 
       # clipboard
       cliphist
