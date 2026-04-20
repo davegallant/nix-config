@@ -1,5 +1,7 @@
 {
   inputs,
+  lib,
+  modulesPath,
   pkgs,
   unstable,
   ...
@@ -8,10 +10,10 @@
 
   imports = [
     inputs.niri.nixosModules.niri
-    ./hardware-configuration.nix
   ];
 
-  nixpkgs.hostPlatform = "aarch64-linux";
+  nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "prl-tools" ];
 
   programs.niri = {
     enable = true;
@@ -22,10 +24,43 @@
     hostName = "kratos";
   };
 
-  boot.loader = {
-    efi.canTouchEfiVariables = true;
-    systemd-boot.enable = true;
+  boot = {
+    initrd.availableKernelModules = [
+      "ehci_pci"
+      "xhci_pci"
+      "usbhid"
+      "sr_mod"
+    ];
+    initrd.kernelModules = [ ];
+    kernelModules = [ ];
+    extraModulePackages = [ ];
+    loader = {
+      efi.canTouchEfiVariables = true;
+      systemd-boot.enable = true;
+    };
   };
+
+  fileSystems."/" = {
+    device = "/dev/disk/by-label/NIXROOT";
+    fsType = "ext4";
+  };
+
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-label/NIXBOOT";
+    fsType = "vfat";
+    options = [
+      "fmask=0022"
+      "dmask=0022"
+    ];
+  };
+
+  fileSystems."/mnt/psf/Home" = {
+    device = "Home";
+    fsType = "prl_fs";
+    options = [ "nofail" ];
+  };
+
+  swapDevices = [ ];
 
   system = {
     stateVersion = "25.11";
