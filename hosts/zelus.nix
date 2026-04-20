@@ -74,10 +74,10 @@
         ];
       };
       bindings = {
-        window_focus_west = "cmd - leftarrow";
-        window_focus_east = "cmd - rightarrow";
-        window_swap_west = "cmd + shift - leftarrow";
-        window_swap_east = "cmd + shift - rightarrow";
+        window_focus_west = "ctrl + cmd - leftarrow";
+        window_focus_east = "ctrl + cmd - rightarrow";
+        window_swap_west = "ctrl + cmd + shift - leftarrow";
+        window_swap_east = "ctrl + cmd + shift - rightarrow";
         window_resize = "alt - r";
         window_shrink = "alt + shift - r";
         window_center = "alt - c";
