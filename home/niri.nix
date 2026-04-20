@@ -187,6 +187,33 @@
               "both"
             ];
           }
+          # Parallels clipboard bridge: Wayland -> X11 (VM -> macOS)
+          {
+            argv = [
+              "sh"
+              "-c"
+              "wl-paste --watch xclip -selection clipboard"
+            ];
+          }
+          # Parallels clipboard bridge: X11 -> Wayland (macOS -> VM)
+          {
+            argv = [
+              "sh"
+              "-c"
+              ''
+                prev=""
+                while true; do
+                  if curr=$(xclip -selection clipboard -o 2>/dev/null); then
+                    if [ "$curr" != "$prev" ]; then
+                      echo -n "$curr" | wl-copy
+                      prev="$curr"
+                    fi
+                  fi
+                  sleep 0.5
+                done
+              ''
+            ];
+          }
           {
             argv = [
               "wl-paste"
@@ -205,6 +232,17 @@
               "--watch"
               "cliphist"
               "store"
+            ];
+          }
+        ]
+        ++ lib.optionals (osConfig.networking.hostName == "kratos") [
+          # prlcc (Parallels clipboard/drag-drop) starts before xwayland-satellite
+          # creates :0, so it exits immediately. Re-launch it once the display is ready.
+          {
+            argv = [
+              "sh"
+              "-c"
+              "until [ -S /tmp/.X11-unix/X0 ]; do sleep 0.5; done; systemctl --user import-environment DISPLAY && systemctl --user restart prlcc.service"
             ];
           }
         ];
