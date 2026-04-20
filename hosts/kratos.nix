@@ -85,6 +85,7 @@
   time.timeZone = "America/Toronto";
 
   hardware.graphics.enable = true;
+  hardware.parallels.enable = true;
 
   services.libinput.enable = true;
 
