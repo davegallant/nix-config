@@ -7,6 +7,7 @@
 
   imports = [
     inputs.niri.nixosModules.niri
+    ./hardware-configuration.nix
   ];
 
   nixpkgs.hostPlatform = "aarch64-linux";
