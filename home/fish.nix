@@ -33,7 +33,9 @@
         set -x EDITOR vim
         set -x NNN_FIFO "$XDG_RUNTIME_DIR/nnn.fifo"
         set -x PAGER less
-        ${lib.optionalString (pkgs.stdenv.isLinux && hostname != "kratos") "set -x SSH_AUTH_SOCK /home/dave/.bitwarden-ssh-agent.sock"}
+        ${lib.optionalString (
+          pkgs.stdenv.isLinux && hostname != "kratos"
+        ) "set -x SSH_AUTH_SOCK /home/dave/.bitwarden-ssh-agent.sock"}
         set -x TERM xterm-256color
 
         set -x PATH $PATH \
