@@ -80,7 +80,8 @@
           "DISPLAY" = ":0"; # XWayland display set by xwayland-satellite
           "GTK_USE_PORTAL" = "1"; # route GTK file dialogs through xdg-desktop-portal
           "XDG_CURRENT_DESKTOP" = "niri"; # portal backend detection
-        } // lib.optionalAttrs (osConfig.networking.hostName == "kratos") {
+        }
+        // lib.optionalAttrs (osConfig.networking.hostName == "kratos") {
           "LIBGL_ALWAYS_SOFTWARE" = "1"; # Parallels VM lacks OpenGL 3.3
         };
 
@@ -518,13 +519,13 @@
             cpu = {
               format = " {usage}%";
               interval = 5;
-              on-click = "missioncenter";
+              on-click = "ghostty -e btop";
             };
 
             memory = {
               format = " {percentage}%";
               interval = 10;
-              on-click = "missioncenter";
+              on-click = "ghostty -e btop";
             };
 
             tray = {
