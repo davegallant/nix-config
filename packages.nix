@@ -132,7 +132,6 @@ in
       hardinfo2
       nfs-utils
       pciutils
-      foot
       unstable.ghostty
       qemu
       unrar

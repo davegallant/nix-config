@@ -53,6 +53,7 @@
           bandwhich
           blueman
           brightnessctl
+          foot
           grim
           gnome-calculator
           nautilus
@@ -504,7 +505,7 @@
                 ];
                 headphone = "";
               };
-              on-click = "pwvucontrol";
+              on-click = "${pkgs.pwvucontrol}/bin/pwvucontrol";
               scroll-step = 5;
             };
 
@@ -512,20 +513,20 @@
               format-ethernet = "▲ {bandwidthUpBits} ▼ {bandwidthDownBits}";
               format-disconnected = "Disconnected ⚠";
               tooltip-format = "{ipaddr}/{cidr}";
-              on-click = "ghostty -e sudo bandwhich";
+              on-click = "${pkgs.foot}/bin/foot sudo ${pkgs.bandwhich}/bin/bandwhich";
               interval = 2;
             };
 
             cpu = {
               format = " {usage}%";
               interval = 5;
-              on-click = "ghostty -e btop";
+              on-click = "${pkgs.foot}/bin/foot ${pkgs.btop}/bin/btop";
             };
 
             memory = {
               format = " {percentage}%";
               interval = 10;
-              on-click = "ghostty -e btop";
+              on-click = "${pkgs.foot}/bin/foot ${pkgs.btop}/bin/btop";
             };
 
             tray = {
@@ -556,7 +557,7 @@
                 warning = 75;
                 critical = 90;
               };
-              on-click = "ghostty -e nvtop";
+              on-click = "${pkgs.foot}/bin/foot ${pkgs.nvtopPackages.amd}/bin/nvtop";
             };
             "custom/weather" = {
               exec = "${weatherScript}/bin/wttr";
