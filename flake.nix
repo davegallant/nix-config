@@ -116,7 +116,7 @@
                 hmModule = home-manager.nixosModules.home-manager;
                 extraModules = [
                   inputs.niri.nixosModules.niri
-                  ./hosts/common.nix
+                  ./nixos.nix
                   ./hosts/${hostname}.nix
                 ] ++ extraModules;
               };
