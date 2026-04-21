@@ -102,6 +102,7 @@
       "notunes"
       "obsidian"
       "raycast"
+      "rectangle"
       "signal"
       "slack"
       "spotify"
