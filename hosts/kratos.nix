@@ -61,7 +61,10 @@
 
   services.libinput.enable = true;
 
-  environment.systemPackages = [ unstable.claude-code ];
+  environment.systemPackages = [
+    unstable.azure-cli
+    unstable.claude-code
+  ];
 
   services.opensnitch.enable = true;
 }
