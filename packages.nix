@@ -103,7 +103,6 @@ in
       qbittorrent
       unstable.brave
       unstable.obsidian
-      unstable.podman-desktop
       unstable.signal-desktop
 
       # media

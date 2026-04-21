@@ -49,7 +49,12 @@
 
   system.stateVersion = "25.11";
 
-  users.users.dave.extraGroups = [ "wheel" ];
+  users.users.dave.extraGroups = [
+    "docker"
+    "wheel"
+  ];
+
+  virtualisation.docker.enable = true;
 
   hardware.graphics.enable = true;
   hardware.parallels.enable = true;
