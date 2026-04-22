@@ -71,6 +71,9 @@
 
   hardware.parallels.enable = true;
 
+  services.eternal-terminal.enable = true;
+  networking.firewall.allowedTCPPorts = [ 2022 ];
+
   environment.systemPackages = [
     unstable.azure-cli
   ];
