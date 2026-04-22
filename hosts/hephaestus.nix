@@ -243,7 +243,11 @@
     };
   };
 
-  services.printing.enable = true;
+  services.printing = {
+    enable = true;
+    browsing = false;
+  };
+  systemd.services.cups-browsed.enable = false;
 
   services.resolved.enable = true;
 
