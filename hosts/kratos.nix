@@ -78,5 +78,4 @@
     unstable.azure-cli
   ];
 
-  services.opensnitch.enable = true;
 }

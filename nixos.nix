@@ -1,5 +1,9 @@
 { lib, pkgs, unstable, ... }:
 {
+  imports = [
+    ./opensnitch.nix
+  ];
+
   system.activationScripts.diff = {
     supportsDryActivation = true;
     text = ''
