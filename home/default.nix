@@ -8,6 +8,7 @@ let
 in
 {
   imports = [
+    ./claude.nix
     ./fish.nix
     ./firefox.nix
     ./git.nix

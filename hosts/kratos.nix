@@ -76,7 +76,6 @@
 
   environment.systemPackages = [
     unstable.azure-cli
-    unstable.claude-code
   ];
 
   services.opensnitch.enable = true;
