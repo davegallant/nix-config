@@ -87,36 +87,6 @@
           ];
         };
       };
-      NetworkManager = {
-        name = "Allow NetworkManager";
-        enabled = true;
-        action = "allow";
-        duration = "always";
-        operator = {
-          type = "list";
-          operand = "list";
-          list = [
-            {
-              type = "simple";
-              sensitive = false;
-              operand = "process.path";
-              data = "${lib.getBin pkgs.networkmanager}/bin/NetworkManager";
-            }
-            {
-              type = "simple";
-              operand = "dest.port";
-              sensitive = false;
-              data = "67";
-            }
-            {
-              type = "simple";
-              operand = "protocol";
-              sensitive = false;
-              data = "udp";
-            }
-          ];
-        };
-      };
       ssh-github = {
         name = "Allow SSH to github";
         enabled = true;

@@ -63,7 +63,6 @@
           grim
           gnome-calculator
           nautilus
-          networkmanagerapplet
           niri-float-sticky
           playerctl
           pwvucontrol
@@ -160,12 +159,6 @@
             argv = [
               "trayscale"
               "--hide-window"
-            ];
-          }
-          {
-            argv = [
-              "nm-applet"
-              "--indicator"
             ];
           }
           { argv = [ "blueman-applet" ]; }

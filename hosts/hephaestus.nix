@@ -117,8 +117,6 @@
   users.groups.beszel = { };
 
   systemd.services = {
-    NetworkManager-wait-online.enable = false;
-
     beszel-agent = {
       description = "Beszel Agent Service";
       after = [ "network-online.target" ];
