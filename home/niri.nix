@@ -140,6 +140,7 @@
           focus-ring = {
             enable = true;
             width = 2;
+            active.color = "#bb9af7ff";
           };
           border = {
             enable = false;
