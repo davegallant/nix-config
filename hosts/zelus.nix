@@ -75,6 +75,7 @@
       "argocd"
       "azure-cli"
       "coreutils"
+      "et"
       "gnu-sed"
       "gnu-tar"
       "k6"
