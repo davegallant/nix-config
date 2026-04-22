@@ -11,8 +11,9 @@
 {
   config =
     let
+      isKratos = osConfig.networking.hostName == "kratos";
       termExec =
-        if osConfig.networking.hostName == "kratos" then
+        if isKratos then
           "${pkgs.foot}/bin/foot"
         else
           "${pkgs.ghostty}/bin/ghostty -e";
@@ -87,7 +88,7 @@
           "GTK_USE_PORTAL" = "1"; # route GTK file dialogs through xdg-desktop-portal
           "XDG_CURRENT_DESKTOP" = "niri"; # portal backend detection
         }
-        // lib.optionalAttrs (osConfig.networking.hostName == "kratos") {
+        // lib.optionalAttrs isKratos {
           "LIBGL_ALWAYS_SOFTWARE" = "1"; # Parallels VM lacks OpenGL 3.3
         };
 
@@ -103,6 +104,11 @@
         };
 
         layout = {
+          gaps = 8;
+          center-focused-column = "never";
+          default-column-width = {
+            proportion = 0.5;
+          };
           preset-window-heights = [
             { proportion = 0.25; }
             { proportion = 0.5; }
@@ -115,6 +121,14 @@
             { proportion = 0.75; }
             { proportion = 1.0; }
           ];
+          focus-ring = {
+            enable = true;
+            width = 2;
+            active.color = "#bb9af7ff";
+          };
+          border = {
+            enable = false;
+          };
         };
 
         input = {
@@ -127,22 +141,6 @@
             left-handed = lib.mkIf (osConfig.networking.hostName == "hephaestus") true;
           };
           focus-follows-mouse = {
-            enable = false;
-          };
-        };
-
-        layout = {
-          gaps = 8;
-          center-focused-column = "never";
-          default-column-width = {
-            proportion = 0.5;
-          };
-          focus-ring = {
-            enable = true;
-            width = 2;
-            active.color = "#bb9af7ff";
-          };
-          border = {
             enable = false;
           };
         };
@@ -239,7 +237,7 @@
             ];
           }
         ]
-        ++ lib.optionals (osConfig.networking.hostName == "kratos") [
+        ++ lib.optionals isKratos [
           # prlcc (Parallels clipboard/drag-drop) starts before xwayland-satellite
           # creates :0, so it exits immediately. Re-launch it once the display is ready.
           {
@@ -724,7 +722,7 @@
             command = "${pkgs.swaylock}/bin/swaylock -f";
           }
         ]
-        ++ lib.optionals (osConfig.networking.hostName != "kratos") [
+        ++ lib.optionals (!isKratos) [
           {
             timeout = 900; # 15 min: suspend
             command = "${pkgs.systemd}/bin/systemctl suspend";
