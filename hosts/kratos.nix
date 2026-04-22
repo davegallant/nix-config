@@ -42,7 +42,20 @@
   fileSystems."/mnt/psf/Home" = {
     device = "Home";
     fsType = "prl_fs";
-    options = [ "nofail" ];
+    options = [
+      "nofail"
+      "noatime"
+      "nodev"
+      "nosuid"
+    ];
+  };
+
+  boot.kernel.sysctl = {
+    "fs.inotify.max_user_watches" = 524288;
+    "fs.inotify.max_user_instances" = 512;
+    "fs.inotify.max_queued_events" = 32768;
+    "vm.max_map_count" = 262144;
+    "fs.file-max" = 2097152;
   };
 
   swapDevices = [ ];

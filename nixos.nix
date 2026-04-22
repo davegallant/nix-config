@@ -1,4 +1,4 @@
-{ pkgs, unstable, ... }:
+{ lib, pkgs, unstable, ... }:
 {
   system.activationScripts.diff = {
     supportsDryActivation = true;
@@ -12,11 +12,25 @@
 
   nix = {
     extraOptions = "experimental-features = nix-command flakes";
-    settings.trusted-users = [
-      "root"
-      "@wheel"
-    ];
+    settings = {
+      trusted-users = [
+        "root"
+        "@wheel"
+      ];
+      auto-optimise-store = lib.mkDefault true;
+      max-jobs = "auto";
+      cores = 0;
+    };
+    gc = {
+      automatic = lib.mkDefault true;
+      dates = lib.mkDefault "weekly";
+      options = lib.mkDefault "--delete-older-than 14d";
+    };
   };
+
+  zramSwap.enable = true;
+
+  boot.tmp.useTmpfs = true;
 
   i18n.defaultLocale = "en_US.UTF-8";
 
@@ -46,6 +60,7 @@
   };
 
   programs.fish.enable = true;
+  programs.nix-ld.enable = lib.mkDefault true;
 
   programs.niri = {
     enable = true;
@@ -65,7 +80,7 @@
     package = unstable.tailscale;
   };
 
-  services.sshd.enable = true;
+  services.openssh.enable = true;
 
   users.users.dave = {
     isNormalUser = true;
