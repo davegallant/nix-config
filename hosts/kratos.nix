@@ -39,8 +39,8 @@
     ];
   };
 
-  fileSystems."/mnt/psf/Home" = {
-    device = "Home";
+  fileSystems."/mnt/psf/src" = {
+    device = "src";
     fsType = "prl_fs";
     options = [
       "nofail"
@@ -69,10 +69,7 @@
 
   virtualisation.docker.enable = true;
 
-  hardware.graphics.enable = true;
   hardware.parallels.enable = true;
-
-  services.libinput.enable = true;
 
   environment.systemPackages = [
     unstable.azure-cli

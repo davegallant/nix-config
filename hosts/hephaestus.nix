@@ -150,13 +150,7 @@
   system.stateVersion = "25.11";
 
   nix = {
-    settings = {
-      auto-optimise-store = true;
-      substituters = [ "https://davegallant.cachix.org" ];
-      trusted-public-keys = [
-        "davegallant.cachix.org-1:SsUMqL4+tF2R3/G6X903E9laLlY1rES2QKFfePegF08="
-      ];
-    };
+    settings.auto-optimise-store = true;
     registry.nixpkgs.flake = inputs.nixpkgs;
     gc = {
       automatic = true;
@@ -201,8 +195,6 @@
   };
 
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-
-  documentation.man.generateCaches = false;
 
   programs = {
     nix-ld.enable = true;
