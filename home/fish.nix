@@ -29,7 +29,7 @@
         bind \cw backward-kill-word
 
         set -x DOCKER_CLI_HINTS false
-        set -x DOCKER_DEFAULT_PLATFORM linux/amd64
+        ${lib.optionalString (hostname != "kratos") "set -x DOCKER_DEFAULT_PLATFORM linux/amd64"}
         set -x EDITOR vim
         set -x NNN_FIFO "$XDG_RUNTIME_DIR/nnn.fifo"
         set -x PAGER less
