@@ -11,6 +11,10 @@
 {
   config =
     let
+      termExec =
+        if osConfig.networking.hostName == "kratos"
+        then "${pkgs.foot}/bin/foot"
+        else "${pkgs.ghostty}/bin/ghostty -e";
       externalIpScript = pkgs.writeShellScript "waybar-external-ip" ''
         data=$(${pkgs.curl}/bin/curl -s https://ipinfo.io/json)
         ip=$(echo "$data" | ${pkgs.jq}/bin/jq -r '.ip')
@@ -513,20 +517,20 @@
               format-ethernet = "▲ {bandwidthUpBits} ▼ {bandwidthDownBits}";
               format-disconnected = "Disconnected ⚠";
               tooltip-format = "{ipaddr}/{cidr}";
-              on-click = "${pkgs.foot}/bin/foot sudo ${pkgs.bandwhich}/bin/bandwhich";
+              on-click = "${termExec} sudo ${pkgs.bandwhich}/bin/bandwhich";
               interval = 2;
             };
 
             cpu = {
               format = " {usage}%";
               interval = 5;
-              on-click = "${pkgs.foot}/bin/foot ${pkgs.btop}/bin/btop";
+              on-click = "${termExec} ${pkgs.btop}/bin/btop";
             };
 
             memory = {
               format = " {percentage}%";
               interval = 10;
-              on-click = "${pkgs.foot}/bin/foot ${pkgs.btop}/bin/btop";
+              on-click = "${termExec} ${pkgs.btop}/bin/btop";
             };
 
             tray = {
@@ -557,7 +561,7 @@
                 warning = 75;
                 critical = 90;
               };
-              on-click = "${pkgs.foot}/bin/foot ${pkgs.nvtopPackages.amd}/bin/nvtop";
+              on-click = "${termExec} ${pkgs.nvtopPackages.amd}/bin/nvtop";
             };
             "custom/weather" = {
               exec = "${weatherScript}/bin/wttr";
