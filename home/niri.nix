@@ -12,9 +12,10 @@
   config =
     let
       termExec =
-        if osConfig.networking.hostName == "kratos"
-        then "${pkgs.foot}/bin/foot"
-        else "${pkgs.ghostty}/bin/ghostty -e";
+        if osConfig.networking.hostName == "kratos" then
+          "${pkgs.foot}/bin/foot"
+        else
+          "${pkgs.ghostty}/bin/ghostty -e";
       externalIpScript = pkgs.writeShellScript "waybar-external-ip" ''
         data=$(${pkgs.curl}/bin/curl -s https://ipinfo.io/json)
         ip=$(echo "$data" | ${pkgs.jq}/bin/jq -r '.ip')
@@ -125,15 +126,9 @@
           mouse = {
             left-handed = lib.mkIf (osConfig.networking.hostName == "hephaestus") true;
           };
-          touchpad = {
-            tap = true;
-            natural-scroll = true;
-          };
           focus-follows-mouse = {
-            enable = true;
-            max-scroll-amount = "0%";
+            enable = false;
           };
-          warp-mouse-to-focus.enable = false;
         };
 
         layout = {
@@ -727,7 +722,8 @@
             timeout = 840; # 14 min: lock before suspend
             command = "${pkgs.swaylock}/bin/swaylock -f";
           }
-        ] ++ lib.optionals (osConfig.networking.hostName != "kratos") [
+        ]
+        ++ lib.optionals (osConfig.networking.hostName != "kratos") [
           {
             timeout = 900; # 15 min: suspend
             command = "${pkgs.systemd}/bin/systemctl suspend";
