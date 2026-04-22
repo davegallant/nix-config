@@ -1,6 +1,8 @@
 {
+  lib,
   pkgs,
   unstable,
+  hostname ? "",
   ...
 }:
 let
@@ -10,14 +12,12 @@ in
   imports = [
     ./claude.nix
     ./fish.nix
-    ./firefox.nix
     ./git.nix
     ./k9s.nix
     ./nixvim.nix
-    ./niri.nix
     ./opencode.nix
-    ./zed.nix
-  ];
+  ]
+  ++ lib.optional (hostname != "" && hostname != "kratos") ./gui.nix;
 
   home.stateVersion = "25.11";
 
@@ -26,18 +26,12 @@ in
   ];
 
   services = {
-    gnome-keyring = {
-      enable = stdenv.isLinux;
-      components = [
-        "secrets"
-      ];
-    };
     gpg-agent = {
       enable = stdenv.isLinux;
       defaultCacheTtl = 3600;
       defaultCacheTtlSsh = 3600;
       enableSshSupport = true;
-      pinentry.package = pkgs.pinentry-gnome3;
+      pinentry.package = if hostname == "kratos" then pkgs.pinentry-curses else pkgs.pinentry-gnome3;
     };
   };
 
@@ -51,6 +45,11 @@ in
       nix-direnv.enable = true;
     };
 
+    atuin = {
+      enable = true;
+      enableFishIntegration = true;
+    };
+
     go = {
       enable = true;
       package = unstable.go;
@@ -58,13 +57,6 @@ in
 
     fzf = {
       enable = true;
-    };
-
-    zathura = {
-      enable = stdenv.isLinux;
-      options = {
-        selection-clipboard = "clipboard";
-      };
     };
 
     nnn = {
@@ -90,15 +82,6 @@ in
           p = "preview-tui";
           o = "fzopen";
         };
-      };
-    };
-
-    mangohud = {
-      enable = stdenv.isLinux;
-      settings = {
-        font_size = 16;
-        position = "top-right";
-        toggle_hud = "Shift_R+F1";
       };
     };
 

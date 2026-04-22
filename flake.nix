@@ -126,6 +126,7 @@
           hephaestus = mkNixos {
             system = "x86_64-linux";
             hostname = "hephaestus";
+            extraModules = [ ./nixos-gui.nix ];
           };
 
           kratos = mkNixos {

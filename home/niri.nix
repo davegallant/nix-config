@@ -11,12 +11,7 @@
 {
   config =
     let
-      isKratos = osConfig.networking.hostName == "kratos";
-      termExec =
-        if isKratos then
-          "${pkgs.foot}/bin/foot"
-        else
-          "${pkgs.ghostty}/bin/ghostty -e";
+      termExec = "${pkgs.ghostty}/bin/ghostty -e";
       externalIpScript = pkgs.writeShellScript "waybar-external-ip" ''
         data=$(${pkgs.curl}/bin/curl -s https://ipinfo.io/json)
         ip=$(echo "$data" | ${pkgs.jq}/bin/jq -r '.ip')
@@ -86,9 +81,6 @@
           "DISPLAY" = ":0"; # XWayland display set by xwayland-satellite
           "GTK_USE_PORTAL" = "1"; # route GTK file dialogs through xdg-desktop-portal
           "XDG_CURRENT_DESKTOP" = "niri"; # portal backend detection
-        }
-        // lib.optionalAttrs isKratos {
-          "LIBGL_ALWAYS_SOFTWARE" = "1"; # Parallels VM lacks OpenGL 3.3
         };
 
         cursor = {
@@ -227,17 +219,6 @@
               "--watch"
               "cliphist"
               "store"
-            ];
-          }
-        ]
-        ++ lib.optionals isKratos [
-          # prlcc (Parallels clipboard/drag-drop) starts before xwayland-satellite
-          # creates :0, so it exits immediately. Re-launch it once the display is ready.
-          {
-            argv = [
-              "sh"
-              "-c"
-              "until [ -S /tmp/.X11-unix/X0 ]; do sleep 0.5; done; systemctl --user import-environment DISPLAY && systemctl --user restart prlcc.service"
             ];
           }
         ];
@@ -714,8 +695,6 @@
             timeout = 840; # 14 min: lock before suspend
             command = "${pkgs.swaylock}/bin/swaylock -f";
           }
-        ]
-        ++ lib.optionals (!isKratos) [
           {
             timeout = 900; # 15 min: suspend
             command = "${pkgs.systemd}/bin/systemctl suspend";
