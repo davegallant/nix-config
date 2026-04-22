@@ -97,6 +97,7 @@
       };
       web-devicons.enable = true;
     };
+    globals.clipboard = "osc52";
     opts = {
       autoindent = true;
       backup = false;
