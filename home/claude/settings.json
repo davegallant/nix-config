@@ -9,7 +9,25 @@
     "CLAUDE_CODE_ENABLE_TELEMETRY": "0"
   },
   "permissions": {
-    "disableBypassPermissionsMode": "disable"
+    "disableBypassPermissionsMode": "disable",
+    "deny": [
+      "Bash(sudo:*)",
+      "Bash(doas:*)",
+      "Bash(dd:*)",
+      "Bash(mkfs:*)",
+      "Read(~/.ssh/**)",
+      "Read(~/.aws/**)",
+      "Read(~/.config/gcloud/**)",
+      "Read(~/.config/op/**)",
+      "Read(~/.kube/config)",
+      "Read(~/.docker/config.json)",
+      "Read(~/.gnupg/**)",
+      "Read(~/.password-store/**)",
+      "Read(/etc/shadow)",
+      "Read(**/.env)",
+      "Read(**/.env.*)",
+      "Read(**/secrets/**)"
+    ]
   },
   "statusLine": {
     "type": "command",
@@ -29,12 +47,52 @@
   },
   "sandbox": {
     "enabled": true,
+    "failIfUnavailable": true,
+    "allowUnsandboxedCommands": false,
     "filesystem": {
       "allowWrite": [
         "/tmp/"
       ],
+      "denyWrite": [
+        "/etc",
+        "/usr",
+        "/nix/store",
+        "~/.ssh",
+        "~/.aws",
+        "~/.config/gcloud",
+        "~/.gnupg",
+        "~/.password-store"
+      ],
       "denyRead": [
         "~/"
+      ]
+    },
+    "network": {
+      "allowedDomains": [
+        "claude.com",
+        "*.claude.com",
+        "anthropic.com",
+        "*.anthropic.com",
+        "github.com",
+        "*.github.com",
+        "raw.githubusercontent.com",
+        "objects.githubusercontent.com",
+        "registry.npmjs.org",
+        "*.npmjs.org",
+        "pypi.org",
+        "files.pythonhosted.org",
+        "cache.nixos.org",
+        "channels.nixos.org",
+        "*.nixos.org",
+        "*.cachix.org",
+        "proxy.golang.org",
+        "sum.golang.org",
+        "crates.io",
+        "static.crates.io",
+        "registry-1.docker.io",
+        "*.docker.io",
+        "ghcr.io",
+        "127.0.0.1"
       ]
     }
   },
