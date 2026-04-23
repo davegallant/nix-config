@@ -63,7 +63,10 @@
         test -f $HOME/work.fish && source $HOME/work.fish
       '';
 
-      shellInit = "";
+      shellInit = ''
+        set -x GH_TELEMETRY false
+        set -x DO_NOT_TRACK true
+      '';
 
       shellAliases = {
         ".." = "cd ..";
@@ -76,7 +79,6 @@
         j = "just";
         k = "kubecolor";
         kubectl = "kubecolor";
-        kp = "viddy 'kubectl get pods'";
         kcx = "kubectx";
         kns = "kubens";
         krun = "kubectl run ubuntu-shell --image=ubuntu --restart=Never -it --rm -- /bin/bash";
