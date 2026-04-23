@@ -49,7 +49,6 @@ in
       unstable.stern
 
       # cloud
-      awscli2
       google-cloud-sdk
       terraform
 
