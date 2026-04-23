@@ -17,7 +17,8 @@ in
     ./nixvim.nix
     ./opencode.nix
   ]
-  ++ lib.optional (hostname != "" && hostname != "kratos") ./gui.nix;
+  ++ lib.optional (hostname == "hephaestus") ./gui.nix
+  ++ lib.optional (hostname == "zelus") ./ghostty.nix;
 
   home.stateVersion = "25.11";
 
