@@ -60,6 +60,11 @@ in
       enable = true;
     };
 
+    zoxide = {
+      enable = true;
+      enableFishIntegration = true;
+    };
+
     nnn = {
       enable = stdenv.isLinux;
       package = pkgs.nnn.override ({ withNerdIcons = true; });
