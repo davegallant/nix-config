@@ -12,33 +12,31 @@ in
   environment.systemPackages =
     with pkgs;
     [
-      # essentials
-      curl
-      gnumake
-      gnupg
-      jq
-      unzip
-      zip
-      lsof
-
-      # modern cli
+      # cli
       atuin
       bat
       cd-fzf
+      curl
       doggo
       eza
       fd
       github-cli
+      gnumake
+      gnupg
       hadolint
+      jq
       lazygit
+      lsof
       macchina
       ncdu
       progress
       ripgrep
       shellcheck
       shfmt
+      unzip
       viddy
       yq-go
+      zip
 
       # containers
       unstable.krew
@@ -47,10 +45,6 @@ in
       unstable.kubectx
       unstable.kubernetes-helm
       unstable.stern
-
-      # cloud
-      google-cloud-sdk
-      terraform
 
       # lsp
       nodePackages.bash-language-server
