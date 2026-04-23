@@ -87,6 +87,7 @@ in
   xdg.configFile."opencode/opencode.json".text = builtins.toJSON {
     "$schema" = "https://opencode.ai/config.json";
     autoupdate = false;
+    plugin = [ "superpowers@git+https://github.com/obra/superpowers.git" ];
     disabled_providers = [
       "opencode"
       "github-copilot"
