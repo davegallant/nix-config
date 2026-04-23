@@ -6,13 +6,16 @@ let
     VERSION="1.4.17"
     IMAGE="''${OPENCODE_IMAGE:-ghcr.io/anomalyco/opencode:$VERSION}"
     CONTAINER_NAME="opencode-$(basename "$PWD")-$$"
+    CONTAINER_HOME="/root"
 
     if ! command -v docker &>/dev/null; then
       echo "error: docker not found in PATH" >&2
       exit 1
     fi
 
-    env_flags=()
+    env_flags=(
+      -e TERM
+    )
     for key in ANTHROPIC_API_KEY OPENAI_API_KEY GOOGLE_API_KEY XAI_API_KEY GROQ_API_KEY; do
       [[ -n "''${!key:-}" ]] && env_flags+=(-e "$key=''${!key}")
     done
@@ -24,21 +27,22 @@ let
     data_dir="''${XDG_DATA_HOME:-$HOME/.local/share}/opencode"
     mkdir -p "$config_dir" "$data_dir"
     auth_mounts+=(
-      -v "$config_dir:/root/.config/opencode"
-      -v "$data_dir:/root/.local/share/opencode"
+      -v "$config_dir:$CONTAINER_HOME/.config/opencode"
+      -v "$data_dir:$CONTAINER_HOME/.local/share/opencode"
     )
 
-    ssh_mounts=()
-    for key_name in id_ed25519 id_rsa id_ecdsa; do
-      key_path="$HOME/.ssh/$key_name"
-      if [[ -f "$key_path" ]]; then
-        ssh_mounts+=(-v "$key_path:/root/.ssh/$key_name:ro")
-        break
-      fi
-    done
+    ssh_agent_args=()
+    if [[ -n "''${SSH_AUTH_SOCK:-}" && -S "''${SSH_AUTH_SOCK}" ]]; then
+      ssh_agent_args+=(
+        -v "$SSH_AUTH_SOCK:/ssh-agent.sock"
+        -e "SSH_AUTH_SOCK=/ssh-agent.sock"
+      )
+    else
+      echo "warning: no ssh-agent detected; git over ssh inside the sandbox will fail" >&2
+    fi
 
     git_mounts=()
-    [[ -f "$HOME/.gitconfig" ]] && git_mounts+=(-v "$HOME/.gitconfig:/root/.gitconfig:ro")
+    [[ -f "$HOME/.gitconfig" ]] && git_mounts+=(-v "$HOME/.gitconfig:$CONTAINER_HOME/.gitconfig:ro")
 
     extra_args=()
     web_port="''${OPENCODE_WEB_PORT:-4096}"
@@ -59,14 +63,17 @@ let
       --rm -it \
       --name "$CONTAINER_NAME" \
       --hostname "opencode-sandbox" \
+      --security-opt no-new-privileges \
+      --pids-limit 4096 \
+      --memory 8g \
+      --cpus 4 \
       --add-host "host.docker.internal:host-gateway" \
       --workdir "/workspace" \
-      -e TERM \
       -v "$(pwd)":/workspace \
       -v /nix/store:/nix/store:ro \
       "''${env_flags[@]+"''${env_flags[@]}"}" \
       "''${auth_mounts[@]+"''${auth_mounts[@]}"}" \
-      "''${ssh_mounts[@]+"''${ssh_mounts[@]}"}" \
+      "''${ssh_agent_args[@]+"''${ssh_agent_args[@]}"}" \
       "''${git_mounts[@]+"''${git_mounts[@]}"}" \
       "''${port_flags[@]+"''${port_flags[@]}"}" \
       "$IMAGE" \
