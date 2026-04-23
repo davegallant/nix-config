@@ -78,19 +78,14 @@
       "et"
       "gnu-sed"
       "gnu-tar"
-      "k6"
       "node"
       "oras"
-      "python@3.14"
-      "sleepwatcher"
-      "vault"
     ];
 
     casks = [
       "beekeeper-studio"
       "brave-browser"
       "capslocknodelay"
-      "discord"
       "dbeaver-community"
       "font-fira-code-nerd-font"
       "font-hack-nerd-font"
@@ -108,16 +103,10 @@
       "slack"
       "spotify"
       "stats"
-      "steam"
       "taskexplorer"
       "tailscale-app"
       "vlc"
-      "whisky"
       "zed"
-    ];
-
-    taps = [
-      "hashicorp/tap"
     ];
   };
 
