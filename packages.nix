@@ -80,42 +80,19 @@ in
       arp-scan
       dnsutils
       iperf
+      iputils
       nmap
       openssl
       openvpn
       tcpdump
-
-      # desktop apps
-      bitwarden-desktop
-      feishin
-      gimp-with-plugins
-      httpie-desktop
-      mission-center
-      pika-backup
-      pinta
-      qbittorrent
-      unstable.brave
-      unstable.obsidian
-      unstable.signal-desktop
-
-      # media
-      calibre
-      libation
-      vlc
-
-      # networking
-      iputils
       traceroute
       unstable.tailscale
       vpngate.packages.${pkgs.stdenv.hostPlatform.system}.default
       whois
 
       # security
-      bleachbit
-      clamtk
       cryptsetup
       libsecret
-      opensnitch-ui
 
       # clipboard
       cliphist
@@ -125,38 +102,13 @@ in
       hardinfo2
       nfs-utils
       pciutils
-      unstable.ghostty
       qemu
       unrar
       unstable.beszel
       usbutils
-      virt-manager
-      wayland-utils
 
       # llm
       bun
     ]
-    ++ lib.optionals (stdenv.isLinux && stdenv.hostPlatform.isx86_64) [
-      # desktop apps
-      discord
-      freefilesync
-      unstable.beekeeper-studio
-      unstable.zoom-us
-      unstable.code-cursor
-
-      # media
-      unstable.spotify
-
-      # keyboard
-      via
-
-      # gaming
-      heroic
-      ludusavi
-      mupen64plus
-      protonup-qt
-      unstable.ryubing
-      unstable.lutris
-      wine
-    ];
+    ;
 }
