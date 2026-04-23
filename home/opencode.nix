@@ -117,7 +117,7 @@ in
         in
         builtins.listToAttrs (
           map (id: {
-            name = "copilot-${id}";
+            name = builtins.replaceStrings [ "." ] [ "-" ] id;
             value = mkModel id;
           }) (import ../copilot-models.nix)
         );
