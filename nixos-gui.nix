@@ -1,5 +1,65 @@
-{ pkgs, ... }:
 {
+  pkgs,
+  lib,
+  unstable,
+  ...
+}:
+{
+  environment.systemPackages =
+    with pkgs;
+    [
+      # desktop apps
+      bitwarden-desktop
+      feishin
+      gimp-with-plugins
+      httpie-desktop
+      mission-center
+      pika-backup
+      pinta
+      qbittorrent
+      unstable.brave
+      unstable.obsidian
+      unstable.signal-desktop
+
+      # media
+      calibre
+      libation
+      vlc
+
+      # security
+      bleachbit
+      clamtk
+      opensnitch-ui
+
+      # system utilities
+      unstable.ghostty
+      virt-manager
+      wayland-utils
+    ]
+    ++ lib.optionals pkgs.stdenv.hostPlatform.isx86_64 [
+      # desktop apps
+      discord
+      freefilesync
+      unstable.beekeeper-studio
+      unstable.zoom-us
+      unstable.code-cursor
+
+      # media
+      unstable.spotify
+
+      # keyboard
+      via
+
+      # gaming
+      heroic
+      ludusavi
+      mupen64plus
+      protonup-qt
+      unstable.ryubing
+      unstable.lutris
+      wine
+    ];
+
   fonts.packages = with pkgs; [
     dejavu_fonts
     fira-mono
