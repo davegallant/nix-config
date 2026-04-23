@@ -59,9 +59,11 @@ let
       --rm -it \
       --name "$CONTAINER_NAME" \
       --hostname "opencode-sandbox" \
+      --add-host "host.docker.internal:host-gateway" \
       --workdir "/workspace" \
       -e TERM \
       -v "$(pwd)":/workspace \
+      -v /nix/store:/nix/store:ro \
       "''${env_flags[@]+"''${env_flags[@]}"}" \
       "''${auth_mounts[@]+"''${auth_mounts[@]}"}" \
       "''${ssh_mounts[@]+"''${ssh_mounts[@]}"}" \
@@ -74,4 +76,44 @@ let
 in
 {
   home.packages = [ opencode-sandbox ];
+
+  xdg.configFile."opencode/opencode.json".text = builtins.toJSON {
+    "$schema" = "https://opencode.ai/config.json";
+    autoupdate = false;
+    disabled_providers = [
+      "opencode"
+      "github-copilot"
+    ];
+    provider.litellm = {
+      npm = "@ai-sdk/openai-compatible";
+      name = "LiteLLM";
+      options = {
+        baseURL = "http://host.docker.internal:4000/v1";
+        apiKey = "sk-noauth";
+      };
+      models =
+        let
+          mkModel = id: {
+            name = id;
+            tool_call = true;
+            reasoning = false;
+            attachment = true;
+            limit = {
+              context = 200000;
+              output = 8192;
+            };
+            cost = {
+              input = 0;
+              output = 0;
+            };
+          };
+        in
+        builtins.listToAttrs (
+          map (id: {
+            name = "copilot-${id}";
+            value = mkModel id;
+          }) (import ../copilot-models.nix)
+        );
+    };
+  };
 }
