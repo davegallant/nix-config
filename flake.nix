@@ -148,6 +148,7 @@
             };
             modules = mkSharedModules {
               username = "dave.gallant";
+              hostname = "zelus";
               inherit system unstable;
               hmModule = home-manager.darwinModules.home-manager;
               extraModules = [
