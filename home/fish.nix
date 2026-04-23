@@ -35,6 +35,17 @@
       interactiveShellInit = ''
         set fish_greeting
 
+        function __save_last_dir --on-event fish_prompt
+          echo $PWD > ~/.last_dir
+        end
+
+        ${lib.optionalString (hostname == "kratos") ''
+          if test -f ~/.last_dir
+            cd (cat ~/.last_dir)
+          end
+        ''}
+
+
         bind \cw backward-kill-word
 
         set -x DOCKER_CLI_HINTS false
