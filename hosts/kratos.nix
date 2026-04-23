@@ -80,10 +80,11 @@
   services.eternal-terminal.enable = true;
   networking.firewall.allowedTCPPorts = [ 2022 ];
 
-  environment.systemPackages = [
-    pkgs.awscli2
-    pkgs.azure-cli
-    pkgs.ssm-session-manager-plugin
+  environment.systemPackages = with pkgs; [
+    awscli2
+    azure-cli
+    ssm-session-manager-plugin
+    terraform
   ];
 
 }
