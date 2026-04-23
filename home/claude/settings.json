@@ -46,7 +46,7 @@
     }
   },
   "sandbox": {
-    "enabled": true,
+    "enabled": false,
     "failIfUnavailable": false,
     "allowUnsandboxedCommands": false,
     "filesystem": {
