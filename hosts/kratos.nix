@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   unstable,
   ...
 }:
@@ -80,7 +81,9 @@
   networking.firewall.allowedTCPPorts = [ 2022 ];
 
   environment.systemPackages = [
-    unstable.azure-cli
+    pkgs.awscli2
+    pkgs.azure-cli
+    pkgs.ssm-session-manager-plugin
   ];
 
 }
