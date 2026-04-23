@@ -4,10 +4,15 @@
   ...
 }:
 {
+  imports = [
+    ../litellm.nix
+  ];
+
   nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "prl-tools" ];
 
   networking.hostName = "kratos";
+  networking.firewall.interfaces.docker0.allowedTCPPorts = [ 4000 ];
 
   boot = {
     initrd.availableKernelModules = [
