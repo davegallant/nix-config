@@ -47,7 +47,7 @@
   },
   "sandbox": {
     "enabled": true,
-    "failIfUnavailable": true,
+    "failIfUnavailable": false,
     "allowUnsandboxedCommands": false,
     "filesystem": {
       "allowWrite": [
@@ -98,5 +98,5 @@
   },
   "effortLevel": "medium",
   "defaultMode": "auto",
-  "model": "opus[1m]"
+  "model": "sonnet[1m]"
 }
