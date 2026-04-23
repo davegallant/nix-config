@@ -15,6 +15,8 @@
   networking.hostName = "kratos";
   networking.firewall.interfaces.docker0.allowedTCPPorts = [ 4000 ];
 
+  programs.ssh.startAgent = true;
+
   boot = {
     initrd.availableKernelModules = [
       "ehci_pci"
