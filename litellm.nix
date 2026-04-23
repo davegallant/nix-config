@@ -15,7 +15,7 @@
             "Copilot-Integration-Id" = "vscode-chat";
           };
           copilotModel = name: {
-            model_name = "copilot-${name}";
+            model_name = builtins.replaceStrings [ "." ] [ "-" ] name;
             litellm_params = {
               model = "github_copilot/${name}";
               extra_headers = copilotHeaders;

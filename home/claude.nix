@@ -1,16 +1,28 @@
 { lib, pkgs, unstable, ... }:
 let
-  claude-model-picker = pkgs.writeShellScriptBin "claude-model-picker" ''
+  claude-litellm = pkgs.writeShellScriptBin "claude-litellm" ''
     set -euo pipefail
 
-    token=$ANTHROPIC_AUTH_TOKEN
-    base=$ANTHROPIC_BASE_URL
+    base="''${LITELLM_BASE_URL:-''${ANTHROPIC_BASE_URL:-http://127.0.0.1:4000}}"
+    token="''${LITELLM_API_KEY:-''${ANTHROPIC_AUTH_TOKEN:-sk-noauth}}"
 
-    model=$(${pkgs.curl}/bin/curl -s -H "Authorization: Bearer $token" "$base/models" |
+    models_json=$(${pkgs.curl}/bin/curl -s -f -m 5 -H "Authorization: Bearer $token" "$base/v1/models") || {
+      echo "error: litellm not reachable at $base" >&2
+      exit 1
+    }
+
+    model=$(echo "$models_json" |
       ${pkgs.jq}/bin/jq -r '.data[].id' |
-      ${pkgs.fzf}/bin/fzf --prompt='model> ' --height=40%)
+      ${pkgs.fzf}/bin/fzf --prompt='litellm model> ' --height=40%)
 
     [[ -z "$model" ]] && exit 1
+
+    export ANTHROPIC_BASE_URL="$base"
+    export ANTHROPIC_AUTH_TOKEN="$token"
+    export ANTHROPIC_DEFAULT_SONNET_MODEL="$model"
+    export ANTHROPIC_DEFAULT_HAIKU_MODEL="$model"
+    export ANTHROPIC_DEFAULT_OPUS_MODEL="$model"
+    export CLAUDE_CODE_SUBAGENT_MODEL="$model"
 
     exec ${unstable.claude-code}/bin/claude --model "$model" "$@"
   '';
@@ -18,7 +30,7 @@ in
 {
   home.packages = [
     unstable.claude-code
-    claude-model-picker
+    claude-litellm
   ];
 
   home.file.".claude/statusline-command.sh" = {
