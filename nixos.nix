@@ -48,6 +48,7 @@
 
   programs.fish.enable = true;
   programs.nix-ld.enable = lib.mkDefault true;
+  programs.ssh.startAgent = true;
 
   services.tailscale = {
     enable = true;
