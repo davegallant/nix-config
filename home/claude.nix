@@ -45,11 +45,14 @@ in
 
     run mkdir -p "$HOME/.claude"
 
+    tmp=$(mktemp)
     if [ -f "$private" ]; then
-      run ${pkgs.jq}/bin/jq -s '.[0] * .[1]' "$public" "$private" > "$out.tmp"
+      ${pkgs.jq}/bin/jq -s '.[0] * .[1]' "$public" "$private" > "$tmp"
     else
-      run cp "$public" "$out.tmp"
+      cp "$public" "$tmp"
     fi
-    run mv "$out.tmp" "$out"
+    run chmod u+w "$HOME/.claude" 2>/dev/null || true
+    run chmod u+w "$out" 2>/dev/null || true
+    run mv "$tmp" "$out"
   '';
 }
