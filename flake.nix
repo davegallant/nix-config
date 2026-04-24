@@ -84,8 +84,49 @@
           )
         ]
         ++ extraModules;
+      forEachSystem =
+        f:
+        nixpkgs.lib.genAttrs
+          [
+            "x86_64-linux"
+            "aarch64-linux"
+            "aarch64-darwin"
+          ]
+          (
+            system:
+            f {
+              inherit system;
+              pkgs = import nixpkgs {
+                inherit system;
+                config.allowUnfree = true;
+              };
+            }
+          );
+
+      nixosModuleSet = {
+        features = import ./modules/features.nix;
+        ollama = import ./modules/ollama.nix;
+      };
     in
     {
+      formatter = forEachSystem ({ pkgs, ... }: pkgs.nixfmt-rfc-style);
+
+      devShells = forEachSystem (
+        { pkgs, ... }:
+        {
+          default = pkgs.mkShell {
+            packages = with pkgs; [
+              just
+              nixfmt-rfc-style
+              shellcheck
+              shfmt
+            ];
+          };
+        }
+      );
+
+      nixosModules = nixosModuleSet;
+
       nixosConfigurations =
         let
           mkNixos =
@@ -118,7 +159,9 @@
                   inputs.niri.nixosModules.niri
                   ./nixos.nix
                   ./hosts/${hostname}.nix
-                ] ++ extraModules;
+                ]
+                ++ (builtins.attrValues nixosModuleSet)
+                ++ extraModules;
               };
             };
         in
@@ -126,7 +169,6 @@
           hephaestus = mkNixos {
             system = "x86_64-linux";
             hostname = "hephaestus";
-            extraModules = [ ./nixos-gui.nix ];
           };
 
           kratos = mkNixos {

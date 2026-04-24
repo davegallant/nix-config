@@ -1,4 +1,9 @@
-{ pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   opencode-sandbox = pkgs.writeShellScriptBin "opencode" ''
     set -euo pipefail
@@ -82,46 +87,48 @@ let
   '';
 in
 {
-  home.packages = [ opencode-sandbox ];
+  config = lib.mkIf config.features.ai.enable {
+    home.packages = [ opencode-sandbox ];
 
-  xdg.configFile."opencode/opencode.json".text = builtins.toJSON {
-    "$schema" = "https://opencode.ai/config.json";
-    autoupdate = false;
-    plugin = [ "superpowers@git+https://github.com/obra/superpowers.git" ];
-    disabled_providers = [
-      "opencode"
-      "github-copilot"
-    ];
-    provider.litellm = {
-      npm = "@ai-sdk/openai-compatible";
-      name = "LiteLLM";
-      options = {
-        baseURL = "http://host.docker.internal:4000/v1";
-        apiKey = "sk-noauth";
+    xdg.configFile."opencode/opencode.json".text = builtins.toJSON {
+      "$schema" = "https://opencode.ai/config.json";
+      autoupdate = false;
+      plugin = [ "superpowers@git+https://github.com/obra/superpowers.git" ];
+      disabled_providers = [
+        "opencode"
+        "github-copilot"
+      ];
+      provider.litellm = {
+        npm = "@ai-sdk/openai-compatible";
+        name = "LiteLLM";
+        options = {
+          baseURL = "http://host.docker.internal:4000/v1";
+          apiKey = "sk-noauth";
+        };
+        models =
+          let
+            mkModel = id: {
+              name = id;
+              tool_call = true;
+              reasoning = false;
+              attachment = true;
+              limit = {
+                context = 200000;
+                output = 8192;
+              };
+              cost = {
+                input = 0;
+                output = 0;
+              };
+            };
+          in
+          builtins.listToAttrs (
+            map (id: {
+              name = builtins.replaceStrings [ "." ] [ "-" ] id;
+              value = mkModel id;
+            }) (import ../copilot-models.nix)
+          );
       };
-      models =
-        let
-          mkModel = id: {
-            name = id;
-            tool_call = true;
-            reasoning = false;
-            attachment = true;
-            limit = {
-              context = 200000;
-              output = 8192;
-            };
-            cost = {
-              input = 0;
-              output = 0;
-            };
-          };
-        in
-        builtins.listToAttrs (
-          map (id: {
-            name = builtins.replaceStrings [ "." ] [ "-" ] id;
-            value = mkModel id;
-          }) (import ../copilot-models.nix)
-        );
     };
   };
 }
