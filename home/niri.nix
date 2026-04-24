@@ -9,7 +9,7 @@
 }:
 
 {
-  config =
+  config = lib.mkIf config.features.desktop.enable (
     let
       termExec = "${pkgs.ghostty}/bin/ghostty -e";
       externalIpScript = pkgs.writeShellScript "waybar-external-ip" ''
@@ -726,5 +726,6 @@
           show-failed-attempts = true;
         };
       };
-    };
+    }
+  );
 }

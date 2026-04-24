@@ -11,8 +11,20 @@
 
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
-    ../litellm.nix
   ];
+
+  features = {
+    desktop.enable = true;
+    ai = {
+      enable = true;
+      ollama.enable = true;
+    };
+  };
+
+  home-manager.users.dave.features = {
+    desktop.enable = true;
+    ai.enable = true;
+  };
 
   security.sudo-rs = {
     enable = true;
@@ -141,14 +153,6 @@
   services.mullvad-vpn.enable = true;
   services.mullvad-vpn.package = pkgs.mullvad-vpn;
 
-  services.ollama = {
-    package = unstable.ollama-rocm;
-    enable = true;
-    acceleration = "rocm";
-    host = "0.0.0.0";
-    rocmOverrideGfx = "11.0.2";
-  };
-
   system.stateVersion = "25.11";
 
   nix = {
@@ -169,20 +173,6 @@
     "plugdev"
   ];
 
-  i18n.inputMethod = {
-    enable = true;
-    type = "fcitx5";
-    fcitx5.addons = with pkgs; [
-      fcitx5-anthy
-      fcitx5-gtk
-    ];
-  };
-
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true;
-
-  services.blueman.enable = true;
-
   hardware.keyboard.qmk.enable = true;
 
   services.udev.extraRules = ''
@@ -191,55 +181,7 @@
     ENV{ID_INPUT_JOYSTICK}="", ENV{ID_INPUT_ACCELEROMETER}=""
   '';
 
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-  };
-
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-
-  programs = {
-    nix-ld.enable = true;
-    steam = {
-      enable = true;
-      remotePlay.openFirewall = true;
-    };
-  };
-
-  services.flatpak.enable = true;
-
-  xdg.portal = {
-    enable = true;
-    extraPortals = [
-      pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal-gnome
-    ];
-    config.niri.default = [
-      "gnome"
-      "gtk"
-    ];
-    config.niri."org.freedesktop.impl.portal.FileChooser" = [ "gtk" ]; # skip nautilus
-
-  };
-
-  services.avahi = {
-    enable = true;
-    nssmdns4 = true;
-    publish = {
-      enable = true;
-      addresses = true;
-      domain = true;
-      hinfo = true;
-      userServices = true;
-      workstation = true;
-    };
-  };
-
-  services.printing = {
-    enable = true;
-    browsing = false;
-  };
-  systemd.services.cups-browsed.enable = false;
 
   services.resolved.enable = true;
 

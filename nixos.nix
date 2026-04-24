@@ -1,6 +1,13 @@
-{ lib, pkgs, unstable, ... }:
+{
+  lib,
+  pkgs,
+  unstable,
+  ...
+}:
 {
   imports = [
+    ./litellm.nix
+    ./nixos-gui.nix
     ./opensnitch.nix
   ];
 

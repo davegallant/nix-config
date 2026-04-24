@@ -5,9 +5,12 @@
   ...
 }:
 {
-  imports = [
-    ../litellm.nix
-  ];
+  features.ai.enable = true;
+
+  home-manager.users.dave.features = {
+    headless.enable = true;
+    ai.enable = true;
+  };
 
   nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "prl-tools" ];
