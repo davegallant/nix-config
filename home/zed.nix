@@ -35,6 +35,29 @@ in
             format_on_save = "off";
             ui_font_size = 18;
             buffer_font_size = 16;
+            language_models = {
+              openai_compatible = {
+                litellm = {
+                  api_url = "http://127.0.0.1:4000/v1";
+                  available_models =
+                    let
+                      mkModel = name: {
+                        inherit name;
+                        display_name = builtins.replaceStrings [ "." ] [ "-" ] name;
+                        max_tokens = 200000;
+                        max_output_tokens = 8192;
+                        capabilities = {
+                          tools = true;
+                          images = true;
+                          parallel_tool_calls = true;
+                          prompt_cache_key = false;
+                        };
+                      };
+                    in
+                    map mkModel (import ../copilot-models.nix);
+                };
+              };
+            };
           };
           userKeymaps = [
             {
