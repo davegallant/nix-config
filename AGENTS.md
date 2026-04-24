@@ -35,6 +35,7 @@ nix build .#nixosConfigurations.hephaestus.config.system.build.toplevel
 ### Format all Nix files
 ```sh
 just fmt        # runs: fd -e nix -x nixfmt
+nix fmt         # alternative: uses formatter flake output
 ```
 The formatter is `nixfmt` (RFC 166 style, package `nixfmt-rfc-style`).
 Always run `just fmt` before committing changes.
@@ -64,6 +65,8 @@ to Cachix on every push to `main`.
 
 ```
 flake.nix          # Entry point: inputs, outputs, system configurations
+                   # Exports: formatter, devShells, nixosModules,
+                   #          nixosConfigurations, darwinConfigurations
 packages.nix       # Shared system packages (cross-platform + Linux-only)
 justfile           # Task runner commands
 home/              # home-manager modules (one concern per file)
@@ -80,6 +83,9 @@ hosts/             # Per-machine system configurations (flat files, not dirs)
   hephaestus.nix   # NixOS desktop (x86_64-linux)
   kratos.nix       # NixOS Parallels VM (aarch64-linux)
   zelus.nix        # macOS (nix-darwin)
+modules/           # Reusable NixOS modules (exported as nixosModules flake output)
+  features.nix     # Feature flags (desktop, ai, ollama)
+  ollama.nix       # Ollama with ROCm acceleration
 overlays/          # Nixpkgs overlays
   default.nix      # Overlay entry point
   cd-fzf/          # Custom package
@@ -172,6 +178,11 @@ Two nixpkgs tiers, passed via `specialArgs`/`extraSpecialArgs`:
 - Shared config is factored into `packages.nix` and `home/default.nix`.
 - The `mkSharedModules` function in `flake.nix` assembles shared modules
   for both NixOS and Darwin configurations.
+- Reusable NixOS modules live in `modules/` and are exported as
+  `nixosModules` in the flake output. They are auto-imported into all
+  NixOS configurations via `builtins.attrValues` — adding a new module
+  to `modules/` and registering it in the `nixosModuleSet` attrset in
+  `flake.nix` is sufficient; no per-host import is needed.
 
 ### Attribute Set Style
 - Flat dot-notation for simple single-attribute enables:

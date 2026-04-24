@@ -60,6 +60,8 @@
 
   security.pam.services.sudo_local.touchIdAuth = true;
 
+  home-manager.users."dave.gallant".features.ai.enable = true;
+
   homebrew = {
     enable = true;
     onActivation = {

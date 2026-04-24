@@ -1,7 +1,7 @@
 {
+  config,
   lib,
   pkgs,
-  hostname ? "",
   ...
 }:
 {
@@ -39,7 +39,7 @@
           echo $PWD > ~/.last_dir
         end
 
-        ${lib.optionalString (hostname == "kratos") ''
+        ${lib.optionalString config.features.headless.enable ''
           if test -f ~/.last_dir
             cd (cat ~/.last_dir)
           end
@@ -49,12 +49,14 @@
         bind \cw backward-kill-word
 
         set -x DOCKER_CLI_HINTS false
-        ${lib.optionalString (hostname != "kratos") "set -x DOCKER_DEFAULT_PLATFORM linux/amd64"}
+        ${lib.optionalString (
+          !config.features.headless.enable
+        ) "set -x DOCKER_DEFAULT_PLATFORM linux/amd64"}
         set -x EDITOR vim
         set -x NNN_FIFO "$XDG_RUNTIME_DIR/nnn.fifo"
         set -x PAGER less
         ${lib.optionalString (
-          pkgs.stdenv.isLinux && hostname != "kratos"
+          pkgs.stdenv.isLinux && !config.features.headless.enable
         ) "set -x SSH_AUTH_SOCK /home/dave/.bitwarden-ssh-agent.sock"}
         set -x TERM xterm-256color
 

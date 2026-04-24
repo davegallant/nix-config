@@ -1,4 +1,5 @@
 {
+  config,
   lib,
   pkgs,
   unstable,
@@ -11,20 +12,17 @@ in
 {
   imports = [
     ./claude.nix
+    ./features.nix
     ./fish.nix
     ./git.nix
+    ./gui.nix
     ./k9s.nix
     ./nixvim.nix
     ./opencode.nix
   ]
-  ++ lib.optional (hostname == "hephaestus") ./gui.nix
   ++ lib.optional (hostname == "zelus") ./ghostty.nix;
 
   home.stateVersion = "25.11";
-
-  home.packages = with pkgs; [
-    just
-  ];
 
   services = {
     gpg-agent = {
@@ -32,7 +30,8 @@ in
       defaultCacheTtl = 3600;
       defaultCacheTtlSsh = 3600;
       enableSshSupport = true;
-      pinentry.package = if hostname == "kratos" then pkgs.pinentry-curses else pkgs.pinentry-gnome3;
+      pinentry.package =
+        if config.features.headless.enable then pkgs.pinentry-curses else pkgs.pinentry-gnome3;
     };
   };
 

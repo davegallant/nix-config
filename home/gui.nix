@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, lib, ... }:
 {
   imports = [
     ./firefox.nix
@@ -6,26 +6,28 @@
     ./zed.nix
   ];
 
-  services.gnome-keyring = {
-    enable = true;
-    components = [
-      "secrets"
-    ];
-  };
-
-  programs.zathura = {
-    enable = true;
-    options = {
-      selection-clipboard = "clipboard";
+  config = lib.mkIf config.features.desktop.enable {
+    services.gnome-keyring = {
+      enable = true;
+      components = [
+        "secrets"
+      ];
     };
-  };
 
-  programs.mangohud = {
-    enable = true;
-    settings = {
-      font_size = 16;
-      position = "top-right";
-      toggle_hud = "Shift_R+F1";
+    programs.zathura = {
+      enable = true;
+      options = {
+        selection-clipboard = "clipboard";
+      };
+    };
+
+    programs.mangohud = {
+      enable = true;
+      settings = {
+        font_size = 16;
+        position = "top-right";
+        toggle_hud = "Shift_R+F1";
+      };
     };
   };
 }
