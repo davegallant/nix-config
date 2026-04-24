@@ -8,10 +8,36 @@ on:
       - '**/*.md'
       - '*.md'
       - 'LICENSE'
+  pull_request:
+    paths-ignore:
+      - '**/*.md'
+      - '*.md'
+      - 'LICENSE'
   workflow_dispatch:
 
 jobs:
-  build:
+  check-format:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v6
+    - uses: cachix/install-nix-action@v31
+    - run: nix fmt -- --check .
+
+  eval-kratos:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v6
+    - uses: cachix/install-nix-action@v31
+    - run: nix eval .#nixosConfigurations.kratos.config.system.build.toplevel --raw
+
+  build-zelus:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v6
+    - uses: cachix/install-nix-action@v31
+    - run: nix build .#darwinConfigurations.zelus.config.system.build.toplevel
+
+  build-hephaestus:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v6
