@@ -17,6 +17,7 @@ in
           package = unstable.zed-editor;
           extensions = [
             "ansible"
+            "comment"
             "dockerfile"
             "html"
             "make"
