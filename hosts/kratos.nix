@@ -87,7 +87,7 @@
 
   environment.systemPackages = with pkgs; [
     awscli2
-    azure-cli
+    (azure-cli.withExtensions [ azure-cli-extensions.fzf ])
     ssm-session-manager-plugin
     terraform
   ];
