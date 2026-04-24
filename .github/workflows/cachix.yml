@@ -35,7 +35,11 @@ jobs:
     steps:
     - uses: actions/checkout@v6
     - uses: cachix/install-nix-action@v31
-    - run: nix build .#darwinConfigurations.zelus.config.system.build.toplevel
+    - uses: cachix/cachix-action@v17
+      with:
+        name: davegallant
+        authToken: '${{ secrets.CACHIX_API_KEY }}'
+    - run: nix build .#darwinConfigurations.zelus.config.system.build.toplevel --json | jq -r '.[].outputs | to_entries[].value' | cachix push davegallant
 
   build-hephaestus:
     runs-on: ubuntu-latest

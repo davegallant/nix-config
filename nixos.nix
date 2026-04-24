@@ -29,11 +29,16 @@
         "@wheel"
       ];
       auto-optimise-store = lib.mkDefault true;
+      builders-use-substitutes = true;
       max-jobs = "auto";
       cores = 0;
-      substituters = [ "https://davegallant.cachix.org" ];
+      substituters = [
+        "https://davegallant.cachix.org"
+        "https://nix-community.cachix.org"
+      ];
       trusted-public-keys = [
         "davegallant.cachix.org-1:SsUMqL4+tF2R3/G6X903E9laLlY1rES2QKFfePegF08="
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       ];
     };
     gc = {
