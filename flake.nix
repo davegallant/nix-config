@@ -20,7 +20,10 @@
       url = "github:nix-community/nixvim/nixos-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    vpngate.url = "github:davegallant/vpngate";
+    vpngate = {
+      url = "github:davegallant/vpngate";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     weathr = {
       url = "github:Veirt/weathr";
       inputs.nixpkgs.follows = "nixpkgs";
