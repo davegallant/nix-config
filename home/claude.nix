@@ -62,5 +62,19 @@ in
       run chmod u+w "$out" 2>/dev/null || true
       run mv "$tmp" "$out"
     '';
+
+    home.activation.claudeMcp = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      mcp="${./claude/mcp.json}"
+      out="$HOME/.claude.json"
+
+      tmp=$(mktemp)
+      if [ -f "$out" ]; then
+        ${pkgs.jq}/bin/jq -s '.[0] * .[1]' "$out" "$mcp" > "$tmp"
+      else
+        cp "$mcp" "$tmp"
+      fi
+      run chmod u+w "$out" 2>/dev/null || true
+      run mv "$tmp" "$out"
+    '';
   };
 }

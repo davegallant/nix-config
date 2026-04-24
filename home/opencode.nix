@@ -94,6 +94,35 @@ in
       "$schema" = "https://opencode.ai/config.json";
       autoupdate = false;
       plugin = [ "superpowers@git+https://github.com/obra/superpowers.git" ];
+      mcp = {
+        github = {
+          type = "local";
+          command = [
+            "npx"
+            "-y"
+            "@modelcontextprotocol/server-github"
+          ];
+          environment = {
+            GITHUB_PERSONAL_ACCESS_TOKEN = "\${env:GITHUB_TOKEN}";
+          };
+        };
+        memory = {
+          type = "local";
+          command = [
+            "npx"
+            "-y"
+            "@modelcontextprotocol/server-memory"
+          ];
+        };
+        sequential-thinking = {
+          type = "local";
+          command = [
+            "npx"
+            "-y"
+            "@modelcontextprotocol/server-sequential-thinking"
+          ];
+        };
+      };
       disabled_providers = [
         "opencode"
         "github-copilot"
