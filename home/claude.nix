@@ -6,6 +6,23 @@
   ...
 }:
 let
+  npx = "${pkgs.nodejs}/bin/npx";
+
+  mcpConfigFile = pkgs.writeText "claude-mcp.json" (builtins.toJSON {
+    mcpServers = {
+      github = {
+        command = npx;
+        args = [
+          "-y"
+          "@modelcontextprotocol/server-github"
+        ];
+        env = {
+          GITHUB_PERSONAL_ACCESS_TOKEN = "\${GITHUB_TOKEN}";
+        };
+      };
+    };
+  });
+
   claude-litellm = pkgs.writeShellScriptBin "claude-litellm" ''
     set -euo pipefail
 
@@ -38,6 +55,7 @@ in
     home.packages = [
       unstable.claude-code
       claude-litellm
+      pkgs.nodejs
     ];
 
     home.file.".claude/statusline-command.sh" = {
@@ -64,14 +82,13 @@ in
     '';
 
     home.activation.claudeMcp = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      mcp="${./claude/mcp.json}"
       out="$HOME/.claude.json"
 
       tmp=$(mktemp)
       if [ -f "$out" ]; then
-        ${pkgs.jq}/bin/jq -s '.[0] * .[1]' "$out" "$mcp" > "$tmp"
+        ${pkgs.jq}/bin/jq -s '.[0] * .[1]' "$out" "${mcpConfigFile}" > "$tmp"
       else
-        cp "$mcp" "$tmp"
+        cp "${mcpConfigFile}" "$tmp"
       fi
       run chmod u+w "$out" 2>/dev/null || true
       run mv "$tmp" "$out"

@@ -106,22 +106,6 @@ in
             GITHUB_PERSONAL_ACCESS_TOKEN = "\${env:GITHUB_TOKEN}";
           };
         };
-        memory = {
-          type = "local";
-          command = [
-            "npx"
-            "-y"
-            "@modelcontextprotocol/server-memory"
-          ];
-        };
-        sequential-thinking = {
-          type = "local";
-          command = [
-            "npx"
-            "-y"
-            "@modelcontextprotocol/server-sequential-thinking"
-          ];
-        };
       };
       disabled_providers = [
         "opencode"
