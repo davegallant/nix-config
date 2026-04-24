@@ -64,7 +64,9 @@ in
       rustup
 
       # nix
+      nil
       nix-tree
+      nixd
       nixfmt-rfc-style
       nixpkgs-review
       nvd
