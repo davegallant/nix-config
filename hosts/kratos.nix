@@ -7,6 +7,12 @@
 {
   features.ai.enable = true;
 
+  security.sudo-rs = {
+    enable = true;
+    execWheelOnly = true;
+    wheelNeedsPassword = true;
+  };
+
   home-manager.users.dave.features = {
     headless.enable = true;
     ai.enable = true;
@@ -84,6 +90,11 @@
 
   services.eternal-terminal.enable = true;
   networking.firewall.allowedTCPPorts = [ 2022 ];
+  networking.firewall.extraCommands = ''
+    iptables -I DOCKER-USER -s 172.0.0.0/8 -d 192.168.1.0/24 -j DROP
+    iptables -I DOCKER-USER -s 172.0.0.0/8 -d 10.0.0.0/8 -j DROP
+    iptables -I DOCKER-USER -s 172.0.0.0/8 -d 172.16.0.0/12 -j DROP
+  '';
 
   environment.systemPackages = with pkgs; [
     awscli2
