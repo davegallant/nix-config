@@ -8,7 +8,7 @@ let
   opencode-sandbox = pkgs.writeShellScriptBin "opencode" ''
     set -euo pipefail
 
-    VERSION="1.4.17"
+    VERSION="1.14.24"
     IMAGE="''${OPENCODE_IMAGE:-ghcr.io/anomalyco/opencode:$VERSION}"
     CONTAINER_NAME="opencode-$(basename "$PWD")-$$"
     CONTAINER_HOME="/root"
@@ -93,6 +93,7 @@ in
     xdg.configFile."opencode/opencode.json".text = builtins.toJSON {
       "$schema" = "https://opencode.ai/config.json";
       autoupdate = false;
+      model = "litellm/gpt-4-1";
       plugin = [ "superpowers@git+https://github.com/obra/superpowers.git" ];
       disabled_providers = [
         "opencode"
