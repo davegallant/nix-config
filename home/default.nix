@@ -1,9 +1,7 @@
 {
   config,
-  lib,
   pkgs,
   unstable,
-  hostname ? "",
   ...
 }:
 let
@@ -20,8 +18,8 @@ in
     ./nixvim.nix
     ./opencode.nix
     ./obsidian.nix
-  ]
-  ++ lib.optional (hostname == "zelus") ./ghostty.nix;
+    ./ghostty.nix
+  ];
 
   home.stateVersion = "25.11";
 
