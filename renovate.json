@@ -5,18 +5,5 @@
   ],
   "extends": [
     "config:recommended"
-  ],
-  "packageRules": [
-    {
-      "matchPackageNames": ["ghcr.io/anomalyco/opencode"],
-    }
-  ],
-  "regexManagers": [
-    {
-      "fileMatch": ["home/opencode\\.nix"],
-      "matchStrings": ["VERSION=\"(?<currentValue>[^\"]+)\""],
-      "depNameTemplate": "ghcr.io/anomalyco/opencode",
-      "datasourceTemplate": "docker"
-    }
   ]
 }
