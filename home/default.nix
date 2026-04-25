@@ -19,6 +19,7 @@ in
     ./k9s.nix
     ./nixvim.nix
     ./opencode.nix
+    ./obsidian.nix
   ]
   ++ lib.optional (hostname == "zelus") ./ghostty.nix;
 

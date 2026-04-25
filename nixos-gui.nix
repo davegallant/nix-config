@@ -25,7 +25,6 @@
         qbittorrent
         unstable.brave
         unstable.ghostty
-        unstable.obsidian
         unstable.signal-desktop
         virt-manager
         vlc
