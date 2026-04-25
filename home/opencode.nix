@@ -94,6 +94,29 @@ in
       "$schema" = "https://opencode.ai/config.json";
       autoupdate = false;
       model = "litellm/gpt-4-1";
+      permission = {
+        bash = {
+          "*" = "ask";
+          "git *" = "allow";
+          "git commit *" = "ask";
+          "git push *" = "deny";
+          "grep *" = "allow";
+          "cat *" = "allow";
+          "ls *" = "allow";
+          "rm *" = "deny";
+          "sudo *" = "deny";
+          "chmod 777 *" = "deny";
+        };
+        read = {
+          "*" = "allow";
+          "*.env" = "deny";
+          "*.env.*" = "deny";
+          "*.env.example" = "allow";
+          "*.key" = "deny";
+          "*.pem" = "deny";
+        };
+        edit = "ask";
+      };
       plugin = [ "superpowers@git+https://github.com/obra/superpowers.git" ];
       disabled_providers = [
         "opencode"
