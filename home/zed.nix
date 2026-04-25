@@ -27,6 +27,7 @@ in
             "vue"
           ];
           userSettings = {
+            auto_update = false;
             icon_theme = "Material Icon Theme";
             vim_mode = true;
             vim = {
