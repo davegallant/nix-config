@@ -171,34 +171,7 @@
             argv = [
               "wl-clip-persist"
               "--clipboard"
-              "both"
-            ];
-          }
-          # Parallels clipboard bridge: Wayland -> X11 (VM -> macOS)
-          {
-            argv = [
-              "sh"
-              "-c"
-              "wl-paste --watch xclip -selection clipboard"
-            ];
-          }
-          # Parallels clipboard bridge: X11 -> Wayland (macOS -> VM)
-          {
-            argv = [
-              "sh"
-              "-c"
-              ''
-                prev=""
-                while true; do
-                  if curr=$(xclip -selection clipboard -o 2>/dev/null); then
-                    if [ "$curr" != "$prev" ]; then
-                      echo -n "$curr" | wl-copy
-                      prev="$curr"
-                    fi
-                  fi
-                  sleep 0.5
-                done
-              ''
+              "regular"
             ];
           }
           {
