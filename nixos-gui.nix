@@ -34,12 +34,12 @@
         discord
         freefilesync
         heroic
+        lutris
         ludusavi
         mupen64plus
         protonup-qt
+        ryubing
         unstable.beekeeper-studio
-        unstable.lutris
-        unstable.ryubing
         unstable.spotify
         unstable.zoom-us
         via
