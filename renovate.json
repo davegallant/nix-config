@@ -5,5 +5,16 @@
   ],
   "extends": [
     "config:recommended"
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": ["home/obsidian\\.nix$"],
+      "matchStrings": [
+        "https://github\\.com/(?<depName>Vinzent03/obsidian-git)/releases/download/(?<currentValue>[\\d\\.]+)/obsidian-git-[\\d\\.]+\\.zip"
+      ],
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver"
+    }
   ]
 }
