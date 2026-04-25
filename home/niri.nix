@@ -165,7 +165,12 @@
               "${../wallpaper.png}"
             ];
           }
-          { argv = [ "niri-float-sticky" ]; }
+          {
+            argv = [
+              "niri-float-sticky"
+              "-disable-auto-stick"
+            ];
+          }
           # clipboard history daemons
           {
             argv = [
@@ -217,10 +222,6 @@
             default-column-width = {
               proportion = 0.4;
             };
-          }
-          {
-            matches = [ { app-id = "com.mitchellh.ghostty"; } ];
-            open-floating = false;
           }
           {
             matches = [ { app-id = "steam"; } ];
@@ -308,8 +309,8 @@
             "${mod}+C".action = center-column;
 
             # ── Floating toggle ─────────────────────────────────────────────
-            "Alt+T".action = toggle-window-floating;
-            "Alt+Shift+T".action = {
+            "${mod}+T".action = toggle-window-floating;
+            "${mod}+Shift+T".action = {
               spawn = [
                 "sh"
                 "-c"
