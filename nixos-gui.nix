@@ -104,12 +104,16 @@
     services.nirinit = {
       enable = true;
       settings = {
-        # Map app_id to launch command (useful for PWAs, flatpaks, etc.)
         launch = {
-          "chromium-example.com__-Default" = "example-web-app";
+          "signal" = "signal-desktop";
+          "brave-browser" = "brave";
+          "com.mitchellh.ghostty" = "ghostty";
+          "opensnitch_ui" = "opensnitch-ui";
         };
-        # Apps to skip during restore
-        skip.apps = [ "steam" ];
+        skip.apps = [
+          "steam"
+          "brave-ophjlpahpchlmihnnnihgmmeilfjmjjc-Default"
+        ];
       };
     };
 
