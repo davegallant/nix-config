@@ -1,6 +1,7 @@
 { config, lib, ... }:
 {
   imports = [
+    ./brave.nix
     ./firefox.nix
     ./niri.nix
     ./zed.nix
