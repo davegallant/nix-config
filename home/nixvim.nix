@@ -94,6 +94,11 @@
         action = "<cmd>Telescope live_grep<CR>";
       }
       {
+        key = "<leader>s";
+        mode = [ "n" ];
+        action = "<cmd>lua require('spectre').open()<CR>";
+      }
+      {
         key = "<C-r>";
         mode = [ "v" ];
         action = ''"hy:%s/<C-r>h//g<left><left>'';
@@ -128,6 +133,7 @@
         mockDevIcons = true;
       };
       nvim-tree.enable = true;
+      spectre.enable = true;
       treesitter.enable = true;
       telescope = {
         enable = true;
