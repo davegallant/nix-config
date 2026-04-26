@@ -3,6 +3,7 @@
   lib,
   pkgs,
   unstable,
+  inputs,
   ...
 }:
 {
@@ -101,6 +102,8 @@
     };
 
     services.flatpak.enable = true;
+
+    services.niri-session-manager.enable = true;
 
     xdg.portal = {
       enable = true;
