@@ -64,7 +64,7 @@ let
       --setenv LANG "''${LANG:-en_US.UTF-8}" \
       --setenv TZ "''${TZ:-}" \
       --setenv PATH "/etc/profiles/per-user/$USER/bin:/run/current-system/sw/bin:/run/wrappers/bin" \
-      ${unstable.opencode}/bin/opencode "$@"
+      ${pkgs.opencode}/bin/opencode "$@"
   '';
 in
 {
