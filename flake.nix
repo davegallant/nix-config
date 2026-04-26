@@ -16,8 +16,8 @@
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    niri-session-manager = {
-      url = "github:MTeaHead/niri-session-manager";
+    nirinit = {
+      url = "github:amaanq/nirinit";
       inputs.nixpkgs.follows = "nixpkgs"; # optional, keeps dependencies synced
     };
     nixvim = {
@@ -166,7 +166,7 @@
                   inputs.niri.nixosModules.niri
                   ./nixos.nix
                   ./hosts/${hostname}.nix
-                  inputs.niri-session-manager.nixosModules.niri-session-manager
+                  inputs.nirinit.nixosModules.nirinit
                 ]
                 ++ (builtins.attrValues nixosModuleSet)
                 ++ extraModules;
