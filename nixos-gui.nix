@@ -3,7 +3,6 @@
   lib,
   pkgs,
   unstable,
-  inputs,
   ...
 }:
 {
@@ -24,7 +23,6 @@
         pika-backup
         pinta
         qbittorrent
-        unstable.brave
         unstable.ghostty
         unstable.signal-desktop
         virt-manager
