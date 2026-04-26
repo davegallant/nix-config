@@ -1,9 +1,8 @@
 # Gemini models exposed via LiteLLM.
-# Requires GEMINI_API_KEY environment variable (set via litellm environmentFile).
-# Model list: https://ai.google.dev/gemini-api/docs/models
+# Model list
+# curl "https://generativelanguage.googleapis.com/v1beta/models?key=$GEMINI_API_KEY"
 [
-  "gemini-2.5-pro"
   "gemini-2.5-flash"
-  "gemini-2.0-flash"
-  "gemini-2.0-flash-lite"
+  "gemini-3.1-flash-lite-preview"
+  "gemma-4-31b-it"
 ]
