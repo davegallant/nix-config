@@ -22,8 +22,14 @@
                 extra_headers = copilotHeaders;
               };
             };
+            geminiModel = name: {
+              model_name = builtins.replaceStrings [ "." ] [ "-" ] name;
+              litellm_params = {
+                model = "gemini/${name}";
+              };
+            };
           in
-          map copilotModel (import ./copilot-models.nix);
+          map copilotModel (import ./copilot-models.nix) ++ map geminiModel (import ./gemini-models.nix);
         litellm_settings = {
           drop_params = true;
         };
