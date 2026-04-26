@@ -115,11 +115,6 @@
       checkReversePath = "loose";
       trustedInterfaces = [ "tailscale0" ];
       interfaces.docker0.allowedTCPPorts = [ 4000 ];
-      extraCommands = ''
-        iptables -I DOCKER-USER -s 172.0.0.0/8 -d 192.168.1.0/24 -j DROP
-        iptables -I DOCKER-USER -s 172.0.0.0/8 -d 10.0.0.0/8 -j DROP
-        iptables -I DOCKER-USER -s 172.0.0.0/8 -d 172.16.0.0/12 -j DROP
-      '';
     };
   };
 
