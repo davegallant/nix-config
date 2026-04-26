@@ -163,6 +163,7 @@
               "--hide-window"
             ];
           }
+          { argv = [ "bitwarden" ]; }
           { argv = [ "blueman-applet" ]; }
           { argv = [ "mako" ]; }
           { argv = [ "opensnitch-ui" ]; }
