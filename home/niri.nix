@@ -83,8 +83,6 @@
           "XDG_CURRENT_DESKTOP" = "niri"; # portal backend detection
         };
 
-        prefer-no-csd = true;
-
         cursor = {
           theme = "Bibata-Modern-Classic";
           size = 24;

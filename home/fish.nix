@@ -74,6 +74,7 @@
         set -x PATH $PATH $GOBIN
 
         test -f $HOME/work.fish && source $HOME/work.fish
+        test -f $HOME/private.fish && source $HOME/private.fish
       '';
 
       shellInit = ''
