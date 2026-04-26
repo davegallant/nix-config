@@ -75,6 +75,16 @@
         GTK_THEME = "adw-gtk3-dark";
       };
 
+      home.file.".config/nirinit/config.toml".text = ''
+        [skip]
+        apps = ["brave-ophjlpahpchlmihnnnihgmmeilfjmjjc-Default"]
+
+        [launch]
+        "signal" = "signal-desktop"
+        "brave-browser" = "brave"
+        "com.mitchellh.ghostty" = "ghostty"
+      '';
+
       programs.niri.settings = {
         environment = {
           "NIXOS_OZONE_WL" = "1"; # Electron apps use Wayland natively
