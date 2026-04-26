@@ -1,6 +1,14 @@
 { config, lib, ... }:
 {
   config = lib.mkIf config.features.ai.enable {
+    system.activationScripts.litellm-secrets.text = ''
+      if [ ! -f /var/lib/litellm/secrets.env ]; then
+        mkdir -p /var/lib/litellm
+        touch /var/lib/litellm/secrets.env
+        chmod 600 /var/lib/litellm/secrets.env
+      fi
+    '';
+
     services.litellm = {
       enable = true;
       host = "0.0.0.0";
@@ -8,6 +16,7 @@
       environment = {
         HOME = "/var/lib/litellm";
       };
+      environmentFile = "/var/lib/litellm/secrets.env";
       settings = {
         model_list =
           let
@@ -26,6 +35,7 @@
               model_name = builtins.replaceStrings [ "." ] [ "-" ] name;
               litellm_params = {
                 model = "gemini/${name}";
+                api_key = "os.environ/GEMINI_API_KEY";
               };
             };
           in

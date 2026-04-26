@@ -103,6 +103,7 @@ in
       disabled_providers = [
         "opencode"
         "github-copilot"
+        "google"
       ];
       provider.litellm = {
         npm = "@ai-sdk/openai-compatible";
@@ -132,7 +133,7 @@ in
             map (id: {
               name = builtins.replaceStrings [ "." ] [ "-" ] id;
               value = mkModel id;
-            }) (import ../copilot-models.nix)
+            }) (import ../copilot-models.nix ++ import ../gemini-models.nix)
           );
       };
     };
