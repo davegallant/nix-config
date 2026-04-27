@@ -117,6 +117,8 @@
       };
     };
 
+    services.tumbler.enable = true;
+
     xdg.portal = {
       enable = true;
       extraPortals = [
