@@ -57,12 +57,12 @@
           foot
           grim
           gnome-calculator
-          nautilus
           niri-float-sticky
           playerctl
           pwvucontrol
           slurp
           swaybg
+          xfce.thunar
           trayscale
           wl-clipboard
           xclip
