@@ -86,7 +86,7 @@
       {
         key = "<leader>ff";
         mode = [ "n" ];
-        action = "<cmd>Telescope find_files<CR>";
+        action = "<cmd>Telescope find_files hidden=true<CR>";
       }
       {
         key = "<leader>fg";
@@ -140,6 +140,18 @@
         settings.defaults = {
           layout_strategy = "vertical";
           layout_config.vertical.width = 0.9;
+          vimgrep_arguments = [
+            "rg"
+            "--color=never"
+            "--no-heading"
+            "--with-filename"
+            "--line-number"
+            "--column"
+            "--smart-case"
+            "--hidden"
+            "--glob"
+            "!**/.git/**"
+          ];
         };
         extensions.fzf-native.enable = true;
         extensions.live-grep-args.enable = true;
