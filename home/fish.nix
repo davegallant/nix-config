@@ -20,6 +20,12 @@
       enableFishIntegration = true;
       settings = {
         add_newline = false;
+        time = {
+          disabled = false;
+          format = "[$time]($style) ";
+          time_format = "%I:%M %p";
+          style = "dimmed white";
+        };
         gcloud = {
           format = "";
         };
