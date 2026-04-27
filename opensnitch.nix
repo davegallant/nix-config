@@ -1,4 +1,9 @@
-{ lib, pkgs, ... }:
+{
+  lib,
+  pkgs,
+  unstable,
+  ...
+}:
 {
   services.opensnitch = {
     enable = true;
@@ -83,6 +88,42 @@
               operand = "dest.host";
               sensitive = false;
               data = "^(([a-z0-9|-]+\\.)*github\\.com|([a-z0-9|-]+\\.)*nixos\\.org)$";
+            }
+          ];
+        };
+      };
+      tailscaled = {
+        name = "Allow tailscaled";
+        enabled = true;
+        action = "allow";
+        duration = "always";
+        operator = {
+          type = "simple";
+          sensitive = false;
+          operand = "process.path";
+          data = "${lib.getBin unstable.tailscale}/bin/tailscaled";
+        };
+      };
+      clamav-freshclam = {
+        name = "Allow ClamAV freshclam";
+        enabled = true;
+        action = "allow";
+        duration = "always";
+        operator = {
+          type = "list";
+          operand = "list";
+          list = [
+            {
+              type = "simple";
+              sensitive = false;
+              operand = "process.path";
+              data = "${lib.getBin pkgs.clamav}/bin/freshclam";
+            }
+            {
+              type = "regexp";
+              operand = "dest.host";
+              sensitive = false;
+              data = "^([a-z0-9|-]+\\.)*clamav\\.net$";
             }
           ];
         };
