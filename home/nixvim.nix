@@ -8,29 +8,20 @@
     globals.clipboard = "osc52";
 
     opts = {
-      backup = false;
       completeopt = [
         "menuone"
         "noselect"
       ];
       cursorline = true;
       expandtab = true;
-      fillchars = {
-        diff = "∙";
-        eob = " ";
-        vert = "┃";
-      };
       foldenable = false;
       foldexpr = "nvim_treesitter#foldexpr()";
       foldlevel = 20;
       foldmethod = "expr";
       ignorecase = true;
-      modelines = 5;
       mouse = "a";
       number = true;
-      scrolloff = 3;
       shell = "bash";
-      shiftround = false;
       shiftwidth = 2;
       showbreak = "↳ ";
       sidescrolloff = 3;
