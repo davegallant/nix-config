@@ -91,7 +91,7 @@
       {
         key = "<leader>fg";
         mode = [ "n" ];
-        action = "<cmd>Telescope live_grep<CR>";
+        action = "<cmd>lua require('telescope').extensions['live_grep_args'].live_grep_args()<CR>";
       }
       {
         key = "<leader>s";
@@ -142,6 +142,7 @@
           layout_config.vertical.width = 0.9;
         };
         extensions.fzy-native.enable = true;
+        extensions.live-grep-args.enable = true;
       };
     };
 
