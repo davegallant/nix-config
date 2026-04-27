@@ -95,7 +95,7 @@
         g = "git";
         gc = "git checkout $(git branch | fzf)";
         gco = "git checkout $(git branch -r | sed -e 's/^  origin\\///' | fzf)";
-        gho = "gh repo view --web >/dev/null";
+        gho = "gh repo view --json url --jq .url; gh repo view --web 2>/dev/null";
         gr = "cd $(git rev-parse --show-toplevel)";
         grep = "rg --smart-case";
         j = "just";
