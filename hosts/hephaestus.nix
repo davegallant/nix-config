@@ -2,16 +2,11 @@
   config,
   inputs,
   lib,
-  modulesPath,
   pkgs,
   unstable,
   ...
 }:
 {
-
-  imports = [
-    (modulesPath + "/installer/scan/not-detected.nix")
-  ];
 
   features = {
     desktop.enable = true;
