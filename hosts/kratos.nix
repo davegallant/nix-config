@@ -96,6 +96,7 @@
     (azure-cli.withExtensions [ azure-cli-extensions.fzf ])
     ssm-session-manager-plugin
     terraform
+    vault
   ];
 
 }
