@@ -46,7 +46,9 @@
         ''}
 
 
-        bind \cw backward-kill-word
+        fish_vi_key_bindings
+        bind -M insert \cw backward-kill-word
+        bind -M insert \ce end-of-line
 
         set -x DOCKER_CLI_HINTS false
         ${lib.optionalString (
