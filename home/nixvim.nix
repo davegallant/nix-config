@@ -75,6 +75,21 @@
         action = "<cmd>NvimTreeFindFileToggle<CR>";
       }
       {
+        key = "gd";
+        mode = [ "n" ];
+        action = "<cmd>lua vim.lsp.buf.definition()<CR>";
+      }
+      {
+        key = "gD";
+        mode = [ "n" ];
+        action = "<cmd>lua vim.lsp.buf.declaration()<CR>";
+      }
+      {
+        key = "gr";
+        mode = [ "n" ];
+        action = "<cmd>lua vim.lsp.buf.references()<CR>";
+      }
+      {
         key = "<leader>ff";
         mode = [ "n" ];
         action = "<cmd>Telescope find_files hidden=true<CR>";
