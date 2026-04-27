@@ -141,7 +141,7 @@
           layout_strategy = "vertical";
           layout_config.vertical.width = 0.9;
         };
-        extensions.fzy-native.enable = true;
+        extensions.fzf-native.enable = true;
         extensions.live-grep-args.enable = true;
       };
     };
