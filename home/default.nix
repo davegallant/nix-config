@@ -12,34 +12,18 @@ in
     ./claude.nix
     ./features.nix
     ./fish.nix
+    ./ghostty.nix
     ./git.nix
     ./gui.nix
+    ./gh-clone.nix
     ./k9s.nix
+    ./nix-search.nix
     ./nixvim.nix
-    ./opencode.nix
     ./obsidian.nix
-    ./ghostty.nix
+    ./opencode.nix
   ];
 
   home.stateVersion = "25.11";
-
-  home.file.".local/bin/nix-search" = {
-    executable = true;
-    text = ''
-      #!/usr/bin/env bash
-      if [ $# -gt 1 ]; then
-        channel=$1
-        shift
-      else
-        channel=nixpkgs
-      fi
-      query="$@"
-      nix search "$channel" "$query" 2>/dev/null \
-        | grep "^\*" \
-        | sed "s/legacyPackages\.[^.]*\.//" \
-        | grep -E "^\* [^[:space:]]*''${query}"
-    '';
-  };
 
   services = {
     gpg-agent = {
