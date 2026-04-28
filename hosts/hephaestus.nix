@@ -190,6 +190,8 @@
     "plugdev"
   ];
 
+  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.enableRedistributableFirmware = true;
   hardware.keyboard.qmk.enable = true;
 
   services.udev.extraRules = ''
@@ -197,8 +199,6 @@
     ATTRS{idVendor}=="36b0", ATTRS{idProduct}=="3002", \
     ENV{ID_INPUT_JOYSTICK}="", ENV{ID_INPUT_ACCELEROMETER}=""
   '';
-
-  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
   services.resolved.enable = true;
 
