@@ -116,6 +116,12 @@
         action = "<cmd>Neogit<CR>";
         options.silent = true;
       }
+      {
+        key = "<leader>d";
+        mode = [ "n" ];
+        action = "<cmd>DiffviewOpen<CR>";
+        options.silent = true;
+      }
     ];
 
     plugins = {
@@ -149,7 +155,7 @@
         enable = true;
         settings.integrations.diffview = true;
       };
-      diffview.enable = true; # optional but pairs well
+      diffview.enable = true;
       nvim-tree.enable = true;
       spectre.enable = true;
       treesitter.enable = true;
