@@ -105,14 +105,14 @@
       enable = true;
       settings = {
         launch = {
-          "signal" = "signal-desktop";
           "brave-browser" = "brave";
           "com.mitchellh.ghostty" = "ghostty";
-          "opensnitch_ui" = "opensnitch-ui";
+          "signal" = "signal-desktop";
         };
         skip.apps = [
-          "steam"
           "brave-ophjlpahpchlmihnnnihgmmeilfjmjjc-Default"
+          "opensnitch_ui"
+          "steam"
         ];
       };
     };
