@@ -74,11 +74,11 @@
 
   fileSystems = {
     "/" = {
-      device = "/dev/disk/by-uuid/7f4f0948-041c-47e9-ab28-53132026f158";
+      device = "/dev/disk/by-label/NIXROOT";
       fsType = "ext4";
     };
     "/boot/efi" = {
-      device = "/dev/disk/by-uuid/F1BD-5227";
+      device = "/dev/disk/by-label/NIXBOOT";
       fsType = "vfat";
     };
     "/mnt/synology-2b/media" = {
