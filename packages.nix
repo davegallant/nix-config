@@ -28,7 +28,6 @@ in
       gopls
       hadolint
       jq
-      lazygit
       lsof
       macchina
       ncdu
