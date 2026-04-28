@@ -327,6 +327,7 @@
     ];
 
     extraConfigLua = ''
+      require("gh-clone")
       vim.cmd.colorscheme("ghostty-default-style-dark")
     '';
   };
