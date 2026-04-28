@@ -654,6 +654,7 @@
           border-radius = 6;
           border-size = 2;
           font = "JetBrainsMono Nerd Font 12";
+          max-history = 50;
           max-visible = 5;
           sort = "-time";
           "urgency=high" = {
