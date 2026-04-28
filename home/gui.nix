@@ -15,13 +15,6 @@
       ];
     };
 
-    programs.zathura = {
-      enable = true;
-      options = {
-        selection-clipboard = "clipboard";
-      };
-    };
-
     programs.mangohud = {
       enable = true;
       settings = {
