@@ -182,6 +182,15 @@
         action.__raw = ''function() vim.cmd("Octo review submit") end'';
         options.desc = "Submit a review";
       }
+      {
+        mode = "n";
+        key = "<leader>sp";
+        action = "<cmd>Telescope project<CR>";
+        options = {
+          desc = "Switch project";
+          silent = true;
+        };
+      }
     ];
 
     plugins = {
@@ -240,10 +249,26 @@
         };
         extensions.fzf-native.enable = true;
         extensions.live-grep-args.enable = true;
+        enabledExtensions = [ "project" ];
+
+        settings.extensions.project = {
+          base_dirs = [
+            {
+              path = "~/src";
+              max_depth = 5;
+            }
+          ];
+          hidden_files = true;
+          theme = "dropdown";
+          order_by = "recent";
+          search_by = "title";
+        };
+
       };
     };
 
     extraPlugins = [
+      pkgs.vimPlugins.telescope-project-nvim
       (pkgs.vimUtils.buildVimPlugin {
         name = "ghostty-default-style-dark-nvim";
         src = pkgs.fetchFromGitHub {
