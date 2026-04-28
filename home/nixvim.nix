@@ -144,6 +144,31 @@
         '';
         options.desc = "Git branches (fetch first)";
       }
+      {
+        key = "<leader>op";
+        action.__raw = ''function() vim.cmd("Octo pr list") end'';
+        options.desc = "List PRs";
+      }
+      {
+        key = "<leader>od";
+        action.__raw = ''function() vim.cmd("Octo pr diff") end'';
+        options.desc = "Show the PR diff";
+      }
+      {
+        key = "<leader>or";
+        action.__raw = ''function() vim.cmd("Octo review start") end'';
+        options.desc = "Start a review";
+      }
+      {
+        key = "<leader>ou";
+        action.__raw = ''function() vim.cmd("Octo pr url") end'';
+        options.desc = "Show and copy the PR url";
+      }
+      {
+        key = "<leader>os";
+        action.__raw = ''function() vim.cmd("Octo review submit") end'';
+        options.desc = "Submit a review";
+      }
     ];
 
     plugins = {
