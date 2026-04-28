@@ -110,6 +110,12 @@
         mode = [ "v" ];
         action = ''"hy:%s/<C-r>h//g<left><left>'';
       }
+      {
+        key = "<leader>g";
+        mode = [ "n" ];
+        action = "<cmd>Neogit<CR>";
+        options.silent = true;
+      }
     ];
 
     plugins = {
@@ -139,6 +145,11 @@
         enable = true;
         mockDevIcons = true;
       };
+      neogit = {
+        enable = true;
+        settings.integrations.diffview = true;
+      };
+      diffview.enable = true; # optional but pairs well
       nvim-tree.enable = true;
       spectre.enable = true;
       treesitter.enable = true;
