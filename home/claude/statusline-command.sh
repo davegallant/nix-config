@@ -4,6 +4,7 @@ input=$(cat)
 cwd=$(echo "$input" | jq -r '.workspace.current_dir // .cwd // ""')
 model=$(echo "$input" | jq -r '.model.display_name // ""')
 window_size=$(echo "$input" | jq -r '.context_window.context_window_size // empty')
+session_cost=$(echo "$input" | jq -r '.cost.total_cost_usd // empty')
 # Sum all current_usage token fields for precise count
 input_tokens=$(echo "$input" | jq -r '
   [.context_window.current_usage.input_tokens,
@@ -64,6 +65,12 @@ if [ -n "$model" ]; then
     parts+=("$(printf '\033[33m%s\033[0m' "$model")")
 fi
 
+# Session cost (magenta)
+if [ -n "$session_cost" ]; then
+    cost_display=$(awk "BEGIN { printf \"%.4f\", $session_cost }")
+    parts+=("$(printf '\033[35m$%s\033[0m' "$cost_display")")
+fi
+
 # Context usage — rendered as a 10-segment block progress bar
 if [ -n "$used" ]; then
     used_int=$(printf '%.0f' "$used")
@@ -78,7 +85,7 @@ if [ -n "$used" ]; then
     filled=$(( used_int / 10 ))
     empty=$(( 10 - filled ))
     bar=""
-    for ((i=0; i<filled; i++)); do bar+="█"; done
+    for ((i=0; i<filled; i++)); do bar+="▓"; done
     for ((i=0; i<empty; i++));  do bar+="░"; done
     token_label=""
     if [ -n "$input_tokens" ] && [ -n "$window_size" ]; then
