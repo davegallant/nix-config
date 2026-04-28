@@ -271,12 +271,21 @@
         enabledExtensions = [ "project" ];
 
         settings.extensions.project = {
-          base_dirs = [
-            {
-              path = "~/src";
-              max_depth = 5;
-            }
-          ];
+          base_dirs.__raw = ''
+            (function()
+              local f = io.open(vim.fn.expand("~/.config/cd-fzf"), "r")
+              if not f then return {} end
+              local dirs = {}
+              for line in f:lines() do
+                line = line:match("^%s*(.-)%s*$")  -- trim whitespace
+                if line ~= "" then
+                  table.insert(dirs, { path = line, max_depth = 1 })
+                end
+              end
+              f:close()
+              return dirs
+            end)()
+          '';
           hidden_files = true;
           theme = "dropdown";
           order_by = "recent";
