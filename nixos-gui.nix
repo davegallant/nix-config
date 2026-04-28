@@ -14,11 +14,13 @@
         bleachbit
         calibre
         clamtk
+        evince
         feishin
         gimp-with-plugins
         httpie-desktop
         libation
         mission-center
+        mupdf
         opensnitch-ui
         pika-backup
         pinta
