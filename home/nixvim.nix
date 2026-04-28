@@ -48,6 +48,19 @@
         event = "BufEnter";
         command = "match ExtraWhitespace /\\s\\+$/";
       }
+      {
+        event = "OptionSet";
+        pattern = "diff";
+        callback = {
+          __raw = ''
+            function()
+              if vim.o.diff then
+                vim.opt_local.wrap = true
+              end
+            end
+          '';
+        };
+      }
     ];
 
     highlight = {
