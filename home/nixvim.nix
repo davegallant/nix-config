@@ -61,6 +61,20 @@
           '';
         };
       }
+      {
+        event = "User";
+        pattern = "PersistenceSavePre";
+        callback = {
+          __raw = ''
+            function()
+              local view = require("nvim-tree.view")
+              if view.is_visible() then
+                vim.cmd("NvimTreeClose")
+              end
+            end
+          '';
+        };
+      }
     ];
 
     highlight = {
@@ -245,7 +259,10 @@
       };
       octo.enable = true;
       nvim-tree.enable = true;
-      persistence.enable = true;
+      persistence = {
+        enable = true;
+        settings.excluded_filetypes = [ "NvimTree" ];
+      };
       spectre.enable = true;
       treesitter.enable = true;
       telescope = {
