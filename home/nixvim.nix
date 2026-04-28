@@ -122,6 +122,28 @@
         action = "<cmd>DiffviewOpen<CR>";
         options.silent = true;
       }
+      {
+        key = "<leader>gb";
+        action.__raw = ''
+          function()
+            vim.system({"git", "fetch", "--prune"}, {})
+            require("telescope.builtin").git_branches({
+              attach_mappings = function(_, map)
+                local actions = require("telescope.actions")
+                local action_state = require("telescope.actions.state")
+                actions.select_default:replace(function(prompt_bufnr)
+                  local selection = action_state.get_selected_entry()
+                  actions.close(prompt_bufnr)
+                  local branch = selection.value:gsub("^origin/", "")
+                  vim.fn.system("git switch " .. branch)
+                end)
+                return true
+              end
+            })
+          end
+        '';
+        options.desc = "Git branches (fetch first)";
+      }
     ];
 
     plugins = {
@@ -131,6 +153,7 @@
         enable = true;
         settings.current_line_blame = true;
       };
+      diffview.enable = true;
       gitlinker.enable = true;
       lualine.enable = true;
       lsp = {
@@ -155,7 +178,7 @@
         enable = true;
         settings.integrations.diffview = true;
       };
-      diffview.enable = true;
+      octo.enable = true;
       nvim-tree.enable = true;
       spectre.enable = true;
       treesitter.enable = true;
