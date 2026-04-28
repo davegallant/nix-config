@@ -92,7 +92,8 @@
       {
         key = "<leader>ff";
         mode = [ "n" ];
-        action = "<cmd>Telescope find_files hidden=true<CR>";
+        action = "<cmd>Telescope find_files hidden=true find_command=rg,--files,--hidden,--glob,!**/.git/**<CR>";
+
       }
       {
         key = "<leader>fg";
