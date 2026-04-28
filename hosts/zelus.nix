@@ -39,6 +39,14 @@
       ];
     };
 
+    WindowManager = {
+      GloballyEnabled = true;
+      EnableTilingByEdgeDrag = true;
+      EnableTopTilingByEdgeDrag = true;
+      EnableTilingOptionAccelerator = true;
+      EnableTiledWindowMargins = false;
+    };
+
     NSGlobalDomain.AppleShowAllExtensions = true;
     NSGlobalDomain.AppleShowScrollBars = "Always";
     NSGlobalDomain.NSUseAnimatedFocusRing = false;
@@ -100,7 +108,6 @@
       "notunes"
       "obsidian"
       "raycast"
-      "rectangle"
       "signal"
       "slack"
       "spotify"
