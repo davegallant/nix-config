@@ -88,6 +88,7 @@
       "et"
       "gnu-sed"
       "gnu-tar"
+      "mpv"
       "node"
       "oras"
     ];

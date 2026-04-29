@@ -15,7 +15,6 @@
         calibre
         clamtk
         evince
-        feishin
         gimp-with-plugins
         httpie-desktop
         libation
