@@ -84,10 +84,18 @@
     "/mnt/synology-2b/media" = {
       device = "192.168.1.178:/volume1/Media";
       fsType = "nfs";
+      options = [
+        "nofail"
+        "x-systemd.automount"
+      ];
     };
     "/mnt/truenas/home/backups" = {
       device = "192.168.1.132:/mnt/wd4t/data/home/backup/";
       fsType = "nfs";
+      options = [
+        "nofail"
+        "x-systemd.automount"
+      ];
     };
   };
 
@@ -140,8 +148,10 @@
     };
   };
 
-  services.mullvad-vpn.enable = true;
-  services.mullvad-vpn.package = pkgs.mullvad-vpn;
+  services.mullvad-vpn = {
+    enable = true;
+    package = pkgs.mullvad-vpn;
+  };
 
   services.opensnitch.rules = {
     mullvad-daemon = {
@@ -173,7 +183,6 @@
   system.stateVersion = "25.11";
 
   nix = {
-    settings.auto-optimise-store = true;
     registry.nixpkgs.flake = inputs.nixpkgs;
     gc = {
       automatic = true;
