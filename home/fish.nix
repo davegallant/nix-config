@@ -85,8 +85,8 @@
         set -x GOBIN $GOPATH/bin
         set -x PATH $PATH $GOBIN
 
-        test -f $HOME/work.fish && source $HOME/work.fish
-        test -f $HOME/private.fish && source $HOME/private.fish
+        test -f $HOME/.config/fish/work.fish && source $HOME/.config/fish/work.fish
+        test -f $HOME/.config/fish/workprivate.fish && source $HOME/.config/fish/private.fish
       '';
 
       shellInit = ''
