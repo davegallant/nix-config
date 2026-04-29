@@ -150,6 +150,12 @@
         options.silent = true;
       }
       {
+        key = "<leader>dr";
+        mode = [ "n" ];
+        action = "<cmd>DiffviewRefresh<CR>";
+        options.silent = true;
+      }
+      {
         key = "<leader>gb";
         action.__raw = ''
           function()
