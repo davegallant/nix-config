@@ -85,6 +85,25 @@
         set -x GOBIN $GOPATH/bin
         set -x PATH $PATH $GOBIN
 
+        function kdebug
+          kubectl run debug-(random) --image=nicolaka/netshoot --restart=Never -it --rm -- bash
+        end
+
+        function kdesc
+          set pod (kubectl get pods -o name | fzf)
+          test -n "$pod"; and kubectl describe $pod
+        end
+
+        function kex
+          set pod (kubectl get pods -o name | fzf)
+          test -n "$pod"; and kubectl exec -it $pod -- sh -c 'bash || sh'
+        end
+
+        function klog
+          set pod (kubectl get pods -o name | fzf)
+          test -n "$pod"; and kubectl logs -f $pod --all-containers
+        end
+
         test -f $HOME/.config/fish/work.fish && source $HOME/.config/fish/work.fish
         test -f $HOME/.config/fish/workprivate.fish && source $HOME/.config/fish/private.fish
       '';
@@ -106,8 +125,9 @@
         k = "kubecolor";
         kubectl = "kubecolor";
         kcx = "kubectx";
+        kevents = "kubectl get events --sort-by=.lastTimestamp -A";
+        ktree = "kubectl tree";
         kns = "kubens";
-        krun = "kubectl run --rm ubuntu-shell --image=ubuntu --restart=Never -it --rm -- /bin/bash";
         l = "eza -la --git --group-directories-first";
         m = "make";
         oc = "opencode";

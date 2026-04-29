@@ -50,6 +50,7 @@ in
       unstable.kubecolor
       unstable.kubectl
       unstable.kubectx
+      unstable.kubectl-tree
       unstable.kubernetes-helm
       unstable.stern
       unzip
