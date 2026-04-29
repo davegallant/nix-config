@@ -92,6 +92,12 @@
         options.silent = true;
       }
       {
+        key = "<C-w>";
+        mode = [ "n" ];
+        action = "<cmd>tabclose<cr>";
+        options.silent = true;
+      }
+      {
         key = "<leader>y";
         mode = [ "v" ];
         action = ''"+y'';
