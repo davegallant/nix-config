@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 set -euo pipefail
 
 base="${LITELLM_BASE_URL:-${ANTHROPIC_BASE_URL:-http://127.0.0.1:4000}}"
