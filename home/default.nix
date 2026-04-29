@@ -30,7 +30,7 @@ in
       enable = stdenv.isLinux;
       defaultCacheTtl = 3600;
       defaultCacheTtlSsh = 3600;
-      enableSshSupport = true;
+      enableSshSupport = !config.features.headless.enable;
       pinentry.package =
         if config.features.headless.enable then pkgs.pinentry-curses else pkgs.pinentry-gnome3;
     };
