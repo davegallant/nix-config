@@ -16,7 +16,10 @@
         builtins.readFile ./niri/waybar-external-ip.sh
       );
       gpuUsageScript = pkgs.writeShellScriptBin "gpu-usage" (builtins.readFile ./niri/gpu-usage.sh);
-      weatherScript = pkgs.writeShellScriptBin "wttr" (builtins.readFile ./niri/wttr.sh);
+      weatherScript = pkgs.writeShellScriptBin "wttr" (
+        builtins.replaceStrings [ "__WEATHER_COORDS__" ] [ config.features.weatherCoords ]
+          (builtins.readFile ./niri/wttr.sh)
+      );
     in
     {
       home.pointerCursor = {
@@ -489,7 +492,7 @@
               exec = "${weatherScript}/bin/wttr";
               interval = 3600;
               format = "{}";
-              on-click = "xdg-open 'https://weather.gc.ca/en/location/index.html?coords=42.982,-81.249'";
+              on-click = "xdg-open 'https://weather.gc.ca/en/location/index.html?coords=${config.features.weatherCoords}'";
             };
           }
         ];
