@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+set -euo pipefail
+
 input=$(cat)
 
 cwd=$(echo "$input" | jq -r '.workspace.current_dir // .cwd // ""')
