@@ -6,16 +6,9 @@
   ...
 }:
 let
-  claude-litellm = pkgs.writeShellApplication {
-    name = "claude-litellm";
-    runtimeInputs = [
-      pkgs.curl
-      pkgs.fzf
-      pkgs.jq
-      unstable.claude-code
-    ];
-    text = builtins.readFile ./claude/claude-litellm.sh;
-  };
+  claude-litellm = pkgs.writeShellScriptBin "claude-litellm" (
+    builtins.readFile ./claude/claude-litellm.sh
+  );
 in
 {
   config = lib.mkIf config.features.ai.enable {
