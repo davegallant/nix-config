@@ -92,7 +92,7 @@
         options.silent = true;
       }
       {
-        key = "<C-w>";
+        key = "<leader>tc";
         mode = [ "n" ];
         action = "<cmd>tabclose<cr>";
         options.silent = true;
@@ -150,16 +150,40 @@
         options.silent = true;
       }
       {
-        key = "<leader>d";
+        key = "<leader>gd";
         mode = [ "n" ];
-        action = "<cmd>DiffviewOpen<CR>";
-        options.silent = true;
+        action.__raw = ''
+          function()
+            local lines = vim.fn.systemlist("git diff")
+            if #lines == 0 then
+              vim.notify("No changes", vim.log.levels.INFO)
+              return
+            end
+            local buf = vim.api.nvim_create_buf(true, true)
+            vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+            vim.api.nvim_buf_set_option(buf, "filetype", "diff")
+            vim.api.nvim_set_current_buf(buf)
+          end
+        '';
+        options.desc = "Show git diff";
       }
       {
-        key = "<leader>dr";
+        key = "<leader>gdc";
         mode = [ "n" ];
-        action = "<cmd>DiffviewRefresh<CR>";
-        options.silent = true;
+        action.__raw = ''
+          function()
+            local lines = vim.fn.systemlist("git diff --cached")
+            if #lines == 0 then
+              vim.notify("No staged changes", vim.log.levels.INFO)
+              return
+            end
+            local buf = vim.api.nvim_create_buf(true, true)
+            vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+            vim.api.nvim_buf_set_option(buf, "filetype", "diff")
+            vim.api.nvim_set_current_buf(buf)
+          end
+        '';
+        options.desc = "Show git diff (staged)";
       }
       {
         key = "<leader>gb";
@@ -244,13 +268,6 @@
         enable = true;
         settings.current_line_blame = true;
       };
-      diffview = {
-        enable = true;
-        settings.view = {
-          default.layout = "diff2_vertical";
-          merge_tool.layout = "diff3_vertical";
-        };
-      };
       gitlinker.enable = true;
       lualine.enable = true;
       lsp = {
@@ -271,10 +288,7 @@
         enable = true;
         mockDevIcons = true;
       };
-      neogit = {
-        enable = true;
-        settings.integrations.diffview = true;
-      };
+      neogit.enable = true;
       octo.enable = true;
       nvim-tree.enable = true;
       persistence = {
