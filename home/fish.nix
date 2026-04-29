@@ -63,9 +63,13 @@
         set -x EDITOR vim
         set -x NNN_FIFO "$XDG_RUNTIME_DIR/nnn.fifo"
         set -x PAGER less
-        ${lib.optionalString (
-          pkgs.stdenv.isLinux && !config.features.headless.enable
-        ) "set -x SSH_AUTH_SOCK /home/dave/.bitwarden-ssh-agent.sock"}
+        ${lib.optionalString (pkgs.stdenv.isLinux && !config.features.headless.enable) ''
+          if test -S $HOME/.bitwarden-ssh-agent.sock
+            set -x SSH_AUTH_SOCK $HOME/.bitwarden-ssh-agent.sock
+          else
+            set -x SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
+          end
+        ''}
         set -x TERM xterm-256color
 
         set -x PATH $PATH \
