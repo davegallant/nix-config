@@ -244,7 +244,13 @@
         enable = true;
         settings.current_line_blame = true;
       };
-      diffview.enable = true;
+      diffview = {
+        enable = true;
+        settings.view = {
+          default.layout = "diff2_vertical";
+          merge_tool.layout = "diff3_vertical";
+        };
+      };
       gitlinker.enable = true;
       lualine.enable = true;
       lsp = {
