@@ -12,32 +12,11 @@
   config = lib.mkIf config.features.desktop.enable (
     let
       termExec = "${pkgs.ghostty}/bin/ghostty -e";
-      externalIpScript = pkgs.writeShellScript "waybar-external-ip" ''
-        data=$(${pkgs.curl}/bin/curl -s https://ipinfo.io/json)
-        ip=$(echo "$data" | ${pkgs.jq}/bin/jq -r '.ip')
-        country=$(echo "$data" | ${pkgs.jq}/bin/jq -r '.country')
-        c1=$(printf '%d' "'$(echo "$country" | cut -c1)")
-        c2=$(printf '%d' "'$(echo "$country" | cut -c2)")
-        f1=$(printf '\U'$(printf '%08x' $((0x1F1E6 + c1 - 65))))
-        f2=$(printf '\U'$(printf '%08x' $((0x1F1E6 + c2 - 65))))
-        printf '{"text":"%s","tooltip":"%s"}\n' "$f1$f2" "$ip"
-      '';
-      gpuUsageScript = pkgs.writeShellScriptBin "gpu-usage" ''
-        GPU=$(cat /sys/class/drm/card*/device/gpu_busy_percent 2>/dev/null | head -1)
-        MEM=$(cat /sys/class/drm/card*/device/mem_info_vram_used 2>/dev/null | head -1)
-        [[ -z "$GPU" ]] && exit 0
-        MEM_MB=$(( MEM / 1024 / 1024 ))
-        printf '{"text":"%s%%","tooltip":"GPU %s%% VRAM %s MiB","percentage":%s}\n' \
-        "$GPU" "$GPU" "$MEM_MB" "$GPU"
-      '';
-      weatherScript = pkgs.writeShellScriptBin "wttr" ''
-        for i in 1 2 3 4 5; do
-          result=$(${pkgs.curl}/bin/curl -s --max-time 5 "https://wttr.in/42.982,-81.249?format=%c+%t")
-          [ -n "$result" ] && echo "$result" | tr -s ' ' && exit 0
-          sleep 3
-        done
-        echo "no network"
-      '';
+      externalIpScript = pkgs.writeShellScript "waybar-external-ip" (
+        builtins.readFile ./niri/waybar-external-ip.sh
+      );
+      gpuUsageScript = pkgs.writeShellScriptBin "gpu-usage" (builtins.readFile ./niri/gpu-usage.sh);
+      weatherScript = pkgs.writeShellScriptBin "wttr" (builtins.readFile ./niri/wttr.sh);
     in
     lib.mkIf pkgs.stdenv.isLinux {
       home.pointerCursor = {
