@@ -102,7 +102,6 @@
       "font-hack-nerd-font"
       "fork"
       "headlamp"
-      "iterm2"
       "knockknock"
       "ghostty"
       "lulu"
