@@ -40,7 +40,7 @@
     };
 
     WindowManager = {
-      GloballyEnabled = true;
+      GloballyEnabled = false;
       EnableTilingByEdgeDrag = true;
       EnableTopTilingByEdgeDrag = true;
       EnableTilingOptionAccelerator = true;
