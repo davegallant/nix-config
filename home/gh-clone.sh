@@ -31,7 +31,8 @@ mkdir -p "$BASE_DIR" "$CACHE_DIR"
 now=$(date +%s)
 
 if [ -f "$CACHE_FILE" ]; then
-  cache_mtime=$(stat -c %Y "$CACHE_FILE" 2>/dev/null || stat -f %m "$CACHE_FILE")
+  cache_mtime=0
+  cache_mtime=$(stat -c %Y "$CACHE_FILE" 2>/dev/null || stat -f %m "$CACHE_FILE" 2>/dev/null || printf '0')
   cache_age=$((now - cache_mtime))
 else
   cache_age=$CACHE_TTL

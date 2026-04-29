@@ -9,7 +9,7 @@
 }:
 
 {
-  config = lib.mkIf config.features.desktop.enable (
+  config = lib.mkIf (config.features.desktop.enable && pkgs.stdenv.isLinux) (
     let
       termExec = "${pkgs.ghostty}/bin/ghostty -e";
       externalIpScript = pkgs.writeShellScript "waybar-external-ip" (
@@ -18,7 +18,7 @@
       gpuUsageScript = pkgs.writeShellScriptBin "gpu-usage" (builtins.readFile ./niri/gpu-usage.sh);
       weatherScript = pkgs.writeShellScriptBin "wttr" (builtins.readFile ./niri/wttr.sh);
     in
-    lib.mkIf pkgs.stdenv.isLinux {
+    {
       home.pointerCursor = {
         package = pkgs.bibata-cursors;
         name = "Bibata-Modern-Classic";
