@@ -66,7 +66,13 @@
     package = unstable.tailscale;
   };
 
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    settings = {
+      PasswordAuthentication = false;
+      PermitRootLogin = "no";
+    };
+  };
 
   users.users.dave = {
     isNormalUser = true;
