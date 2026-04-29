@@ -18,7 +18,6 @@
         tag.gpgsign = true;
         alias = {
           aa = "add -A .";
-          br = "branch";
           c = "commit";
           cm = "commit -m";
           ca = "commit --amend";
@@ -35,7 +34,6 @@
           pl = "! git pull origin $(git rev-parse --abbrev-ref HEAD)";
           pom = "pull origin main";
           st = "status";
-          wip = "for-each-ref --sort='authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' refs/heads";
         };
         push = {
           default = "current";
@@ -45,7 +43,7 @@
         };
       };
 
-      includes = [ { path = "~/.gitconfig-work"; } ];
+      includes = [ { path = "~/.config/git/config-work"; } ];
 
     };
   };

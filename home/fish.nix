@@ -51,7 +51,6 @@
           end
         ''}
 
-
         fish_vi_key_bindings
         bind -M insert \cw backward-kill-word
         bind -M insert \ce end-of-line
@@ -108,7 +107,7 @@
         kubectl = "kubecolor";
         kcx = "kubectx";
         kns = "kubens";
-        krun = "kubectl run ubuntu-shell --image=ubuntu --restart=Never -it --rm -- /bin/bash";
+        krun = "kubectl run --rm ubuntu-shell --image=ubuntu --restart=Never -it --rm -- /bin/bash";
         l = "eza -la --git --group-directories-first";
         m = "make";
         oc = "opencode";
