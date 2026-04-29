@@ -56,6 +56,7 @@ in
       viddy
       virtualenv
       yq-go
+      subtui
       yt-dlp
       zip
     ]
