@@ -1,7 +1,12 @@
 {
   lib,
-  stdenv,
+  stdenvNoCC,
   fetchurl,
+  makeBinaryWrapper,
+  autoPatchelfHook,
+  bubblewrap,
+  procps,
+  socat,
 }:
 let
   version = "2.1.123"; # renovate: datasource=github-releases depName=anthropics/claude-code
@@ -21,9 +26,9 @@ let
     };
   };
 
-  asset = assets.${stdenv.hostPlatform.system} or (throw "claude-code: unsupported system ${stdenv.hostPlatform.system}");
+  asset = assets.${stdenvNoCC.hostPlatform.system} or (throw "claude-code: unsupported system ${stdenvNoCC.hostPlatform.system}");
 in
-stdenv.mkDerivation {
+stdenvNoCC.mkDerivation {
   pname = "claude-code";
   inherit version;
 
@@ -32,18 +37,39 @@ stdenv.mkDerivation {
   };
 
   sourceRoot = ".";
+
+  nativeBuildInputs =
+    [ makeBinaryWrapper ]
+    ++ lib.optionals stdenvNoCC.hostPlatform.isElf [ autoPatchelfHook ];
+
   dontBuild = true;
-  dontFixup = true;
+  dontStrip = true;
 
   installPhase = ''
     mkdir -p $out/bin
-    cp claude $out/bin/claude
-    chmod +x $out/bin/claude
+    cp claude $out/bin/.claude-unwrapped
+    chmod +x $out/bin/.claude-unwrapped
+    makeBinaryWrapper $out/bin/.claude-unwrapped $out/bin/claude \
+      --set DISABLE_AUTOUPDATER 1 \
+      --set DISABLE_INSTALLATION_CHECKS 1 \
+      --set-default FORCE_AUTOUPDATE_PLUGINS 1 \
+      --unset DEV \
+      --prefix PATH : ${
+        lib.makeBinPath (
+          [ procps ]
+          ++ lib.optionals stdenvNoCC.hostPlatform.isLinux [
+            bubblewrap
+            socat
+          ]
+        )
+      }
   '';
 
   meta = {
-    description = "Claude Code CLI";
+    description = "Agentic coding tool that lives in your terminal";
     homepage = "https://github.com/anthropics/claude-code";
+    license = lib.licenses.unfree;
+    sourceProvenance = with lib.sourceTypes; [ binaryNativeCode ];
     platforms = builtins.attrNames assets;
     mainProgram = "claude";
   };
