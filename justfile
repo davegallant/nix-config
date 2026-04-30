@@ -16,7 +16,7 @@ rebuild-boot:
 rollback:
   $cmd switch --rollback
 
-update:
+update: fmt
   @./update-flake.sh
 
 fmt:
