@@ -134,7 +134,7 @@
         action = "<cmd>lua require('telescope').extensions['live_grep_args'].live_grep_args()<CR>";
       }
       {
-        key = "<leader>s";
+        key = "<leader>sr";
         mode = [ "n" ];
         action = "<cmd>lua require('spectre').open()<CR>";
       }
