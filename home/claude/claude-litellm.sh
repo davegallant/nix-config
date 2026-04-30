@@ -15,11 +15,20 @@ model=$(echo "$models_json" |
 
 [[ -z "$model" ]] && exit 1
 
+max_input=$(curl -s -f -m 5 -H "Authorization: Bearer $token" "$base/model/info" 2>/dev/null |
+  jq -r --arg m "$model" '[.data[] | select(.model_name == $m) | .model_info.max_input_tokens] | first // empty')
+
+claude_model="$model"
+if [[ -n "$max_input" ]]; then
+  max_input_k=$((max_input / 1000))
+  claude_model="${model}[${max_input_k}k]"
+fi
+
 export ANTHROPIC_BASE_URL="$base"
 export ANTHROPIC_AUTH_TOKEN="$token"
-export ANTHROPIC_DEFAULT_SONNET_MODEL="$model"
-export ANTHROPIC_DEFAULT_HAIKU_MODEL="$model"
-export ANTHROPIC_DEFAULT_OPUS_MODEL="$model"
-export CLAUDE_CODE_SUBAGENT_MODEL="$model"
+export ANTHROPIC_DEFAULT_SONNET_MODEL="$claude_model"
+export ANTHROPIC_DEFAULT_HAIKU_MODEL="$claude_model"
+export ANTHROPIC_DEFAULT_OPUS_MODEL="$claude_model"
+export CLAUDE_CODE_SUBAGENT_MODEL="$claude_model"
 
-exec claude --model "$model" "$@"
+exec claude --model "$claude_model" "$@"
