@@ -26,7 +26,9 @@ let
     };
   };
 
-  asset = assets.${stdenvNoCC.hostPlatform.system} or (throw "claude-code: unsupported system ${stdenvNoCC.hostPlatform.system}");
+  asset =
+    assets.${stdenvNoCC.hostPlatform.system}
+      or (throw "claude-code: unsupported system ${stdenvNoCC.hostPlatform.system}");
 in
 stdenvNoCC.mkDerivation {
   pname = "claude-code";
@@ -38,9 +40,10 @@ stdenvNoCC.mkDerivation {
 
   sourceRoot = ".";
 
-  nativeBuildInputs =
-    [ makeBinaryWrapper ]
-    ++ lib.optionals stdenvNoCC.hostPlatform.isElf [ autoPatchelfHook ];
+  nativeBuildInputs = [
+    makeBinaryWrapper
+  ]
+  ++ lib.optionals stdenvNoCC.hostPlatform.isElf [ autoPatchelfHook ];
 
   dontBuild = true;
   dontStrip = true;
