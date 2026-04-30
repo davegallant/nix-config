@@ -198,6 +198,42 @@
         };
       }
       {
+        key = "<leader>gl";
+        mode = [ "n" ];
+        action = "<cmd>Telescope git_commits<CR>";
+        options = {
+          silent = true;
+          desc = "Git log";
+        };
+      }
+      {
+        key = "<leader>gL";
+        mode = [ "n" ];
+        action = "<cmd>Telescope git_bcommits<CR>";
+        options = {
+          silent = true;
+          desc = "Git log (current file)";
+        };
+      }
+      {
+        key = "<leader>gss";
+        mode = [ "n" ];
+        action = "<cmd>Git stash<CR>";
+        options = {
+          silent = true;
+          desc = "Git stash";
+        };
+      }
+      {
+        key = "<leader>gsp";
+        mode = [ "n" ];
+        action = "<cmd>Git stash pop<CR>";
+        options = {
+          silent = true;
+          desc = "Git stash pop";
+        };
+      }
+      {
         key = "<leader>gb";
         action.__raw = ''
           function()
@@ -254,27 +290,9 @@
         };
       }
       {
-        mode = "n";
-        key = "<leader>qs";
-        action.__raw = ''function() require("persistence").load() end'';
-        options.desc = "Restore session for CWD";
-      }
-      {
-        mode = "n";
-        key = "<leader>qS";
-        action.__raw = ''function() require("persistence").select() end'';
-        options.desc = "Select session";
-      }
-      {
-        mode = "n";
-        key = "<leader>ql";
-        action.__raw = ''function() require("persistence").load({ last = true }) end'';
-        options.desc = "Restore last session";
-      }
-      {
         key = "K";
         mode = [ "n" ];
-        action.__raw = ''function() vim.lsp.buf.hover() end'';
+        action.__raw = "function() vim.lsp.buf.hover() end";
         options = {
           silent = true;
           desc = "LSP hover";
@@ -282,8 +300,11 @@
       }
       {
         key = "<leader>ca";
-        mode = [ "n" "v" ];
-        action.__raw = ''function() vim.lsp.buf.code_action() end'';
+        mode = [
+          "n"
+          "v"
+        ];
+        action.__raw = "function() vim.lsp.buf.code_action() end";
         options = {
           silent = true;
           desc = "Code action";
@@ -292,7 +313,7 @@
       {
         key = "<leader>rn";
         mode = [ "n" ];
-        action.__raw = ''function() vim.lsp.buf.rename() end'';
+        action.__raw = "function() vim.lsp.buf.rename() end";
         options = {
           silent = true;
           desc = "Rename symbol";
@@ -301,7 +322,7 @@
       {
         key = "[d";
         mode = [ "n" ];
-        action.__raw = ''function() vim.diagnostic.goto_prev() end'';
+        action.__raw = "function() vim.diagnostic.goto_prev() end";
         options = {
           silent = true;
           desc = "Previous diagnostic";
@@ -310,7 +331,7 @@
       {
         key = "]d";
         mode = [ "n" ];
-        action.__raw = ''function() vim.diagnostic.goto_next() end'';
+        action.__raw = "function() vim.diagnostic.goto_next() end";
         options = {
           silent = true;
           desc = "Next diagnostic";
