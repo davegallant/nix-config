@@ -96,7 +96,14 @@
 
         function kex
           set pod (kubectl get pods -o name | fzf)
-          test -n "$pod"; and kubectl exec -it $pod -- sh -c 'bash || sh'
+          test -n "$pod"; or return
+          set containers (kubectl get $pod -o jsonpath='{.spec.containers[*].name}' | string split ' ')
+          if test (count $containers) -gt 1
+            set container (printf '%s\n' $containers | fzf)
+            test -n "$container"; and kubectl exec -it $pod -c $container -- sh -c 'bash || sh'
+          else
+            kubectl exec -it $pod -- sh -c 'bash || sh'
+          end
         end
 
         function klog
