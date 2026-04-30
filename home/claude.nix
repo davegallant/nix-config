@@ -2,10 +2,10 @@
   config,
   lib,
   pkgs,
-  unstable,
   ...
 }:
 let
+  claude-code = pkgs.callPackage ./claude/package.nix { };
   claude-litellm = pkgs.writeShellScriptBin "claude-litellm" (
     builtins.readFile ./claude/claude-litellm.sh
   );
@@ -13,7 +13,7 @@ in
 {
   config = lib.mkIf config.features.ai.enable {
     home.packages = [
-      unstable.claude-code
+      claude-code
       claude-litellm
     ];
 
