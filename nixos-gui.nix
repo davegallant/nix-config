@@ -16,7 +16,7 @@
         clamtk
         evince
         gimp-with-plugins
-        httpie-desktop
+        bruno
         libation
         mission-center
         mupdf

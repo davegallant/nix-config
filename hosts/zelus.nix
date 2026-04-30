@@ -96,6 +96,7 @@
     casks = [
       "beekeeper-studio"
       "brave-browser"
+      "bruno"
       "capslocknodelay"
       "dbeaver-community"
       "font-fira-code-nerd-font"
