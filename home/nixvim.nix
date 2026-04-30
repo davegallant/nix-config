@@ -271,6 +271,60 @@
         action.__raw = ''function() require("persistence").load({ last = true }) end'';
         options.desc = "Restore last session";
       }
+      {
+        key = "K";
+        mode = [ "n" ];
+        action.__raw = ''function() vim.lsp.buf.hover() end'';
+        options = {
+          silent = true;
+          desc = "LSP hover";
+        };
+      }
+      {
+        key = "<leader>ca";
+        mode = [ "n" "v" ];
+        action.__raw = ''function() vim.lsp.buf.code_action() end'';
+        options = {
+          silent = true;
+          desc = "Code action";
+        };
+      }
+      {
+        key = "<leader>rn";
+        mode = [ "n" ];
+        action.__raw = ''function() vim.lsp.buf.rename() end'';
+        options = {
+          silent = true;
+          desc = "Rename symbol";
+        };
+      }
+      {
+        key = "[d";
+        mode = [ "n" ];
+        action.__raw = ''function() vim.diagnostic.goto_prev() end'';
+        options = {
+          silent = true;
+          desc = "Previous diagnostic";
+        };
+      }
+      {
+        key = "]d";
+        mode = [ "n" ];
+        action.__raw = ''function() vim.diagnostic.goto_next() end'';
+        options = {
+          silent = true;
+          desc = "Next diagnostic";
+        };
+      }
+      {
+        key = "<leader>fb";
+        mode = [ "n" ];
+        action = "<cmd>Telescope buffers<CR>";
+        options = {
+          silent = true;
+          desc = "Find buffers";
+        };
+      }
     ];
 
     plugins = {
