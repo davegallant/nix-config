@@ -25,6 +25,17 @@
       "depNameTemplate": "MattiaPun/SubTUI",
       "datasourceTemplate": "github-releases",
       "versioningTemplate": "semver"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": ["home/claude/package\\.nix$"],
+      "matchStrings": [
+        "version = \"(?<currentValue>[\\d\\.]+)\";"
+      ],
+      "depNameTemplate": "anthropics/claude-code",
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver",
+      "extractVersionTemplate": "^v?(?<version>.*)$"
     }
   ]
 }
