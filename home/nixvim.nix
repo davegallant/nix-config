@@ -92,7 +92,7 @@
         options.silent = true;
       }
       {
-        key = "<leader>tc";
+        key = "<leader>q";
         mode = [ "n" ];
         action = "<cmd>tabclose<cr>";
         options.silent = true;
@@ -144,7 +144,7 @@
         action = ''"hy:%s/<C-r>h//g<left><left>'';
       }
       {
-        key = "<leader>g";
+        key = "<leader>gst";
         mode = [ "n" ];
         action = "<cmd>Git<CR>";
         options = {
