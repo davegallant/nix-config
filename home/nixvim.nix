@@ -350,6 +350,7 @@
 
     plugins = {
       auto-save.enable = true;
+      which-key.enable = true;
       cmp.enable = true;
       gitsigns = {
         enable = true;
