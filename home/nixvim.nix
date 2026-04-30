@@ -146,44 +146,56 @@
       {
         key = "<leader>g";
         mode = [ "n" ];
-        action = "<cmd>Neogit<CR>";
-        options.silent = true;
+        action = "<cmd>Git<CR>";
+        options = {
+          silent = true;
+          desc = "Git status";
+        };
+      }
+      {
+        key = "<leader>gc";
+        mode = [ "n" ];
+        action = "<cmd>Git commit<CR>";
+        options = {
+          silent = true;
+          desc = "Git commit";
+        };
+      }
+      {
+        key = "<leader>gp";
+        mode = [ "n" ];
+        action = "<cmd>Git pull<CR>";
+        options = {
+          silent = true;
+          desc = "Git pull";
+        };
+      }
+      {
+        key = "<leader>gP";
+        mode = [ "n" ];
+        action = "<cmd>Git push<CR>";
+        options = {
+          silent = true;
+          desc = "Git push";
+        };
       }
       {
         key = "<leader>gd";
         mode = [ "n" ];
-        action.__raw = ''
-          function()
-            local lines = vim.fn.systemlist("git diff")
-            if #lines == 0 then
-              vim.notify("No changes", vim.log.levels.INFO)
-              return
-            end
-            local buf = vim.api.nvim_create_buf(true, true)
-            vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
-            vim.api.nvim_buf_set_option(buf, "filetype", "diff")
-            vim.api.nvim_set_current_buf(buf)
-          end
-        '';
-        options.desc = "Show git diff";
+        action = "<cmd>Git diff<CR>";
+        options = {
+          silent = true;
+          desc = "Git diff";
+        };
       }
       {
         key = "<leader>gdc";
         mode = [ "n" ];
-        action.__raw = ''
-          function()
-            local lines = vim.fn.systemlist("git diff --cached")
-            if #lines == 0 then
-              vim.notify("No staged changes", vim.log.levels.INFO)
-              return
-            end
-            local buf = vim.api.nvim_create_buf(true, true)
-            vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
-            vim.api.nvim_buf_set_option(buf, "filetype", "diff")
-            vim.api.nvim_set_current_buf(buf)
-          end
-        '';
-        options.desc = "Show git diff (staged)";
+        action = "<cmd>Git diff --cached<CR>";
+        options = {
+          silent = true;
+          desc = "Git diff (staged)";
+        };
       }
       {
         key = "<leader>gb";
@@ -288,7 +300,7 @@
         enable = true;
         mockDevIcons = true;
       };
-      neogit.enable = true;
+      fugitive.enable = true;
       octo.enable = true;
       nvim-tree.enable = true;
       persistence = {
