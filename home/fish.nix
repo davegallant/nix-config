@@ -27,6 +27,13 @@
           time_format = "%I:%M %p";
           style = "dimmed white";
         };
+        custom.kube = {
+          command = ''grep '^current-context:' "$HOME/.kube/config" | awk '{print $2}' '';
+          when = ''test -f "$HOME/.kube/config"'';
+          symbol = "☸ ";
+          format = "[$symbol$output]($style) ";
+          style = "bold cyan";
+        };
       };
     };
 
