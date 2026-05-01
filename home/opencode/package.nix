@@ -5,6 +5,8 @@
   makeBinaryWrapper,
   autoPatchelfHook,
   unzip,
+  python3,
+  just,
 }:
 let
   version = "1.14.31"; # renovate: datasource=github-releases depName=anomalyco/opencode
@@ -59,13 +61,15 @@ stdenvNoCC.mkDerivation {
         tar -xzf $src
       '';
 
-  installPhase = ''
-    mkdir -p $out/bin
-    cp opencode $out/bin/.opencode-unwrapped
-    chmod +x $out/bin/.opencode-unwrapped
-    makeBinaryWrapper $out/bin/.opencode-unwrapped $out/bin/opencode \
-      --set OPENCODE_AUTO_UPDATE 0
-  '';
+   installPhase = ''
+     mkdir -p $out/bin
+     cp opencode $out/bin/.opencode-unwrapped
+     chmod +x $out/bin/.opencode-unwrapped
+     makeBinaryWrapper $out/bin/.opencode-unwrapped $out/bin/opencode \
+       --set OPENCODE_AUTO_UPDATE 0 \
+       --prefix PATH : ${lib.makeBinPath [ python3 just ]}
+   '';
+
 
   meta = {
     description = "AI coding agent for the terminal";
