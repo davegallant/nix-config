@@ -1,0 +1,49 @@
+name: update hashes on renovate prs
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+    paths:
+      - home/claude/package.nix
+      - home/opencode/package.nix
+
+jobs:
+  update-hashes:
+    if: startsWith(github.head_ref, 'renovate/')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: read
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.head_ref }}
+          token: ${{ secrets.GH_PAT }}
+
+      - name: get changed files
+        id: changed
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+        run: |
+          FILES=$(gh api repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/files --jq '.[].filename' | tr '\n' ' ')
+          echo "files=$FILES" >> "$GITHUB_OUTPUT"
+
+      - name: update claude hashes
+        if: contains(steps.changed.outputs.files, 'home/claude/package.nix')
+        run: |
+          VERSION=$(grep 'version = ' home/claude/package.nix | head -1 | sed 's/.*version = "\([^"]*\)".*/\1/')
+          bash home/claude/update-hashes.sh "$VERSION"
+
+      - name: update opencode hashes
+        if: contains(steps.changed.outputs.files, 'home/opencode/package.nix')
+        run: |
+          VERSION=$(grep 'version = ' home/opencode/package.nix | head -1 | sed 's/.*version = "\([^"]*\)".*/\1/')
+          bash home/opencode/update-hashes.sh "$VERSION"
+
+      - name: commit and push updated hashes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add home/claude/package.nix home/opencode/package.nix
+          git diff --staged --quiet || git commit -m "chore: update hashes"
+          git push
