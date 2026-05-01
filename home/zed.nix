@@ -61,7 +61,7 @@ in
                           };
                         };
                     in
-                    map mkModel (import ../copilot-models.nix);
+                    map mkModel (import ../litellm/models/copilot.nix);
                 };
               };
             };
