@@ -82,7 +82,6 @@
     };
 
     brews = [
-      "argocd"
       "azure-cli"
       "coreutils"
       "et"
