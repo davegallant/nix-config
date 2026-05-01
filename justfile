@@ -1,7 +1,7 @@
 set export
 
-alias u := update
 alias r := rebuild
+alias f := fmt
 
 arch := `uname -s`
 
@@ -15,9 +15,6 @@ rebuild-boot:
 
 rollback:
   $cmd switch --rollback --flake .
-
-update: fmt
-  @./update-flake.sh
 
 fmt:
   fd -e nix -x nixfmt
