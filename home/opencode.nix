@@ -5,7 +5,10 @@
   ...
 }:
 let
-  opencode = pkgs.callPackage ./opencode/package.nix { };
+  opencode = pkgs.callPackage ./opencode/package.nix {
+    python3 = pkgs.python3;
+    just = pkgs.just;
+  };
   opencode-wrapper = pkgs.writeShellScriptBin "opencode" (
     ''
       set -euo pipefail
