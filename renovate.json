@@ -16,12 +16,6 @@
       "automerge": true,
       "automergeType": "pr",
       "automergeStrategy": "squash"
-    },
-    {
-      "matchManagers": ["regex"],
-      "automerge": true,
-      "automergeType": "pr",
-      "automergeStrategy": "squash"
     }
   ],
   "customManagers": [
