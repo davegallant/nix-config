@@ -11,39 +11,48 @@
   "permissions": {
     "disableBypassPermissionsMode": "disable",
     "allow": [
+      "Bash(curl*)",
+      "Bash(gh issue view*)",
       "Bash(git add*)",
       "Bash(git commit*)",
-      "Bash(git pull*)",
-      "Bash(git status*)",
-      "Bash(git log*)",
       "Bash(git diff*)",
+      "Bash(git log*)",
+      "Bash(git pull*)",
       "Bash(git show*)",
+      "Bash(git status*)",
       "Bash(just*)",
       "Bash(make*)",
       "Bash(nix build*)",
       "Bash(nix flake*)",
-      "Bash(curl*)",
-      "WebFetch"
+      "WebFetch",
+      "mcp__plugin_slack_slack__slack_read_canvas",
+      "mcp__plugin_slack_slack__slack_read_channel",
+      "mcp__plugin_slack_slack__slack_read_thread",
+      "mcp__plugin_slack_slack__slack_read_user_profile",
+      "mcp__plugin_slack_slack__slack_search_channels",
+      "mcp__plugin_slack_slack__slack_search_public",
+      "mcp__plugin_slack_slack__slack_search_public_and_private",
+      "mcp__plugin_slack_slack__slack_search_users"
     ],
     "deny": [
+      "Bash(dd:*)",
+      "Bash(doas:*)",
       "Bash(git push --force*)",
       "Bash(git push -f*)",
-      "Bash(sudo:*)",
-      "Bash(doas:*)",
-      "Bash(dd:*)",
       "Bash(mkfs:*)",
-      "Read(~/.ssh/**)",
+      "Bash(sudo:*)",
+      "Read(**/.env)",
+      "Read(**/.env.*)",
+      "Read(**/secrets/**)",
+      "Read(/etc/shadow)",
       "Read(~/.aws/**)",
       "Read(~/.config/gcloud/**)",
       "Read(~/.config/op/**)",
-      "Read(~/.kube/config)",
       "Read(~/.docker/config.json)",
       "Read(~/.gnupg/**)",
+      "Read(~/.kube/config)",
       "Read(~/.password-store/**)",
-      "Read(/etc/shadow)",
-      "Read(**/.env)",
-      "Read(**/.env.*)",
-      "Read(**/secrets/**)"
+      "Read(~/.ssh/**)"
     ]
   },
   "statusLine": {
@@ -52,7 +61,8 @@
   },
   "enabledPlugins": {
     "code-review@claude-plugins-official": true,
-    "superpowers@claude-plugins-official": true
+    "superpowers@claude-plugins-official": true,
+    "slack@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "claude-plugins-official": {
