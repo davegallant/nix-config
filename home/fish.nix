@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  unstable,
   ...
 }:
 {
@@ -25,15 +26,6 @@
           format = "[$time]($style) ";
           time_format = "%I:%M %p";
           style = "dimmed white";
-        };
-        gcloud = {
-          format = "";
-        };
-        kubernetes = {
-          disabled = false;
-          symbol = "☸ ";
-          format = "[$symbol$context/$namespace]($style) ";
-          style = "bold cyan";
         };
       };
     };
