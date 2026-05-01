@@ -2,10 +2,10 @@
   config,
   lib,
   pkgs,
-  unstable,
   ...
 }:
 let
+  opencode = pkgs.callPackage ./opencode/package.nix { };
   opencode-wrapper = pkgs.writeShellScriptBin "opencode" (
     ''
       set -euo pipefail
@@ -85,11 +85,11 @@ let
         --setenv LANG "''${LANG:-en_US.UTF-8}" \
         --setenv TZ "''${TZ:-}" \
         --setenv PATH "/etc/profiles/per-user/$USER/bin:/run/current-system/sw/bin:/run/wrappers/bin" \
-        ${unstable.opencode}/bin/opencode "$@"
+        ${opencode}/bin/opencode "$@"
     ''
     + lib.optionalString pkgs.stdenv.isDarwin ''
 
-      exec ${unstable.opencode}/bin/opencode "$@"
+      exec ${opencode}/bin/opencode "$@"
     ''
   );
 in

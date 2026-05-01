@@ -28,6 +28,16 @@ clean:
   echo 'Cleaning root...'
   sudo nix-collect-garbage -d
 
+# update version and hashes in home/claude/package.nix
+# usage: just update-claude [VERSION]  (VERSION without leading 'v'; defaults to latest)
+update-claude *version:
+  @./home/claude/update-hashes.sh {{version}}
+
+# update version and hashes in home/opencode/package.nix
+# usage: just update-opencode [VERSION]  (VERSION without leading 'v'; defaults to latest)
+update-opencode *version:
+  @./home/opencode/update-hashes.sh {{version}}
+
 # fetch live model metadata from the litellm proxy and write a json file
 # consumed by home/opencode.nix. file path:
 #   ~/.config/nix-config/litellm-models.json
