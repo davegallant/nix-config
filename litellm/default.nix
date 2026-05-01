@@ -39,7 +39,7 @@
               };
             };
           in
-          map copilotModel (import ./copilot-models.nix) ++ map geminiModel (import ./gemini-models.nix);
+          map copilotModel (import ./models/copilot.nix) ++ map geminiModel (import ./models/gemini.nix);
         litellm_settings = {
           drop_params = true;
         };

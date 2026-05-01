@@ -6,7 +6,7 @@
 }:
 {
   imports = [
-    ./litellm.nix
+    ./litellm
     ./nixos-gui.nix
     ./opensnitch.nix
   ];
