@@ -23,10 +23,6 @@ in
       github-cli
       gnumake
       gnupg
-      gofumpt
-      golangci-lint
-      gopls
-      hadolint
       jq
       lsof
       macchina
@@ -37,7 +33,6 @@ in
       nixfmt-rfc-style
       nixpkgs-review
       nodePackages.bash-language-server
-      nodePackages.eslint
       nodePackages.yaml-language-server
       nvd
       progress
@@ -63,7 +58,6 @@ in
     ]
     ++ lib.optionals stdenv.isLinux [
       arp-scan
-      bun
       cliphist
       cryptsetup
       dnsutils
