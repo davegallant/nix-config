@@ -17,11 +17,21 @@ let
 
       litellm_base_url="''${LITELLM_BASE_URL:-''${ANTHROPIC_BASE_URL:-http://127.0.0.1:4000/v1}}"
       litellm_api_key="''${LITELLM_API_KEY:-''${ANTHROPIC_AUTH_TOKEN:-sk-noauth}}"
+      models_json="$HOME/.config/nix-config/litellm-models.json"
+      rendered="$HOME/.config/opencode/opencode.json"
       sed \
         -e "s|__LITELLM_BASE_URL__|$litellm_base_url|g" \
         -e "s|__LITELLM_API_KEY__|$litellm_api_key|g" \
         "$HOME/.config/opencode/opencode.json.template" \
-        > "$HOME/.config/opencode/opencode.json"
+        > "$rendered.tmp"
+      if [ -f "$models_json" ]; then
+        ${pkgs.jq}/bin/jq --slurpfile m "$models_json" \
+          '.provider.litellm.models = $m[0]' \
+          "$rendered.tmp" > "$rendered"
+        rm -f "$rendered.tmp"
+      else
+        mv "$rendered.tmp" "$rendered"
+      fi
     ''
     + lib.optionalString pkgs.stdenv.isLinux ''
 
@@ -75,11 +85,11 @@ let
         --setenv LANG "''${LANG:-en_US.UTF-8}" \
         --setenv TZ "''${TZ:-}" \
         --setenv PATH "/etc/profiles/per-user/$USER/bin:/run/current-system/sw/bin:/run/wrappers/bin" \
-        ${pkgs.opencode}/bin/opencode "$@"
+        ${unstable.opencode}/bin/opencode "$@"
     ''
     + lib.optionalString pkgs.stdenv.isDarwin ''
 
-      exec ${pkgs.opencode}/bin/opencode "$@"
+      exec ${unstable.opencode}/bin/opencode "$@"
     ''
   );
 in
@@ -91,7 +101,7 @@ in
       "$schema" = "https://opencode.ai/config.json";
       autoupdate = false;
       theme = "system";
-      model = "litellm/gpt-4-1";
+      model = "litellm/claude-sonnet-4-6";
       permission = {
         bash = {
           "*" = "ask";
@@ -128,29 +138,10 @@ in
           baseURL = "__LITELLM_BASE_URL__";
           apiKey = "__LITELLM_API_KEY__";
         };
-        models =
-          let
-            mkModel = id: {
-              name = id;
-              tool_call = true;
-              reasoning = false;
-              attachment = true;
-              limit = {
-                context = 200000;
-                output = 8192;
-              };
-              cost = {
-                input = 0;
-                output = 0;
-              };
-            };
-          in
-          builtins.listToAttrs (
-            map (id: {
-              name = builtins.replaceStrings [ "." ] [ "-" ] id;
-              value = mkModel id;
-            }) (import ../copilot-models.nix ++ import ../gemini-models.nix)
-          );
+        # Models are merged in at runtime by the opencode wrapper from
+        # ~/.config/nix-config/litellm-models.json (populated by `just refresh-models`).
+        # Empty here so the template stays pure / hermetic.
+        models = { };
       };
     };
   };
