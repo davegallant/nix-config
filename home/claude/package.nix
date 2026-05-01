@@ -7,6 +7,8 @@
   bubblewrap,
   procps,
   socat,
+  python3,
+  just,
 }:
 let
   version = "2.1.126"; # renovate: datasource=npm depName=@anthropic-ai/claude-code
@@ -60,7 +62,7 @@ stdenvNoCC.mkDerivation {
       --unset DEV \
       --prefix PATH : ${
         lib.makeBinPath (
-          [ procps ]
+          [ procps python3 just ]
           ++ lib.optionals stdenvNoCC.hostPlatform.isLinux [
             bubblewrap
             socat
