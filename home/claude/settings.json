@@ -113,6 +113,7 @@
       ]
     }
   },
+  "preferredNotifChannel": "ghostty",
   "effortLevel": "medium",
   "defaultMode": "auto",
   "model": "sonnet[1m]"
