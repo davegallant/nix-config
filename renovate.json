@@ -1,7 +1,11 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "schedule": [
-    "after 6am before 7am on weekdays"
+    "after 6am on monday",
+    "after 6am on tuesday",
+    "after 6am on wednesday",
+    "after 6am on thursday",
+    "after 6am on friday"
   ],
   "extends": [
     "config:recommended"
@@ -11,7 +15,9 @@
   },
   "packageRules": [
     {
-      "matchManagers": ["nix"],
+      "matchManagers": [
+        "nix"
+      ],
       "groupName": "nix flake inputs",
       "automerge": true,
       "automergeType": "pr",
@@ -21,7 +27,9 @@
   "customManagers": [
     {
       "customType": "regex",
-      "fileMatch": ["home/obsidian\\.nix$"],
+      "fileMatch": [
+        "home/obsidian\\.nix$"
+      ],
       "matchStrings": [
         "https://github\\.com/(?<depName>Vinzent03/obsidian-git)/releases/download/(?<currentValue>[\\d\\.]+)/obsidian-git-[\\d\\.]+\\.zip"
       ],
@@ -30,7 +38,9 @@
     },
     {
       "customType": "regex",
-      "fileMatch": ["overlays/subtui/default\\.nix$"],
+      "fileMatch": [
+        "overlays/subtui/default\\.nix$"
+      ],
       "matchStrings": [
         "rev = \"v(?<currentValue>[\\d\\.]+)\";"
       ],
@@ -40,7 +50,9 @@
     },
     {
       "customType": "regex",
-      "fileMatch": ["home/claude/package\\.nix$"],
+      "fileMatch": [
+        "home/claude/package\\.nix$"
+      ],
       "matchStrings": [
         "version = \"(?<currentValue>[\\d\\.]+)\";"
       ],
@@ -51,7 +63,9 @@
     },
     {
       "customType": "regex",
-      "fileMatch": ["home/opencode/package\\.nix$"],
+      "fileMatch": [
+        "home/opencode/package\\.nix$"
+      ],
       "matchStrings": [
         "version = \"(?<currentValue>[\\d\\.]+)\";"
       ],
