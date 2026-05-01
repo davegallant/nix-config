@@ -427,11 +427,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1777298702,
-        "narHash": "sha256-gB27sPh34ZQuBdnujTr1urEIYD0IW4OuTZUD/GMKeyk=",
+        "lastModified": 1777568088,
+        "narHash": "sha256-vifuYO4q8GFkguNiVmr7yoh7tWHbMAv7rAqZuHPUuPs=",
         "owner": "Veirt",
         "repo": "weathr",
-        "rev": "e7032c9282693ed871435ac0ec1af838a2913573",
+        "rev": "01a838526312683388a881123a0a9776bc20f4dc",
         "type": "github"
       },
       "original": {
