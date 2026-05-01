@@ -14,7 +14,7 @@ rebuild-boot:
   $cmd boot --flake . --install-bootloader
 
 rollback:
-  $cmd switch --rollback
+  $cmd switch --rollback --flake .
 
 update: fmt
   @./update-flake.sh
