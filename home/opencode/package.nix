@@ -7,20 +7,20 @@
   unzip,
 }:
 let
-  version = "1.14.30"; # renovate: datasource=github-releases depName=anomalyco/opencode
+  version = "1.14.31"; # renovate: datasource=github-releases depName=anomalyco/opencode
 
   assets = {
     x86_64-linux = {
       url = "https://github.com/anomalyco/opencode/releases/download/v${version}/opencode-linux-x64.tar.gz";
-      hash = "sha256-E7LdMsVUn3sDHou2f7jW6Nh6qeB71vABdiCDbx+3zc4=";
+      hash = "sha256-XThT4pyB16E0kVaQYlAJ9XNsqEBwUp5peWz2LhIjLJ4=";
     };
     aarch64-linux = {
       url = "https://github.com/anomalyco/opencode/releases/download/v${version}/opencode-linux-arm64.tar.gz";
-      hash = "sha256-yoauIrHbmGZQ6sTjAXU54VVwVpaJ+2cky48zwOTN9mg=";
+      hash = "sha256-2IZ+d7kB3QTnB/RZ9Es+KPI6bwwtdA8buK9vS2SsGfc=";
     };
     aarch64-darwin = {
       url = "https://github.com/anomalyco/opencode/releases/download/v${version}/opencode-darwin-arm64.zip";
-      hash = "sha256-A2m0XxAL5PAlxog2DbGyj/i+v8gdbLSIziccTkLdFss=";
+      hash = "sha256-86I4ajzNsehzOvdmYAoOLDWgAa2qoNMUKf+BwNzTIYA=";
     };
   };
 
