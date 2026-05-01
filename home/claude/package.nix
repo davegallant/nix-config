@@ -9,20 +9,20 @@
   socat,
 }:
 let
-  version = "2.1.123"; # renovate: datasource=github-releases depName=anthropics/claude-code
+  version = "2.1.126"; # renovate: datasource=npm depName=@anthropic-ai/claude-code
 
   assets = {
     x86_64-linux = {
-      url = "https://github.com/anthropics/claude-code/releases/download/v${version}/claude-linux-x64.tar.gz";
-      hash = "sha256-0RNfKwZrSwmnf++ur8U3cxBhr3rzFfKR+AkOV/x0idA=";
+      url = "https://registry.npmjs.org/@anthropic-ai/claude-code-linux-x64/-/claude-code-linux-x64-${version}.tgz";
+      hash = "sha512-D2A9TI62aoQcxxbZzsiOWlfqs+7X/K49qSthkPdCg4B24aQWv2rL0PWTvnvMTbQUTlg6bBL0PjauANdgHs+WjQ==";
     };
     aarch64-linux = {
-      url = "https://github.com/anthropics/claude-code/releases/download/v${version}/claude-linux-arm64.tar.gz";
-      hash = "sha256-dDxcijHvWKa3aRbOgnmmX3oSldJ5ZWvWDtQDi7b19HY=";
+      url = "https://registry.npmjs.org/@anthropic-ai/claude-code-linux-arm64/-/claude-code-linux-arm64-${version}.tgz";
+      hash = "sha512-iqdERAVEhU2BwEPlHy/S0O3ioKnlFUvlk5xS/G8DXnWok4Niin1HJ+7q4u6ayXWw7JFou3GW3pg34V31ddGhGg==";
     };
     aarch64-darwin = {
-      url = "https://github.com/anthropics/claude-code/releases/download/v${version}/claude-darwin-arm64.tar.gz";
-      hash = "sha256-wEwqXioJbZ9lU0elXhOjPaegvyJHIPh+tdwG3cQca98=";
+      url = "https://registry.npmjs.org/@anthropic-ai/claude-code-darwin-arm64/-/claude-code-darwin-arm64-${version}.tgz";
+      hash = "sha512-e1p/d4ugb3a28+i1AfRcjFMDnFS9isxsJOy9sYlINmX98pDyCIY76MyJw1HDH0z0x/8jEK30nx/lrrNAvIMNwA==";
     };
   };
 
@@ -38,7 +38,8 @@ stdenvNoCC.mkDerivation {
     inherit (asset) url hash;
   };
 
-  sourceRoot = ".";
+  # npm tarballs extract into a "package/" subdirectory
+  sourceRoot = "package";
 
   nativeBuildInputs = [
     makeBinaryWrapper
