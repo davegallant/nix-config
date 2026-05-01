@@ -182,7 +182,24 @@
       {
         key = "<leader>gd";
         mode = [ "n" ];
-        action = "<cmd>Git diff<CR>";
+        action.__raw = ''
+          function()
+            local result = vim.system({"git", "diff"}, {text = true}):wait()
+            if result.stdout == "" then
+              vim.notify("No changes", vim.log.levels.INFO)
+              return
+            end
+            local lines = vim.split(result.stdout, "\n", {plain = true})
+            vim.cmd("enew")
+            vim.bo.buftype = "nofile"
+            vim.bo.bufhidden = "wipe"
+            vim.bo.swapfile = false
+            vim.bo.filetype = "diff"
+            vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
+            vim.bo.modifiable = false
+            vim.keymap.set("n", "q", "<cmd>bd<CR>", {buffer = true, silent = true})
+          end
+        '';
         options = {
           silent = true;
           desc = "Git diff";
@@ -191,7 +208,24 @@
       {
         key = "<leader>gdc";
         mode = [ "n" ];
-        action = "<cmd>Git diff --cached<CR>";
+        action.__raw = ''
+          function()
+            local result = vim.system({"git", "diff", "--cached"}, {text = true}):wait()
+            if result.stdout == "" then
+              vim.notify("No staged changes", vim.log.levels.INFO)
+              return
+            end
+            local lines = vim.split(result.stdout, "\n", {plain = true})
+            vim.cmd("enew")
+            vim.bo.buftype = "nofile"
+            vim.bo.bufhidden = "wipe"
+            vim.bo.swapfile = false
+            vim.bo.filetype = "diff"
+            vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
+            vim.bo.modifiable = false
+            vim.keymap.set("n", "q", "<cmd>bd<CR>", {buffer = true, silent = true})
+          end
+        '';
         options = {
           silent = true;
           desc = "Git diff (staged)";
