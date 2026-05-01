@@ -40,12 +40,6 @@ nix fmt         # alternative: uses formatter flake output
 The formatter is `nixfmt` (RFC 166 style, package `nixfmt-rfc-style`).
 Always run `just fmt` before committing changes.
 
-### Update flake inputs
-```sh
-just update     # or: just u (runs update-flake.sh)
-```
-`update-flake.sh` is interactive: stashes uncommitted changes, `git pull`, `nix flake update`, `just rebuild`, then prompts to GPG-sign and push a timestamped commit. Do not run non-interactively.
-
 ### Garbage collection
 ```sh
 just clean
@@ -204,9 +198,11 @@ Two nixpkgs tiers, passed via `specialArgs`/`extraSpecialArgs`:
 ## CI/CD
 
 GitHub Actions workflow (`.github/workflows/cachix.yml`):
-- Triggers on push to `main` (ignoring markdown/LICENSE changes)
-- Builds the NixOS `hephaestus` configuration on `ubuntu-latest`
+- Triggers on push to `main` and on pull requests (ignoring markdown/LICENSE changes)
+- Builds the NixOS `hephaestus` and macOS `zelus` configurations, evaluates `kratos`
 - Pushes build artifacts to the `davegallant` Cachix binary cache
+
+Flake inputs are updated automatically by Renovate (weekdays at 6am) and auto-merged when CI passes. PRs touching `home/claude/package.nix` or `home/opencode/package.nix` trigger `.github/workflows/update-hashes.yml` which recomputes per-platform hashes before CI runs.
 
 ## Git Conventions
 - Main branch: `main`
