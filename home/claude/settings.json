@@ -10,7 +10,24 @@
   },
   "permissions": {
     "disableBypassPermissionsMode": "disable",
+    "allow": [
+      "Bash(git add*)",
+      "Bash(git commit*)",
+      "Bash(git pull*)",
+      "Bash(git status*)",
+      "Bash(git log*)",
+      "Bash(git diff*)",
+      "Bash(git show*)",
+      "Bash(just*)",
+      "Bash(make*)",
+      "Bash(nix build*)",
+      "Bash(nix flake*)",
+      "Bash(curl*)",
+      "WebFetch"
+    ],
     "deny": [
+      "Bash(git push --force*)",
+      "Bash(git push -f*)",
       "Bash(sudo:*)",
       "Bash(doas:*)",
       "Bash(dd:*)",
