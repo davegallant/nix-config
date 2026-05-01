@@ -31,6 +31,9 @@
         };
         kubernetes = {
           disabled = false;
+          symbol = "☸ ";
+          format = "[$symbol$context/$namespace]($style) ";
+          style = "bold cyan";
         };
       };
     };
