@@ -206,7 +206,7 @@
         };
       }
       {
-        key = "<leader>gdc";
+        key = "<leader>gD";
         mode = [ "n" ];
         action.__raw = ''
           function()
