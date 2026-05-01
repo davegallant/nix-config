@@ -62,7 +62,11 @@ stdenvNoCC.mkDerivation {
       --unset DEV \
       --prefix PATH : ${
         lib.makeBinPath (
-          [ procps python3 just ]
+          [
+            procps
+            python3
+            just
+          ]
           ++ lib.optionals stdenvNoCC.hostPlatform.isLinux [
             bubblewrap
             socat
