@@ -23,8 +23,8 @@
   "customManagers": [
     {
       "customType": "regex",
-      "fileMatch": [
-        "home/obsidian\\.nix$"
+      "managerFilePatterns": [
+        "/home/obsidian\\.nix$/"
       ],
       "matchStrings": [
         "https://github\\.com/(?<depName>Vinzent03/obsidian-git)/releases/download/(?<currentValue>[\\d\\.]+)/obsidian-git-[\\d\\.]+\\.zip"
@@ -34,8 +34,8 @@
     },
     {
       "customType": "regex",
-      "fileMatch": [
-        "overlays/subtui/default\\.nix$"
+      "managerFilePatterns": [
+        "/overlays/subtui/default\\.nix$/"
       ],
       "matchStrings": [
         "rev = \"v(?<currentValue>[\\d\\.]+)\";"
@@ -46,8 +46,8 @@
     },
     {
       "customType": "regex",
-      "fileMatch": [
-        "home/claude/package\\.nix$"
+      "managerFilePatterns": [
+        "/home/claude/package\\.nix$/"
       ],
       "matchStrings": [
         "version = \"(?<currentValue>[\\d\\.]+)\";"
@@ -59,8 +59,8 @@
     },
     {
       "customType": "regex",
-      "fileMatch": [
-        "home/opencode/package\\.nix$"
+      "managerFilePatterns": [
+        "/home/opencode/package\\.nix$/"
       ],
       "matchStrings": [
         "version = \"(?<currentValue>[\\d\\.]+)\";"
