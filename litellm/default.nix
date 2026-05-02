@@ -15,6 +15,7 @@
       port = 4000;
       environment = {
         HOME = "/var/lib/litellm";
+        XDG_CONFIG_HOME = "/var/lib/litellm/.config";
       };
       environmentFile = "/var/lib/litellm/secrets.env";
       settings = {
@@ -38,8 +39,17 @@
                 api_key = "os.environ/GEMINI_API_KEY";
               };
             };
+            openrouterModel = name: {
+              model_name = builtins.replaceStrings [ "." ] [ "-" ] name;
+              litellm_params = {
+                model = "openrouter/${name}";
+                api_key = "os.environ/OPENROUTER_API_KEY";
+              };
+            };
           in
-          map copilotModel (import ./models/copilot.nix) ++ map geminiModel (import ./models/gemini.nix);
+          map copilotModel (import ./models/copilot.nix)
+          ++ map geminiModel (import ./models/gemini.nix)
+          ++ map openrouterModel (import ./models/openrouter.nix);
         litellm_settings = {
           drop_params = true;
         };
