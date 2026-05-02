@@ -143,6 +143,7 @@ in
       plugin = [ "superpowers@git+https://github.com/obra/superpowers.git" ];
       disabled_providers = [
         "opencode"
+        "openrouter"
         "github-copilot"
         "google"
       ];
