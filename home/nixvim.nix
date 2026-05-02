@@ -162,6 +162,15 @@
         };
       }
       {
+        key = "<leader>gC";
+        mode = [ "n" ];
+        action = "<cmd>Git commit --amend<CR>";
+        options = {
+          silent = true;
+          desc = "Git commit amend";
+        };
+      }
+      {
         key = "<leader>gp";
         mode = [ "n" ];
         action = "<cmd>Git pull<CR>";
