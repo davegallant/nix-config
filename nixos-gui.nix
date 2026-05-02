@@ -12,11 +12,12 @@
       [
         bitwarden-desktop
         bleachbit
+        borgbackup
+        bruno
         calibre
         clamtk
         evince
         gimp-with-plugins
-        bruno
         libation
         mission-center
         mupdf
