@@ -114,7 +114,7 @@
         end
 
         test -f $HOME/.config/fish/work.fish && source $HOME/.config/fish/work.fish
-        test -f $HOME/.config/fish/workprivate.fish && source $HOME/.config/fish/private.fish
+        test -f $HOME/.config/fish/private.fish && source $HOME/.config/fish/private.fish
       '';
 
       shellInit = ''
