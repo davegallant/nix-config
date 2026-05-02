@@ -22,6 +22,11 @@ in
       executable = true;
     };
 
+    home.file.".claude/agents" = {
+      source = ./claude/agents;
+      recursive = true;
+    };
+
     home.activation.claudeSettings = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       public="${./claude/settings.json}"
       private="$HOME/.claude/settings.private.json"
