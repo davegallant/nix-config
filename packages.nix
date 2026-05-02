@@ -18,6 +18,7 @@ in
       cd-fzf
       curl
       doggo
+      dust
       eza
       fd
       github-cli
