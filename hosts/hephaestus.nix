@@ -89,8 +89,8 @@
         "x-systemd.automount"
       ];
     };
-    "/mnt/truenas/home/backups" = {
-      device = "192.168.1.132:/mnt/wd4t/data/home/backup/";
+    "/mnt/synology-2b/backups" = {
+      device = "192.168.1.178:/volume1/Backups";
       fsType = "nfs";
       options = [
         "nofail"
