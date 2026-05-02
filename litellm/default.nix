@@ -32,13 +32,6 @@
                 extra_headers = copilotHeaders;
               };
             };
-            geminiModel = name: {
-              model_name = builtins.replaceStrings [ "." ] [ "-" ] name;
-              litellm_params = {
-                model = "gemini/${name}";
-                api_key = "os.environ/GEMINI_API_KEY";
-              };
-            };
             openrouterModel = name: {
               model_name = builtins.replaceStrings [ "." ] [ "-" ] name;
               litellm_params = {
@@ -48,7 +41,6 @@
             };
           in
           map copilotModel (import ./models/copilot.nix)
-          ++ map geminiModel (import ./models/gemini.nix)
           ++ map openrouterModel (import ./models/openrouter.nix);
         litellm_settings = {
           drop_params = true;
