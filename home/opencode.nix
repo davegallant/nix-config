@@ -105,6 +105,28 @@ in
       autoupdate = false;
       theme = "system";
       model = "litellm/claude-sonnet-4-6";
+      agent = {
+        explorer = {
+          mode = "subagent";
+          model = "litellm/claude-haiku-4-5";
+          hidden = true;
+          description = "Fast read-only file search and codebase exploration. Use for grepping, reading files, and navigating the project structure.";
+          permission = {
+            write = "deny";
+            execute = "deny";
+          };
+        };
+        reviewer = {
+          mode = "subagent";
+          model = "litellm/claude-haiku-4-5";
+          hidden = true;
+          description = "Read-only code review and analysis. Use for summarizing code, checking style, or spotting obvious bugs — never for editing.";
+          permission = {
+            write = "deny";
+            execute = "deny";
+          };
+        };
+      };
       permission = {
         bash = {
           "*" = "ask";
