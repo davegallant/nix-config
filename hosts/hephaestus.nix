@@ -97,6 +97,16 @@
         "x-systemd.automount"
       ];
     };
+    "/mnt/hermes" = {
+      device = "192.168.1.83:/mnt/pool";
+      fsType = "nfs";
+      options = [
+        "nofail"
+        "x-systemd.automount"
+        "x-systemd.idle-timeout=600"
+        "_netdev"
+      ];
+    };
   };
 
   nixpkgs.hostPlatform = "x86_64-linux";
