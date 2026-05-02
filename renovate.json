@@ -1,11 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "schedule": [
-    "after 6am on monday",
-    "after 6am on tuesday",
-    "after 6am on wednesday",
-    "after 6am on thursday",
-    "after 6am on friday"
+    "* 0-4 * * *"
   ],
   "extends": [
     "config:recommended"
