@@ -644,6 +644,11 @@
             border-color = "#f7768e";
             default-timeout = 0;
           };
+          "urgency=critical" = {
+            border-color = "#f7768e";
+            default-timeout = 0;
+            ignore-timeout = 1;
+          };
         };
       };
 
