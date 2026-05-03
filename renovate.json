@@ -18,9 +18,6 @@
         "nix"
       ],
       "groupName": "nix flake inputs",
-      "automerge": true,
-      "automergeType": "pr",
-      "automergeStrategy": "squash"
     },
     {
       "matchManagers": [
