@@ -9,15 +9,12 @@
   "nix": {
     "enabled": true
   },
-  "lockFileMaintenance": {
-    "enabled": true
-  },
   "packageRules": [
     {
       "matchManagers": [
         "nix"
       ],
-      "groupName": "nix flake inputs",
+      "groupName": "nix flake inputs"
     },
     {
       "matchManagers": [
