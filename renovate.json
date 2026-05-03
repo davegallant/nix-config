@@ -9,6 +9,9 @@
   "nix": {
     "enabled": true
   },
+  "lockFileMaintenance": {
+    "enabled": true
+  },
   "packageRules": [
     {
       "matchManagers": [
@@ -18,9 +21,32 @@
       "automerge": true,
       "automergeType": "pr",
       "automergeStrategy": "squash"
+    },
+    {
+      "matchManagers": [
+        "nix"
+      ],
+      "matchDepNames": [
+        "nixpkgs",
+        "nixpkgs-unstable"
+      ],
+      "enabled": false
     }
   ],
   "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/flake\\.nix$/"
+      ],
+      "matchStrings": [
+        "github:NixOS/nixpkgs/(?<currentDigest>[a-f0-9]+)[^\n]*# renovate: currentValue=(?<currentValue>\\S+)"
+      ],
+      "depNameTemplate": "NixOS/nixpkgs",
+      "packageNameTemplate": "https://github.com/NixOS/nixpkgs",
+      "datasourceTemplate": "git-refs",
+      "versioningTemplate": "git"
+    },
     {
       "customType": "regex",
       "managerFilePatterns": [
