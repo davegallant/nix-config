@@ -9,7 +9,7 @@
   just,
 }:
 let
-  version = "1.14.31"; # renovate: datasource=github-releases depName=anomalyco/opencode
+  version = "1.14.33"; # renovate: datasource=github-releases depName=anomalyco/opencode
 
   assets = {
     x86_64-linux = {
