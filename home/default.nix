@@ -9,6 +9,7 @@ let
 in
 {
   imports = [
+    ./borgmatic.nix
     ./claude.nix
     ./features.nix
     ./fish.nix
