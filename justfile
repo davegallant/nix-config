@@ -8,6 +8,8 @@ arch := `uname -s`
 cmd := if arch == "Linux" { "nixos-rebuild --sudo" } else { "sudo darwin-rebuild" }
 
 rebuild:
+  $cmd build --flake . --option warn-dirty false
+  nvd diff /run/current-system result | rg -v '^[<>]{3} ' | tee /tmp/nvd-diff.txt
   $cmd switch --flake . --option warn-dirty false
 
 rebuild-boot:
@@ -75,3 +77,22 @@ refresh-models:
     ' > "$tmp"
   mv "$tmp" "$out"
   echo "wrote $(jq 'length' "$out") models to $out"
+
+merge-pr:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    BRANCH=$(git rev-parse --abbrev-ref HEAD)
+    PR=$(gh pr view "$BRANCH" --json number --jq '.number' 2>/dev/null || echo "")
+    if [[ -z "$PR" ]]; then
+        echo "No PR found for branch $BRANCH"
+        exit 1
+    fi
+    DIFF=$(cat /tmp/nvd-diff.txt 2>/dev/null || echo "")
+    BODY_FILE=$(mktemp)
+    if [[ -n "$DIFF" ]]; then
+        printf '## nvd diff\n```\n%s\n```\n' "$DIFF" > "$BODY_FILE"
+    else
+        printf 'No package changes detected\n' > "$BODY_FILE"
+    fi
+    gh pr merge "$PR" --squash --body-file "$BODY_FILE" --delete-branch
+    rm "$BODY_FILE"
