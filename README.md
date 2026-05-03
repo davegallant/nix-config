@@ -40,13 +40,9 @@ just rebuild
 
 ## Update
 
-To update nixpkgs defined in [flake.nix](./flake.nix), run:
+Updates are proposed by [renovate](https://github.com/renovatebot/renovate). To build the system, checkout the renovate PR and run `just rebuild`.
 
-```sh
-just update
-```
-
-If there are updates, they should be reflected in [flake.lock](./flake.lock).
+If the build is stable, run `just merge-pr`
 
 ## Rollback
 
