@@ -16,6 +16,8 @@
     };
   };
 
+  system.stateVersion = "25.11";
+
   home-manager.users.dave.features = {
     desktop.enable = true;
     ai.enable = true;
@@ -187,10 +189,9 @@
         operand = "process.path";
         data = "${lib.getBin unstable.beszel}/bin/beszel-agent";
       };
+
     };
   };
-
-  system.stateVersion = "25.11";
 
   nix = {
     registry.nixpkgs.flake = inputs.nixpkgs;

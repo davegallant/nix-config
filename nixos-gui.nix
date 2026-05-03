@@ -19,10 +19,10 @@
         evince
         gimp-with-plugins
         libation
+        libnotify
         mission-center
         mupdf
         opensnitch-ui
-        pika-backup
         pinta
         qbittorrent
         unstable.ghostty
