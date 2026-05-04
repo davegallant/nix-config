@@ -28,6 +28,7 @@ The configuration is very specific to my own machines and setup, but it may be a
 ## Prerequisites
 
 - [NixOS](nixos.org) (Linux)
+- [Determinate Nix](https://determinate.systems/nix-installer) (macOS)
 - [just](https://github.com/casey/just)
 
 ## Build
@@ -38,26 +39,28 @@ To run a build/rebuild:
 just rebuild
 ```
 
-## Update
+## Updates
 
 Updates are proposed by [renovate](https://github.com/renovatebot/renovate). To build the system, checkout the renovate PR and run `just rebuild`.
 
 If the build is stable, run `just merge-pr`.
 
-## Rollback
+## Common Recipes
 
-To rollback to the previous generation:
+Run `just` to view all recipes and associated descriptions:
 
-```sh
-just rollback
-```
-
-## Garbage collection
-
-To cleanup previous files, run nix garbage collection:
-
-```sh
-just clean
+```console
+❯ just
+Available recipes:
+    clean                    # run nix garbage collection (user + root)
+    fmt                      # format all nix files [alias: f]
+    merge-pr                 # squash-merge current branch's PR with nvd diff in body
+    rebuild                  # build, show nvd diff, then switch [alias: r]
+    rebuild-boot             # rebuild and install bootloader
+    refresh-models           # ~/.config/nix-config/litellm-models.json
+    rollback                 # switch to previous generation
+    update-claude *version   # usage: just update-claude [VERSION]  (VERSION without leading 'v'; defaults to latest)
+    update-opencode *version # usage: just update-opencode [VERSION]  (VERSION without leading 'v'; defaults to latest)
 ```
 
 ## Restoring from a live USB
