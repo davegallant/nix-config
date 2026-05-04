@@ -93,6 +93,7 @@
     ];
 
     casks = [
+      "1password"
       "beekeeper-studio"
       "brave-browser"
       "bruno"
