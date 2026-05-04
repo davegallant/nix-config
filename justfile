@@ -15,7 +15,7 @@ default:
 # build, show nvd diff, then switch
 rebuild:
   $cmd build --flake . --option warn-dirty false
-  nvd diff /run/current-system result | rg -v '^[<>]{3} ' | tee /tmp/nvd-diff.txt
+  nvd diff /run/current-system result | rg -v '^[<>]{3} ' > /tmp/nvd-diff.txt
   $cmd switch --flake . --option warn-dirty false
 
 # rebuild and install bootloader
