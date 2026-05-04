@@ -43,6 +43,13 @@
       interactiveShellInit = ''
         set fish_greeting
 
+        function s
+          set selected (fd --type d --exact-depth 3 --base-directory ~/src | fzf --exact)
+          if test -n "$selected"
+            cd ~/src/$selected
+          end
+        end
+
         function __save_last_dir --on-event fish_prompt
           echo $PWD > ~/.last_dir
         end
@@ -140,7 +147,6 @@
         l = "eza -la --git --group-directories-first";
         m = "make";
         oc = "opencode";
-        t = "cd $(cd-fzf)";
         tf = "terraform";
         tree = "eza --tree";
         v = "nvim";
