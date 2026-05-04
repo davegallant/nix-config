@@ -20,6 +20,7 @@
             ];
             extraConfig = {
               exclude_caches = true;
+              umask = 0022;
               exclude_patterns = [
                 "/home/dave/.cache"
                 "/home/dave/.local/share/Steam"
