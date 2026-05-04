@@ -15,7 +15,6 @@ in
       atuin
       bat
       btop
-      cd-fzf
       curl
       doggo
       dust
