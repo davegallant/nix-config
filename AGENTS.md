@@ -5,7 +5,8 @@ Guidelines for AI coding agents working in this repository.
 ## Project Overview
 
 Nix Flake-based configuration managing NixOS (Linux) and macOS (nix-darwin) systems
-with home-manager for user-level configuration. Uses nixvim for Neovim configuration.
+with home-manager for user-level configuration. Uses nixvim for Neovim configuration
+and LiteLLM as a local model proxy for AI tooling.
 
 - **Hosts**: `hephaestus` (x86_64-linux NixOS desktop), `kratos` (aarch64-linux NixOS Parallels VM), `zelus` (aarch64-darwin macOS)
 - **Nix channel**: nixpkgs 25.11 (stable), plus unstable channel
@@ -18,8 +19,9 @@ with home-manager for user-level configuration. Uses nixvim for Neovim configura
 ```sh
 just rebuild    # or: just r
 ```
-On Linux runs `nixos-rebuild --sudo switch --flake .`
-On macOS runs `sudo darwin-rebuild switch --flake .`
+Runs a two-step process: builds first, shows an `nvd diff` of package changes,
+then switches. On Linux uses `nixos-rebuild --sudo`, on macOS uses
+`sudo darwin-rebuild`.
 
 ### Rebuild and install bootloader
 ```sh
@@ -50,41 +52,46 @@ just clean
 just rollback
 ```
 
+### Update package hashes
+```sh
+just update-claude [VERSION]    # update home/claude/package.nix
+just update-opencode [VERSION]  # update home/opencode/package.nix
+just refresh-models             # fetch live LiteLLM model metadata
+```
+
+### Merge PR with nvd diff
+```sh
+just merge-pr
+```
+Squash-merges the current branch's PR and attaches the last `nvd diff` output.
+
 ### Tests
 There are no automated tests in this repository. The primary validation is
 a successful `just rebuild`. CI builds the NixOS configuration and pushes
 to Cachix on every push to `main`.
 
-## Repository Structure
+## Feature Flags (Two-Tier System)
 
+Feature flags exist at **two levels** that must be set independently:
+
+### NixOS-level (`modules/features.nix`)
+Set directly in host configs. Controls system services and NixOS modules.
+```nix
+features.desktop.enable = true;      # NixOS desktop bundle (nixos-gui.nix)
+features.ai.enable = true;           # LiteLLM service
+features.ai.ollama.enable = true;    # Ollama with ROCm
 ```
-flake.nix          # Entry point: inputs, outputs, system configurations
-                   # Exports: formatter, devShells, nixosModules,
-                   #          nixosConfigurations, darwinConfigurations
-packages.nix       # Shared system packages (cross-platform + Linux-only)
-justfile           # Task runner commands
-home/              # home-manager modules (one concern per file)
-  default.nix      # Aggregates all home modules via imports list
-  fish.nix         # Fish shell + Starship prompt
-  firefox.nix      # Librewolf browser config
-  git.nix          # Git configuration
-  k9s.nix          # k9s Kubernetes TUI
-  niri.nix         # Niri Wayland compositor + Waybar/Fuzzel/Mako/Swaylock
-  nixvim.nix       # Neovim (nixvim) configuration
-  opencode.nix     # `oc` wrapper: runs opencode via Docker
-  zed.nix          # Zed editor configuration
-hosts/             # Per-machine system configurations (flat files, not dirs)
-  hephaestus.nix   # NixOS desktop (x86_64-linux)
-  kratos.nix       # NixOS Parallels VM (aarch64-linux)
-  zelus.nix        # macOS (nix-darwin)
-modules/           # Reusable NixOS modules (exported as nixosModules flake output)
-  features.nix     # Feature flags (desktop, ai, ollama)
-  ollama.nix       # Ollama with ROCm acceleration
-overlays/          # Nixpkgs overlays
-  default.nix      # Overlay entry point
-  cd-fzf/          # Custom package
-  niri-float-sticky/ # Custom package (Go, niri window management)
+
+### Home-manager-level (`home/features.nix`)
+Set via `home-manager.users.<name>.features`. Controls user-level programs.
+```nix
+home-manager.users.dave.features = {
+  desktop.enable = true;   # brave, firefox, niri, zed, gnome-keyring, mangohud
+  headless.enable = true;  # curses pinentry, last_dir restore, skip Docker amd64
+  ai.enable = true;        # claude code, opencode
+};
 ```
+Also provides `remoteHost` (default: `"kratos"`) and `weatherCoords`.
 
 ## Code Style Guidelines
 
@@ -123,18 +130,6 @@ in
 Only use `with` in list contexts (e.g., `with pkgs; [ ... ]`). Never use `with`
 to scope an entire attribute set.
 
-### `inherit` keyword
-Prefer `inherit (pkgs) stdenv;` over `stdenv = pkgs.stdenv;`.
-
-### Imports
-Use relative paths in list form:
-```nix
-imports = [
-  ./fish.nix
-  ./git.nix
-];
-```
-
 ### Naming Conventions
 - **Files**: lowercase, single-word preferred (`fish.nix`, `git.nix`). Use `default.nix` as directory entry point.
 - **Directories**: lowercase. Kebab-case for multi-word (`cd-fzf`).
@@ -165,19 +160,6 @@ Two nixpkgs tiers, passed via `specialArgs`/`extraSpecialArgs`:
 - Binary paths in services: `"${lib.getBin pkg}/bin/name"`
 - Flake input packages: `input.packages.${pkgs.stdenv.hostPlatform.system}.default`
 
-### Module Structure
-- One concern per file in `home/` (e.g., one program = one file).
-- `default.nix` aggregates sub-modules via an `imports` list.
-- Host configs are flat single files, not directories.
-- Shared config is factored into `packages.nix` and `home/default.nix`.
-- The `mkSharedModules` function in `flake.nix` assembles shared modules
-  for both NixOS and Darwin configurations.
-- Reusable NixOS modules live in `modules/` and are exported as
-  `nixosModules` in the flake output. They are auto-imported into all
-  NixOS configurations via `builtins.attrValues` — adding a new module
-  to `modules/` and registering it in the `nixosModuleSet` attrset in
-  `flake.nix` is sufficient; no per-host import is needed.
-
 ### Attribute Set Style
 - Flat dot-notation for simple single-attribute enables:
   ```nix
@@ -199,10 +181,17 @@ Two nixpkgs tiers, passed via `specialArgs`/`extraSpecialArgs`:
 
 GitHub Actions workflow (`.github/workflows/cachix.yml`):
 - Triggers on push to `main` and on pull requests (ignoring markdown/LICENSE changes)
+- Checks formatting with `nix fmt -- --check .`
 - Builds the NixOS `hephaestus` and macOS `zelus` configurations, evaluates `kratos`
 - Pushes build artifacts to the `davegallant` Cachix binary cache
 
-Flake inputs are updated automatically by Renovate (weekdays at 6am) and auto-merged when CI passes. PRs touching `home/claude/package.nix` or `home/opencode/package.nix` trigger `.github/workflows/update-hashes.yml` which recomputes per-platform hashes before CI runs.
+A separate workflow (`.github/workflows/update-hashes.yml`) runs on PRs touching
+`home/claude/package.nix` or `home/opencode/package.nix` and recomputes
+per-platform hashes before CI runs.
+
+## Updates
+
+Flake inputs are updated automatically by Renovate and auto-merged when CI passes.
 
 ## Git Conventions
 - Main branch: `main`
