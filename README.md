@@ -42,7 +42,7 @@ just rebuild
 
 Updates are proposed by [renovate](https://github.com/renovatebot/renovate). To build the system, checkout the renovate PR and run `just rebuild`.
 
-If the build is stable, run `just merge-pr`
+If the build is stable, run `just merge-pr`.
 
 ## Rollback
 
