@@ -40,19 +40,41 @@
     fish = {
       enable = true;
 
-      interactiveShellInit = ''
-        set fish_greeting
-
-        function s
+      functions = {
+        s = ''
           set selected (fd --type d --exact-depth 3 --base-directory ~/src | fzf --exact)
           if test -n "$selected"
             cd ~/src/$selected
           end
-        end
+        '';
+        __save_last_dir = {
+          onEvent = "fish_prompt";
+          body = "echo $PWD > ~/.last_dir";
+        };
+        kdebug = "kubectl run debug-(random) --image=nicolaka/netshoot --restart=Never -it --rm -- bash";
+        kdesc = ''
+          set pod (kubectl get pods -o name | fzf)
+          test -n "$pod"; and kubectl describe $pod
+        '';
+        kex = ''
+          set pod (kubectl get pods -o name | fzf)
+          test -n "$pod"; or return
+          set containers (kubectl get $pod -o jsonpath='{.spec.containers[*].name}' | string split ' ')
+          if test (count $containers) -gt 1
+            set container (printf '%s\n' $containers | fzf)
+            test -n "$container"; and kubectl exec -it $pod -c $container -- sh -c 'bash || sh'
+          else
+            kubectl exec -it $pod -- sh -c 'bash || sh'
+          end
+        '';
+        klog = ''
+          set pod (kubectl get pods -o name | fzf)
+          test -n "$pod"; and kubectl logs -f $pod --all-containers
+        '';
+      };
 
-        function __save_last_dir --on-event fish_prompt
-          echo $PWD > ~/.last_dir
-        end
+      interactiveShellInit = ''
+        set fish_greeting
 
         ${lib.optionalString config.features.headless.enable ''
           if test -f ~/.last_dir
@@ -93,32 +115,6 @@
         set -x GOPATH ~/go
         set -x GOBIN $GOPATH/bin
         set -x PATH $PATH $GOBIN
-
-        function kdebug
-          kubectl run debug-(random) --image=nicolaka/netshoot --restart=Never -it --rm -- bash
-        end
-
-        function kdesc
-          set pod (kubectl get pods -o name | fzf)
-          test -n "$pod"; and kubectl describe $pod
-        end
-
-        function kex
-          set pod (kubectl get pods -o name | fzf)
-          test -n "$pod"; or return
-          set containers (kubectl get $pod -o jsonpath='{.spec.containers[*].name}' | string split ' ')
-          if test (count $containers) -gt 1
-            set container (printf '%s\n' $containers | fzf)
-            test -n "$container"; and kubectl exec -it $pod -c $container -- sh -c 'bash || sh'
-          else
-            kubectl exec -it $pod -- sh -c 'bash || sh'
-          end
-        end
-
-        function klog
-          set pod (kubectl get pods -o name | fzf)
-          test -n "$pod"; and kubectl logs -f $pod --all-containers
-        end
 
         test -f $HOME/.config/fish/work.fish && source $HOME/.config/fish/work.fish
         test -f $HOME/.config/fish/private.fish && source $HOME/.config/fish/private.fish
