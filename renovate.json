@@ -44,6 +44,45 @@
     {
       "customType": "regex",
       "managerFilePatterns": [
+        "/flake\\.nix$/"
+      ],
+      "matchStrings": [
+        "github:nix-community/home-manager/(?<currentDigest>[a-f0-9]+)[^\n]*# renovate: currentValue=(?<currentValue>\\S+)"
+      ],
+      "depNameTemplate": "nix-community/home-manager",
+      "packageNameTemplate": "https://github.com/nix-community/home-manager",
+      "datasourceTemplate": "git-refs",
+      "versioningTemplate": "git"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/flake\\.nix$/"
+      ],
+      "matchStrings": [
+        "github:lnl7/nix-darwin/(?<currentDigest>[a-f0-9]+)[^\n]*# renovate: currentValue=(?<currentValue>\\S+)"
+      ],
+      "depNameTemplate": "lnl7/nix-darwin",
+      "packageNameTemplate": "https://github.com/lnl7/nix-darwin",
+      "datasourceTemplate": "git-refs",
+      "versioningTemplate": "git"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/flake\\.nix$/"
+      ],
+      "matchStrings": [
+        "github:nix-community/nixvim/(?<currentDigest>[a-f0-9]+)[^\n]*# renovate: currentValue=(?<currentValue>\\S+)"
+      ],
+      "depNameTemplate": "nix-community/nixvim",
+      "packageNameTemplate": "https://github.com/nix-community/nixvim",
+      "datasourceTemplate": "git-refs",
+      "versioningTemplate": "git"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
         "/home/obsidian\\.nix$/"
       ],
       "matchStrings": [
