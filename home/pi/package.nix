@@ -4,6 +4,7 @@
   fetchurl,
   makeBinaryWrapper,
   autoPatchelfHook,
+  python3,
 }:
 let
   version = "0.73.0"; # renovate: datasource=github-releases depName=badlogic/pi-mono
@@ -49,7 +50,8 @@ stdenvNoCC.mkDerivation {
     mkdir -p $out/lib/pi $out/bin
     cp -r . $out/lib/pi/
     chmod +x $out/lib/pi/pi
-    makeBinaryWrapper $out/lib/pi/pi $out/bin/pi
+    makeBinaryWrapper $out/lib/pi/pi $out/bin/pi \
+      --prefix PATH : ${lib.makeBinPath [ python3 ]}
   '';
 
   meta = {

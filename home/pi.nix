@@ -5,7 +5,9 @@
   ...
 }:
 let
-  pi-pkg = pkgs.callPackage ./pi/package.nix { };
+  pi-pkg = pkgs.callPackage ./pi/package.nix {
+    python3 = pkgs.python3;
+  };
   pi-wrapper = pkgs.writeShellScriptBin "pi" (
     ''
       set -euo pipefail
