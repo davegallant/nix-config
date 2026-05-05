@@ -16,8 +16,8 @@
       },
       "original": {
         "owner": "lnl7",
-        "ref": "nix-darwin-25.11",
         "repo": "nix-darwin",
+        "rev": "ebec37af18215214173c98cf6356d0aca24a2585",
         "type": "github"
       }
     },
@@ -116,8 +116,8 @@
       },
       "original": {
         "owner": "nix-community",
-        "ref": "release-25.11",
         "repo": "home-manager",
+        "rev": "0585fbf645640973e3398863bbaf3bd1ddce4a51",
         "type": "github"
       }
     },
@@ -311,8 +311,8 @@
       },
       "original": {
         "owner": "nix-community",
-        "ref": "nixos-25.11",
         "repo": "nixvim",
+        "rev": "b8f76bf5751835647538ef8784e4e6ee8deb8f95",
         "type": "github"
       }
     },
