@@ -22,6 +22,7 @@ in
     ./nixvim.nix
     ./obsidian.nix
     ./opencode.nix
+    ./pi.nix
   ];
 
   home.stateVersion = "25.11";
