@@ -1,17 +1,15 @@
 /**
  * Statusline extension for pi
  *
- * Replaces the default footer with a coloured statusline similar to Claude Code's:
+ * Replaces the default footer with a coloured statusline:
  *
- *   ↑123.4k ↓45.6k  $0.123  [████████░░] 78%/200k      repo (main)  claude-sonnet-4-6
+ *   repo (main)  $0.123  [████████░░] 78%/200k
  *
  * Left side:
- *   - Token counts (accent arrows, muted numbers)
+ *   - Repo name (muted) and git branch (success colour)
  *   - Cost (success colour)
  *   - Context progress bar: green → yellow → red as the window fills up,
  *     with filled (█) and empty (░) blocks plus a numeric percentage.
- *
- * Right side: repo name (muted), git branch (success), model ID (accent).
  *
  * Context usage is read fresh on every render via ctx.getContextUsage().
  * A turn_end hook triggers an explicit requestRender() so the bar updates
@@ -20,7 +18,7 @@
 
 import type { AssistantMessage } from "@mariozechner/pi-ai";
 import type { ExtensionAPI } from "@mariozechner/pi-coding-agent";
-import { truncateToWidth, visibleWidth } from "@mariozechner/pi-tui";
+import { truncateToWidth } from "@mariozechner/pi-tui";
 
 // Width (in block characters) of the filled+empty portion of the bar.
 const BAR_WIDTH = 10;
@@ -43,7 +41,7 @@ export default function (pi: ExtensionAPI) {
         dispose: unsub,
         invalidate() {},
         render(width: number): string[] {
-          // --- Token usage + cost (from session branch) ---
+          // --- Cost (from session branch) ---
           let input = 0;
           let output = 0;
           let cost = 0;
@@ -57,7 +55,7 @@ export default function (pi: ExtensionAPI) {
           }
 
           const fmt = (n: number) =>
-            n === 0 ? "0" : n < 1000 ? `${n}` : `${(n / 1000).toFixed(1)}k`;
+            n === 0 ? "0" : n < 1000 ? `${n}` : n >= 1_000_000 ? `${(n / 1_000_000).toFixed(1)}M` : `${(n / 1000).toFixed(1)}k`;
 
           const inputStr = theme.fg("accent", "↑") + theme.fg("muted", fmt(input));
           const outputStr = theme.fg("accent", "↓") + theme.fg("muted", fmt(output));
@@ -86,24 +84,19 @@ export default function (pi: ExtensionAPI) {
             ctxBar = `[${filledBlocks}${emptyBlocks}] ${pctLabel}${limitLabel}`;
           }
 
-          const left = `${inputStr} ${outputStr}  ${costStr}  ${ctxBar}`;
-
-          // --- Right side: repo · branch · model ---
+          // --- Left side: repo · branch · model · cost · bar ---
           const modelId = ctx.model?.id ?? "no model";
           const cwd = process.cwd();
           const repoName = cwd.split("/").at(-1) || cwd;
           const branch = footerData.getGitBranch();
           const branchStr = branch
-            ? " " + theme.fg("success", `(${branch})`)
+            ? " " + theme.fg("accent", `(${branch})`)
             : "";
-          const right =
-            theme.fg("muted", repoName) +
-            branchStr +
-            "  " +
-            theme.fg("accent", modelId);
+          const repoStr = theme.fg("muted", repoName) + branchStr;
+          const modelStr = theme.fg("dim", modelId);
 
-          const gap = Math.max(1, width - visibleWidth(left) - visibleWidth(right));
-          return [truncateToWidth(left + " ".repeat(gap) + right, width)];
+          const line = ` ${repoStr}  ${modelStr}  ${inputStr} ${outputStr}  ${costStr}  ${ctxBar}`;
+          return [truncateToWidth(line, width)];
         },
       };
     });
