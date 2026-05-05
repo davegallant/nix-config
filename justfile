@@ -47,6 +47,11 @@ update-claude *version:
 update-opencode *version:
   @./home/opencode/update-hashes.sh {{version}}
 
+# update version and hashes in home/pi/package.nix
+# usage: just update-pi [VERSION]  (VERSION without leading 'v'; defaults to latest)
+update-pi *version:
+  @./home/pi/update-hashes.sh {{version}}
+
 # fetch live model metadata from the litellm proxy and write a json file
 # consumed by home/opencode.nix. file path:
 #   ~/.config/nix-config/litellm-models.json
