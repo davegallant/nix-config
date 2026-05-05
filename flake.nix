@@ -2,8 +2,8 @@
   description = "nixos and macos configurations";
 
   inputs = {
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/15f4ee454b1dce334612fa6843b3e05cf546efab"; # renovate: currentValue=nixos-unstable
-    nixpkgs.url = "github:NixOS/nixpkgs/26ef669cffa904b6f6832ab57b77892a37c1a671"; # renovate: currentValue=nixos-25.11
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/549bd84d6279f9852cae6225e372cc67fb91a4c1"; # renovate: currentValue=nixos-unstable
+    nixpkgs.url = "github:NixOS/nixpkgs/0c88e1f2bdb93d5999019e99cb0e61e1fe2af4c5"; # renovate: currentValue=nixos-25.11
     darwin = {
       url = "github:lnl7/nix-darwin/ebec37af18215214173c98cf6356d0aca24a2585"; # renovate: currentValue=nix-darwin-25.11
       inputs.nixpkgs.follows = "nixpkgs";
