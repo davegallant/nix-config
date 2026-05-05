@@ -5,11 +5,11 @@
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/15f4ee454b1dce334612fa6843b3e05cf546efab"; # renovate: currentValue=nixos-unstable
     nixpkgs.url = "github:NixOS/nixpkgs/26ef669cffa904b6f6832ab57b77892a37c1a671"; # renovate: currentValue=nixos-25.11
     darwin = {
-      url = "github:lnl7/nix-darwin/nix-darwin-25.11";
+      url = "github:lnl7/nix-darwin/ebec37af18215214173c98cf6356d0aca24a2585"; # renovate: currentValue=nix-darwin-25.11
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager/0585fbf645640973e3398863bbaf3bd1ddce4a51"; # renovate: currentValue=release-25.11
       inputs.nixpkgs.follows = "nixpkgs";
     };
     niri = {
@@ -21,7 +21,7 @@
       inputs.nixpkgs.follows = "nixpkgs"; # optional, keeps dependencies synced
     };
     nixvim = {
-      url = "github:nix-community/nixvim/nixos-25.11";
+      url = "github:nix-community/nixvim/b8f76bf5751835647538ef8784e4e6ee8deb8f95"; # renovate: currentValue=nixos-25.11
       inputs.nixpkgs.follows = "nixpkgs";
     };
     vpngate = {
