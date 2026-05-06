@@ -181,6 +181,7 @@
       ]
     }
   },
+  "includeCoAuthoredBy": false,
   "preferredNotifChannel": "ghostty",
   "effortLevel": "medium",
   "defaultMode": "auto",
