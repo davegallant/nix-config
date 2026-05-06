@@ -326,7 +326,38 @@
       {
         mode = "n";
         key = "<leader>sp";
-        action = "<cmd>Telescope project<CR>";
+        action.__raw = ''
+          function()
+            local src = vim.fn.expand("~/src")
+            if vim.fn.isdirectory(src) == 0 then
+              vim.notify("~/src does not exist", vim.log.levels.WARN)
+              return
+            end
+            local results = vim.fn.systemlist({
+              "fd", "--exact-depth", "3", "--type", "d", "--base-directory", src,
+            })
+            require("telescope.pickers").new({}, {
+              prompt_title = "Projects",
+              finder = require("telescope.finders").new_table({ results = results }),
+              sorter = require("telescope.config").values.generic_sorter({}),
+              attach_mappings = function(bufnr, _)
+                require("telescope.actions").select_default:replace(function()
+                  local entry = require("telescope.actions.state").get_selected_entry()
+                  require("telescope.actions").close(bufnr)
+                  if not entry then return end
+                  local path = src .. "/" .. entry[1]
+                  vim.cmd.tcd(path)
+                  require("telescope.builtin").find_files({
+                    cwd = path,
+                    hidden = true,
+                    file_ignore_patterns = { "^.git/", "/.git/" },
+                  })
+                end)
+                return true
+              end,
+            }):find()
+          end
+        '';
         options = {
           desc = "Switch project";
           silent = true;
@@ -448,35 +479,10 @@
         };
         extensions.fzf-native.enable = true;
         extensions.live-grep-args.enable = true;
-        enabledExtensions = [ "project" ];
-
-        settings.extensions.project = {
-          base_dirs.__raw = ''
-            (function()
-              local f = io.open(vim.fn.expand("~/.config/cd-fzf"), "r")
-              if not f then return {} end
-              local dirs = {}
-              for line in f:lines() do
-                line = line:match("^%s*(.-)%s*$")  -- trim whitespace
-                if line ~= "" then
-                  table.insert(dirs, { path = line, max_depth = 1 })
-                end
-              end
-              f:close()
-              return dirs
-            end)()
-          '';
-          hidden_files = true;
-          theme = "dropdown";
-          order_by = "recent";
-          search_by = "title";
-        };
-
       };
     };
 
     extraPlugins = [
-      pkgs.vimPlugins.telescope-project-nvim
       (pkgs.vimUtils.buildVimPlugin {
         name = "ghostty-default-style-dark-nvim";
         src = pkgs.fetchFromGitHub {
