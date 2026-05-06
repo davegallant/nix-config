@@ -134,7 +134,7 @@ in
     home.file.".pi/agent/settings.json".text = builtins.toJSON {
       defaultProvider = "litellm";
       defaultModel = "claude-sonnet-4-6";
-      autoCompact = true;
+      autoCompact = false;
       thinking = "low";
     };
   };
