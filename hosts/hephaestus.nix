@@ -7,6 +7,9 @@
   ...
 }:
 {
+  imports = [
+    ../opensnitch.nix
+  ];
 
   features = {
     desktop.enable = true;
