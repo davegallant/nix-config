@@ -9,7 +9,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
-      url = "github:nix-community/home-manager/0585fbf645640973e3398863bbaf3bd1ddce4a51"; # renovate: currentValue=release-25.11
+      url = "github:nix-community/home-manager/cc09c0f9b7eaa95c2d9827338a5eb03d32505ca5"; # renovate: currentValue=release-25.11
       inputs.nixpkgs.follows = "nixpkgs";
     };
     niri = {
