@@ -8,7 +8,6 @@
   imports = [
     ./litellm
     ./nixos-gui.nix
-    ./opensnitch.nix
   ];
 
   system.activationScripts.diff = {
