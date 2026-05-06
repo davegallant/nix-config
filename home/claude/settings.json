@@ -184,5 +184,5 @@
   "preferredNotifChannel": "ghostty",
   "effortLevel": "medium",
   "defaultMode": "auto",
-  "model": "sonnet[1m]"
+  "model": "opus[1m]"
 }
