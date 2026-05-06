@@ -181,7 +181,10 @@
       ]
     }
   },
-  "includeCoAuthoredBy": false,
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
   "preferredNotifChannel": "ghostty",
   "effortLevel": "medium",
   "defaultMode": "auto",
