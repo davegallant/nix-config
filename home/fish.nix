@@ -143,6 +143,7 @@
         l = "eza -la --git --group-directories-first";
         m = "make";
         oc = "opencode";
+        pi-review = "pi --tools read,grep,find,ls -p";
         tf = "terraform";
         tree = "eza --tree";
         v = "nvim";
