@@ -25,7 +25,6 @@ in
                 app = {
                   safeMode = false;
                   vimMode = true;
-                  showLineNumber = true;
                 };
                 corePlugins = [
                   "backlink"
