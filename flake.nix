@@ -5,15 +5,15 @@
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/15f4ee454b1dce334612fa6843b3e05cf546efab"; # renovate: currentValue=nixos-unstable
     nixpkgs.url = "github:NixOS/nixpkgs/26ef669cffa904b6f6832ab57b77892a37c1a671"; # renovate: currentValue=nixos-25.11
     darwin = {
-      url = "github:lnl7/nix-darwin/ebec37af18215214173c98cf6356d0aca24a2585"; # renovate: currentValue=nix-darwin-25.11
+      url = "github:lnl7/nix-darwin/8c62fba0854ba15c8917aed18894dbccb48a3777"; # renovate: currentValue=nix-darwin-25.11
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
-      url = "github:nix-community/home-manager/cc09c0f9b7eaa95c2d9827338a5eb03d32505ca5"; # renovate: currentValue=release-25.11
+      url = "github:nix-community/home-manager/00ed86e58bb6979a7921859fd1615d19382eac5c"; # renovate: currentValue=release-25.11
       inputs.nixpkgs.follows = "nixpkgs";
     };
     niri = {
-      url = "github:sodiboo/niri-flake/945748d71d3422d4f1dada2cd10222e34ed9d767";
+      url = "github:sodiboo/niri-flake/6e900d2d23f32b88a1d97c38d1f24413cce66c90";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nirinit = {
@@ -21,7 +21,7 @@
       inputs.nixpkgs.follows = "nixpkgs"; # optional, keeps dependencies synced
     };
     nixvim = {
-      url = "github:nix-community/nixvim/b8f76bf5751835647538ef8784e4e6ee8deb8f95"; # renovate: currentValue=nixos-25.11
+      url = "github:nix-community/nixvim/7986a276960b4dfaed9bb2c3c438b5ba71ae08f1"; # renovate: currentValue=nixos-25.11
       inputs.nixpkgs.follows = "nixpkgs";
     };
     vpngate = {
