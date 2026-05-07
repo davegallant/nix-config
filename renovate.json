@@ -4,7 +4,8 @@
     "* 0-4 * * *"
   ],
   "extends": [
-    "config:recommended"
+    "config:recommended",
+    "helpers:pinGitHubActionDigests"
   ],
   "nix": {
     "enabled": false
