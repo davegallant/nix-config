@@ -12,12 +12,12 @@ jobs:
       contents: write
       pull-requests: write
     steps:
-      - uses: actions/checkout@v6
-      - uses: cachix/install-nix-action@v31
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      - uses: cachix/install-nix-action@8aa03977d8d733052d78f4e008a241fd1dbf36b3 # v31
         with:
           extra_nix_config: |
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
-      - uses: DeterminateSystems/update-flake-lock@main
+      - uses: DeterminateSystems/update-flake-lock@203e2eb079eca40abff70ea3189192e9adeca500 # main
         with:
           pr-title: "chore: flake.lock update"
           pr-labels: |
