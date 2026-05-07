@@ -19,23 +19,23 @@ jobs:
   check-format:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v6
-    - uses: cachix/install-nix-action@v31
+    - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+    - uses: cachix/install-nix-action@8aa03977d8d733052d78f4e008a241fd1dbf36b3 # v31
     - run: nix fmt -- --check .
 
   eval-kratos:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v6
-    - uses: cachix/install-nix-action@v31
+    - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+    - uses: cachix/install-nix-action@8aa03977d8d733052d78f4e008a241fd1dbf36b3 # v31
     - run: nix eval .#nixosConfigurations.kratos.config.system.build.toplevel --raw
 
   build-zelus:
     runs-on: macos-latest
     steps:
-    - uses: actions/checkout@v6
-    - uses: cachix/install-nix-action@v31
-    - uses: cachix/cachix-action@v17
+    - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+    - uses: cachix/install-nix-action@8aa03977d8d733052d78f4e008a241fd1dbf36b3 # v31
+    - uses: cachix/cachix-action@1eb2ef646ac0255473d23a5907ad7b04ce94065c # v17
       with:
         name: davegallant
         authToken: '${{ secrets.CACHIX_API_KEY }}'
@@ -44,9 +44,9 @@ jobs:
   build-hephaestus:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v6
-    - uses: cachix/install-nix-action@v31
-    - uses: cachix/cachix-action@v17
+    - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+    - uses: cachix/install-nix-action@8aa03977d8d733052d78f4e008a241fd1dbf36b3 # v31
+    - uses: cachix/cachix-action@1eb2ef646ac0255473d23a5907ad7b04ce94065c # v17
       with:
         name: davegallant
         authToken: '${{ secrets.CACHIX_API_KEY }}'
