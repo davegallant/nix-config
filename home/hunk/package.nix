@@ -10,7 +10,7 @@ let
   assets = {
     x86_64-linux = {
       url = "https://github.com/modem-dev/hunk/releases/download/v${version}/hunkdiff-linux-x64.tar.gz";
-      hash = "sha256-5J8zYH4WTHIG7JVA2Sq1wd3Q4q/cE7eWCzAQFOvUbaM=";
+      hash = "sha256-ND3Kb1u0B5O+joNCvE4LzJjYpSFnt5QWDFGmuAmYns8=";
       dir = "hunkdiff-linux-x64";
     };
     aarch64-linux = {
