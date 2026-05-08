@@ -20,6 +20,7 @@ in
       dust
       eza
       fd
+      google-cloud-sdk
       github-cli
       gnumake
       gnupg
@@ -75,6 +76,7 @@ in
       traceroute
       unrar
       unstable.beszel
+      unstable.gws
       unstable.tailscale
       usbutils
       vpngate.packages.${pkgs.stdenv.hostPlatform.system}.default
