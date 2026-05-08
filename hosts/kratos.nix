@@ -96,8 +96,6 @@
   environment.systemPackages = with pkgs; [
     awscli2
     (azure-cli.withExtensions [ azure-cli-extensions.fzf ])
-    google-cloud-sdk
-    unstable.gws
     kubelogin
     ssm-session-manager-plugin
     terraform
