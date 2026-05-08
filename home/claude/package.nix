@@ -11,7 +11,7 @@
   just,
 }:
 let
-  version = "2.1.132"; # renovate: datasource=npm depName=@anthropic-ai/claude-code
+  version = "2.1.133"; # renovate: datasource=npm depName=@anthropic-ai/claude-code
 
   assets = {
     x86_64-linux = {
