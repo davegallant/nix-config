@@ -104,6 +104,7 @@
       "font-fira-code-nerd-font"
       "font-hack-nerd-font"
       "fork"
+      "gcloud-cli"
       "headlamp"
       "knockknock"
       "ghostty"
