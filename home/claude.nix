@@ -9,6 +9,28 @@ let
   claude-litellm = pkgs.writeShellScriptBin "claude-litellm" (
     builtins.readFile ./claude/claude-litellm.sh
   );
+  googleworkspace-cli-skills = pkgs.runCommand "googleworkspace-cli-skills" { } ''
+    src=${
+      pkgs.fetchFromGitHub {
+        owner = "googleworkspace";
+        repo = "cli";
+        rev = "a3768d0e82ad83cca2da97724e46bea4ff0e6dbd";
+        hash = "sha256-YyNIHbyZrLlXYtWxZY8Um19MsnLharmS+nWGWO89fsA=";
+      }
+    }/skills
+    mkdir -p $out
+    for skill in \
+      gws-shared \
+      gws-gmail \
+      gws-gmail-read \
+      gws-calendar \
+      gws-calendar-agenda \
+      gws-calendar-insert \
+      gws-docs \
+      gws-docs-write; do
+      cp -r $src/$skill $out/$skill
+    done
+  '';
 in
 {
   config = lib.mkIf config.features.ai.enable {
@@ -24,6 +46,11 @@ in
 
     home.file.".claude/agents" = {
       source = ./claude/agents;
+      recursive = true;
+    };
+
+    home.file.".claude/skills" = {
+      source = googleworkspace-cli-skills;
       recursive = true;
     };
 
