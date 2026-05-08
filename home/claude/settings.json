@@ -33,6 +33,7 @@
       "Bash(git status*)",
       "Bash(git tag*)",
       "Bash(grep*)",
+      "Bash(hunk session *)",
       "Bash(jq*)",
       "Bash(just*)",
       "Bash(kubectl api-resources*)",
