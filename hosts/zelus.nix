@@ -87,6 +87,7 @@
       "et"
       "gnu-sed"
       "gnu-tar"
+      "googleworkspace-cli"
       "mpv"
       "node"
       "oras"
