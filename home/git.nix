@@ -1,11 +1,6 @@
 { ... }:
 {
   programs = {
-    diff-so-fancy = {
-      enable = true;
-      enableGitIntegration = true;
-    };
-
     git = {
       enable = true;
 
@@ -35,6 +30,7 @@
           pom = "pull origin main";
           st = "status";
         };
+        core.pager = "hunk pager";
         push = {
           default = "current";
         };

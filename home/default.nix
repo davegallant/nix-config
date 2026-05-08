@@ -17,6 +17,7 @@ in
     ./git.nix
     ./gui.nix
     ./gh-clone.nix
+    ./hunk.nix
     ./k9s.nix
     ./nix-search.nix
     ./nixvim.nix

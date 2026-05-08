@@ -80,6 +80,19 @@
       "datasourceTemplate": "github-releases",
       "versioningTemplate": "semver",
       "extractVersionTemplate": "^v?(?<version>.*)$"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/home/hunk/package\\.nix$/"
+      ],
+      "matchStrings": [
+        "version = \"(?<currentValue>[\\d\\.]+)\";"
+      ],
+      "depNameTemplate": "modem-dev/hunk",
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver",
+      "extractVersionTemplate": "^v?(?<version>.*)$"
     }
   ]
 }

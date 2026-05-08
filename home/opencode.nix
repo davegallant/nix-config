@@ -105,6 +105,7 @@ in
       autoupdate = false;
       theme = "system";
       model = "litellm/claude-sonnet-4-6";
+      skills.paths = [ "~/.config/opencode/skills" ];
       permission = {
         bash = {
           "*" = "ask";
@@ -122,6 +123,7 @@ in
           "git push -f*" = "deny";
           "git status *" = "allow";
           "grep *" = "allow";
+          "hunk session *" = "allow";
           "just *" = "allow";
           "ls *" = "allow";
           "make *" = "allow";
