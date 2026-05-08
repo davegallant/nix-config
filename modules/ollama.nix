@@ -12,6 +12,7 @@
       acceleration = "rocm";
       host = "0.0.0.0";
       rocmOverrideGfx = "11.0.2";
+      loadModels = [ "qwen3.5:9b" ];
     };
   };
 }

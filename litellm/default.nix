@@ -39,9 +39,17 @@
                 api_key = "os.environ/OPENROUTER_API_KEY";
               };
             };
+            ollamaModel = name: {
+              model_name = builtins.replaceStrings [ "." ] [ "-" ] name;
+              litellm_params = {
+                model = "ollama/${name}";
+                api_base = "http://localhost:11434";
+              };
+            };
           in
           map copilotModel (import ./models/copilot.nix)
-          ++ map openrouterModel (import ./models/openrouter.nix);
+          ++ map openrouterModel (import ./models/openrouter.nix)
+          ++ map ollamaModel [ "qwen3.5:9b" ];
         litellm_settings = {
           drop_params = true;
         };
