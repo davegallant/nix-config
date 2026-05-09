@@ -86,32 +86,6 @@ in
       enableFishIntegration = true;
     };
 
-    nnn = {
-      enable = stdenv.isLinux;
-      package = pkgs.nnn.override ({ withNerdIcons = true; });
-      bookmarks = {
-        d = "~/Downloads";
-        p = "~/src/";
-        c = "~/.config";
-        h = "~";
-      };
-      extraPackages = with pkgs; [
-        bat
-        eza
-        fzf
-        imv
-        mediainfo
-        ffmpegthumbnailer
-      ];
-      plugins = {
-        src = "${pkgs.nnn.src}/plugins";
-        mappings = {
-          p = "preview-tui";
-          o = "fzopen";
-        };
-      };
-    };
-
     weathr = {
       enable = true;
     };
