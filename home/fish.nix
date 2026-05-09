@@ -92,7 +92,6 @@
           !config.features.headless.enable
         ) "set -x DOCKER_DEFAULT_PLATFORM linux/amd64"}
         set -x EDITOR vim
-        set -x NNN_FIFO "$XDG_RUNTIME_DIR/nnn.fifo"
         set -x PAGER less
         ${lib.optionalString (pkgs.stdenv.isLinux && !config.features.headless.enable) ''
           if test -S $HOME/.bitwarden-ssh-agent.sock
