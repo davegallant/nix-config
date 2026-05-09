@@ -127,6 +127,16 @@
         policy = [ "magic" ];
       };
     };
+    # For printer
+    interfaces."wlp42s0f3u1".ipv4.routes = [
+      {
+        address = "192.168.18.7";
+        prefixLength = 32;
+        options = {
+          scope = "link";
+        };
+      }
+    ];
     firewall = {
       allowPing = true;
       enable = true;
@@ -134,6 +144,7 @@
       trustedInterfaces = [ "tailscale0" ];
       interfaces.docker0.allowedTCPPorts = [ 4000 ];
     };
+    networkmanager.enable = true;
   };
 
   users.users.beszel = {
@@ -207,10 +218,11 @@
 
   users.users.dave.extraGroups = [
     "docker"
-    "libvirtd"
-    "wheel"
     "input"
+    "libvirtd"
+    "networkmanager"
     "plugdev"
+    "wheel"
   ];
 
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
