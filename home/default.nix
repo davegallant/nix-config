@@ -22,7 +22,6 @@ in
     ./nix-search.nix
     ./nixvim.nix
     ./obsidian.nix
-    ./opencode.nix
     ./pi.nix
   ];
 
