@@ -20,8 +20,5 @@ in
 
     # pi: ~/.pi/agent/skills/hunk-review/SKILL.md
     home.file.".pi/agent/skills/hunk-review/SKILL.md".source = hunk-review-skill;
-
-    # opencode: ~/.config/opencode/skills/hunk-review/SKILL.md
-    home.file.".config/opencode/skills/hunk-review/SKILL.md".source = hunk-review-skill;
   };
 }

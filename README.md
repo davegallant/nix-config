@@ -60,7 +60,7 @@ Available recipes:
     refresh-models           # ~/.config/nix-config/litellm-models.json
     rollback                 # switch to previous generation
     update-claude *version   # usage: just update-claude [VERSION]  (VERSION without leading 'v'; defaults to latest)
-    update-opencode *version # usage: just update-opencode [VERSION]  (VERSION without leading 'v'; defaults to latest)
+    update-pi *version       # usage: just update-pi [VERSION]  (VERSION without leading 'v'; defaults to latest)
 ```
 
 ## Restoring from a live USB
