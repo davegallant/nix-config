@@ -14,15 +14,15 @@ let
   assets = {
     x86_64-linux = {
       url = "https://github.com/anomalyco/opencode/releases/download/v${version}/opencode-linux-x64.tar.gz";
-      hash = "sha256-0n08hRg6e9LfRQZISi9QjRiXliBjt8zIRmcFtJOWPcU=";
+      hash = "sha256-7gZuM5HJRjBHLQTuPUHJGV1xC4YZy+uUdtur+GF4P14=";
     };
     aarch64-linux = {
       url = "https://github.com/anomalyco/opencode/releases/download/v${version}/opencode-linux-arm64.tar.gz";
-      hash = "sha256-L/pju2EV16oZPLH2+nZut54bOZd2hxpiSTWnUuRGEQU=";
+      hash = "sha256-XiVQLyxKw8kf1iIh3FnXg3Chp+dRWNcERohtQr/5jBk=";
     };
     aarch64-darwin = {
       url = "https://github.com/anomalyco/opencode/releases/download/v${version}/opencode-darwin-arm64.zip";
-      hash = "sha256-eVYKWj8c+WU4s37HiuP5IybKU2p7taL26MHn6aK2/tI=";
+      hash = "sha256-e0t3S8Keq2jmc//FV4ZI11fNXzEwuP6uMk8UkPSB36w=";
     };
   };
 
