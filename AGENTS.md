@@ -44,7 +44,7 @@ Always run `just fmt` before committing changes.
 
 ```sh
 just update-claude [VERSION]    # update home/claude/package.nix
-just update-opencode [VERSION]  # update home/opencode/package.nix
+just update-pi[VERSION]         # update home/pi/package.nix
 just refresh-models             # fetch live LiteLLM model metadata
 ```
 
@@ -81,7 +81,7 @@ Set via `home-manager.users.<name>.features`. Controls user-level programs.
 home-manager.users.dave.features = {
   desktop.enable = true;   # brave, firefox, niri, zed, gnome-keyring, mangohud
   headless.enable = true;  # curses pinentry, last_dir restore, skip Docker amd64
-  ai.enable = true;        # claude code, opencode
+  ai.enable = true;        # claude code, pi
 };
 ```
 
@@ -154,7 +154,7 @@ GitHub Actions workflow (`.github/workflows/cachix.yml`):
 - Pushes build artifacts to the `davegallant` Cachix binary cache
 
 A separate workflow (`.github/workflows/update-hashes.yml`) runs on PRs touching
-`home/claude/package.nix` or `home/opencode/package.nix` and recomputes
+`home/claude/package.nix` or `home/pi/package.nix` and recomputes
 per-platform hashes before CI runs.
 
 ## Updates
