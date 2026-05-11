@@ -80,6 +80,11 @@ in
       recursive = true;
     };
 
+    home.file.".claude/skills/sentry" = {
+      source = "${agent-stuff-skills}/skills/sentry";
+      recursive = true;
+    };
+
     # Merge two JSON files (deep merge, second overrides first) into a target.
     # If the overlay is missing, fall back to the base unchanged.
     home.activation.claudeSettings = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
