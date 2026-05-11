@@ -9,6 +9,12 @@ let
   claude-litellm = pkgs.writeShellScriptBin "claude-litellm" (
     builtins.readFile ./claude/claude-litellm.sh
   );
+  agent-stuff-skills = pkgs.fetchFromGitHub {
+    owner = "mitsuhiko";
+    repo = "agent-stuff";
+    rev = "ab79f98104bcd3c6a7c5491e609f6d6700a7414d";
+    hash = "sha256-Sh79q+6X3cb6ypIDQ34l3SAWSoAQmQLW81mh8dQQOYQ=";
+  };
   googleworkspace-cli-skills = pkgs.runCommand "googleworkspace-cli-skills" { } ''
     src=${
       pkgs.fetchFromGitHub {
@@ -51,6 +57,31 @@ in
 
     home.file.".claude/skills" = {
       source = googleworkspace-cli-skills;
+      recursive = true;
+    };
+
+    home.file.".claude/skills/commit" = {
+      source = "${agent-stuff-skills}/skills/commit";
+      recursive = true;
+    };
+
+    home.file.".claude/skills/github" = {
+      source = "${agent-stuff-skills}/skills/github";
+      recursive = true;
+    };
+
+    home.file.".claude/skills/summarize" = {
+      source = "${agent-stuff-skills}/skills/summarize";
+      recursive = true;
+    };
+
+    home.file.".claude/skills/native-web-search" = {
+      source = "${agent-stuff-skills}/skills/native-web-search";
+      recursive = true;
+    };
+
+    home.file.".claude/skills/sentry" = {
+      source = "${agent-stuff-skills}/skills/sentry";
       recursive = true;
     };
 

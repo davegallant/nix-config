@@ -106,6 +106,7 @@
       "fork"
       "gcloud-cli"
       "headlamp"
+      "kap"
       "knockknock"
       "ghostty"
       "lulu"
