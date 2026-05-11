@@ -133,7 +133,6 @@ in
     ];
 
     home.file.".pi/agent/extensions/statusline.ts".source = ./pi/statusline.ts;
-    home.file.".pi/agent/extensions/git-checkpoint.ts".source = ./pi/git-checkpoint.ts;
 
     home.file.".pi/agent/settings.json".text = builtins.toJSON {
       defaultProvider = "litellm";
