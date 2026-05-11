@@ -131,6 +131,10 @@ in
 
     home.file.".pi/agent/extensions/statusline.ts".source = ./pi/statusline.ts;
     home.file.".pi/agent/extensions/git-checkpoint.ts".source = ./pi/git-checkpoint.ts;
+    home.file.".pi/agent/extensions/btw.ts".source = ./pi/btw.ts;
+    home.file.".pi/agent/extensions/review.ts".source = ./pi/review.ts;
+    home.file.".pi/agent/extensions/whimsical.ts".source = ./pi/whimsical.ts;
+    home.file.".pi/agent/skills/commit/SKILL.md".source = ./pi/skills/commit/SKILL.md;
 
     home.file.".pi/agent/settings.json".text = builtins.toJSON {
       defaultProvider = "litellm";
