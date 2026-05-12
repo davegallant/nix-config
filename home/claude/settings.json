@@ -94,6 +94,7 @@
       "Bash(shutdown*)",
       "Bash(sudo *)",
       "Read(.env)",
+      "Read(./.env.*)",
       "Read(/etc/shadow)",
       "Read(~/.aws/**)",
       "Read(~/.config/gcloud/**)",
@@ -124,6 +125,7 @@
   },
   "sandbox": {
     "enabled": true,
+    "autoAllowBashIfSandboxed": true,
     "filesystem": {
       "allowWrite": [
         "/tmp/"
@@ -170,7 +172,8 @@
     "pr": ""
   },
   "preferredNotifChannel": "ghostty",
-  "effortLevel": "medium",
+  "editorMode": "vim",
+  "effortLevel": "high",
   "defaultMode": "auto",
   "model": "opus[1m]"
 }
