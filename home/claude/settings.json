@@ -93,9 +93,7 @@
       "Bash(rm -rf*)",
       "Bash(shutdown*)",
       "Bash(sudo *)",
-      "Read(**/.env)",
-      "Read(**/.env.*)",
-      "Read(**/secrets/**)",
+      "Read(.env)",
       "Read(/etc/shadow)",
       "Read(~/.aws/**)",
       "Read(~/.config/gcloud/**)",
@@ -125,9 +123,7 @@
     }
   },
   "sandbox": {
-    "enabled": false,
-    "failIfUnavailable": false,
-    "allowUnsandboxedCommands": false,
+    "enabled": true,
     "filesystem": {
       "allowWrite": [
         "/tmp/"
@@ -143,7 +139,7 @@
         "~/.password-store"
       ],
       "denyRead": [
-        "~/"
+        "~/.aws/sso"
       ]
     },
     "network": {
@@ -156,18 +152,12 @@
         "*.github.com",
         "raw.githubusercontent.com",
         "objects.githubusercontent.com",
-        "registry.npmjs.org",
-        "*.npmjs.org",
-        "pypi.org",
-        "files.pythonhosted.org",
         "cache.nixos.org",
         "channels.nixos.org",
         "*.nixos.org",
         "*.cachix.org",
-        "proxy.golang.org",
-        "sum.golang.org",
-        "crates.io",
-        "static.crates.io",
+        "pypi.org",
+        "files.pythonhosted.org",
         "registry-1.docker.io",
         "*.docker.io",
         "ghcr.io",
