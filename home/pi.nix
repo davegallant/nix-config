@@ -29,6 +29,9 @@ let
                 baseUrl: $base_url,
                 api: "openai-completions",
                 apiKey: $api_key,
+                compat: {
+                  cacheControlFormat: "anthropic",
+                },
                 models: (
                   $m[0] | to_entries
                   | map({
@@ -60,6 +63,9 @@ let
                 baseUrl: $base_url,
                 api: "openai-completions",
                 apiKey: $api_key,
+                compat: {
+                  cacheControlFormat: "anthropic",
+                },
                 models: [],
               },
             },
