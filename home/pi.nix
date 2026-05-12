@@ -146,7 +146,21 @@ in
       autoCompact = false;
       thinking = "low";
       packages = [
-        "git:github.com/mitsuhiko/agent-stuff@ab79f98104bcd3c6a7c5491e609f6d6700a7414d"
+        {
+          source = "git:github.com/mitsuhiko/agent-stuff@ab79f98104bcd3c6a7c5491e609f6d6700a7414d";
+          skills = [
+            "commit"
+            "frontend-design"
+            "github"
+            "google-workspace"
+            "librarian"
+            "mermaid"
+            "native-web-search"
+            "sentry"
+            "summarize"
+            "web-browser"
+          ];
+        }
       ];
     };
   };
