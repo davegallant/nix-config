@@ -135,7 +135,6 @@ in
   config = lib.mkIf config.features.ai.enable {
     home.packages = [
       pi-wrapper
-      pkgs.nodejs # required for pi to install git packages (npm install)
     ];
 
     home.file.".pi/agent/extensions/statusline.ts".source = ./pi/statusline.ts;
