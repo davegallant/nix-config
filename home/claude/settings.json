@@ -129,7 +129,7 @@
     "filesystem": {
       "allowWrite": [
         "/tmp/",
-        "~/.gnupg"
+        "~/.gnupg/"
       ],
       "denyWrite": [
         "/etc",
@@ -140,7 +140,6 @@
         "~/.config/gcloud",
         "~/.password-store"
       ],
-      "allowRead": [],
       "denyRead": [
         "~/.aws/sso"
       ]
@@ -176,5 +175,5 @@
   "editorMode": "vim",
   "effortLevel": "high",
   "defaultMode": "auto",
-  "model": "opus[1m]"
+  "model": "sonnet[1m]"
 }
