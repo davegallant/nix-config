@@ -77,7 +77,6 @@ in
       unrar
       unstable.beszel
       unstable.gws
-      unstable.tailscale
       usbutils
       vpngate.packages.${pkgs.stdenv.hostPlatform.system}.default
       whois
