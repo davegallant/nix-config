@@ -148,13 +148,22 @@ in
       packages = [
         {
           source = "git:github.com/mitsuhiko/agent-stuff@ab79f98104bcd3c6a7c5491e609f6d6700a7414d";
+          extensions = [
+            "extensions/answer.ts"
+            "extensions/btw.ts"
+            "extensions/control.ts"
+            "extensions/files.ts"
+            "extensions/go-to-bed.ts"
+            "extensions/loop.ts"
+            "extensions/notify.ts"
+            "extensions/prompt-editor.ts"
+            "extensions/review.ts"
+            "extensions/whimsical.ts"
+          ];
           skills = [
             "commit"
-            "frontend-design"
             "github"
-            "google-workspace"
             "librarian"
-            "mermaid"
             "native-web-search"
             "sentry"
             "summarize"
