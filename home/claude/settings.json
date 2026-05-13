@@ -128,7 +128,8 @@
     "autoAllowBashIfSandboxed": true,
     "filesystem": {
       "allowWrite": [
-        "/tmp/"
+        "/tmp/",
+        "~/.gnupg"
       ],
       "denyWrite": [
         "/etc",
@@ -137,9 +138,9 @@
         "~/.ssh",
         "~/.aws",
         "~/.config/gcloud",
-        "~/.gnupg",
         "~/.password-store"
       ],
+      "allowRead": [],
       "denyRead": [
         "~/.aws/sso"
       ]
