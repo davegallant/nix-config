@@ -88,7 +88,7 @@
 
   hardware.parallels.enable = true;
 
-  systemd.services.tailscaled.wantedBy = lib.mkForce [ ];
+  services.tailscale.enable = lib.mkForce false;
 
   services.eternal-terminal.enable = true;
   networking.firewall.allowedTCPPorts = [ 2022 ];
