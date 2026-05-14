@@ -47,6 +47,12 @@
       enable = true;
 
       functions = {
+        gh-clone = ''
+          set dest (command gh-clone $argv | head -1)
+          if test -n "$dest"
+            cd $dest
+          end
+        '';
         s = ''
           set selected (fd --type d --exact-depth 3 --base-directory ~/src | fzf --exact)
           if test -n "$selected"
