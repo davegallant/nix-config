@@ -11,20 +11,20 @@
   just,
 }:
 let
-  version = "2.1.140"; # renovate: datasource=npm depName=@anthropic-ai/claude-code
+  version = "2.1.141"; # renovate: datasource=npm depName=@anthropic-ai/claude-code
 
   assets = {
     x86_64-linux = {
       url = "https://registry.npmjs.org/@anthropic-ai/claude-code-linux-x64/-/claude-code-linux-x64-${version}.tgz";
-      hash = "sha512-6fIEtDVmYcuBxnhPhHNDQ7dK9i3HuB/Fl286mmLL6qlQ8egd6NL7zZLDEYQiJP3MDf+mU8aA2Cu84bwBi/KSHA==";
+      hash = "sha512-Wr+2E5+E3iCsCRklJUzhgJ+wGL1gWIHnbWc5CHLC42Cop5BAEdlG3e4bX3LMzJLGzVX/bVZKIcZuulHgumqCMQ==";
     };
     aarch64-linux = {
       url = "https://registry.npmjs.org/@anthropic-ai/claude-code-linux-arm64/-/claude-code-linux-arm64-${version}.tgz";
-      hash = "sha512-iV4RFk15jRyK5SIYXjqwW5UgCNZfe0AQsIVWAT6Sar0bkOdOeKCn/xqyr57XQqy8Im5CgrhW89rq6NBA5SCRUQ==";
+      hash = "sha512-LUiuieiIh6+YDpwzSHBo6FFeqC4eD+rtnuvMy3cZBoKRls9aYVnrqCBl4++jcEuInSwhrsPPQpc81pTW8QGOxg==";
     };
     aarch64-darwin = {
       url = "https://registry.npmjs.org/@anthropic-ai/claude-code-darwin-arm64/-/claude-code-darwin-arm64-${version}.tgz";
-      hash = "sha512-S6LYafRHImb1+cia05kPx1F/yhhRzivWjHw70JDn8A+I6w6uKntm7FA1tQy27gGLMn8g99ccOpRYaq+09vR0XA==";
+      hash = "sha512-JnRjN8rSkuihDkI5500UOJY0owrhbcRpf5l6IEFoQTsc+XZSmwuig4KFubrfuFbyqIl2RtQWRuJIp1aqx27NnQ==";
     };
   };
 
