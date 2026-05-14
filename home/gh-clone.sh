@@ -48,7 +48,7 @@ fi
 selected=$(fzf --multi --prompt="Select repo to clone > " <"$CACHE_FILE")
 
 if [ -z "$selected" ]; then
-  echo "Nothing selected, exiting."
+  echo "Nothing selected, exiting." >&2
   exit 0
 fi
 
@@ -56,9 +56,10 @@ echo "$selected" | while read -r repo; do
   name="${repo##*/}"
   dest="$BASE_DIR/$name"
   if [ -d "$dest" ]; then
-    echo "  skip  $repo (already exists)"
+    echo "  skip  $repo (already exists)" >&2
   else
-    echo "  clone $repo → $dest"
+    echo "  clone $repo → $dest" >&2
     gh repo clone "$repo" "$dest"
   fi
+  echo "$dest"
 done
