@@ -12,7 +12,7 @@ let
   mattpocock-skills = pkgs.fetchFromGitHub {
     owner = "mattpocock";
     repo = "skills";
-    rev = "e74f0061bb67222181640effa98c675bdb2fdaa7";
+    rev = "e74f0061bb67222181640effa98c675bdb2fdaa7"; # mattpocock/skills
     hash = "sha256-5Rr5BQe8bdQXWt/H6QjYpoM4X+GuWPK26rU2VSqTZVI=";
   };
   agent-stuff-skills = pkgs.fetchFromGitHub {
