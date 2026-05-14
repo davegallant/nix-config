@@ -159,19 +159,20 @@ in
             "extensions/review.ts"
             "extensions/whimsical.ts"
           ];
+        }
+        {
+          source = "git:github.com/davegallant/skills@8988cb86445a6989d9764011e03eac4edb70259c";
           skills = [
             "commit"
             "github"
+            "grill-me"
+            "hunk-review"
             "librarian"
             "native-web-search"
             "sentry"
             "summarize"
             "web-browser"
           ];
-        }
-        {
-          source = "git:github.com/mattpocock/skills@e74f0061bb67222181640effa98c675bdb2fdaa7";
-          skills = [ "skills/productivity/grill-me" ];
         }
       ];
     };

@@ -47,11 +47,11 @@ jobs:
           VERSION=$(grep 'version = ' home/hunk/package.nix | head -1 | sed 's/.*version = "\([^"]*\)".*/\1/')
           bash home/hunk/update-hashes.sh "$VERSION"
 
-      - name: update mattpocock/skills hash
+      - name: update davegallant/skills hash
         if: contains(steps.changed.outputs.files, 'home/claude.nix')
         run: |
-          REV=$(grep 'rev = ".*"; # mattpocock/skills' home/claude.nix | sed 's/.*rev = "\([^"]*\)".*/\1/')
-          bash home/claude/update-mattpocock-skills-hash.sh "$REV"
+          REV=$(grep -A1 'repo = "skills"' home/claude.nix | grep 'rev =' | sed 's/.*rev = "\([^"]*\)".*/\1/')
+          bash home/claude/update-skills-hash.sh "$REV"
 
       - name: commit and push updated hashes
         run: |
