@@ -9,40 +9,12 @@ let
   claude-litellm = pkgs.writeShellScriptBin "claude-litellm" (
     builtins.readFile ./claude/claude-litellm.sh
   );
-  mattpocock-skills = pkgs.fetchFromGitHub {
-    owner = "mattpocock";
+  skills = pkgs.fetchFromGitHub {
+    owner = "davegallant";
     repo = "skills";
-    rev = "e74f0061bb67222181640effa98c675bdb2fdaa7"; # mattpocock/skills
-    hash = "sha256-5Rr5BQe8bdQXWt/H6QjYpoM4X+GuWPK26rU2VSqTZVI=";
+    rev = "8988cb86445a6989d9764011e03eac4edb70259c";
+    hash = "sha256-LxIT7dtOyTkLBM29iEdZuafQczcPg2ME/vpEPl19NhU=";
   };
-  agent-stuff-skills = pkgs.fetchFromGitHub {
-    owner = "mitsuhiko";
-    repo = "agent-stuff";
-    rev = "ab79f98104bcd3c6a7c5491e609f6d6700a7414d";
-    hash = "sha256-Sh79q+6X3cb6ypIDQ34l3SAWSoAQmQLW81mh8dQQOYQ=";
-  };
-  googleworkspace-cli-skills = pkgs.runCommand "googleworkspace-cli-skills" { } ''
-    src=${
-      pkgs.fetchFromGitHub {
-        owner = "googleworkspace";
-        repo = "cli";
-        rev = "a3768d0e82ad83cca2da97724e46bea4ff0e6dbd";
-        hash = "sha256-YyNIHbyZrLlXYtWxZY8Um19MsnLharmS+nWGWO89fsA=";
-      }
-    }/skills
-    mkdir -p $out
-    for skill in \
-      gws-shared \
-      gws-gmail \
-      gws-gmail-read \
-      gws-calendar \
-      gws-calendar-agenda \
-      gws-calendar-insert \
-      gws-docs \
-      gws-docs-write; do
-      cp -r $src/$skill $out/$skill
-    done
-  '';
 in
 {
   config = lib.mkIf config.features.ai.enable {
@@ -62,37 +34,7 @@ in
     };
 
     home.file.".claude/skills" = {
-      source = googleworkspace-cli-skills;
-      recursive = true;
-    };
-
-    home.file.".claude/skills/commit" = {
-      source = "${agent-stuff-skills}/skills/commit";
-      recursive = true;
-    };
-
-    home.file.".claude/skills/github" = {
-      source = "${agent-stuff-skills}/skills/github";
-      recursive = true;
-    };
-
-    home.file.".claude/skills/summarize" = {
-      source = "${agent-stuff-skills}/skills/summarize";
-      recursive = true;
-    };
-
-    home.file.".claude/skills/native-web-search" = {
-      source = "${agent-stuff-skills}/skills/native-web-search";
-      recursive = true;
-    };
-
-    home.file.".claude/skills/sentry" = {
-      source = "${agent-stuff-skills}/skills/sentry";
-      recursive = true;
-    };
-
-    home.file.".claude/skills/grill-me" = {
-      source = "${mattpocock-skills}/skills/productivity/grill-me";
+      source = "${skills}/skills";
       recursive = true;
     };
 
