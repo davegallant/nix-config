@@ -9,6 +9,12 @@ let
   claude-litellm = pkgs.writeShellScriptBin "claude-litellm" (
     builtins.readFile ./claude/claude-litellm.sh
   );
+  mattpocock-skills = pkgs.fetchFromGitHub {
+    owner = "mattpocock";
+    repo = "skills";
+    rev = "e74f0061bb67222181640effa98c675bdb2fdaa7";
+    hash = "sha256-5Rr5BQe8bdQXWt/H6QjYpoM4X+GuWPK26rU2VSqTZVI=";
+  };
   agent-stuff-skills = pkgs.fetchFromGitHub {
     owner = "mitsuhiko";
     repo = "agent-stuff";
@@ -82,6 +88,11 @@ in
 
     home.file.".claude/skills/sentry" = {
       source = "${agent-stuff-skills}/skills/sentry";
+      recursive = true;
+    };
+
+    home.file.".claude/skills/grill-me" = {
+      source = "${mattpocock-skills}/skills/productivity/grill-me";
       recursive = true;
     };
 
