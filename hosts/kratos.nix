@@ -34,7 +34,6 @@
       "sr_mod"
     ];
     initrd.kernelModules = [ ];
-    kernelModules = [ ];
     extraModulePackages = [ ];
     loader = {
       efi.canTouchEfiVariables = true;
@@ -56,14 +55,12 @@
     ];
   };
 
-  fileSystems."/mnt/psf/src" = {
-    device = "src";
-    fsType = "prl_fs";
+  fileSystems."/mnt/src" = {
+    device = "share";
+    fsType = "9p";
     options = [
+      "trans=virtio"
       "nofail"
-      "noatime"
-      "nodev"
-      "nosuid"
     ];
   };
 
@@ -75,6 +72,9 @@
     "fs.file-max" = 2097152;
   };
 
+  boot.kernelModules = [ "virtiofs" ];
+  boot.supportedFilesystems = [ "virtiofs" ];
+
   swapDevices = [ ];
 
   system.stateVersion = "25.11";
@@ -85,8 +85,6 @@
   ];
 
   virtualisation.docker.enable = true;
-
-  hardware.parallels.enable = true;
 
   services.tailscale.enable = lib.mkForce false;
 
