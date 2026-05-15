@@ -63,9 +63,6 @@
     "fs.file-max" = 2097152;
   };
 
-  boot.kernelModules = [ "virtiofs" ];
-  boot.supportedFilesystems = [ "virtiofs" ];
-
   swapDevices = [ ];
 
   system.stateVersion = "25.11";
