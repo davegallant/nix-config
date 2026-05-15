@@ -191,18 +191,18 @@
           unstable = mkUnstable system;
         in
         {
-          zelus = darwin.lib.darwinSystem {
+          ares = darwin.lib.darwinSystem {
             inherit system;
             specialArgs = {
               inherit unstable inputs;
             };
             modules = mkSharedModules {
               username = "dave.gallant";
-              hostname = "zelus";
+              hostname = "ares";
               inherit system unstable;
               hmModule = home-manager.darwinModules.home-manager;
               extraModules = [
-                ./hosts/zelus.nix
+                ./hosts/ares.nix
               ];
             };
           };

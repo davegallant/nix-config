@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   networking = {
-    hostName = "zelus";
+    hostName = "ares";
   };
 
   nix.enable = false;
