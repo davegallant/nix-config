@@ -5,22 +5,22 @@
   autoPatchelfHook,
 }:
 let
-  version = "0.12.0"; # renovate: datasource=github-releases depName=modem-dev/hunk
+  version = "0.12.1"; # renovate: datasource=github-releases depName=modem-dev/hunk
 
   assets = {
     x86_64-linux = {
       url = "https://github.com/modem-dev/hunk/releases/download/v${version}/hunkdiff-linux-x64.tar.gz";
-      hash = "sha256-p+NQssUr4GkGOkoU9kg48m+TPexUf3W6LYruNdglsds=";
+      hash = "sha256-iIs1YyVwas8aEyufSWMN2En6awmKR8yC4n0o8u+GG8Y=";
       dir = "hunkdiff-linux-x64";
     };
     aarch64-linux = {
       url = "https://github.com/modem-dev/hunk/releases/download/v${version}/hunkdiff-linux-arm64.tar.gz";
-      hash = "sha256-XejtJ1G3pjHbNWQxSL+BCribHcNa39sGzBvy2qc3JlQ=";
+      hash = "sha256-kxXnTITRp0awtWjfks003wVeAMi5tfKYsbtrlGV4HuI=";
       dir = "hunkdiff-linux-arm64";
     };
     aarch64-darwin = {
       url = "https://github.com/modem-dev/hunk/releases/download/v${version}/hunkdiff-darwin-arm64.tar.gz";
-      hash = "sha256-tPExtV9uPpxnRudomAG2zd61CPxpjf6OGsRlwfHaJL4=";
+      hash = "sha256-PuRNsdUXBQ4JYrgCjdsBB7UdHNAeHUvA3i5fTjs6rp0=";
       dir = "hunkdiff-darwin-arm64";
     };
   };
