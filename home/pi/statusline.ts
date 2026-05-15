@@ -14,6 +14,11 @@
  * Context usage is read fresh on every render via ctx.getContextUsage().
  * A turn_end hook triggers an explicit requestRender() so the bar updates
  * immediately after each assistant reply.
+ *
+ * Cost: prefers the LiteLLM proxy's authoritative `x-litellm-response-cost`
+ * response header when present (per-session sum), falling back to the
+ * client-side token × rate calculation when the header isn't there
+ * (e.g. talking to a non-litellm provider).
  */
 
 import type { AssistantMessage } from "@mariozechner/pi-ai";
@@ -26,13 +31,40 @@ const BAR_WIDTH = 10;
 // Stored so the turn_end hook can trigger a re-render from outside the footer closure.
 let activeTui: { requestRender(): void } | undefined;
 
+// Per-session accumulator of the `x-litellm-response-cost` response header.
+// Keyed by sessionId so /resume and forks don't double-count.
+const litellmSessionCost = new Map<string, number>();
+let currentSessionId: string | undefined;
+
 export default function (pi: ExtensionAPI) {
   // After each assistant turn the context usage changes – refresh the bar.
   pi.on("turn_end", () => {
     activeTui?.requestRender();
   });
 
+  // Accumulate authoritative cost from LiteLLM response headers.
+  // event.headers may be a Headers (web standard) or a plain record.
+  pi.on("after_provider_response", (event) => {
+    if (currentSessionId === undefined) return;
+    const h = event.headers as unknown;
+    let raw: string | string[] | undefined;
+    if (h && typeof (h as Headers).get === "function") {
+      raw = (h as Headers).get("x-litellm-response-cost") ?? undefined;
+    } else if (h && typeof h === "object") {
+      raw = (h as Record<string, string | string[]>)["x-litellm-response-cost"];
+    }
+    if (raw === undefined) return;
+    const cost = Number(Array.isArray(raw) ? raw[0] : raw);
+    if (!Number.isFinite(cost) || cost <= 0) return;
+    litellmSessionCost.set(
+      currentSessionId,
+      (litellmSessionCost.get(currentSessionId) ?? 0) + cost,
+    );
+    activeTui?.requestRender();
+  });
+
   function installFooter(ctx: Parameters<Parameters<typeof pi.on<"session_start">>[1]>[1]) {
+    currentSessionId = ctx.sessionManager.getSessionId?.() ?? undefined;
     ctx.ui.setFooter((tui, theme, footerData) => {
       activeTui = tui;
       const unsub = footerData.onBranchChange(() => tui.requestRender());
@@ -44,15 +76,18 @@ export default function (pi: ExtensionAPI) {
           // --- Cost (from session branch) ---
           let input = 0;
           let output = 0;
-          let cost = 0;
+          let localCost = 0;
           for (const entry of ctx.sessionManager.getBranch()) {
             if (entry.type === "message" && entry.message.role === "assistant") {
               const m = entry.message as AssistantMessage;
               input += m.usage.input;
               output += m.usage.output;
-              cost += m.usage.cost.total;
+              localCost += m.usage.cost.total;
             }
           }
+          // Prefer LiteLLM's authoritative cost when available for this session.
+          const litellmCost = currentSessionId ? litellmSessionCost.get(currentSessionId) : undefined;
+          const cost = litellmCost ?? localCost;
 
           const fmt = (n: number) =>
             n === 0 ? "0" : n < 1000 ? `${n}` : n >= 1_000_000 ? `${(n / 1_000_000).toFixed(1)}M` : `${(n / 1000).toFixed(1)}k`;
