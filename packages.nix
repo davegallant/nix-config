@@ -24,6 +24,7 @@ in
       github-cli
       gnumake
       gnupg
+      just
       jq
       lsof
       macchina
