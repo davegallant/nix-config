@@ -55,17 +55,6 @@
     ];
   };
 
-  fileSystems."/mnt/src" = {
-    device = "share";
-    fsType = "9p";
-    options = [
-      "trans=virtio"
-      "version=9p2000.L"
-      "access=any"
-      "_netdev"
-    ];
-  };
-
   boot.kernel.sysctl = {
     "fs.inotify.max_user_watches" = 524288;
     "fs.inotify.max_user_instances" = 512;
