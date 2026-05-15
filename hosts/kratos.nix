@@ -93,6 +93,9 @@
   services.eternal-terminal.enable = true;
   networking.firewall.allowedTCPPorts = [ 2022 ];
 
+  # Certain VPNs add encapsulation overhead, and GitHub's servers are strict about oversized packets
+  networking.interfaces.enp0s1.mtu = 1280;
+
   environment.systemPackages = with pkgs; [
     awscli2
     (azure-cli.withExtensions [ azure-cli-extensions.fzf ])
