@@ -148,6 +148,7 @@ in
       packages = [
         {
           source = "git:github.com/mitsuhiko/agent-stuff@ab79f98104bcd3c6a7c5491e609f6d6700a7414d";
+          skills = [ ]; # skip loading skills
           extensions = [
             "extensions/answer.ts"
             "extensions/btw.ts"
@@ -162,7 +163,7 @@ in
           ];
         }
         {
-          source = "git:github.com/davegallant/skills@8988cb86445a6989d9764011e03eac4edb70259c";
+          source = "git:github.com/davegallant/skills@5e4fb0368ae7c2d59b0e9aa5100676ac9624ecc9";
           skills = [
             "commit"
             "github"
