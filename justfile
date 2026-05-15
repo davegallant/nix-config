@@ -50,42 +50,41 @@ update-pi *version:
 
 # fetch live model metadata from the litellm proxy and write a json file
 #   ~/.config/nix-config/litellm-models.json
+# uses /v1/models for the list of available models and /public/litellm_model_cost_map
+# (no auth) for pricing and capabilities.
 refresh-models:
   #!/usr/bin/env bash
   set -euo pipefail
   url="${LITELLM_BASE_URL:-${ANTHROPIC_BASE_URL:-http://127.0.0.1:4000/v1}}"
   key="${LITELLM_API_KEY:-${ANTHROPIC_AUTH_TOKEN:-sk-noauth}}"
+  root="${url%/v1}"; root="${root%/}"
   out="$HOME/.config/nix-config/litellm-models.json"
   mkdir -p "$(dirname "$out")"
-  tmp="$(mktemp)"
-  trap 'rm -f "$tmp"' EXIT
-  echo "fetching models from $url/model/info"
-  curl -fsS -m 10 -H "Authorization: Bearer $key" "$url/model/info" \
-    | jq '
-      def num($x): if ($x == null) then 0 else $x end;
+  models_tmp="$(mktemp)"; costs_tmp="$(mktemp)"
+  trap 'rm -f "$models_tmp" "$costs_tmp"' EXIT
+
+  curl -fsS -m 10 -H "Authorization: Bearer $key" "$root/v1/models" > "$models_tmp"
+  curl -fsS -m 30 "$root/public/litellm_model_cost_map" > "$costs_tmp"
+
+  jq -n --slurpfile models "$models_tmp" --slurpfile costs "$costs_tmp" '
+      def num($x): $x // 0;
       def per_million($x): (num($x) * 1000000 * 10000 | round) / 10000;
-      # dedupe by model_name (first wins; litellm exposes the same name across multiple routes)
-      [.data[]] | unique_by(.model_name)
-      | map({
-          key: .model_name,
+      ($costs[0]) as $cost_map
+      | [$models[0].data[].id] | unique
+      | map(. as $name | ($cost_map[$name] // {}) as $c | {
+          key: $name,
           value: {
-            name: .model_name,
-            attachment: (.model_info.supports_vision == true),
-            reasoning: (.model_info.supports_reasoning == true),
-            tool_call: (.model_info.supports_function_calling == true),
-            limit: {
-              context: num(.model_info.max_input_tokens),
-              output: num(.model_info.max_output_tokens),
-            },
-            cost: {
-              input: per_million(.model_info.input_cost_per_token),
-              output: per_million(.model_info.output_cost_per_token),
-            },
+            name: $name,
+            attachment: ($c.supports_vision == true),
+            reasoning: ($c.supports_reasoning == true),
+            tool_call: ($c.supports_function_calling == true),
+            limit: { context: num($c.max_input_tokens), output: num($c.max_output_tokens) },
+            cost:  { input:   per_million($c.input_cost_per_token), output: per_million($c.output_cost_per_token) },
           },
         })
       | from_entries
-    ' > "$tmp"
-  mv "$tmp" "$out"
+    ' > "$out.tmp"
+  mv "$out.tmp" "$out"
   echo "wrote $(jq 'length' "$out") models to $out"
 
 # squash-merge current branch's PR with nvd diff in body
