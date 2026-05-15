@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, unstable, ... }:
 {
   networking = {
     hostName = "ares";
@@ -67,6 +67,25 @@
   };
 
   security.pam.services.sudo_local.touchIdAuth = true;
+
+  environment.systemPackages = [ unstable.ollama ];
+
+  launchd.daemons.ollama = {
+    serviceConfig = {
+      ProgramArguments = [
+        "${unstable.ollama}/bin/ollama"
+        "serve"
+      ];
+      EnvironmentVariables = {
+        OLLAMA_HOST = "0.0.0.0:11434";
+        HOME = "/var/root";
+      };
+      RunAtLoad = true;
+      KeepAlive = true;
+      StandardOutPath = "/var/log/ollama.log";
+      StandardErrorPath = "/var/log/ollama.log";
+    };
+  };
 
   home-manager.users."dave.gallant".features.ai.enable = true;
 
