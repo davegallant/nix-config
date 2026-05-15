@@ -60,7 +60,9 @@
     fsType = "9p";
     options = [
       "trans=virtio"
-      "nofail"
+      "version=9p2000.L"
+      "access=any"
+      "_netdev"
     ];
   };
 
