@@ -8,7 +8,7 @@ Nix Flake-based configuration managing NixOS (Linux) and macOS (nix-darwin) syst
 with home-manager for user-level configuration. Uses nixvim for Neovim configuration
 and LiteLLM as a local model proxy for AI tooling.
 
-- **Hosts**: `hephaestus` (x86_64-linux NixOS desktop), `kratos` (aarch64-linux NixOS Parallels VM), `zelus` (aarch64-darwin macOS)
+- **Hosts**: `hephaestus` (x86_64-linux NixOS desktop), `kratos` (aarch64-linux NixOS Parallels VM), `ares` (aarch64-darwin macOS)
 - **Nix channel**: nixpkgs 25.11 (stable), plus unstable channel
 - **Shell**: Fish, with Starship prompt
 - **Task runner**: `just` (not Make)
@@ -98,7 +98,7 @@ Run `just fmt` to format all `.nix` files.
 - **Files**: lowercase, single-word preferred (`fish.nix`, `git.nix`). Use `default.nix` as directory entry point.
 - **Directories**: lowercase. Kebab-case for multi-word (`cd-fzf`).
 - **Variables/functions**: camelCase (`mkUnstable`, `hmModule`, `extraModules`).
-- **Host names**: Greek mythology, lowercase (`hephaestus`, `zelus`).
+- **Host names**: Greek mythology, lowercase (`hephaestus`, `ares`).
 - **NixOS options**: standard dot-path convention (`services.tailscale.enable`).
 
 ### Comments
@@ -150,7 +150,7 @@ Two nixpkgs tiers, passed via `specialArgs`/`extraSpecialArgs`:
 GitHub Actions workflow (`.github/workflows/cachix.yml`):
 - Triggers on push to `main` and on pull requests (ignoring markdown/LICENSE changes)
 - Checks formatting with `nix fmt -- --check .`
-- Builds the NixOS `hephaestus` and macOS `zelus` configurations, evaluates `kratos`
+- Builds the NixOS `hephaestus` and macOS `ares` configurations, evaluates `kratos`
 - Pushes build artifacts to the `davegallant` Cachix binary cache
 
 A separate workflow (`.github/workflows/update-hashes.yml`) runs on PRs touching
