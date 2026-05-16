@@ -21,6 +21,7 @@ in
     home.packages = [
       claude-code
       claude-litellm
+      pkgs.uv
     ];
 
     home.file.".claude/statusline-command.sh" = {
@@ -64,10 +65,21 @@ in
         "${./claude/settings.json}" \
         "$HOME/.claude/settings.private.json"
 
+      # generate pagerduty-mcp entry with resolved uvx path
+      pagerdutyMcp=$(${lib.getExe pkgs.jq} -n \
+        --arg uvx "${lib.getBin pkgs.uv}/bin/uvx" \
+        '{mcpServers: {"pagerduty-mcp": {type: "stdio", command: $uvx, args: ["pagerduty-mcp", "--enable-write-tools"]}}}')
+      echo "$pagerdutyMcp" > /tmp/pagerduty-mcp.json
+
       # ~/.claude.json is owned by Claude Code; merge MCP servers into it
       mergeJson "$HOME/.claude.json" \
         "$HOME/.claude.json" \
         "${./claude/mcp-servers.json}"
+
+      mergeJson "$HOME/.claude.json" \
+        "$HOME/.claude.json" \
+        "/tmp/pagerduty-mcp.json"
+
     '';
 
   };
