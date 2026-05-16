@@ -46,10 +46,18 @@
                 api_base = "http://localhost:11434";
               };
             };
+            ollamaModelAres = name: {
+              model_name = builtins.replaceStrings [ "." ] [ "-" ] name;
+              litellm_params = {
+                model = "ollama/${name}";
+                api_base = "http://ares:11434";
+              };
+            };
           in
           map copilotModel (import ./models/copilot.nix)
           ++ map openrouterModel (import ./models/openrouter.nix)
-          ++ map ollamaModel [ "qwen3.5:9b" ];
+          ++ map ollamaModel [ "qwen3.5:9b" ]
+          ++ map ollamaModelAres [ "qwen3.5:27b" ];
         litellm_settings = {
           drop_params = true;
         };
