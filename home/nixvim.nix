@@ -424,6 +424,7 @@
 
     plugins = {
       auto-save.enable = true;
+      render-markdown.enable = true;
       which-key.enable = true;
       cmp.enable = true;
       gitsigns = {
