@@ -1,4 +1,9 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  unstable,
+  ...
+}:
 {
   config = lib.mkIf config.features.ai.enable {
     system.activationScripts.litellm-secrets.text = ''
@@ -11,6 +16,7 @@
 
     services.litellm = {
       enable = true;
+      package = unstable.litellm;
       host = "127.0.0.1";
       port = 4000;
       environment = {
