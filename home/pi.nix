@@ -162,24 +162,12 @@ in
             "extensions/files.ts"
             "extensions/loop.ts"
             "extensions/notify.ts"
-            "extensions/prompt-editor.ts"
             "extensions/review.ts"
             "extensions/whimsical.ts"
           ];
         }
         {
-          source = "git:github.com/davegallant/skills@5e4fb0368ae7c2d59b0e9aa5100676ac9624ecc9";
-          skills = [
-            "commit"
-            "github"
-            "grill-me"
-            "hunk-review"
-            "librarian"
-            "native-web-search"
-            "sentry"
-            "summarize"
-            "web-browser"
-          ];
+          source = "git:github.com/davegallant/skills@7e303c04926975a70616775a87d2f410b84239aa";
         }
       ];
     };
