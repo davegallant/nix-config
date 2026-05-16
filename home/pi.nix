@@ -47,6 +47,14 @@ let
                       cacheRead: (.value.cost.input / 10),
                       cacheWrite: (.value.cost.input * 1.25),
                     },
+                    compat: (
+                      if (.key | test("^qwen"; "i")) then {
+                        cacheControlFormat: null,
+                        supportsDeveloperRole: false,
+                        supportsReasoningEffort: false,
+                        thinkingFormat: "qwen",
+                      } else {} end
+                    ),
                   })
                 ),
               },
