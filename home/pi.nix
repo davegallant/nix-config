@@ -29,9 +29,6 @@ let
                 baseUrl: $base_url,
                 api: "openai-completions",
                 apiKey: $api_key,
-                compat: {
-                  cacheControlFormat: "anthropic",
-                },
                 models: (
                   $m[0] | to_entries
                   | map({
@@ -48,12 +45,13 @@ let
                       cacheWrite: (.value.cost.input * 1.25),
                     },
                     compat: (
-                      if (.key | test("^qwen"; "i")) then {
-                        cacheControlFormat: null,
+                      if (.key | test("^claude"; "i")) then {
+                        cacheControlFormat: "anthropic",
+                        supportsDeveloperRole: true,
+                      } else {
                         supportsDeveloperRole: false,
                         supportsReasoningEffort: false,
-                        thinkingFormat: "qwen",
-                      } else {} end
+                      } end
                     ),
                   })
                 ),
