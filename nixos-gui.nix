@@ -32,7 +32,6 @@
         wayland-utils
       ]
       ++ lib.optionals pkgs.stdenv.hostPlatform.isx86_64 [
-        discord
         freefilesync
         heroic
         lutris
