@@ -154,7 +154,6 @@ in
             "extensions/btw.ts"
             "extensions/control.ts"
             "extensions/files.ts"
-            "extensions/go-to-bed.ts"
             "extensions/loop.ts"
             "extensions/notify.ts"
             "extensions/prompt-editor.ts"
