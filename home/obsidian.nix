@@ -49,7 +49,7 @@ in
                       url = "https://github.com/Vinzent03/obsidian-git/releases/download/2.38.3/obsidian-git-2.38.3.zip";
                       name = "obsidian-git";
                       stripRoot = true;
-                      hash = "sha256-M9DaGqa2ILEJ0GMJGSqry0VXDn5HYRkl1sfxpsUh9bQ=";
+                      hash = "sha256-Bm0USEhNtRCNzt9cx7vI6mgHF+mvZEAzo9WJalBKD8U=";
                     };
                     settings = {
                       commitMessage = "vault backup: {{date}}";
