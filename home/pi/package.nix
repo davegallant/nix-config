@@ -7,20 +7,20 @@
   python3,
 }:
 let
-  version = "0.75.1"; # renovate: datasource=github-releases depName=badlogic/pi-mono
+  version = "0.75.3"; # renovate: datasource=github-releases depName=badlogic/pi-mono
 
   assets = {
     x86_64-linux = {
       url = "https://github.com/badlogic/pi-mono/releases/download/v${version}/pi-linux-x64.tar.gz";
-      hash = "sha256-dukdMq8S56alXeOxDr84YRzHNB+ZTFh24W5F6Q18rF4=";
+      hash = "sha256-hu9I21upinhKzx284b1tX9W2vuPuLvRJ4IEagtG6eMM=";
     };
     aarch64-linux = {
       url = "https://github.com/badlogic/pi-mono/releases/download/v${version}/pi-linux-arm64.tar.gz";
-      hash = "sha256-+oBTrsx1v7gEUgXUjmwPSyOGH0jYNREZGVzaCsBJKzs=";
+      hash = "sha256-NBOJtZrUpUomgRTE4rTmXgFPl6WB/RTqciwgsziX7s0=";
     };
     aarch64-darwin = {
       url = "https://github.com/badlogic/pi-mono/releases/download/v${version}/pi-darwin-arm64.tar.gz";
-      hash = "sha256-i/df5S0VQCWWj/71h0x/xn7GWDXZOmVTxrgE0fAiKuk=";
+      hash = "sha256-LRZmjWJoBepz1DCxeLIvU0EVLHwTVExG+J1oBY4Lv4E=";
     };
   };
 
