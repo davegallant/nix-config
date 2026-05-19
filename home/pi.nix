@@ -18,10 +18,17 @@ let
       litellm_api_key="''${LITELLM_API_KEY:-''${ANTHROPIC_AUTH_TOKEN:-sk-noauth}}"
       models_json="$HOME/.config/nix-config/litellm-models.json"
 
+      ollama_compat='{
+        "supportsDeveloperRole": false,
+        "supportsReasoningEffort": false,
+        "thinkingFormat": "qwen"
+      }'
+
       if [ -f "$models_json" ]; then
         ${pkgs.jq}/bin/jq -n \
           --arg base_url "$litellm_base_url" \
           --arg api_key "$litellm_api_key" \
+          --argjson ollama_compat "$ollama_compat" \
           --slurpfile m "$models_json" '
           {
             providers: {
@@ -56,13 +63,23 @@ let
                   })
                 ),
               },
+              "ollama-ares": {
+                baseUrl: "http://ares:11434/v1",
+                api: "openai-completions",
+                apiKey: "ollama",
+                compat: $ollama_compat,
+                models: [
+                  { id: "qwen3.6:35b-64k", name: "Qwen 3.6 35B 64k (ares)", reasoning: true, contextWindow: 65536 }
+                ],
+              },
             },
           }
         ' > "$HOME/.pi/agent/models.json"
       else
         ${pkgs.jq}/bin/jq -n \
           --arg base_url "$litellm_base_url" \
-          --arg api_key "$litellm_api_key" '
+          --arg api_key "$litellm_api_key" \
+          --argjson ollama_compat "$ollama_compat" '
           {
             providers: {
               litellm: {
@@ -73,6 +90,15 @@ let
                   cacheControlFormat: "anthropic",
                 },
                 models: [],
+              },
+              "ollama-ares": {
+                baseUrl: "http://ares:11434/v1",
+                api: "openai-completions",
+                apiKey: "ollama",
+                compat: $ollama_compat,
+                models: [
+                  { id: "qwen3.6:35b-64k", name: "Qwen 3.6 35B 64k (ares)", reasoning: true, contextWindow: 65536 }
+                ],
               },
             },
           }
