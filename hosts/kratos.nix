@@ -22,6 +22,9 @@
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "prl-tools" ];
 
   networking.hostName = "kratos";
+  networking.hosts = {
+    "192.168.64.1" = [ "ares" ];
+  };
   networking.firewall.interfaces.docker0.allowedTCPPorts = [ 4000 ];
 
   programs.ssh.startAgent = true;
