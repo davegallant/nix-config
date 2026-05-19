@@ -71,7 +71,7 @@
           map copilotModel (import ./models/copilot.nix)
           ++ map openrouterModel (import ./models/openrouter.nix)
           ++ map ollamaModel [ "qwen3.5:9b" ]
-          ++ map ollamaModelAres [ "qwen3.6:35b" ];
+          ++ map ollamaModelAres [ "qwen3.6:35b-64k" ];
         litellm_settings = {
           drop_params = true;
         };
