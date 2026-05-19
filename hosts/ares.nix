@@ -103,6 +103,7 @@
     };
 
     brews = [
+      "awscli"
       "azure-cli"
       "coreutils"
       "et"
