@@ -169,6 +169,7 @@
       ]
     },
     "network": {
+      "allowAllUnixSockets": true,
       "allowedDomains": [
         "claude.com",
         "*.claude.com",
