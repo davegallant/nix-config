@@ -63,7 +63,7 @@ let
                   })
                 ),
               },
-              "ollama-ares": {
+              "ollama": {
                 baseUrl: "http://ares:11434/v1",
                 api: "openai-completions",
                 apiKey: "ollama",
@@ -91,7 +91,7 @@ let
                 },
                 models: [],
               },
-              "ollama-ares": {
+              "ollama": {
                 baseUrl: "http://ares:11434/v1",
                 api: "openai-completions",
                 apiKey: "ollama",
@@ -173,8 +173,8 @@ in
     home.file.".pi/agent/extensions/statusline.ts".source = ./pi/statusline.ts;
 
     home.file.".pi/agent/settings.json".text = builtins.toJSON {
-      defaultProvider = "litellm";
-      defaultModel = "claude-sonnet-4-6";
+      defaultProvider = "ollama";
+      defaultModel = "qwen3.6:35b-64k";
       autoCompact = false;
       thinking = "low";
       packages = [
