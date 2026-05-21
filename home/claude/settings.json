@@ -136,7 +136,8 @@
   "enabledPlugins": {
     "code-review@claude-plugins-official": true,
     "superpowers@claude-plugins-official": true,
-    "slack@claude-plugins-official": true
+    "slack@claude-plugins-official": true,
+    "datadog@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "claude-plugins-official": {
@@ -187,7 +188,9 @@
         "*.docker.io",
         "ghcr.io",
         "127.0.0.1",
-        "api.pagerduty.com"
+        "api.pagerduty.com",
+        "*.datadoghq.com",
+        "*.datadoghq.eu"
       ]
     }
   },
