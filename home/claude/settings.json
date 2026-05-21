@@ -191,7 +191,9 @@
         "127.0.0.1",
         "api.pagerduty.com",
         "*.datadoghq.com",
-        "*.datadoghq.eu"
+        "*.datadoghq.eu",
+        "oauth2.googleapis.com",
+        "www.googleapis.com"
       ]
     }
   },
