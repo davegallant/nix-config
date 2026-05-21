@@ -193,7 +193,8 @@
         "*.datadoghq.com",
         "*.datadoghq.eu",
         "oauth2.googleapis.com",
-        "www.googleapis.com"
+        "www.googleapis.com",
+        "gmail.googleapis.com"
       ]
     }
   },
