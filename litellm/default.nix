@@ -45,33 +45,9 @@
                 api_key = "os.environ/OPENROUTER_API_KEY";
               };
             };
-            # 32k context fits most local 20-30B models on 64GB without OOM.
-            # Ollama's default of 4096 silently truncates pi's system prompt + tools,
-            # which causes models to emit partial JSON and stop mid-response.
-            ollamaOpts = {
-              num_ctx = 32768;
-            };
-            ollamaModel = name: {
-              model_name = builtins.replaceStrings [ "." ] [ "-" ] name;
-              litellm_params = {
-                model = "ollama_chat/${name}";
-                api_base = "http://localhost:11434";
-              }
-              // ollamaOpts;
-            };
-            ollamaModelAres = name: {
-              model_name = builtins.replaceStrings [ "." ] [ "-" ] name;
-              litellm_params = {
-                model = "ollama_chat/${name}";
-                api_base = "http://ares:11434";
-              }
-              // ollamaOpts;
-            };
           in
           map copilotModel (import ./models/copilot.nix)
-          ++ map openrouterModel (import ./models/openrouter.nix)
-          ++ map ollamaModel [ "qwen3.5:9b" ]
-          ++ map ollamaModelAres [ "qwen3.6:35b-64k" ];
+          ++ map openrouterModel (import ./models/openrouter.nix);
         litellm_settings = {
           drop_params = true;
         };
