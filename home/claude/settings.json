@@ -190,8 +190,7 @@
         "ghcr.io",
         "127.0.0.1",
         "api.pagerduty.com",
-        "*.datadoghq.com",
-        "*.datadoghq.eu",
+        "us3.datadoghq.com",
         "oauth2.googleapis.com",
         "www.googleapis.com",
         "gmail.googleapis.com"
