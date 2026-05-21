@@ -12,15 +12,15 @@ let
   assets = {
     x86_64-linux = {
       url = "https://github.com/badlogic/pi-mono/releases/download/v${version}/pi-linux-x64.tar.gz";
-      hash = "sha256-hu9I21upinhKzx284b1tX9W2vuPuLvRJ4IEagtG6eMM=";
+      hash = "sha256-69nC5croJ3mi3p5/NMe+bkU+9LC2JjQNAtrLCfKfdjk=";
     };
     aarch64-linux = {
       url = "https://github.com/badlogic/pi-mono/releases/download/v${version}/pi-linux-arm64.tar.gz";
-      hash = "sha256-NBOJtZrUpUomgRTE4rTmXgFPl6WB/RTqciwgsziX7s0=";
+      hash = "sha256-cl06ZU+eCCL8U3LifOgXsil4TDyW7q7AXenKqiv5/0s=";
     };
     aarch64-darwin = {
       url = "https://github.com/badlogic/pi-mono/releases/download/v${version}/pi-darwin-arm64.tar.gz";
-      hash = "sha256-LRZmjWJoBepz1DCxeLIvU0EVLHwTVExG+J1oBY4Lv4E=";
+      hash = "sha256-NlgJIGV++hkrXIpq06NNdTHHtUUJMaRZJz51uxV6oJ0=";
     };
   };
 
