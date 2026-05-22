@@ -56,7 +56,7 @@ jobs:
           VERSION=$(grep 'obsidian-git/releases/download/' home/obsidian.nix | sed 's|.*/download/\([^/]*\)/.*|\1|')
           bash home/obsidian-update-hashes.sh "$VERSION"
 
-      - uses: actions/setup-go@30119f1570f800a12004f2b03f0152a7edcd19f1 # v5
+      - uses: actions/setup-go@v6
         with:
           go-version: '1.25'
 

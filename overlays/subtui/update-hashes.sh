@@ -22,9 +22,9 @@ echo "version: ${VERSION}"
 
 # Get source hash
 echo "fetching source hash..."
-SOURCE_HASH=$(nix run nixpkgs#nix-prefetch-github -- \
-  --json "${OWNER}" "${REPO}" --rev "v${VERSION}" 2>/dev/null \
-  | grep '"hash"' | sed 's/.*"hash": *"\([^"]*\)".*/\1/')
+TARBALL_URL="https://github.com/${OWNER}/${REPO}/archive/refs/tags/v${VERSION}.tar.gz"
+STORE_PATH=$(nix-prefetch-url --unpack --print-path "${TARBALL_URL}" | tail -1)
+SOURCE_HASH=$(nix hash path "${STORE_PATH}")
 echo "hash: ${SOURCE_HASH}"
 
 # Compute vendorHash by cloning and running go mod vendor
