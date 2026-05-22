@@ -12,7 +12,7 @@ let
   skills = pkgs.fetchFromGitHub {
     owner = "davegallant";
     repo = "skills";
-    rev = "d522228f5d83772b8e1ac60d14a991f8ef24dbc5";
+    rev = "ab04fc11e0cc71fefce85f051d32c61f726e07ca";
     hash = "sha256-rN8IkvsAjGpKUyWQGfVfqlkWWUGibY1XVT71W+Nuspc=";
   };
 in
