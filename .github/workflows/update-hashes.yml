@@ -15,8 +15,6 @@ jobs:
   update-hashes:
     if: startsWith(github.head_ref, 'renovate/')
     runs-on: ubuntu-latest
-    env:
-      GITHUB_TOKEN: ${{ github.token }}
     permissions:
       contents: write
       pull-requests: read
