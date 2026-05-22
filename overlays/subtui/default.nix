@@ -15,7 +15,7 @@ buildGoModule {
   src = fetchFromGitHub {
     owner = "MattiaPun";
     repo = "SubTUI";
-    rev = "v2.14.2";
+    rev = "v2.14.3";
     hash = "sha256-BujR2VXTz3wlj8HFwxLFfkVTC+PRChnZtN8yoLRhv9c=";
   };
 
