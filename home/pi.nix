@@ -193,7 +193,7 @@ in
           ];
         }
         {
-          source = "git:github.com/davegallant/skills@7e303c04926975a70616775a87d2f410b84239aa";
+          source = "git:github.com/davegallant/skills@ab04fc11e0cc71fefce85f051d32c61f726e07ca";
         }
       ];
     };
