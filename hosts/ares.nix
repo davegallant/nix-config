@@ -141,6 +141,7 @@
       "stats"
       "taskexplorer"
       "tailscale-app"
+      "iterm2"
       "vlc"
       "zed"
     ];
