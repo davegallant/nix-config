@@ -30,7 +30,6 @@
           pom = "pull origin main";
           st = "status";
         };
-        core.pager = "hunk pager";
         push = {
           default = "current";
         };
