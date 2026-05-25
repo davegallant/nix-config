@@ -19,7 +19,6 @@
   };
 
   nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "prl-tools" ];
 
   networking.hostName = "kratos";
   networking.hosts = {
@@ -81,6 +80,11 @@
 
   services.eternal-terminal.enable = true;
   networking.firewall.allowedTCPPorts = [ 2022 ];
+
+  # Trust the UTM shared-network interface so ad-hoc dev ports
+  # (kubectl port-forward, vite, etc.) are reachable from ares without
+  # opening them to the world.
+  networking.firewall.trustedInterfaces = [ "enp0s1" ];
 
   # Certain VPNs add encapsulation overhead, and GitHub's servers are strict about oversized packets
   networking.interfaces.enp0s1.mtu = 1280;

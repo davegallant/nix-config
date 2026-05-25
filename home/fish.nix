@@ -151,6 +151,7 @@
         kubectl = "kubecolor";
         kcx = "kubectx";
         kevents = "kubectl get events --sort-by=.lastTimestamp -A";
+        kpf = "kubectl port-forward --address 0.0.0.0";
         ktree = "kubectl tree";
         kns = "kubens";
         l = "eza -la --git --group-directories-first";
