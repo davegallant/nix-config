@@ -87,7 +87,10 @@
 
   environment.systemPackages = with pkgs; [
     awscli2
-    (unstable.azure-cli.withExtensions [ unstable.azure-cli-extensions.fzf ])
+    (unstable.azure-cli.withExtensions [
+      unstable.azure-cli-extensions.bastion
+      unstable.azure-cli-extensions.fzf
+    ])
     kubelogin
     ssm-session-manager-plugin
     terraform
