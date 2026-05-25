@@ -142,6 +142,7 @@
       "taskexplorer"
       "tailscale-app"
       "iterm2"
+      "microsoft-remote-desktop"
       "vlc"
       "zed"
     ];
