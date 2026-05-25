@@ -143,6 +143,8 @@
         gco = "git checkout $(git branch -r | sed -e 's/^  origin\\///' | fzf)";
         gho = "gh repo view --json url --jq .url; gh repo view --web 2>/dev/null";
         gr = "cd $(git rev-parse --show-toplevel)";
+        hd = "hunk diff";
+        hdc = "hunk diff --cached";
         grep = "rg --smart-case";
         j = "just";
         k = "kubecolor";
