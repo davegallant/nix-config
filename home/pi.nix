@@ -69,7 +69,7 @@ let
                 apiKey: "ollama",
                 compat: $ollama_compat,
                 models: [
-                  { id: "qwen3.6:35b-64k", name: "Qwen 3.6 35B 64k (ares)", reasoning: true, contextWindow: 65536 }
+                  { id: "qwen3.6:35b", name: "Qwen 3.6 35B (ares)", reasoning: true, contextWindow: 262144 }
                 ],
               },
             },
@@ -97,7 +97,7 @@ let
                 apiKey: "ollama",
                 compat: $ollama_compat,
                 models: [
-                  { id: "qwen3.6:35b-64k", name: "Qwen 3.6 35B 64k (ares)", reasoning: true, contextWindow: 65536 }
+                  { id: "qwen3.6:35b", name: "Qwen 3.6 35B (ares)", reasoning: true, contextWindow: 262144 }
                 ],
               },
             },
@@ -175,7 +175,7 @@ in
 
     home.file.".pi/agent/settings.json".text = builtins.toJSON {
       defaultProvider = "ollama";
-      defaultModel = "qwen3.6:35b-64k";
+      defaultModel = "qwen3.6:35b";
       autoCompact = false;
       thinking = "low";
       packages = [
