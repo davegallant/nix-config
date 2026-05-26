@@ -47,10 +47,6 @@ update-claude *version:
 update-pi *version:
   @./home/pi/update-hashes.sh {{version}}
 
-# create custom ollama models from modelfiles
-ollama-models:
-  ollama create qwen3.6:35b-64k -f {{justfile_directory()}}/ollama/modelfiles/qwen3.6-35b
-
 # fetch live model metadata from the litellm proxy and write a json file
 #   ~/.config/nix-config/litellm-models.json
 # uses /v1/models for the list of available models and /public/litellm_model_cost_map
