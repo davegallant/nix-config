@@ -155,11 +155,12 @@ let
         --setenv LANG "''${LANG:-en_US.UTF-8}" \
         --setenv TZ "''${TZ:-}" \
         --setenv PATH "/etc/profiles/per-user/$USER/bin:/run/current-system/sw/bin:/run/wrappers/bin" \
+        --setenv PI_SKIP_VERSION_CHECK "1" \
         ${pi-pkg}/bin/pi "$@"
     ''
     + lib.optionalString pkgs.stdenv.isDarwin ''
 
-      exec ${pi-pkg}/bin/pi "$@"
+      PI_SKIP_VERSION_CHECK=1 exec ${pi-pkg}/bin/pi "$@"
     ''
   );
 in
