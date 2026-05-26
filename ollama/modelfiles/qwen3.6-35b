@@ -1,5 +1,0 @@
-FROM qwen3.6:35b
-
-PARAMETER num_ctx 65536
-PARAMETER num_predict -1
-PARAMETER num_gpu 99
