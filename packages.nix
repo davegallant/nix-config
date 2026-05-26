@@ -72,6 +72,7 @@ in
       openssl
       openvpn
       pciutils
+      socat
       qemu
       tcpdump
       traceroute
