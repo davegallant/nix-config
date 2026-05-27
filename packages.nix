@@ -78,7 +78,6 @@ in
       traceroute
       unrar
       unstable.beszel
-      unstable.gws
       usbutils
       vpngate.packages.${pkgs.stdenv.hostPlatform.system}.default
       whois
