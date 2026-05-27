@@ -6,9 +6,6 @@
 }:
 let
   claude-code = pkgs.callPackage ./claude/package.nix { };
-  claude-litellm = pkgs.writeShellScriptBin "claude-litellm" (
-    builtins.readFile ./claude/claude-litellm.sh
-  );
   skills = pkgs.fetchFromGitHub {
     owner = "davegallant";
     repo = "skills";
@@ -20,7 +17,6 @@ in
   config = lib.mkIf config.features.ai.enable {
     home.packages = [
       claude-code
-      claude-litellm
       pkgs.uv
     ];
 
