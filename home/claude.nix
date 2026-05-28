@@ -10,7 +10,7 @@ let
     owner = "davegallant";
     repo = "skills";
     rev = "2ac4c137972fd3608205ad11f618351e48c9c4d2";
-    hash = "sha256-Qsc2nLoQdu7ac4phhxqmN6wN+lUFPhWFu2MSwSuBxr4=";
+    hash = "sha256-+ztmVrwCZAIe6EAae5VvtPEIuElniu3PPiGqSK9BTVQ=";
   };
 in
 {
