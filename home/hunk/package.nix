@@ -5,7 +5,7 @@
   autoPatchelfHook,
 }:
 let
-  version = "0.13.2"; # renovate: datasource=github-releases depName=modem-dev/hunk
+  version = "0.14.0"; # renovate: datasource=github-releases depName=modem-dev/hunk
 
   assets = {
     x86_64-linux = {
