@@ -129,7 +129,11 @@
       "Read(~/.docker/config.json)",
       "Read(~/.kube/config)",
       "Read(~/.password-store/**)",
-      "Read(~/.ssh/**)"
+      "Read(~/.ssh/**)",
+      "Edit(~/.claude/settings.json)",
+      "Write(~/.claude/settings.json)",
+      "Edit(~/.claude/settings.private.json)",
+      "Write(~/.claude/settings.private.json)"
     ]
   },
   "statusLine": {
@@ -153,6 +157,7 @@
   "sandbox": {
     "enabled": true,
     "autoAllowBashIfSandboxed": true,
+    "allowUnsandboxedCommands": false,
     "filesystem": {
       "allowWrite": [
         "/tmp/",
@@ -165,7 +170,9 @@
         "~/.ssh",
         "~/.aws",
         "~/.config/gcloud",
-        "~/.password-store"
+        "~/.password-store",
+        "~/.claude/settings.json",
+        "~/.claude/settings.private.json"
       ],
       "denyRead": [
         "~/.aws/sso"
