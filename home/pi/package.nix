@@ -1,5 +1,6 @@
 {
   lib,
+  stdenv,
   stdenvNoCC,
   fetchurl,
   makeBinaryWrapper,
@@ -42,6 +43,8 @@ stdenvNoCC.mkDerivation {
     makeBinaryWrapper
   ]
   ++ lib.optionals stdenvNoCC.hostPlatform.isElf [ autoPatchelfHook ];
+
+  buildInputs = lib.optionals stdenvNoCC.hostPlatform.isElf [ stdenv.cc.cc.lib ];
 
   dontBuild = true;
   dontStrip = true;
