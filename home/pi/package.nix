@@ -7,7 +7,7 @@
   python3,
 }:
 let
-  version = "0.75.4"; # renovate: datasource=github-releases depName=badlogic/pi-mono
+  version = "0.77.0"; # renovate: datasource=github-releases depName=badlogic/pi-mono
 
   assets = {
     x86_64-linux = {
