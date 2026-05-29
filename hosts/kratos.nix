@@ -7,12 +7,6 @@
 {
   features.ai.enable = true;
 
-  security.sudo-rs = {
-    enable = true;
-    execWheelOnly = true;
-    wheelNeedsPassword = true;
-  };
-
   home-manager.users.dave.features = {
     headless.enable = true;
     ai.enable = true;
@@ -24,7 +18,6 @@
   networking.hosts = {
     "192.168.64.1" = [ "ares" ];
   };
-  networking.firewall.interfaces.docker0.allowedTCPPorts = [ 4000 ];
 
   programs.ssh.startAgent = true;
 

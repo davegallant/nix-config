@@ -78,6 +78,12 @@
     };
   };
 
+  security.sudo-rs = {
+    enable = true;
+    execWheelOnly = true;
+    wheelNeedsPassword = true;
+  };
+
   users.users.dave = {
     isNormalUser = true;
     shell = pkgs.fish;
