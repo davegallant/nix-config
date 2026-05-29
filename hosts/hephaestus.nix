@@ -26,12 +26,6 @@
     ai.enable = true;
   };
 
-  security.sudo-rs = {
-    enable = true;
-    execWheelOnly = true;
-    wheelNeedsPassword = true;
-  };
-
   boot = {
     kernelModules = [
       "kvm-amd"
@@ -142,7 +136,6 @@
       enable = true;
       checkReversePath = "loose";
       trustedInterfaces = [ "tailscale0" ];
-      interfaces.docker0.allowedTCPPorts = [ 4000 ];
     };
     networkmanager.enable = true;
   };
