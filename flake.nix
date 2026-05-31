@@ -3,13 +3,13 @@
 
   inputs = {
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     darwin = {
-      url = "github:lnl7/nix-darwin/nix-darwin-25.11";
+      url = "github:lnl7/nix-darwin/nix-darwin-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     niri = {
@@ -21,7 +21,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixvim = {
-      url = "github:nix-community/nixvim/nixos-25.11";
+      url = "github:nix-community/nixvim/nixos-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     vpngate = {
@@ -50,6 +50,7 @@
         import nixpkgs-unstable {
           inherit system;
           config.allowUnfree = true;
+          config.permittedInsecurePackages = [ "electron-39.8.10" ];
         };
 
       mkSharedModules =
@@ -68,7 +69,10 @@
             { ... }:
             {
               config = {
-                nixpkgs.config.allowUnfree = true;
+                nixpkgs.config = {
+                  allowUnfree = true;
+                  permittedInsecurePackages = [ "electron-39.8.10" ];
+                };
                 nixpkgs.overlays = [
                   (import ./overlays)
                   inputs.niri.overlays.niri
@@ -83,7 +87,7 @@
                   ]
                   ++ (if nixpkgs.lib.hasSuffix "-darwin" system then [ inputs.niri.homeModules.niri ] else [ ]);
                   extraSpecialArgs = {
-                    inherit unstable hostname;
+                    inherit unstable hostname inputs;
                   };
                 };
               };
@@ -106,6 +110,7 @@
               pkgs = import nixpkgs {
                 inherit system;
                 config.allowUnfree = true;
+                config.permittedInsecurePackages = [ "electron-39.8.10" ];
               };
             }
           );
