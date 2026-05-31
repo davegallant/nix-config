@@ -499,8 +499,7 @@
             "custom/resolution" = {
               exec = "niri msg outputs | grep 'Current mode' | grep -q '3840x2160' && echo '󰍹 4K' || echo '󰍹 1440p'";
               interval = 2;
-              on-click = "bash -c 'niri msg outputs | grep \"Current mode\" | grep -q \"3840x2160\" && { niri msg output DP-2 mode 2560x1440@59.951; niri msg output DP-2 scale 1; } || { niri msg output DP-2 mode 3840x2160@59.997; niri msg output DP-2 scale 1.5; }'";
-              on-right-click = "bash -c 'niri msg output DP-2 mode 2560x1440@59.951 && niri msg output DP-2 scale 1 && sleep 1 && lutris lutris:rungame/diablo-iv; niri msg output DP-2 mode 3840x2160@59.997 && niri msg output DP-2 scale 1.5'";
+              on-click = "bash -c 'niri msg outputs | grep \"Current mode\" | grep -q \"3840x2160\" && { niri msg output DP-1 mode 2560x1440@59.951; niri msg output DP-1 scale 1; } || { niri msg output DP-1 mode 3840x2160@59.997; niri msg output DP-1 scale 1.5; }'";
             };
           }
         ];
