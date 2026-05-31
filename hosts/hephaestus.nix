@@ -81,7 +81,7 @@
       fsType = "vfat";
     };
     "/mnt/synology-2b/media" = {
-      device = "192.168.1.178:/volume1/Media";
+      device = "192.168.2.2:/volume1/Media";
       fsType = "nfs";
       options = [
         "nofail"
@@ -89,7 +89,7 @@
       ];
     };
     "/mnt/synology-2b/backups" = {
-      device = "192.168.1.178:/volume1/Backups";
+      device = "192.168.2.2:/volume1/Backups";
       fsType = "nfs";
       options = [
         "nofail"
@@ -114,6 +114,7 @@
     iproute2.enable = true;
     hostName = "hephaestus";
     hostId = "0e8aad53";
+
     interfaces."enp34s0" = {
       useDHCP = true;
       wakeOnLan = {
@@ -137,7 +138,10 @@
       checkReversePath = "loose";
       trustedInterfaces = [ "tailscale0" ];
     };
-    networkmanager.enable = true;
+    networkmanager = {
+      enable = true;
+      unmanaged = [ "enp40s0" ];
+    };
   };
 
   users.users.beszel = {
@@ -227,6 +231,17 @@
     ATTRS{idVendor}=="36b0", ATTRS{idProduct}=="3002", \
     ENV{ID_INPUT_JOYSTICK}="", ENV{ID_INPUT_ACCELEROMETER}=""
   '';
+
+  systemd.network = {
+    enable = true;
+    networks."10-enp40s0" = {
+      matchConfig.Name = "enp40s0";
+      address = [ "192.168.2.1/24" ];
+      linkConfig.RequiredForOnline = "no";
+    };
+  };
+
+  systemd.services.systemd-networkd-wait-online.enable = lib.mkForce false;
 
   services.resolved.enable = true;
 
