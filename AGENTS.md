@@ -9,7 +9,7 @@ with home-manager for user-level configuration. Uses nixvim for Neovim configura
 and LiteLLM as a local model proxy for AI tooling.
 
 - **Hosts**: `hephaestus` (x86_64-linux NixOS desktop), `kratos` (aarch64-linux NixOS Parallels VM), `ares` (aarch64-darwin macOS)
-- **Nix channel**: nixpkgs 25.11 (stable), plus unstable channel
+- **Nix channel**: nixpkgs 26.05 (stable), plus unstable channel
 - **Shell**: Fish, with Starship prompt
 - **Task runner**: `just` (not Make)
 
