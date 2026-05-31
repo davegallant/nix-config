@@ -87,7 +87,7 @@
                   ]
                   ++ (if nixpkgs.lib.hasSuffix "-darwin" system then [ inputs.niri.homeModules.niri ] else [ ]);
                   extraSpecialArgs = {
-                    inherit unstable hostname inputs;
+                    inherit unstable hostname;
                   };
                 };
               };
@@ -121,7 +121,7 @@
       };
     in
     {
-      formatter = forEachSystem ({ pkgs, ... }: pkgs.nixfmt-rfc-style);
+      formatter = forEachSystem ({ pkgs, ... }: pkgs.nixfmt);
 
       devShells = forEachSystem (
         { pkgs, ... }:
@@ -129,7 +129,7 @@
           default = pkgs.mkShell {
             packages = with pkgs; [
               just
-              nixfmt-rfc-style
+              nixfmt
               shellcheck
               shfmt
             ];

@@ -1,11 +1,11 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 {
   programs.nixvim = {
     enable = true;
     viAlias = true;
     vimAlias = true;
 
-    nixpkgs.source = inputs.nixpkgs;
+    nixpkgs.source = pkgs.path;
     globals.clipboard = "osc52";
 
     opts = {

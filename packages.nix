@@ -32,7 +32,7 @@ in
       nil
       nix-tree
       nixd
-      nixfmt-rfc-style
+      nixfmt
       nixpkgs-review
       bash-language-server
       yaml-language-server
