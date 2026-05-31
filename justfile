@@ -16,7 +16,7 @@ default:
 rebuild:
   $cmd build --flake . --option warn-dirty false
   nvd diff /run/current-system result | rg -v '^[<>]{3} ' > /tmp/nvd-diff.txt
-  $cmd switch --flake . --option warn-dirty false
+  sudo result/bin/switch-to-configuration switch
 
 # rebuild and install bootloader
 rebuild-boot:
