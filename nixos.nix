@@ -47,7 +47,7 @@
     };
   };
 
-  documentation.man.generateCaches = false;
+  documentation.man.cache.enable = false;
 
   zramSwap.enable = true;
 
