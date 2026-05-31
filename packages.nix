@@ -34,8 +34,8 @@ in
       nixd
       nixfmt-rfc-style
       nixpkgs-review
-      nodePackages.bash-language-server
-      nodePackages.yaml-language-server
+      bash-language-server
+      yaml-language-server
       nvd
       progress
       ripgrep

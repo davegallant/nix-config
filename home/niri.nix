@@ -45,7 +45,7 @@
           pwvucontrol
           slurp
           swaybg
-          xfce.thunar
+          thunar
           trayscale
           wl-clipboard
           xclip
@@ -676,16 +676,10 @@
             command = "${pkgs.systemd}/bin/systemctl suspend";
           }
         ];
-        events = [
-          {
-            event = "before-sleep";
-            command = "${pkgs.swaylock}/bin/swaylock -f";
-          }
-          {
-            event = "after-resume";
-            command = "${pkgs.swaylock}/bin/swaylock -f";
-          }
-        ];
+        events = {
+          before-sleep = "${pkgs.swaylock}/bin/swaylock -f";
+          after-resume = "${pkgs.swaylock}/bin/swaylock -f";
+        };
       };
 
       programs.swaylock = {
