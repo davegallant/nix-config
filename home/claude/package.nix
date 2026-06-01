@@ -1,14 +1,13 @@
 {
   lib,
+  callPackage,
   stdenvNoCC,
-  fetchurl,
   makeBinaryWrapper,
-  autoPatchelfHook,
-  bubblewrap,
   procps,
-  socat,
   python3,
   just,
+  bubblewrap,
+  socat,
 }:
 let
   version = "2.1.159"; # renovate: datasource=npm depName=@anthropic-ai/claude-code
@@ -27,29 +26,13 @@ let
       hash = "sha512-F0NwKmIdKwEBDC//Iq++4v87LCCF3egMpTK7x6isq6AnbDMJ/61usML/Cfs86VCq0dHnxgEzYuWWs2nJkDRxag==";
     };
   };
-
-  asset =
-    assets.${stdenvNoCC.hostPlatform.system}
-      or (throw "claude-code: unsupported system ${stdenvNoCC.hostPlatform.system}");
 in
-stdenvNoCC.mkDerivation {
+# npm tarballs extract into a "package/" subdirectory
+callPackage ../lib/mk-prebuilt-binary.nix {
   pname = "claude-code";
-  inherit version;
-
-  src = fetchurl {
-    inherit (asset) url hash;
-  };
-
-  # npm tarballs extract into a "package/" subdirectory
+  inherit version assets;
   sourceRoot = "package";
-
-  nativeBuildInputs = [
-    makeBinaryWrapper
-  ]
-  ++ lib.optionals stdenvNoCC.hostPlatform.isElf [ autoPatchelfHook ];
-
-  dontBuild = true;
-  dontStrip = true;
+  nativeBuildInputs = [ makeBinaryWrapper ];
 
   installPhase = ''
     mkdir -p $out/bin
@@ -79,8 +62,6 @@ stdenvNoCC.mkDerivation {
     description = "Agentic coding tool that lives in your terminal";
     homepage = "https://github.com/anthropics/claude-code";
     license = lib.licenses.unfree;
-    sourceProvenance = with lib.sourceTypes; [ binaryNativeCode ];
-    platforms = builtins.attrNames assets;
     mainProgram = "claude";
   };
 }
