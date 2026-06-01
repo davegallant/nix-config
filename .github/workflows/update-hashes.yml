@@ -9,7 +9,6 @@ on:
       - home/hunk/package.nix
       - home/obsidian.nix
       - home/pi/package.nix
-      - overlays/subtui/default.nix
 
 jobs:
   update-hashes:
@@ -60,12 +59,6 @@ jobs:
         with:
           go-version: '1.25'
 
-      - name: update subtui hashes
-        if: contains(steps.changed.outputs.files, 'overlays/subtui/default.nix')
-        run: |
-          VERSION=$(grep 'rev = ' overlays/subtui/default.nix | sed 's/.*rev = "v\([^"]*\)".*/\1/')
-          bash overlays/subtui/update-hashes.sh "$VERSION"
-
       - name: update davegallant/skills hash
         if: contains(steps.changed.outputs.files, 'home/claude.nix')
         run: |
@@ -76,6 +69,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add home/claude/package.nix home/claude.nix home/hunk/package.nix home/obsidian.nix home/pi/package.nix overlays/subtui/default.nix
+          git add home/claude/package.nix home/claude.nix home/hunk/package.nix home/obsidian.nix home/pi/package.nix
           git diff --staged --quiet || git commit -m "chore: update hashes"
           git push
