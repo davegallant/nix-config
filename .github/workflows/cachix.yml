@@ -24,6 +24,7 @@ jobs:
     - run: nix fmt -- --check .
     - run: nix develop -c deadnix --fail .
     - run: nix develop -c statix check .
+    - run: nix develop -c shellcheck $(git ls-files '*.sh')
 
   eval-kratos:
     runs-on: ubuntu-latest
