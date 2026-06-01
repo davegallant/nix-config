@@ -1,8 +1,6 @@
 {
   lib,
-  stdenvNoCC,
-  fetchurl,
-  autoPatchelfHook,
+  callPackage,
 }:
 let
   version = "0.14.0"; # renovate: datasource=github-releases depName=modem-dev/hunk
@@ -11,38 +9,24 @@ let
     x86_64-linux = {
       url = "https://github.com/modem-dev/hunk/releases/download/v${version}/hunkdiff-linux-x64.tar.gz";
       hash = "sha256-f8/R0OAaJGSJRq7b9XHiYlZgHnLTxuz2GmfrY0SWgOg=";
-      dir = "hunkdiff-linux-x64";
+      sourceRoot = "hunkdiff-linux-x64";
     };
     aarch64-linux = {
       url = "https://github.com/modem-dev/hunk/releases/download/v${version}/hunkdiff-linux-arm64.tar.gz";
       hash = "sha256-Bbq5e7Y524gLgiwgLPJZeHWY49Z5UX52W8u64WVbY+U=";
-      dir = "hunkdiff-linux-arm64";
+      sourceRoot = "hunkdiff-linux-arm64";
     };
     aarch64-darwin = {
       url = "https://github.com/modem-dev/hunk/releases/download/v${version}/hunkdiff-darwin-arm64.tar.gz";
       hash = "sha256-tG9kRvm69mBONw1kz8N3ZONcXKLu1Ja1N+SBfQSSxvk=";
-      dir = "hunkdiff-darwin-arm64";
+      sourceRoot = "hunkdiff-darwin-arm64";
     };
   };
-
-  asset =
-    assets.${stdenvNoCC.hostPlatform.system}
-      or (throw "hunk: unsupported system ${stdenvNoCC.hostPlatform.system}");
 in
-stdenvNoCC.mkDerivation {
+callPackage ../lib/mk-prebuilt-binary.nix {
   pname = "hunk";
-  inherit version;
-
-  src = fetchurl {
-    inherit (asset) url hash;
-  };
-
-  sourceRoot = asset.dir;
-
-  nativeBuildInputs = lib.optionals stdenvNoCC.hostPlatform.isElf [ autoPatchelfHook ];
-
-  dontBuild = true;
-  dontStrip = true;
+  inherit version assets;
+  sourceRoot = asset: asset.sourceRoot;
 
   installPhase = ''
     mkdir -p $out/bin
@@ -54,8 +38,6 @@ stdenvNoCC.mkDerivation {
     description = "Review-first terminal diff viewer for agentic coders";
     homepage = "https://github.com/modem-dev/hunk";
     license = lib.licenses.mit;
-    sourceProvenance = with lib.sourceTypes; [ binaryNativeCode ];
-    platforms = builtins.attrNames assets;
     mainProgram = "hunk";
   };
 }

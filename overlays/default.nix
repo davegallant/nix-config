@@ -1,3 +1,3 @@
-final: prev: {
+_: prev: {
   niri-float-sticky = prev.callPackage ./niri-float-sticky { };
 }

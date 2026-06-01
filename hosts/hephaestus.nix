@@ -206,11 +206,8 @@
 
   nix = {
     registry.nixpkgs.flake = inputs.nixpkgs;
-    gc = {
-      automatic = true;
-      dates = "daily";
-      options = "--delete-older-than 14d";
-    };
+    # nixos.nix sets automatic/options as defaults; only override the cadence
+    gc.dates = "daily";
   };
 
   users.users.dave.extraGroups = [
