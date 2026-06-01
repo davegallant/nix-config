@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-data=$(curl -s https://ipinfo.io/json)
+data=$(curl -s --max-time 5 https://ipinfo.io/json)
 ip=$(echo "$data" | jq -r '.ip')
 country=$(echo "$data" | jq -r '.country | ascii_upcase')
 if [[ "$country" =~ ^[A-Z]{2}$ ]]; then
