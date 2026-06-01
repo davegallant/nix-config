@@ -40,6 +40,16 @@ nix fmt         # alternative: uses formatter flake output
 The formatter is `nixfmt` (RFC 166 style, package `nixfmt-rfc-style`).
 Always run `just fmt` before committing changes.
 
+### Lint Nix files
+
+```sh
+just lint       # runs: deadnix --fail . ; statix check .
+```
+
+Catches dead code (`deadnix`) and anti-patterns (`statix`); CI runs the same
+checks. The `repeated_keys` statix lint is disabled in `statix.toml` because the
+repo intentionally favors flat dot-notation (see Attribute Set Style below).
+
 ### Update package hashes
 
 ```sh

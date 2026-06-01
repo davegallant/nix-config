@@ -33,39 +33,11 @@
     {
       "customType": "regex",
       "managerFilePatterns": [
-        "/home/claude/package\\.nix$/"
+        "/home/(claude|hunk|pi)/package\\.nix$/"
       ],
       "matchStrings": [
-        "version = \"(?<currentValue>[\\d\\.]+)\";"
+        "version = \"(?<currentValue>[^\"]+)\";\\s*# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)"
       ],
-      "depNameTemplate": "anthropics/claude-code",
-      "datasourceTemplate": "github-releases",
-      "versioningTemplate": "semver",
-      "extractVersionTemplate": "^v?(?<version>.*)$"
-    },
-    {
-      "customType": "regex",
-      "managerFilePatterns": [
-        "/home/pi/package\\.nix$/"
-      ],
-      "matchStrings": [
-        "version = \"(?<currentValue>[\\d\\.]+)\";"
-      ],
-      "depNameTemplate": "badlogic/pi-mono",
-      "datasourceTemplate": "github-releases",
-      "versioningTemplate": "semver",
-      "extractVersionTemplate": "^v?(?<version>.*)$"
-    },
-    {
-      "customType": "regex",
-      "managerFilePatterns": [
-        "/home/hunk/package\\.nix$/"
-      ],
-      "matchStrings": [
-        "version = \"(?<currentValue>[\\d\\.]+)\";"
-      ],
-      "depNameTemplate": "modem-dev/hunk",
-      "datasourceTemplate": "github-releases",
       "versioningTemplate": "semver",
       "extractVersionTemplate": "^v?(?<version>.*)$"
     },
@@ -84,22 +56,10 @@
     {
       "customType": "regex",
       "managerFilePatterns": [
-        "/home/pi\\.nix$/"
+        "/home/lib/skills\\.nix$/"
       ],
       "matchStrings": [
-        "git:github\\.com/(?<depName>davegallant/skills)@(?<currentDigest>[a-f0-9]{40})"
-      ],
-      "datasourceTemplate": "git-refs",
-      "packageNameTemplate": "https://github.com/{{depName}}",
-      "currentValueTemplate": "main"
-    },
-    {
-      "customType": "regex",
-      "managerFilePatterns": [
-        "/home/claude\\.nix$/"
-      ],
-      "matchStrings": [
-        "rev = \"(?<currentDigest>[a-f0-9]{40})\";\n\\s+hash"
+        "rev = \"(?<currentDigest>[a-f0-9]{40})\";"
       ],
       "depNameTemplate": "davegallant/skills",
       "datasourceTemplate": "git-refs",
