@@ -31,10 +31,11 @@ rollback:
 fmt:
   fd -e nix -x nixfmt
 
-# lint nix files (dead code + anti-patterns)
+# lint nix files (dead code + anti-patterns) and shell scripts
 lint:
   deadnix --fail .
   statix check .
+  shellcheck $(git ls-files '*.sh')
 
 # run nix garbage collection (user + root)
 clean:
