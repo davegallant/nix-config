@@ -1,0 +1,4 @@
+# The repo intentionally uses flat dot-notation (e.g. networking.hostName,
+# networking.firewall.*) as documented in AGENTS.md, so the repeated-keys
+# lint is disabled. Everything else stays on.
+disabled = ["repeated_keys"]
