@@ -43,6 +43,8 @@ in
   programs = {
     home-manager.enable = true;
 
+    man.enable = stdenv.isLinux;
+
     direnv = {
       enable = true;
       nix-direnv.enable = true;
