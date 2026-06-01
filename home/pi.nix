@@ -5,8 +5,9 @@
   ...
 }:
 let
+  skillsPin = import ./lib/skills.nix;
   pi-pkg = pkgs.callPackage ./pi/package.nix {
-    python3 = pkgs.python3;
+    inherit (pkgs) python3;
   };
   pi-wrapper = pkgs.writeShellScriptBin "pi" (
     ''
@@ -194,7 +195,7 @@ in
           ];
         }
         {
-          source = "git:github.com/davegallant/skills@2ac4c137972fd3608205ad11f618351e48c9c4d2";
+          source = "git:github.com/davegallant/skills@${skillsPin.rev}";
         }
       ];
     };

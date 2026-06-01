@@ -65,34 +65,34 @@
         [
           ./packages.nix
           hmModule
-          (
-            { ... }:
-            {
-              config = {
-                nixpkgs.config = {
-                  allowUnfree = true;
-                  permittedInsecurePackages = [ "electron-39.8.10" ];
-                };
-                nixpkgs.overlays = [
-                  (import ./overlays)
-                  inputs.niri.overlays.niri
-                ];
-                home-manager = {
-                  useGlobalPkgs = true;
-                  useUserPackages = true;
-                  users.${username}.imports = [
-                    ./home
-                    inputs.nixvim.homeModules.nixvim
-                    weathr.homeModules.weathr
-                  ]
-                  ++ (if nixpkgs.lib.hasSuffix "-darwin" system then [ inputs.niri.homeModules.niri ] else [ ]);
-                  extraSpecialArgs = {
-                    inherit unstable hostname;
-                  };
+          (_: {
+            config = {
+              nixpkgs.config = {
+                allowUnfree = true;
+                permittedInsecurePackages = [ "electron-39.8.10" ];
+              };
+              nixpkgs.overlays = [
+                (import ./overlays)
+                inputs.niri.overlays.niri
+              ];
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users.${username}.imports = [
+                  ./home
+                  inputs.nixvim.homeModules.nixvim
+                  weathr.homeModules.weathr
+                ]
+                # On Linux the niri NixOS module declares the home-manager niri
+                # options; on Darwin there is no NixOS module, so import the home
+                # module directly so home/niri.nix (Linux-gated) still evaluates.
+                ++ (if nixpkgs.lib.hasSuffix "-darwin" system then [ inputs.niri.homeModules.niri ] else [ ]);
+                extraSpecialArgs = {
+                  inherit unstable hostname;
                 };
               };
-            }
-          )
+            };
+          })
         ]
         ++ extraModules;
       forEachSystem =
@@ -128,10 +128,12 @@
         {
           default = pkgs.mkShell {
             packages = with pkgs; [
+              deadnix
               just
               nixfmt
               shellcheck
               shfmt
+              statix
             ];
           };
         }

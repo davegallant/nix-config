@@ -1,10 +1,9 @@
 {
   lib,
   stdenv,
+  callPackage,
   stdenvNoCC,
-  fetchurl,
   makeBinaryWrapper,
-  autoPatchelfHook,
   python3,
 }:
 let
@@ -24,30 +23,13 @@ let
       hash = "sha256-aOu+T1ahNqHHus4zk+ykrQqh/Z8lO3l/03AFi9Of4HA=";
     };
   };
-
-  asset =
-    assets.${stdenvNoCC.hostPlatform.system}
-      or (throw "pi: unsupported system ${stdenvNoCC.hostPlatform.system}");
 in
-stdenvNoCC.mkDerivation {
+callPackage ../lib/mk-prebuilt-binary.nix {
   pname = "pi";
-  inherit version;
-
-  src = fetchurl {
-    inherit (asset) url hash;
-  };
-
+  inherit version assets;
   sourceRoot = "pi";
-
-  nativeBuildInputs = [
-    makeBinaryWrapper
-  ]
-  ++ lib.optionals stdenvNoCC.hostPlatform.isElf [ autoPatchelfHook ];
-
+  nativeBuildInputs = [ makeBinaryWrapper ];
   buildInputs = lib.optionals stdenvNoCC.hostPlatform.isElf [ stdenv.cc.cc.lib ];
-
-  dontBuild = true;
-  dontStrip = true;
 
   installPhase = ''
     mkdir -p $out/lib/pi $out/bin
@@ -61,8 +43,6 @@ stdenvNoCC.mkDerivation {
     description = "A minimal terminal coding harness";
     homepage = "https://pi.dev";
     license = lib.licenses.mit;
-    sourceProvenance = with lib.sourceTypes; [ binaryNativeCode ];
-    platforms = builtins.attrNames assets;
     mainProgram = "pi";
   };
 }
