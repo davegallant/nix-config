@@ -24,7 +24,7 @@ in
             "dom.push.enabled" = false;
             "geo.enabled" = false;
             "intl.regional_prefs.use_os_locales" = true;
-            "services.sync.prefs.sync.intl.regional._prefs.use_os_locates" = false;
+            "services.sync.prefs.sync.intl.regional_prefs.use_os_locales" = false;
           };
         };
       };
