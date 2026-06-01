@@ -39,7 +39,6 @@ in
       nvd
       progress
       ripgrep
-      rustup
       shellcheck
       shfmt
       terraform-ls
@@ -54,7 +53,6 @@ in
       viddy
       virtualenv
       yq-go
-      yt-dlp
       zip
     ]
     ++ lib.optionals stdenv.isLinux [
@@ -75,7 +73,6 @@ in
       qemu
       tcpdump
       traceroute
-      unrar
       unstable.beszel
       usbutils
       vpngate.packages.${pkgs.stdenv.hostPlatform.system}.default
