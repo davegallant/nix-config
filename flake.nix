@@ -45,12 +45,16 @@
       ...
     }@inputs:
     let
+      nixpkgsConfig = {
+        allowUnfree = true;
+        permittedInsecurePackages = [ "electron-39.8.10" ];
+      };
+
       mkUnstable =
         system:
         import nixpkgs-unstable {
           inherit system;
-          config.allowUnfree = true;
-          config.permittedInsecurePackages = [ "electron-39.8.10" ];
+          config = nixpkgsConfig;
         };
 
       mkSharedModules =
@@ -67,10 +71,7 @@
           hmModule
           (_: {
             config = {
-              nixpkgs.config = {
-                allowUnfree = true;
-                permittedInsecurePackages = [ "electron-39.8.10" ];
-              };
+              nixpkgs.config = nixpkgsConfig;
               nixpkgs.overlays = [
                 (import ./overlays)
                 inputs.niri.overlays.niri
@@ -109,8 +110,7 @@
               inherit system;
               pkgs = import nixpkgs {
                 inherit system;
-                config.allowUnfree = true;
-                config.permittedInsecurePackages = [ "electron-39.8.10" ];
+                config = nixpkgsConfig;
               };
             }
           );
