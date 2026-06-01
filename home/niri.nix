@@ -477,7 +477,7 @@
               interval = 60;
               format = "{}";
               return-type = "json";
-              on-click = "${pkgs.curl}/bin/curl -s https://icanhazip.com | ${pkgs.wl-clipboard}/bin/wl-copy";
+              on-click = "${pkgs.curl}/bin/curl -s --max-time 5 https://icanhazip.com | ${pkgs.wl-clipboard}/bin/wl-copy";
             };
             "custom/gpu" = {
               exec = "${gpuUsageScript}/bin/gpu-usage";
