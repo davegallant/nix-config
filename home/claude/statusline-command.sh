@@ -1,39 +1,53 @@
 #!/usr/bin/env bash
-set -euo pipefail
+# Resilient by design: a statusline must always render something, so we avoid
+# `set -e` — a missing or malformed field degrades to a shorter line, never a
+# blank one (or a jq parse error leaking through).
+set -uo pipefail
 
 input=$(cat)
 
-cwd=$(echo "$input" | jq -r '.workspace.current_dir // .cwd // ""')
-model=$(echo "$input" | jq -r '.model.display_name // ""')
-window_size=$(echo "$input" | jq -r '.context_window.context_window_size // empty')
-session_cost=$(echo "$input" | jq -r '.cost.total_cost_usd // empty')
-# Input tokens used only for precise context percentage
-input_tokens=$(echo "$input" | jq -r '
-  [.context_window.current_usage.input_tokens,
-   .context_window.current_usage.cache_creation_input_tokens,
-   .context_window.current_usage.cache_read_input_tokens]
-  | map(. // 0) | add' 2>/dev/null)
+# Parse every field in a single jq pass. Fields are joined with US (0x1f),
+# generated in bash and passed via --arg. A non-whitespace separator stops
+# `read` from collapsing the runs that empty fields would create with tabs/
+# spaces, which would otherwise shift every later value into the wrong variable.
+# Absent values become "" (not `empty`) so the field count stays fixed.
+us=$'\x1f'
+IFS=$us read -r cwd model window_size session_cost input_tokens used_pct < <(
+  jq --arg us "$us" -r '
+    [ (.workspace.current_dir // .cwd // ""),
+      (.model.display_name // ""),
+      (.context_window.context_window_size // ""),
+      (.cost.total_cost_usd // ""),
+      ([ .context_window.current_usage.input_tokens,
+         .context_window.current_usage.cache_creation_input_tokens,
+         .context_window.current_usage.cache_read_input_tokens ] | map(. // 0) | add),
+      (.context_window.used_percentage // "")
+    ] | map(tostring) | join($us)' <<<"$input" 2>/dev/null
+)
+
+# A zero/absent token sum means we have no precise figure to work from.
 if [ -z "$input_tokens" ] || [ "$input_tokens" = "null" ] || [ "$input_tokens" = "0" ]; then
     input_tokens=""
 fi
-# Compute precise percentage from actual tokens
+
+# Prefer a precise percentage computed from actual tokens; otherwise use the
+# percentage the host reported.
 if [ -n "$input_tokens" ] && [ -n "$window_size" ] && [ "$window_size" != "0" ]; then
-    used=$(awk "BEGIN { printf \"%.4f\", $input_tokens / $window_size * 100 }")
+    used=$(awk -v t="$input_tokens" -v w="$window_size" 'BEGIN { printf "%.4f", t / w * 100 }')
 else
-    used=$(echo "$input" | jq -r '.context_window.used_percentage // empty')
+    used="$used_pct"
 fi
 
-# Show only the git repo base name, or fall back to basename of cwd
-if git -C "$cwd" rev-parse --show-toplevel > /dev/null 2>&1; then
-    short_cwd=$(basename "$(git -C "$cwd" rev-parse --show-toplevel)")
-else
-    short_cwd=$(basename "$cwd")
-fi
+# Show only the git repo base name, or fall back to basename of cwd. A toplevel
+# result also proves we're in a work tree, so reuse it to gate the branch lookup.
+toplevel=$(git -C "$cwd" rev-parse --show-toplevel 2>/dev/null || true)
+short_cwd=$(basename "${toplevel:-$cwd}")
 
-# Get git branch (skip optional locks)
+# Git branch (skip optional locks via fsmonitor=false)
 git_branch=""
-if git -C "$cwd" rev-parse --git-dir > /dev/null 2>&1; then
-    git_branch=$(git -C "$cwd" -c core.fsmonitor=false symbolic-ref --short HEAD 2>/dev/null || git -C "$cwd" -c core.fsmonitor=false rev-parse --short HEAD 2>/dev/null)
+if [ -n "$toplevel" ]; then
+    git_branch=$(git -C "$cwd" -c core.fsmonitor=false symbolic-ref --short HEAD 2>/dev/null \
+        || git -C "$cwd" -c core.fsmonitor=false rev-parse --short HEAD 2>/dev/null || true)
 fi
 
 # Build the status line
@@ -54,14 +68,13 @@ fi
 
 # Session cost (green)
 if [ -n "$session_cost" ]; then
-    cost_display=$(awk "BEGIN { printf \"%.4f\", $session_cost }")
+    cost_display=$(printf '%.2f' "$session_cost")
     parts+=("$(printf '\033[32m$%s\033[0m' "$cost_display")")
 fi
 
 # Context usage — block progress bar + percentage/limit label (e.g. [▓▓▓░░░░░░░] 12%/200k)
 if [ -n "$used" ]; then
     used_int=$(printf '%.0f' "$used")
-    used_display=$(printf '%.0f' "$used")
     if [ "$used_int" -ge 75 ]; then
         color='\033[31m'  # red
     elif [ "$used_int" -ge 50 ]; then
@@ -70,19 +83,21 @@ if [ -n "$used" ]; then
         color='\033[34m'  # blue
     fi
     filled=$(( used_int / 10 ))
+    (( filled > 10 )) && filled=10   # clamp so an over-budget context can't overflow the bar
     empty=$(( 10 - filled ))
     bar=""
     for ((i=0; i<filled; i++)); do bar+="▓"; done
     for ((i=0; i<empty; i++));  do bar+="░"; done
     limit_label=""
     if [ -n "$window_size" ] && [ "$window_size" != "0" ]; then
-        if awk "BEGIN { exit !($window_size >= 1000000) }"; then
-            limit_label=$(awk "BEGIN { printf \"/%.0fM\", $window_size/1000000 }")
+        ws_int=${window_size%%.*}
+        if [ "$ws_int" -ge 1000000 ]; then
+            limit_label="/$(( ws_int / 1000000 ))M"
         else
-            limit_label=$(awk "BEGIN { printf \"/%.0fk\", $window_size/1000 }")
+            limit_label="/$(( ws_int / 1000 ))k"
         fi
     fi
-    parts+=("$(printf "${color}[%s] %s%%\033[0m\033[2m%s\033[0m" "$bar" "$used_display" "$limit_label")")
+    parts+=("$(printf "${color}[%s] %s%%\033[0m\033[2m%s\033[0m" "$bar" "$used_int" "$limit_label")")
 fi
 
-printf '%s' "$(IFS=' '; echo "${parts[*]}")"
+(IFS=' '; printf '%s' "${parts[*]}")
