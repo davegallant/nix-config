@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Update the davegallant/skills rev and hash in home/claude.nix.
+# Update the davegallant/skills rev and hash in home/lib/skills.nix.
 # Usage: ./update-skills-hash.sh <REV>
 set -euo pipefail
 
@@ -9,7 +9,7 @@ if [[ $# -lt 1 ]]; then
 fi
 
 REV="$1"
-CLAUDE_NIX="$(dirname "$0")/../../home/claude.nix"
+SKILLS_NIX="$(dirname "$0")/../lib/skills.nix"
 
 echo "fetching hash for davegallant/skills@${REV}..."
 HASH=$(nix-prefetch-url --unpack --type sha256 \
@@ -21,7 +21,8 @@ echo "  rev:  ${REV}"
 echo "  hash: ${SRI}"
 
 sed -i -E \
-  "/owner = \"davegallant\";/{n; /repo = \"skills\";/{n; s|rev = \"[^\"]*\"|rev = \"${REV}\"|; n; s|hash = \"[^\"]*\"|hash = \"${SRI}\"|;}}" \
-  "$CLAUDE_NIX"
+  -e "s|rev = \"[^\"]*\"|rev = \"${REV}\"|" \
+  -e "s|hash = \"[^\"]*\"|hash = \"${SRI}\"|" \
+  "$SKILLS_NIX"
 
-echo "updated ${CLAUDE_NIX}"
+echo "updated ${SKILLS_NIX}"

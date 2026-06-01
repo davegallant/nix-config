@@ -31,6 +31,11 @@ rollback:
 fmt:
   fd -e nix -x nixfmt
 
+# lint nix files (dead code + anti-patterns)
+lint:
+  deadnix --fail .
+  statix check .
+
 # run nix garbage collection (user + root)
 clean:
   echo 'Cleaning user...'
