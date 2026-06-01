@@ -125,7 +125,6 @@
       "et"
       "gnu-sed"
       "gnu-tar"
-      "googleworkspace-cli"
       "node"
       "oras"
     ];
