@@ -33,18 +33,6 @@
     {
       "customType": "regex",
       "managerFilePatterns": [
-        "/overlays/subtui/default\\.nix$/"
-      ],
-      "matchStrings": [
-        "rev = \"v(?<currentValue>[\\d\\.]+)\";"
-      ],
-      "depNameTemplate": "MattiaPun/SubTUI",
-      "datasourceTemplate": "github-releases",
-      "versioningTemplate": "semver"
-    },
-    {
-      "customType": "regex",
-      "managerFilePatterns": [
         "/home/claude/package\\.nix$/"
       ],
       "matchStrings": [
