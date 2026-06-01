@@ -64,6 +64,7 @@ in
       iperf
       iputils
       libsecret
+      remmina
       nfs-utils
       nmap
       openssl
