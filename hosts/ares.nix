@@ -4,22 +4,6 @@
     hostName = "ares";
   };
 
-  # nix-darwin doesn't manage /etc/hosts. Append a managed block between
-  # sentinel markers on activation so we can reach the kratos UTM VM by name.
-  system.activationScripts.extraActivation.text =
-    let
-      managedHosts = pkgs.writeText "managed-hosts" ''
-        # >>> nix-darwin managed hosts >>>
-        192.168.64.2 kratos
-        # <<< nix-darwin managed hosts <<<
-      '';
-    in
-    ''
-      echo "updating /etc/hosts with managed entries..."
-      /usr/bin/sed -i.bak '/# >>> nix-darwin managed hosts >>>/,/# <<< nix-darwin managed hosts <<</d' /etc/hosts
-      cat ${managedHosts} >> /etc/hosts
-    '';
-
   nix.enable = false;
 
   system.stateVersion = 4;
