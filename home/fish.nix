@@ -58,10 +58,6 @@
             cd ~/src/$selected
           end
         '';
-        __save_last_dir = {
-          onEvent = "fish_prompt";
-          body = "echo $PWD > ~/.last_dir";
-        };
         kdebug = "kubectl run debug-(random) --image=nicolaka/netshoot --restart=Never -it --rm -- bash";
         kdesc = ''
           set pod (kubectl get pods -o name | fzf)
@@ -86,12 +82,6 @@
 
       interactiveShellInit = ''
         set fish_greeting
-
-        ${lib.optionalString config.features.headless.enable ''
-          if test -f ~/.last_dir
-            cd (cat ~/.last_dir)
-          end
-        ''}
 
         fish_vi_key_bindings
         bind -M insert \cw backward-kill-word

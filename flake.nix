@@ -185,11 +185,6 @@
             system = "x86_64-linux";
             hostname = "hephaestus";
           };
-
-          kratos = mkNixos {
-            system = "aarch64-linux";
-            hostname = "kratos";
-          };
         };
 
       darwinConfigurations =
