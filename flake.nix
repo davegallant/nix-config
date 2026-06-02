@@ -193,18 +193,18 @@
           unstable = mkUnstable system;
         in
         {
-          ares = darwin.lib.darwinSystem {
+          kratos = darwin.lib.darwinSystem {
             inherit system;
             specialArgs = {
               inherit unstable inputs;
             };
             modules = mkSharedModules {
               username = "dave.gallant";
-              hostname = "ares";
+              hostname = "kratos";
               inherit system unstable;
               hmModule = home-manager.darwinModules.home-manager;
               extraModules = [
-                ./hosts/ares.nix
+                ./hosts/kratos.nix
               ];
             };
           };
