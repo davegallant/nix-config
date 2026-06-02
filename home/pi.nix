@@ -65,12 +65,12 @@ let
                 ),
               },
               "ollama": {
-                baseUrl: "http://ares:11434/v1",
+                baseUrl: "http://kratos:11434/v1",
                 api: "openai-completions",
                 apiKey: "ollama",
                 compat: $ollama_compat,
                 models: [
-                  { id: "qwen3.6:35b", name: "Qwen 3.6 35B (ares)", reasoning: true, contextWindow: 262144 }
+                  { id: "qwen3.6:35b", name: "Qwen 3.6 35B (kratos)", reasoning: true, contextWindow: 262144 }
                 ],
               },
             },
@@ -93,12 +93,12 @@ let
                 models: [],
               },
               "ollama": {
-                baseUrl: "http://ares:11434/v1",
+                baseUrl: "http://kratos:11434/v1",
                 api: "openai-completions",
                 apiKey: "ollama",
                 compat: $ollama_compat,
                 models: [
-                  { id: "qwen3.6:35b", name: "Qwen 3.6 35B (ares)", reasoning: true, contextWindow: 262144 }
+                  { id: "qwen3.6:35b", name: "Qwen 3.6 35B (kratos)", reasoning: true, contextWindow: 262144 }
                 ],
               },
             },
