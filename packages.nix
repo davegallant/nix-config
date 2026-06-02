@@ -20,7 +20,6 @@ in
       dust
       eza
       fd
-      google-cloud-sdk
       github-cli
       gnumake
       gnupg
@@ -33,7 +32,6 @@ in
       nix-tree
       nixd
       nixfmt
-      nixpkgs-review
       bash-language-server
       yaml-language-server
       nvd
