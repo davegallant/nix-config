@@ -155,7 +155,6 @@
       "stats"
       "taskexplorer"
       "tailscale-app"
-      "iterm2"
       "microsoft-remote-desktop"
       "orka3"
       "vlc"
