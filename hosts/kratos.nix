@@ -1,7 +1,7 @@
 { pkgs, unstable, ... }:
 {
   networking = {
-    hostName = "ares";
+    hostName = "kratos";
   };
 
   nix.enable = false;
