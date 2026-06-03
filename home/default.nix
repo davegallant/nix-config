@@ -10,7 +10,6 @@ in
   imports = [
     ./borgmatic.nix
     ./claude.nix
-    ./features.nix
     ./fish.nix
     ./ghostty.nix
     ./git.nix

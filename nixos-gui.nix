@@ -1,12 +1,10 @@
 {
-  config,
-  lib,
   pkgs,
   unstable,
   ...
 }:
 {
-  config = lib.mkIf config.features.desktop.enable {
+  config = {
     environment.systemPackages =
       with pkgs;
       [

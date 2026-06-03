@@ -116,7 +116,6 @@
           );
 
       nixosModuleSet = {
-        features = import ./modules/features.nix;
         ollama = import ./modules/ollama.nix;
       };
     in

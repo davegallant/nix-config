@@ -88,8 +88,6 @@
     };
   };
 
-  home-manager.users."dave.gallant".features.ai.enable = true;
-
   homebrew = {
     enable = true;
     onActivation = {
