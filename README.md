@@ -57,7 +57,6 @@ Available recipes:
     merge-pr                 # squash-merge current branch's PR with nvd diff in body
     rebuild                  # build, show nvd diff, then switch [alias: r]
     rebuild-boot             # rebuild and install bootloader
-    refresh-models           # ~/.config/nix-config/litellm-models.json
     rollback                 # switch to previous generation
     update-claude *version   # usage: just update-claude [VERSION]  (VERSION without leading 'v'; defaults to latest)
     update-pi *version       # usage: just update-pi [VERSION]  (VERSION without leading 'v'; defaults to latest)
