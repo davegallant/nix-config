@@ -97,6 +97,8 @@
       cleanup = "zap";
       autoUpdate = true;
       upgrade = true;
+      # Homebrew 4.x requires --force alongside --cleanup for non-interactive zap
+      extraFlags = [ "--force" ];
     };
     global = {
       brewfile = true;
