@@ -39,7 +39,6 @@
         mupen64plus
         protonup-qt
         ryubing
-        unstable.beekeeper-studio
         unstable.spotify
         unstable.zoom-us
         via
