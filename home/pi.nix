@@ -14,96 +14,25 @@ let
 
       mkdir -p "$HOME/.pi/agent"
 
-      litellm_base_url="''${LITELLM_BASE_URL:-''${ANTHROPIC_BASE_URL:-http://127.0.0.1:4000/v1}}"
-      litellm_api_key="''${LITELLM_API_KEY:-''${ANTHROPIC_AUTH_TOKEN:-sk-noauth}}"
-      models_json="$HOME/.config/nix-config/litellm-models.json"
-
-      ollama_compat='{
-        "supportsDeveloperRole": false,
-        "supportsReasoningEffort": false,
-        "thinkingFormat": "qwen"
-      }'
-
-      if [ -f "$models_json" ]; then
-        ${pkgs.jq}/bin/jq -n \
-          --arg base_url "$litellm_base_url" \
-          --arg api_key "$litellm_api_key" \
-          --argjson ollama_compat "$ollama_compat" \
-          --slurpfile m "$models_json" '
-          {
-            providers: {
-              litellm: {
-                baseUrl: $base_url,
-                api: "openai-completions",
-                apiKey: $api_key,
-                models: (
-                  $m[0] | to_entries
-                  | map({
-                    id: .key,
-                    name: .value.name,
-                    reasoning: .value.reasoning,
-                    input: (if .value.attachment then ["text", "image"] else ["text"] end),
-                    contextWindow: (if .value.limit.context > 0 then .value.limit.context else 128000 end),
-                    maxTokens: (if .value.limit.output > 0 then .value.limit.output else 16384 end),
-                    cost: {
-                      input: .value.cost.input,
-                      output: .value.cost.output,
-                      cacheRead: (.value.cost.input / 10),
-                      cacheWrite: (.value.cost.input * 1.25),
-                    },
-                    compat: (
-                      if (.key | test("^claude"; "i")) then {
-                        cacheControlFormat: "anthropic",
-                        supportsDeveloperRole: true,
-                      } else {
-                        supportsDeveloperRole: false,
-                        supportsReasoningEffort: false,
-                      } end
-                    ),
-                  })
-                ),
+      ${pkgs.jq}/bin/jq -n '
+        {
+          providers: {
+            "ollama": {
+              baseUrl: "http://kratos:11434/v1",
+              api: "openai-completions",
+              apiKey: "ollama",
+              compat: {
+                supportsDeveloperRole: false,
+                supportsReasoningEffort: false,
+                thinkingFormat: "qwen"
               },
-              "ollama": {
-                baseUrl: "http://kratos:11434/v1",
-                api: "openai-completions",
-                apiKey: "ollama",
-                compat: $ollama_compat,
-                models: [
-                  { id: "qwen3.6:35b", name: "Qwen 3.6 35B (kratos)", reasoning: true, contextWindow: 262144 }
-                ],
-              },
+              models: [
+                { id: "qwen3.6:35b", name: "Qwen 3.6 35B (kratos)", reasoning: true, contextWindow: 262144 }
+              ],
             },
-          }
-        ' > "$HOME/.pi/agent/models.json"
-      else
-        ${pkgs.jq}/bin/jq -n \
-          --arg base_url "$litellm_base_url" \
-          --arg api_key "$litellm_api_key" \
-          --argjson ollama_compat "$ollama_compat" '
-          {
-            providers: {
-              litellm: {
-                baseUrl: $base_url,
-                api: "openai-completions",
-                apiKey: $api_key,
-                compat: {
-                  cacheControlFormat: "anthropic",
-                },
-                models: [],
-              },
-              "ollama": {
-                baseUrl: "http://kratos:11434/v1",
-                api: "openai-completions",
-                apiKey: "ollama",
-                compat: $ollama_compat,
-                models: [
-                  { id: "qwen3.6:35b", name: "Qwen 3.6 35B (kratos)", reasoning: true, contextWindow: 262144 }
-                ],
-              },
-            },
-          }
-        ' > "$HOME/.pi/agent/models.json"
-      fi
+          },
+        }
+      ' > "$HOME/.pi/agent/models.json"
     ''
     + lib.optionalString pkgs.stdenv.isLinux ''
 

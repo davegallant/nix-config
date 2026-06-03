@@ -6,7 +6,6 @@
 }:
 {
   imports = [
-    ./litellm
     ./nixos-gui.nix
   ];
 
