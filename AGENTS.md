@@ -8,7 +8,7 @@ Nix Flake-based configuration managing NixOS (Linux) and macOS (nix-darwin) syst
 with home-manager for user-level configuration. Uses nixvim for Neovim configuration
 and LiteLLM as a local model proxy for AI tooling.
 
-- **Hosts**: `hephaestus` (x86_64-linux NixOS desktop), `kratos` (aarch64-linux NixOS Parallels VM), `ares` (aarch64-darwin macOS)
+- **Hosts**: `hephaestus` (x86_64-linux NixOS desktop), `kratos` (aarch64-darwin macOS)
 - **Nix channel**: nixpkgs 26.05 (stable), plus unstable channel
 - **Shell**: Fish, with Starship prompt
 - **Task runner**: `just` (not Make)
@@ -43,7 +43,7 @@ Always run `just fmt` before committing changes.
 ### Lint Nix files
 
 ```sh
-just lint       # runs: deadnix --fail . ; statix check .
+just lint       # runs: deadnix --fail . ; statix check . ; shellcheck *.sh
 ```
 
 Catches dead code (`deadnix`) and anti-patterns (`statix`); CI runs the same
@@ -54,7 +54,7 @@ repo intentionally favors flat dot-notation (see Attribute Set Style below).
 
 ```sh
 just update-claude [VERSION]    # update home/claude/package.nix
-just update-pi[VERSION]         # update home/pi/package.nix
+just update-pi [VERSION]        # update home/pi/package.nix
 just refresh-models             # fetch live LiteLLM model metadata
 ```
 
@@ -95,7 +95,8 @@ home-manager.users.dave.features = {
 };
 ```
 
-Also provides `remoteHost` (default: `"kratos"`) and `weatherCoords`.
+Also provides `weatherCoords` (default coordinates for weather scripts and the
+Waybar weather link).
 
 ## Code Style Guidelines
 
@@ -108,7 +109,7 @@ Run `just fmt` to format all `.nix` files.
 - **Files**: lowercase, single-word preferred (`fish.nix`, `git.nix`). Use `default.nix` as directory entry point.
 - **Directories**: lowercase. Kebab-case for multi-word (`cd-fzf`).
 - **Variables/functions**: camelCase (`mkUnstable`, `hmModule`, `extraModules`).
-- **Host names**: Greek mythology, lowercase (`hephaestus`, `ares`).
+- **Host names**: Greek mythology, lowercase (`hephaestus`, `kratos`).
 - **NixOS options**: standard dot-path convention (`services.tailscale.enable`).
 
 ### Comments
@@ -159,8 +160,8 @@ Two nixpkgs tiers, passed via `specialArgs`/`extraSpecialArgs`:
 
 GitHub Actions workflow (`.github/workflows/cachix.yml`):
 - Triggers on push to `main` and on pull requests (ignoring markdown/LICENSE changes)
-- Checks formatting with `nix fmt -- --check .`
-- Builds the NixOS `hephaestus` and macOS `ares` configurations, evaluates `kratos`
+- Checks formatting with `nix fmt -- --check .`, runs `deadnix`, `statix`, and `shellcheck`
+- Builds the NixOS `hephaestus` and macOS `kratos` configurations
 - Pushes build artifacts to the `davegallant` Cachix binary cache
 
 A separate workflow (`.github/workflows/update-hashes.yml`) runs on PRs touching
