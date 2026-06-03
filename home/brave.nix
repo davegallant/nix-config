@@ -1,5 +1,4 @@
 {
-  config,
   lib,
   pkgs,
   unstable,
@@ -9,7 +8,7 @@ let
   inherit (pkgs) stdenv;
 in
 {
-  config = lib.mkIf (config.features.desktop.enable && stdenv.isLinux) {
+  config = lib.mkIf stdenv.isLinux {
     programs.brave = {
       enable = true;
       package = unstable.brave.override {

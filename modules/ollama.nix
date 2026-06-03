@@ -1,11 +1,9 @@
 {
-  config,
-  lib,
   unstable,
   ...
 }:
 {
-  config = lib.mkIf config.features.ai.ollama.enable {
+  config = {
     services.ollama = {
       package = unstable.ollama-rocm;
       enable = true;

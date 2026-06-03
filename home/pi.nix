@@ -1,5 +1,4 @@
 {
-  config,
   lib,
   pkgs,
   ...
@@ -166,7 +165,7 @@ let
   );
 in
 {
-  config = lib.mkIf config.features.ai.enable {
+  config = {
     home.packages = [
       pi-wrapper
       pkgs.nodejs # required for pi to install git packages (npm install)

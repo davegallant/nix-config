@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ lib, pkgs, ... }:
 {
   imports = [
     ./brave.nix
@@ -7,7 +7,7 @@
     ./zed.nix
   ];
 
-  config = lib.mkIf config.features.desktop.enable {
+  config = lib.mkIf pkgs.stdenv.isLinux {
     services.gnome-keyring = {
       enable = true;
       components = [

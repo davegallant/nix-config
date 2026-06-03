@@ -1,11 +1,9 @@
 {
-  config,
-  lib,
   unstable,
   ...
 }:
 {
-  config = lib.mkIf config.features.ai.enable {
+  config = {
     system.activationScripts.litellm-secrets.text = ''
       if [ ! -f /var/lib/litellm/secrets.env ]; then
         mkdir -p /var/lib/litellm

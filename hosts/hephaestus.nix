@@ -11,20 +11,7 @@
     ../opensnitch.nix
   ];
 
-  features = {
-    desktop.enable = true;
-    ai = {
-      enable = true;
-      ollama.enable = true;
-    };
-  };
-
   system.stateVersion = "26.05";
-
-  home-manager.users.dave.features = {
-    desktop.enable = true;
-    ai.enable = true;
-  };
 
   boot = {
     kernelModules = [

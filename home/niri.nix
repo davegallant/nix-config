@@ -9,7 +9,7 @@
 }:
 
 {
-  config = lib.mkIf (config.features.desktop.enable && pkgs.stdenv.isLinux) (
+  config = lib.mkIf pkgs.stdenv.isLinux (
     let
       termExec = "${pkgs.ghostty}/bin/ghostty -e";
       externalIpScript = pkgs.writeShellScript "waybar-external-ip" (
@@ -17,7 +17,7 @@
       );
       gpuUsageScript = pkgs.writeShellScriptBin "gpu-usage" (builtins.readFile ./niri/gpu-usage.sh);
       weatherScript = pkgs.writeShellScriptBin "wttr" (
-        builtins.replaceStrings [ "__WEATHER_COORDS__" ] [ config.features.weatherCoords ] (
+        builtins.replaceStrings [ "__WEATHER_COORDS__" ] [ "42.982,-81.249" ] (
           builtins.readFile ./niri/wttr.sh
         )
       );
@@ -494,7 +494,7 @@
               exec = "${weatherScript}/bin/wttr";
               interval = 3600;
               format = "{}";
-              on-click = "xdg-open 'https://weather.gc.ca/en/location/index.html?coords=${config.features.weatherCoords}'";
+              on-click = "xdg-open 'https://weather.gc.ca/en/location/index.html?coords=42.982,-81.249'";
             };
             "custom/resolution" = {
               exec = "niri msg outputs | grep 'Current mode' | grep -q '3840x2160' && echo '󰍹 4K' || echo '󰍹 1440p'";
