@@ -60,11 +60,6 @@
   programs.fish.enable = true;
   programs.nix-ld.enable = lib.mkDefault true;
 
-  # The store is owned by nobody:nogroup here, so OpenSSH 10 rejects the
-  # systemd-ssh-proxy Include in /etc/ssh/ssh_config ("Bad owner or
-  # permissions"), breaking all ssh. We don't use the proxy, so disable it.
-  programs.ssh.systemd-ssh-proxy.enable = false;
-
   services.tailscale = {
     enable = true;
     package = unstable.tailscale;
