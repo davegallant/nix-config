@@ -5,8 +5,7 @@ Guidelines for AI coding agents working in this repository.
 ## Project Overview
 
 Nix Flake-based configuration managing NixOS (Linux) and macOS (nix-darwin) systems
-with home-manager for user-level configuration. Uses nixvim for Neovim configuration
-and LiteLLM as a local model proxy for AI tooling.
+with home-manager for user-level configuration. Uses nixvim for Neovim configuration.
 
 - **Hosts**: `hephaestus` (x86_64-linux NixOS desktop), `kratos` (aarch64-darwin macOS)
 - **Nix channel**: nixpkgs 26.05 (stable), plus unstable channel
@@ -55,7 +54,6 @@ repo intentionally favors flat dot-notation (see Attribute Set Style below).
 ```sh
 just update-claude [VERSION]    # update home/claude/package.nix
 just update-pi [VERSION]        # update home/pi/package.nix
-just refresh-models             # fetch live LiteLLM model metadata
 ```
 
 ### Merge PR (usually proposed by Renovate)
@@ -70,32 +68,6 @@ Squash-merges the current branch's PR and attaches the last `nvd diff` output.
 There are no automated tests in this repository. The primary validation is
 a successful `just rebuild`. CI builds the NixOS configuration and pushes
 to Cachix on every push to `main`.
-
-## Feature Flags (Two-Tier System)
-
-Feature flags exist at **two levels** that must be set independently:
-
-### NixOS-level (`modules/features.nix`)
-Set directly in host configs. Controls system services and NixOS modules.
-```nix
-features.desktop.enable = true;      # NixOS desktop bundle (nixos-gui.nix)
-features.ai.enable = true;           # LiteLLM service
-features.ai.ollama.enable = true;    # Ollama with ROCm
-```
-
-### Home-manager-level (`home/features.nix`)
-
-Set via `home-manager.users.<name>.features`. Controls user-level programs.
-
-```nix
-home-manager.users.dave.features = {
-  desktop.enable = true;   # brave, firefox, niri, zed, gnome-keyring, mangohud
-  ai.enable = true;        # claude code, pi
-};
-```
-
-Also provides `weatherCoords` (default coordinates for weather scripts and the
-Waybar weather link).
 
 ## Code Style Guidelines
 

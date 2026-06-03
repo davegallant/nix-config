@@ -54,45 +54,6 @@ update-claude *version:
 update-pi *version:
   @./home/pi/update-hashes.sh {{version}}
 
-# fetch live model metadata from the litellm proxy and write a json file
-#   ~/.config/nix-config/litellm-models.json
-# uses /v1/models for the list of available models and /public/litellm_model_cost_map
-# (no auth) for pricing and capabilities.
-refresh-models:
-  #!/usr/bin/env bash
-  set -euo pipefail
-  url="${LITELLM_BASE_URL:-${ANTHROPIC_BASE_URL:-http://127.0.0.1:4000/v1}}"
-  key="${LITELLM_API_KEY:-${ANTHROPIC_AUTH_TOKEN:-sk-noauth}}"
-  root="${url%/v1}"; root="${root%/}"
-  out="$HOME/.config/nix-config/litellm-models.json"
-  mkdir -p "$(dirname "$out")"
-  models_tmp="$(mktemp)"; costs_tmp="$(mktemp)"
-  trap 'rm -f "$models_tmp" "$costs_tmp"' EXIT
-
-  curl -fsS -m 10 -H "Authorization: Bearer $key" "$root/v1/models" > "$models_tmp"
-  curl -fsS -m 30 "$root/public/litellm_model_cost_map" > "$costs_tmp"
-
-  jq -n --slurpfile models "$models_tmp" --slurpfile costs "$costs_tmp" '
-      def num($x): $x // 0;
-      def per_million($x): (num($x) * 1000000 * 10000 | round) / 10000;
-      ($costs[0]) as $cost_map
-      | [$models[0].data[].id] | unique
-      | map(. as $name | ($cost_map[$name] // {}) as $c | {
-          key: $name,
-          value: {
-            name: $name,
-            attachment: ($c.supports_vision == true),
-            reasoning: ($c.supports_reasoning == true),
-            tool_call: ($c.supports_function_calling == true),
-            limit: { context: num($c.max_input_tokens), output: num($c.max_output_tokens) },
-            cost:  { input:   per_million($c.input_cost_per_token), output: per_million($c.output_cost_per_token) },
-          },
-        })
-      | from_entries
-    ' > "$out.tmp"
-  mv "$out.tmp" "$out"
-  echo "wrote $(jq 'length' "$out") models to $out"
-
 # squash-merge current branch's PR with nvd diff in body
 merge-pr:
   #!/usr/bin/env bash
