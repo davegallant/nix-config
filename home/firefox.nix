@@ -1,5 +1,4 @@
 {
-  config,
   lib,
   pkgs,
   ...
@@ -8,7 +7,7 @@ let
   inherit (pkgs) stdenv;
 in
 {
-  config = lib.mkIf (config.features.desktop.enable && stdenv.isLinux) {
+  config = lib.mkIf stdenv.isLinux {
     programs.firefox = {
       enable = true;
 
