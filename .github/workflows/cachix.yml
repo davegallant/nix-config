@@ -5,52 +5,45 @@ on:
     branches:
       - main
     paths-ignore:
-      - '**/*.md'
-      - '*.md'
-      - 'LICENSE'
+      - "**/*.md"
+      - "*.md"
+      - "LICENSE"
   pull_request:
     paths-ignore:
-      - '**/*.md'
-      - '*.md'
-      - 'LICENSE'
+      - "**/*.md"
+      - "*.md"
+      - "LICENSE"
   workflow_dispatch:
 
 jobs:
   check-format:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
-    - uses: cachix/install-nix-action@8aa03977d8d733052d78f4e008a241fd1dbf36b3 # v31
-    - run: nix fmt -- --check .
-    - run: nix develop -c deadnix --fail .
-    - run: nix develop -c statix check .
-    - run: nix develop -c shellcheck $(git ls-files '*.sh')
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      - uses: cachix/install-nix-action@8aa03977d8d733052d78f4e008a241fd1dbf36b3 # v31
+      - run: nix fmt -- --check .
+      - run: nix develop -c deadnix --fail .
+      - run: nix develop -c statix check .
+      - run: nix develop -c shellcheck $(git ls-files '*.sh')
 
-  eval-kratos:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
-    - uses: cachix/install-nix-action@8aa03977d8d733052d78f4e008a241fd1dbf36b3 # v31
-    - run: nix eval .#nixosConfigurations.kratos.config.system.build.toplevel --raw
-
-  build-ares:
+  build-kratos:
     runs-on: macos-latest
     steps:
-    - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
-    - uses: cachix/install-nix-action@8aa03977d8d733052d78f4e008a241fd1dbf36b3 # v31
-    - uses: cachix/cachix-action@5f2d7c5294214f71b873db4b969586b980625e71 # v17
-      with:
-        name: davegallant
-        authToken: '${{ secrets.CACHIX_API_KEY }}'
-    - run: nix build .#darwinConfigurations.ares.config.system.build.toplevel --json | jq -r '.[].outputs | to_entries[].value' | cachix push davegallant
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      - uses: cachix/install-nix-action@8aa03977d8d733052d78f4e008a241fd1dbf36b3 # v31
+      - uses: cachix/cachix-action@5f2d7c5294214f71b873db4b969586b980625e71 # v17
+        with:
+          name: davegallant
+          authToken: "${{ secrets.CACHIX_API_KEY }}"
+      - run: nix build .#darwinConfigurations.kratos.config.system.build.toplevel --json | jq -r '.[].outputs | to_entries[].value' | cachix push davegallant
 
   build-hephaestus:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
-    - uses: cachix/install-nix-action@8aa03977d8d733052d78f4e008a241fd1dbf36b3 # v31
-    - uses: cachix/cachix-action@5f2d7c5294214f71b873db4b969586b980625e71 # v17
-      with:
-        name: davegallant
-        authToken: '${{ secrets.CACHIX_API_KEY }}'
-    - run: nix build .#nixosConfigurations.hephaestus.config.system.build.toplevel --json | jq -r '.[].outputs | to_entries[].value' | cachix push davegallant
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      - uses: cachix/install-nix-action@8aa03977d8d733052d78f4e008a241fd1dbf36b3 # v31
+      - uses: cachix/cachix-action@5f2d7c5294214f71b873db4b969586b980625e71 # v17
+        with:
+          name: davegallant
+          authToken: "${{ secrets.CACHIX_API_KEY }}"
+      - run: nix build .#nixosConfigurations.hephaestus.config.system.build.toplevel --json | jq -r '.[].outputs | to_entries[].value' | cachix push davegallant
