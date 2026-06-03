@@ -90,7 +90,6 @@ Set via `home-manager.users.<name>.features`. Controls user-level programs.
 ```nix
 home-manager.users.dave.features = {
   desktop.enable = true;   # brave, firefox, niri, zed, gnome-keyring, mangohud
-  headless.enable = true;  # curses pinentry, last_dir restore, skip Docker amd64
   ai.enable = true;        # claude code, pi
 };
 ```
@@ -204,7 +203,7 @@ Flake inputs are updated automatically by Renovate and auto-merged when CI passe
 
 ```
 feat(hephaestus): add borgmatic backup service
-fix(fish): restore last_dir on headless hosts
+fix(fish): correct SSH_AUTH_SOCK fallback on darwin
 chore: bump nixpkgs flake input
 refactor(nixvim): split keybindings into separate file
 style: run nixfmt across all nix files
