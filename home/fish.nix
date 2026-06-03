@@ -1,5 +1,4 @@
 {
-  config,
   lib,
   pkgs,
   ...
@@ -89,12 +88,10 @@
         bind -M insert \ca beginning-of-line
 
         set -x DOCKER_CLI_HINTS false
-        ${lib.optionalString (
-          !config.features.headless.enable
-        ) "set -x DOCKER_DEFAULT_PLATFORM linux/amd64"}
+        set -x DOCKER_DEFAULT_PLATFORM linux/amd64
         set -x EDITOR vim
         set -x PAGER less
-        ${lib.optionalString (pkgs.stdenv.isLinux && !config.features.headless.enable) ''
+        ${lib.optionalString pkgs.stdenv.isLinux ''
           if test -S $HOME/.bitwarden-ssh-agent.sock
             set -x SSH_AUTH_SOCK $HOME/.bitwarden-ssh-agent.sock
           else
