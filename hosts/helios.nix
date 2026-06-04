@@ -22,6 +22,7 @@
 
   homebrew.casks = lib.mkAfter [
     "bitwarden"
+    "minecraft"
     "mullvad-vpn"
     "signal"
     "steam"
