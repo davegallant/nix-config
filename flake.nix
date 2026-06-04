@@ -190,37 +190,40 @@
         let
           system = "aarch64-darwin";
           unstable = mkUnstable system;
+          mkDarwin =
+            { hostname, username }:
+            darwin.lib.darwinSystem {
+              inherit system;
+              specialArgs = {
+                inherit
+                  inputs
+                  unstable
+                  username
+                  ;
+              };
+              modules = mkSharedModules {
+                inherit
+                  hostname
+                  system
+                  unstable
+                  username
+                  ;
+                hmModule = home-manager.darwinModules.home-manager;
+                extraModules = [
+                  ./hosts/darwin-common.nix
+                  ./hosts/${hostname}.nix
+                ];
+              };
+            };
         in
         {
-          kratos = darwin.lib.darwinSystem {
-            inherit system;
-            specialArgs = {
-              inherit unstable inputs;
-            };
-            modules = mkSharedModules {
-              username = "dave.gallant";
-              hostname = "kratos";
-              inherit system unstable;
-              hmModule = home-manager.darwinModules.home-manager;
-              extraModules = [
-                ./hosts/kratos.nix
-              ];
-            };
+          kratos = mkDarwin {
+            hostname = "kratos";
+            username = "dave.gallant";
           };
-          helios = darwin.lib.darwinSystem {
-            inherit system;
-            specialArgs = {
-              inherit unstable inputs;
-            };
-            modules = mkSharedModules {
-              username = "dave";
-              hostname = "helios";
-              inherit system unstable;
-              hmModule = home-manager.darwinModules.home-manager;
-              extraModules = [
-                ./hosts/helios.nix
-              ];
-            };
+          helios = mkDarwin {
+            hostname = "helios";
+            username = "dave";
           };
         };
     };
