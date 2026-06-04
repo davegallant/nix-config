@@ -1,4 +1,8 @@
 {
+  lib,
+  ...
+}:
+{
   networking.hostName = "helios";
 
   system.defaults.dock = {
@@ -11,4 +15,9 @@
       "/Applications/Obsidian.app"
     ];
   };
+
+  homebrew.casks = lib.mkAfter [
+    "bitwarden"
+    "steam"
+  ];
 }
