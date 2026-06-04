@@ -4,59 +4,63 @@ Guidelines for AI coding agents working in this repository.
 
 ## Project Overview
 
-Nix Flake-based configuration managing NixOS (Linux) and macOS (nix-darwin) systems
-with home-manager for user-level configuration. Uses nixvim for Neovim configuration.
+Nix Flake configuration for NixOS and macOS systems, with home-manager for
+user-level configuration and nixvim for Neovim.
 
-- **Hosts**: `hephaestus` (x86_64-linux NixOS desktop), `kratos` (aarch64-darwin macOS)
-- **Nix channel**: nixpkgs 26.05 (stable), plus unstable channel
-- **Shell**: Fish, with Starship prompt
-- **Task runner**: `just` (not Make)
+- **Hosts**:
+  - `hephaestus`: x86_64-linux NixOS desktop
+  - `kratos`: aarch64-darwin macOS
+  - `helios`: aarch64-darwin macOS
+- **Nix channel**: nixpkgs 26.05 stable, plus nixpkgs-unstable
+- **Shell**: Fish with Starship
+- **Task runner**: `just`
 
-## Build / Rebuild / Lint Commands
+## Commands
 
-### Rebuild system (primary build command)
+### Rebuild system
 
 ```sh
 just rebuild    # or: just r
 ```
 
-Runs a two-step process: builds first, shows an `nvd diff` of package changes,
-then switches. On Linux uses `nixos-rebuild --sudo`, on macOS uses
-`sudo darwin-rebuild`.
+Builds first, shows an `nvd diff`, then switches. Uses `nixos-rebuild --sudo`
+on Linux and `sudo darwin-rebuild` on macOS.
 
-### Build without switching (CI / dry-run)
+### Build without switching
 
 ```sh
 nix build .#nixosConfigurations.hephaestus.config.system.build.toplevel
+nix build .#darwinConfigurations.kratos.config.system.build.toplevel
+nix build .#darwinConfigurations.helios.config.system.build.toplevel
 ```
 
-### Format all Nix files
+### Format
 
 ```sh
-just fmt        # runs: fd -e nix -x nixfmt
-nix fmt         # alternative: uses formatter flake output
+just fmt        # fd -e nix -x nixfmt
+nix fmt         # formatter flake output
 ```
-The formatter is `nixfmt` (RFC 166 style, package `nixfmt-rfc-style`).
-Always run `just fmt` before committing changes.
 
-### Lint Nix files
+Formatter: `nixfmt` / `nixfmt-rfc-style`. Run `just fmt` before committing Nix
+changes.
+
+### Lint
 
 ```sh
-just lint       # runs: deadnix --fail . ; statix check . ; shellcheck *.sh
+just lint       # deadnix, statix, shellcheck tracked *.sh files
 ```
 
-Catches dead code (`deadnix`) and anti-patterns (`statix`); CI runs the same
-checks. The `repeated_keys` statix lint is disabled in `statix.toml` because the
-repo intentionally favors flat dot-notation (see Attribute Set Style below).
+`statix.toml` disables `repeated_keys` because this repo intentionally favors
+flat dot-notation for simple option assignments.
 
 ### Update package hashes
 
 ```sh
-just update-claude [VERSION]    # update home/claude/package.nix
-just update-pi [VERSION]        # update home/pi/package.nix
+just update-claude [VERSION]
+just update-pi [VERSION]
 ```
 
-### Merge PR (usually proposed by Renovate)
+### Merge PR
 
 ```sh
 just merge-pr
@@ -64,33 +68,51 @@ just merge-pr
 
 Squash-merges the current branch's PR and attaches the last `nvd diff` output.
 
-### Tests
-There are no automated tests in this repository. The primary validation is
-a successful `just rebuild`. CI builds the NixOS configuration and pushes
-to Cachix on every push to `main`.
+## Validation
 
-## Code Style Guidelines
+There are no automated tests. Primary validation is a successful `just rebuild`.
+Before committing, run the relevant checks:
 
-### Formatter
+```sh
+just fmt
+just lint
+nix flake check --no-build
+```
 
-Run `just fmt` to format all `.nix` files.
+CI checks formatting and linting, builds `hephaestus` and `kratos`, and pushes
+build outputs to Cachix on `main`.
 
-### Naming Conventions
+## Repository Layout
 
-- **Files**: lowercase, single-word preferred (`fish.nix`, `git.nix`). Use `default.nix` as directory entry point.
-- **Directories**: lowercase. Kebab-case for multi-word (`cd-fzf`).
+- `flake.nix`: flake inputs, system builders, shared module wiring
+- `nixos.nix`: shared NixOS module
+- `darwin.nix`: shared nix-darwin module
+- `hosts/*.nix`: host-specific settings
+- `home/`: home-manager modules
+- `modules/`: reusable NixOS modules
+- `packages.nix`: shared package set
+- `overlays/`: nixpkgs overlays
+
+## Code Style
+
+### Naming
+
+- **Files**: lowercase, single-word preferred (`fish.nix`, `git.nix`); use
+  `default.nix` as directory entry point.
+- **Directories**: lowercase; use kebab-case for multi-word names.
 - **Variables/functions**: camelCase (`mkUnstable`, `hmModule`, `extraModules`).
-- **Host names**: Greek mythology, lowercase (`hephaestus`, `kratos`).
-- **NixOS options**: standard dot-path convention (`services.tailscale.enable`).
+- **Hosts**: Greek mythology, lowercase (`hephaestus`, `kratos`, `helios`).
+- **Nix options**: standard dot-path convention (`services.tailscale.enable`).
 
 ### Comments
 
-- Use `#` single-line comments only. No `/* */` block comments.
+- Use `#` single-line comments only.
 - Keep comments minimal and pragmatic.
-- Use section headers in package lists: `# essentials`, `# cloud`, `# gaming`, etc.
-- Add inline comments for non-obvious settings: `false; # breaks timezone`
+- Use section headers in package lists when helpful: `# essentials`, `# cloud`,
+  `# gaming`, etc.
+- Add inline comments for non-obvious settings: `false; # breaks timezone`.
 
-### Platform Conditionals
+### Platform conditionals
 
 - Use `stdenv.isLinux` directly on `enable` for Linux-only features:
   ```nix
@@ -99,81 +121,59 @@ Run `just fmt` to format all `.nix` files.
 - Use `lib.optionals stdenv.isLinux [ ... ]` for conditional list items.
 - Use `lib.optionalAttrs stdenv.isLinux { ... }` for conditional attribute sets.
 - Use `lib.optionalString stdenv.isLinux "..."` for conditional strings.
-- Prefer direct conditionals over `lib.mkIf`. Exception: `lib.mkIf` is acceptable as a whole-module guard (e.g., `config = lib.mkIf stdenv.isLinux { ... }` in `niri.nix`).
+- Prefer direct conditionals over `lib.mkIf`. Exception: `lib.mkIf` is fine as a
+  whole-module guard, e.g. `config = lib.mkIf stdenv.isLinux { ... }`.
 
-### Package References
+### Package references
 
-Two nixpkgs tiers, passed via `specialArgs`/`extraSpecialArgs`:
-- `pkgs.foo` -- stable (default for most packages)
-- `unstable.foo` -- nixpkgs-unstable (for packages needing newer versions)
-- Binary paths in services: `"${lib.getBin pkg}/bin/name"`
-- Flake input packages: `input.packages.${pkgs.stdenv.hostPlatform.system}.default`
+- `pkgs.foo`: stable nixpkgs, default for most packages.
+- `unstable.foo`: nixpkgs-unstable for packages needing newer versions.
+- Binary paths in services: `"${lib.getBin pkg}/bin/name"`.
+- Flake input packages:
+  `input.packages.${pkgs.stdenv.hostPlatform.system}.default`.
 
-### Attribute Set Style
+### Attribute sets
 
-- Flat dot-notation for simple single-attribute enables:
-  ```nix
-  services.printing.enable = true;
-  ```
-- Nested `= { ... };` when configuring multiple sub-attributes:
-  ```nix
-  services.tailscale = {
-    enable = true;
-    package = unstable.tailscale;
-  };
-  ```
+Use flat dot-notation for simple single-attribute enables:
 
-### Error Handling
-- No `assert` statements are used in this codebase.
+```nix
+services.printing.enable = true;
+```
+
+Use nested sets when configuring multiple sub-attributes:
+
+```nix
+services.tailscale = {
+  enable = true;
+  package = unstable.tailscale;
+};
+```
+
+### Error handling
+
+- Do not use `assert` statements.
 - Use `lib.mkDefault` sparingly for hardware defaults.
-
-## CI/CD
-
-GitHub Actions workflow (`.github/workflows/cachix.yml`):
-- Triggers on push to `main` and on pull requests (ignoring markdown/LICENSE changes)
-- Checks formatting with `nix fmt -- --check .`, runs `deadnix`, `statix`, and `shellcheck`
-- Builds the NixOS `hephaestus` and macOS `kratos` configurations
-- Pushes build artifacts to the `davegallant` Cachix binary cache
-
-A separate workflow (`.github/workflows/update-hashes.yml`) runs on PRs touching
-`home/claude/package.nix` or `home/pi/package.nix` and recomputes
-per-platform hashes before CI runs.
-
-## Updates
-
-Flake inputs are updated automatically by Renovate and auto-merged when CI passes.
 
 ## Git Conventions
 
 - Main branch: `main`
-- Use [Conventional Commits](https://www.conventionalcommits.org/) for all commit messages.
+- Use Conventional Commits for commit messages.
 
-### Format
+Format:
 
+```text
+<type>(<scope>): <summary>
 ```
-<type>(<scope>): <short summary>
-```
 
-- **type**: one of the types below (required)
-- **scope**: optional, names the affected module or host (e.g. `hephaestus`, `fish`, `nixvim`)
-- **summary**: imperative mood, lowercase, no trailing period, ≤72 chars total
+- **type**: `feat`, `fix`, `chore`, `refactor`, `style`, `docs`, `ci`, or
+  `revert`.
+- **scope**: optional affected module or host, e.g. `hephaestus`, `fish`,
+  `nixvim`.
+- **summary**: imperative mood, lowercase, no trailing period, ≤72 chars total.
 
-### Types
+Examples:
 
-| Type       | When to use |
-|------------|-------------|
-| `feat`     | Add a new package, module, or feature |
-| `fix`      | Correct broken behavior or configuration |
-| `chore`    | Maintenance with no user-visible effect (hash bumps, flake updates) |
-| `refactor` | Restructure config without changing behavior |
-| `style`    | Formatting-only changes (`just fmt`) |
-| `docs`     | Changes to documentation only |
-| `ci`       | Changes to GitHub Actions workflows |
-| `revert`   | Revert a previous commit |
-
-### Examples
-
-```
+```text
 feat(hephaestus): add borgmatic backup service
 fix(fish): correct SSH_AUTH_SOCK fallback on darwin
 chore: bump nixpkgs flake input
