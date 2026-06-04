@@ -79,8 +79,8 @@ just lint
 nix flake check --no-build
 ```
 
-CI checks formatting and linting, builds `hephaestus` and `kratos`, and pushes
-build outputs to Cachix on `main`.
+CI checks formatting and linting, builds `hephaestus`, `kratos`, and `helios`,
+and pushes build outputs to Cachix on `main`.
 
 ## Repository Layout
 
