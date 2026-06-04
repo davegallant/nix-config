@@ -213,7 +213,7 @@
               inherit unstable inputs;
             };
             modules = mkSharedModules {
-              username = "dave.gallant";
+              username = "dave";
               hostname = "helios";
               inherit system unstable;
               hmModule = home-manager.darwinModules.home-manager;

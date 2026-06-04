@@ -8,12 +8,12 @@
 
   system.stateVersion = 4;
 
-  users.users."dave.gallant".home = "/Users/dave.gallant";
-  users.users."dave.gallant".shell = pkgs.fish;
+  users.users."dave".home = "/Users/dave";
+  users.users."dave".shell = pkgs.fish;
 
   programs.fish.enable = true;
 
-  system.primaryUser = "dave.gallant";
+  system.primaryUser = "dave";
   system.defaults = {
 
     trackpad = {
