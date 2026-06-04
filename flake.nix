@@ -207,6 +207,21 @@
               ];
             };
           };
+          helios = darwin.lib.darwinSystem {
+            inherit system;
+            specialArgs = {
+              inherit unstable inputs;
+            };
+            modules = mkSharedModules {
+              username = "dave.gallant";
+              hostname = "helios";
+              inherit system unstable;
+              hmModule = home-manager.darwinModules.home-manager;
+              extraModules = [
+                ./hosts/helios.nix
+              ];
+            };
+          };
         };
     };
 }
