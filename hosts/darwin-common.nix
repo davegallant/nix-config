@@ -74,6 +74,7 @@
       "bruno"
       "capslocknodelay"
       "dbeaver-community"
+      "docker-desktop"
       "font-fira-code-nerd-font"
       "font-hack-nerd-font"
       "fork"
