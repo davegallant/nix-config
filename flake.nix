@@ -210,7 +210,7 @@
                   ;
                 hmModule = home-manager.darwinModules.home-manager;
                 extraModules = [
-                  ./hosts/darwin-common.nix
+                  ./darwin.nix
                   ./hosts/${hostname}.nix
                 ];
               };
