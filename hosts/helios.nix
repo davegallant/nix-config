@@ -13,6 +13,10 @@
       "/Applications/ghostty.app"
       "/Applications/Brave Browser.app"
       "/Applications/Obsidian.app"
+      "/Applications/Signal.app"
+      "/Applications/Line.app"
+      "/System/Applications/Messages.app"
+      "/System/Applications/Phone.app"
     ];
   };
 
