@@ -132,6 +132,18 @@
           { argv = [ "xwayland-satellite" ]; }
           {
             argv = [
+              "sh"
+              "-c"
+              ''
+                for _ in $(seq 1 10); do
+                  niri msg output HDMI-A-1 custom-mode 2560x1440@60 && exit 0
+                  sleep 1
+                done
+              ''
+            ];
+          }
+          {
+            argv = [
               "trayscale"
               "--hide-window"
             ];
@@ -406,7 +418,6 @@
               "idle_inhibitor"
               "tray"
               "custom/weather"
-              "custom/resolution"
               "clock"
             ];
 
@@ -496,11 +507,6 @@
               format = "{}";
               on-click = "xdg-open 'https://weather.gc.ca/en/location/index.html?coords=42.982,-81.249'";
             };
-            "custom/resolution" = {
-              exec = "niri msg outputs | grep 'Current mode' | grep -q '3840x2160' && echo '󰍹 4K' || echo '󰍹 1440p'";
-              interval = 2;
-              on-click = "bash -c 'niri msg outputs | grep \"Current mode\" | grep -q \"3840x2160\" && { niri msg output DP-1 mode 2560x1440@59.951; niri msg output DP-1 scale 1; } || { niri msg output DP-1 mode 3840x2160@59.997; niri msg output DP-1 scale 1.5; }'";
-            };
           }
         ];
 
@@ -583,11 +589,6 @@
             background-color: #0d0f18;
             color: #c0caf5;
             font-weight: bold;
-          }
-          #custom-resolution {
-            padding: 0 10px;
-            background-color: #0d0f18;
-            color: #c0caf5;
           }
         '';
       };
