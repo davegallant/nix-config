@@ -412,7 +412,6 @@
               "cpu"
               "memory"
               "custom/gpu"
-              "network"
               "custom/external-ip"
               "pulseaudio"
               "idle_inhibitor"
@@ -449,14 +448,6 @@
               };
               on-click = "${pkgs.pwvucontrol}/bin/pwvucontrol";
               scroll-step = 5;
-            };
-
-            network = {
-              format-ethernet = "▲ {bandwidthUpBits} ▼ {bandwidthDownBits}";
-              format-disconnected = "Disconnected ⚠";
-              tooltip-format = "{ipaddr}/{cidr}";
-              on-click = "${termExec} sudo ${pkgs.bandwhich}/bin/bandwhich";
-              interval = 2;
             };
 
             cpu = {
@@ -559,19 +550,10 @@
             background-color: #3b4261;
             color: #737aa2;
           }
-          #network {
-            padding: 0 10px;
-            background-color: #0d0f18;
-            color: #c0caf5;
-          }
           #idle-inhibitor {
             padding: 0 10px;
             background-color: #0d0f18;
             color: #c0caf5;
-          }
-          #network.disconnected {
-            background-color: #f7768e;
-            color: #0d0f18;
           }
           #memory {
             padding: 0 10px;
