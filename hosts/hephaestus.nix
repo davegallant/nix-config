@@ -50,11 +50,9 @@
         allowDiscards = true;
         device = "/dev/disk/by-uuid/89a14ac5-7723-4a0a-bb95-fb2fb2e92160";
         preLVM = true;
-        keyFile = "./keyfile0.bin";
+        keyFile = "/keyfile0.bin";
       };
-      secrets = {
-        "keyfile0.bin" = "/etc/secrets/initrd/keyfile0.bin";
-      };
+      secrets."/keyfile0.bin" = "/etc/secrets/initrd/keyfile0.bin";
     };
   };
 
