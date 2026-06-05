@@ -149,24 +149,7 @@
     };
   };
 
-  services.mullvad-vpn = {
-    enable = true;
-    package = pkgs.mullvad-vpn;
-  };
-
   services.opensnitch.rules = {
-    mullvad-daemon = {
-      name = "Allow mullvad daemon";
-      enabled = true;
-      action = "allow";
-      duration = "always";
-      operator = {
-        type = "simple";
-        sensitive = false;
-        operand = "process.path";
-        data = "${lib.getBin pkgs.mullvad-vpn}/bin/mullvad-daemon";
-      };
-    };
     beszel-agent = {
       name = "Allow beszel agent";
       enabled = true;
