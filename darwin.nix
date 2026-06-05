@@ -85,7 +85,6 @@
       "notunes"
       "obsidian"
       "raycast"
-      "signal"
       "spotify"
       "stats"
       "taskexplorer"
