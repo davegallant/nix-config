@@ -12,14 +12,6 @@
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    niri = {
-      url = "github:sodiboo/niri-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nirinit = {
-      url = "github:amaanq/nirinit";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nixvim = {
       url = "github:nix-community/nixvim/nixos-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -74,7 +66,6 @@
               nixpkgs.config = nixpkgsConfig;
               nixpkgs.overlays = [
                 (import ./overlays)
-                inputs.niri.overlays.niri
               ];
               home-manager = {
                 useGlobalPkgs = true;
@@ -83,11 +74,7 @@
                   ./home
                   inputs.nixvim.homeModules.nixvim
                   weathr.homeModules.weathr
-                ]
-                # On Linux the niri NixOS module declares the home-manager niri
-                # options; on Darwin there is no NixOS module, so import the home
-                # module directly so home/niri.nix (Linux-gated) still evaluates.
-                ++ (if nixpkgs.lib.hasSuffix "-darwin" system then [ inputs.niri.homeModules.niri ] else [ ]);
+                ];
                 extraSpecialArgs = {
                   inherit unstable hostname;
                 };
@@ -169,10 +156,8 @@
                   ;
                 hmModule = home-manager.nixosModules.home-manager;
                 extraModules = [
-                  inputs.niri.nixosModules.niri
                   ./nixos.nix
                   ./hosts/${hostname}.nix
-                  inputs.nirinit.nixosModules.nirinit
                 ]
                 ++ (builtins.attrValues nixosModuleSet)
                 ++ extraModules;

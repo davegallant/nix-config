@@ -3,7 +3,7 @@
   imports = [
     ./brave.nix
     ./firefox.nix
-    ./niri.nix
+    ./kde.nix
     ./zed.nix
   ];
 
@@ -18,7 +18,7 @@
     programs.mangohud = {
       enable = true;
       settings = {
-        font_size = 16;
+        font_size = 24;
         position = "top-right";
         toggle_hud = "Shift_R+F1";
       };
