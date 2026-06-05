@@ -101,24 +101,15 @@
     iproute2.enable = true;
     hostName = "hephaestus";
     hostId = "0e8aad53";
-
-    interfaces."enp34s0" = {
+    # interfaces."enp34s0" = {
+    #   wakeOnLan = {
+    #     enable = true;
+    #     policy = [ "magic" ];
+    #   };
+    # };
+    interfaces."wlp42s0f3u1" = {
       useDHCP = true;
-      wakeOnLan = {
-        enable = true;
-        policy = [ "magic" ];
-      };
     };
-    # For printer
-    interfaces."wlp42s0f3u1".ipv4.routes = [
-      {
-        address = "192.168.18.7";
-        prefixLength = 32;
-        options = {
-          scope = "link";
-        };
-      }
-    ];
     firewall = {
       allowPing = true;
       enable = true;
@@ -215,15 +206,6 @@
     ATTRS{idVendor}=="36b0", ATTRS{idProduct}=="3002", \
     ENV{ID_INPUT_JOYSTICK}="", ENV{ID_INPUT_ACCELEROMETER}=""
   '';
-
-  systemd.network = {
-    enable = true;
-    networks."10-enp40s0" = {
-      matchConfig.Name = "enp40s0";
-      address = [ "192.168.2.1/24" ];
-      linkConfig.RequiredForOnline = "no";
-    };
-  };
 
   systemd.services.systemd-networkd-wait-online.enable = lib.mkForce false;
 
