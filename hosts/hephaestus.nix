@@ -190,6 +190,7 @@
 
   users.users.dave.extraGroups = [
     "docker"
+    "gamemode"
     "input"
     "libvirtd"
     "networkmanager"

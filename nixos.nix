@@ -136,16 +136,17 @@
     emoji = [ "Noto Color Emoji" ];
   };
 
-  programs.niri = {
-    enable = true;
-    package = pkgs.niri-unstable;
-  };
+  services.desktopManager.plasma6.enable = true;
 
-  services.greetd = {
-    enable = true;
-    settings.default_session = {
-      command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --cmd niri-session";
-      user = "greeter";
+  services.displayManager = {
+    defaultSession = "plasma";
+    autoLogin = {
+      enable = true;
+      user = "dave";
+    };
+    sddm = {
+      enable = true;
+      wayland.enable = true;
     };
   };
 
@@ -169,34 +170,7 @@
 
   services.flatpak.enable = true;
 
-  services.nirinit = {
-    enable = true;
-    settings = {
-      launch = {
-        "brave-browser" = "brave";
-        "com.mitchellh.ghostty" = "ghostty";
-        "signal" = "signal-desktop";
-      };
-      skip.apps = [
-        "brave-ophjlpahpchlmihnnnihgmmeilfjmjjc-Default"
-        "opensnitch_ui"
-        "steam"
-      ];
-    };
-  };
-
   services.tumbler.enable = true;
-
-  xdg.portal = {
-    enable = true;
-    extraPortals = [
-      pkgs.xdg-desktop-portal-gtk
-    ];
-    config.niri.default = [
-      "gtk"
-    ];
-    config.niri."org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
-  };
 
   services.avahi = {
     enable = true;
@@ -217,8 +191,23 @@
   };
   systemd.services.cups-browsed.enable = false;
 
+  programs.gamescope = {
+    enable = true;
+    capSysNice = true;
+  };
+
+  programs.gamemode = {
+    enable = true;
+    enableRenice = true;
+  };
+
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true;
+    localNetworkGameTransfers.openFirewall = true;
+    gamescopeSession.enable = true;
+    extest.enable = true;
+    protontricks.enable = true;
+    extraCompatPackages = [ pkgs.proton-ge-bin ];
   };
 }
