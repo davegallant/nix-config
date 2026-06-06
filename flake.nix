@@ -149,7 +149,6 @@
               modules = mkSharedModules {
                 inherit
                   username
-                  system
                   unstable
                   hostname
                   ;
@@ -188,7 +187,6 @@
               modules = mkSharedModules {
                 inherit
                   hostname
-                  system
                   unstable
                   username
                   ;

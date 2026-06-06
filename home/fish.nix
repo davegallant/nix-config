@@ -91,13 +91,13 @@
         set -x DOCKER_DEFAULT_PLATFORM linux/amd64
         set -x EDITOR vim
         set -x PAGER less
+        if test -S $HOME/.bitwarden-ssh-agent.sock
+          set -x SSH_AUTH_SOCK $HOME/.bitwarden-ssh-agent.sock
         ${lib.optionalString pkgs.stdenv.isLinux ''
-          if test -S $HOME/.bitwarden-ssh-agent.sock
-            set -x SSH_AUTH_SOCK $HOME/.bitwarden-ssh-agent.sock
           else
             set -x SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
-          end
         ''}
+        end
         set -x TERM xterm-256color
 
         set -x PATH $PATH \
