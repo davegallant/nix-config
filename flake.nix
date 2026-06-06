@@ -101,9 +101,6 @@
             }
           );
 
-      nixosModuleSet = {
-        ollama = import ./modules/ollama.nix;
-      };
     in
     {
       formatter = forEachSystem ({ pkgs, ... }: pkgs.nixfmt);
@@ -123,8 +120,6 @@
           };
         }
       );
-
-      nixosModules = nixosModuleSet;
 
       nixosConfigurations =
         let
@@ -157,7 +152,6 @@
                   ./nixos.nix
                   ./hosts/${hostname}.nix
                 ]
-                ++ (builtins.attrValues nixosModuleSet)
                 ++ extraModules;
               };
             };
