@@ -65,30 +65,12 @@
       device = "/dev/disk/by-label/NIXBOOT";
       fsType = "vfat";
     };
-    "/mnt/synology-2b/media" = {
-      device = "192.168.2.2:/volume1/Media";
-      fsType = "nfs";
-      options = [
-        "nofail"
-        "x-systemd.automount"
-      ];
-    };
     "/mnt/synology-2b/backups" = {
-      device = "192.168.2.2:/volume1/Backups";
+      device = "192.168.1.178:/volume1/Backups";
       fsType = "nfs";
       options = [
         "nofail"
         "x-systemd.automount"
-      ];
-    };
-    "/mnt/hermes" = {
-      device = "192.168.1.83:/mnt/pool";
-      fsType = "nfs";
-      options = [
-        "nofail"
-        "x-systemd.automount"
-        "x-systemd.idle-timeout=600"
-        "_netdev"
       ];
     };
   };
@@ -99,12 +81,6 @@
     iproute2.enable = true;
     hostName = "hephaestus";
     hostId = "0e8aad53";
-    # interfaces."enp34s0" = {
-    #   wakeOnLan = {
-    #     enable = true;
-    #     policy = [ "magic" ];
-    #   };
-    # };
     interfaces."wlp42s0f3u1" = {
       useDHCP = true;
     };
