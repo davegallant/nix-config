@@ -84,9 +84,6 @@
     interfaces."enp34s0" = {
       useDHCP = true;
     };
-    interfaces."wlp42s0f3u1" = {
-      useDHCP = true;
-    };
     firewall = {
       allowPing = true;
       enable = true;
