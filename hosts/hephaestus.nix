@@ -81,6 +81,9 @@
     iproute2.enable = true;
     hostName = "hephaestus";
     hostId = "0e8aad53";
+    interfaces."enp34s0" = {
+      useDHCP = true;
+    };
     interfaces."wlp42s0f3u1" = {
       useDHCP = true;
     };
