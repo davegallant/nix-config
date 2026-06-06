@@ -205,7 +205,7 @@
     enable = true;
     remotePlay.openFirewall = true;
     localNetworkGameTransfers.openFirewall = true;
-    gamescopeSession.enable = true;
+    gamescopeSession.enable = false; # avoids broken setuid bwrap wrapper
     extest.enable = true;
     protontricks.enable = true;
     extraCompatPackages = [ pkgs.proton-ge-bin ];
