@@ -52,7 +52,6 @@
       mkSharedModules =
         {
           username,
-          system,
           unstable,
           hmModule,
           hostname ? "",
