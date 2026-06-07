@@ -65,6 +65,14 @@
       device = "/dev/disk/by-label/NIXBOOT";
       fsType = "vfat";
     };
+    "/mnt/synology-2b/media" = {
+      device = "192.168.1.178:/volume1/Media";
+      fsType = "nfs";
+      options = [
+        "nofail"
+        "x-systemd.automount"
+      ];
+    };
     "/mnt/synology-2b/backups" = {
       device = "192.168.1.178:/volume1/Backups";
       fsType = "nfs";
