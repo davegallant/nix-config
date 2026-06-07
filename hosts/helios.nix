@@ -27,5 +27,6 @@
     "mullvad-vpn"
     "signal"
     "steam"
+    "transmission"
   ];
 }
