@@ -103,8 +103,8 @@ in
     home.file.".pi/agent/extensions/statusline.ts".source = ./pi/statusline.ts;
 
     home.file.".pi/agent/settings.json".text = builtins.toJSON {
-      defaultProvider = "ollama";
-      defaultModel = "qwen3.6:35b";
+      defaultProvider = "openai-codex";
+      defaultModel = "gpt-5.5";
       autoCompact = false;
       thinking = "low";
       packages = [
