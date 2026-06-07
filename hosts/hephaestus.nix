@@ -91,6 +91,7 @@
     hostId = "0e8aad53";
     firewall = {
       allowPing = true;
+      allowedTCPPorts = [ 2022 ];
       enable = true;
       checkReversePath = "loose";
       trustedInterfaces = [ "tailscale0" ];
@@ -173,6 +174,8 @@
   systemd.services.systemd-networkd-wait-online.enable = lib.mkForce false;
 
   services.resolved.enable = true;
+
+  services.eternal-terminal.enable = true;
 
   services.clamav.daemon.enable = true;
   services.clamav.updater.enable = true;
