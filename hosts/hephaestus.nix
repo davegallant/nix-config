@@ -17,7 +17,7 @@
     kernelModules = [
       "kvm-amd"
     ];
-    kernelPackages = pkgs.linuxPackages;
+    kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [
       "amd_iommu=on"
     ];

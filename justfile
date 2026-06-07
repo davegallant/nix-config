@@ -6,7 +6,7 @@ alias f := fmt
 arch := `uname -s`
 
 cmd := if arch == "Linux" { "nixos-rebuild --sudo" } else { "sudo darwin-rebuild" }
-switch_cmd := if arch == "Linux" { "sudo result/bin/switch-to-configuration switch" } else { "sudo result/activate" }
+switch_cmd := if arch == "Linux" { "sudo nix-env -p /nix/var/nix/profiles/system --set ./result && sudo /nix/var/nix/profiles/system/bin/switch-to-configuration switch" } else { "sudo result/activate" }
 
 # list available recipes
 [private]
@@ -17,7 +17,7 @@ default:
 rebuild:
   $cmd build --flake . --option warn-dirty false
   nvd diff /run/current-system result | rg -v '^[<>]{3} ' > /tmp/nvd-diff.txt
-  $switch_cmd
+  sh -c "$switch_cmd"
 
 # rebuild and install bootloader
 rebuild-boot:
