@@ -21,7 +21,6 @@
       SecondClickThreshold = 1;
       TrackpadRightClick = true;
     };
-
     WindowManager = {
       GloballyEnabled = false;
       EnableTilingByEdgeDrag = true;
@@ -29,24 +28,30 @@
       EnableTilingOptionAccelerator = true;
       EnableTiledWindowMargins = false;
     };
-
-    NSGlobalDomain.AppleShowAllExtensions = true;
-    NSGlobalDomain.AppleShowScrollBars = "Always";
-    NSGlobalDomain.NSUseAnimatedFocusRing = false;
-    NSGlobalDomain.NSNavPanelExpandedStateForSaveMode = true;
-    NSGlobalDomain.NSNavPanelExpandedStateForSaveMode2 = true;
-    NSGlobalDomain.PMPrintingExpandedStateForPrint = true;
-    NSGlobalDomain.PMPrintingExpandedStateForPrint2 = true;
-    NSGlobalDomain.NSDocumentSaveNewDocumentsToCloud = false;
-    NSGlobalDomain.ApplePressAndHoldEnabled = false;
-    NSGlobalDomain.InitialKeyRepeat = 25;
-    NSGlobalDomain.KeyRepeat = 2;
-    NSGlobalDomain."com.apple.mouse.tapBehavior" = 1;
-    NSGlobalDomain.NSWindowShouldDragOnGesture = true;
-    NSGlobalDomain.NSAutomaticSpellingCorrectionEnabled = false;
+    NSGlobalDomain = {
+      "com.apple.mouse.tapBehavior" = 1;
+      ApplePressAndHoldEnabled = false;
+      AppleShowAllExtensions = true;
+      AppleShowScrollBars = "Always";
+      InitialKeyRepeat = 25;
+      KeyRepeat = 2;
+      NSAutomaticSpellingCorrectionEnabled = false;
+      NSNavPanelExpandedStateForSaveMode = true;
+      NSNavPanelExpandedStateForSaveMode2 = true;
+      NSUseAnimatedFocusRing = false;
+      NSWindowShouldDragOnGesture = true;
+      PMPrintingExpandedStateForPrint = true;
+      PMPrintingExpandedStateForPrint2 = true;
+    };
     LaunchServices.LSQuarantine = false; # disables "Are you sure?" for new apps
     loginwindow.GuestEnabled = false;
-    finder.FXPreferredViewStyle = "Nlsv";
+    finder = {
+      AppleShowAllExtensions = true;
+      AppleShowAllFiles = true;
+      ShowPathbar = true;
+      _FXShowPosixPathInTitle = true;
+      FXPreferredViewStyle = "Nlsv";
+    };
   };
 
   security.pam.services.sudo_local.touchIdAuth = true;
