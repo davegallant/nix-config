@@ -78,5 +78,6 @@
     "headlamp"
     "orka3"
     "slack"
+    "zulu@8" # Java 8 runtime required by Cisco ASDM-IDM Launcher
   ];
 }
