@@ -22,6 +22,7 @@
 
   homebrew.casks = lib.mkAfter [
     "bitwarden"
+    "blender"
     "discord"
     "heroic"
     "minecraft"
