@@ -95,6 +95,7 @@
       "taskexplorer"
       "tailscale-app"
       "microsoft-remote-desktop"
+      "unity-hub"
       "utm"
       "vlc"
       "zed"
