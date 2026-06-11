@@ -69,7 +69,6 @@
 
     brews = [
       "coreutils"
-      "et"
       "gnu-sed"
       "gnu-tar"
     ];
