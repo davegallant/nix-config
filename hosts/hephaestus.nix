@@ -175,8 +175,6 @@
 
   services.resolved.enable = true;
 
-  services.eternal-terminal.enable = true;
-
   services.clamav.daemon.enable = true;
   services.clamav.updater.enable = true;
 

@@ -21,6 +21,7 @@ in
     ./nixvim.nix
     ./obsidian.nix
     ./pi.nix
+    ./tmux.nix
   ];
 
   home.stateVersion = "26.05";
