@@ -24,6 +24,7 @@
     "bitwarden"
     "blender"
     "discord"
+    "ente-auth"
     "heroic"
     "minecraft"
     "mullvad-vpn"
