@@ -89,6 +89,8 @@
 
   nixpkgs.hostPlatform = "x86_64-linux";
 
+  environment.systemPackages = [ pkgs.trayscale ];
+
   networking = {
     iproute2.enable = true;
     hostName = "hephaestus";
