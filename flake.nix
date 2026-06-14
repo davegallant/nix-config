@@ -63,9 +63,6 @@
           (_: {
             config = {
               nixpkgs.config = nixpkgsConfig;
-              nixpkgs.overlays = [
-                (import ./overlays)
-              ];
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;

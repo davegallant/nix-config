@@ -1,15 +1,16 @@
 {
   lib,
   pkgs,
+  unstable,
   ...
 }:
 {
   xdg.configFile = {
     "fish/completions/kubectl.fish".source = pkgs.runCommand "kubectl-completions.fish" { } ''
-      ${pkgs.kubectl}/bin/kubectl completion fish > $out
+      ${unstable.kubectl}/bin/kubectl completion fish > $out
     '';
     "fish/completions/helm.fish".source = pkgs.runCommand "helm-completions.fish" { } ''
-      ${pkgs.kubernetes-helm}/bin/helm completion fish > $out
+      ${unstable.kubernetes-helm}/bin/helm completion fish > $out
     '';
   };
 
