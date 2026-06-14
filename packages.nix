@@ -12,7 +12,6 @@ in
   environment.systemPackages =
     with pkgs;
     [
-      atuin
       bat
       btop
       curl
@@ -28,7 +27,6 @@ in
       lsof
       macchina
       ncdu
-      nil
       nix-tree
       nixd
       nixfmt
