@@ -20,7 +20,10 @@
     ];
   };
 
-  environment.systemPackages = [ unstable.ollama ];
+  environment.systemPackages = [
+    unstable.ollama
+    unstable.terraform
+  ];
 
   launchd.daemons.ollama = {
     serviceConfig = {
