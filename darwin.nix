@@ -93,7 +93,7 @@
       "stats"
       "taskexplorer"
       "tailscale-app"
-      "microsoft-remote-desktop"
+      "windows-app"
       "unity-hub"
       "utm"
       "vlc"
