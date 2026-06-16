@@ -87,15 +87,12 @@
     calibre
     clamtk
     evince
-    freefilesync
-    gimp-with-plugins
     heroic
     libation
     libnotify
     ludusavi
     lutris
     mission-center
-    mupen64plus
     mupdf
     opensnitch-ui
     pinta
@@ -103,9 +100,7 @@
     qbittorrent
     ryubing
     unstable.ghostty
-    unstable.signal-desktop
     unstable.spotify
-    unstable.zoom-us
     via
     virt-manager
     vlc
@@ -184,12 +179,6 @@
       workstation = true;
     };
   };
-
-  services.printing = {
-    enable = true;
-    browsing = false;
-  };
-  systemd.services.cups-browsed.enable = false;
 
   programs.gamescope = {
     enable = true;
