@@ -109,7 +109,7 @@ in
       thinking = "low";
       packages = [
         {
-          source = "git:github.com/mitsuhiko/agent-stuff@39e6911d27f0733687560e971a7455ce2ef07cc1";
+          source = "git:github.com/mitsuhiko/agent-stuff@19abb5afc61269d1ddbec39047a9e93faa70bd0d";
           skills = [ ]; # skip loading skills
           extensions = [
             "extensions/answer.ts"
