@@ -11,6 +11,10 @@
     ../opensnitch.nix
   ];
 
+  home-manager.users.dave.imports = [
+    ../home/retroarch.nix
+  ];
+
   system.stateVersion = "26.05";
 
   boot = {
@@ -151,6 +155,10 @@
     gc.dates = "daily";
   };
 
+  environment.systemPackages = [
+    pkgs.retroarch
+  ];
+
   users.users.dave.extraGroups = [
     "docker"
     "gamemode"
@@ -174,6 +182,17 @@
   systemd.services.systemd-networkd-wait-online.enable = lib.mkForce false;
 
   services.resolved.enable = true;
+
+  services.syncthing = {
+    enable = true;
+    user = "dave";
+    dataDir = "/home/dave";
+    configDir = "/home/dave/.config/syncthing";
+    openDefaultPorts = true;
+    overrideDevices = false;
+    overrideFolders = false;
+    settings.options.urAccepted = -1;
+  };
 
   services.clamav.daemon.enable = true;
   services.clamav.updater.enable = true;
