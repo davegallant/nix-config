@@ -173,12 +173,6 @@
   hardware.enableRedistributableFirmware = true;
   hardware.keyboard.qmk.enable = true;
 
-  services.udev.extraRules = ''
-    # Prevent epomaker TH85's extra HID interfaces from being detected as joystick/gamepad
-    ATTRS{idVendor}=="36b0", ATTRS{idProduct}=="3002", \
-    ENV{ID_INPUT_JOYSTICK}="", ENV{ID_INPUT_ACCELEROMETER}=""
-  '';
-
   systemd.services.systemd-networkd-wait-online.enable = lib.mkForce false;
 
   services.resolved.enable = true;
