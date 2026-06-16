@@ -22,17 +22,6 @@
     {
       "customType": "regex",
       "managerFilePatterns": [
-        "/home/obsidian\\.nix$/"
-      ],
-      "matchStrings": [
-        "https://github\\.com/(?<depName>Vinzent03/obsidian-git)/releases/download/(?<currentValue>[\\d\\.]+)/obsidian-git-[\\d\\.]+\\.zip"
-      ],
-      "datasourceTemplate": "github-releases",
-      "versioningTemplate": "semver"
-    },
-    {
-      "customType": "regex",
-      "managerFilePatterns": [
         "/home/(claude|hunk|pi)/package\\.nix$/"
       ],
       "matchStrings": [
