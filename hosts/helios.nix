@@ -5,6 +5,10 @@
 {
   networking.hostName = "helios";
 
+  home-manager.users.dave.imports = [
+    ../home/retroarch.nix
+  ];
+
   system.defaults.dock = {
     autohide = true;
     tilesize = 50;
@@ -28,6 +32,7 @@
     "heroic"
     "minecraft"
     "mullvad-vpn"
+    "retroarch-metal"
     "signal"
     "steam"
     "transmission"
