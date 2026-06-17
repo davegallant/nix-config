@@ -26,7 +26,6 @@
   };
 
   homebrew.casks = lib.mkAfter [
-    "bitwarden"
     "blender"
     "discord"
     "ente-auth"

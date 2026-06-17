@@ -80,7 +80,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    bitwarden-desktop
     bleachbit
     borgbackup
     bruno
