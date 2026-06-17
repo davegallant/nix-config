@@ -100,6 +100,7 @@
   environment.systemPackages = [
     pkgs.retroarch
     pkgs.trayscale
+    unstable.signal-desktop
   ];
 
   networking = {
