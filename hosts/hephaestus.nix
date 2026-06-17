@@ -73,23 +73,34 @@
       device = "192.168.1.178:/volume1/Media";
       fsType = "nfs";
       options = [
+        "_netdev"
+        "noauto"
         "nofail"
         "x-systemd.automount"
+        "x-systemd.idle-timeout=60"
+        "x-systemd.mount-timeout=10"
       ];
     };
     "/mnt/synology-2b/backups" = {
       device = "192.168.1.178:/volume1/Backups";
       fsType = "nfs";
       options = [
+        "_netdev"
+        "noauto"
         "nofail"
         "x-systemd.automount"
+        "x-systemd.idle-timeout=60"
+        "x-systemd.mount-timeout=10"
       ];
     };
   };
 
   nixpkgs.hostPlatform = "x86_64-linux";
 
-  environment.systemPackages = [ pkgs.trayscale ];
+  environment.systemPackages = [
+    pkgs.retroarch
+    pkgs.trayscale
+  ];
 
   networking = {
     iproute2.enable = true;
@@ -156,10 +167,6 @@
     # nixos.nix sets automatic/options as defaults; only override the cadence
     gc.dates = "daily";
   };
-
-  environment.systemPackages = [
-    pkgs.retroarch
-  ];
 
   users.users.dave.extraGroups = [
     "docker"
