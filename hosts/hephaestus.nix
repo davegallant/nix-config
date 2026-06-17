@@ -98,7 +98,12 @@
   nixpkgs.hostPlatform = "x86_64-linux";
 
   environment.systemPackages = [
-    pkgs.retroarch
+    (pkgs.retroarch.withCores (
+      cores: with cores; [
+        mupen64plus
+        snes9x
+      ]
+    ))
     pkgs.trayscale
     unstable.signal-desktop
   ];
