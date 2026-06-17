@@ -13,6 +13,7 @@
 
   home-manager.users.dave.imports = [
     ../home/retroarch.nix
+    ../home/ryujinx.nix
   ];
 
   system.stateVersion = "26.05";

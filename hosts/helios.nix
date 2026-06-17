@@ -7,6 +7,7 @@
 
   home-manager.users.dave.imports = [
     ../home/retroarch.nix
+    ../home/ryujinx.nix
   ];
 
   system.defaults.dock = {
