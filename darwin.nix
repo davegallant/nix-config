@@ -89,6 +89,7 @@
       "notunes"
       "obsidian"
       "raycast"
+      "secretive"
       "spotify"
       "stats"
       "taskexplorer"
