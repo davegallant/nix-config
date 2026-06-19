@@ -101,6 +101,7 @@
         snes9x
       ]
     ))
+    pkgs.keepassxc
     pkgs.trayscale
     unstable.signal-desktop
   ];
