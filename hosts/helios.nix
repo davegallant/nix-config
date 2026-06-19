@@ -30,6 +30,7 @@
     "discord"
     "ente-auth"
     "heroic"
+    "keepassxc"
     "minecraft"
     "mullvad-vpn"
     "retroarch-metal"
