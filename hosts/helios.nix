@@ -28,7 +28,6 @@
   homebrew.casks = lib.mkAfter [
     "blender"
     "discord"
-    "ente-auth"
     "heroic"
     "keepassxc"
     "minecraft"
