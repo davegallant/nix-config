@@ -3,7 +3,7 @@
   callPackage,
 }:
 let
-  version = "0.15.3"; # renovate: datasource=github-releases depName=modem-dev/hunk
+  version = "0.16.0"; # renovate: datasource=github-releases depName=modem-dev/hunk
 
   assets = {
     x86_64-linux = {
