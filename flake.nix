@@ -173,6 +173,7 @@
                   inputs
                   unstable
                   username
+                  vpngate
                   ;
               };
               modules = mkSharedModules {
