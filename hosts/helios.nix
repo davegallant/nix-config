@@ -10,6 +10,13 @@
     ../home/ryujinx.nix
   ];
 
+  home-manager.users.dave.home.file.".homebrew/trust.json" = {
+    force = true;
+    text = builtins.toJSON {
+      trustedtaps = [ "henrygd/beszel" ];
+    };
+  };
+
   system.defaults.dock = {
     autohide = true;
     tilesize = 50;
@@ -24,6 +31,17 @@
       "/System/Applications/Phone.app"
     ];
   };
+
+  homebrew.taps = lib.mkAfter [
+    "henrygd/beszel"
+  ];
+
+  homebrew.brews = lib.mkAfter [
+    {
+      name = "henrygd/beszel/beszel-agent";
+      start_service = true;
+    }
+  ];
 
   homebrew.casks = lib.mkAfter [
     "blender"
