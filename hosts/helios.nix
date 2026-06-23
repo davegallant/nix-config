@@ -1,7 +1,14 @@
 {
   lib,
+  username,
   ...
 }:
+let
+  trustedHomebrewTaps = [
+    "davegallant/public"
+    "henrygd/beszel"
+  ];
+in
 {
   networking.hostName = "helios";
 
@@ -10,12 +17,26 @@
     ../home/ryujinx.nix
   ];
 
-  home-manager.users.dave.home.file.".homebrew/trust.json" = {
-    force = true;
-    text = builtins.toJSON {
-      trustedtaps = [ "henrygd/beszel" ];
-    };
-  };
+  system.activationScripts.preActivation.text = ''
+    homebrew_trust_dir=/Users/${lib.escapeShellArg username}/.homebrew
+    homebrew_trust_file="$homebrew_trust_dir/trust.json"
+
+    if [ -L "$homebrew_trust_dir" ]; then
+      rm "$homebrew_trust_dir"
+    fi
+
+    mkdir -p "$homebrew_trust_dir"
+    if [ -L "$homebrew_trust_file" ]; then
+      rm "$homebrew_trust_file"
+    fi
+
+    cat > "$homebrew_trust_file" <<'EOF'
+    ${builtins.toJSON { trustedtaps = trustedHomebrewTaps; }}
+    EOF
+    chown -R ${lib.escapeShellArg username}:staff "$homebrew_trust_dir"
+    chmod 700 "$homebrew_trust_dir"
+    chmod 600 "$homebrew_trust_file"
+  '';
 
   system.defaults.dock = {
     autohide = true;
@@ -32,11 +53,10 @@
     ];
   };
 
-  homebrew.taps = lib.mkAfter [
-    "henrygd/beszel"
-  ];
+  homebrew.taps = lib.mkAfter trustedHomebrewTaps;
 
   homebrew.brews = lib.mkAfter [
+    "davegallant/public/vpngate"
     {
       name = "henrygd/beszel/beszel-agent";
       start_service = true;
