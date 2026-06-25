@@ -66,8 +66,8 @@
       device = "/dev/disk/by-label/NIXBOOT";
       fsType = "vfat";
     };
-    "/mnt/synology-2b/media" = {
-      device = "192.168.1.178:/volume1/Media";
+    "/mnt/tank/media" = {
+      device = "192.168.1.16:/mnt/tank/media";
       fsType = "nfs";
       options = [
         "_netdev"
@@ -78,8 +78,8 @@
         "x-systemd.mount-timeout=10"
       ];
     };
-    "/mnt/synology-2b/backups" = {
-      device = "192.168.1.178:/volume1/Backups";
+    "/mnt/tank/backups" = {
+      device = "192.168.1.16:/mnt/tank/backups";
       fsType = "nfs";
       options = [
         "_netdev"
