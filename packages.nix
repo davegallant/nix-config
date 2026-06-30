@@ -15,6 +15,7 @@ in
       bat
       btop
       curl
+      czkawka
       doggo
       dust
       eza
