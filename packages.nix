@@ -19,6 +19,7 @@ in
       dust
       eza
       fd
+      gdu
       github-cli
       gnumake
       gnupg
