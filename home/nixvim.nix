@@ -5,7 +5,7 @@
     viAlias = true;
     vimAlias = true;
 
-    nixpkgs.source = pkgs.path;
+    nixpkgs.useGlobalPackages = true;
     globals.clipboard = "osc52";
 
     opts = {
