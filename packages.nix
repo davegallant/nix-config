@@ -36,6 +36,7 @@ in
       yaml-language-server
       nvd
       progress
+      rclone
       ripgrep
       shellcheck
       shfmt
