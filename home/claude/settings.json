@@ -217,5 +217,6 @@
   "editorMode": "vim",
   "effortLevel": "high",
   "defaultMode": "auto",
-  "model": "opus"
+  "model": "sonnet",
+  "advisorModel": "opus"
 }
