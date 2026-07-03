@@ -5,7 +5,8 @@
     "ANTHROPIC_DEFAULT_OPUS_MODEL": "claude-opus-4-8",
     "DISABLE_COST_WARNINGS": "1",
     "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
-    "CLAUDE_CODE_ENABLE_TELEMETRY": "0"
+    "CLAUDE_CODE_ENABLE_TELEMETRY": "0",
+    "CLAUDE_CODE_ENABLE_EXPERIMENTAL_ADVISOR_TOOL": "1"
   },
   "permissions": {
     "disableBypassPermissionsMode": "disable",
