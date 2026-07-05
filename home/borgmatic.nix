@@ -14,8 +14,8 @@
             sourceDirectories = [ "/home/dave" ];
             repositories = [
               {
-                path = "/mnt/synology-2b/backups/hephaestus";
-                label = "synology";
+                path = "/mnt/tank/backups/hephaestus";
+                label = "tank";
               }
             ];
             extraConfig = {

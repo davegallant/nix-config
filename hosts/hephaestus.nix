@@ -84,8 +84,9 @@
       options = [
         "_netdev"
         "noauto"
-        "nofail"
         "x-systemd.automount"
+        "x-systemd.after=network-online.target"
+        "x-systemd.requires=network-online.target"
         "x-systemd.idle-timeout=60"
         "x-systemd.mount-timeout=10"
       ];
