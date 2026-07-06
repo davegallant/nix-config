@@ -58,40 +58,6 @@
             cd ~/src/$selected
           end
         '';
-        jjcm = ''
-          set message (string join " " -- $argv)
-          test -n "$message"; or begin
-            echo "usage: jjcm <message>"
-            return 1
-          end
-          jj describe -m "$message"
-          jj commit
-        '';
-        jjpush = ''
-          jj bookmark set main -r @-
-          jj git push --bookmark main
-        '';
-        jjpushnew = ''
-          set name $argv[1]
-          test -n "$name"; or begin
-            echo "usage: jjpushnew <bookmark>"
-            return 1
-          end
-          jj bookmark create $name -r @-
-          jj git push --bookmark $name
-        '';
-        jjship = ''
-          set message (string join " " -- $argv)
-          test -n "$message"; or begin
-            echo "usage: jjship <message>"
-            return 1
-          end
-          jj describe -m "$message"
-          jj commit
-          jj bookmark set main -r @-
-          jj git push --bookmark main
-        '';
-        jjs = "jj status";
         kdebug = "kubectl run debug-(random) --image=nicolaka/netshoot --restart=Never -it --rm -- bash";
         kdesc = ''
           set pod (kubectl get pods -o name | fzf)
