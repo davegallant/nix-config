@@ -21,6 +21,7 @@
   };
 
   environment.systemPackages = [
+    unstable.kubelogin
     unstable.ollama
     unstable.terraform
   ];
