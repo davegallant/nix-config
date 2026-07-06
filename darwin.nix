@@ -92,7 +92,6 @@
       "raycast"
       "secretive"
       "spotify"
-      "stats"
       "taskexplorer"
       "tailscale-app"
       "windows-app"
