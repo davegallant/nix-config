@@ -135,7 +135,6 @@
         hd = "hunk diff";
         hdc = "hunk diff --cached";
         hs = "hunk show";
-        grep = "rg --smart-case";
         j = "just";
         k = "kubecolor";
         kubectl = "kubecolor";
