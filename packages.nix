@@ -26,7 +26,6 @@ in
       gnupg
       just
       jq
-      jujutsu
       lsof
       macchina
       ncdu
