@@ -94,7 +94,7 @@
     mission-center
     mupdf
     pinta
-    protonup-qt
+    protonplus
     qbittorrent
     ryubing
     unstable.ghostty
