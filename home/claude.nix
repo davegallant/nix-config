@@ -23,6 +23,11 @@ in
     executable = true;
   };
 
+  home.file.".claude/sync-memory-to-vault.sh" = {
+    source = ./claude/sync-memory-to-vault.sh;
+    executable = true;
+  };
+
   home.file.".claude/agents" = {
     source = ./claude/agents;
     recursive = true;
