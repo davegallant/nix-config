@@ -142,6 +142,18 @@
     "type": "command",
     "command": "bash ~/.claude/statusline-command.sh"
   },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/sync-memory-to-vault.sh"
+          }
+        ]
+      }
+    ]
+  },
   "enabledPlugins": {
     "code-review@claude-plugins-official": true,
     "superpowers@claude-plugins-official": true,
@@ -164,7 +176,8 @@
     "filesystem": {
       "allowWrite": [
         "/tmp/",
-        "~/.gnupg/"
+        "~/.gnupg/",
+        "~/Documents/obsidian-vault/AI Context/"
       ],
       "denyWrite": [
         "/etc",
