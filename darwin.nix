@@ -74,6 +74,7 @@
     ];
 
     casks = [
+      "boop"
       "brave-browser"
       "bruno"
       "capslocknodelay"
