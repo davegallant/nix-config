@@ -232,5 +232,5 @@
   "effortLevel": "high",
   "defaultMode": "auto",
   "model": "sonnet",
-  "advisorModel": "opus"
+  "advisorModel": "fable"
 }
