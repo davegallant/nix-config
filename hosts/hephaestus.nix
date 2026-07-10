@@ -104,6 +104,7 @@
     ))
     pkgs.keepassxc
     pkgs.trayscale
+    unstable.antigravity-cli
     unstable.signal-desktop
   ];
 
