@@ -7,7 +7,7 @@ input=$(cat)
 cwd=$(jq -r '.cwd // empty' <<<"$input" 2>/dev/null)
 [ -z "$cwd" ] && exit 0
 
-vault_root="$HOME/Documents/obsidian-vault/AI Context"
+vault_root="$HOME/@vaultAiDir@"
 [ -d "$vault_root" ] || exit 0
 
 # Mirrors Claude Code's own project-path encoding: cwd with every "/" and "."

@@ -196,8 +196,7 @@
         "/tmp/",
         "~/.cache/",
         "~/Library/Caches/",
-        "~/.gnupg/",
-        "~/Documents/obsidian-vault/AI Context/"
+        "~/.gnupg/"
       ],
       "denyWrite": [
         "/etc",
