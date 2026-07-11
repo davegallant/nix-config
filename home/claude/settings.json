@@ -174,9 +174,7 @@
   },
   "enabledPlugins": {
     "code-review@claude-plugins-official": true,
-    "superpowers@claude-plugins-official": true,
-    "slack@claude-plugins-official": true,
-    "datadog@claude-plugins-official": true
+    "superpowers@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "claude-plugins-official": {
