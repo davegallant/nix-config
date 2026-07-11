@@ -14,8 +14,30 @@ let
   };
   # kratos uses fable as the advisor model; every other host uses opus
   advisorModel = if hostname == "kratos" then "fable" else "opus";
+  # Obsidian vault location, relative to $HOME; Claude memory syncs into
+  # "<vault>/AI Context" (see sync-memory-to-vault.sh). Hosts without a
+  # vault (e.g. hephaestus, no iCloud) get no sync script and no hook.
+  vaultRoot =
+    {
+      kratos = "Documents/obsidian-vault";
+      helios = "Library/Mobile Documents/iCloud~md~obsidian/Documents/vault";
+    }
+    .${hostname} or null;
+  hasVault = vaultRoot != null;
+  vaultAiDir = if hasVault then "${vaultRoot}/AI Context" else null;
+  baseSettings = builtins.fromJSON (builtins.readFile ./claude/settings.json);
   hostSettingsOverlay = pkgs.writeText "claude-host-settings.json" (
-    builtins.toJSON { inherit advisorModel; }
+    builtins.toJSON (
+      {
+        inherit advisorModel;
+        # jq's "*" merge replaces arrays, so this overlay carries the full
+        # allowWrite list: base entries plus the per-host vault dir
+        sandbox.filesystem.allowWrite =
+          baseSettings.sandbox.filesystem.allowWrite ++ lib.optional hasVault "~/${vaultAiDir}/";
+      }
+      # the base settings' only SessionStart hook is the vault sync
+      // lib.optionalAttrs (!hasVault) { hooks.SessionStart = [ ]; }
+    )
   );
 in
 {
@@ -29,8 +51,10 @@ in
     executable = true;
   };
 
-  home.file.".claude/sync-memory-to-vault.sh" = {
-    source = ./claude/sync-memory-to-vault.sh;
+  home.file.".claude/sync-memory-to-vault.sh" = lib.mkIf hasVault {
+    source = pkgs.replaceVars ./claude/sync-memory-to-vault.sh {
+      inherit vaultAiDir;
+    };
     executable = true;
   };
 
