@@ -231,6 +231,5 @@
   "editorMode": "vim",
   "effortLevel": "high",
   "defaultMode": "auto",
-  "model": "sonnet",
-  "advisorModel": "fable"
+  "model": "sonnet"
 }
