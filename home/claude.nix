@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  hostname ? "",
   ...
 }:
 let
@@ -11,6 +12,11 @@ let
     repo = "skills";
     inherit (skillsPin) rev hash;
   };
+  # kratos uses fable as the advisor model; every other host uses opus
+  advisorModel = if hostname == "kratos" then "fable" else "opus";
+  hostSettingsOverlay = pkgs.writeText "claude-host-settings.json" (
+    builtins.toJSON { inherit advisorModel; }
+  );
 in
 {
   home.packages = [
@@ -59,9 +65,13 @@ in
     run mkdir -p "$HOME/.claude"
     run chmod u+w "$HOME/.claude" 2>/dev/null || true
 
-    # ~/.claude/settings.json: nix-managed base + optional private overlay
+    # ~/.claude/settings.json: nix-managed base + host overlay + optional private overlay
     mergeJson "$HOME/.claude/settings.json" \
       "${./claude/settings.json}" \
+      "${hostSettingsOverlay}"
+
+    mergeJson "$HOME/.claude/settings.json" \
+      "$HOME/.claude/settings.json" \
       "$HOME/.claude/settings.private.json"
 
     # generate pagerduty-mcp entry with resolved uvx path
