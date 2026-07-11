@@ -75,10 +75,11 @@ in
       "$HOME/.claude/settings.private.json"
 
     # generate pagerduty-mcp entry with resolved uvx path
-    pagerdutyMcp=$(${lib.getExe pkgs.jq} -n \
+    pagerdutyMcpFile=$(mktemp)
+    ${lib.getExe pkgs.jq} -n \
       --arg uvx "${lib.getBin pkgs.uv}/bin/uvx" \
-      '{mcpServers: {"pagerduty-mcp": {type: "stdio", command: $uvx, args: ["pagerduty-mcp", "--enable-write-tools"]}}}')
-    echo "$pagerdutyMcp" > /tmp/pagerduty-mcp.json
+      '{mcpServers: {"pagerduty-mcp": {type: "stdio", command: $uvx, args: ["pagerduty-mcp", "--enable-write-tools"]}}}' \
+      > "$pagerdutyMcpFile"
 
     # ~/.claude.json is owned by Claude Code; merge MCP servers into it
     mergeJson "$HOME/.claude.json" \
@@ -87,7 +88,8 @@ in
 
     mergeJson "$HOME/.claude.json" \
       "$HOME/.claude.json" \
-      "/tmp/pagerduty-mcp.json"
+      "$pagerdutyMcpFile"
+    run rm -f "$pagerdutyMcpFile"
 
   '';
 }
