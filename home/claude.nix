@@ -97,23 +97,5 @@ in
     mergeJson "$HOME/.claude/settings.json" \
       "$HOME/.claude/settings.json" \
       "$HOME/.claude/settings.private.json"
-
-    # generate pagerduty-mcp entry with resolved uvx path
-    pagerdutyMcpFile=$(mktemp)
-    ${lib.getExe pkgs.jq} -n \
-      --arg uvx "${lib.getBin pkgs.uv}/bin/uvx" \
-      '{mcpServers: {"pagerduty-mcp": {type: "stdio", command: $uvx, args: ["pagerduty-mcp", "--enable-write-tools"]}}}' \
-      > "$pagerdutyMcpFile"
-
-    # ~/.claude.json is owned by Claude Code; merge MCP servers into it
-    mergeJson "$HOME/.claude.json" \
-      "$HOME/.claude.json" \
-      "${./claude/mcp-servers.json}"
-
-    mergeJson "$HOME/.claude.json" \
-      "$HOME/.claude.json" \
-      "$pagerdutyMcpFile"
-    run rm -f "$pagerdutyMcpFile"
-
   '';
 }
