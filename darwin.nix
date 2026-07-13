@@ -89,6 +89,7 @@
       "ghostty"
       "lulu"
       "notunes"
+      "obs"
       "obsidian"
       "raycast"
       "secretive"
