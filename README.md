@@ -4,25 +4,24 @@ This repo stores nix configuration to manage my hosts running [NixOS](https://ni
 
 The configuration is very specific to my own machines and setup, but it may be a useful reference for anyone else learning or experimenting with nix, whether it be on a personal workstation or a server environment.
 
-```console
-❯ macchina
+```mermaid
+flowchart TD
+    flake["flake.nix"]
+    flake --> nixos["nixosConfigurations"]
+    flake --> darwin["darwinConfigurations"]
 
-        a8888b.           Host        -  dave@hephaestus
-       d888888b.          Machine     -  Micro-Star International Co., Ltd MS-7C02 1.0
-       8P"YP"Y88          Kernel      -  6.12.81
-       8|o||o|88          Distro      -  NixOS 25.11 (Xantusia)
-       8'    .88          DE          -  Niri
-       8`._.' Y8.         Packages    -  1 (cargo), 6 (flatpak), 9299 (nix)
-      d/      `8b.        Shell       -  fish
-     dP        Y8b.       Terminal    -  .ghostty-wrappe
-    d8:       ::88b.      Resolution  -  3840x2160
-   d8"         'Y88b      Uptime      -  11h 32m
-  :8P           :888      CPU         -  AMD Ryzen 7 5700X 8-Core Processor (16)
-   8a.         _a88P      CPU Load    -  3%
- ._/"Yaa     .| 88P|      Memory      -  10.2 GB / 32.8 GB
- \    YP"    `|     `.
- /     \.___.d|    .'
- `--..__)     `._.'
+    nixos --> hephaestus["hephaestus (NixOS)"]
+
+    darwin --> kratos["kratos (macOS)"]
+    darwin --> helios["helios (macOS)"]
+
+    hephaestus --> hostH["hosts/hephaestus.nix"]
+    kratos --> hostK["hosts/kratos.nix"]
+    helios --> hostHe["hosts/helios.nix"]
+
+    hostH --> hm["home-manager (./home)"]
+    hostK --> hm
+    hostHe --> hm
 ```
 
 ## Prerequisites
