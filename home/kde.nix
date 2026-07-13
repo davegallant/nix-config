@@ -2,6 +2,7 @@
 {
   config = lib.mkIf pkgs.stdenv.isLinux {
     home.packages = with pkgs; [
+      gnome-calculator
       kodi
       moonlight-qt
       pwvucontrol
