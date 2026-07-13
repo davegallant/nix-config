@@ -12,7 +12,7 @@ input=$(cat)
 # spaces, which would otherwise shift every later value into the wrong variable.
 # Absent values become "" (not `empty`) so the field count stays fixed.
 us=$'\x1f'
-IFS=$us read -r cwd model window_size session_cost input_tokens used_pct < <(
+IFS=$us read -r cwd model window_size session_cost input_tokens used_pct transcript_path < <(
   jq --arg us "$us" -r '
     [ (.workspace.current_dir // .cwd // ""),
       (.model.display_name // ""),
@@ -21,7 +21,8 @@ IFS=$us read -r cwd model window_size session_cost input_tokens used_pct < <(
       ([ .context_window.current_usage.input_tokens,
          .context_window.current_usage.cache_creation_input_tokens,
          .context_window.current_usage.cache_read_input_tokens ] | map(. // 0) | add),
-      (.context_window.used_percentage // "")
+      (.context_window.used_percentage // ""),
+      (.transcript_path // "")
     ] | map(tostring) | join($us)' <<<"$input" 2>/dev/null
 )
 
@@ -98,6 +99,32 @@ if [ -n "$used" ]; then
         fi
     fi
     parts+=("$(printf "${color}[%s] %s%%\033[0m\033[2m%s\033[0m" "$bar" "$used_int" "$limit_label")")
+fi
+
+# Cumulative session tokens (dim) — the payload only reports current
+# context-window usage, so the true session total is summed from the
+# transcript instead. Dedup by message id first: a multi-block assistant
+# turn logs one JSONL line per content block, each repeating the same
+# message-level usage, so a naive sum overcounts.
+if [ -n "$transcript_path" ] && [ -f "$transcript_path" ]; then
+    total_tokens=$(jq -s '
+        [ .[] | select(.message.usage and .message.id) | {id: .message.id, u: .message.usage} ]
+        | unique_by(.id)
+        | map(.u)
+        | (map(.input_tokens // 0) | add)
+          + (map(.output_tokens // 0) | add)
+          + (map(.cache_creation_input_tokens // 0) | add)
+          + (map(.cache_read_input_tokens // 0) | add)
+    ' "$transcript_path" 2>/dev/null)
+
+    if [ -n "$total_tokens" ] && [ "$total_tokens" != "null" ] && [ "$total_tokens" != "0" ]; then
+        total_display=$(awk -v n="$total_tokens" 'BEGIN {
+            if (n >= 1000000) printf "%.1fM", n / 1000000;
+            else if (n >= 1000) printf "%.1fk", n / 1000;
+            else printf "%d", n;
+        }')
+        parts+=("$(printf '\033[2;36mΣ%s tok\033[0m' "$total_display")")
+    fi
 fi
 
 (IFS=' '; printf '%s' "${parts[*]}")
