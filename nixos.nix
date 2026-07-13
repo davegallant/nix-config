@@ -134,10 +134,6 @@
 
   services.displayManager = {
     defaultSession = "plasma";
-    autoLogin = {
-      enable = true;
-      user = "dave";
-    };
     sddm = {
       enable = true;
       wayland.enable = true;
