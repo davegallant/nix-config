@@ -71,7 +71,6 @@ in
     "keepassxc"
     "minecraft"
     "mullvad-vpn"
-    "obs"
     "retroarch-metal"
     "signal"
     "steam"
