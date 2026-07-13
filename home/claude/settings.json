@@ -10,6 +10,7 @@
   },
   "permissions": {
     "disableBypassPermissionsMode": "disable",
+    "defaultMode": "auto",
     "allow": [
       "Bash(curl*)",
       "Bash(git *)",
@@ -255,6 +256,5 @@
   "preferredNotifChannel": "ghostty",
   "editorMode": "vim",
   "effortLevel": "high",
-  "defaultMode": "auto",
   "model": "sonnet"
 }
