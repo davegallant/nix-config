@@ -12,12 +12,11 @@ input=$(cat)
 # spaces, which would otherwise shift every later value into the wrong variable.
 # Absent values become "" (not `empty`) so the field count stays fixed.
 us=$'\x1f'
-IFS=$us read -r cwd model window_size session_cost input_tokens used_pct transcript_path < <(
+IFS=$us read -r cwd model window_size input_tokens used_pct transcript_path < <(
   jq --arg us "$us" -r '
     [ (.workspace.current_dir // .cwd // ""),
       (.model.display_name // ""),
       (.context_window.context_window_size // ""),
-      (.cost.total_cost_usd // ""),
       ([ .context_window.current_usage.input_tokens,
          .context_window.current_usage.cache_creation_input_tokens,
          .context_window.current_usage.cache_read_input_tokens ] | map(. // 0) | add),
@@ -65,12 +64,6 @@ fi
 # Model (yellow)
 if [ -n "$model" ]; then
     parts+=("$(printf '\033[33m%s\033[0m' "$model")")
-fi
-
-# Session cost (green)
-if [ -n "$session_cost" ]; then
-    cost_display=$(printf '%.2f' "$session_cost")
-    parts+=("$(printf '\033[32m$%s\033[0m' "$cost_display")")
 fi
 
 # Context usage — block progress bar + percentage/limit label (e.g. [▓▓▓░░░░░░░] 12%/200k)
