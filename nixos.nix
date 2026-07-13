@@ -93,6 +93,7 @@
     lutris
     mission-center
     mupdf
+    opensnitch-ui
     pinta
     protonplus
     qbittorrent
