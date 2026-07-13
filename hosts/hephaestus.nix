@@ -7,6 +7,10 @@
   ...
 }:
 {
+  imports = [
+    ../opensnitch.nix
+  ];
+
   home-manager.users.dave.imports = [
     ../home/keepassxc-ssh-agent.nix
     ../home/retroarch.nix
@@ -118,20 +122,7 @@
       allowedTCPPorts = [ 2022 ];
       enable = true;
       checkReversePath = "loose";
-      logRefusedConnections = true;
-      logRefusedPackets = true;
       trustedInterfaces = [ "tailscale0" ];
-    };
-    nftables = {
-      enable = true;
-      ruleset = ''
-        table inet connlog {
-          chain output {
-            type filter hook output priority 0; policy accept;
-            oifname != "lo" ct state new limit rate 50/second burst 100 packets log prefix "CONN_OUT " flags all counter
-          }
-        }
-      '';
     };
     networkmanager = {
       enable = true;
@@ -163,6 +154,22 @@
         Restart = "always";
         RestartSec = 5;
       };
+    };
+  };
+
+  services.opensnitch.rules = {
+    beszel-agent = {
+      name = "Allow beszel agent";
+      enabled = true;
+      action = "allow";
+      duration = "always";
+      operator = {
+        type = "simple";
+        sensitive = false;
+        operand = "process.path";
+        data = "${lib.getBin unstable.beszel}/bin/beszel-agent";
+      };
+
     };
   };
 
