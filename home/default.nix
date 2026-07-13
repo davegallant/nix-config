@@ -26,11 +26,12 @@ in
   home.stateVersion = "26.05";
 
   services = {
+    # SSH support is handled by services.ssh-agent (see home/keepassxc-ssh-agent.nix)
+    # instead: gpg-agent's ssh-agent emulation can't add/remove identities on
+    # request, which KeePassXC's SSH Agent integration relies on.
     gpg-agent = {
       enable = stdenv.isLinux;
       defaultCacheTtl = 3600;
-      defaultCacheTtlSsh = 3600;
-      enableSshSupport = true;
       pinentry.package = pkgs.pinentry-gnome3;
     };
   };
