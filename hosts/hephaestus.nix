@@ -8,6 +8,7 @@
 }:
 {
   home-manager.users.dave.imports = [
+    ../home/keepassxc-ssh-agent.nix
     ../home/retroarch.nix
     ../home/ryujinx.nix
   ];

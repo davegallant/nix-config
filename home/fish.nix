@@ -98,9 +98,6 @@
             set -x SSH_AUTH_SOCK $secretive_sock
           end
         ''}
-        ${lib.optionalString pkgs.stdenv.isLinux ''
-          set -x SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
-        ''}
         set -x TERM xterm-256color
 
         set -x PATH $PATH \
