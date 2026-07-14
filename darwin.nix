@@ -73,12 +73,6 @@
     };
     global.brewfile = true;
 
-    brews = [
-      "coreutils"
-      "gnu-sed"
-      "gnu-tar"
-    ];
-
     casks = [
       "boop"
       "brave-browser"

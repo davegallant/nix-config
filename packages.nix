@@ -77,5 +77,10 @@ in
       vpngate.packages.${pkgs.stdenv.hostPlatform.system}.default
       whois
       wl-clip-persist
+    ]
+    ++ lib.optionals stdenv.isDarwin [
+      coreutils
+      gnused
+      gnutar
     ];
 }
