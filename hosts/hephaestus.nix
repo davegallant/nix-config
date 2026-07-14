@@ -119,7 +119,6 @@
     hostId = "0e8aad53";
     firewall = {
       allowPing = true;
-      allowedTCPPorts = [ 2022 ];
       enable = true;
       checkReversePath = "loose";
       trustedInterfaces = [ "tailscale0" ];
