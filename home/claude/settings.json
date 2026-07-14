@@ -217,7 +217,6 @@
         "github.com",
         "*.github.com",
         "*.githubusercontent.com",
-        "github.cds.internal.unity3d.com",
         "cache.nixos.org",
         "channels.nixos.org",
         "*.nixos.org",
