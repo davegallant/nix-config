@@ -5,6 +5,7 @@
   # install, add the cachix caches manually to /etc/nix/nix.custom.conf:
   #   extra-substituters = https://davegallant.cachix.org https://nix-community.cachix.org
   #   extra-trusted-public-keys = davegallant.cachix.org-1:SsUMqL4+tF2R3/G6X903E9laLlY1rES2QKFfePegF08= nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=
+  #   cores = 0
   nix.enable = false;
 
   system.stateVersion = 4;
@@ -66,7 +67,7 @@
     onActivation = {
       cleanup = "zap";
       autoUpdate = true;
-      upgrade = true;
+      upgrade = false;
       # Homebrew 4.x requires --force alongside --cleanup for non-interactive zap
       extraFlags = [ "--force" ];
     };
