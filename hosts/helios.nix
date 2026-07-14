@@ -6,7 +6,6 @@
 let
   trustedHomebrewTaps = [
     "davegallant/public"
-    "henrygd/beszel"
   ];
 in
 {
@@ -57,10 +56,6 @@ in
 
   homebrew.brews = lib.mkAfter [
     "davegallant/public/vpngate"
-    {
-      name = "henrygd/beszel/beszel-agent";
-      start_service = true;
-    }
   ];
 
   homebrew.casks = lib.mkAfter [
