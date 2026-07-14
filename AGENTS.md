@@ -89,9 +89,7 @@ and pushes build outputs to Cachix on `main`.
 - `darwin.nix`: shared nix-darwin module
 - `hosts/*.nix`: host-specific settings
 - `home/`: home-manager modules
-- `modules/`: reusable NixOS modules
 - `packages.nix`: shared package set
-- `overlays/`: nixpkgs overlays
 
 ## Code Style
 
