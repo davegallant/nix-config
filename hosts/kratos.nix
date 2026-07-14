@@ -45,14 +45,9 @@
     };
   };
 
-  homebrew.taps = lib.mkAfter [ "hashicorp/tap" ];
-
   homebrew.brews = lib.mkAfter [
-    "awscli"
     "azure-cli"
-    "hashicorp/tap/vault"
     "node"
-    "oras"
   ];
 
   homebrew.casks = lib.mkAfter [
