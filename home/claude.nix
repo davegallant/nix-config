@@ -12,8 +12,6 @@ let
     repo = "skills";
     inherit (skillsPin) rev hash;
   };
-  # kratos uses fable as the advisor model; every other host uses opus
-  advisorModel = if hostname == "kratos" then "fable" else "opus";
   # Obsidian vault location, relative to $HOME; Claude memory syncs into
   # "<vault>/AI Context" (see sync-memory-to-vault.sh). Hosts without a
   # vault (e.g. hephaestus, no iCloud) get no sync script and no hook.
@@ -29,7 +27,6 @@ let
   hostSettingsOverlay = pkgs.writeText "claude-host-settings.json" (
     builtins.toJSON (
       {
-        inherit advisorModel;
         # jq's "*" merge replaces arrays, so this overlay carries the full
         # allowWrite list: base entries plus the per-host vault dir
         sandbox.filesystem.allowWrite =
