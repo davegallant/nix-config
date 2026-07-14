@@ -126,7 +126,10 @@
     };
     networkmanager = {
       enable = true;
-      unmanaged = [ "enp40s0" ];
+      unmanaged = [
+        "enp40s0"
+        "enp3s0f0u4u2"
+      ];
     };
   };
 
