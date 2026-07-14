@@ -73,7 +73,6 @@ in
       qemu
       tcpdump
       traceroute
-      unstable.beszel
       usbutils
       vpngate.packages.${pkgs.stdenv.hostPlatform.system}.default
       whois

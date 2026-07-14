@@ -130,49 +130,6 @@
     };
   };
 
-  users.users.beszel = {
-    isSystemUser = true;
-    group = "beszel";
-    description = "Beszel Agent service user";
-  };
-  users.groups.beszel = { };
-
-  systemd.services = {
-    beszel-agent = {
-      description = "Beszel Agent Service";
-      after = [ "network-online.target" ];
-      wants = [ "network-online.target" ];
-      wantedBy = [ "multi-user.target" ];
-
-      serviceConfig = {
-        Environment = [
-          "PORT=45876"
-          ''KEY="ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEaNtnkc+3+fJU+bTO6fibID9FHgFjei0sjJNqvcYtG8"''
-        ];
-        ExecStart = "${lib.getBin unstable.beszel}/bin/beszel-agent";
-        User = "beszel";
-        Restart = "always";
-        RestartSec = 5;
-      };
-    };
-  };
-
-  services.opensnitch.rules = {
-    beszel-agent = {
-      name = "Allow beszel agent";
-      enabled = true;
-      action = "allow";
-      duration = "always";
-      operator = {
-        type = "simple";
-        sensitive = false;
-        operand = "process.path";
-        data = "${lib.getBin unstable.beszel}/bin/beszel-agent";
-      };
-
-    };
-  };
-
   nix = {
     registry.nixpkgs.flake = inputs.nixpkgs;
     # nixos.nix sets automatic/options as defaults; only override the cadence
