@@ -28,6 +28,7 @@ in
       jq
       lsof
       macchina
+      openvpn
       ncdu
       nix-tree
       nixd
@@ -67,7 +68,6 @@ in
       nfs-utils
       nmap
       openssl
-      openvpn
       pciutils
       socat
       qemu
