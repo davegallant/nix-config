@@ -102,11 +102,18 @@ in
 
     home.file.".pi/agent/extensions/statusline.ts".source = ./pi/statusline.ts;
 
+    # Claude-Code-parity prompt templates (/plan, /security-review, /simplify,
+    # /verify). Pi auto-discovers global templates in ~/.pi/agent/prompts/*.md.
+    home.file.".pi/agent/prompts/plan.md".source = ./pi/prompts/plan.md;
+    home.file.".pi/agent/prompts/security-review.md".source = ./pi/prompts/security-review.md;
+    home.file.".pi/agent/prompts/simplify.md".source = ./pi/prompts/simplify.md;
+    home.file.".pi/agent/prompts/verify.md".source = ./pi/prompts/verify.md;
+
     home.file.".pi/agent/settings.json".text = builtins.toJSON {
       defaultProvider = "openai-codex";
       defaultModel = "gpt-5.5";
-      autoCompact = false;
-      thinking = "low";
+      defaultThinkingLevel = "low";
+      collapseChangelog = true;
       packages = [
         {
           source = "git:github.com/mitsuhiko/agent-stuff@c77d49797ad3fb78888e5b002ae606a93777c6b1";
