@@ -101,10 +101,12 @@ in
     ];
 
     home.file.".pi/agent/extensions/statusline.ts".source = ./pi/statusline.ts;
+    home.file.".pi/agent/extensions/auto-recap.ts".source = ./pi/auto-recap.ts;
 
-    # Claude-Code-parity prompt templates (/plan, /security-review, /simplify,
-    # /verify). Pi auto-discovers global templates in ~/.pi/agent/prompts/*.md.
+    # Claude-Code-parity prompt templates (/plan, /recap, /security-review,
+    # /simplify, /verify). Pi auto-discovers templates in ~/.pi/agent/prompts/*.md.
     home.file.".pi/agent/prompts/plan.md".source = ./pi/prompts/plan.md;
+    home.file.".pi/agent/prompts/recap.md".source = ./pi/prompts/recap.md;
     home.file.".pi/agent/prompts/security-review.md".source = ./pi/prompts/security-review.md;
     home.file.".pi/agent/prompts/simplify.md".source = ./pi/prompts/simplify.md;
     home.file.".pi/agent/prompts/verify.md".source = ./pi/prompts/verify.md;
