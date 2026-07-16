@@ -144,7 +144,6 @@
       "Read(~/.config/gcloud/**)",
       "Read(~/.config/op/**)",
       "Read(~/.docker/config.json)",
-      "Read(~/.kube/config)",
       "Read(~/.password-store/**)",
       "Read(~/.ssh/**)",
       "Edit(~/.claude/settings.json)",
