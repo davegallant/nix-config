@@ -1,25 +1,22 @@
 /**
  * Statusline extension for pi
  *
- * Replaces the default footer with a coloured statusline:
+ * Replaces the default footer with a coloured statusline that mirrors the
+ * Claude Code statusline (see home/claude/statusline-command.sh):
  *
- *   repo (main)  $0.123  [████████░░] 78%/200k
+ *   repo (main)  gpt-5.5  [▓▓▓░░░░░░░] 34%/200k
  *
- * Left side:
- *   - Repo name (muted) and git branch (success colour)
- *   - Cost (success colour)
+ * Left to right:
+ *   - Repo name (accent) and git branch (muted, in parens)
+ *   - Model id (dim)
  *   - Context progress bar: green → yellow → red as the window fills up,
- *     with filled (█) and empty (░) blocks plus a numeric percentage.
+ *     with filled (▓) and empty (░) blocks plus a percentage and limit.
  *
  * Context usage is read fresh on every render via ctx.getContextUsage().
  * A turn_end hook triggers an explicit requestRender() so the bar updates
  * immediately after each assistant reply.
- *
- * Cost is the client-side token × rate calculation summed over the session
- * branch.
  */
 
-import type { AssistantMessage } from "@mariozechner/pi-ai";
 import type { ExtensionAPI } from "@mariozechner/pi-coding-agent";
 import { truncateToWidth } from "@mariozechner/pi-tui";
 
@@ -44,26 +41,6 @@ export default function (pi: ExtensionAPI) {
         dispose: unsub,
         invalidate() {},
         render(width: number): string[] {
-          // --- Cost (from session branch) ---
-          let input = 0;
-          let output = 0;
-          let cost = 0;
-          for (const entry of ctx.sessionManager.getBranch()) {
-            if (entry.type === "message" && entry.message.role === "assistant") {
-              const m = entry.message as AssistantMessage;
-              input += m.usage.input;
-              output += m.usage.output;
-              cost += m.usage.cost.total;
-            }
-          }
-
-          const fmt = (n: number) =>
-            n === 0 ? "0" : n < 1000 ? `${n}` : n >= 1_000_000 ? `${(n / 1_000_000).toFixed(1)}M` : `${(n / 1000).toFixed(1)}k`;
-
-          const inputStr = theme.fg("accent", "↑") + theme.fg("muted", fmt(input));
-          const outputStr = theme.fg("accent", "↓") + theme.fg("muted", fmt(output));
-          const costStr = theme.fg("success", `$${cost.toFixed(3)}`);
-
           // --- Context window progress bar ---
           const usage = ctx.getContextUsage();
           const contextWindow = usage?.contextWindow ?? ctx.model?.contextWindow;
@@ -77,7 +54,7 @@ export default function (pi: ExtensionAPI) {
             const empty = BAR_WIDTH - filled;
             // Green up to 50 %, yellow 50–75 %, red above 75 %.
             const barColor = pct >= 75 ? "error" : pct >= 50 ? "warning" : "success";
-            const filledBlocks = theme.fg(barColor, "█".repeat(filled));
+            const filledBlocks = theme.fg(barColor, "▓".repeat(filled));
             const emptyBlocks = theme.fg("dim", "░".repeat(empty));
             const pctLabel = theme.fg(barColor, `${Math.round(pct)}%`);
             const fmtCtx = (n: number) =>
@@ -87,18 +64,18 @@ export default function (pi: ExtensionAPI) {
             ctxBar = `[${filledBlocks}${emptyBlocks}] ${pctLabel}${limitLabel}`;
           }
 
-          // --- Left side: repo · branch · model · cost · bar ---
+          // --- Left side: repo · branch · model · bar ---
           const modelId = ctx.model?.id ?? "no model";
           const cwd = process.cwd();
           const repoName = cwd.split("/").at(-1) || cwd;
           const branch = footerData.getGitBranch();
           const branchStr = branch
-            ? " " + theme.fg("accent", `(${branch})`)
+            ? " " + theme.fg("muted", `(${branch})`)
             : "";
-          const repoStr = theme.fg("muted", repoName) + branchStr;
+          const repoStr = theme.fg("accent", repoName) + branchStr;
           const modelStr = theme.fg("dim", modelId);
 
-          const line = ` ${repoStr}  ${modelStr}  ${inputStr} ${outputStr}  ${costStr}  ${ctxBar}`;
+          const line = ` ${repoStr}  ${modelStr}  ${ctxBar}`;
           return [truncateToWidth(line, width)];
         },
       };
