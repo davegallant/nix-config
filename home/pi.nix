@@ -110,8 +110,8 @@ in
     home.file.".pi/agent/prompts/verify.md".source = ./pi/prompts/verify.md;
 
     home.file.".pi/agent/settings.json".text = builtins.toJSON {
-      defaultProvider = "openai-codex";
-      defaultModel = "gpt-5.5";
+      defaultProvider = "opencode-go";
+      defaultModel = "glm-5.2";
       defaultThinkingLevel = "low";
       collapseChangelog = true;
       packages = [
