@@ -147,9 +147,7 @@
       "Read(~/.password-store/**)",
       "Read(~/.ssh/**)",
       "Edit(~/.claude/settings.json)",
-      "Write(~/.claude/settings.json)",
-      "Edit(~/.claude/settings.private.json)",
-      "Write(~/.claude/settings.private.json)"
+      "Edit(~/.claude/settings.private.json)"
     ]
   },
   "statusLine": {
