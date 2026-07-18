@@ -15,15 +15,15 @@ let
   assets = {
     x86_64-linux = {
       url = "https://registry.npmjs.org/@anthropic-ai/claude-code-linux-x64/-/claude-code-linux-x64-${version}.tgz";
-      hash = "sha512-E1vqxgSheADujZtBdz4UsigHjjulesv7FlYC19Jb/5Sq/csT8zlfKpJhST+LNovP4fU9TkK/urq3pE9c7PaDLw==";
+      hash = "sha512-NSQjXX8QjjjYdDlYbPvlse5yQ3UwsmV2vuPNR3eFaXnGVv7ymFHvDSMIkTFRLXQlmPjp+tvAN5fbH3e1C38SOw==";
     };
     aarch64-linux = {
       url = "https://registry.npmjs.org/@anthropic-ai/claude-code-linux-arm64/-/claude-code-linux-arm64-${version}.tgz";
-      hash = "sha512-eU6EVzxfey1ceW3qx7zrwWpoh6RnqUbLAFKK//IAqe2RWS3YkO8ABh7rgdWcGUADLAQ5YjTnGrX6VnFufJbZdw==";
+      hash = "sha512-WqNC8frNnFfNU6pFUilEk6bRWFjVI//iyZzB4VT4k9jRVJCsF4j2mrpu3AcDHbtVUqiBYsjfGXGjHmXtdhzZNw==";
     };
     aarch64-darwin = {
       url = "https://registry.npmjs.org/@anthropic-ai/claude-code-darwin-arm64/-/claude-code-darwin-arm64-${version}.tgz";
-      hash = "sha512-Bah0gEfrgKGzZWHieE37+MZNKlCDZ/OSGbD5PLecsJP0ulNoFJoGojWQGs4+fWjcO+LFVIBFJenLqaS1whMJxw==";
+      hash = "sha512-z99kjSImARBWdE6lGoCXSi83tbiabtIv7vtFyuwrHD56WZTFSguedBb9F8wlUncEEfUVtqHKa9nCZ55j6spiIA==";
     };
   };
 in
