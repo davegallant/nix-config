@@ -16,6 +16,10 @@
       url = "github:nix-community/nixvim/nixos-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    pvectl = {
+      url = "github:davegallant/pvectl";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     vpngate = {
       url = "github:davegallant/vpngate";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -32,6 +36,7 @@
       home-manager,
       nixpkgs,
       nixpkgs-unstable,
+      pvectl,
       vpngate,
       weathr,
       ...
@@ -134,6 +139,7 @@
               specialArgs = {
                 inherit
                   unstable
+                  pvectl
                   vpngate
                   inputs
                   ;
