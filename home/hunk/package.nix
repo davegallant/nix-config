@@ -8,17 +8,17 @@ let
   assets = {
     x86_64-linux = {
       url = "https://github.com/modem-dev/hunk/releases/download/v${version}/hunkdiff-linux-x64.tar.gz";
-      hash = "sha256-5O0+trpL12PnG9xj8tHu2ZP1SxiXdKUHNZLHkJUEG9Y=";
+      hash = "sha256-cepaQMgG3wJf2nzeXHSHth8HAm3rjKiRabAJizY/xWo=";
       sourceRoot = "hunkdiff-linux-x64";
     };
     aarch64-linux = {
       url = "https://github.com/modem-dev/hunk/releases/download/v${version}/hunkdiff-linux-arm64.tar.gz";
-      hash = "sha256-6VOFhjUPvL82sUbfQyktTM4S846feNVORpUJaIHSh3s=";
+      hash = "sha256-pHii4CcFZjdTRf02BYyf5KdvAdZ2rq+zuM0g9MDHlGU=";
       sourceRoot = "hunkdiff-linux-arm64";
     };
     aarch64-darwin = {
       url = "https://github.com/modem-dev/hunk/releases/download/v${version}/hunkdiff-darwin-arm64.tar.gz";
-      hash = "sha256-YsFtBMXFL/RffxrVbpqpzAlQjUVmRzPhb2iQ0CM7n/k=";
+      hash = "sha256-V9RtxbzZSgcyGEY1/gA5LHTICMQglW6jbO5Z/waxMvk=";
       sourceRoot = "hunkdiff-darwin-arm64";
     };
   };
