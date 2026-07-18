@@ -3,5 +3,5 @@
 # refreshed by home/claude/update-skills-hash.sh via the update-hashes workflow.
 {
   rev = "f4c1565513ff1528086cd014ed41f87b9d836f26";
-  hash = "sha256-OnP6mJLQ2fLloqOkncVqssssD6GEoHXAoI7MBBp3RxM=";
+  hash = "sha256-z87AMjtY5rgEdQQJFU4KPhmxKE0CORMW+ZZLJdlcT+I=";
 }
