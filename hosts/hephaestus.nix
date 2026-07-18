@@ -3,6 +3,7 @@
   inputs,
   lib,
   pkgs,
+  pvectl,
   unstable,
   ...
 }:
@@ -109,6 +110,7 @@
     ))
     pkgs.keepassxc
     pkgs.trayscale
+    pvectl.packages.${pkgs.stdenv.hostPlatform.system}.default
     unstable.antigravity-cli
     unstable.signal-desktop
   ];
