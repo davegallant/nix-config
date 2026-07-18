@@ -151,6 +151,26 @@
         "type": "github"
       }
     },
+    "pvectl": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1784382302,
+        "narHash": "sha256-NcwOTO1utsvtBJGpWp+VP9v5B3k3wBKPgpkpt3NTkUU=",
+        "owner": "davegallant",
+        "repo": "pvectl",
+        "rev": "e1c2cdaf25530c51926776cba24f9f848b8f8490",
+        "type": "github"
+      },
+      "original": {
+        "owner": "davegallant",
+        "repo": "pvectl",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "darwin": "darwin",
@@ -158,6 +178,7 @@
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nixvim": "nixvim",
+        "pvectl": "pvectl",
         "vpngate": "vpngate",
         "weathr": "weathr"
       }
