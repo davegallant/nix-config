@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  pvectl,
   unstable,
   ...
 }:
@@ -11,6 +12,9 @@
     '';
     "fish/completions/helm.fish".source = pkgs.runCommand "helm-completions.fish" { } ''
       ${unstable.kubernetes-helm}/bin/helm completion fish > $out
+    '';
+    "fish/completions/pvectl.fish".source = pkgs.runCommand "pvectl-completions.fish" { } ''
+      ${pvectl.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/pvectl completion fish > $out
     '';
   };
 
