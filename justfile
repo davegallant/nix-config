@@ -54,6 +54,11 @@ update-claude *version:
 update-pi *version:
   @./home/pi/update-hashes.sh {{version}}
 
+# update pvectl flake input to latest and rebuild
+update-pvectl:
+  nix flake lock --update-input pvectl
+  just rebuild
+
 # squash-merge current branch's PR with nvd diff in body
 merge-pr:
   #!/usr/bin/env bash

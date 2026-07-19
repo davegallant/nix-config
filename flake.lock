@@ -158,11 +158,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1784382302,
-        "narHash": "sha256-NcwOTO1utsvtBJGpWp+VP9v5B3k3wBKPgpkpt3NTkUU=",
+        "lastModified": 1784481433,
+        "narHash": "sha256-TYujsgw8gU748DWHrryhsjYPyqL9Xc3GhCSu/5ggn8Y=",
         "owner": "davegallant",
         "repo": "pvectl",
-        "rev": "e1c2cdaf25530c51926776cba24f9f848b8f8490",
+        "rev": "a6b9cbdeca895f719c8261155fc48a6f6ae900f4",
         "type": "github"
       },
       "original": {
