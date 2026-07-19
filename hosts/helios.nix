@@ -1,5 +1,7 @@
 {
   lib,
+  pkgs,
+  pvectl,
   username,
   ...
 }:
@@ -10,6 +12,10 @@ let
 in
 {
   networking.hostName = "helios";
+
+  environment.systemPackages = [
+    pvectl.packages.${pkgs.stdenv.hostPlatform.system}.default
+  ];
 
   home-manager.users.dave.imports = [
     ../home/retroarch.nix

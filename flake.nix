@@ -177,6 +177,7 @@
               specialArgs = {
                 inherit
                   inputs
+                  pvectl
                   unstable
                   username
                   vpngate
