@@ -48,6 +48,11 @@ in
     executable = true;
   };
 
+  home.file.".claude/claude-resume.sh" = {
+    source = ./claude/claude-resume.sh;
+    executable = true;
+  };
+
   home.file.".claude/sync-memory-to-vault.sh" = lib.mkIf hasVault {
     source = pkgs.replaceVars ./claude/sync-memory-to-vault.sh {
       inherit vaultAiDir;
