@@ -30,6 +30,9 @@ let
     base_url = "''${LITELLM_BASE_URL:-}/v1"
     env_key = "LITELLM_API_KEY"
     wire_api = "responses"
+
+    [tui]
+    status_line = [ "current-dir", "git-branch", "model", "context-remaining" ]
     EOF
 
     exec ${codex-pkg}/bin/codex "$@"
