@@ -54,6 +54,11 @@ update-claude *version:
 update-pi *version:
   @./home/pi/update-hashes.sh {{version}}
 
+# update version and hash in home/codex/package.nix
+# usage: just update-codex [VERSION]  (VERSION without leading 'rust-v'; defaults to latest)
+update-codex *version:
+  @./home/codex/update-hashes.sh {{version}}
+
 # update pvectl flake input to latest and rebuild
 update-pvectl:
   nix flake lock --update-input pvectl
