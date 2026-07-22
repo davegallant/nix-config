@@ -40,10 +40,15 @@ in
     home.packages = [ codex-wrapper ];
 
     # Shared skills: same davegallant/skills pin as claude (~/.claude/skills)
-    # and pi. codex scans ~/.agents/skills for user-level skills.
-    home.file.".agents/skills" = {
-      source = "${skills}/skills";
-      recursive = true;
-    };
+    # and pi. codex scans ~/.agents/skills for user-level skills, but its
+    # walker ignores symlinked SKILL.md files, so home.file symlinks are
+    # invisible to it. Materialize real files by copying (deref) from the
+    # store instead.
+    home.activation.codexSkills = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      run rm -rf "$HOME/.agents/skills"
+      run mkdir -p "$HOME/.agents"
+      run cp -rL "${skills}/skills" "$HOME/.agents/skills"
+      run chmod -R u+w "$HOME/.agents/skills"
+    '';
   };
 }
