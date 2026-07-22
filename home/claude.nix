@@ -1,7 +1,6 @@
 {
   lib,
   pkgs,
-  hostname ? "",
   ...
 }:
 let
@@ -12,30 +11,6 @@ let
     repo = "skills";
     inherit (skillsPin) rev hash;
   };
-  # Obsidian vault location, relative to $HOME; Claude memory syncs into
-  # "<vault>/AI Context" (see sync-memory-to-vault.sh). Hosts without a
-  # vault (e.g. hephaestus, no iCloud) get no sync script and no hook.
-  vaultRoot =
-    {
-      kratos = "Documents/obsidian-vault";
-      helios = "Library/Mobile Documents/iCloud~md~obsidian/Documents/vault";
-    }
-    .${hostname} or null;
-  hasVault = vaultRoot != null;
-  vaultAiDir = if hasVault then "${vaultRoot}/AI Context" else null;
-  baseSettings = builtins.fromJSON (builtins.readFile ./claude/settings.json);
-  hostSettingsOverlay = pkgs.writeText "claude-host-settings.json" (
-    builtins.toJSON (
-      {
-        # jq's "*" merge replaces arrays, so this overlay carries the full
-        # allowWrite list: base entries plus the per-host vault dir
-        sandbox.filesystem.allowWrite =
-          baseSettings.sandbox.filesystem.allowWrite ++ lib.optional hasVault "~/${vaultAiDir}/";
-      }
-      # the base settings' only SessionStart hook is the vault sync
-      // lib.optionalAttrs (!hasVault) { hooks.SessionStart = [ ]; }
-    )
-  );
 in
 {
   home.packages = [
@@ -50,13 +25,6 @@ in
 
   home.file.".claude/claude-resume.sh" = {
     source = ./claude/claude-resume.sh;
-    executable = true;
-  };
-
-  home.file.".claude/sync-memory-to-vault.sh" = lib.mkIf hasVault {
-    source = pkgs.replaceVars ./claude/sync-memory-to-vault.sh {
-      inherit vaultAiDir;
-    };
     executable = true;
   };
 
@@ -91,13 +59,9 @@ in
     run mkdir -p "$HOME/.claude"
     run chmod u+w "$HOME/.claude" 2>/dev/null || true
 
-    # ~/.claude/settings.json: nix-managed base + host overlay + optional private overlay
+    # ~/.claude/settings.json: nix-managed base + optional private overlay
     mergeJson "$HOME/.claude/settings.json" \
       "${./claude/settings.json}" \
-      "${hostSettingsOverlay}"
-
-    mergeJson "$HOME/.claude/settings.json" \
-      "$HOME/.claude/settings.json" \
       "$HOME/.claude/settings.private.json"
   '';
 }
