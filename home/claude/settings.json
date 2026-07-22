@@ -154,18 +154,6 @@
     "type": "command",
     "command": "bash ~/.claude/statusline-command.sh"
   },
-  "hooks": {
-    "SessionStart": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash ~/.claude/sync-memory-to-vault.sh"
-          }
-        ]
-      }
-    ]
-  },
   "enabledPlugins": {
     "superpowers@claude-plugins-official": true
   },
