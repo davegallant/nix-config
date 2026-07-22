@@ -33,6 +33,17 @@
     {
       "customType": "regex",
       "managerFilePatterns": [
+        "/home/codex/package\\.nix$/"
+      ],
+      "matchStrings": [
+        "version = \"(?<currentValue>[^\"]+)\";\\s*# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)"
+      ],
+      "versioningTemplate": "semver",
+      "extractVersionTemplate": "^rust-v(?<version>.*)$"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
         "/home/pi\\.nix$/"
       ],
       "matchStrings": [
