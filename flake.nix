@@ -77,7 +77,7 @@
                   weathr.homeModules.weathr
                 ];
                 extraSpecialArgs = {
-                  inherit unstable hostname pvectl;
+                  inherit unstable hostname pvectl vpngate;
                 };
               };
             };
