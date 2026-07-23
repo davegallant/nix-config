@@ -3,6 +3,7 @@
   pkgs,
   pvectl,
   unstable,
+  vpngate,
   ...
 }:
 {
@@ -15,6 +16,9 @@
     '';
     "fish/completions/pvectl.fish".source = pkgs.runCommand "pvectl-completions.fish" { } ''
       ${pvectl.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/pvectl completion fish > $out
+    '';
+    "fish/completions/vpngate.fish".source = pkgs.runCommand "vpngate-completions.fish" { } ''
+      ${vpngate.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/vpngate completion fish > $out
     '';
   };
 
