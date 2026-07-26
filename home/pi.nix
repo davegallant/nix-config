@@ -118,7 +118,7 @@ in
       collapseChangelog = true;
       packages = [
         {
-          source = "git:github.com/mitsuhiko/agent-stuff@cc4b711dc6a2bee2aefb89820600e38291500543";
+          source = "git:github.com/mitsuhiko/agent-stuff@d265b8ef32f896d3ef3bc6a45bd7b8e0d02150e0";
           skills = [ ]; # skip loading skills
           extensions = [
             "extensions/answer.ts"
