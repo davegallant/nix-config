@@ -71,7 +71,6 @@ in
     "heroic"
     "keepassxc"
     "minecraft"
-    "mullvad-vpn"
     "retroarch-metal"
     "signal"
     "steam"
