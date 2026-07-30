@@ -4,7 +4,7 @@
   makeBinaryWrapper,
 }:
 let
-  version = "0.145.0"; # renovate: datasource=github-releases depName=openai/codex
+  version = "0.146.0"; # renovate: datasource=github-releases depName=openai/codex
 
   # kratos (aarch64-darwin) is the only consumer; other systems are omitted.
   # Release tags carry a "rust-v" prefix (see home/codex/update-hashes.sh).
