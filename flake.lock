@@ -67,11 +67,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1784350909,
-        "narHash": "sha256-ZWyzLbS1yKUTeFJLmdVuWNnHttL333/ldJbEE+KzCrM=",
+        "lastModified": 1785119570,
+        "narHash": "sha256-Rgs2xKnGLFWQscxUaXX07oyZeuMDOHEbqDOsgliLFGM=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "4ce190229c73d44536caa7072f6308fb2d8feeb3",
+        "rev": "d4fd24667c8cbef124bb70a20380cab75ec8474d",
         "type": "github"
       },
       "original": {
@@ -83,11 +83,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1784280462,
-        "narHash": "sha256-DtoqIqM7VkR6NxAkcLpMwmi02USwWb3JdmNGLyhthc0=",
+        "lastModified": 1785386831,
+        "narHash": "sha256-sPS3CaXH8RAT3FZRuy4VcV47iuYIWMMfa0GbyJKC3o4=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "293d6abedf0478e681a4dfcfcb35b30fc796a32f",
+        "rev": "21ea275a7c46aef9d4d6ddc962e6d562e9d94183",
         "type": "github"
       },
       "original": {
@@ -114,11 +114,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1784356753,
-        "narHash": "sha256-12KrbMiWLcf8m7pCvAtZh1ZrgF85ZXDXvfR/fWTKy84=",
+        "lastModified": 1785318670,
+        "narHash": "sha256-dN6Ou5x/+23FZLEpYP3IffO+NyJFzUlGumt1uu3MMaY=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "61b7c44c4073f0b827768aff0049561b5110ea5a",
+        "rev": "0954f7ee2f6bb3dc7d4e3d0d8bcb8fd4bde4cfc5",
         "type": "github"
       },
       "original": {
@@ -158,11 +158,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1784684118,
-        "narHash": "sha256-KhL1C7fwtGfUn4DkDMHl+OEj1IXiPlTxTuix/HGal5Q=",
+        "lastModified": 1784809120,
+        "narHash": "sha256-BG+ylBczKieHxNrVs1YhlDoF7EHMsOy6a/TKsWn+pls=",
         "owner": "davegallant",
         "repo": "pvectl",
-        "rev": "7d87b67b690a16992ca3d0b259445b5d0f0fa2b2",
+        "rev": "8853b9526e44497e83506292e5b39ac46eb945f9",
         "type": "github"
       },
       "original": {
@@ -205,11 +205,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1784767362,
-        "narHash": "sha256-i/XRAgR9yRAkn+pO6c2UWX+iBCB22SAYCc0jmTiVx/s=",
+        "lastModified": 1785197064,
+        "narHash": "sha256-g+JuZFDaetqgS5N5ocrPp/iSTO4AJZCZ8dcSP0R50wo=",
         "owner": "davegallant",
         "repo": "vpngate",
-        "rev": "03188f80c969c19ceb409a60558e0ddadb3122df",
+        "rev": "297447b4639eaf23b77e985c16c94e3454d92d57",
         "type": "github"
       },
       "original": {
