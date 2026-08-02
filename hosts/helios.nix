@@ -8,6 +8,7 @@
 let
   trustedHomebrewTaps = [
     "davegallant/public"
+    "hamed-elfayome/claude-usage"
   ];
 in
 {
@@ -68,6 +69,7 @@ in
     "antigravity-cli"
     "blender"
     "discord"
+    "hamed-elfayome/claude-usage/claude-usage-tracker"
     "heroic"
     "keepassxc"
     "minecraft"
