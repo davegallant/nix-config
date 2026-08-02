@@ -1,0 +1,119 @@
+--- a/package/contents/ui/main.qml	2026-08-02 10:50:41.826471289 -0400
++++ b/package/contents/ui/main.qml	2026-08-02 11:08:16.679768574 -0400
+@@ -1,5 +1,6 @@
+ import QtQuick
+ import QtQuick.Layouts
++import QtQuick.Shapes
+ import org.kde.plasma.plasmoid
+ import org.kde.plasma.core as PlasmaCore
+ import org.kde.plasma.components as PlasmaComponents3
+@@ -146,12 +147,19 @@
+         return rows
+     }
+ 
+-    // ---------- compact (in-panel): just text, % above, time below ----------
++    // ---------- compact (in-panel): a ring showing session % ----------
+     compactRepresentation: MouseArea {
+         id: compact
+-        Layout.minimumWidth: col.implicitWidth + Kirigami.Units.smallSpacing * 2
+-        Layout.preferredWidth: col.implicitWidth + Kirigami.Units.smallSpacing * 2
+-        Layout.minimumHeight: col.implicitHeight
++        // Only one axis follows the other, and only the axis Plasma doesn't
++        // already fix for us — binding both ways off Math.min(width, height)
++        // is a binding loop, since each axis's Layout.* would depend on the
++        // other axis's rendered size, which in turn depends on Layout.*.
++        readonly property bool vertical: Plasmoid.formFactor === PlasmaCore.Types.Vertical
++        Layout.minimumWidth: vertical ? Kirigami.Units.iconSizes.smallMedium : height
++        Layout.minimumHeight: vertical ? width : Kirigami.Units.iconSizes.smallMedium
++        Layout.preferredWidth: Layout.minimumWidth
++        Layout.preferredHeight: Layout.minimumHeight
++        readonly property real side: vertical ? width : height
+         hoverEnabled: true
+         acceptedButtons: Qt.LeftButton | Qt.MiddleButton
+         onClicked: (mouse) => {
+@@ -159,36 +167,59 @@
+             else root.expanded = !root.expanded
+         }
+ 
+-        ColumnLayout {
+-            id: col
+-            anchors.centerIn: parent
+-            spacing: 0
++        readonly property real util: root.fiveHour ? root.fiveHour.util : 0
++        // Not readonly: Behavior needs write access to animate this property
++        // through value changes; Qt refuses to attach one to a readonly property.
++        property real fraction: root.fiveHour ? Math.max(0, Math.min(100, util)) / 100 : 0
++        readonly property color ringColor: root.fiveHour ? root.utilColor(util) : Kirigami.Theme.disabledTextColor
++        Behavior on fraction { NumberAnimation { duration: 400; easing.type: Easing.OutCubic } }
+ 
+-            PlasmaComponents3.Label {   // session % — headline
+-                Layout.alignment: Qt.AlignHCenter
+-                Layout.fillWidth: true
+-                text: root.fiveHour ? (Math.round(root.fiveHour.util) + "%") : "—"
+-                color: root.fiveHour ? root.utilColor(root.fiveHour.util) : Kirigami.Theme.disabledTextColor
+-                font.bold: true
+-                font.pixelSize: Math.round(Kirigami.Theme.defaultFont.pixelSize * 1.1)
+-                font.features: { "tnum": 1 }
+-                fontSizeMode: Text.HorizontalFit
+-                minimumPixelSize: 8
+-                horizontalAlignment: Text.AlignHCenter
++        Shape {
++            id: ring
++            anchors.centerIn: parent
++            readonly property real d: Math.max(compact.side - Kirigami.Units.smallSpacing, 8)
++            readonly property real strokeW: Math.max(2, d * 0.12)
++            width: d; height: d
++            layer.enabled: true
++            layer.samples: 4
++
++            ShapePath {   // background track
++                // ShapePath has no strokeOpacity; bake the alpha into the color.
++                strokeColor: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g,
++                                      Kirigami.Theme.textColor.b, 0.18)
++                strokeWidth: ring.strokeW
++                fillColor: "transparent"
++                capStyle: ShapePath.FlatCap
++                PathAngleArc {
++                    centerX: ring.d / 2; centerY: ring.d / 2
++                    radiusX: (ring.d - ring.strokeW) / 2; radiusY: radiusX
++                    startAngle: 0; sweepAngle: 359.999
++                }
+             }
+-            PlasmaComponents3.Label {   // time until reset — below
+-                Layout.alignment: Qt.AlignHCenter
+-                Layout.fillWidth: true
+-                text: root.fiveHour ? root.remainStr(root.fiveHour.resets_ms)
+-                                    : (root.errorMsg !== "" ? "!" : "…")
+-                opacity: root.busy ? 0.45 : 0.8
+-                font.pixelSize: Math.round(Kirigami.Theme.smallFont.pixelSize)
+-                font.features: { "tnum": 1 }
+-                fontSizeMode: Text.HorizontalFit
+-                minimumPixelSize: 7
+-                horizontalAlignment: Text.AlignHCenter
++            ShapePath {   // filled portion, clockwise from the top
++                strokeColor: compact.ringColor
++                strokeWidth: ring.strokeW
++                fillColor: "transparent"
++                capStyle: ShapePath.RoundCap
++                PathAngleArc {
++                    centerX: ring.d / 2; centerY: ring.d / 2
++                    radiusX: (ring.d - ring.strokeW) / 2; radiusY: radiusX
++                    startAngle: -90; sweepAngle: 359.999 * compact.fraction
++                }
+             }
+         }
++
++        PlasmaComponents3.Label {
++            anchors.centerIn: parent
++            text: root.fiveHour ? (Math.round(root.fiveHour.util) + "%") : (root.errorMsg !== "" ? "!" : "…")
++            color: compact.ringColor
++            font.bold: true
++            font.pixelSize: Math.round(ring.d * 0.32)
++            font.features: { "tnum": 1 }
++            fontSizeMode: Text.HorizontalFit
++            minimumPixelSize: 6
++            horizontalAlignment: Text.AlignHCenter
++        }
+     }
+ 
+     // ---------- full (popup) ----------
