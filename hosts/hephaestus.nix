@@ -108,6 +108,7 @@
         snes9x
       ]
     ))
+    (pkgs.callPackage ../pkgs/line.nix { wine = pkgs.wineWow64Packages.base; })
     pkgs.keepassxc
     pkgs.trayscale
     pvectl.packages.${pkgs.stdenv.hostPlatform.system}.default
