@@ -73,6 +73,7 @@ in
     "heroic"
     "keepassxc"
     "minecraft"
+    "moonlight"
     "retroarch-metal"
     "signal"
     "steam"

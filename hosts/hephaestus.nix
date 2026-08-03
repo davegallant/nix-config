@@ -88,6 +88,26 @@
     networkmanager.enable = true;
   };
 
+  # Auto-login so the Plasma session (and Sunshine, which is tied to
+  # graphical-session.target) is always up after a reboot with no manual
+  # console login.
+  services.displayManager.autoLogin = {
+    enable = true;
+    user = "dave";
+  };
+
+  # KDE's compositor doesn't implement the wlroots screencopy protocol, so
+  # Sunshine falls back to KMS/DRM capture on Plasma Wayland, which needs
+  # CAP_SYS_ADMIN.
+  services.sunshine = {
+    enable = true;
+    capSysAdmin = true;
+    # Covers LAN (mDNS auto-discovery) and Tailscale. mDNS doesn't cross
+    # the tailnet, so pair from off-LAN by adding the host in Moonlight
+    # manually via its Tailscale IP/MagicDNS name.
+    openFirewall = true;
+  };
+
   nix = {
     registry.nixpkgs.flake = inputs.nixpkgs;
     gc.dates = "daily";
