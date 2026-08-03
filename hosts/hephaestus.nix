@@ -103,6 +103,11 @@
     "wheel"
   ];
 
+  # Let dave's systemd --user instance (tmux-server, etc.) keep running after
+  # SSH sessions end and start again on boot, without needing an active login.
+  users.manageLingering = true;
+  users.users.dave.linger = true;
+
   hardware.enableRedistributableFirmware = true;
   hardware.keyboard.qmk.enable = true;
   # udev rules for Steam Controller / Xbox / PS / other gamepads
