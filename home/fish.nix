@@ -138,6 +138,10 @@
         set -x DO_NOT_TRACK true
       '';
 
+      shellAbbrs = {
+        claude-rc = "env -u DO_NOT_TRACK claude rc";
+      };
+
       shellAliases = {
         ".." = "cd ..";
         g = "git";
