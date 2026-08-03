@@ -1,4 +1,9 @@
-{ pkgs, ... }:
+{
+  lib,
+  pkgs,
+  hostname,
+  ...
+}:
 {
   programs.tmux = {
     enable = true;
@@ -13,6 +18,7 @@
     plugins = with pkgs.tmuxPlugins; [
       sensible
       resurrect
+      continuum
     ];
     extraConfig = ''
       set -g default-command "${pkgs.fish}/bin/fish"
@@ -45,10 +51,13 @@
       bind-key -n C-S-Left previous-window
       bind-key -n C-S-Right next-window
 
-      # resurrect
+      # resurrect / continuum: auto-save session state and restore it whenever
+      # a fresh tmux server starts (e.g. after a host reboot)
       set -g @resurrect-capture-pane-contents 'on'
       set -g @resurrect-strategy-nvim 'session'
       set -g @resurrect-strategy-vim 'session'
+      set -g @continuum-restore 'on'
+      set -g @continuum-save-interval '10'
 
       # Minimal bottom status line
       set -g status-position bottom
@@ -72,5 +81,15 @@
       set -g pane-border-lines single
       set -g message-style "bg=default,fg=#cdd6f4"
     '';
+  };
+
+  systemd.user.services.tmux-server = lib.mkIf (hostname == "hephaestus") {
+    Unit.Description = "Persistent tmux server";
+    Service = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+      ExecStart = "${pkgs.bash}/bin/bash -c '${pkgs.tmux}/bin/tmux -f %h/.config/tmux/tmux.conf has-session -t main 2>/dev/null || ${pkgs.tmux}/bin/tmux -f %h/.config/tmux/tmux.conf new-session -d -s main'";
+    };
+    Install.WantedBy = [ "default.target" ];
   };
 }
