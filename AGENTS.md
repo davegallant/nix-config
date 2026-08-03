@@ -8,7 +8,7 @@ Nix Flake configuration for NixOS and macOS systems, with home-manager for
 user-level configuration and nixvim for Neovim.
 
 - **Hosts**:
-  - `apollo`: x86_64-linux NixOS desktop (GPU-passthrough VM)
+  - `hephaestus`: x86_64-linux NixOS desktop (GPU-passthrough VM)
   - `kratos`: aarch64-darwin macOS
   - `helios`: aarch64-darwin macOS
 - **Nix channel**: nixpkgs 26.05 stable, plus nixpkgs-unstable
@@ -29,7 +29,7 @@ on Linux and `sudo darwin-rebuild` on macOS.
 ### Build without switching
 
 ```sh
-nix build .#nixosConfigurations.apollo.config.system.build.toplevel
+nix build .#nixosConfigurations.hephaestus.config.system.build.toplevel
 nix build .#darwinConfigurations.kratos.config.system.build.toplevel
 nix build .#darwinConfigurations.helios.config.system.build.toplevel
 ```
@@ -79,7 +79,7 @@ just lint
 nix flake check --no-build
 ```
 
-CI checks formatting and linting, builds `apollo`, `kratos`, and `helios`,
+CI checks formatting and linting, builds `hephaestus`, `kratos`, and `helios`,
 and pushes build outputs to Cachix on `main`.
 
 ## Repository Layout

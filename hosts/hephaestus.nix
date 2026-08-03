@@ -62,7 +62,7 @@
   # npm-installed tooling runs via nix-ld (nixos.nix)
   environment.systemPackages = with pkgs; [
     # LINE needs a manually-fetched installer added to the store first — see
-    # pkgs/line.nix for instructions. Re-add once that's done on apollo:
+    # pkgs/line.nix for instructions. Re-add once that's done on hephaestus:
     # (pkgs.callPackage ../pkgs/line.nix { wine = pkgs.wineWow64Packages.base; })
     (retroarch.withCores (
       cores: with cores; [
@@ -78,7 +78,7 @@
   ];
 
   networking = {
-    hostName = "apollo";
+    hostName = "hephaestus";
     hostId = "861d59c4";
     firewall = {
       allowPing = true;
@@ -110,7 +110,7 @@
 
   systemd.services.systemd-networkd-wait-online.enable = lib.mkForce false;
 
-  # Apollo is a VM that should never sleep/suspend/hibernate
+  # Hephaestus is a VM that should never sleep/suspend/hibernate
   systemd.targets = {
     sleep.enable = false;
     suspend.enable = false;
