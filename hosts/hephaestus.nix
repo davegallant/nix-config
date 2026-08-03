@@ -106,6 +106,25 @@
     # the tailnet, so pair from off-LAN by adding the host in Moonlight
     # manually via its Tailscale IP/MagicDNS name.
     openFirewall = true;
+    settings = {
+      # Steam's steamwebhelper process grabs port 47990 (Sunshine's
+      # default web UI port, offset +1 from the default base of 47989)
+      # for its own local IPC, and reclaims it on every Steam relaunch.
+      # Move Sunshine's whole port range off the default to avoid the
+      # collision instead of relying on start order.
+      port = 48989;
+    };
+    applications.apps = [
+      {
+        name = "Desktop";
+        prep-cmd = [
+          {
+            do = "${pkgs.kdePackages.libkscreen}/bin/kscreen-doctor output.DP-1.mode.2560x1440@60";
+            undo = "${pkgs.kdePackages.libkscreen}/bin/kscreen-doctor output.DP-1.mode.3840x2160@60";
+          }
+        ];
+      }
+    ];
   };
 
   nix = {
@@ -120,6 +139,7 @@
     "libvirtd"
     "networkmanager"
     "plugdev"
+    "uinput" # lets Sunshine create virtual gamepads for Moonlight clients
     "wheel"
   ];
 
