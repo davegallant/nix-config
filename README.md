@@ -61,18 +61,6 @@ Available recipes:
     update-pi *version       # usage: just update-pi [VERSION]  (VERSION without leading 'v'; defaults to latest)
 ```
 
-## Restoring from a live USB
-
-If the bootloader for some reason breaks (i.e. motherboard firmware upgrade), restore it from a live USB by running the following commands:
-
-```console
-$ sudo cryptsetup luksOpen /dev/nvme0n1p2 crypted-nixos
-Enter passphrase for /dev/nvme0n1p2: ********
-$ sudo mount /dev/vg/root /mnt
-$ sudo mount /dev/nvme0n1p1 /mnt/boot/efi
-$ sudo nixos-enter --root /mnt
-$ hostname <hostname>
-```
 
 Navigate to the nix-config directory and run:
 
