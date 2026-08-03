@@ -39,8 +39,9 @@ in
 
     xdg.configFile."kscreenlockerrc".text = ''
       [Daemon]
-      Autolock=false
+      Autolock=true
       LockOnResume=false
+      Timeout=5
     '';
   };
 }
