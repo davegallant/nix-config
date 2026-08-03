@@ -71,10 +71,8 @@
       ]
     ))
     keepassxc
-    nodejs_22
     pvectl.packages.${pkgs.stdenv.hostPlatform.system}.default
     trayscale
-    unstable.antigravity-cli
     unstable.signal-desktop
     vim
   ];
