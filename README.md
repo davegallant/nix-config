@@ -10,12 +10,12 @@ flowchart TD
     flake --> nixos["nixosConfigurations"]
     flake --> darwin["darwinConfigurations"]
 
-    nixos --> apollo["apollo (NixOS)"]
+    nixos --> hephaestus["hephaestus (NixOS)"]
 
     darwin --> kratos["kratos (macOS)"]
     darwin --> helios["helios (macOS)"]
 
-    apollo --> hostA["hosts/apollo.nix"]
+    hephaestus --> hostA["hosts/hephaestus.nix"]
     kratos --> hostK["hosts/kratos.nix"]
     helios --> hostHe["hosts/helios.nix"]
 
