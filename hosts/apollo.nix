@@ -112,6 +112,18 @@
 
   systemd.services.systemd-networkd-wait-online.enable = lib.mkForce false;
 
+  # Apollo is a VM that should never sleep/suspend/hibernate
+  systemd.targets = {
+    sleep.enable = false;
+    suspend.enable = false;
+    hibernate.enable = false;
+    hybrid-sleep.enable = false;
+  };
+  services.logind.settings.Login = {
+    HandleLidSwitch = "ignore";
+    IdleAction = "ignore";
+  };
+
   services.resolved.enable = true;
 
   services.syncthing = {
