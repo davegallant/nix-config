@@ -165,9 +165,9 @@
             };
         in
         {
-          hephaestus = mkNixos {
+          apollo = mkNixos {
             system = "x86_64-linux";
-            hostname = "hephaestus";
+            hostname = "apollo";
           };
         };
 
