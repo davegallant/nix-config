@@ -51,6 +51,11 @@
       bind-key -n C-S-Left previous-window
       bind-key -n C-S-Right next-window
 
+      # Keep the selection highlighted after a mouse drag instead of
+      # exiting copy-mode immediately (default copy-pipe-and-cancel clears it)
+      unbind -T copy-mode-vi MouseDragEnd1Pane
+      bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-selection-no-clear
+
       # resurrect / continuum: auto-save session state and restore it whenever
       # a fresh tmux server starts (e.g. after a host reboot)
       set -g @resurrect-capture-pane-contents 'on'
