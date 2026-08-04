@@ -55,6 +55,31 @@
         "dmask=0022"
       ];
     };
+    "/mnt/tank/media" = {
+      device = "192.168.1.16:/mnt/tank/media";
+      fsType = "nfs";
+      options = [
+        "_netdev"
+        "noauto"
+        "nofail"
+        "x-systemd.automount"
+        "x-systemd.idle-timeout=60"
+        "x-systemd.mount-timeout=10"
+      ];
+    };
+    "/mnt/tank/backups" = {
+      device = "192.168.1.16:/mnt/tank/backups";
+      fsType = "nfs";
+      options = [
+        "_netdev"
+        "noauto"
+        "x-systemd.automount"
+        "x-systemd.after=network-online.target"
+        "x-systemd.requires=network-online.target"
+        "x-systemd.idle-timeout=60"
+        "x-systemd.mount-timeout=10"
+      ];
+    };
   };
 
   nixpkgs.hostPlatform = "x86_64-linux";
