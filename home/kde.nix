@@ -1,20 +1,16 @@
 { lib, pkgs, ... }:
 let
-  # Manually pinned to the CraigBorrows/claude-usage-widget main branch HEAD
-  # (no tagged releases exist upstream). Bump rev/hash by hand when needed.
+  # davegallant/claude-usage-widget is a fork of CraigBorrows/claude-usage-widget
+  # carrying two local changes as real commits: a circular progress ring in the
+  # compact panel, and fetching usage from Messages API rate-limit headers
+  # instead of the oauth/usage endpoint (that endpoint is rate-limited far more
+  # aggressively than ordinary API traffic and 429s under a 60s poll interval).
+  # No tagged releases exist upstream or on the fork; bump rev/hash by hand.
   claude-usage-widget = pkgs.fetchFromGitHub {
-    owner = "CraigBorrows";
+    owner = "davegallant";
     repo = "claude-usage-widget";
-    rev = "5421a14255ceec29ceadc40e805bbf80697b26b4";
-    hash = "sha256-XKhYb+SdtXFczVtgZkp4ZweYYW7OgTPr72zgiPq/Gmk=";
-  };
-  # Local tweak: swap the compact panel's stacked text for a circular
-  # progress ring. Carried as a patch instead of a fork since it's a single
-  # QML block; may need a rebase if upstream reshuffles main.qml.
-  claude-usage-widget-patched = pkgs.applyPatches {
-    name = "claude-usage-widget-patched";
-    src = claude-usage-widget;
-    patches = [ ./kde/claude-usage-widget-progress-ring.patch ];
+    rev = "6f9abddb6bccd1a3cee9eb37c6637b13a4fd517f";
+    hash = "sha256-OKtmkV0fp8tOQm+XIMYr2IHZAIUI69q5nRVp11IJ3Ts=";
   };
 in
 {
@@ -35,7 +31,7 @@ in
     # real path escapes the package root, which recursive per-file symlinks
     # into the Nix store would trigger.
     xdg.dataFile."plasma/plasmoids/com.cbo.claudeusage".source =
-      "${claude-usage-widget-patched}/package";
+      "${claude-usage-widget}/package";
 
     xdg.configFile."kscreenlockerrc".text = ''
       [Daemon]
