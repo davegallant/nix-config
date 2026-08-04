@@ -66,6 +66,7 @@
       Unit.Description = "borgmatic backup";
       Service = {
         Type = "oneshot";
+        Environment = "BORG_UNKNOWN_UNENCRYPTED_REPO_ACCESS_IS_OK=yes";
         ExecStart = "${pkgs.borgmatic}/bin/borgmatic --verbosity -1";
       };
     };
