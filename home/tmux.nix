@@ -23,6 +23,12 @@
     extraConfig = ''
       set -g default-command "${pkgs.fish}/bin/fish"
 
+      # Don't let an SSH-forwarded agent leak into this persistent session:
+      # KeePassXC's ssh-agent (home/keepassxc-ssh-agent.nix) should always
+      # win inside tmux, even after the forwarding connection dies and
+      # leaves a dead socket behind.
+      set -g update-environment "DISPLAY XAUTHORITY"
+
       # Terminal + titles
       set -as terminal-features ",xterm-256color:RGB"
       set -g set-titles on
@@ -93,6 +99,15 @@
     Service = {
       Type = "oneshot";
       RemainAfterExit = true;
+      # XDG_RUNTIME_DIR isn't reliably in the systemd user manager's
+      # activation environment this early at boot (it can land there after
+      # this unit runs), and tmux bakes whatever it sees at `new-session`
+      # into its session-wide environment table for the life of the
+      # server. Set it explicitly via the %t specifier, which systemd
+      # always resolves correctly regardless of that race, so every pane
+      # spawned in this persistent session gets a working SSH_AUTH_SOCK
+      # (see home/keepassxc-ssh-agent.nix) instead of resolving to "/ssh-agent".
+      Environment = "XDG_RUNTIME_DIR=%t";
       ExecStart = "${pkgs.bash}/bin/bash -c '${pkgs.tmux}/bin/tmux -f %h/.config/tmux/tmux.conf has-session -t main 2>/dev/null || ${pkgs.tmux}/bin/tmux -f %h/.config/tmux/tmux.conf new-session -d -s main'";
     };
     Install.WantedBy = [ "default.target" ];
