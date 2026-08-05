@@ -1,16 +1,17 @@
 { lib, pkgs, ... }:
 let
   # davegallant/claude-usage-widget is a fork of CraigBorrows/claude-usage-widget
-  # carrying two local changes as real commits: a circular progress ring in the
-  # compact panel, and fetching usage from Messages API rate-limit headers
+  # carrying three local changes as real commits: a circular progress ring in
+  # the compact panel, fetching usage from Messages API rate-limit headers
   # instead of the oauth/usage endpoint (that endpoint is rate-limited far more
-  # aggressively than ordinary API traffic and 429s under a 60s poll interval).
+  # aggressively than ordinary API traffic and 429s under a 60s poll interval),
+  # and tinting the popup usage bars green/orange/red at 70%/90%.
   # No tagged releases exist upstream or on the fork; bump rev/hash by hand.
   claude-usage-widget = pkgs.fetchFromGitHub {
     owner = "davegallant";
     repo = "claude-usage-widget";
-    rev = "6f9abddb6bccd1a3cee9eb37c6637b13a4fd517f";
-    hash = "sha256-OKtmkV0fp8tOQm+XIMYr2IHZAIUI69q5nRVp11IJ3Ts=";
+    rev = "127e30ca78cd4cdfaade9f176c86f8762fb8a732";
+    hash = "sha256-gRn740nuFhx2QQ2vl7p+joNmJnX2tllvBqKabibPRbY=";
   };
 in
 {
