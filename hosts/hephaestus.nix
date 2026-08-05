@@ -208,6 +208,17 @@
   services.clamav.daemon.enable = true;
   services.clamav.updater.enable = true;
 
+  services.ollama = {
+    package = unstable.ollama-rocm;
+    enable = true;
+    host = "0.0.0.0";
+    rocmOverrideGfx = "11.0.2";
+    loadModels = [ "qwen3.5:9b" ];
+    environmentVariables = {
+      OLLAMA_KEEP_ALIVE = "-1";
+    };
+  };
+
   virtualisation = {
     docker.enable = true;
     libvirtd = {
