@@ -95,6 +95,23 @@
         snes9x
       ]
     ))
+    # KDE's own RDP server, for the things Sunshine's video-codec streaming is
+    # bad at -- clipboard sync and crisp static text. Shares the same session
+    # Sunshine captures, so it is an alternative front door, not a second
+    # desktop. nixpkgs has no services.krdp module, so enabling the server and
+    # its cert/credentials is done in System Settings > Remote Desktop.
+    # Deliberately not opening 3389 in the firewall: tailscale0 is already a
+    # trusted interface, so reach it over the tailnet rather than the LAN.
+    #
+    # Do not let the display mode change while an RDP session is open. krdpserver
+    # fixes its ffmpeg filter graph to the resolution present at connect time and
+    # cannot renegotiate; a mid-session change makes every frame fail to hwmap and
+    # it retries a few hundred times a second, which starves the compositor and
+    # freezes the desktop. Ending a Sunshine session does exactly this, because
+    # the app profiles below restore 4K on undo. Recover with
+    # `systemctl --user kill -s KILL app-org.kde.krdpserver.service` -- SIGTERM
+    # does not land, the process wedges inside a GPU call.
+    kdePackages.krdp
     keepassxc
     pvectl.packages.${pkgs.stdenv.hostPlatform.system}.default
     trayscale
@@ -121,9 +138,9 @@
     user = "dave";
   };
 
-  # KDE's compositor doesn't implement the wlroots screencopy protocol, so
-  # Sunshine falls back to KMS/DRM capture on Plasma Wayland, which needs
-  # CAP_SYS_ADMIN.
+  # Screen capture on Plasma Wayland is fussy; see the capture= note below for
+  # why the backend is pinned. capSysAdmin is what KMS/DRM capture needs and is
+  # kept as a fallback lever, though the KWin backend in use does not need it.
   services.sunshine = {
     enable = true;
     capSysAdmin = true;
@@ -138,18 +155,63 @@
       # Move Sunshine's whole port range off the default to avoid the
       # collision instead of relying on start order.
       port = 48989;
+      # Capture backend has to be pinned; neither automatic nor KMS works here.
+      # Left on automatic, Sunshine picks the XDG portal backend, which wants
+      # an interactive "remote desktop" consent grant that a systemd user
+      # service can't answer (xdg-desktop-portal-kde logs "No entry for
+      # remote-desktop"). Portal init then fails during startup -- observed
+      # both as a SIGTRAP core dump inside portal::start_portal_session and
+      # as a start that just stops making progress -- so the listeners never
+      # bind and Moonlight reports the host as offline.
+      #
+      # KMS/DRM capture enumerates the monitor list but then dies with
+      # "Unable to initialize capture method" / "Platform failed to
+      # initialize", most likely because KWin holds DRM master on this
+      # qemu-guest VM. Every encoder probe then fails downstream of the
+      # missing capture source, so Sunshine serves 503s instead.
+      #
+      # KWin's native screencasting needs no portal consent and no DRM
+      # master, so it is the one path left on Plasma Wayland.
+      capture = "kwin";
+      # Encoder probing stops at the first family that works and vulkan sits
+      # ahead of vaapi in that order, so VA-API is never reached on its own.
+      # Vulkan Video encode on RADV is the newest and least tuned path for this
+      # AMD GPU, VA-API the mature one -- that, not measured gain, is the reason
+      # this is pinned. It was tried as a fix for pointer lag and made no
+      # perceptible difference; the jitter turned out to be the client's Wi-Fi.
+      encoder = "vaapi";
     };
-    applications.apps = [
-      {
-        name = "Desktop";
-        prep-cmd = [
-          {
-            do = "${pkgs.kdePackages.libkscreen}/bin/kscreen-doctor output.DP-1.mode.2560x1440@60";
-            undo = "${pkgs.kdePackages.libkscreen}/bin/kscreen-doctor output.DP-1.mode.3840x2160@60";
-          }
-        ];
-      }
-    ];
+    applications.apps =
+      let
+        kscreen-doctor = "${pkgs.kdePackages.libkscreen}/bin/kscreen-doctor";
+      in
+      [
+        {
+          # 4K is DP-1's resting mode, but set it explicitly anyway so this
+          # profile recovers the display if another session ended uncleanly
+          # and never ran its undo.
+          name = "4K";
+          prep-cmd = [
+            {
+              do = "${kscreen-doctor} output.DP-1.mode.3840x2160@60";
+              undo = "${kscreen-doctor} output.DP-1.mode.3840x2160@60";
+            }
+          ];
+        }
+        {
+          # Sized for streaming to the 13" MacBook Air. Its panel is 16:10.4,
+          # which DP-1 has no mode for (and the display reports no custom mode
+          # support), so 2560x1600 is the closest fit: exact width match, 64px
+          # short on height.
+          name = "MacBook Air";
+          prep-cmd = [
+            {
+              do = "${kscreen-doctor} output.DP-1.mode.2560x1600@60";
+              undo = "${kscreen-doctor} output.DP-1.mode.3840x2160@60";
+            }
+          ];
+        }
+      ];
   };
 
   nix = {
