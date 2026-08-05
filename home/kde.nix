@@ -30,8 +30,7 @@ in
     # path-traversal guard canonicalizes each file and rejects anything whose
     # real path escapes the package root, which recursive per-file symlinks
     # into the Nix store would trigger.
-    xdg.dataFile."plasma/plasmoids/com.cbo.claudeusage".source =
-      "${claude-usage-widget}/package";
+    xdg.dataFile."plasma/plasmoids/com.cbo.claudeusage".source = "${claude-usage-widget}/package";
 
     xdg.configFile."kscreenlockerrc".text = ''
       [Daemon]
