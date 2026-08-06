@@ -37,6 +37,15 @@
       # socket - long after it stops existing. Pin it back to the local
       # agent.
       #
+      # A server started from an SSH login (Tailscale or otherwise) inherits
+      # that login shell's environment wholesale, which may never have had
+      # XDG_RUNTIME_DIR set. Every client tool that talks to a per-user
+      # runtime service (wpctl/pactl -> pipewire, etc.) breaks silently in
+      # every pane of that session. Pin it the same way SSH_AUTH_SOCK is
+      # pinned below, so a plain `prefix+r` repairs an already-broken
+      # session without needing to kill the server.
+      run-shell '${pkgs.tmux}/bin/tmux set-environment -g XDG_RUNTIME_DIR "''${XDG_RUNTIME_DIR:-/run/user/$(${pkgs.coreutils}/bin/id -u)}"'
+
       # This goes through run-shell rather than the more obvious
       # `set-environment -g SSH_AUTH_SOCK "$XDG_RUNTIME_DIR/ssh-agent"`
       # because tmux expands $VAR in config strings against the server's
