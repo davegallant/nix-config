@@ -66,6 +66,23 @@
             cd ~/src/$selected
           end
         '';
+        t = ''
+          # Like s, but lands in a tmux session for the picked repo:
+          # creates one rooted there if none exists, else hops into it.
+          set selected (fd --type d --exact-depth 3 --base-directory ~/src | fzf --exact)
+          test -n "$selected"; or return
+          # basename also strips fd's trailing slash; tmux session names
+          # can't contain "." or ":"
+          set -l name (string replace -ra '[.:]' _ (basename $selected))
+          if not tmux has-session -t "=$name" 2>/dev/null
+            tmux new-session -d -s $name -c ~/src/$selected
+          end
+          if set -q TMUX
+            tmux switch-client -t "=$name"
+          else
+            tmux attach-session -t "=$name"
+          end
+        '';
         cr = ''
           # Pick a Claude Code session from any project (see ~/.claude/claude-resume.sh),
           # then cd into its directory and resume it.
