@@ -83,6 +83,16 @@
             tmux attach-session -t "=$name"
           end
         '';
+        ts = ''
+          # Fuzzy-pick an existing tmux session and hop into it.
+          set -l session (tmux ls -F '#S' 2>/dev/null | fzf --exact)
+          test -n "$session"; or return
+          if set -q TMUX
+            tmux switch-client -t "=$session"
+          else
+            tmux attach-session -t "=$session"
+          end
+        '';
         cr = ''
           # Pick a Claude Code session from any project (see ~/.claude/claude-resume.sh),
           # then cd into its directory and resume it.
