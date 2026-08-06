@@ -55,15 +55,9 @@ Available recipes:
     fmt                      # format all nix files [alias: f]
     merge-pr                 # squash-merge current branch's PR with nvd diff in body
     rebuild                  # build, show nvd diff, then switch [alias: r]
-    rebuild-boot             # rebuild and install bootloader
     rollback                 # switch to previous generation
     update-claude *version   # usage: just update-claude [VERSION]  (VERSION without leading 'v'; defaults to latest)
     update-pi *version       # usage: just update-pi [VERSION]  (VERSION without leading 'v'; defaults to latest)
 ```
 
 
-Navigate to the nix-config directory and run:
-
-```sh
-just rebuild-boot
-```

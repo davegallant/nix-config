@@ -148,6 +148,16 @@ in
     user = "dave";
   };
 
+  # sddm-autologin's PAM stack never runs a real password check (auth is just
+  # pam_permit), so pam_kwallet5 isn't wired in by default and KWallet has no
+  # login password to auto-unlock with -- it falls back to prompting on every
+  # boot. Enabling it here lets pam_kwallet5 attempt an unlock with whatever
+  # (empty) auth token PAM hands it, which only succeeds because the wallet's
+  # own password is set to blank (done once, by hand, in System Settings >
+  # KDE Wallet -- autologin already grants a full session with zero
+  # credentials, so an encrypted-with-blank-password wallet adds nothing).
+  security.pam.services.sddm-autologin.kwallet.enable = true;
+
   # Screen capture on Plasma Wayland is fussy; see the capture= note below for
   # why the backend is pinned. capSysAdmin is what KMS/DRM capture needs and is
   # kept as a fallback lever, though the KWin backend in use does not need it.
@@ -286,9 +296,6 @@ in
     host = "0.0.0.0";
     rocmOverrideGfx = "11.0.2";
     loadModels = [ "qwen2.5:7b-instruct" ];
-    environmentVariables = {
-      OLLAMA_KEEP_ALIVE = "-1";
-    };
   };
 
   # Tags RedFlagDeals deals on rfd.davegallant.ca with the local Ollama.
@@ -342,12 +349,11 @@ in
   # steady-state run sees. Verify by hand first (see the enricher's
   # bootstrapping instructions), then `systemctl enable --now rfd-enrich.timer`.
   systemd.timers.rfd-enrich = {
-    description = "Tag RedFlagDeals deals every 15 minutes";
+    description = "Tag RedFlagDeals deals daily around 4am Eastern";
     timerConfig = {
-      OnBootSec = "5min";
-      OnUnitActiveSec = "15min";
+      OnCalendar = "04:00";
       Persistent = true;
-      RandomizedDelaySec = "60s";
+      RandomizedDelaySec = "10min";
     };
   };
 
