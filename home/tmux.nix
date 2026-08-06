@@ -58,6 +58,15 @@
 
       # Terminal + titles
       set -as terminal-features ",xterm-256color:RGB"
+
+      # Copies (including mouse drags) land on the system clipboard via
+      # OSC 52, which also works through SSH so a copy inside remote tmux
+      # reaches the local clipboard. The terminal-features line is needed
+      # because tmux won't emit OSC 52 unless it knows the outer terminal
+      # supports it, and it can't always tell from xterm-ghostty terminfo
+      # (which may not even be installed on the remote host).
+      set -g set-clipboard on
+      set -as terminal-features ",xterm-ghostty:clipboard"
       set -g set-titles on
       set -g set-titles-string "#S:#I:#W - #{pane_current_command}"
       set-window-option -g automatic-rename on
@@ -84,10 +93,18 @@
       bind-key -n C-S-Left previous-window
       bind-key -n C-S-Right next-window
 
-      # Keep the selection highlighted after a mouse drag instead of
-      # exiting copy-mode immediately (default copy-pipe-and-cancel clears it)
-      unbind -T copy-mode-vi MouseDragEnd1Pane
-      bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-selection-no-clear
+      # Toggle mouse capture for when a native terminal selection is needed
+      # (drag across pane borders, unwrapped lines). Shadows the default
+      # pane-mark binding. Shift+drag in Ghostty bypasses tmux without this.
+      bind m set -g mouse \; display "mouse #{?mouse,on,off}"
+
+      # Mouse-drag copy: when scrolled up in scrollback, copy but stay put
+      # (cancelling would snap the view back to the live prompt); at the
+      # bottom, copy and cancel so the next keystrokes reach the shell
+      # instead of being eaten by copy-mode.
+      bind -T copy-mode-vi MouseDragEnd1Pane if -F '#{scroll_position}' \
+        { send -X copy-selection-no-clear } \
+        { send -X copy-selection-and-cancel }
 
       # resurrect / continuum: auto-save session state and restore it whenever
       # a fresh tmux server starts (e.g. after a host reboot)
