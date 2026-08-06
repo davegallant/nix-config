@@ -106,6 +106,17 @@
         { send -X copy-selection-no-clear } \
         { send -X copy-selection-and-cancel }
 
+      # Same treatment for double/triple click (word/line copy): the
+      # defaults end in copy-pipe-and-cancel, which snaps the view back
+      # to the live prompt when scrolled up. The 0.3s delay matches the
+      # defaults and keeps the highlight visible before it resolves.
+      bind -T copy-mode-vi DoubleClick1Pane select-pane \; send -X select-word \; run -d 0.3 \; if -F '#{scroll_position}' \
+        { send -X copy-selection-no-clear } \
+        { send -X copy-selection-and-cancel }
+      bind -T copy-mode-vi TripleClick1Pane select-pane \; send -X select-line \; run -d 0.3 \; if -F '#{scroll_position}' \
+        { send -X copy-selection-no-clear } \
+        { send -X copy-selection-and-cancel }
+
       # resurrect / continuum: auto-save session state and restore it whenever
       # a fresh tmux server starts (e.g. after a host reboot)
       set -g @resurrect-capture-pane-contents 'on'
