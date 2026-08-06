@@ -7,6 +7,16 @@
   unstable,
   ...
 }:
+let
+  # rfd-fyi's enricher (tools/enricher/) is 4 dependency-free .mjs files. Pin
+  # to a rev and bump by hand -- the enricher is stable, so this should be rare.
+  rfdFyi = pkgs.fetchFromGitHub {
+    owner = "davegallant";
+    repo = "rfd-fyi";
+    rev = "e68091d18918afaea89f8ef16d757615d63b2357";
+    hash = "sha256-6OSeuMIVEMJPdWezKAKCPCLuB5fDfahX0BJ3ev6VLfg=";
+  };
+in
 {
   imports = [
     (modulesPath + "/profiles/qemu-guest.nix")
@@ -275,9 +285,69 @@
     enable = true;
     host = "0.0.0.0";
     rocmOverrideGfx = "11.0.2";
-    loadModels = [ "qwen3.5:9b" ];
+    loadModels = [ "qwen2.5:7b-instruct" ];
     environmentVariables = {
       OLLAMA_KEEP_ALIVE = "-1";
+    };
+  };
+
+  # Tags RedFlagDeals deals on rfd.davegallant.ca with the local Ollama.
+  # Cloudflare Workers can't reach a LAN, so the enricher runs here and
+  # pushes results in. qwen2.5:7b-instruct (already loaded above, see
+  # loadModels) is the enricher's own default model.
+  users.users.rfd-enrich = {
+    isSystemUser = true;
+    group = "rfd-enrich";
+  };
+  users.groups.rfd-enrich = { };
+
+  # Created independently of the service so the secret file below can be
+  # placed before the first `systemctl start`.
+  systemd.tmpfiles.rules = [
+    "d /var/lib/rfd-enrich 0750 rfd-enrich rfd-enrich -"
+  ];
+
+  systemd.services.rfd-enrich = {
+    description = "Tag RedFlagDeals deals with the local Ollama";
+    after = [
+      "network-online.target"
+      "ollama.service"
+    ];
+    wants = [ "network-online.target" ];
+
+    environment = {
+      RFD_FYI_ORIGIN = "https://rfd.davegallant.ca";
+      ENRICH_MODEL = "qwen2.5:7b-instruct";
+    };
+
+    serviceConfig = {
+      Type = "oneshot";
+      User = "rfd-enrich";
+      Group = "rfd-enrich";
+      # REFRESH_SECRET only. Must not come from the Nix store (world-readable);
+      # placed by hand: install -m 600 -o rfd-enrich -g rfd-enrich /dev/stdin
+      # /var/lib/rfd-enrich/env <<< 'REFRESH_SECRET=...'
+      EnvironmentFile = "/var/lib/rfd-enrich/env";
+      ExecStart = "${pkgs.nodejs}/bin/node ${rfdFyi}/tools/enricher/enrich.mjs";
+
+      PrivateTmp = true;
+      ProtectSystem = "strict";
+      ProtectHome = true;
+      NoNewPrivileges = true;
+    };
+  };
+
+  # Deliberately not wantedBy timers.target: the first run against production
+  # KV backfills up to 1000 deals (~7.5min) rather than the handful a
+  # steady-state run sees. Verify by hand first (see the enricher's
+  # bootstrapping instructions), then `systemctl enable --now rfd-enrich.timer`.
+  systemd.timers.rfd-enrich = {
+    description = "Tag RedFlagDeals deals every 15 minutes";
+    timerConfig = {
+      OnBootSec = "5min";
+      OnUnitActiveSec = "15min";
+      Persistent = true;
+      RandomizedDelaySec = "60s";
     };
   };
 
