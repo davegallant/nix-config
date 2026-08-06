@@ -29,6 +29,24 @@
       # leaves a dead socket behind.
       set -g update-environment "DISPLAY XAUTHORITY"
 
+      # update-environment only covers what a client copies into the
+      # *session* environment on attach. Whatever forked the server has
+      # already been copied into the *global* environment table, and that
+      # copy lives as long as the server does, so a server started from a
+      # Tailscale SSH login hands every later pane that login's forwarded
+      # socket - long after it stops existing. Pin it back to the local
+      # agent.
+      #
+      # This goes through run-shell rather than the more obvious
+      # `set-environment -g SSH_AUTH_SOCK "$XDG_RUNTIME_DIR/ssh-agent"`
+      # because tmux expands $VAR in config strings against the server's
+      # own environment: a server that starts without XDG_RUNTIME_DIR
+      # collapses that to "/ssh-agent". Inside single quotes tmux leaves
+      # the string alone and sh does the expansion, so the :- fallback
+      # actually applies. Both binaries are absolute because run-shell
+      # inherits the server's PATH, which is not guaranteed to be useful.
+      run-shell '${pkgs.tmux}/bin/tmux set-environment -g SSH_AUTH_SOCK "''${XDG_RUNTIME_DIR:-/run/user/$(${pkgs.coreutils}/bin/id -u)}/ssh-agent"'
+
       # Terminal + titles
       set -as terminal-features ",xterm-256color:RGB"
       set -g set-titles on
@@ -79,8 +97,8 @@
       set -g status-style "bg=default,fg=#585b70"
       set -g status-left-length 40
       set -g status-left "#[fg=#89b4fa]#S#[fg=#585b70]│"
-      set -g status-right-length 40
-      set -g status-right "#[fg=#585b70]│#[fg=#a6e3a1]#h"
+      # status-right is deliberately NOT set here - see the mkOrder 750
+      # block below for why it has to be set before the plugins load.
       setw -g window-status-format "#[fg=#6c7086]#I:#W"
       setw -g window-status-current-format "#[fg=#89b4fa]#I:#W"
       setw -g window-status-separator " "
@@ -94,20 +112,52 @@
     '';
   };
 
+  # continuum has no timer of its own: it drives periodic saves by prepending
+  # a "#(continuum_save.sh)" interpolation onto status-right, which tmux then
+  # re-evaluates every status-interval. home-manager renders extraConfig
+  # (mkAfter, 1500) *after* the plugin run-shell lines (default, 1000), so
+  # setting status-right in extraConfig overwrites that hook right after
+  # continuum installs it and auto-save silently never fires again.
+  #
+  # mkOrder 750 lands between the module's own config (mkBefore, 500) and the
+  # plugin block, so status-right already holds this value when continuum
+  # loads and continuum prepends to it instead of being clobbered by it.
+  # The interpolation renders as an empty string, so it costs no visible
+  # width and status-right-length only bounds rendered output anyway.
+  xdg.configFile."tmux/tmux.conf".text = lib.mkOrder 750 ''
+    set -g status-right-length 40
+    set -g status-right "#[fg=#585b70]│#[fg=#a6e3a1]#h"
+  '';
+
   systemd.user.services.tmux-server = lib.mkIf (hostname == "hephaestus") {
     Unit.Description = "Persistent tmux server";
     Service = {
       Type = "oneshot";
       RemainAfterExit = true;
+      # TMUX_TMPDIR decides the socket path, and home-manager's
+      # programs.tmux.secureSocket (on by default on Linux) only exports it
+      # via home.sessionVariables - which reaches login shells but never
+      # this unit. Without it systemd starts a second server on
+      # /tmp/tmux-$UID that nothing ever attaches to, while every
+      # interactive tmux talks to one on $XDG_RUNTIME_DIR, so this unit
+      # silently stops being the persistent server it claims to be. %t is
+      # that runtime dir, and lingering is enabled for this user, so the
+      # socket survives logout.
+      #
       # XDG_RUNTIME_DIR isn't reliably in the systemd user manager's
       # activation environment this early at boot (it can land there after
       # this unit runs), and tmux bakes whatever it sees at `new-session`
-      # into its session-wide environment table for the life of the
-      # server. Set it explicitly via the %t specifier, which systemd
-      # always resolves correctly regardless of that race, so every pane
-      # spawned in this persistent session gets a working SSH_AUTH_SOCK
-      # (see home/keepassxc-ssh-agent.nix) instead of resolving to "/ssh-agent".
-      Environment = "XDG_RUNTIME_DIR=%t";
+      # into its environment table for the life of the server. Set it
+      # explicitly via %t, which systemd always resolves correctly.
+      #
+      # SSH_AUTH_SOCK is pinned for the same reason as in tmux.conf, but
+      # set here too so the session's first pane has it immediately rather
+      # than racing the run-shell that fixes it up.
+      Environment = [
+        "XDG_RUNTIME_DIR=%t"
+        "TMUX_TMPDIR=%t"
+        "SSH_AUTH_SOCK=%t/ssh-agent"
+      ];
       ExecStart = "${pkgs.bash}/bin/bash -c '${pkgs.tmux}/bin/tmux -f %h/.config/tmux/tmux.conf has-session -t main 2>/dev/null || ${pkgs.tmux}/bin/tmux -f %h/.config/tmux/tmux.conf new-session -d -s main'";
     };
     Install.WantedBy = [ "default.target" ];
