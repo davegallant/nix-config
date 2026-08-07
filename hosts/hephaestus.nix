@@ -20,6 +20,7 @@ in
 {
   imports = [
     (modulesPath + "/profiles/qemu-guest.nix")
+    ../litellm
     ../opensnitch.nix
   ];
 
