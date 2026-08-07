@@ -8,13 +8,11 @@
   ...
 }:
 let
-  # rfd-fyi's enricher (tools/enricher/) is 4 dependency-free .mjs files. Pin
-  # to a rev and bump by hand -- the enricher is stable, so this should be rare.
   rfdFyi = pkgs.fetchFromGitHub {
     owner = "davegallant";
     repo = "rfd-fyi";
-    rev = "e68091d18918afaea89f8ef16d757615d63b2357";
-    hash = "sha256-6OSeuMIVEMJPdWezKAKCPCLuB5fDfahX0BJ3ev6VLfg=";
+    rev = "2d37ac263b1abfbcf69f7adb518bd762b8e626ff";
+    hash = "sha256-g//QfJlTsS9DEjtxZHVWICDNilDMZvkeDlufqDkwi7k=";
   };
 in
 {
@@ -299,10 +297,10 @@ in
     loadModels = [ "qwen2.5:7b-instruct" ];
   };
 
-  # Tags RedFlagDeals deals on rfd.davegallant.ca with the local Ollama.
+  # Tags RedFlagDeals deals on rfd.davegallant.ca via the local LiteLLM proxy.
   # Cloudflare Workers can't reach a LAN, so the enricher runs here and
-  # pushes results in. qwen2.5:7b-instruct (already loaded above, see
-  # loadModels) is the enricher's own default model.
+  # pushes results in. minimax-m3 (served by the litellm service above) is
+  # the enricher's own default model for the litellm provider.
   users.users.rfd-enrich = {
     isSystemUser = true;
     group = "rfd-enrich";
@@ -316,16 +314,14 @@ in
   ];
 
   systemd.services.rfd-enrich = {
-    description = "Tag RedFlagDeals deals with the local Ollama";
+    description = "Tag RedFlagDeals deals with the local LiteLLM proxy";
     after = [
       "network-online.target"
-      "ollama.service"
+      "litellm.service"
     ];
     wants = [ "network-online.target" ];
-
     environment = {
       RFD_FYI_ORIGIN = "https://rfd.davegallant.ca";
-      ENRICH_MODEL = "qwen2.5:7b-instruct";
     };
 
     serviceConfig = {
@@ -345,16 +341,15 @@ in
     };
   };
 
-  # Deliberately not wantedBy timers.target: the first run against production
-  # KV backfills up to 1000 deals (~7.5min) rather than the handful a
-  # steady-state run sees. Verify by hand first (see the enricher's
-  # bootstrapping instructions), then `systemctl enable --now rfd-enrich.timer`.
+  # Manually verified (a hand-run of rfd-enrich.service tagged cleanly via
+  # litellm/minimax-m3) before enabling the timer below.
   systemd.timers.rfd-enrich = {
-    description = "Tag RedFlagDeals deals daily around 4am Eastern";
+    description = "Tag RedFlagDeals deals every 15 minutes";
+    wantedBy = [ "timers.target" ];
     timerConfig = {
-      OnCalendar = "04:00";
+      OnCalendar = "*:0/15";
       Persistent = true;
-      RandomizedDelaySec = "10min";
+      RandomizedDelaySec = "1min";
     };
   };
 
