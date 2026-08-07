@@ -4,14 +4,14 @@
   makeBinaryWrapper,
 }:
 let
-  version = "0.146.0"; # renovate: datasource=github-releases depName=openai/codex
+  version = "0.147.0"; # renovate: datasource=github-releases depName=openai/codex
 
   # kratos (aarch64-darwin) is the only consumer; other systems are omitted.
   # Release tags carry a "rust-v" prefix (see home/codex/update-hashes.sh).
   assets = {
     aarch64-darwin = {
       url = "https://github.com/openai/codex/releases/download/rust-v${version}/codex-aarch64-apple-darwin.tar.gz";
-      hash = "sha256-Byowpl8FZmc1iJ7w9gtW2xhq293p1cXMGmS+C1mFMP4=";
+      hash = "sha256-dZhLgfkqcbDA9LO1ytgOXFcXfk2Mi0seE9twOyDcQ1g=";
     };
   };
 in
