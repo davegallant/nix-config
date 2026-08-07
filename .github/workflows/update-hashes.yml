@@ -8,6 +8,7 @@ on:
       - home/lib/skills.nix
       - home/hunk/package.nix
       - home/pi/package.nix
+      - home/codex/package.nix
 
 jobs:
   update-hashes:
@@ -48,6 +49,12 @@ jobs:
           VERSION=$(grep 'version = ' home/hunk/package.nix | head -1 | sed 's/.*version = "\([^"]*\)".*/\1/')
           bash home/hunk/update-hashes.sh "$VERSION"
 
+      - name: update codex hashes
+        if: contains(steps.changed.outputs.files, 'home/codex/package.nix')
+        run: |
+          VERSION=$(grep 'version = ' home/codex/package.nix | head -1 | sed 's/.*version = "\([^"]*\)".*/\1/')
+          bash home/codex/update-hashes.sh "$VERSION"
+
       - name: update davegallant/skills hash
         if: contains(steps.changed.outputs.files, 'home/lib/skills.nix')
         run: |
@@ -58,6 +65,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add home/claude/package.nix home/lib/skills.nix home/hunk/package.nix home/pi/package.nix
+          git add home/claude/package.nix home/lib/skills.nix home/hunk/package.nix home/pi/package.nix home/codex/package.nix
           git diff --staged --quiet || git commit -m "chore: update hashes"
           git push
