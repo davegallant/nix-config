@@ -1,0 +1,30 @@
+# OpenCode Go models exposed via LiteLLM.
+# Refreshed via (no auth required):
+#   curl -s https://opencode.ai/zen/go/v1/models | jq -r '.data[].id'
+[
+  "deepseek-v4-flash"
+  "deepseek-v4-pro"
+  "glm-5"
+  "glm-5.1"
+  "glm-5.2"
+  "gpt-5.6-luna"
+  "grok-4.5"
+  "hy3"
+  "hy3-preview"
+  "kimi-k2.5"
+  "kimi-k2.6"
+  "kimi-k2.7-code"
+  "kimi-k3"
+  "mimo-v2-omni"
+  "mimo-v2-pro"
+  "mimo-v2.5"
+  "mimo-v2.5-pro"
+  "minimax-m2.5"
+  "minimax-m2.7"
+  "minimax-m3"
+  "qwen3.5-plus"
+  "qwen3.6-plus"
+  "qwen3.7-max"
+  "qwen3.7-plus"
+  "qwen3.8-max"
+]
