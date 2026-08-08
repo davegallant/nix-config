@@ -72,6 +72,26 @@
     enable = true;
     execWheelOnly = true;
     wheelNeedsPassword = true;
+    # Passwordless nixos-rebuild so agents (Claude Code) can run `just rebuild`
+    # without an interactive password prompt. Note this is effectively
+    # unrestricted root: any flake can be built and activated through it.
+    # Both paths are listed because `sudo nixos-rebuild` resolves via PATH to
+    # the /run/current-system symlink, not the store path.
+    extraRules = [
+      {
+        groups = [ "wheel" ];
+        commands = [
+          {
+            command = "/run/current-system/sw/bin/nixos-rebuild";
+            options = [ "NOPASSWD" ];
+          }
+          {
+            command = "${pkgs.nixos-rebuild-ng}/bin/nixos-rebuild";
+            options = [ "NOPASSWD" ];
+          }
+        ];
+      }
+    ];
   };
 
   users.users.dave = {
