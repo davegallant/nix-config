@@ -19,6 +19,7 @@ in
   ];
 
   home-manager.users.dave.imports = [
+    ../home/opencode-usage.nix
     ../home/retroarch.nix
     ../home/ryujinx.nix
   ];
