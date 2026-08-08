@@ -167,6 +167,28 @@ in
     # the tailnet, so pair from off-LAN by adding the host in Moonlight
     # manually via its Tailscale IP/MagicDNS name.
     openFirewall = true;
+    # Recurring bug: desktop audio goes silent after (or sometimes during)
+    # a Moonlight session, even though nothing was unplugged. Sunshine's
+    # audio capture creates a virtual sink named "sink-sunshine-stereo".
+    # WirePlumber records whatever sink was most recently in use as the
+    # preferred default in ~/.local/state/wireplumber/default-nodes
+    # (default.configured.audio.sink=...). When that session ends the
+    # virtual sink is destroyed, but WirePlumber doesn't always fall back
+    # to a real device -- both onboard ALSA cards (GPU HDMI/DP and
+    # motherboard analog) can end up stuck on profile "off", leaving only
+    # a silent "Dummy Output" sink (`wpctl status` shows just Dummy Output
+    # under Audio > Sinks).
+    #
+    # Fix: force a real profile back on, e.g. for the motherboard analog
+    # card: `wpctl set-profile 45 2` (get device/profile ids from
+    # `wpctl status` / `wpctl inspect <id>`). That's usually enough to get
+    # WirePlumber to pick a real default sink again.
+    #
+    # To stop it recurring for the current stale state, remove the leftover
+    # preference: `sed -i '/default.configured.audio.sink=sink-sunshine-stereo/d'
+    # ~/.local/state/wireplumber/default-nodes`. It comes back after every
+    # streaming session, so this isn't a one-time fix -- no permanent fix
+    # found yet.
     settings = {
       # Steam's steamwebhelper process grabs port 47990 (Sunshine's
       # default web UI port, offset +1 from the default base of 47989)
