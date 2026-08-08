@@ -6,7 +6,7 @@ alias f := fmt
 arch := `uname -s`
 
 cmd := if arch == "Linux" { "nixos-rebuild --sudo" } else { "sudo darwin-rebuild" }
-switch_cmd := if arch == "Linux" { "sudo nix-env -p /nix/var/nix/profiles/system --set ./result && sudo /nix/var/nix/profiles/system/bin/switch-to-configuration switch" } else { "sudo result/activate" }
+switch_cmd := if arch == "Linux" { "sudo nix-env -p /nix/var/nix/profiles/system --set ./result && sudo /nix/var/nix/profiles/system/bin/switch-to-configuration switch" } else { "sudo nix-env -p /nix/var/nix/profiles/system --set ./result && sudo ./result/activate" }
 
 # list available recipes
 [private]
