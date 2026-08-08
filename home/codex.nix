@@ -1,7 +1,6 @@
 {
   lib,
   pkgs,
-  hostname ? "",
   ...
 }:
 let
@@ -39,7 +38,7 @@ let
   '';
 in
 {
-  config = lib.mkIf (hostname == "kratos") {
+  config = {
     home.packages = [ codex-wrapper ];
 
     # Shared skills: same davegallant/skills pin as claude (~/.claude/skills)

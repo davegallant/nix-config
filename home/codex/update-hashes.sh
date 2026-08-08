@@ -5,9 +5,9 @@
 #            defaults to the latest release from GitHub.
 #
 # codex needs its own updater (not lib/update-github-hashes.sh) because release
-# tags carry a "rust-v" prefix and the darwin asset is named
-# codex-aarch64-apple-darwin.tar.gz. kratos (aarch64-darwin) is the only
-# consumer, so only that hash is tracked.
+# tags carry a "rust-v" prefix and assets are named codex-<triple>.tar.gz.
+# Tracks both consumers: aarch64-darwin (kratos, helios) and x86_64-linux
+# (hephaestus).
 
 set -euo pipefail
 
@@ -25,22 +25,28 @@ fi
 
 echo "version: ${VERSION}"
 
-URL="https://github.com/${REPO}/releases/download/rust-v${VERSION}/codex-aarch64-apple-darwin.tar.gz"
-echo "  fetching ${URL##*/}..."
-HASH="sha256-$(curl -fsSL "$URL" | openssl dgst -sha256 -binary | openssl base64)"
-echo "  hash: ${HASH}"
-
 CURRENT_VERSION=$(grep 'version = ' "$PACKAGE_NIX" | head -1 | sed 's/.*version = "\([^"]*\)".*/\1/')
 
 if [[ "$CURRENT_VERSION" == "$VERSION" ]]; then
-  echo "version unchanged (${VERSION}), updating hash only"
+  echo "version unchanged (${VERSION}), updating hashes only"
 else
   echo "updating version: ${CURRENT_VERSION} -> ${VERSION}"
   sed -i "s|version = \"${CURRENT_VERSION}\";|version = \"${VERSION}\";|" "$PACKAGE_NIX"
 fi
 
-sed -i \
-  "/codex-aarch64-apple-darwin\.tar\.gz/{n; s|hash = \"[^\"]*\";|hash = \"${HASH}\";|}" \
-  "$PACKAGE_NIX"
+declare -A ASSETS=(
+  [codex-aarch64-apple-darwin.tar.gz]=1
+  [codex-x86_64-unknown-linux-musl.tar.gz]=1
+)
+
+for asset in "${!ASSETS[@]}"; do
+  URL="https://github.com/${REPO}/releases/download/rust-v${VERSION}/${asset}"
+  echo "  fetching ${asset}..."
+  HASH="sha256-$(curl -fsSL "$URL" | openssl dgst -sha256 -binary | openssl base64)"
+  echo "  hash: ${HASH}"
+  sed -i \
+    "/${asset//./\\.}\";/{n; s|hash = \"[^\"]*\";|hash = \"${HASH}\";|}" \
+    "$PACKAGE_NIX"
+done
 
 echo "updated ${PACKAGE_NIX}"
