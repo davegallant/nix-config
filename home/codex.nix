@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  hostname ? "",
   ...
 }:
 let
@@ -11,16 +12,11 @@ let
     repo = "skills";
     inherit (skillsPin) rev hash;
   };
-  # Wrapper regenerates ~/.codex/config.toml on each run (like the pi wrapper's
-  # models.json), so model/provider stay nix-managed. base_url is read from
-  # $LITELLM_BASE_URL and the key via env_key at runtime, keeping the internal
-  # URL and secret out of this public repo.
-  codex-wrapper = pkgs.writeShellScriptBin "codex" ''
-    set -euo pipefail
-
-    mkdir -p "$HOME/.codex"
-
-    cat > "$HOME/.codex/config.toml" <<EOF
+  # Only kratos routes through litellm (base_url from $LITELLM_BASE_URL, key
+  # via env_key at runtime, keeping the internal URL and secret out of this
+  # public repo). Other hosts fall back to codex's default ChatGPT-login auth
+  # (`codex login`), riding whatever ChatGPT plan is signed in there.
+  litellmProvider = ''
     model = "gpt-5.6-sol"
     model_provider = "litellm"
 
@@ -30,8 +26,19 @@ let
     env_key = "LITELLM_API_KEY"
     wire_api = "responses"
 
-    [tui]
+  '';
+
+  # Wrapper regenerates ~/.codex/config.toml on each run (like the pi wrapper's
+  # models.json), so config stays nix-managed.
+  codex-wrapper = pkgs.writeShellScriptBin "codex" ''
+    set -euo pipefail
+
+    mkdir -p "$HOME/.codex"
+
+    cat > "$HOME/.codex/config.toml" <<EOF
+    ${lib.optionalString (hostname == "kratos") litellmProvider}[tui]
     status_line = [ "current-dir", "git-branch", "model", "context-remaining" ]
+    vim_mode_default = true
     EOF
 
     exec ${codex-pkg}/bin/codex "$@"
