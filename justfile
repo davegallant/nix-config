@@ -5,8 +5,12 @@ alias f := fmt
 
 arch := `uname -s`
 
-cmd := if arch == "Linux" { "nixos-rebuild --sudo" } else { "sudo darwin-rebuild" }
-switch_cmd := if arch == "Linux" { "sudo nix-env -p /nix/var/nix/profiles/system --set ./result && sudo /nix/var/nix/profiles/system/bin/switch-to-configuration switch" } else { "sudo nix-env -p /nix/var/nix/profiles/system --set ./result && sudo ./result/activate" }
+# Activation runs under a single `sudo <rebuild>` so it matches the one
+# NOPASSWD sudoers rule in nixos.nix (see security.sudo-rs.extraRules).
+cmd := if arch == "Linux" { "sudo nixos-rebuild" } else { "sudo darwin-rebuild" }
+# Building stays unprivileged on Linux so ./result stays owned by the user.
+build_cmd := if arch == "Linux" { "nixos-rebuild" } else { "sudo darwin-rebuild" }
+switch_cmd := if arch == "Linux" { "sudo nixos-rebuild switch --flake . --option warn-dirty false" } else { "sudo nix-env -p /nix/var/nix/profiles/system --set ./result && sudo ./result/activate" }
 
 # list available recipes
 [private]
@@ -15,7 +19,7 @@ default:
 
 # build, show nvd diff, then switch
 rebuild:
-  $cmd build --flake . --option warn-dirty false
+  $build_cmd build --flake . --option warn-dirty false
   nvd diff /run/current-system result | rg -v '^[<>]{3} ' > /tmp/nvd-diff.txt
   sh -c "$switch_cmd"
 
