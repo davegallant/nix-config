@@ -15,12 +15,13 @@ stdenvNoCC.mkDerivation rec {
   # - the menu bar icon is a pair of concentric ring gauges (rolling 5h on
   #   the outer ring, weekly on the inner), instead of a static logo
   # - a notification fires when monthly usage crosses 90%
+  # - the popover footer shows the app version
   # See https://github.com/davegallant/opencode-usage (fork's main branch)
   src = fetchFromGitHub {
     owner = "davegallant";
     repo = "opencode-usage";
-    rev = "e1779bc26776efbb4ceae4462925db62200c79de";
-    hash = "sha256-wHG/TbjIz0we3jSxfc3pwX+376Bb7iN/zsblP2rnjXg=";
+    rev = "8783165e82a7fd25f1444d4e644e66d8d92e549c";
+    hash = "sha256-gTWeRZPJ7aViVXUZMQQVocWR1vKTFFi7fWR60gc3ZcA=";
   };
 
   nativeBuildInputs = [ xcodegen ];
