@@ -16,6 +16,21 @@ let
     rev = "efcb168b1d604b3115810dedc602597514d12cfb";
     hash = "sha256-lAqjKIlEFK8kc3TfyWLl92RA5gVcKnTcGfJ0+6FEk4c=";
   };
+
+  # The same idea for opencode Go usage, built to the same package layout so it
+  # installs the same way. opencode publishes no usage API, so the widget's
+  # helper replays an https://opencode.ai/_server request copied out of the web
+  # console as cURL and scrapes the three usage windows from the response. That
+  # means it needs configuring after install: right-click the widget ->
+  # Configure, paste the curl. Nothing here can provision that -- it carries a
+  # live session cookie and goes stale whenever opencode redeploys.
+  # No tagged releases; bump rev/hash by hand.
+  opencode-usage-widget = pkgs.fetchFromGitHub {
+    owner = "davegallant";
+    repo = "opencode-usage-widget";
+    rev = "9423a3726cb4d2998dff0e954fae3192c00a059d";
+    hash = "sha256-gFFKuqkiJEY+OPgyuj4hh0mSajbB7RcBiKOPGP+Zq2M=";
+  };
 in
 {
   config = lib.mkIf pkgs.stdenv.isLinux {
@@ -35,6 +50,8 @@ in
     # real path escapes the package root, which recursive per-file symlinks
     # into the Nix store would trigger.
     xdg.dataFile."plasma/plasmoids/com.cbo.claudeusage".source = "${claude-usage-widget}/package";
+    xdg.dataFile."plasma/plasmoids/com.davegallant.opencodeusage".source =
+      "${opencode-usage-widget}/package";
 
     xdg.configFile."kscreenlockerrc".text = ''
       [Daemon]
