@@ -15,7 +15,7 @@ stdenvNoCC.mkDerivation rec {
   # - the menu bar icon is a pair of concentric ring gauges (rolling 5h on
   #   the outer ring, weekly on the inner), instead of a static logo
   # - a notification fires when monthly usage crosses 90%
-  # See https://github.com/davegallant/opencode-usage/tree/feat/dual-ring-and-alerts
+  # See https://github.com/davegallant/opencode-usage (fork's main branch)
   src = fetchFromGitHub {
     owner = "davegallant";
     repo = "opencode-usage";
