@@ -8,6 +8,9 @@
 }:
 {
   xdg.configFile = {
+    # Shadows fish's stock j.fish (an autojump/history completion), which runs
+    # `complete -c j -e` and wipes the `j` alias's inherited `just` completions.
+    "fish/completions/j.fish".text = "complete -c j -w just\n";
     "fish/completions/kubectl.fish".source = pkgs.runCommand "kubectl-completions.fish" { } ''
       ${unstable.kubectl}/bin/kubectl completion fish > $out
     '';
