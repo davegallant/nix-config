@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   unstable,
   ...
 }:
@@ -21,6 +22,7 @@
   };
 
   environment.systemPackages = [
+    pkgs.terraform-mcp-server
     unstable.kubelogin
     unstable.ollama
     unstable.terraform
