@@ -7,10 +7,6 @@ let
   pi-pkg = pkgs.callPackage ./pi/package.nix {
     inherit (pkgs) python3;
   };
-  # Deliberately unsandboxed, and identical on Linux and macOS. Linux used to
-  # run pi under bubblewrap, but macOS had no equivalent, so behaviour diverged
-  # per platform. pi now runs with the same access the shell that launched it
-  # has, everywhere.
   pi-wrapper = pkgs.writeShellScriptBin "pi" ''
     set -euo pipefail
 
@@ -47,7 +43,6 @@ in
     ];
 
     home.file.".pi/agent/extensions/statusline.ts".source = ./pi/statusline.ts;
-    home.file.".pi/agent/extensions/auto-recap.ts".source = ./pi/auto-recap.ts;
 
     # Advisor tool: consults a stronger model with the full session transcript.
     # The model is runtime-switchable via /advisor-model (persisted to
@@ -97,18 +92,28 @@ in
           source = "git:github.com/mitsuhiko/agent-stuff@d265b8ef32f896d3ef3bc6a45bd7b8e0d02150e0";
           skills = [ ]; # skip loading skills
           extensions = [
-            "extensions/answer.ts"
             "extensions/btw.ts"
+            "extensions/continue.ts"
             "extensions/control.ts"
             "extensions/files.ts"
-            "extensions/loop.ts"
             "extensions/notify.ts"
             "extensions/review.ts"
+            "extensions/subagent.ts"
             "extensions/whimsical.ts"
           ];
         }
         {
           source = "git:github.com/davegallant/skills@${skillsPin.rev}";
+          skills = [
+            "skills/commit"
+            "skills/github"
+            "skills/grill-me"
+            "skills/hunk-review"
+            "skills/issue-tracker-local"
+            "skills/obsidian-vault"
+            "skills/sentry"
+            "skills/summarize"
+          ];
         }
       ];
     };
