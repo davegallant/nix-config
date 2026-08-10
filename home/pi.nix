@@ -98,6 +98,7 @@ in
             "extensions/whimsical.ts"
           ];
         }
+        { source = "npm:pi-vimmode@0.9.0"; }
       ];
     };
   };
