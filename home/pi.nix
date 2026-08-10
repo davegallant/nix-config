@@ -1,5 +1,4 @@
 {
-  lib,
   pkgs,
   ...
 }:
@@ -8,90 +7,37 @@ let
   pi-pkg = pkgs.callPackage ./pi/package.nix {
     inherit (pkgs) python3;
   };
-  pi-wrapper = pkgs.writeShellScriptBin "pi" (
-    ''
-      set -euo pipefail
+  # Deliberately unsandboxed, and identical on Linux and macOS. Linux used to
+  # run pi under bubblewrap, but macOS had no equivalent, so behaviour diverged
+  # per platform. pi now runs with the same access the shell that launched it
+  # has, everywhere.
+  pi-wrapper = pkgs.writeShellScriptBin "pi" ''
+    set -euo pipefail
 
-      mkdir -p "$HOME/.pi/agent"
+    mkdir -p "$HOME/.pi/agent"
 
-      ${pkgs.jq}/bin/jq -n '
-        {
-          providers: {
-            "ollama": {
-              baseUrl: "http://kratos:11434/v1",
-              api: "openai-completions",
-              apiKey: "ollama",
-              compat: {
-                supportsDeveloperRole: false,
-                supportsReasoningEffort: false,
-                thinkingFormat: "qwen"
-              },
-              models: [
-                { id: "qwen3.6:35b", name: "Qwen 3.6 35B (kratos)", reasoning: true, contextWindow: 262144 }
-              ],
+    ${pkgs.jq}/bin/jq -n '
+      {
+        providers: {
+          "ollama": {
+            baseUrl: "http://kratos:11434/v1",
+            api: "openai-completions",
+            apiKey: "ollama",
+            compat: {
+              supportsDeveloperRole: false,
+              supportsReasoningEffort: false,
+              thinkingFormat: "qwen"
             },
+            models: [
+              { id: "qwen3.6:35b", name: "Qwen 3.6 35B (kratos)", reasoning: true, contextWindow: 262144 }
+            ],
           },
-        }
-      ' > "$HOME/.pi/agent/models.json"
-    ''
-    + lib.optionalString pkgs.stdenv.isLinux ''
+        },
+      }
+    ' > "$HOME/.pi/agent/models.json"
 
-      project="$(pwd)"
-      uid="$(id -u)"
-      xdg_runtime="''${XDG_RUNTIME_DIR:-/run/user/$uid}"
-
-      ssh_auth_bind=()
-      if [ -n "''${SSH_AUTH_SOCK:-}" ] && [ -S "$SSH_AUTH_SOCK" ]; then
-        ssh_auth_bind=(--bind "$SSH_AUTH_SOCK" "$SSH_AUTH_SOCK" --setenv SSH_AUTH_SOCK "$SSH_AUTH_SOCK")
-      fi
-
-      exec ${pkgs.bubblewrap}/bin/bwrap \
-        --unshare-all \
-        --share-net \
-        --die-with-parent \
-        --ro-bind /nix/store /nix/store \
-        --ro-bind /run/current-system /run/current-system \
-        --ro-bind /run/wrappers /run/wrappers \
-        --ro-bind /etc/profiles/per-user/"$USER" /etc/profiles/per-user/"$USER" \
-        --ro-bind /etc/resolv.conf /etc/resolv.conf \
-        --ro-bind /etc/hosts /etc/hosts \
-        --ro-bind /etc/nsswitch.conf /etc/nsswitch.conf \
-        --ro-bind /etc/passwd /etc/passwd \
-        --ro-bind /etc/group /etc/group \
-        --ro-bind /etc/ssl /etc/ssl \
-        --ro-bind /etc/static /etc/static \
-        --ro-bind-try /etc/localtime /etc/localtime \
-        --ro-bind-try /etc/zoneinfo /etc/zoneinfo \
-        --ro-bind-try /etc/timezone /etc/timezone \
-        --ro-bind-try /etc/terminfo /etc/terminfo \
-        --ro-bind-try "$HOME/.gitconfig" "$HOME/.gitconfig" \
-        --ro-bind-try "$HOME/.config/git" "$HOME/.config/git" \
-        --ro-bind-try "$HOME/.config/gh" "$HOME/.config/gh" \
-        --ro-bind-try "$HOME/.ssh" "$HOME/.ssh" \
-        --ro-bind-try "$HOME/.gnupg" "$HOME/.gnupg" \
-        --bind "$HOME/.pi" "$HOME/.pi" \
-        --bind "$project" "$project" \
-        --chdir "$project" \
-        --dev /dev \
-        --proc /proc \
-        --tmpfs /tmp \
-        --tmpfs /run/user \
-        --dir "$xdg_runtime" \
-        --bind-try "$xdg_runtime/gnupg" "$xdg_runtime/gnupg" \
-        "''${ssh_auth_bind[@]}" \
-        --setenv HOME "$HOME" \
-        --setenv XDG_RUNTIME_DIR "$xdg_runtime" \
-        --setenv LANG "''${LANG:-en_US.UTF-8}" \
-        --setenv TZ "''${TZ:-}" \
-        --setenv PATH "/etc/profiles/per-user/$USER/bin:/run/current-system/sw/bin:/run/wrappers/bin" \
-        --setenv PI_SKIP_VERSION_CHECK "1" \
-        ${pi-pkg}/bin/pi "$@"
-    ''
-    + lib.optionalString pkgs.stdenv.isDarwin ''
-
-      PI_SKIP_VERSION_CHECK=1 exec ${pi-pkg}/bin/pi "$@"
-    ''
-  );
+    PI_SKIP_VERSION_CHECK=1 exec ${pi-pkg}/bin/pi "$@"
+  '';
 in
 {
   config = {
