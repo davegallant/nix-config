@@ -3,7 +3,6 @@
   ...
 }:
 let
-  skillsPin = import ./lib/skills.nix;
   pi-pkg = pkgs.callPackage ./pi/package.nix {
     inherit (pkgs) python3;
   };
@@ -87,6 +86,11 @@ in
         "opencode-go/glm-5.2"
         "opencode-go/kimi-k3"
       ];
+      # davegallant/skills isn't declared here: pi auto-discovers skills from
+      # ~/.agents/skills, which codex.nix already materializes from the same
+      # pin (see home/lib/skills.nix). Declaring it again as a package source
+      # just clones a second, independently-drifting copy and produces
+      # startup "skill conflict" collision warnings.
       packages = [
         {
           source = "git:github.com/mitsuhiko/agent-stuff@d265b8ef32f896d3ef3bc6a45bd7b8e0d02150e0";
@@ -100,19 +104,6 @@ in
             "extensions/review.ts"
             "extensions/subagent.ts"
             "extensions/whimsical.ts"
-          ];
-        }
-        {
-          source = "git:github.com/davegallant/skills@${skillsPin.rev}";
-          skills = [
-            "skills/commit"
-            "skills/github"
-            "skills/grill-me"
-            "skills/hunk-review"
-            "skills/issue-tracker-local"
-            "skills/obsidian-vault"
-            "skills/sentry"
-            "skills/summarize"
           ];
         }
       ];
