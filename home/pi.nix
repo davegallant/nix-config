@@ -110,6 +110,12 @@ in
     # PI_ADVISOR_MODEL in the wrapper above.
     home.file.".pi/agent/extensions/advisor.ts".source = ./pi/advisor.ts;
 
+    # AskUserQuestion equivalent: lets the model stop and offer choices mid-task.
+    # Vendored from pi's bundled examples, plus promptGuidelines and a
+    # sequential execution mode. Distinct from /answer (agent-stuff), which
+    # extracts questions after the fact.
+    home.file.".pi/agent/extensions/questionnaire.ts".source = ./pi/questionnaire.ts;
+
     # Claude-Code-parity prompt templates (/plan, /recap, /security-review,
     # /simplify, /verify). Pi auto-discovers templates in ~/.pi/agent/prompts/*.md.
     home.file.".pi/agent/prompts/plan.md".source = ./pi/prompts/plan.md;
