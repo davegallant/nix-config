@@ -258,6 +258,6 @@
   "preferredNotifChannel": "ghostty",
   "editorMode": "vim",
   "effortLevel": "high",
-  "model": "sonnet",
-  "advisorModel": "opus"
+  "model": "opus",
+  "advisorModel": "fable"
 }
