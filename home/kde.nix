@@ -28,8 +28,8 @@ let
   opencode-usage-widget = pkgs.fetchFromGitHub {
     owner = "davegallant";
     repo = "opencode-usage-widget";
-    rev = "24dbbef02df1bf258e6473729481c40919e15148";
-    hash = "sha256-0tQj/EJWzsZ1BmO3T069tI9YmbES5Ed/NuGcPdWZkhs=";
+    rev = "4e1e0c45edf301efffba02b656b349724c0bfdd1";
+    hash = "sha256-9O99isTSja0uT7ZlNVvAoi/CPqWVnMCBWp+w6IkAlVU=";
   };
 in
 {
