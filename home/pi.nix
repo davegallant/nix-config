@@ -66,15 +66,7 @@ in
 
     home.file.".pi/agent/settings.json".text = builtins.toJSON {
       defaultProvider = "opencode-go";
-      # deepseek-v4-pro over glm-5.2 mainly for cacheRead: $0.003625/M vs
-      # $0.26/M. An agent loop re-reads the prefix every turn, so that term
-      # dominates and the sticker price does not.
       defaultModel = "deepseek-v4-pro";
-      # Explicit rather than implied. pi's clampThinkingLevel searches *upward*
-      # for a supported level, and deepseek-v4-pro supports only off/high/max,
-      # so the previous "low" was already resolving to "high". This matters when
-      # cycling to minimax-m3, which supports the full ladder and would take
-      # "low" literally.
       defaultThinkingLevel = "high";
       collapseChangelog = true;
       # Ctrl+P cycling, for A/B-ing the candidates on real work. kimi-k3 is
