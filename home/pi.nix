@@ -103,6 +103,13 @@ in
     home.file.".pi/agent/extensions/statusline.ts".source = ./pi/statusline.ts;
     home.file.".pi/agent/extensions/auto-recap.ts".source = ./pi/auto-recap.ts;
 
+    # Advisor tool: consults a stronger model with the full session transcript.
+    # The model is runtime-switchable via /advisor-model (persisted to
+    # ~/.pi/agent/advisor.json, deliberately not nix-managed so it stays
+    # writable). To pin it declaratively instead, set PI_ADVISOR_PROVIDER /
+    # PI_ADVISOR_MODEL in the wrapper above.
+    home.file.".pi/agent/extensions/advisor.ts".source = ./pi/advisor.ts;
+
     # Claude-Code-parity prompt templates (/plan, /recap, /security-review,
     # /simplify, /verify). Pi auto-discovers templates in ~/.pi/agent/prompts/*.md.
     home.file.".pi/agent/prompts/plan.md".source = ./pi/prompts/plan.md;
