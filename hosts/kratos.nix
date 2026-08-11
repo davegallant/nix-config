@@ -14,7 +14,6 @@
     persistent-apps = [
       "/Applications/ghostty.app"
       "/Applications/Google Chrome.app"
-      "/Applications/Brave Browser.app"
       "/Applications/Obsidian.app"
       "/Applications/Slack.app"
       "/Applications/zoom.us.app"
