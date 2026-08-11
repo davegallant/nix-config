@@ -38,6 +38,7 @@ in
       gnome-calculator
       kodi
       moonlight-qt
+      kdePackages.plasma-browser-integration
       pwvucontrol
       python3
       wl-clipboard

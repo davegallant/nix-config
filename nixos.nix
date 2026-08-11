@@ -151,6 +151,9 @@
 
   services.desktopManager.plasma6.enable = true;
 
+  environment.etc."chromium/native-messaging-hosts/org.kde.plasma.browser_integration.json".source =
+    "${pkgs.kdePackages.plasma-browser-integration}/etc/chromium/native-messaging-hosts/org.kde.plasma.browser_integration.json";
+
   services.displayManager = {
     defaultSession = "plasma";
     sddm = {
