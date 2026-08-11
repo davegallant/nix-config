@@ -7,13 +7,6 @@
   ];
 
   config = lib.mkIf pkgs.stdenv.isLinux {
-    services.gnome-keyring = {
-      enable = true;
-      components = [
-        "secrets"
-      ];
-    };
-
     programs.mangohud = {
       enable = true;
       settings = {
