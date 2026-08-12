@@ -104,7 +104,7 @@ in
       # startup "skill conflict" collision warnings.
       packages = [
         {
-          source = "git:github.com/mitsuhiko/agent-stuff@d265b8ef32f896d3ef3bc6a45bd7b8e0d02150e0";
+          source = "git:github.com/mitsuhiko/agent-stuff@13bc8f87970bec8830aab0f1c0487d35aa7c0917";
           skills = [ ];
           extensions = [
             "extensions/btw.ts"
