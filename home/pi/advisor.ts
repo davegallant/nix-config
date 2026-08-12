@@ -19,7 +19,9 @@
  *
  * Cost: one call to the advisor model per invocation, billed on top of the
  * session model. The call reports its `usage` back to pi so the spend shows up
- * in the statusline rather than vanishing.
+ * in the statusline rather than vanishing. The tool refuses to run when the
+ * advisor model *is* the session model, which would be the priciest call in the
+ * session in exchange for self-critique — see `collidesWithSession`.
  *
  * Which model plays advisor is configurable — see ADVISOR CONFIG below.
  */
@@ -45,11 +47,17 @@ import { Type } from "typebox";
 // provider/model pair; nothing else in this file assumes a vendor.
 // ---------------------------------------------------------------------------
 
+/** Structural subsets of pi's Model / UI context — narrow enough to keep these
+ *  helpers testable without dragging in the SDK types. */
+type ModelRef = { provider: string; id: string };
+type NotifyUI = { notify(message: string, type?: "info" | "warning" | "error"): void };
+
 interface AdvisorConfig {
   provider: string;
   model: string;
   reasoningEffort: string;
   maxTranscriptChars: number;
+  allowSameModel: boolean;
 }
 
 const DEFAULTS: AdvisorConfig = {
@@ -59,6 +67,10 @@ const DEFAULTS: AdvisorConfig = {
   // Advisor models are chosen for large context; this leaves headroom while
   // keeping a single consultation from costing a fortune.
   maxTranscriptChars: 240_000,
+  // Refuse to consult the model already running the session — see
+  // collidesWithSession. Config-file only (like maxTranscriptChars); set true
+  // to allow the call anyway.
+  allowSameModel: false,
 };
 
 const CONFIG_PATH = path.join(os.homedir(), ".pi", "agent", "advisor.json");
@@ -97,6 +109,54 @@ function saveConfig(provider: string, model: string): void {
   const merged = { ...readConfigFile(), provider, model };
   fs.mkdirSync(path.dirname(CONFIG_PATH), { recursive: true });
   fs.writeFileSync(CONFIG_PATH, `${JSON.stringify(merged, null, 2)}\n`);
+}
+
+/**
+ * The advisor earns its cost by being a *different* model — a second set of
+ * weights with different blind spots. Aimed at the session's own model it keeps
+ * almost nothing: the session model already holds this transcript, so the
+ * "sees what you did not summarise" premise is moot, and pi.nix sets
+ * defaultThinkingLevel to the same "high" as reasoningEffort below, so even the
+ * effort differential is zero. Meanwhile it costs the most it ever can, because
+ * cacheRetention "none" in execute() re-sends the whole transcript uncached.
+ * That leaves plain self-critique at premium prices, so refuse by default.
+ *
+ * Compared on provider *and* id: one id behind two gateways is rare, and
+ * treating that as a clash would false-block a legitimate pairing. An undefined
+ * ctx.model fails open — some run modes may not populate it, and not knowing
+ * the current model is not evidence of a collision.
+ */
+function collidesWithSession(config: AdvisorConfig, current: ModelRef | undefined): boolean {
+  if (config.allowSameModel || !current) return false;
+  return current.provider === config.provider && current.id === config.model;
+}
+
+/**
+ * Announce a collision at the moment it becomes true — on Ctrl+P, on
+ * /advisor-model, and at session start for a collision persisted in
+ * advisor.json — so it is never discovered halfway through a task.
+ */
+function warnIfCollides(ui: NotifyUI, current: ModelRef | undefined): void {
+  const config = loadConfig();
+  if (!collidesWithSession(config, current)) return;
+  ui.notify(
+    `Advisor disabled: ${config.provider}/${config.model} is both the session model and the advisor model. Switch either one to re-enable it.`,
+    "warning",
+  );
+}
+
+/**
+ * Addressed to the model, not the user: promptGuidelines tells it to consult the
+ * advisor before substantive work and again at the end, so a collision would
+ * otherwise fail every call for the whole session. Hence the explicit "do not
+ * retry" and the two concrete ways out.
+ */
+function collisionError(config: AdvisorConfig): Error {
+  return new Error(
+    `Advisor is unavailable this session: the advisor model (${config.provider}/${config.model}) is the model you are already running on, ` +
+      `so consulting it would re-send this transcript uncached for no cross-model review. Do not retry. ` +
+      `Proceed without advice, or ask the user to switch session models (Ctrl+P) or run /advisor-model <provider/model>.`,
+  );
 }
 
 // ---------------------------------------------------------------------------
@@ -264,6 +324,17 @@ export default function (pi: ExtensionAPI) {
     } catch {
       availableModels = []; // completions degrade to none; the tool itself still works
     }
+    // Outside the try: advisor.json outlives the session, so a collision saved
+    // by a previous /advisor-model is worth reporting even if the catch fired.
+    warnIfCollides(ctx.ui, ctx.model);
+  });
+
+  // Ctrl+P is the likeliest route into a collision — enabledModels lists
+  // kimi-k3 precisely so the advisor's model is one keypress away (home/pi.nix)
+  // — so warn on the switch rather than on the first failed consultation.
+  // event.model is used over ctx.model: this fires as the selection is applied.
+  pi.on("model_select", (event, ctx) => {
+    warnIfCollides(ctx.ui, event.model);
   });
 
   pi.registerCommand("advisor-model", {
@@ -281,6 +352,7 @@ export default function (pi: ExtensionAPI) {
       if (!target) {
         const source = pinnedByEnv() ? "env" : fs.existsSync(CONFIG_PATH) ? CONFIG_PATH : "built-in default";
         ctx.ui.notify(`Advisor: ${config.provider}/${config.model} (effort ${config.reasoningEffort}, from ${source})`, "info");
+        warnIfCollides(ctx.ui, ctx.model);
         return;
       }
 
@@ -320,6 +392,12 @@ export default function (pi: ExtensionAPI) {
       } else {
         ctx.ui.notify(`Advisor model set to ${provider}/${model}`, "info");
       }
+
+      // Separate call, not an else-branch: an env pin and a collision can both
+      // apply at once (saved X, env pins Y, and Y is the session model).
+      // warnIfCollides re-reads the config, so it reports what will actually
+      // be consulted rather than what was just requested.
+      warnIfCollides(ctx.ui, ctx.model);
     },
   });
 
@@ -343,6 +421,11 @@ export default function (pi: ExtensionAPI) {
 
     async execute(_toolCallId, _params, signal, onUpdate, ctx) {
       const config = loadConfig();
+
+      // Read ctx.model here rather than caching it at session_start: Ctrl+P
+      // switches the session model mid-session, which is exactly how a
+      // collision becomes reachable.
+      if (collidesWithSession(config, ctx.model)) throw collisionError(config);
 
       const model = ctx.modelRegistry.find(config.provider, config.model);
       if (!model) {
