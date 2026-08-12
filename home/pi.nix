@@ -118,6 +118,7 @@ in
           ];
         }
         { source = "npm:pi-vimmode@0.9.0"; }
+        { source = "git:github.com/obra/superpowers@v6.3.0"; }
       ];
     };
   };
