@@ -11,13 +11,7 @@ let
 
   onKratos = hostname == "kratos";
 
-  # Only kratos routes through litellm, mirroring home/codex.nix: the internal
-  # URL and key stay out of this public repo. The URL is expanded by the
-  # wrapper at launch (pi only interpolates $VARs in credential-style values,
-  # not in baseUrl); the key stays as a literal $LITELLM_API_KEY so pi resolves
-  # it per request and it never lands in models.json. input must be declared
-  # explicitly -- pi defaults custom models to ["text"] and silently drops
-  # images on anything it believes is text-only.
+  # Only kratos routes through litellm, mirroring home/codex.nix
   litellmProvider = ''
     "litellm": {
       baseUrl: $litellmBaseUrl,
@@ -93,15 +87,11 @@ in
 
     home.file.".pi/agent/settings.json".text = builtins.toJSON {
       defaultProvider = if onKratos then "litellm" else "opencode-go";
-      # gpt-5.6-sol accepts images; deepseek-v4-pro is text-only, so pasted
-      # screenshots are dropped before they reach the model on other hosts.
-      defaultModel = if onKratos then "gpt-5.6-sol" else "deepseek-v4-pro";
+      defaultModel = if onKratos then "gpt-5.6-sol" else "deepseek-v4-flash";
       defaultThinkingLevel = "high";
       collapseChangelog = true;
-      # Ctrl+P cycling, for A/B-ing the candidates on real work. kimi-k3 is
-      # listed so the advisor's model stays inside the session scope that
-      # enabledModels establishes.
       enabledModels = lib.optional onKratos "litellm/gpt-5.6-sol" ++ [
+        "opencode-go/deepseek-v4-flash"
         "opencode-go/deepseek-v4-pro"
         "opencode-go/minimax-m3"
         "opencode-go/glm-5.2"
@@ -115,7 +105,7 @@ in
       packages = [
         {
           source = "git:github.com/mitsuhiko/agent-stuff@d265b8ef32f896d3ef3bc6a45bd7b8e0d02150e0";
-          skills = [ ]; # skip loading skills
+          skills = [ ];
           extensions = [
             "extensions/btw.ts"
             "extensions/continue.ts"
