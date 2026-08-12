@@ -1,20 +1,43 @@
 {
+  lib,
   pkgs,
+  hostname ? "",
   ...
 }:
 let
   pi-pkg = pkgs.callPackage ./pi/package.nix {
     inherit (pkgs) python3;
   };
+
+  onKratos = hostname == "kratos";
+
+  # Only kratos routes through litellm, mirroring home/codex.nix: the internal
+  # URL and key stay out of this public repo. The URL is expanded by the
+  # wrapper at launch (pi only interpolates $VARs in credential-style values,
+  # not in baseUrl); the key stays as a literal $LITELLM_API_KEY so pi resolves
+  # it per request and it never lands in models.json. input must be declared
+  # explicitly -- pi defaults custom models to ["text"] and silently drops
+  # images on anything it believes is text-only.
+  litellmProvider = ''
+    "litellm": {
+      baseUrl: $litellmBaseUrl,
+      api: "openai-responses",
+      apiKey: "$LITELLM_API_KEY",
+      models: [
+        { id: "gpt-5.6-sol", name: "GPT-5.6 Sol (litellm)", reasoning: true, input: ["text", "image"], contextWindow: 272000, maxTokens: 128000 }
+      ],
+    },
+  '';
+
   pi-wrapper = pkgs.writeShellScriptBin "pi" ''
     set -euo pipefail
 
     mkdir -p "$HOME/.pi/agent"
 
-    ${pkgs.jq}/bin/jq -n '
+    ${pkgs.jq}/bin/jq -n --arg litellmBaseUrl "''${LITELLM_BASE_URL:-}/v1" '
       {
         providers: {
-          "ollama": {
+    ${lib.optionalString onKratos litellmProvider}      "ollama": {
             baseUrl: "http://kratos:11434/v1",
             api: "openai-completions",
             apiKey: "ollama",
@@ -43,6 +66,10 @@ in
 
     home.file.".pi/agent/extensions/statusline.ts".source = ./pi/statusline.ts;
 
+    # Attaches image paths in the prompt as real image content on submit, so
+    # Ctrl+V pastes reach the model directly instead of costing a `read` call.
+    home.file.".pi/agent/extensions/image-paste.ts".source = ./pi/image-paste.ts;
+
     # Advisor tool: consults a stronger model with the full session transcript.
     # The model is runtime-switchable via /advisor-model (persisted to
     # ~/.pi/agent/advisor.json, deliberately not nix-managed so it stays
@@ -65,14 +92,16 @@ in
     home.file.".pi/agent/prompts/verify.md".source = ./pi/prompts/verify.md;
 
     home.file.".pi/agent/settings.json".text = builtins.toJSON {
-      defaultProvider = "opencode-go";
-      defaultModel = "deepseek-v4-pro";
+      defaultProvider = if onKratos then "litellm" else "opencode-go";
+      # gpt-5.6-sol accepts images; deepseek-v4-pro is text-only, so pasted
+      # screenshots are dropped before they reach the model on other hosts.
+      defaultModel = if onKratos then "gpt-5.6-sol" else "deepseek-v4-pro";
       defaultThinkingLevel = "high";
       collapseChangelog = true;
       # Ctrl+P cycling, for A/B-ing the candidates on real work. kimi-k3 is
       # listed so the advisor's model stays inside the session scope that
       # enabledModels establishes.
-      enabledModels = [
+      enabledModels = lib.optional onKratos "litellm/gpt-5.6-sol" ++ [
         "opencode-go/deepseek-v4-pro"
         "opencode-go/minimax-m3"
         "opencode-go/glm-5.2"
