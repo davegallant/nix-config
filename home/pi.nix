@@ -99,6 +99,7 @@ in
           ];
         }
         { source = "npm:pi-vimmode@0.9.0"; }
+        { source = "npm:pi-image-paste@1.0.0"; }
       ];
     };
   };
