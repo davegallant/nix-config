@@ -79,5 +79,6 @@ in
     "signal"
     "steam"
     "transmission"
+    "unity-cli"
   ];
 }
