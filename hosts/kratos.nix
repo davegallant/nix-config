@@ -7,6 +7,8 @@
 {
   networking.hostName = "kratos";
 
+  services.openssh.enable = true;
+
   system.defaults.dock = {
     autohide = true;
     tilesize = 50;
