@@ -202,7 +202,8 @@
         "~/.cache/",
         "~/Library/Caches/",
         "~/.gnupg/",
-        "~/.azure/"
+        "~/.azure/",
+        "~/Library/Application Support/UnityHub/logs/"
       ],
       "denyWrite": [
         "/etc",
