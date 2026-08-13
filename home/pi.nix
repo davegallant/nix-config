@@ -18,6 +18,7 @@ let
       api: "openai-responses",
       apiKey: "$LITELLM_API_KEY",
       models: [
+        { id: "gpt-5.6-terra", name: "GPT-5.6 Terra (litellm)", reasoning: true, input: ["text", "image"], contextWindow: 272000, maxTokens: 128000 },
         { id: "gpt-5.6-sol", name: "GPT-5.6 Sol (litellm)", reasoning: true, input: ["text", "image"], contextWindow: 272000, maxTokens: 128000 }
       ],
     },
@@ -47,6 +48,11 @@ let
         },
       }
     ' > "$HOME/.pi/agent/models.json"
+
+    ${lib.optionalString onKratos ''
+      export PI_ADVISOR_PROVIDER=litellm
+      export PI_ADVISOR_MODEL=gpt-5.6-sol
+    ''}
 
     PI_SKIP_VERSION_CHECK=1 exec ${pi-pkg}/bin/pi "$@"
   '';
@@ -87,16 +93,21 @@ in
 
     home.file.".pi/agent/settings.json".text = builtins.toJSON {
       defaultProvider = if onKratos then "litellm" else "opencode-go";
-      defaultModel = if onKratos then "gpt-5.6-sol" else "deepseek-v4-flash";
+      defaultModel = if onKratos then "gpt-5.6-terra" else "deepseek-v4-flash";
       defaultThinkingLevel = "high";
       collapseChangelog = true;
-      enabledModels = lib.optional onKratos "litellm/gpt-5.6-sol" ++ [
-        "opencode-go/deepseek-v4-flash"
-        "opencode-go/deepseek-v4-pro"
-        "opencode-go/minimax-m3"
-        "opencode-go/glm-5.2"
-        "opencode-go/kimi-k3"
-      ];
+      enabledModels =
+        lib.optionals onKratos [
+          "litellm/gpt-5.6-terra"
+          "litellm/gpt-5.6-sol"
+        ]
+        ++ [
+          "opencode-go/deepseek-v4-flash"
+          "opencode-go/deepseek-v4-pro"
+          "opencode-go/minimax-m3"
+          "opencode-go/glm-5.2"
+          "opencode-go/kimi-k3"
+        ];
       # davegallant/skills isn't declared here: pi auto-discovers skills from
       # ~/.agents/skills, which codex.nix already materializes from the same
       # pin (see home/lib/skills.nix). Declaring it again as a package source
