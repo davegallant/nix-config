@@ -321,8 +321,7 @@ in
 
   # Tags RedFlagDeals deals on rfd.davegallant.ca via the local LiteLLM proxy.
   # Cloudflare Workers can't reach a LAN, so the enricher runs here and
-  # pushes results in. minimax-m3 (served by the litellm service above) is
-  # the enricher's own default model for the litellm provider.
+  # pushes results in. gpt-5.4-mini is served by the local litellm service.
   users.users.rfd-enrich = {
     isSystemUser = true;
     group = "rfd-enrich";
@@ -344,6 +343,8 @@ in
     wants = [ "network-online.target" ];
     environment = {
       RFD_FYI_ORIGIN = "https://rfd.davegallant.ca";
+      ENRICH_MODEL = "gpt-5.4-mini";
+      ENRICH_BASE_URL = "http://127.0.0.1:4000/v1";
     };
 
     serviceConfig = {
@@ -363,8 +364,8 @@ in
     };
   };
 
-  # Manually verified (a hand-run of rfd-enrich.service tagged cleanly via
-  # litellm/minimax-m3) before enabling the timer below.
+  # Manually verify rfd-enrich.service tags cleanly via litellm/gpt-5.4-mini
+  # after model changes; the timer remains enabled for normal operation.
   systemd.timers.rfd-enrich = {
     description = "Tag RedFlagDeals deals every 15 minutes";
     wantedBy = [ "timers.target" ];
