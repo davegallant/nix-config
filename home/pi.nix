@@ -10,14 +10,15 @@ let
   };
 
   onKratos = hostname == "kratos";
+  modelProvider = if onKratos then "litellm" else "openai-codex";
 
-  # Only kratos routes through litellm, mirroring home/codex.nix
   litellmProvider = ''
     "litellm": {
       baseUrl: $litellmBaseUrl,
       api: "openai-responses",
       apiKey: "$LITELLM_API_KEY",
       models: [
+        { id: "gpt-5.6-luna", name: "GPT-5.6 Luna (litellm)", reasoning: true, input: ["text", "image"], contextWindow: 272000, maxTokens: 128000 },
         { id: "gpt-5.6-terra", name: "GPT-5.6 Terra (litellm)", reasoning: true, input: ["text", "image"], contextWindow: 272000, maxTokens: 128000 },
         { id: "gpt-5.6-sol", name: "GPT-5.6 Sol (litellm)", reasoning: true, input: ["text", "image"], contextWindow: 272000, maxTokens: 128000 }
       ],
@@ -27,32 +28,24 @@ let
   pi-wrapper = pkgs.writeShellScriptBin "pi" ''
     set -euo pipefail
 
+    litellm_base_url=""
+    ${lib.optionalString onKratos ''
+      : "''${LITELLM_BASE_URL:?LITELLM_BASE_URL must be set}"
+      : "''${LITELLM_API_KEY:?LITELLM_API_KEY must be set}"
+      litellm_base_url="''${LITELLM_BASE_URL%/}/v1"
+    ''}
+
     mkdir -p "$HOME/.pi/agent"
 
-    ${pkgs.jq}/bin/jq -n --arg litellmBaseUrl "''${LITELLM_BASE_URL:-}/v1" '
+    ${pkgs.jq}/bin/jq -n --arg litellmBaseUrl "$litellm_base_url" '
       {
         providers: {
-    ${lib.optionalString onKratos litellmProvider}      "ollama": {
-            baseUrl: "http://kratos:11434/v1",
-            api: "openai-completions",
-            apiKey: "ollama",
-            compat: {
-              supportsDeveloperRole: false,
-              supportsReasoningEffort: false,
-              thinkingFormat: "qwen"
-            },
-            models: [
-              { id: "qwen3.6:35b", name: "Qwen 3.6 35B (kratos)", reasoning: true, contextWindow: 262144 }
-            ],
-          },
-        },
+    ${lib.optionalString onKratos litellmProvider}        },
       }
     ' > "$HOME/.pi/agent/models.json"
 
-    ${lib.optionalString onKratos ''
-      export PI_ADVISOR_PROVIDER=litellm
-      export PI_ADVISOR_MODEL=gpt-5.6-sol
-    ''}
+    export PI_ADVISOR_PROVIDER=${modelProvider}
+    export PI_ADVISOR_MODEL=gpt-5.6-sol
 
     PI_SKIP_VERSION_CHECK=1 exec ${pi-pkg}/bin/pi "$@"
   '';
@@ -92,23 +85,15 @@ in
     home.file.".pi/agent/prompts/verify.md".source = ./pi/prompts/verify.md;
 
     home.file.".pi/agent/settings.json".text = builtins.toJSON {
-      defaultProvider = if onKratos then "litellm" else "opencode-go";
-      defaultModel = if onKratos then "gpt-5.6-terra" else "deepseek-v4-flash";
+      defaultProvider = modelProvider;
+      defaultModel = "gpt-5.6-luna";
       defaultThinkingLevel = "high";
       collapseChangelog = true;
-      enabledModels =
-        lib.optionals onKratos [
-          "litellm/gpt-5.6-terra"
-          "litellm/gpt-5.6-sol"
-        ]
-        ++ [
-          "opencode-go/deepseek-v4-flash"
-          "opencode-go/deepseek-v4-pro"
-          "opencode-go/minimax-m3"
-          "opencode-go/glm-5.2"
-          "opencode-go/glm-5.3"
-          "opencode-go/kimi-k3"
-        ];
+      enabledModels = map (model: "${modelProvider}/${model}") [
+        "gpt-5.6-luna"
+        "gpt-5.6-terra"
+        "gpt-5.6-sol"
+      ];
       # davegallant/skills isn't declared here: pi auto-discovers skills from
       # ~/.agents/skills, which codex.nix already materializes from the same
       # pin (see home/lib/skills.nix). Declaring it again as a package source

@@ -24,17 +24,19 @@
       environmentFile = "/var/lib/litellm/secrets.env";
       settings = {
         model_list =
-          let
-            opencodeGoModel = name: {
-              model_name = builtins.replaceStrings [ "." ] [ "-" ] name;
+          map
+            (name: {
+              model_name = name;
               litellm_params = {
                 model = "openai/${name}";
-                api_base = "https://opencode.ai/zen/go/v1";
-                api_key = "os.environ/OPENCODE_API_KEY";
+                api_key = "os.environ/OPENAI_API_KEY";
               };
-            };
-          in
-          map opencodeGoModel (import ./models/opencode-go.nix);
+            })
+            [
+              "gpt-5.6-luna"
+              "gpt-5.6-terra"
+              "gpt-5.6-sol"
+            ];
         litellm_settings = {
           drop_params = true;
         };
