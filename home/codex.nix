@@ -17,7 +17,7 @@ let
   # public repo). Other hosts fall back to codex's default ChatGPT-login auth
   # (`codex login`), riding whatever ChatGPT plan is signed in there.
   litellmProvider = ''
-    model = "gpt-5.6-sol"
+    model = "gpt-5.6-luna"
     model_provider = "litellm"
 
     [model_providers.litellm]
