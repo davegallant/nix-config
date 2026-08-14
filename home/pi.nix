@@ -93,7 +93,7 @@ in
 
     home.file.".pi/agent/settings.json".text = builtins.toJSON {
       defaultProvider = modelProvider;
-      defaultModel = "gpt-5.6-luna";
+      defaultModel = "gpt-5.6-terra";
       defaultThinkingLevel = "high";
       collapseChangelog = true;
       enabledModels = map (model: "${modelProvider}/${model}") [

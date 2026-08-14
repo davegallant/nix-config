@@ -82,6 +82,11 @@ nix flake check --no-build
 CI checks formatting and linting, builds `hephaestus`, `kratos`, and `helios`,
 and pushes build outputs to Cachix on `main`.
 
+When operating inside the pi harness, do not run Nix builds or rebuilds
+(`nix build`, `just rebuild`, or `nixos-rebuild`). Limit local validation to
+formatting, linting, evaluation, and `nix flake check --no-build`; ask the
+user to run builds outside the harness.
+
 ## Repository Layout
 
 - `flake.nix`: flake inputs, system builders, shared module wiring
