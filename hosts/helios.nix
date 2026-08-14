@@ -66,6 +66,7 @@ in
 
   homebrew.casks = lib.mkAfter [
     "antigravity-cli"
+    "codexbar"
     "blender"
     "discord"
     "heroic"
