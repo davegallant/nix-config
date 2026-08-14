@@ -106,6 +106,7 @@ in
           "opencode-go/deepseek-v4-pro"
           "opencode-go/minimax-m3"
           "opencode-go/glm-5.2"
+          "opencode-go/glm-5.3"
           "opencode-go/kimi-k3"
         ];
       # davegallant/skills isn't declared here: pi auto-discovers skills from
