@@ -18,9 +18,9 @@ let
       api: "openai-responses",
       apiKey: "$LITELLM_API_KEY",
       models: [
-        { id: "gpt-5.6-luna", name: "GPT-5.6 Luna (litellm)", reasoning: true, input: ["text", "image"], contextWindow: 272000, maxTokens: 128000 },
-        { id: "gpt-5.6-terra", name: "GPT-5.6 Terra (litellm)", reasoning: true, input: ["text", "image"], contextWindow: 272000, maxTokens: 128000 },
-        { id: "gpt-5.6-sol", name: "GPT-5.6 Sol (litellm)", reasoning: true, input: ["text", "image"], contextWindow: 272000, maxTokens: 128000 }
+        { id: "gpt-5.6-luna", name: "GPT-5.6 Luna (litellm)", reasoning: true, input: ["text", "image"], contextWindow: 1050000, maxTokens: 128000 },
+        { id: "gpt-5.6-terra", name: "GPT-5.6 Terra (litellm)", reasoning: true, input: ["text", "image"], contextWindow: 1050000, maxTokens: 128000 },
+        { id: "gpt-5.6-sol", name: "GPT-5.6 Sol (litellm)", reasoning: true, input: ["text", "image"], contextWindow: 1050000, maxTokens: 128000 }
       ],
     },
   '';
@@ -40,6 +40,13 @@ let
     ${pkgs.jq}/bin/jq -n --arg litellmBaseUrl "$litellm_base_url" '
       {
         providers: {
+          "openai-codex": {
+            modelOverrides: {
+              "gpt-5.6-luna": { contextWindow: 1050000 },
+              "gpt-5.6-terra": { contextWindow: 1050000 },
+              "gpt-5.6-sol": { contextWindow: 1050000 },
+            },
+          },
     ${lib.optionalString onKratos litellmProvider}        },
       }
     ' > "$HOME/.pi/agent/models.json"
