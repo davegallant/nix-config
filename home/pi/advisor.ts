@@ -43,8 +43,8 @@ import { Type } from "typebox";
 //      Deliberately not nix-managed, so it stays writable.
 //   3. The defaults below.
 //
-// Switching providers (opencode → codex, etc.) is just a different
-// provider/model pair; nothing else in this file assumes a vendor.
+// Switching providers is just a different provider/model pair; nothing else
+// in this file assumes a vendor.
 // ---------------------------------------------------------------------------
 
 /** Structural subsets of pi's Model / UI context — narrow enough to keep these
@@ -61,15 +61,14 @@ interface AdvisorConfig {
 }
 
 const DEFAULTS: AdvisorConfig = {
-  provider: "opencode-go",
-  model: "kimi-k3",
+  provider: "openai-codex",
+  model: "gpt-5.6-sol",
   reasoningEffort: "high",
   // Advisor models are chosen for large context; this leaves headroom while
   // keeping a single consultation from costing a fortune.
   maxTranscriptChars: 240_000,
-  // Refuse to consult the model already running the session — see
-  // collidesWithSession. Config-file only (like maxTranscriptChars); set true
-  // to allow the call anyway.
+  // Refuse to consult the model already running the session. Config-file only
+  // (like maxTranscriptChars); set true to allow the call anyway.
   allowSameModel: false,
 };
 
@@ -112,19 +111,9 @@ function saveConfig(provider: string, model: string): void {
 }
 
 /**
- * The advisor earns its cost by being a *different* model — a second set of
- * weights with different blind spots. Aimed at the session's own model it keeps
- * almost nothing: the session model already holds this transcript, so the
- * "sees what you did not summarise" premise is moot, and pi.nix sets
- * defaultThinkingLevel to the same "high" as reasoningEffort below, so even the
- * effort differential is zero. Meanwhile it costs the most it ever can, because
- * cacheRetention "none" in execute() re-sends the whole transcript uncached.
- * That leaves plain self-critique at premium prices, so refuse by default.
- *
- * Compared on provider *and* id: one id behind two gateways is rare, and
- * treating that as a clash would false-block a legitimate pairing. An undefined
- * ctx.model fails open — some run modes may not populate it, and not knowing
- * the current model is not evidence of a collision.
+ * A user can opt out of same-model consultations in advisor.json. Compared on
+ * provider and id so one model behind separate gateways remains distinct. An
+ * undefined ctx.model fails open because some run modes do not populate it.
  */
 function collidesWithSession(config: AdvisorConfig, current: ModelRef | undefined): boolean {
   if (config.allowSameModel || !current) return false;

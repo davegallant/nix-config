@@ -2,10 +2,13 @@
   lib,
   pkgs,
   unstable,
+  username,
   ...
 }:
 {
   networking.hostName = "kratos";
+
+  home-manager.users.${username}.imports = [ ../home/claude.nix ];
 
   services.openssh.enable = true;
 
