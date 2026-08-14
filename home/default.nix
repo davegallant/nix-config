@@ -9,7 +9,6 @@ in
 {
   imports = [
     ./borgmatic.nix
-    ./claude.nix
     ./codex.nix
     ./fish.nix
     ./ghostty.nix

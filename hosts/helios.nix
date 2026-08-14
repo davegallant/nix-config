@@ -8,7 +8,6 @@
 let
   trustedHomebrewTaps = [
     "davegallant/public"
-    "hamed-elfayome/claude-usage"
   ];
 in
 {
@@ -19,7 +18,6 @@ in
   ];
 
   home-manager.users.dave.imports = [
-    ../home/opencode-usage.nix
     ../home/retroarch.nix
     ../home/ryujinx.nix
   ];
@@ -70,7 +68,6 @@ in
     "antigravity-cli"
     "blender"
     "discord"
-    "hamed-elfayome/claude-usage/claude-usage-tracker"
     "heroic"
     "keepassxc"
     "minecraft"

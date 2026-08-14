@@ -1,5 +1,6 @@
 {
   lib,
+  hostname ? "",
   pkgs,
   pvectl,
   unstable,
@@ -96,14 +97,6 @@
             tmux attach-session -t "=$session"
           end
         '';
-        cr = ''
-          # Pick a Claude Code session from any project (see ~/.claude/claude-resume.sh),
-          # then cd into its directory and resume it.
-          set -l sel (~/.claude/claude-resume.sh)
-          test -n "$sel"; or return
-          set -l parts (string split \t -- $sel)
-          cd $parts[1]; and claude --resume $parts[2]
-        '';
         kdebug = "kubectl run debug-(random) --image=nicolaka/netshoot --restart=Never -it --rm -- bash";
         kdesc = ''
           set pod (kubectl get pods -o name | fzf)
@@ -123,6 +116,16 @@
         klog = ''
           set pod (kubectl get pods -o name | fzf)
           test -n "$pod"; and kubectl logs -f $pod --all-containers
+        '';
+      }
+      // lib.optionalAttrs (hostname == "kratos") {
+        cr = ''
+          # Pick a Claude Code session from any project (see ~/.claude/claude-resume.sh),
+          # then cd into its directory and resume it.
+          set -l sel (~/.claude/claude-resume.sh)
+          test -n "$sel"; or return
+          set -l parts (string split \t -- $sel)
+          cd $parts[1]; and claude --resume $parts[2]
         '';
       };
 
@@ -168,7 +171,7 @@
         set -x DO_NOT_TRACK true
       '';
 
-      shellAbbrs = {
+      shellAbbrs = lib.optionalAttrs (hostname == "kratos") {
         claude-rc = "env -u DO_NOT_TRACK claude rc";
       };
 
