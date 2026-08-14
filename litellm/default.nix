@@ -27,12 +27,16 @@
           map
             (name: {
               model_name = name;
+              model_info = {
+                mode = "responses";
+              };
               litellm_params = {
-                model = "openai/${name}";
-                api_key = "os.environ/OPENAI_API_KEY";
+                model = "chatgpt/${name}";
               };
             })
             [
+              "gpt-5.4"
+              "gpt-5.4-mini"
               "gpt-5.6-luna"
               "gpt-5.6-terra"
               "gpt-5.6-sol"
