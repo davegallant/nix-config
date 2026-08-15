@@ -11,6 +11,22 @@ let
 
   onKratos = hostname == "kratos";
   modelProvider = if onKratos then "litellm" else "openai-codex";
+  ollamaBaseUrl = if onKratos then "http://127.0.0.1:11434/v1" else "http://kratos:11434/v1";
+
+  ollamaProvider = ''
+    "ollama": {
+      baseUrl: "${ollamaBaseUrl}",
+      api: "openai-completions",
+      apiKey: "ollama",
+      compat: {
+        supportsDeveloperRole: false,
+        supportsReasoningEffort: false,
+      },
+      models: [
+        { id: "qwen3.6:27b", name: "Qwen 3.6 27B (Ollama)" }
+      ],
+    },
+  '';
 
   # Pricing is unavailable from the repository and current gateway access. Leave
   # model `cost` metadata unset until authoritative per-million-token rates are available.
@@ -49,7 +65,7 @@ let
               "gpt-5.6-sol": { contextWindow: 272000 },
             },
           },
-    ${lib.optionalString onKratos litellmProvider}        },
+    ${lib.optionalString onKratos litellmProvider}${ollamaProvider}        },
       }
     ' > "$HOME/.pi/agent/models.json"
 
@@ -103,7 +119,10 @@ in
         high = 16384;
       };
       collapseChangelog = true;
-      enabledModels = map (model: "${modelProvider}/${model}") [
+      enabledModels = [
+        "ollama/qwen3.6:27b"
+      ]
+      ++ map (model: "${modelProvider}/${model}") [
         "gpt-5.6-luna"
         "gpt-5.6-terra"
         "gpt-5.6-sol"
