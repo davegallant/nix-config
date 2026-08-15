@@ -28,31 +28,12 @@
   environment.systemPackages = [
     pkgs.terraform-mcp-server
     unstable.kubelogin
-    unstable.ollama
     unstable.terraform
   ];
 
-  launchd.daemons.ollama = {
-    serviceConfig = {
-      ProgramArguments = [
-        "${unstable.ollama}/bin/ollama"
-        "serve"
-      ];
-      EnvironmentVariables = {
-        OLLAMA_HOST = "0.0.0.0:11434";
-        OLLAMA_KEEP_ALIVE = "-1";
-        OLLAMA_FLASH_ATTENTION = "1";
-        HOME = "/var/root";
-      };
-      RunAtLoad = true;
-      KeepAlive = true;
-      StandardOutPath = "/var/log/ollama.log";
-      StandardErrorPath = "/var/log/ollama.log";
-    };
-  };
-
   homebrew.brews = lib.mkAfter [
     "azure-cli"
+    "ollama"
     "node"
   ];
 

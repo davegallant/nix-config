@@ -23,7 +23,7 @@ let
         supportsReasoningEffort: false,
       },
       models: [
-        { id: "qwen3.6:27b", name: "Qwen 3.6 27B (Ollama)" }
+        { id: "qwen3.8:27b", name: "Qwen 3.8 27B (Ollama)" }
       ],
     },
   '';
@@ -120,7 +120,7 @@ in
       };
       collapseChangelog = true;
       enabledModels = [
-        "ollama/qwen3.6:27b"
+        "ollama/qwen3.8:27b"
       ]
       ++ map (model: "${modelProvider}/${model}") [
         "gpt-5.6-luna"

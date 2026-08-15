@@ -19,6 +19,7 @@ in
     ./k9s.nix
     ./nix-search.nix
     ./nixvim.nix
+    ./ollama.nix
     ./pi.nix
     ./tmux.nix
   ];
