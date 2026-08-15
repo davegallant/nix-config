@@ -8,6 +8,8 @@
   ...
 }:
 let
+  codexbarCli = pkgs.callPackage ../pkgs/codexbar-cli.nix { };
+  codexbarKde = pkgs.callPackage ../pkgs/codexbar-kde.nix { };
   rfdFyi = pkgs.fetchFromGitHub {
     owner = "davegallant";
     repo = "rfd-fyi";
@@ -122,6 +124,8 @@ in
     # does not land, the process wedges inside a GPU call.
     kdePackages.krdp
     keepassxc
+    codexbarCli
+    codexbarKde
     pvectl.packages.${pkgs.stdenv.hostPlatform.system}.default
     trayscale
     unstable.signal-desktop
