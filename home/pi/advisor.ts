@@ -5,7 +5,7 @@
  * more expensive model that sees the *whole* session — not just what the main
  * model chooses to summarise.
  *
- * The strategy has two halves, and both matter:
+ * Use the advisor selectively for consequential, uncertain, or stalled work:
  *
  *   1. The transcript. The advisor's entire value is that it sees every tool
  *      call and every tool result, so it can catch "you concluded X but the
@@ -63,10 +63,9 @@ interface AdvisorConfig {
 const DEFAULTS: AdvisorConfig = {
   provider: "openai-codex",
   model: "gpt-5.6-sol",
-  reasoningEffort: "high",
-  // Advisor models are chosen for large context; this leaves headroom while
-  // keeping a single consultation from costing a fortune.
-  maxTranscriptChars: 240_000,
+  reasoningEffort: "medium",
+  // Keep consultations focused on the active work and bounded in cost.
+  maxTranscriptChars: 80_000,
   // Refuse to consult the model already running the session. Config-file only
   // (like maxTranscriptChars); set true to allow the call anyway.
   allowSameModel: false,
@@ -318,10 +317,9 @@ export default function (pi: ExtensionAPI) {
     warnIfCollides(ctx.ui, ctx.model);
   });
 
-  // Ctrl+P is the likeliest route into a collision — enabledModels lists
-  // kimi-k3 precisely so the advisor's model is one keypress away (home/pi.nix)
-  // — so warn on the switch rather than on the first failed consultation.
-  // event.model is used over ctx.model: this fires as the selection is applied.
+  // Ctrl+P can switch the session to the advisor model, so warn on the switch
+  // rather than on the first failed consultation. event.model is used over
+  // ctx.model because this fires as the selection is applied.
   pi.on("model_select", (event, ctx) => {
     warnIfCollides(ctx.ui, event.model);
   });
@@ -400,11 +398,9 @@ export default function (pi: ExtensionAPI) {
     ].join(" "),
     promptSnippet: "Get a second opinion from a stronger model on the current approach",
     promptGuidelines: [
-      "Call advisor before substantive work — before writing files, before committing to an interpretation, before building on an assumption. Orientation (searching, reading, fetching) is not substantive work; do that first, then call advisor.",
-      "Call advisor again when you believe the task is complete, but only after the deliverable is durable on disk — the call takes time, and a written file survives where an unwritten one does not.",
-      "Call advisor when stuck: errors recurring, an approach not converging, or results that do not fit.",
-      "Give advisor's advice serious weight, but adapt if a step it suggests empirically fails or you hold primary-source evidence contradicting it. If your evidence and its advice conflict, call advisor once more to reconcile rather than silently switching.",
-      "Do not call advisor on short reactive tasks where the next action is already dictated by tool output you just read.",
+      "Use advisor for high-impact decisions, risky changes, contradictory evidence, or a stalled investigation.",
+      "Do not use advisor for routine, well-understood, or small changes where the evidence already determines the next step.",
+      "Treat advice as evidence to weigh against the session's primary-source results, not as an authority to follow blindly.",
     ],
     parameters: Type.Object({}),
 
