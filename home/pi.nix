@@ -12,15 +12,17 @@ let
   onKratos = hostname == "kratos";
   modelProvider = if onKratos then "litellm" else "openai-codex";
 
+  # Pricing is unavailable from the repository and current gateway access. Leave
+  # model `cost` metadata unset until authoritative per-million-token rates are available.
   litellmProvider = ''
     "litellm": {
       baseUrl: $litellmBaseUrl,
       api: "openai-responses",
       apiKey: "$LITELLM_API_KEY",
       models: [
-        { id: "gpt-5.6-luna", name: "GPT-5.6 Luna (litellm)", reasoning: true, input: ["text", "image"], contextWindow: 1050000, maxTokens: 128000 },
-        { id: "gpt-5.6-terra", name: "GPT-5.6 Terra (litellm)", reasoning: true, input: ["text", "image"], contextWindow: 1050000, maxTokens: 128000 },
-        { id: "gpt-5.6-sol", name: "GPT-5.6 Sol (litellm)", reasoning: true, input: ["text", "image"], contextWindow: 1050000, maxTokens: 128000 }
+        { id: "gpt-5.6-luna", name: "GPT-5.6 Luna (litellm)", reasoning: true, input: ["text", "image"], contextWindow: 272000, maxTokens: 128000 },
+        { id: "gpt-5.6-terra", name: "GPT-5.6 Terra (litellm)", reasoning: true, input: ["text", "image"], contextWindow: 272000, maxTokens: 128000 },
+        { id: "gpt-5.6-sol", name: "GPT-5.6 Sol (litellm)", reasoning: true, input: ["text", "image"], contextWindow: 272000, maxTokens: 128000 }
       ],
     },
   '';
@@ -42,9 +44,9 @@ let
         providers: {
           "openai-codex": {
             modelOverrides: {
-              "gpt-5.6-luna": { contextWindow: 1050000 },
-              "gpt-5.6-terra": { contextWindow: 1050000 },
-              "gpt-5.6-sol": { contextWindow: 1050000 },
+              "gpt-5.6-luna": { contextWindow: 272000 },
+              "gpt-5.6-terra": { contextWindow: 272000 },
+              "gpt-5.6-sol": { contextWindow: 272000 },
             },
           },
     ${lib.optionalString onKratos litellmProvider}        },
@@ -94,7 +96,12 @@ in
     home.file.".pi/agent/settings.json".text = builtins.toJSON {
       defaultProvider = modelProvider;
       defaultModel = "gpt-5.6-terra";
-      defaultThinkingLevel = "high";
+      defaultThinkingLevel = "medium";
+      thinkingBudgets = {
+        low = 2048;
+        medium = 8192;
+        high = 16384;
+      };
       collapseChangelog = true;
       enabledModels = map (model: "${modelProvider}/${model}") [
         "gpt-5.6-luna"
@@ -113,7 +120,6 @@ in
           extensions = [
             "extensions/btw.ts"
             "extensions/continue.ts"
-            "extensions/control.ts"
             "extensions/files.ts"
             "extensions/notify.ts"
             "extensions/review.ts"
@@ -122,7 +128,14 @@ in
           ];
         }
         { source = "npm:pi-vimmode@0.9.0"; }
-        { source = "git:github.com/obra/superpowers@v6.3.0"; }
+        {
+          source = "git:github.com/obra/superpowers@v6.3.0";
+          extensions = [ ];
+          skills = [
+            "skills/systematic-debugging/SKILL.md"
+            "skills/verification-before-completion/SKILL.md"
+          ];
+        }
       ];
     };
   };
