@@ -1,6 +1,7 @@
 {
   lib,
   callPackage,
+  fetchurl,
   makeBinaryWrapper,
   stdenvNoCC,
 }:
@@ -16,14 +17,25 @@ let
       url = "https://github.com/openai/codex/releases/download/rust-v${version}/codex-aarch64-apple-darwin.tar.gz";
       hash = "sha256-dZhLgfkqcbDA9LO1ytgOXFcXfk2Mi0seE9twOyDcQ1g=";
       binary = "codex-aarch64-apple-darwin";
+      codeModeHostUrl = "https://github.com/openai/codex/releases/download/rust-v${version}/codex-code-mode-host-aarch64-apple-darwin.tar.gz";
+      codeModeHostHash = "sha256-Vs2/YYe/kUEI07f+7qWjT/uhXlwWK+3OaeBi7pLd+14=";
+      codeModeHostBinary = "codex-code-mode-host-aarch64-apple-darwin";
     };
     x86_64-linux = {
       url = "https://github.com/openai/codex/releases/download/rust-v${version}/codex-x86_64-unknown-linux-musl.tar.gz";
       hash = "sha256-Akbi53ODTgfw+1JJ7W660S5FkeYI+Me7l91qlpBUTDY=";
       binary = "codex-x86_64-unknown-linux-musl";
+      codeModeHostUrl = "https://github.com/openai/codex/releases/download/rust-v${version}/codex-code-mode-host-x86_64-unknown-linux-musl.tar.gz";
+      codeModeHostHash = "sha256-AUat+qyDY+yfzbWJX3Yk21suhheig4h5OLf7l6HdQ1Y=";
+      codeModeHostBinary = "codex-code-mode-host-x86_64-unknown-linux-musl";
     };
   };
-  binary = assets.${stdenvNoCC.hostPlatform.system}.binary;
+  asset = assets.${stdenvNoCC.hostPlatform.system};
+  inherit (asset) binary codeModeHostBinary;
+  codeModeHost = fetchurl {
+    url = asset.codeModeHostUrl;
+    hash = asset.codeModeHostHash;
+  };
 in
 callPackage ../lib/mk-prebuilt-binary.nix {
   pname = "codex";
@@ -34,7 +46,9 @@ callPackage ../lib/mk-prebuilt-binary.nix {
   installPhase = ''
     mkdir -p $out/bin
     cp ${binary} $out/bin/.codex-unwrapped
-    chmod +x $out/bin/.codex-unwrapped
+    tar -xzf ${codeModeHost}
+    cp ${codeModeHostBinary} $out/bin/codex-code-mode-host
+    chmod +x $out/bin/.codex-unwrapped $out/bin/codex-code-mode-host
     makeBinaryWrapper $out/bin/.codex-unwrapped $out/bin/codex
   '';
 
