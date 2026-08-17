@@ -36,7 +36,10 @@ let
     mkdir -p "$HOME/.codex"
 
     cat > "$HOME/.codex/config.toml" <<EOF
-    ${lib.optionalString (hostname == "kratos") litellmProvider}[tui]
+    ${lib.optionalString (hostname == "kratos") litellmProvider}[features]
+    code_mode_host = true
+
+    [tui]
     status_line = [ "current-dir", "git-branch", "model", "context-remaining" ]
     vim_mode_default = true
     EOF
