@@ -84,11 +84,14 @@ in
 
     home.file.".pi/agent/extensions/statusline.ts".source = ./pi/statusline.ts;
 
+    # Prevent rare, oversized read/bash results from inflating every later turn.
+    home.file.".pi/agent/extensions/token-budget.ts".source = ./pi/token-budget.ts;
+
     # Attaches image paths in the prompt as real image content on submit, so
     # Ctrl+V pastes reach the model directly instead of costing a `read` call.
     home.file.".pi/agent/extensions/image-paste.ts".source = ./pi/image-paste.ts;
 
-    # Advisor tool: consults a stronger model with the full session transcript.
+    # Advisor tool: consults a stronger model with a bounded session transcript.
     # The model is runtime-switchable via /advisor-model (persisted to
     # ~/.pi/agent/advisor.json, deliberately not nix-managed so it stays
     # writable). To pin it declaratively instead, set PI_ADVISOR_PROVIDER /
@@ -112,11 +115,17 @@ in
     home.file.".pi/agent/settings.json".text = builtins.toJSON {
       defaultProvider = modelProvider;
       defaultModel = "gpt-5.6-terra";
+      # Match Codex defaults; the token-budget extension selects low for Sol.
       defaultThinkingLevel = "medium";
       thinkingBudgets = {
-        low = 2048;
-        medium = 8192;
-        high = 16384;
+        low = 1024;
+        medium = 4096;
+        high = 8192;
+      };
+      # Compact before long tool-heavy sessions repeatedly replay their history.
+      compaction = {
+        reserveTokens = 13600;
+        keepRecentTokens = 20000;
       };
       collapseChangelog = true;
       enabledModels = [

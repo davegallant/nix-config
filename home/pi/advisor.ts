@@ -2,16 +2,14 @@
  * Advisor extension for pi
  *
  * Approximates Claude Code's `advisor` tool: a second opinion from a stronger,
- * more expensive model that sees the *whole* session — not just what the main
- * model chooses to summarise.
+ * more expensive model that sees a bounded transcript of the active session —
+ * not just what the main model chooses to summarise.
  *
  * Use the advisor selectively for consequential, uncertain, or stalled work:
  *
- *   1. The transcript. The advisor's entire value is that it sees every tool
- *      call and every tool result, so it can catch "you concluded X but the
- *      grep you ran actually said Y". A text-only transcript (like the one
- *      auto-recap.ts builds) produces confident advice about a conversation
- *      the advisor cannot actually see, and nothing surfaces the mistake.
+ *   1. The transcript. The advisor sees recent work plus selectively elided
+ *      older tool output, so it can catch "you concluded X but the grep you
+ *      ran actually said Y" without replaying an unbounded session.
  *   2. The invocation policy. Registering a tool is not enough — the model has
  *      to know *when* to reach for it. That lives in `promptGuidelines`, which
  *      pi appends to the system prompt's Guidelines section while the tool is
@@ -52,20 +50,26 @@ import { Type } from "typebox";
 type ModelRef = { provider: string; id: string };
 type NotifyUI = { notify(message: string, type?: "info" | "warning" | "error"): void };
 
+const REASONING_EFFORTS = new Set(["off", "minimal", "low", "medium", "high", "xhigh", "max"]);
+type ReasoningEffort = "off" | "minimal" | "low" | "medium" | "high" | "xhigh" | "max";
+
 interface AdvisorConfig {
   provider: string;
   model: string;
-  reasoningEffort: string;
+  reasoningEffort: ReasoningEffort;
   maxTranscriptChars: number;
+  maxCallsPerSession: number;
   allowSameModel: boolean;
 }
 
 const DEFAULTS: AdvisorConfig = {
   provider: "openai-codex",
   model: "gpt-5.6-sol",
-  reasoningEffort: "medium",
+  reasoningEffort: "low",
   // Keep consultations focused on the active work and bounded in cost.
-  maxTranscriptChars: 80_000,
+  maxTranscriptChars: 32_000,
+  // A repeated full-transcript review is both expensive and usually redundant.
+  maxCallsPerSession: 2,
   // Refuse to consult the model already running the session. Config-file only
   // (like maxTranscriptChars); set true to allow the call anyway.
   allowSameModel: false,
@@ -73,14 +77,46 @@ const DEFAULTS: AdvisorConfig = {
 
 const CONFIG_PATH = path.join(os.homedir(), ".pi", "agent", "advisor.json");
 
+const MIN_TRANSCRIPT_CHARS = 4_000;
+const MAX_TRANSCRIPT_CHARS = 200_000;
+const MAX_ADVISOR_CALLS = 20;
 const MAX_TOOL_RESULT_CHARS = 3000; // per result, middle-elided
 const MAX_THINKING_CHARS = 2000; // per thinking block
 const MAX_TOOL_ARGS_CHARS = 800; // per tool call
 
+function boundedInteger(value: unknown, min: number, max: number): number | undefined {
+  if (typeof value !== "number" || !Number.isFinite(value)) return undefined;
+  return Math.min(max, Math.max(min, Math.trunc(value)));
+}
+
+function nonEmptyString(value: unknown): string | undefined {
+  return typeof value === "string" && value.trim() ? value.trim() : undefined;
+}
+
+function reasoningEffort(value: unknown): ReasoningEffort | undefined {
+  return typeof value === "string" && REASONING_EFFORTS.has(value) ? (value as ReasoningEffort) : undefined;
+}
+
 function readConfigFile(): Partial<AdvisorConfig> {
   try {
     const parsed = JSON.parse(fs.readFileSync(CONFIG_PATH, "utf-8"));
-    return parsed && typeof parsed === "object" ? parsed : {};
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return {};
+
+    const raw = parsed as Record<string, unknown>;
+    const config: Partial<AdvisorConfig> = {};
+    const provider = nonEmptyString(raw.provider);
+    const model = nonEmptyString(raw.model);
+    const effort = reasoningEffort(raw.reasoningEffort);
+    const transcriptChars = boundedInteger(raw.maxTranscriptChars, MIN_TRANSCRIPT_CHARS, MAX_TRANSCRIPT_CHARS);
+    const calls = boundedInteger(raw.maxCallsPerSession, 0, MAX_ADVISOR_CALLS);
+
+    if (provider) config.provider = provider;
+    if (model) config.model = model;
+    if (effort) config.reasoningEffort = effort;
+    if (transcriptChars !== undefined) config.maxTranscriptChars = transcriptChars;
+    if (calls !== undefined) config.maxCallsPerSession = calls;
+    if (typeof raw.allowSameModel === "boolean") config.allowSameModel = raw.allowSameModel;
+    return config;
   } catch {
     return {}; // absent or malformed — fall through to defaults
   }
@@ -88,9 +124,12 @@ function readConfigFile(): Partial<AdvisorConfig> {
 
 function envConfig(): Partial<AdvisorConfig> {
   const env: Partial<AdvisorConfig> = {};
-  if (process.env.PI_ADVISOR_PROVIDER) env.provider = process.env.PI_ADVISOR_PROVIDER;
-  if (process.env.PI_ADVISOR_MODEL) env.model = process.env.PI_ADVISOR_MODEL;
-  if (process.env.PI_ADVISOR_EFFORT) env.reasoningEffort = process.env.PI_ADVISOR_EFFORT;
+  const provider = nonEmptyString(process.env.PI_ADVISOR_PROVIDER);
+  const model = nonEmptyString(process.env.PI_ADVISOR_MODEL);
+  const effort = reasoningEffort(process.env.PI_ADVISOR_EFFORT);
+  if (provider) env.provider = provider;
+  if (model) env.model = model;
+  if (effort) env.reasoningEffort = effort;
   return env;
 }
 
@@ -170,18 +209,23 @@ type SessionEntry = { type: string; message?: AgentMessage };
 
 // A transcript is a list of sections so the budget pass can shrink tool
 // results selectively instead of tail-slicing the whole conversation.
-interface Section {
+export interface Section {
   isToolResult: boolean;
   text: string;
 }
 
-/** Middle-elide: keep the head and tail, which is where the signal usually is. */
-function elide(text: string, max: number): string {
-  if (text.length <= max) return text;
-  const head = Math.floor(max * 0.7);
-  const tail = max - head;
-  const dropped = text.length - max;
-  return `${text.slice(0, head)}\n… [${dropped} chars elided] …\n${text.slice(-tail)}`;
+/** Middle-elide to an exact maximum, keeping the signal-rich head and tail. */
+export function elide(text: string, max: number): string {
+  const limit = Math.max(0, Math.floor(max));
+  if (text.length <= limit) return text;
+
+  const marker = "\n… [elided] …\n";
+  if (limit <= marker.length) return text.slice(0, limit);
+
+  const kept = limit - marker.length;
+  const head = Math.floor(kept * 0.7);
+  const tail = kept - head;
+  return `${text.slice(0, head)}${marker}${text.slice(-tail)}`;
 }
 
 function blocks(content: unknown): ContentBlock[] {
@@ -241,24 +285,37 @@ function totalChars(sections: Section[]): number {
   return sections.reduce((sum, s) => sum + s.text.length + 2, 0);
 }
 
+function advisorCallCount(entries: SessionEntry[]): number {
+  return entries.filter(
+    (entry) => entry.type === "message" && entry.message?.role === "toolResult" && entry.message.toolName === "advisor",
+  ).length;
+}
+
 /**
  * Fit the transcript to budget by degrading the least valuable material first:
  * oldest tool results get stubbed out, and only if that is not enough do whole
  * sections drop off the front. The most recent exchanges always survive — they
  * are the ones the advice is actually about.
  */
-function fitToBudget(sections: Section[], budget: number): Section[] {
+export function fitToBudget(sections: Section[], budget: number): Section[] {
+  const limit = Math.max(0, Math.floor(budget));
+  if (!Number.isFinite(budget) || limit <= 2) return [];
+
   const result = [...sections];
 
-  for (let i = 0; i < result.length && totalChars(result) > budget; i++) {
+  for (let i = 0; i < result.length && totalChars(result) > limit; i++) {
     const section = result[i];
     if (!section.isToolResult) continue;
     const firstLine = section.text.split("\n", 1)[0];
     result[i] = { ...section, text: `${firstLine}\n[older tool result elided to fit context]` };
   }
 
-  while (result.length > 1 && totalChars(result) > budget) {
+  while (result.length > 1 && totalChars(result) > limit) {
     result.shift();
+  }
+
+  if (result.length === 1 && totalChars(result) > limit) {
+    result[0] = { ...result[0], text: elide(result[0].text, limit - 2) };
   }
 
   return result;
@@ -270,7 +327,7 @@ function fitToBudget(sections: Section[], budget: number): Section[] {
 
 const ADVISOR_SYSTEM = [
   "You are a senior engineer advising another AI coding agent mid-task.",
-  "You are shown that agent's full session transcript: the user's request, the agent's reasoning, every tool call it made, and every result it got back.",
+  "You are shown a bounded transcript of the agent's active session: the user's request, its reasoning, tool calls, and the most relevant results.",
   "",
   "Your job is to improve the outcome, not to praise the work. Prioritise:",
   "  1. Errors of fact — claims the agent made that its own tool output contradicts.",
@@ -288,7 +345,7 @@ const ADVISOR_SYSTEM = [
 
 const ADVISOR_PROMPT = (transcript: string): string =>
   [
-    "Here is the full session transcript of the agent you are advising.",
+    "Here is a bounded transcript of the agent session you are advising.",
     "",
     "<transcript>",
     transcript,
@@ -392,14 +449,14 @@ export default function (pi: ExtensionAPI) {
     name: "advisor",
     label: "Advisor",
     description: [
-      "Consult a stronger reviewer model that automatically receives this entire session transcript — the task, every tool call, every result, and your reasoning.",
-      "Takes no parameters: you do not summarise anything, the full context is forwarded for you.",
+      "Consult a stronger reviewer model that receives a bounded transcript of this session, including the task, recent work, and relevant tool results.",
+      "Takes no parameters; it constructs the focused review context automatically.",
       "Returns a second opinion on your approach, factual errors, and blind spots.",
     ].join(" "),
     promptSnippet: "Get a second opinion from a stronger model on the current approach",
     promptGuidelines: [
-      "Use advisor for high-impact decisions, risky changes, contradictory evidence, or a stalled investigation.",
-      "Do not use advisor for routine, well-understood, or small changes where the evidence already determines the next step.",
+      "Use advisor only for high-impact decisions, contradictory evidence, or a stalled investigation; at most twice per session.",
+      "Do not use advisor for routine, well-understood, small, or already-reviewed work where primary-source evidence determines the next step.",
       "Treat advice as evidence to weigh against the session's primary-source results, not as an authority to follow blindly.",
     ],
     parameters: Type.Object({}),
@@ -423,6 +480,19 @@ export default function (pi: ExtensionAPI) {
       }
 
       const branch = ctx.sessionManager.getBranch() as SessionEntry[];
+      const calls = advisorCallCount(branch);
+      if (calls >= config.maxCallsPerSession) {
+        return {
+          content: [{
+            type: "text",
+            text:
+              `Advisor call limit reached (${calls}/${config.maxCallsPerSession}) for this session. ` +
+              "Do not call advisor again; use the existing advice and primary-source evidence.",
+          }],
+          details: { calls, maxCallsPerSession: config.maxCallsPerSession, skipped: true },
+        };
+      }
+
       const sections = fitToBudget(buildSections(branch), config.maxTranscriptChars);
       const transcript = sections.map((s) => s.text).join("\n\n");
       if (!transcript.trim()) {
