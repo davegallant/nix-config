@@ -5,7 +5,7 @@
 #            defaults to the latest release from GitHub.
 #
 # codex needs its own updater (not lib/update-github-hashes.sh) because release
-# tags carry a "rust-v" prefix and assets are named codex-<triple>.tar.gz.
+# tags carry a "rust-v" prefix and assets include the CLI and code-mode host.
 # Tracks both consumers: aarch64-darwin (kratos, helios) and x86_64-linux
 # (hephaestus).
 
@@ -37,6 +37,8 @@ fi
 declare -A ASSETS=(
   [codex-aarch64-apple-darwin.tar.gz]=1
   [codex-x86_64-unknown-linux-musl.tar.gz]=1
+  [codex-code-mode-host-aarch64-apple-darwin.tar.gz]=1
+  [codex-code-mode-host-x86_64-unknown-linux-musl.tar.gz]=1
 )
 
 for asset in "${!ASSETS[@]}"; do
@@ -44,9 +46,15 @@ for asset in "${!ASSETS[@]}"; do
   echo "  fetching ${asset}..."
   HASH="sha256-$(curl -fsSL "$URL" | openssl dgst -sha256 -binary | openssl base64)"
   echo "  hash: ${HASH}"
-  sed -i \
-    "/${asset//./\\.}\";/{n; s|hash = \"[^\"]*\";|hash = \"${HASH}\";|}" \
-    "$PACKAGE_NIX"
+  if [[ "$asset" == codex-code-mode-host-* ]]; then
+    sed -i \
+      "/${asset//./\\.}\";/{n; s|codeModeHostHash = \"[^\"]*\";|codeModeHostHash = \"${HASH}\";|}" \
+      "$PACKAGE_NIX"
+  else
+    sed -i \
+      "/${asset//./\\.}\";/{n; s|hash = \"[^\"]*\";|hash = \"${HASH}\";|}" \
+      "$PACKAGE_NIX"
+  fi
 done
 
 echo "updated ${PACKAGE_NIX}"
