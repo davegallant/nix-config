@@ -2,25 +2,23 @@
   lib,
   stdenvNoCC,
   fetchurl,
-  unzip,
 }:
 stdenvNoCC.mkDerivation {
   pname = "codexbar-kde";
-  version = "0.5.0";
+  version = "0.5.0-unstable-2026-08-17";
 
   src = fetchurl {
-    url = "https://github.com/EvilFreelancer/CodexBar-KDE/releases/download/v0.5.0/org.rpa.codexbar-v0.5.0.plasmoid";
-    hash = "sha256-qgOkCSv/jaLmYmZSreXjdTPVpxayhTD4/IDSqsC2JUw=";
+    url = "https://codeload.github.com/davegallant/CodexBar-KDE/tar.gz/f883d02bf359012bedd5774c9bbc0129b51ff8dd";
+    hash = "sha256-yLwqdRWb+l6mObSs6c5LQImmLWTVprwb1j6OUrnqWJY=";
   };
-
-  nativeBuildInputs = [ unzip ];
   dontUnpack = true;
   dontConfigure = true;
   dontBuild = true;
 
   installPhase = ''
     install -d $out/share/plasma/plasmoids/org.rpa.codexbar
-    unzip -q $src -d $out/share/plasma/plasmoids/org.rpa.codexbar
+    tar -xzf $src -C $out/share/plasma/plasmoids/org.rpa.codexbar \
+      --strip-components=2 --wildcards --no-anchored 'package/*'
   '';
 
   meta = {
