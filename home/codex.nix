@@ -28,21 +28,23 @@ let
 
   '';
 
-  # Wrapper regenerates ~/.codex/config.toml on each run (like the pi wrapper's
-  # models.json), so config stays nix-managed.
+  # Create defaults once, then let Codex retain mutable state such as trusted
+  # project decisions in ~/.codex/config.toml.
   codex-wrapper = pkgs.writeShellScriptBin "codex" ''
     set -euo pipefail
 
     mkdir -p "$HOME/.codex"
 
-    cat > "$HOME/.codex/config.toml" <<EOF
-    ${lib.optionalString (hostname == "kratos") litellmProvider}[features]
-    code_mode_host = true
+    if [ ! -f "$HOME/.codex/config.toml" ]; then
+      cat > "$HOME/.codex/config.toml" <<EOF
+      ${lib.optionalString (hostname == "kratos") litellmProvider}[features]
+      code_mode_host = true
 
-    [tui]
-    status_line = [ "current-dir", "git-branch", "model", "context-remaining" ]
-    vim_mode_default = true
+      [tui]
+      status_line = [ "current-dir", "git-branch", "model", "context-remaining" ]
+      vim_mode_default = true
     EOF
+    fi
 
     exec ${codex-pkg}/bin/codex "$@"
   '';
