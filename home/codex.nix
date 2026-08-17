@@ -17,7 +17,6 @@ let
   # public repo). Other hosts fall back to codex's default ChatGPT-login auth
   # (`codex login`), riding whatever ChatGPT plan is signed in there.
   litellmProvider = ''
-    model = "gpt-5.6-luna"
     model_provider = "litellm"
 
     [model_providers.litellm]
@@ -37,6 +36,11 @@ let
 
     if [ ! -f "$HOME/.codex/config.toml" ]; then
       cat > "$HOME/.codex/config.toml" <<EOF
+      model = "gpt-5.6-terra"
+      model_reasoning_effort = "medium"
+      sandbox_mode = "workspace-write"
+      approval_policy = "never"
+
       ${lib.optionalString (hostname == "kratos") litellmProvider}[features]
       code_mode_host = true
 
@@ -46,7 +50,12 @@ let
     EOF
     fi
 
-    exec ${codex-pkg}/bin/codex "$@"
+    exec ${codex-pkg}/bin/codex \
+      --config 'model="gpt-5.6-terra"' \
+      --config 'model_reasoning_effort="medium"' \
+      --config 'sandbox_mode="workspace-write"' \
+      --config 'approval_policy="never"' \
+      "$@"
   '';
 in
 {
