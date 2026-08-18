@@ -2,6 +2,7 @@
   lib,
   pkgs,
   hostname ? "",
+  superpowers,
   ...
 }:
 let
@@ -12,6 +13,11 @@ let
     repo = "skills";
     inherit (skillsPin) rev hash;
   };
+  codexSkills = pkgs.runCommand "codex-skills" { } ''
+    mkdir -p "$out/superpowers"
+    cp -rL ${skills}/skills/. "$out"
+    cp -rL ${superpowers}/skills/. "$out/superpowers"
+  '';
   # Only kratos routes through litellm (base_url from $LITELLM_BASE_URL, key
   # via env_key at runtime, keeping the internal URL and secret out of this
   # public repo). Other hosts fall back to codex's default ChatGPT-login auth
@@ -62,15 +68,13 @@ in
   config = {
     home.packages = [ codex-wrapper ];
 
-    # Shared skills: same davegallant/skills pin as claude (~/.claude/skills)
-    # and pi. codex scans ~/.agents/skills for user-level skills, but its
-    # walker ignores symlinked SKILL.md files, so home.file symlinks are
-    # invisible to it. Materialize real files by copying (deref) from the
-    # store instead.
+    # Codex scans ~/.agents/skills for user-level skills but ignores symlinked
+    # SKILL.md files. Materialize the shared and Superpowers skills as real
+    # files instead.
     home.activation.codexSkills = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       run rm -rf "$HOME/.agents/skills"
       run mkdir -p "$HOME/.agents"
-      run cp -rL "${skills}/skills" "$HOME/.agents/skills"
+      run cp -rL "${codexSkills}" "$HOME/.agents/skills"
       run chmod -R u+w "$HOME/.agents/skills"
     '';
   };

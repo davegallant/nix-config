@@ -20,6 +20,10 @@
       url = "github:davegallant/pvectl";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    superpowers = {
+      url = "github:obra/superpowers";
+      flake = false;
+    };
     vpngate = {
       url = "github:davegallant/vpngate";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -42,6 +46,7 @@
       ...
     }@inputs:
     let
+      inherit (inputs) superpowers;
       nixpkgsConfig = {
         allowUnfree = true;
         permittedInsecurePackages = [ "pnpm-10.29.2" ];
@@ -81,6 +86,7 @@
                     unstable
                     hostname
                     pvectl
+                    superpowers
                     vpngate
                     ;
                 };
