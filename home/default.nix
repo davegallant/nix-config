@@ -21,6 +21,7 @@ in
     ./nixvim.nix
     ./ollama.nix
     ./pi.nix
+    ./prs.nix
     ./tmux.nix
   ];
 
