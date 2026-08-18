@@ -8,6 +8,7 @@
   ...
 }:
 let
+  chatgpt = pkgs.callPackage ../pkgs/chatgpt.nix { };
   codexbarCli = pkgs.callPackage ../pkgs/codexbar-cli.nix { };
   codexbarKde = pkgs.callPackage ../pkgs/codexbar-kde.nix { };
   rfdFyi = pkgs.fetchFromGitHub {
@@ -126,6 +127,7 @@ in
     keepassxc
     codexbarCli
     codexbarKde
+    chatgpt
     pvectl.packages.${pkgs.stdenv.hostPlatform.system}.default
     trayscale
     unstable.signal-desktop
