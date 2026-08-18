@@ -128,6 +128,7 @@ in
     codexbarCli
     codexbarKde
     chatgpt
+    discord
     pvectl.packages.${pkgs.stdenv.hostPlatform.system}.default
     trayscale
     unstable.signal-desktop
