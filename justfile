@@ -68,6 +68,11 @@ update-pvectl:
   nix flake lock --update-input pvectl
   just rebuild
 
+# update the Superpowers flake input and activate its skills
+update-superpowers:
+  nix flake lock --update-input superpowers
+  just rebuild
+
 # squash-merge current branch's PR with nvd diff in body
 merge-pr:
   #!/usr/bin/env bash
