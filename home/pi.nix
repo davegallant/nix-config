@@ -113,8 +113,8 @@ in
     home.file.".pi/agent/prompts/verify.md".source = ./pi/prompts/verify.md;
 
     home.file.".pi/agent/settings.json".text = builtins.toJSON {
-      defaultProvider = modelProvider;
-      defaultModel = "gpt-5.6-terra";
+      defaultProvider = "ollama";
+      defaultModel = "qwen3.8:27b";
       # Match Codex defaults; the token-budget extension selects low for Sol.
       defaultThinkingLevel = "medium";
       thinkingBudgets = {
