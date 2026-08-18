@@ -2,8 +2,10 @@
   lib,
   stdenv,
   fetchurl,
+  asar,
   autoPatchelfHook,
   dpkg,
+  makeWrapper,
   alsa-lib,
   at-spi2-atk,
   cairo,
@@ -14,6 +16,7 @@
   gtk3,
   libdrm,
   libgbm,
+  libglvnd,
   libnotify,
   libusb1,
   libxkbcommon,
@@ -39,8 +42,10 @@ stdenv.mkDerivation {
   };
 
   nativeBuildInputs = [
+    asar
     autoPatchelfHook
     dpkg
+    makeWrapper
   ];
 
   buildInputs = [
@@ -54,6 +59,7 @@ stdenv.mkDerivation {
     gtk3
     libdrm
     libgbm
+    libglvnd
     libnotify
     libusb1
     libxkbcommon
@@ -93,13 +99,28 @@ stdenv.mkDerivation {
     runHook postUnpack
   '';
 
+  patchPhase = ''
+    runHook prePatch
+
+    asar extract usr/lib/chatgpt/resources/app.asar app
+    substituteInPlace app/.vite/build/main-DkjTIhil.js \
+      --replace-fail 'let i=r===`win32`&&e.computerUse===!0?{...e,computerUseNodeRepl:!0}:e,o=' 'let i=r===`linux`?{...e,inAppBrowserUse:!1,inAppBrowserUseAllowed:!1,inAppBrowserUseHistory:!1,browserPane:!1}:r===`win32`&&e.computerUse===!0?{...e,computerUseNodeRepl:!0}:e,o='
+    asar pack app usr/lib/chatgpt/resources/app.asar
+
+    runHook postPatch
+  '';
+
   installPhase = ''
     runHook preInstall
 
     mkdir -p $out
     cp -r usr/lib usr/share $out/
+
     mkdir -p $out/bin
-    ln -s ../lib/chatgpt/codex-launcher $out/bin/chatgpt
+    makeWrapper $out/lib/chatgpt/codex-launcher $out/bin/chatgpt \
+      --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath [ libglvnd ]} \
+      --set CHATGPT_PACKAGED_PLUGINS $out/lib/chatgpt/resources/plugins \
+      --run 'pluginCache="''${XDG_CACHE_HOME:-''${HOME}/.cache}/chatgpt/bundled-plugins-26.814.41407"; if [ ! -d "$pluginCache" ]; then pluginCacheTmp="$pluginCache.tmp.$$"; mkdir -p "$(dirname "$pluginCache")"; cp -r --no-preserve=mode "$CHATGPT_PACKAGED_PLUGINS" "$pluginCacheTmp"; chmod -R u+rwX "$pluginCacheTmp"; mv "$pluginCacheTmp" "$pluginCache"; fi; pluginTmp="''${CODEX_HOME:-''${HOME}/.codex}/.tmp/bundled-marketplaces"; if [ -d "$pluginTmp" ]; then chmod -R u+rwX "$pluginTmp"; fi; export CODEX_ELECTRON_BUNDLED_PLUGINS_RESOURCES_PATH="$pluginCache"'
 
     runHook postInstall
   '';
