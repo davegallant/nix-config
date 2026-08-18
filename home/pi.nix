@@ -136,11 +136,11 @@ in
         "gpt-5.6-terra"
         "gpt-5.6-sol"
       ];
-      # davegallant/skills isn't declared here: pi auto-discovers skills from
-      # ~/.agents/skills, which codex.nix already materializes from the same
-      # pin (see home/lib/skills.nix). Declaring it again as a package source
-      # just clones a second, independently-drifting copy and produces
-      # startup "skill conflict" collision warnings.
+      # Skills (davegallant/skills + obra/superpowers) aren't declared here:
+      # pi auto-discovers ~/.agents/skills, which codex.nix materializes
+      # from the same pins (see home/lib/skills.nix). Declaring any of them
+      # again as a package source clones a second, independently-drifting
+      # copy and produces startup "skill conflict" collision warnings.
       packages = [
         {
           source = "git:github.com/mitsuhiko/agent-stuff@13bc8f87970bec8830aab0f1c0487d35aa7c0917";
@@ -156,14 +156,6 @@ in
           ];
         }
         { source = "npm:pi-vimmode@0.9.0"; }
-        {
-          source = "git:github.com/obra/superpowers@v6.3.0";
-          extensions = [ ];
-          skills = [
-            "skills/systematic-debugging/SKILL.md"
-            "skills/verification-before-completion/SKILL.md"
-          ];
-        }
       ];
     };
   };
