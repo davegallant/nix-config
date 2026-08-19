@@ -74,7 +74,7 @@
     systemd.user.timers.borgmatic = {
       Unit.Description = "borgmatic backup timer";
       Timer = {
-        OnCalendar = "20:00";
+        OnCalendar = "02:00";
         Persistent = true;
       };
       Install.WantedBy = [ "timers.target" ];
