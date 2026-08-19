@@ -262,6 +262,10 @@ in
       ];
   };
 
+  # Keep Sunshine installed but out of boot; `systemctl start sunshine` when
+  # you want it, `systemctl stop sunshine` to end it.
+  systemd.services.sunshine.enable = false;
+
   nix = {
     registry.nixpkgs.flake = inputs.nixpkgs;
     gc.dates = "daily";
