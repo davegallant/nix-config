@@ -35,11 +35,34 @@ rollback:
 fmt:
   fd -e nix -x nixfmt
 
-# lint nix files (dead code + anti-patterns) and shell scripts
+# check formatting without rewriting (`nix run .#formatter` needs a system suffix)
+fmt-check:
+  fd -e nix -x nixfmt --check
+
+# lint nix files (dead code + anti-patterns) and shell scripts, tracked or not
 lint:
   deadnix --fail .
   statix check .
-  shellcheck $(git ls-files '*.sh')
+  # --others also covers new scripts that git does not track yet
+  shellcheck $(git ls-files --cached --others --exclude-standard '*.sh')
+
+# print which hosts are linux vs darwin (authoritative, from flake.nix)
+hosts:
+  @nix eval --raw --impure --expr 'let f = builtins.getFlake (toString ./.); in "linux:  " + builtins.concatStringsSep " " (builtins.attrNames f.nixosConfigurations) + "\ndarwin: " + builtins.concatStringsSep " " (builtins.attrNames f.darwinConfigurations) + "\n"'
+
+# eval a host's system closure without building; defaults to the current host
+eval-host host=`hostname -s`:
+  #!/usr/bin/env bash
+  set -euo pipefail
+  # the flake only sees git-tracked files; an unstaged new module evaluates as absent
+  untracked=$(git ls-files --others --exclude-standard '*.nix')
+  if [ -n "$untracked" ]; then
+    echo "warning: untracked .nix files are invisible to the flake; 'git add' them first:" >&2
+    echo "$untracked" | sed 's/^/  /' >&2
+  fi
+  if [ "$(uname -s)" = "Linux" ]; then attr=nixosConfigurations; else attr=darwinConfigurations; fi
+  nix eval --raw ".#${attr}.{{host}}.config.system.build.toplevel.drvPath" --option warn-dirty false
+  echo
 
 # run nix garbage collection (user + root)
 clean:

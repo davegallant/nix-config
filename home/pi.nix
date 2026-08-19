@@ -67,6 +67,9 @@ let
           },
     ${lib.optionalString onKratos litellmProvider}${ollamaProvider}        },
       }
+    # This rewrite happens on every launch under `set -euo pipefail`, so even
+    # `pi --version` aborts if ~/.pi is not writable. Keep "~/.pi/" in
+    # sandbox.filesystem.allowWrite in home/claude/settings.json.
     ' > "$HOME/.pi/agent/models.json"
 
     export PI_ADVISOR_PROVIDER=${modelProvider}
