@@ -12,10 +12,10 @@ stdenv.mkDerivation {
     hash = "sha256-f7Dtvi5siJ04sJgsAwcThV7cqCw82gF1iwvVCj/9NWo=";
   };
 
-  sourceRoot = ".";
+  dontUnpack = true;
 
   installPhase = ''
-    install -Dm755 unity-linux-x64 $out/bin/unity
+    install -Dm755 $src $out/bin/unity
   '';
 
   meta = {
