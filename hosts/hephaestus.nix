@@ -346,6 +346,14 @@ in
   # placed before the first `systemctl start`.
   systemd.tmpfiles.rules = [
     "d /var/lib/rfd-enrich 0750 rfd-enrich rfd-enrich -"
+    # unity-cli dlopens libsqlite3 by hardcoded absolute path (it probes
+    # /usr/lib/x86_64-linux-gnu/..., /usr/lib/aarch64-linux-gnu/..., /usr/lib64/...
+    # and /usr/lib/...; LD_LIBRARY_PATH has no effect -- verified by repro), so
+    # the file must exist at one of those paths. /usr lives on the root fs,
+    # outside the Nix profile, so a root-created symlink is the cleanest
+    # placement: /usr/lib64 is one of the probed paths. The store reference pins
+    # the derivation against GC.
+    "L+ /usr/lib64/libsqlite3.so.0 - - - - ${pkgs.sqlite.out}/lib/libsqlite3.so.0"
   ];
 
   systemd.services.rfd-enrich = {
