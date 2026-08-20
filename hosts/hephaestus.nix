@@ -11,6 +11,7 @@ let
   chatgpt = pkgs.callPackage ../pkgs/chatgpt.nix { };
   codexbarCli = pkgs.callPackage ../pkgs/codexbar-cli.nix { };
   codexbarKde = pkgs.callPackage ../pkgs/codexbar-kde.nix { };
+  unityCli = pkgs.callPackage ../pkgs/unity-cli.nix { };
   rfdFyi = pkgs.fetchFromGitHub {
     owner = "davegallant";
     repo = "rfd-fyi";
@@ -132,6 +133,8 @@ in
     pvectl.packages.${pkgs.stdenv.hostPlatform.system}.default
     trayscale
     unstable.signal-desktop
+    unityhub
+    unityCli
     vim
   ];
 
