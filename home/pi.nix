@@ -139,9 +139,10 @@ in
         "gpt-5.6-terra"
         "gpt-5.6-sol"
       ];
-      # Skills (davegallant/skills + obra/superpowers) aren't declared here:
-      # pi auto-discovers ~/.agents/skills, which codex.nix materializes
-      # from the same pins (see home/lib/skills.nix). Declaring any of them
+      # Skills (davegallant/skills + obra/superpowers + a few from
+      # mattpocock/skills) aren't declared here: pi auto-discovers
+      # ~/.agents/skills, which codex.nix materializes from the same pins (see
+      # home/lib/skillset.nix). Declaring any of them
       # again as a package source clones a second, independently-drifting
       # copy and produces startup "skill conflict" collision warnings.
       packages = [
