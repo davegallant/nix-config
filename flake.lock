@@ -21,6 +21,22 @@
         "type": "github"
       }
     },
+    "davegallantSkills": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1786386102,
+        "narHash": "sha256-faTXrvdAZ+/OYM6t+nsFGOASfzwK8JnndGakU0wgC3A=",
+        "owner": "davegallant",
+        "repo": "skills",
+        "rev": "8c1c4b98406d875743363b584771185ce836054a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "davegallant",
+        "repo": "skills",
+        "type": "github"
+      }
+    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": [
@@ -190,6 +206,7 @@
     "root": {
       "inputs": {
         "darwin": "darwin",
+        "davegallantSkills": "davegallantSkills",
         "home-manager": "home-manager",
         "mattpocockSkills": "mattpocockSkills",
         "nixpkgs": "nixpkgs",
