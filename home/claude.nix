@@ -1,12 +1,15 @@
 {
   lib,
   pkgs,
+  davegallantSkills,
   mattpocockSkills,
   ...
 }:
 let
   claude-code = pkgs.callPackage ./claude/package.nix { };
-  skills = import ./lib/skillset.nix { inherit pkgs mattpocockSkills; };
+  skills = import ./lib/skillset.nix {
+    inherit pkgs davegallantSkills mattpocockSkills;
+  };
 in
 {
   home.packages = [

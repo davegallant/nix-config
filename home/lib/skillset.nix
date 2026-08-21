@@ -2,19 +2,15 @@
 # (codex.nix), and pi (which rides codex's copy): davegallant/skills plus a few
 # skills cherry-picked from mattpocock/skills and flattened out of its category
 # directories. Most of that repo overlaps skills we already have, so only the
-# ones listed below are pulled in.
+# ones listed below are pulled in. Both sources are flake inputs, so the weekly
+# flake-update workflow bumps them.
 {
   pkgs,
+  davegallantSkills,
   mattpocockSkills,
 }:
 let
   inherit (pkgs) lib;
-  skillsPin = import ./skills.nix;
-  own = pkgs.fetchFromGitHub {
-    owner = "davegallant";
-    repo = "skills";
-    inherit (skillsPin) rev hash;
-  };
   vendored = {
     handoff = "productivity/handoff";
     resolving-merge-conflicts = "engineering/resolving-merge-conflicts";
@@ -24,7 +20,7 @@ in
 pkgs.runCommand "agent-skills" { } (
   ''
     mkdir -p "$out"
-    cp -rL ${own}/skills/. "$out"
+    cp -rL ${davegallantSkills}/skills/. "$out"
   ''
   + lib.concatStrings (
     lib.mapAttrsToList (name: path: ''

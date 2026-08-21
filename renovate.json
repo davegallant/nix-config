@@ -52,19 +52,6 @@
       "datasourceTemplate": "git-refs",
       "packageNameTemplate": "https://github.com/{{depName}}",
       "currentValueTemplate": "main"
-    },
-    {
-      "customType": "regex",
-      "managerFilePatterns": [
-        "/home/lib/skills\\.nix$/"
-      ],
-      "matchStrings": [
-        "rev = \"(?<currentDigest>[a-f0-9]{40})\";"
-      ],
-      "depNameTemplate": "davegallant/skills",
-      "datasourceTemplate": "git-refs",
-      "packageNameTemplate": "https://github.com/davegallant/skills",
-      "currentValueTemplate": "main"
     }
   ]
 }
