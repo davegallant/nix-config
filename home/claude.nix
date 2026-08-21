@@ -1,16 +1,12 @@
 {
   lib,
   pkgs,
+  mattpocockSkills,
   ...
 }:
 let
   claude-code = pkgs.callPackage ./claude/package.nix { };
-  skillsPin = import ./lib/skills.nix;
-  skills = pkgs.fetchFromGitHub {
-    owner = "davegallant";
-    repo = "skills";
-    inherit (skillsPin) rev hash;
-  };
+  skills = import ./lib/skillset.nix { inherit pkgs mattpocockSkills; };
 in
 {
   home.packages = [
@@ -34,7 +30,7 @@ in
   };
 
   home.file.".claude/skills" = {
-    source = "${skills}/skills";
+    source = skills;
     recursive = true;
   };
 

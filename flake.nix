@@ -12,6 +12,10 @@
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    mattpocockSkills = {
+      url = "github:mattpocock/skills";
+      flake = false;
+    };
     nixvim = {
       url = "github:nix-community/nixvim/nixos-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -46,7 +50,7 @@
       ...
     }@inputs:
     let
-      inherit (inputs) superpowers;
+      inherit (inputs) mattpocockSkills superpowers;
       nixpkgsConfig = {
         allowUnfree = true;
         permittedInsecurePackages = [ "pnpm-10.29.2" ];
@@ -85,6 +89,7 @@
                   inherit
                     unstable
                     hostname
+                    mattpocockSkills
                     pvectl
                     superpowers
                     vpngate
