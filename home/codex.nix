@@ -2,20 +2,16 @@
   lib,
   pkgs,
   hostname ? "",
+  mattpocockSkills,
   superpowers,
   ...
 }:
 let
   codex-pkg = pkgs.callPackage ./codex/package.nix { };
-  skillsPin = import ./lib/skills.nix;
-  skills = pkgs.fetchFromGitHub {
-    owner = "davegallant";
-    repo = "skills";
-    inherit (skillsPin) rev hash;
-  };
+  skills = import ./lib/skillset.nix { inherit pkgs mattpocockSkills; };
   codexSkills = pkgs.runCommand "codex-skills" { } ''
     mkdir -p "$out/superpowers"
-    cp -rL ${skills}/skills/. "$out"
+    cp -rL ${skills}/. "$out"
     cp -rL ${superpowers}/skills/. "$out/superpowers"
   '';
   # Only kratos routes through litellm (base_url from $LITELLM_BASE_URL, key
