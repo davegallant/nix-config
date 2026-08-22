@@ -139,8 +139,7 @@
               shellcheck
               shfmt
               # Upstream snapshot tests are broken in nixpkgs 26.05; skip checks.
-              pkgs.statix.overrideAttrs
-              { doCheck = false; }
+              (statix.overrideAttrs { doCheck = false; })
             ];
           };
         }
