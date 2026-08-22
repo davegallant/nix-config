@@ -173,6 +173,7 @@ in
   # kept as a fallback lever, though the KWin backend in use does not need it.
   services.sunshine = {
     enable = true;
+    autoStart = false;
     capSysAdmin = true;
     # Covers LAN (mDNS auto-discovery) and Tailscale. mDNS doesn't cross
     # the tailnet, so pair from off-LAN by adding the host in Moonlight
@@ -265,10 +266,6 @@ in
         }
       ];
   };
-
-  # Keep Sunshine installed but out of boot; `systemctl start sunshine` when
-  # you want it, `systemctl stop sunshine` to end it.
-  systemd.services.sunshine.enable = false;
 
   nix = {
     registry.nixpkgs.flake = inputs.nixpkgs;
