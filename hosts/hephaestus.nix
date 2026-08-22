@@ -333,6 +333,9 @@ in
     loadModels = [ "qwen2.5:7b-instruct" ];
   };
 
+  # Keep Ollama installed but out of boot; start it on demand.
+  systemd.services.ollama.enable = false;
+
   # Tags RedFlagDeals deals on rfd.davegallant.ca via the local LiteLLM proxy.
   # Cloudflare Workers can't reach a LAN, so the enricher runs here and
   # pushes results in. gpt-5.4-mini is served by the local litellm service.
