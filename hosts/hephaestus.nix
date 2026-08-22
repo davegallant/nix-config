@@ -36,6 +36,7 @@ in
 
   boot = {
     kernelPackages = pkgs.linuxPackages;
+    kernelParams = [ "amdgpu.gpu_recovery=1" ];
 
     loader = {
       systemd-boot.enable = true;
