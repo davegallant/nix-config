@@ -86,6 +86,11 @@ update-pi *version:
 update-codex *version:
   @./home/codex/update-hashes.sh {{version}}
 
+# update version, url, hash and plugin cache in pkgs/chatgpt.nix
+# usage: just update-chatgpt [VERSION]  (defaults to the latest in the OpenAI deb repo)
+update-chatgpt *version:
+  @./pkgs/update-chatgpt.sh {{version}}
+
 # update pvectl flake input to latest and rebuild
 update-pvectl:
   nix flake lock --update-input pvectl

@@ -103,7 +103,10 @@ stdenv.mkDerivation {
     runHook prePatch
 
     asar extract usr/lib/chatgpt/resources/app.asar app
-    substituteInPlace app/.vite/build/main-DkjTIhil.js \
+    # the vite hash in the chunk name changes with every release
+    mainChunk=$(find app/.vite/build -maxdepth 1 -name 'main-*.js' | sort | head -n1)
+    test -n "$mainChunk"
+    substituteInPlace "$mainChunk" \
       --replace-fail 'let i=r===`win32`&&e.computerUse===!0?{...e,computerUseNodeRepl:!0}:e,o=' 'let i=r===`linux`?{...e,inAppBrowserUse:!1,inAppBrowserUseAllowed:!1,inAppBrowserUseHistory:!1,browserPane:!1}:r===`win32`&&e.computerUse===!0?{...e,computerUseNodeRepl:!0}:e,o='
     asar pack app usr/lib/chatgpt/resources/app.asar
 
