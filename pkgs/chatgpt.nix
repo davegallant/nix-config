@@ -34,11 +34,11 @@
 }:
 stdenv.mkDerivation {
   pname = "chatgpt";
-  version = "26.814.41407";
+  version = "26.825.41651";
 
   src = fetchurl {
-    url = "https://persistent.oaistatic.com/codex-app-prod/linux/deb/pool/main/c/chatgpt/chatgpt_26.814.41407_amd64.deb";
-    hash = "sha256-BT1azpHEihcUau8Cykq7AKKx6U/9FcoBiR/YSoInyoA=";
+    url = "https://persistent.oaistatic.com/codex-app-prod/linux/deb/pool/main/c/chatgpt/chatgpt_26.825.41651_amd64.deb";
+    hash = "sha256-IbIulcDEOj8RTz7TJpKr7cY49AV6CPmMmINuLT6aZx4=";
   };
 
   nativeBuildInputs = [
@@ -123,7 +123,7 @@ stdenv.mkDerivation {
     makeWrapper $out/lib/chatgpt/codex-launcher $out/bin/chatgpt \
       --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath [ libglvnd ]} \
       --set CHATGPT_PACKAGED_PLUGINS $out/lib/chatgpt/resources/plugins \
-      --run 'pluginCache="''${XDG_CACHE_HOME:-''${HOME}/.cache}/chatgpt/bundled-plugins-26.814.41407"; if [ ! -d "$pluginCache" ]; then pluginCacheTmp="$pluginCache.tmp.$$"; mkdir -p "$(dirname "$pluginCache")"; cp -r --no-preserve=mode "$CHATGPT_PACKAGED_PLUGINS" "$pluginCacheTmp"; chmod -R u+rwX "$pluginCacheTmp"; mv "$pluginCacheTmp" "$pluginCache"; fi; pluginTmp="''${CODEX_HOME:-''${HOME}/.codex}/.tmp/bundled-marketplaces"; if [ -d "$pluginTmp" ]; then chmod -R u+rwX "$pluginTmp"; fi; export CODEX_ELECTRON_BUNDLED_PLUGINS_RESOURCES_PATH="$pluginCache"'
+      --run 'pluginCache="''${XDG_CACHE_HOME:-''${HOME}/.cache}/chatgpt/bundled-plugins-26.825.41651"; if [ ! -d "$pluginCache" ]; then pluginCacheTmp="$pluginCache.tmp.$$"; mkdir -p "$(dirname "$pluginCache")"; cp -r --no-preserve=mode "$CHATGPT_PACKAGED_PLUGINS" "$pluginCacheTmp"; chmod -R u+rwX "$pluginCacheTmp"; mv "$pluginCacheTmp" "$pluginCache"; fi; pluginTmp="''${CODEX_HOME:-''${HOME}/.codex}/.tmp/bundled-marketplaces"; if [ -d "$pluginTmp" ]; then chmod -R u+rwX "$pluginTmp"; fi; export CODEX_ELECTRON_BUNDLED_PLUGINS_RESOURCES_PATH="$pluginCache"'
 
     runHook postInstall
   '';
