@@ -8,7 +8,6 @@
   ...
 }:
 let
-  chatgpt = pkgs.callPackage ../pkgs/chatgpt.nix { };
   codexbarCli = pkgs.callPackage ../pkgs/codexbar-cli.nix { };
   codexbarKde = pkgs.callPackage ../pkgs/codexbar-kde.nix { };
   unityCli = pkgs.callPackage ../pkgs/unity-cli.nix { };
@@ -129,7 +128,6 @@ in
     keepassxc
     codexbarCli
     codexbarKde
-    chatgpt
     discord
     pvectl.packages.${pkgs.stdenv.hostPlatform.system}.default
     trayscale
