@@ -145,7 +145,10 @@ in
       enable = true;
       trustedInterfaces = [ "tailscale0" ];
     };
-    networkmanager.enable = true;
+    networkmanager = {
+      enable = true;
+      unmanaged = [ "interface-name:enp3s0u2u2" ];
+    };
   };
 
   # Auto-login so the Plasma session (and Sunshine, which is tied to
