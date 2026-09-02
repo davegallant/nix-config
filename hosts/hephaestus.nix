@@ -25,11 +25,18 @@ in
     ../opensnitch.nix
   ];
 
-  home-manager.users.dave.imports = [
-    ../home/keepassxc-ssh-agent.nix
-    ../home/retroarch.nix
-    ../home/ryujinx.nix
-  ];
+  home-manager.users.dave = {
+    imports = [
+      ../home/keepassxc-ssh-agent.nix
+      ../home/retroarch.nix
+      ../home/ryujinx.nix
+    ];
+
+    services.tailscale-systray = {
+      enable = true;
+      package = unstable.tailscale;
+    };
+  };
 
   system.stateVersion = "26.05";
 
@@ -130,7 +137,6 @@ in
     codexbarKde
     discord
     pvectl.packages.${pkgs.stdenv.hostPlatform.system}.default
-    trayscale
     unstable.signal-desktop
     unityhub
     unityCli
