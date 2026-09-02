@@ -6,7 +6,7 @@
   stdenvNoCC,
 }:
 let
-  version = "0.152.0"; # renovate: datasource=github-releases depName=openai/codex
+  version = "0.152.1"; # renovate: datasource=github-releases depName=openai/codex
 
   # kratos + helios (aarch64-darwin) and hephaestus (x86_64-linux) are the
   # consumers; other systems are omitted. Release tags carry a "rust-v" prefix
@@ -15,18 +15,18 @@ let
   assets = {
     aarch64-darwin = {
       url = "https://github.com/openai/codex/releases/download/rust-v${version}/codex-aarch64-apple-darwin.tar.gz";
-      hash = "sha256-XJrkBsb3PDXpITCMf1o/rHBSisGtXDUj56tDKiI4r8E=";
+      hash = "sha256-jd3h/PXJhC6bqgnHwQgIi7IqOf64bkNE5F3AmGdkudc=";
       binary = "codex-aarch64-apple-darwin";
       codeModeHostUrl = "https://github.com/openai/codex/releases/download/rust-v${version}/codex-code-mode-host-aarch64-apple-darwin.tar.gz";
-      codeModeHostHash = "sha256-PRG9THC4Ip7E1woxFJADxBmxhgOzJW4P3V2uFmfgp9w=";
+      codeModeHostHash = "sha256-mx3dyz41yMVFzH6hhYoH9+HFT/jlmrJmk634l/uzU2M=";
       codeModeHostBinary = "codex-code-mode-host-aarch64-apple-darwin";
     };
     x86_64-linux = {
       url = "https://github.com/openai/codex/releases/download/rust-v${version}/codex-x86_64-unknown-linux-musl.tar.gz";
-      hash = "sha256-BflC09PFtazZ7a1WzieXtv5y27FGKyTlyb99zsmiihE=";
+      hash = "sha256-oO0bQLHVl7NA8JrgDs68RmcLBstSqsMVudyE/tAon9A=";
       binary = "codex-x86_64-unknown-linux-musl";
       codeModeHostUrl = "https://github.com/openai/codex/releases/download/rust-v${version}/codex-code-mode-host-x86_64-unknown-linux-musl.tar.gz";
-      codeModeHostHash = "sha256-RJzv41ufNH4/2/Eh6BYzmzeCXrC/7n3oKYoKYbZofLo=";
+      codeModeHostHash = "sha256-DxpUTVweia7XaakdjmNCHrju+dtVToYe2QcEEmpBke0=";
       codeModeHostBinary = "codex-code-mode-host-x86_64-unknown-linux-musl";
     };
   };
