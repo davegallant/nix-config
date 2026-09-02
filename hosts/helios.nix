@@ -68,7 +68,6 @@ in
     "antigravity-cli"
     "codexbar"
     "blender"
-    "discord"
     "heroic"
     "keepassxc"
     "minecraft"
