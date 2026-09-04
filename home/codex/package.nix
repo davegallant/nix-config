@@ -6,7 +6,7 @@
   stdenvNoCC,
 }:
 let
-  version = "0.152.1"; # renovate: datasource=github-releases depName=openai/codex
+  version = "0.153.2"; # renovate: datasource=github-releases depName=openai/codex
 
   # kratos + helios (aarch64-darwin) and hephaestus (x86_64-linux) are the
   # consumers; other systems are omitted. Release tags carry a "rust-v" prefix
