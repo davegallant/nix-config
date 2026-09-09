@@ -72,6 +72,7 @@ in
     "keepassxc"
     "minecraft"
     "moonlight"
+    "pocket-casts"
     "retroarch-metal"
     "signal"
     "steam"
