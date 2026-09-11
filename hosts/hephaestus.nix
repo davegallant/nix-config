@@ -2,7 +2,6 @@
   inputs,
   lib,
   pkgs,
-  modulesPath,
   pvectl,
   unstable,
   ...
@@ -20,7 +19,6 @@ let
 in
 {
   imports = [
-    (modulesPath + "/profiles/qemu-guest.nix")
     ../litellm
     ../opensnitch.nix
   ];
@@ -50,15 +48,12 @@ in
     };
 
     initrd.availableKernelModules = [
-      "ahci"
-      "ehci_pci"
-      "sd_mod"
-      "sr_mod"
-      "uhci_hcd"
-      "usbhid"
-      "virtio_pci"
-      "virtio_scsi"
+      "nvme"
       "xhci_pci"
+      "ahci"
+      "usb_storage"
+      "usbhid"
+      "sd_mod"
     ];
   };
 
@@ -227,7 +222,7 @@ in
       # KMS/DRM capture enumerates the monitor list but then dies with
       # "Unable to initialize capture method" / "Platform failed to
       # initialize", most likely because KWin holds DRM master on this
-      # qemu-guest VM. Every encoder probe then fails downstream of the
+      # bare-metal Plasma session. Every encoder probe then fails downstream of the
       # missing capture source, so Sunshine serves 503s instead.
       #
       # KWin's native screencasting needs no portal consent and no DRM
@@ -301,18 +296,6 @@ in
   hardware.steam-hardware.enable = true;
 
   systemd.services.systemd-networkd-wait-online.enable = lib.mkForce false;
-
-  # Hephaestus is a VM that should never sleep/suspend/hibernate
-  systemd.targets = {
-    sleep.enable = false;
-    suspend.enable = false;
-    hibernate.enable = false;
-    hybrid-sleep.enable = false;
-  };
-  services.logind.settings.Login = {
-    HandleLidSwitch = "ignore";
-    IdleAction = "ignore";
-  };
 
   services.resolved.enable = true;
 
