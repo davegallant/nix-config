@@ -17,7 +17,8 @@
       [Daemon]
       Autolock=true
       LockOnResume=true
-      Timeout=5
+      LockGrace=5
+      Timeout=10
     '';
   };
 }
