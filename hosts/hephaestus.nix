@@ -152,24 +152,6 @@ in
     };
   };
 
-  # Auto-login so the Plasma session (and Sunshine, which is tied to
-  # graphical-session.target) is always up after a reboot with no manual
-  # console login.
-  services.displayManager.autoLogin = {
-    enable = true;
-    user = "dave";
-  };
-
-  # sddm-autologin's PAM stack never runs a real password check (auth is just
-  # pam_permit), so pam_kwallet5 isn't wired in by default and KWallet has no
-  # login password to auto-unlock with -- it falls back to prompting on every
-  # boot. Enabling it here lets pam_kwallet5 attempt an unlock with whatever
-  # (empty) auth token PAM hands it, which only succeeds because the wallet's
-  # own password is set to blank (done once, by hand, in System Settings >
-  # KDE Wallet -- autologin already grants a full session with zero
-  # credentials, so an encrypted-with-blank-password wallet adds nothing).
-  security.pam.services.sddm-autologin.kwallet.enable = true;
-
   # Screen capture on Plasma Wayland is fussy; see the capture= note below for
   # why the backend is pinned. capSysAdmin is what KMS/DRM capture needs and is
   # kept as a fallback lever, though the KWin backend in use does not need it.
