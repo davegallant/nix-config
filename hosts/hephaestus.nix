@@ -148,7 +148,7 @@ in
     };
     networkmanager = {
       enable = true;
-      unmanaged = [ "interface-name:enp3s0u2u2" ];
+      unmanaged = [ "interface-name:enp3s0f0u4u2" ];
     };
   };
 
