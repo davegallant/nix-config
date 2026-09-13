@@ -13,8 +13,8 @@ let
   rfdFyi = pkgs.fetchFromGitHub {
     owner = "davegallant";
     repo = "rfd-fyi";
-    rev = "2d37ac263b1abfbcf69f7adb518bd762b8e626ff";
-    hash = "sha256-g//QfJlTsS9DEjtxZHVWICDNilDMZvkeDlufqDkwi7k=";
+    rev = "6d85c8346fb08bd68fd353833eb6d51d228bb911";
+    hash = "sha256-6YVp+E/RTOoGw4lh5BLVrxSKHvP5a0C3b15boEYE4bU=";
   };
 in
 {
@@ -308,7 +308,7 @@ in
 
   # Tags RedFlagDeals deals on rfd.davegallant.ca via the local LiteLLM proxy.
   # Cloudflare Workers can't reach a LAN, so the enricher runs here and
-  # pushes results in. gpt-5.4-mini is served by the local litellm service.
+  # pushes results in. gpt-5.6-luna is served by the local litellm service.
   users.users.rfd-enrich = {
     isSystemUser = true;
     group = "rfd-enrich";
@@ -338,8 +338,9 @@ in
     wants = [ "network-online.target" ];
     environment = {
       RFD_FYI_ORIGIN = "https://rfd.davegallant.ca";
-      ENRICH_MODEL = "gpt-5.4-mini";
+      ENRICH_MODEL = "gpt-5.6-luna";
       ENRICH_BASE_URL = "http://127.0.0.1:4000/v1";
+      ENRICH_STREAM = "true";
     };
 
     serviceConfig = {
@@ -359,7 +360,7 @@ in
     };
   };
 
-  # Manually verify rfd-enrich.service tags cleanly via litellm/gpt-5.4-mini
+  # Manually verify rfd-enrich.service tags cleanly via litellm/gpt-5.6-luna
   # after model changes; the timer remains enabled for normal operation.
   systemd.timers.rfd-enrich = {
     description = "Tag RedFlagDeals deals every 15 minutes";
