@@ -10,12 +10,6 @@ let
   codexbarCli = pkgs.callPackage ../pkgs/codexbar-cli.nix { };
   codexbarKde = pkgs.callPackage ../pkgs/codexbar-kde.nix { };
   unityCli = pkgs.callPackage ../pkgs/unity-cli.nix { };
-  rfdFyi = pkgs.fetchFromGitHub {
-    owner = "davegallant";
-    repo = "rfd-fyi";
-    rev = "6d85c8346fb08bd68fd353833eb6d51d228bb911";
-    hash = "sha256-6YVp+E/RTOoGw4lh5BLVrxSKHvP5a0C3b15boEYE4bU=";
-  };
 in
 {
   imports = [
@@ -306,19 +300,7 @@ in
   # Keep Ollama installed but out of boot; start it on demand.
   systemd.services.ollama.enable = false;
 
-  # Tags RedFlagDeals deals on rfd.davegallant.ca via the local LiteLLM proxy.
-  # Cloudflare Workers can't reach a LAN, so the enricher runs here and
-  # pushes results in. gpt-5.6-luna is served by the local litellm service.
-  users.users.rfd-enrich = {
-    isSystemUser = true;
-    group = "rfd-enrich";
-  };
-  users.groups.rfd-enrich = { };
-
-  # Created independently of the service so the secret file below can be
-  # placed before the first `systemctl start`.
   systemd.tmpfiles.rules = [
-    "d /var/lib/rfd-enrich 0750 rfd-enrich rfd-enrich -"
     # unity-cli dlopens libsqlite3 by hardcoded absolute path (it probes
     # /usr/lib/x86_64-linux-gnu/..., /usr/lib/aarch64-linux-gnu/..., /usr/lib64/...
     # and /usr/lib/...; LD_LIBRARY_PATH has no effect -- verified by repro), so
@@ -328,49 +310,6 @@ in
     # the derivation against GC.
     "L+ /usr/lib64/libsqlite3.so.0 - - - - ${pkgs.sqlite.out}/lib/libsqlite3.so.0"
   ];
-
-  systemd.services.rfd-enrich = {
-    description = "Tag RedFlagDeals deals with the local LiteLLM proxy";
-    after = [
-      "network-online.target"
-      "litellm.service"
-    ];
-    wants = [ "network-online.target" ];
-    environment = {
-      RFD_FYI_ORIGIN = "https://rfd.davegallant.ca";
-      ENRICH_MODEL = "gpt-5.6-luna";
-      ENRICH_BASE_URL = "http://127.0.0.1:4000/v1";
-      ENRICH_STREAM = "true";
-    };
-
-    serviceConfig = {
-      Type = "oneshot";
-      User = "rfd-enrich";
-      Group = "rfd-enrich";
-      # REFRESH_SECRET only. Must not come from the Nix store (world-readable);
-      # placed by hand: install -m 600 -o rfd-enrich -g rfd-enrich /dev/stdin
-      # /var/lib/rfd-enrich/env <<< 'REFRESH_SECRET=...'
-      EnvironmentFile = "/var/lib/rfd-enrich/env";
-      ExecStart = "${pkgs.nodejs}/bin/node ${rfdFyi}/tools/enricher/enrich.mjs";
-
-      PrivateTmp = true;
-      ProtectSystem = "strict";
-      ProtectHome = true;
-      NoNewPrivileges = true;
-    };
-  };
-
-  # Manually verify rfd-enrich.service tags cleanly via litellm/gpt-5.6-luna
-  # after model changes; the timer remains enabled for normal operation.
-  systemd.timers.rfd-enrich = {
-    description = "Tag RedFlagDeals deals every 15 minutes";
-    wantedBy = [ "timers.target" ];
-    timerConfig = {
-      OnCalendar = "*:0/15";
-      Persistent = true;
-      RandomizedDelaySec = "1min";
-    };
-  };
 
   virtualisation = {
     docker.enable = true;
