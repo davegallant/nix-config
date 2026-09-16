@@ -135,6 +135,10 @@ in
   networking = {
     hostName = "hephaestus";
     hostId = "861d59c4";
+    interfaces."enp34s0".wakeOnLan = {
+      enable = true;
+      policy = [ "magic" ];
+    };
     firewall = {
       allowPing = true;
       enable = true;
