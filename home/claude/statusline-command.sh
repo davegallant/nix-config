@@ -37,16 +37,27 @@ else
     used="$used_pct"
 fi
 
-# Show only the git repo base name, or fall back to basename of cwd. A toplevel
-# result also proves we're in a work tree, so reuse it to gate the branch lookup.
-toplevel=$(git -C "$cwd" rev-parse --show-toplevel 2>/dev/null || true)
+# Work-tree root and branch in a single rev-parse (skip optional locks via
+# fsmonitor=false): line 1 is the toplevel, which also proves we're in a work
+# tree, and line 2 the branch — or the literal "HEAD" when detached or unborn.
+# Don't gate on the exit status: an unborn HEAD exits 128 after printing both
+# lines, so the output is the signal.
+git_info=$(git -C "$cwd" -c core.fsmonitor=false rev-parse --show-toplevel --abbrev-ref HEAD 2>/dev/null)
+toplevel=${git_info%%$'\n'*}
+
+# Show only the git repo base name, or fall back to basename of cwd.
 short_cwd=$(basename "${toplevel:-$cwd}")
 
-# Git branch (skip optional locks via fsmonitor=false)
 git_branch=""
-if [ -n "$toplevel" ]; then
-    git_branch=$(git -C "$cwd" -c core.fsmonitor=false symbolic-ref --short HEAD 2>/dev/null \
-        || git -C "$cwd" -c core.fsmonitor=false rev-parse --short HEAD 2>/dev/null || true)
+if [ -n "$toplevel" ] && [ "$git_info" != "$toplevel" ]; then
+    git_branch=${git_info#*$'\n'}
+fi
+
+# A detached HEAD reads better as a short sha; an unborn branch has no commit
+# to name, so fall back to the symbolic name there.
+if [ "$git_branch" = "HEAD" ]; then
+    git_branch=$(git -C "$cwd" -c core.fsmonitor=false rev-parse --short HEAD 2>/dev/null \
+        || git -C "$cwd" -c core.fsmonitor=false symbolic-ref --short HEAD 2>/dev/null || true)
 fi
 
 # Build the status line
