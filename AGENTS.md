@@ -73,7 +73,7 @@ source; `~/.claude/settings.json` is generated and denied for editing). Changes 
 - macOS pasteboard access and `tmux` both fail inside the sandbox (`NSPasteboard
   generalPasteboard unavailable`; `fork failed`). Read `home/tmux.nix` instead of
   querying a live server, and ask the user for clipboard checks.
-- `go build` and `go test` **do** work — do not claim otherwise without trying.
+- `go build` and `go test` work in the sandbox.
 - MCP servers are not managed by this flake; they live in `~/.claude.json`, which
   holds plaintext credentials. When inspecting it, print server names and `env`
   **keys** only. Never run a bare `env`/`printenv` grep that can match a secret value.
