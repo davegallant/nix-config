@@ -10,7 +10,7 @@
   socat,
 }:
 let
-  version = "2.1.272"; # renovate: datasource=npm depName=@anthropic-ai/claude-code
+  version = "2.1.280"; # renovate: datasource=npm depName=@anthropic-ai/claude-code
 
   assets = {
     x86_64-linux = {
