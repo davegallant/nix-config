@@ -296,6 +296,6 @@
   "preferredNotifChannel": "ghostty",
   "editorMode": "vim",
   "effortLevel": "high",
-  "model": "opus",
+  "model": "claude-opus-5-5",
   "outputStyle": "Concise"
 }
