@@ -42,6 +42,7 @@ callPackage ../lib/mk-prebuilt-binary.nix {
       --set DISABLE_AUTOUPDATER 1 \
       --set DISABLE_INSTALLATION_CHECKS 1 \
       --set-default FORCE_AUTOUPDATE_PLUGINS 1 \
+      --set-default ANTHROPIC_MODEL claude-opus-5-5 \
       --unset DEV \
       --prefix PATH : ${
         lib.makeBinPath (
