@@ -78,5 +78,6 @@ in
     "steam"
     "transmission"
     "unity-cli"
+    "zoom"
   ];
 }
