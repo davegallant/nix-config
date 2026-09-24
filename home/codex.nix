@@ -41,7 +41,7 @@ let
 
     if [ ! -f "$HOME/.codex/config.toml" ]; then
       cat > "$HOME/.codex/config.toml" <<EOF
-      model = "gpt-5.6-terra"
+      model = "gpt-6-luna"
       model_reasoning_effort = "medium"
       sandbox_mode = "danger-full-access"
       approval_policy = "on-request"
@@ -56,7 +56,7 @@ let
     fi
 
     exec ${codex-pkg}/bin/codex \
-      --config 'model="gpt-5.6-terra"' \
+      --config 'model="gpt-6-luna"' \
       --config 'model_reasoning_effort="medium"' \
       --config 'sandbox_mode="danger-full-access"' \
       --config 'approval_policy="on-request"' \
