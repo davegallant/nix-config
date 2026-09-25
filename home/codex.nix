@@ -67,6 +67,9 @@ in
   config = {
     home.packages = [ codex-wrapper ];
 
+    # Global instructions loaded into every Codex session.
+    home.file.".codex/AGENTS.md".source = ./instructions/links.md;
+
     # Codex scans ~/.agents/skills for user-level skills but ignores symlinked
     # SKILL.md files. Materialize the shared and Superpowers skills as real
     # files instead.
