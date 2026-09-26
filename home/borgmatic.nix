@@ -64,6 +64,7 @@
 
     systemd.user.services.borgmatic = {
       Unit.Description = "borgmatic backup";
+      Unit.X-RestartIfChanged = false;
       Service = {
         Type = "oneshot";
         Environment = "BORG_UNKNOWN_UNENCRYPTED_REPO_ACCESS_IS_OK=yes";
