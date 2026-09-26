@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   stdenv,
   callPackage,
   stdenvNoCC,
@@ -29,7 +30,10 @@ callPackage ../lib/mk-prebuilt-binary.nix {
   inherit version assets;
   sourceRoot = "pi";
   nativeBuildInputs = [ makeBinaryWrapper ];
-  buildInputs = lib.optionals stdenvNoCC.hostPlatform.isElf [ stdenv.cc.cc.lib ];
+  buildInputs = lib.optionals stdenvNoCC.hostPlatform.isElf [
+    stdenv.cc.cc.lib
+    pkgs.libxcb
+  ];
 
   installPhase = ''
     mkdir -p $out/lib/pi $out/bin
