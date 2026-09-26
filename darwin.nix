@@ -77,7 +77,6 @@
       "brave-browser"
       "bruno"
       "capslocknodelay"
-      "cyberduck"
       "dbeaver-community"
       "docker-desktop"
       "font-fira-code-nerd-font"
