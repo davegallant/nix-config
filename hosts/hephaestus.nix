@@ -302,7 +302,8 @@ in
   };
 
   # Keep Ollama installed but out of boot; start it on demand.
-  systemd.services.ollama.enable = false;
+  systemd.services.ollama.wantedBy = lib.mkForce [ ];
+  systemd.services.ollama-model-loader.wantedBy = lib.mkForce [ "ollama.service" ];
 
   systemd.tmpfiles.rules = [
     # unity-cli dlopens libsqlite3 by hardcoded absolute path (it probes

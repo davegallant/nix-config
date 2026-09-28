@@ -108,8 +108,7 @@ export default function (pi: ExtensionAPI) {
 
     let text = event.text;
     for (const token of strip) text = text.replace(token, "");
-    text = text.replace(/[ \t]{2,}/g, " ").trim();
 
-    return { action: "transform" as const, text: text || "(image attached)", images };
+    return { action: "transform" as const, text: text.trim() ? text : "(image attached)", images };
   });
 }
