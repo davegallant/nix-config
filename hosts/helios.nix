@@ -70,6 +70,7 @@ in
     "blender"
     "heroic"
     "keepassxc"
+    "librewolf"
     "minecraft"
     "moonlight"
     "pocket-casts"
