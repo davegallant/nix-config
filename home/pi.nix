@@ -36,7 +36,7 @@ let
       api: "openai-responses",
       apiKey: "$LITELLM_API_KEY",
       models: [
-        { id: "gpt-6-luna", name: "GPT-6 Luna (litellm)", reasoning: true, input: ["text", "image"], contextWindow: 272000, maxTokens: 128000 }
+        { id: "gpt-6-luna", name: "GPT-6 Luna (litellm)", reasoning: true, input: ["text", "image"], contextWindow: 1050000, maxTokens: 128000 }
       ],
     },
   '';
@@ -58,7 +58,7 @@ let
         providers: {
           "openai-codex": {
             modelOverrides: {
-              "gpt-6-luna": { contextWindow: 272000 },
+              "gpt-6-luna": { contextWindow: 1050000 },
             },
           },
     ${lib.optionalString onKratos litellmProvider}${ollamaProvider}        },
