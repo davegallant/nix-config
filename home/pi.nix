@@ -11,64 +11,106 @@ let
 
   onKratos = hostname == "kratos";
   modelProvider = if onKratos then "litellm" else "openai-codex";
+  defaultModel = "gpt-6-luna";
+  ollamaModel = import ./lib/ollama.nix;
   ollamaBaseUrl = if onKratos then "http://127.0.0.1:11434/v1" else "http://kratos:11434/v1";
 
-  ollamaProvider = ''
-    "ollama": {
-      baseUrl: "${ollamaBaseUrl}",
-      api: "openai-completions",
-      apiKey: "ollama",
-      compat: {
-        supportsDeveloperRole: false,
-        supportsReasoningEffort: false,
-      },
-      models: [
-        { id: "qwen3.8:27b", name: "Qwen 3.8 27B (Ollama)" }
-      ],
-    },
-  '';
-
-  # Pricing is unavailable from the repository and current gateway access. Leave
-  # model `cost` metadata unset until authoritative per-million-token rates are available.
-  litellmProvider = ''
-    "litellm": {
-      baseUrl: $litellmBaseUrl,
-      api: "openai-responses",
-      apiKey: "$LITELLM_API_KEY",
-      models: [
-        { id: "gpt-6-luna", name: "GPT-6 Luna (litellm)", reasoning: true, input: ["text", "image"], contextWindow: 1050000, maxTokens: 128000 }
-      ],
-    },
-  '';
+  modelsTemplate = pkgs.writeText "pi-models.json" (
+    builtins.toJSON {
+      providers = {
+        openai-codex.modelOverrides.${defaultModel}.contextWindow = 1050000;
+        ollama = {
+          baseUrl = ollamaBaseUrl;
+          api = "openai-completions";
+          apiKey = "ollama";
+          compat = {
+            supportsDeveloperRole = false;
+            supportsReasoningEffort = false;
+          };
+          models = [ ollamaModel ];
+        };
+      }
+      // lib.optionalAttrs onKratos {
+        litellm = {
+          # Resolve the private gateway URL at launch, outside the Nix store.
+          baseUrl = "";
+          api = "openai-responses";
+          apiKey = "$LITELLM_API_KEY";
+          models = [
+            {
+              id = defaultModel;
+              name = "GPT-6 Luna (litellm)";
+              reasoning = true;
+              input = [
+                "text"
+                "image"
+              ];
+              contextWindow = 1050000;
+              maxTokens = 128000;
+              # Leave cost unset until authoritative gateway pricing is available.
+            }
+          ];
+        };
+      };
+    }
+  );
 
   pi-wrapper = pkgs.writeShellScriptBin "pi" ''
     set -euo pipefail
+    export PI_SKIP_VERSION_CHECK=1
 
-    litellm_base_url=""
+    case "''${1:-}" in
+      -h|--help|-v|--version)
+        exec ${pi-pkg}/bin/pi "$@"
+        ;;
+    esac
+
+    agent_dir="''${PI_CODING_AGENT_DIR:-$HOME/.pi/agent}"
+    models_file="$agent_dir/models.json"
+    models_source=${modelsTemplate}
+    temporary_models=""
+
+    cleanup() {
+      if [[ -n "$temporary_models" && -e "$temporary_models" ]]; then
+        ${pkgs.coreutils}/bin/rm -- "$temporary_models"
+      fi
+    }
+    trap cleanup EXIT
+    trap 'exit 130' INT
+    trap 'exit 143' TERM
+
     ${lib.optionalString onKratos ''
       : "''${LITELLM_BASE_URL:?LITELLM_BASE_URL must be set}"
       : "''${LITELLM_API_KEY:?LITELLM_API_KEY must be set}"
-      litellm_base_url="''${LITELLM_BASE_URL%/}/v1"
+      litellm_base_url="''${LITELLM_BASE_URL%/}"
+      if [[ "$litellm_base_url" != */v1 ]]; then
+        litellm_base_url="$litellm_base_url/v1"
+      fi
+
+      gateway_hash="$(printf '%s' "$litellm_base_url" | ${pkgs.coreutils}/bin/sha256sum)"
+      gateway_hash="''${gateway_hash%% *}"
+      models_cache="$agent_dir/cache/models/${builtins.baseNameOf (toString modelsTemplate)}"
+      models_source="$models_cache/$gateway_hash.json"
+
+      if [[ ! -s "$models_source" ]]; then
+        ${pkgs.coreutils}/bin/mkdir -p -m 700 "$models_cache"
+        temporary_models="$(${pkgs.coreutils}/bin/mktemp "$models_cache/.models.XXXXXXXX")"
+        ${pkgs.jq}/bin/jq --arg baseUrl "$litellm_base_url" \
+          '.providers.litellm.baseUrl = $baseUrl' ${modelsTemplate} > "$temporary_models"
+        ${pkgs.coreutils}/bin/mv -- "$temporary_models" "$models_source"
+        temporary_models=""
+      fi
     ''}
 
-    mkdir -p "$HOME/.pi/agent"
+    if ! ${pkgs.diffutils}/bin/cmp -s "$models_source" "$models_file"; then
+      ${pkgs.coreutils}/bin/mkdir -p -m 700 "$agent_dir"
+      temporary_models="$(${pkgs.coreutils}/bin/mktemp "$agent_dir/.models.XXXXXXXX")"
+      ${pkgs.coreutils}/bin/cp -- "$models_source" "$temporary_models"
+      ${pkgs.coreutils}/bin/mv -- "$temporary_models" "$models_file"
+      temporary_models=""
+    fi
 
-    ${pkgs.jq}/bin/jq -n --arg litellmBaseUrl "$litellm_base_url" '
-      {
-        providers: {
-          "openai-codex": {
-            modelOverrides: {
-              "gpt-6-luna": { contextWindow: 1050000 },
-            },
-          },
-    ${lib.optionalString onKratos litellmProvider}${ollamaProvider}        },
-      }
-    # This rewrite happens on every launch under `set -euo pipefail`, so even
-    # `pi --version` aborts if ~/.pi is not writable. Keep "~/.pi/" in
-    # sandbox.filesystem.allowWrite in home/claude/settings.json.
-    ' > "$HOME/.pi/agent/models.json"
-
-    PI_SKIP_VERSION_CHECK=1 exec ${pi-pkg}/bin/pi "$@"
+    exec ${pi-pkg}/bin/pi "$@"
   '';
 in
 {
@@ -103,9 +145,12 @@ in
 
     home.file.".pi/agent/settings.json".text = builtins.toJSON {
       defaultProvider = modelProvider;
-      defaultModel = "gpt-6-luna";
-      # Match Codex defaults; the token-budget extension selects low for Luna.
+      inherit defaultModel;
       defaultThinkingLevel = "medium";
+      modelThinkingLevels = {
+        "litellm/${defaultModel}" = "low";
+        "openai-codex/${defaultModel}" = "low";
+      };
       thinkingBudgets = {
         low = 1024;
         medium = 4096;
@@ -118,10 +163,8 @@ in
       };
       collapseChangelog = true;
       enabledModels = [
-        "ollama/qwen3.8:27b"
-      ]
-      ++ map (model: "${modelProvider}/${model}") [
-        "gpt-6-luna"
+        "ollama/${ollamaModel.id}"
+        "${modelProvider}/${defaultModel}"
       ];
       # Skills (davegallant/skills + obra/superpowers + a few from
       # mattpocock/skills) aren't declared here: pi auto-discovers
