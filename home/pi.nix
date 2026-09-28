@@ -12,13 +12,17 @@ let
   onKratos = hostname == "kratos";
   modelProvider = if onKratos then "litellm" else "openai-codex";
   defaultModel = "gpt-6-luna";
+  solModel = "gpt-6-sol";
   ollamaModel = import ./lib/ollama.nix;
   ollamaBaseUrl = if onKratos then "http://127.0.0.1:11434/v1" else "http://kratos:11434/v1";
 
   modelsTemplate = pkgs.writeText "pi-models.json" (
     builtins.toJSON {
       providers = {
-        openai-codex.modelOverrides.${defaultModel}.contextWindow = 1050000;
+        openai-codex.modelOverrides = {
+          ${defaultModel}.contextWindow = 1050000;
+          ${solModel}.contextWindow = 1050000;
+        };
         ollama = {
           baseUrl = ollamaBaseUrl;
           api = "openai-completions";
@@ -40,6 +44,18 @@ let
             {
               id = defaultModel;
               name = "GPT-6 Luna (litellm)";
+              reasoning = true;
+              input = [
+                "text"
+                "image"
+              ];
+              contextWindow = 1050000;
+              maxTokens = 128000;
+              # Leave cost unset until authoritative gateway pricing is available.
+            }
+            {
+              id = solModel;
+              name = "GPT-6 Sol (litellm)";
               reasoning = true;
               input = [
                 "text"
@@ -165,6 +181,7 @@ in
       enabledModels = [
         "ollama/${ollamaModel.id}"
         "${modelProvider}/${defaultModel}"
+        "${modelProvider}/${solModel}"
       ];
       # Skills (davegallant/skills + obra/superpowers + a few from
       # mattpocock/skills) aren't declared here: pi auto-discovers
