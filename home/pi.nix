@@ -36,9 +36,7 @@ let
       api: "openai-responses",
       apiKey: "$LITELLM_API_KEY",
       models: [
-        { id: "gpt-5.6-luna", name: "GPT-5.6 Luna (litellm)", reasoning: true, input: ["text", "image"], contextWindow: 272000, maxTokens: 128000 },
-        { id: "gpt-5.6-terra", name: "GPT-5.6 Terra (litellm)", reasoning: true, input: ["text", "image"], contextWindow: 272000, maxTokens: 128000 },
-        { id: "gpt-5.6-sol", name: "GPT-5.6 Sol (litellm)", reasoning: true, input: ["text", "image"], contextWindow: 272000, maxTokens: 128000 }
+        { id: "gpt-6-luna", name: "GPT-6 Luna (litellm)", reasoning: true, input: ["text", "image"], contextWindow: 272000, maxTokens: 128000 }
       ],
     },
   '';
@@ -60,9 +58,7 @@ let
         providers: {
           "openai-codex": {
             modelOverrides: {
-              "gpt-5.6-luna": { contextWindow: 272000 },
-              "gpt-5.6-terra": { contextWindow: 272000 },
-              "gpt-5.6-sol": { contextWindow: 272000 },
+              "gpt-6-luna": { contextWindow: 272000 },
             },
           },
     ${lib.optionalString onKratos litellmProvider}${ollamaProvider}        },
@@ -71,9 +67,6 @@ let
     # `pi --version` aborts if ~/.pi is not writable. Keep "~/.pi/" in
     # sandbox.filesystem.allowWrite in home/claude/settings.json.
     ' > "$HOME/.pi/agent/models.json"
-
-    export PI_ADVISOR_PROVIDER=${modelProvider}
-    export PI_ADVISOR_MODEL=gpt-5.6-sol
 
     PI_SKIP_VERSION_CHECK=1 exec ${pi-pkg}/bin/pi "$@"
   '';
@@ -94,13 +87,6 @@ in
     # Ctrl+V pastes reach the model directly instead of costing a `read` call.
     home.file.".pi/agent/extensions/image-paste.ts".source = ./pi/image-paste.ts;
 
-    # Advisor tool: consults a stronger model with a bounded session transcript.
-    # The model is runtime-switchable via /advisor-model (persisted to
-    # ~/.pi/agent/advisor.json, deliberately not nix-managed so it stays
-    # writable). To pin it declaratively instead, set PI_ADVISOR_PROVIDER /
-    # PI_ADVISOR_MODEL in the wrapper above.
-    home.file.".pi/agent/extensions/advisor.ts".source = ./pi/advisor.ts;
-
     # AskUserQuestion equivalent: lets the model stop and offer choices mid-task.
     # Vendored from pi's bundled examples, plus promptGuidelines and a
     # sequential execution mode. Distinct from /answer (agent-stuff), which
@@ -116,9 +102,9 @@ in
     home.file.".pi/agent/prompts/verify.md".source = ./pi/prompts/verify.md;
 
     home.file.".pi/agent/settings.json".text = builtins.toJSON {
-      defaultProvider = "ollama";
-      defaultModel = "qwen3.8:27b";
-      # Match Codex defaults; the token-budget extension selects low for Sol.
+      defaultProvider = modelProvider;
+      defaultModel = "gpt-6-luna";
+      # Match Codex defaults; the token-budget extension selects low for Luna.
       defaultThinkingLevel = "medium";
       thinkingBudgets = {
         low = 1024;
@@ -135,9 +121,7 @@ in
         "ollama/qwen3.8:27b"
       ]
       ++ map (model: "${modelProvider}/${model}") [
-        "gpt-5.6-luna"
-        "gpt-5.6-terra"
-        "gpt-5.6-sol"
+        "gpt-6-luna"
       ];
       # Skills (davegallant/skills + obra/superpowers + a few from
       # mattpocock/skills) aren't declared here: pi auto-discovers
