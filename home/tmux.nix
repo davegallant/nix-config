@@ -23,38 +23,40 @@
     extraConfig = ''
       set -g default-command "${pkgs.fish}/bin/fish"
 
-      # Don't let an SSH-forwarded agent leak into this persistent session:
-      # KeePassXC's ssh-agent (home/keepassxc-ssh-agent.nix) should always
-      # win inside tmux, even after the forwarding connection dies and
-      # leaves a dead socket behind.
-      set -g update-environment "DISPLAY XAUTHORITY"
+      ${lib.optionalString pkgs.stdenv.isLinux ''
+        # Don't let an SSH-forwarded agent leak into this persistent session:
+        # KeePassXC's ssh-agent (home/keepassxc-ssh-agent.nix) should always
+        # win inside tmux, even after the forwarding connection dies and
+        # leaves a dead socket behind.
+        set -g update-environment "DISPLAY XAUTHORITY"
 
-      # update-environment only covers what a client copies into the
-      # *session* environment on attach. Whatever forked the server has
-      # already been copied into the *global* environment table, and that
-      # copy lives as long as the server does, so a server started from a
-      # Tailscale SSH login hands every later pane that login's forwarded
-      # socket - long after it stops existing. Pin it back to the local
-      # agent.
-      #
-      # A server started from an SSH login (Tailscale or otherwise) inherits
-      # that login shell's environment wholesale, which may never have had
-      # XDG_RUNTIME_DIR set. Every client tool that talks to a per-user
-      # runtime service (wpctl/pactl -> pipewire, etc.) breaks silently in
-      # every pane of that session. Pin it the same way SSH_AUTH_SOCK is
-      # pinned below, so a plain `prefix+r` repairs an already-broken
-      # session without needing to kill the server.
-      run-shell '${pkgs.tmux}/bin/tmux set-environment -g XDG_RUNTIME_DIR "''${XDG_RUNTIME_DIR:-/run/user/$(${pkgs.coreutils}/bin/id -u)}"'
+        # update-environment only covers what a client copies into the
+        # *session* environment on attach. Whatever forked the server has
+        # already been copied into the *global* environment table, and that
+        # copy lives as long as the server does, so a server started from a
+        # Tailscale SSH login hands every later pane that login's forwarded
+        # socket - long after it stops existing. Pin it back to the local
+        # agent.
+        #
+        # A server started from an SSH login (Tailscale or otherwise) inherits
+        # that login shell's environment wholesale, which may never have had
+        # XDG_RUNTIME_DIR set. Every client tool that talks to a per-user
+        # runtime service (wpctl/pactl -> pipewire, etc.) breaks silently in
+        # every pane of that session. Pin it the same way SSH_AUTH_SOCK is
+        # pinned below, so a plain `prefix+r` repairs an already-broken
+        # session without needing to kill the server.
+        run-shell '${pkgs.tmux}/bin/tmux set-environment -g XDG_RUNTIME_DIR "''${XDG_RUNTIME_DIR:-/run/user/$(${pkgs.coreutils}/bin/id -u)}"'
 
-      # This goes through run-shell rather than the more obvious
-      # `set-environment -g SSH_AUTH_SOCK "$XDG_RUNTIME_DIR/ssh-agent"`
-      # because tmux expands $VAR in config strings against the server's
-      # own environment: a server that starts without XDG_RUNTIME_DIR
-      # collapses that to "/ssh-agent". Inside single quotes tmux leaves
-      # the string alone and sh does the expansion, so the :- fallback
-      # actually applies. Both binaries are absolute because run-shell
-      # inherits the server's PATH, which is not guaranteed to be useful.
-      run-shell '${pkgs.tmux}/bin/tmux set-environment -g SSH_AUTH_SOCK "''${XDG_RUNTIME_DIR:-/run/user/$(${pkgs.coreutils}/bin/id -u)}/ssh-agent"'
+        # This goes through run-shell rather than the more obvious
+        # `set-environment -g SSH_AUTH_SOCK "$XDG_RUNTIME_DIR/ssh-agent"`
+        # because tmux expands $VAR in config strings against the server's
+        # own environment: a server that starts without XDG_RUNTIME_DIR
+        # collapses that to "/ssh-agent". Inside single quotes tmux leaves
+        # the string alone and sh does the expansion, so the :- fallback
+        # actually applies. Both binaries are absolute because run-shell
+        # inherits the server's PATH, which is not guaranteed to be useful.
+        run-shell '${pkgs.tmux}/bin/tmux set-environment -g SSH_AUTH_SOCK "''${XDG_RUNTIME_DIR:-/run/user/$(${pkgs.coreutils}/bin/id -u)}/ssh-agent"'
+      ''}
 
       # Terminal + titles
       set -as terminal-features ",xterm-256color:RGB"
