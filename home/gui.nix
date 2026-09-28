@@ -2,6 +2,7 @@
 {
   imports = [
     ./brave.nix
+    ./firefox.nix
     ./kde.nix
     ./zed.nix
   ];
