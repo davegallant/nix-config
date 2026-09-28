@@ -164,8 +164,8 @@ in
       inherit defaultModel;
       defaultThinkingLevel = "medium";
       modelThinkingLevels = {
-        "litellm/${defaultModel}" = "low";
-        "openai-codex/${defaultModel}" = "low";
+        "litellm/${defaultModel}" = "medium";
+        "openai-codex/${defaultModel}" = "medium";
       };
       thinkingBudgets = {
         low = 1024;
