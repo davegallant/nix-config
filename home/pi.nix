@@ -191,7 +191,7 @@ in
       # copy and produces startup "skill conflict" collision warnings.
       packages = [
         {
-          source = "git:github.com/mitsuhiko/agent-stuff@122e2994adddb113c04764c5697217dae120fcc6";
+          source = "git:github.com/mitsuhiko/agent-stuff@0865c849befd2021490679f96a8dee58c84ac857";
           skills = [ ];
           extensions = [
             "extensions/btw.ts"
