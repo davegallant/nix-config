@@ -490,7 +490,7 @@
         src = pkgs.fetchFromGitHub {
           owner = "nkxxll";
           repo = "ghostty-default-style-dark.nvim";
-          rev = "master";
+          rev = "b09d4d51f614cd1c14444d8586e0ba3ba3119787";
           sha256 = "sha256-Qxj2f8f1lS/kAxpWNVz/cjYCvO9WSamgj6mrgDdvziM=";
         };
         doCheck = false;
