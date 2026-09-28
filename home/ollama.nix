@@ -4,6 +4,9 @@
   lib,
   ...
 }:
+let
+  ollamaModel = import ./lib/ollama.nix;
+in
 {
   launchd.agents.ollama = lib.mkIf (hostname == "kratos") {
     enable = true;
@@ -15,6 +18,7 @@
       ];
       EnvironmentVariables = {
         HOME = config.home.homeDirectory;
+        OLLAMA_CONTEXT_LENGTH = toString ollamaModel.contextWindow;
         OLLAMA_FLASH_ATTENTION = "1";
         OLLAMA_HOST = "0.0.0.0:11434";
         OLLAMA_KEEP_ALIVE = "-1";
