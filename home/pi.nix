@@ -10,9 +10,9 @@ let
   };
 
   onKratos = hostname == "kratos";
-  modelProvider = if onKratos then "litellm" else "openai-codex";
-  defaultModel = "gpt-6-luna";
-  solModel = "gpt-6-sol";
+  modelProvider = if onKratos then "litellm" else "openrouter";
+  defaultModel = if onKratos then "gpt-6-luna" else "openai/gpt-6-luna";
+  solModel = if onKratos then "gpt-6-sol" else "openai/gpt-6-sol";
   ollamaModel = import ./lib/ollama.nix;
   ollamaBaseUrl = if onKratos then "http://127.0.0.1:11434/v1" else "http://kratos:11434/v1";
 
@@ -20,8 +20,8 @@ let
     builtins.toJSON {
       providers = {
         openai-codex.modelOverrides = {
-          ${defaultModel}.contextWindow = 1050000;
-          ${solModel}.contextWindow = 1050000;
+          "gpt-6-luna".contextWindow = 1050000;
+          "gpt-6-sol".contextWindow = 1050000;
         };
         ollama = {
           baseUrl = ollamaBaseUrl;
@@ -33,6 +33,41 @@ let
           };
           models = [ ollamaModel ];
         };
+        openrouter.models = [
+          {
+            id = "openai/gpt-6-luna";
+            name = "GPT-6 Luna (OpenRouter)";
+            reasoning = true;
+            input = [
+              "text"
+              "image"
+            ];
+            contextWindow = 1050000;
+            maxTokens = 128000;
+          }
+          {
+            id = "openai/gpt-6-sol";
+            name = "GPT-6 Sol (OpenRouter)";
+            reasoning = true;
+            input = [
+              "text"
+              "image"
+            ];
+            contextWindow = 1050000;
+            maxTokens = 128000;
+          }
+          {
+            id = "deepseek/deepseek-v4.1-flash";
+            name = "DeepSeek V4.1 Flash (OpenRouter)";
+            reasoning = true;
+            input = [
+              "text"
+              "image"
+            ];
+            contextWindow = 1048576;
+            maxTokens = 1048576;
+          }
+        ];
       }
       // lib.optionalAttrs onKratos {
         litellm = {
@@ -163,10 +198,7 @@ in
       defaultProvider = modelProvider;
       inherit defaultModel;
       defaultThinkingLevel = "medium";
-      modelThinkingLevels = {
-        "litellm/${defaultModel}" = "medium";
-        "openai-codex/${defaultModel}" = "medium";
-      };
+      modelThinkingLevels."${modelProvider}/${defaultModel}" = "medium";
       thinkingBudgets = {
         low = 1024;
         medium = 4096;
@@ -182,6 +214,7 @@ in
         "ollama/${ollamaModel.id}"
         "${modelProvider}/${defaultModel}"
         "${modelProvider}/${solModel}"
+        "openrouter/deepseek/deepseek-v4.1-flash"
       ];
       # Skills (davegallant/skills + obra/superpowers + a few from
       # mattpocock/skills) aren't declared here: pi auto-discovers
