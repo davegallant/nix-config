@@ -19,10 +19,6 @@ let
   modelsTemplate = pkgs.writeText "pi-models.json" (
     builtins.toJSON {
       providers = {
-        openai-codex.modelOverrides = {
-          "gpt-6-luna".contextWindow = 1050000;
-          "gpt-6-sol".contextWindow = 1050000;
-        };
         ollama = {
           baseUrl = ollamaBaseUrl;
           api = "openai-completions";
