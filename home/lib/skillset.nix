@@ -1,12 +1,11 @@
 # The user-level skill set shared by Claude Code (claude.nix), Codex
-# (codex.nix), and pi (which rides codex's copy): davegallant/skills plus a few
-# skills cherry-picked from mattpocock/skills and flattened out of its category
+# (codex.nix), and pi (which rides codex's copy): the skills in home/skills plus
+# a few cherry-picked from mattpocock/skills and flattened out of its category
 # directories. Most of that repo overlaps skills we already have, so only the
-# ones listed below are pulled in. Both sources are flake inputs, so the weekly
-# flake-update workflow bumps them.
+# ones listed below are pulled in. It is a flake input, so the weekly
+# flake-update workflow bumps it.
 {
   pkgs,
-  davegallantSkills,
   mattpocockSkills,
 }:
 let
@@ -20,7 +19,7 @@ in
 pkgs.runCommand "agent-skills" { } (
   ''
     mkdir -p "$out"
-    cp -rL ${davegallantSkills}/skills/. "$out"
+    cp -rL ${../skills}/. "$out"
   ''
   + lib.concatStrings (
     lib.mapAttrsToList (name: path: ''

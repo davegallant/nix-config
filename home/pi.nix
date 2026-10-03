@@ -212,7 +212,7 @@ in
         "${modelProvider}/${solModel}"
         "openrouter/deepseek/deepseek-v4.1-flash"
       ];
-      # Skills (davegallant/skills + obra/superpowers + a few from
+      # Skills (home/skills + obra/superpowers + a few from
       # mattpocock/skills) aren't declared here: pi auto-discovers
       # ~/.agents/skills, which codex.nix materializes from the same pins (see
       # home/lib/skillset.nix). Declaring any of them

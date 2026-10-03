@@ -8,10 +8,6 @@
       url = "github:lnl7/nix-darwin/nix-darwin-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    davegallantSkills = {
-      url = "github:davegallant/skills";
-      flake = false;
-    };
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -54,7 +50,7 @@
       ...
     }@inputs:
     let
-      inherit (inputs) davegallantSkills mattpocockSkills superpowers;
+      inherit (inputs) mattpocockSkills superpowers;
       nixpkgsConfig = {
         allowUnfree = true;
         permittedInsecurePackages = [ "pnpm-10.29.2" ];
@@ -93,7 +89,6 @@
                   inherit
                     unstable
                     hostname
-                    davegallantSkills
                     mattpocockSkills
                     pvectl
                     superpowers
