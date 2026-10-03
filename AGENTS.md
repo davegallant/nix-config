@@ -85,6 +85,8 @@ source; `~/.claude/settings.json` is generated and denied for editing). Changes 
 - `hosts/*.nix`: host-specific settings.
 - `home/`: home-manager modules.
 - `packages.nix`: shared package set.
+- `home/skills/<name>/SKILL.md`: agent skills for Claude, Codex, and pi. Line 1 must be
+  the opening `---` of the frontmatter, and `name` must match the directory.
 
 ## Nix Conventions
 
@@ -112,9 +114,8 @@ source; `~/.claude/settings.json` is generated and denied for editing). Changes 
 Commit directly to `main`; do not create feature branches or PRs for routine changes
 in this repo. Never push without explicit approval.
 
-Both this repo and `davegallant/skills` are **public**. Never commit employer-internal
-hostnames, org names, or repo names into them, including values lifted from subagent
-output. A force push does not remove content — the orphaned blob stays fetchable.
+This repo is **public**. Never commit employer-internal hostnames, org names, or repo
+names into it, including values lifted from subagent output. A force push does not remove content — the orphaned blob stays fetchable.
 
 Main branch: `main`. Use Conventional Commits: `<type>(<scope>): <summary>`.
 Types are `feat`, `fix`, `chore`, `refactor`, `style`, `docs`, `ci`, and `revert`. Use imperative,

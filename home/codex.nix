@@ -2,7 +2,6 @@
   lib,
   pkgs,
   hostname ? "",
-  davegallantSkills,
   mattpocockSkills,
   superpowers,
   ...
@@ -10,7 +9,7 @@
 let
   codex-pkg = pkgs.callPackage ./codex/package.nix { };
   skills = import ./lib/skillset.nix {
-    inherit pkgs davegallantSkills mattpocockSkills;
+    inherit pkgs mattpocockSkills;
   };
   codexSkills = pkgs.runCommand "codex-skills" { } ''
     mkdir -p "$out/superpowers"
