@@ -13,7 +13,6 @@ let
   vendored = {
     grilling = "productivity/grilling";
     handoff = "productivity/handoff";
-    resolving-merge-conflicts = "engineering/resolving-merge-conflicts";
     wizard = "engineering/wizard";
     writing-for-agents = "productivity/writing-for-agents";
   };
