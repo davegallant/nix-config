@@ -217,6 +217,7 @@
     "allowUnsandboxedCommands": true,
     "excludedCommands": [
       "darwin-rebuild",
+      "hunk",
       "just",
       "nixos-rebuild"
     ],
