@@ -13,7 +13,6 @@ let
   inherit (pkgs) lib;
   vendored = {
     handoff = "productivity/handoff";
-    resolving-merge-conflicts = "engineering/resolving-merge-conflicts";
     wizard = "engineering/wizard";
   };
 in
