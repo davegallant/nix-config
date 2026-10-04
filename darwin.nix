@@ -8,6 +8,28 @@
   #   cores = 0
   nix.enable = false;
 
+  # nix-darwin 26.05 dropped the `nix.gc.*` options entirely, and Determinate
+  # Nix doesn't schedule collection itself, so run it on a weekly launchd
+  # timer. Mirrors the NixOS side (`nixos.nix`: weekly, --delete-older-than 14d).
+  # Uses the Determinate-installed binary directly rather than pkgs.nix to
+  # avoid version drift with the managing installer.
+  launchd.daemons.nix-gc = {
+    script = ''
+      /nix/var/nix/profiles/default/bin/nix-collect-garbage --delete-older-than 14d
+    '';
+    serviceConfig = {
+      StartCalendarInterval = [
+        {
+          Weekday = 0; # Sunday
+          Hour = 3;
+          Minute = 0;
+        }
+      ];
+      StandardOutPath = "/var/log/nix-gc.log";
+      StandardErrorPath = "/var/log/nix-gc.log";
+    };
+  };
+
   system.stateVersion = 4;
 
   users.users.${username} = {
