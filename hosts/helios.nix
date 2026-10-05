@@ -77,6 +77,7 @@ in
     "retroarch-metal"
     "signal"
     "steam"
+    "tailscale-app"
     "transmission"
     "unity-cli"
     "zoom"
