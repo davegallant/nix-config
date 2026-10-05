@@ -114,7 +114,6 @@
       "secretive"
       "spotify"
       "taskexplorer"
-      "tailscale-app"
       "windows-app"
       "unity-hub"
       "utm"
