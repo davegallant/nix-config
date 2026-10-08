@@ -4,7 +4,6 @@
     ./brave.nix
     ./firefox.nix
     ./kde.nix
-    ./zed.nix
   ];
 
   config = lib.mkIf pkgs.stdenv.isLinux {
