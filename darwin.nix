@@ -96,6 +96,7 @@
 
     casks = [
       "boop"
+      "coteditor"
       "brave-browser"
       "bruno"
       "capslocknodelay"
@@ -118,7 +119,6 @@
       "unity-hub"
       "utm"
       "vlc"
-      "zed"
     ];
   };
 }
