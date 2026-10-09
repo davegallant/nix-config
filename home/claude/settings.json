@@ -238,6 +238,7 @@
         "~/.azure/",
         "~/.codex/",
         "~/.pi/",
+        "~/.voicemode/",
         "~/.npm/",
         "~/go/",
         "~/.local/share/uv/",
