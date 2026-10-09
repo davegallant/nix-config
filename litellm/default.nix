@@ -35,8 +35,6 @@
               };
             })
             [
-              "gpt-5.4"
-              "gpt-5.4-mini"
               "gpt-6-luna"
             ];
         litellm_settings = {
