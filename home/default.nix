@@ -25,6 +25,7 @@ in
     ./pi.nix
     ./prs.nix
     ./tmux.nix
+    ./voice.nix
   ];
 
   home.stateVersion = "26.05";
