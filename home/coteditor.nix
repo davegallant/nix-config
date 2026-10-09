@@ -483,6 +483,55 @@ let
     }
   '';
 
+  # VS Code-style menu shortcuts. Only differences from CotEditor's defaults are
+  # stored; an entry without `shortcut` clears a default that would collide.
+  # Keys are `^~$@` modifiers (control, option, shift, command) plus the key.
+  up = builtins.fromJSON ''"\uf700"'';
+  down = builtins.fromJSON ''"\uf701"'';
+  keyBindings = pkgs.writeText "Shortcuts.json" (
+    builtins.toJSON (
+      map (b: { tag = 0; } // b) [
+        {
+          action = "showFolderFinder:";
+          shortcut = "$@f";
+        }
+        {
+          action = "performTextFinderAction:"; # Find All, was ⌘⇧F
+          tag = 101;
+        }
+        {
+          action = "showQuickActions:";
+          shortcut = "$@p";
+        }
+        { action = "runPageLayout:"; } # was ⌘⇧P
+        {
+          action = "toggleSidebar:";
+          shortcut = "@b";
+        }
+        {
+          action = "gotoLocation:";
+          shortcut = "^g";
+        }
+        {
+          action = "moveLineUp:";
+          shortcut = "~${up}";
+        }
+        {
+          action = "moveLineDown:";
+          shortcut = "~${down}";
+        }
+        {
+          action = "duplicateLine:";
+          shortcut = "~$" + down; # "$${" would be an escaped interpolation
+        }
+        {
+          action = "deleteLine:";
+          shortcut = "$@k";
+        }
+      ]
+    )
+  );
+
   appSupport = "$HOME/Library/Containers/com.coteditor.CotEditor/Data/Library/Application Support/CotEditor";
   scriptsDir = "$HOME/Library/Application Scripts/com.coteditor.CotEditor";
 in
@@ -515,6 +564,8 @@ in
           run install -m 0644 "${theme}" "${appSupport}/Themes/${name}.cottheme"
         '') themes
       )}
+      run mkdir -p "${appSupport}/KeyBindings"
+      run /usr/bin/plutil -convert xml1 -o "${appSupport}/KeyBindings/Shortcuts.plist" "${keyBindings}"
       run install -m 0755 "${lib.getExe formatScript}" "${scriptsDir}/Format.^~f.sh"
       ${lib.concatStrings (
         lib.mapAttrsToList (key: value: ''
