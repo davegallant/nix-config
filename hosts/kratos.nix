@@ -26,6 +26,7 @@
   };
 
   environment.systemPackages = [
+    pkgs.ffmpeg
     pkgs.terraform-mcp-server
     unstable.kubelogin
     unstable.terraform
