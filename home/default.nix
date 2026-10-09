@@ -18,6 +18,7 @@ in
     ./gh-clone.nix
     ./hunk.nix
     ./k9s.nix
+    ./litra-autotoggle.nix
     ./nix-search.nix
     ./nixvim.nix
     ./ollama.nix

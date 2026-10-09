@@ -11,6 +11,7 @@
   version,
   assets, # { <system> = { url; hash; ... }; }
   sourceRoot ? null, # string, or a function: asset -> string
+  dontUnpack ? false, # set for assets that are bare binaries, not archives
   nativeBuildInputs ? [ ],
   buildInputs ? [ ],
   installPhase,
@@ -28,6 +29,7 @@ stdenvNoCC.mkDerivation (
       pname
       version
       buildInputs
+      dontUnpack
       installPhase
       ;
 
