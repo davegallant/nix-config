@@ -483,6 +483,26 @@ let
     }
   '';
 
+  # Command-Shift-F via the Script menu: Folder Find (default Control-Command-2)
+  # leaves focus on the pane rather than its search field, so focus it through UI
+  # scripting. Needs Accessibility permission on first run.
+  folderFindScript = pkgs.writeText "folder-find.applescript" ''
+    tell application "System Events" to tell process "CotEditor"
+      keystroke "2" using {control down, command down}
+      delay 0.2
+      -- Copy the list first; iterating `entire contents` directly yields
+      -- unresolvable `item N of entire contents` references.
+      set elements to entire contents of front window
+      repeat with e in elements
+        set e to contents of e
+        if class of e is text field then
+          set focused of e to true
+          return
+        end if
+      end repeat
+    end tell
+  '';
+
   # VS Code-style menu shortcuts. Only differences from CotEditor's defaults are
   # stored; an entry without `shortcut` clears a default that would collide.
   # Keys are `^~$@` modifiers (control, option, shift, command) plus the key.
@@ -491,10 +511,6 @@ let
   keyBindings = pkgs.writeText "Shortcuts.json" (
     builtins.toJSON (
       map (b: { tag = 0; } // b) [
-        {
-          action = "showFolderFinder:";
-          shortcut = "$@f";
-        }
         {
           action = "performTextFinderAction:"; # Find All, was ⌘⇧F
           tag = 101;
@@ -567,6 +583,7 @@ in
       run mkdir -p "${appSupport}/KeyBindings"
       run /usr/bin/plutil -convert xml1 -o "${appSupport}/KeyBindings/Shortcuts.plist" "${keyBindings}"
       run install -m 0755 "${lib.getExe formatScript}" "${scriptsDir}/Format.^~f.sh"
+      run install -m 0644 "${folderFindScript}" "${scriptsDir}/Folder Find.@F.applescript"
       ${lib.concatStrings (
         lib.mapAttrsToList (key: value: ''
           run /usr/bin/defaults write com.coteditor.CotEditor ${key} ${defaultsFlag value}
