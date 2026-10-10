@@ -331,8 +331,7 @@ let
       }
     );
 
-  # CotEditor switches a theme `X` to `X (Dark)` in Dark Mode, matching Ghostty's
-  # `theme = light:Tomorrow,dark:...` (see home/ghostty.nix).
+  # CotEditor switches a theme `X` to `X (Dark)` in Dark Mode.
   themes = lib.mapAttrs (name: colors: pkgs.writeText "${name}.cottheme" (builtins.toJSON colors)) {
     # Ghostty's default colours (`ghostty +show-config --default`).
     "Ghostty (Dark)" = {
