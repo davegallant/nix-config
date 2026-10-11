@@ -213,6 +213,7 @@
   programs.gamemode = {
     enable = true;
     enableRenice = true;
+    settings.general.desiredgov = "";
   };
 
   programs.steam = {
