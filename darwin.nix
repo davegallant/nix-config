@@ -39,6 +39,18 @@
 
   programs.fish.enable = true;
 
+  launchd.agents.capslock-delay = {
+    serviceConfig = {
+      ProgramArguments = [
+        "/usr/bin/hidutil"
+        "property"
+        "--set"
+        "{\"CapsLockDelayOverride\":0}"
+      ];
+      RunAtLoad = true;
+    };
+  };
+
   system.primaryUser = username;
 
   system.defaults = {
@@ -99,7 +111,6 @@
       "coteditor"
       "brave-browser"
       "bruno"
-      "capslocknodelay"
       "dbeaver-community"
       "docker-desktop"
       "font-fira-code-nerd-font"
