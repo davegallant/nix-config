@@ -32,6 +32,10 @@
       url = "github:davegallant/vpngate";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    vermouth = {
+      url = "github:dekomote/vermouth";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     weathr = {
       url = "github:Veirt/weathr";
       inputs.nixpkgs.follows = "nixpkgs";
