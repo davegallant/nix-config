@@ -15,12 +15,19 @@ in
     ../opensnitch.nix
   ];
 
-  home-manager.users.dave = {
+  home-manager.users.dave = { lib, ... }: {
     imports = [
       ../home/keepassxc-ssh-agent.nix
       ../home/retroarch.nix
       ../home/ryujinx.nix
     ];
+
+    home.activation.vermouthUmu = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      run mkdir -p "$HOME/.config/kde.org"
+      run ${lib.getBin pkgs.kdePackages.kconfig}/bin/kwriteconfig6 \
+        --file "$HOME/.config/kde.org/vermouth.conf" \
+        --group General --key umuPath /run/current-system/sw/bin/umu-run
+    '';
 
     services.tailscale-systray = {
       enable = true;
@@ -123,6 +130,7 @@ in
     discord
     pvectl.packages.${pkgs.stdenv.hostPlatform.system}.default
     unstable.signal-desktop
+    unstable.umu-launcher
     unityhub
     unityCli
     inputs.vermouth.packages.${pkgs.stdenv.hostPlatform.system}.default
