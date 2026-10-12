@@ -41,6 +41,17 @@
 
     autoCmd = [
       {
+        event = "FileType";
+        pattern = "hujson";
+        callback = {
+          __raw = ''
+            function(args)
+              vim.treesitter.start(args.buf, "json5")
+            end
+          '';
+        };
+      }
+      {
         event = "BufReadPost";
         group = "remember_cursor";
         command = ''if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif'';
@@ -498,6 +509,7 @@
     ];
 
     extraConfigLua = ''
+      vim.filetype.add({ extension = { hujson = "hujson" } })
       require("gh-clone")
       vim.cmd.colorscheme("ghostty-default-style-dark")
     '';
