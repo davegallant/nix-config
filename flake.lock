@@ -197,6 +197,7 @@
         "nixvim": "nixvim",
         "pvectl": "pvectl",
         "superpowers": "superpowers",
+        "vermouth": "vermouth",
         "vpngate": "vpngate",
         "weathr": "weathr"
       }
@@ -229,6 +230,26 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "vermouth": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1791812224,
+        "narHash": "sha256-Pjrj4e7PIATtaQj/Y/IYOm6HoanFsAOYc82ZrJt2T+c=",
+        "owner": "dekomote",
+        "repo": "vermouth",
+        "rev": "3775b45b3c785f820cce1d05ce7730c6dd3b10c0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dekomote",
+        "repo": "vermouth",
         "type": "github"
       }
     },

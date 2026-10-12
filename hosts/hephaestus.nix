@@ -129,6 +129,7 @@ in
     unstable.signal-desktop
     unityhub
     unityCli
+    inputs.vermouth.packages.${pkgs.stdenv.hostPlatform.system}.default
     vim
   ];
 
