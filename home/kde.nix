@@ -6,6 +6,7 @@
       kodi
       moonlight-qt
       kdePackages.plasma-browser-integration
+      kdePackages.markdownpart
       pwvucontrol
       python3
       wl-clipboard
