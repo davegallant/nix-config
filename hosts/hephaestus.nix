@@ -7,8 +7,6 @@
   ...
 }:
 let
-  codexbarCli = pkgs.callPackage ../pkgs/codexbar-cli.nix { };
-  codexbarKde = pkgs.callPackage ../pkgs/codexbar-kde.nix { };
   unityCli = pkgs.callPackage ../pkgs/unity-cli.nix { };
 in
 {
@@ -122,8 +120,6 @@ in
     # does not land, the process wedges inside a GPU call.
     kdePackages.krdp
     keepassxc
-    codexbarCli
-    codexbarKde
     discord
     pvectl.packages.${pkgs.stdenv.hostPlatform.system}.default
     unstable.signal-desktop
