@@ -49,7 +49,8 @@ let
       code_mode_host = true
 
       [tui]
-      status_line = [ "current-dir", "git-branch", "model", "context-remaining" ]
+      status_line = [ "git-branch", "context-remaining", "model-with-reasoning", "thread-title" ]
+      status_line_use_colors = true
       vim_mode_default = true
     EOF
     fi
@@ -59,6 +60,8 @@ let
       --config 'model_reasoning_effort="medium"' \
       --config 'sandbox_mode="danger-full-access"' \
       --config 'approval_policy="on-request"' \
+      --config 'tui.status_line=["git-branch","context-remaining","model-with-reasoning","thread-title"]' \
+      --config 'tui.status_line_use_colors=true' \
       "$@"
   '';
 in
