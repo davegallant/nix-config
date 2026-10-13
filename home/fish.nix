@@ -32,6 +32,7 @@
       enableFishIntegration = true;
       settings = {
         add_newline = false;
+        format = "$all$kubernetes$sudo$cmd_duration$line_break$jobs$battery$time$status$container$netns$os$shell$character";
         gcloud = {
           disabled = true;
         };
@@ -42,7 +43,7 @@
           disabled = false;
           symbol = "☸ ";
           format = "[$symbol$context]($style) ";
-          style = "bold cyan";
+          style = "bold blue";
         };
       };
     };
