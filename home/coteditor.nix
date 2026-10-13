@@ -459,6 +459,57 @@ let
     '';
   };
 
+  # Script menu entry (Shift-Command-V) that renders the buffer, unsaved edits
+  # included, as GitHub-flavoured HTML and opens it in the default browser.
+  markdownPreview = pkgs.writeShellApplication {
+    name = "coteditor-markdown-preview";
+    runtimeInputs = [ pkgs.cmark-gfm ];
+    text = ''
+      # %%%{CotEditorXInput=AllText}%%%
+      file="''${1:-untitled.md}"
+      dir=$(dirname "$file")
+      out="''${TMPDIR:-/tmp}/coteditor-markdown-preview/$(basename "$file").html"
+      mkdir -p "$(dirname "$out")"
+      {
+        cat <<EOF
+      <!doctype html>
+      <meta charset="utf-8">
+      <meta name="color-scheme" content="light dark">
+      <title>$(basename "$file")</title>
+      <base href="file://''${dir// /%20}/">
+      <style>
+        body { max-width: 52rem; margin: 2rem auto; padding: 0 1rem; font: 16px/1.6 -apple-system, sans-serif; }
+        pre, code { font-family: "FiraCode Nerd Font Mono", ui-monospace, monospace; font-size: 0.9em; }
+        code { background: #8882; padding: 0.15em 0.3em; border-radius: 4px; }
+        pre { background: #8882; padding: 1em; border-radius: 6px; overflow-x: auto; }
+        pre code { background: none; padding: 0; }
+        blockquote { margin: 0; padding-left: 1em; border-left: 4px solid #8886; color: #888; }
+        table { border-collapse: collapse; }
+        th, td { border: 1px solid #8886; padding: 0.3em 0.7em; }
+        img { max-width: 100%; }
+        h1, h2 { border-bottom: 1px solid #8884; padding-bottom: 0.3em; }
+      </style>
+      EOF
+        cmark-gfm --unsafe -e table -e strikethrough -e autolink -e tasklist -e footnotes
+        cat <<'EOF'
+      <script type="module">
+        import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs";
+        for (const code of document.querySelectorAll("code.language-mermaid")) {
+          const div = document.createElement("div");
+          div.className = "mermaid";
+          div.textContent = code.textContent;
+          code.parentElement.replaceWith(div);
+        }
+        const dark = matchMedia("(prefers-color-scheme: dark)").matches;
+        mermaid.initialize({ startOnLoad: false, theme: dark ? "dark" : "default" });
+        mermaid.run();
+      </script>
+      EOF
+      } >"$out"
+      /usr/bin/open "$out"
+    '';
+  };
+
   # Script menu entry (Shift-Command-O) that opens a ~/src/<host>/<owner>/<repo>
   # folder. The picker runs in osascript, outside the sandboxed editor.
   openProject = pkgs.writeShellApplication {
@@ -686,9 +737,10 @@ in
       run mkdir -p "${appSupport}/KeyBindings"
       run /usr/bin/plutil -convert xml1 -o "${appSupport}/KeyBindings/Shortcuts.plist" "${keyBindings}"
       # Clear managed scripts first so renamed shortcuts leave no stale copies.
-      run rm -rf "${scriptsDir}/Git" "${scriptsDir}"/Format.*.sh "${scriptsDir}"/Open\ Project.*
+      run rm -rf "${scriptsDir}/Git" "${scriptsDir}"/Format.*.sh "${scriptsDir}"/Open\ Project.* "${scriptsDir}"/Markdown\ Preview.*
       run install -m 0755 "${lib.getExe formatScript}" "${scriptsDir}/Format.@I.sh"
       run install -m 0755 "${lib.getExe openProject}" "${scriptsDir}/Open Project.@O.sh"
+      run install -m 0755 "${lib.getExe markdownPreview}" "${scriptsDir}/Markdown Preview.@V.sh"
       ${lib.concatStrings (
         lib.mapAttrsToList (name: body: ''
           run mkdir -p "$(dirname "${scriptsDir}/${name}")"
