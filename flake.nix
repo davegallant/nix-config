@@ -4,6 +4,9 @@
   inputs = {
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
+    # Pinned for kokoro: thrift 0.24 in later revisions fails on aarch64-darwin, so the
+    # pyarrow chain has no binary cache
+    nixpkgs-kokoro.url = "github:NixOS/nixpkgs/774debe7a0d1b496e35677ad955a1011c6ff74f3";
     darwin = {
       url = "github:lnl7/nix-darwin/nix-darwin-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -90,6 +93,7 @@
                   weathr.homeModules.weathr
                 ];
                 extraSpecialArgs = {
+                  inherit (inputs) nixpkgs-kokoro;
                   inherit
                     unstable
                     hostname

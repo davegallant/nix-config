@@ -113,6 +113,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-kokoro": {
+      "locked": {
+        "lastModified": 1790920529,
+        "narHash": "sha256-nQyFkMR78WP6PiXKkDW2SjqzLf/spQqjRuxRGSbcV8k=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "774debe7a0d1b496e35677ad955a1011c6ff74f3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "774debe7a0d1b496e35677ad955a1011c6ff74f3",
+        "type": "github"
+      }
+    },
     "nixpkgs-lib": {
       "locked": {
         "lastModified": 1769909678,
@@ -193,6 +209,7 @@
         "home-manager": "home-manager",
         "mattpocockSkills": "mattpocockSkills",
         "nixpkgs": "nixpkgs",
+        "nixpkgs-kokoro": "nixpkgs-kokoro",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nixvim": "nixvim",
         "pvectl": "pvectl",
