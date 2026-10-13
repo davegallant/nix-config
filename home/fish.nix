@@ -38,11 +38,10 @@
         nix_shell = {
           disabled = true;
         };
-        custom.kube = {
-          command = ''grep '^current-context:' "$HOME/.kube/config" | awk '{print $2}' '';
-          when = ''test -f "$HOME/.kube/config"'';
+        kubernetes = {
+          disabled = false;
           symbol = "☸ ";
-          format = "[$symbol$output]($style) ";
+          format = "[$symbol$context]($style) ";
           style = "bold cyan";
         };
       };
