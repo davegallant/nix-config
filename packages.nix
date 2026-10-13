@@ -77,14 +77,5 @@ in
       vpngate.packages.${pkgs.stdenv.hostPlatform.system}.default
       whois
       wl-clip-persist
-    ]
-    ++ lib.optionals stdenv.isDarwin [
-      # These shadow the BSD tools on PATH, so BSD flag syntax silently means
-      # something else: `stat -f` is a format string on BSD but --file-system on
-      # GNU, so `stat -f "%Sm"` prints filesystem stats instead of an mtime.
-      # Call /usr/bin/stat or /usr/bin/sed when you want BSD behaviour.
-      coreutils
-      gnused
-      gnutar
     ];
 }
