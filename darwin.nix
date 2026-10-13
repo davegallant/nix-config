@@ -113,7 +113,6 @@
       "dbeaver-community"
       "docker-desktop"
       "font-fira-code-nerd-font"
-      "font-hack-nerd-font"
       "fork"
       "knockknock"
       "ghostty"
@@ -125,6 +124,7 @@
       "spotify"
       "taskexplorer"
       "windows-app"
+      "unity-cli"
       "unity-hub"
       "utm"
     ];

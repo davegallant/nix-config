@@ -35,7 +35,6 @@
   homebrew.brews = lib.mkAfter [
     "azure-cli"
     "ollama"
-    "node"
   ];
 
   homebrew.casks = lib.mkAfter [
@@ -44,7 +43,6 @@
     "gcloud-cli"
     "orka3"
     "slack"
-    "unity-cli"
     "zulu@8" # Java 8 runtime required by Cisco ASDM-IDM Launcher
   ];
 }

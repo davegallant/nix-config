@@ -66,7 +66,6 @@ in
 
   homebrew.casks = lib.mkAfter [
     "antigravity-cli"
-    "codexbar"
     "blender"
     "heroic"
     "keepassxc"
@@ -79,7 +78,6 @@ in
     "steam"
     "tailscale-app"
     "transmission"
-    "unity-cli"
     "zoom"
   ];
 }
