@@ -379,7 +379,7 @@ let
     };
   };
 
-  # Script menu entry (Control-Option-F) that formats the saved document by file
+  # Script menu entry (Shift-Command-I) that formats the saved document by file
   # extension. Scripts run outside the app sandbox with a minimal PATH.
   formatScript = pkgs.writeShellApplication {
     name = "coteditor-format";
@@ -429,12 +429,131 @@ let
     '';
   };
 
+  gitScript = pkgs.writeShellApplication {
+    name = "coteditor-git";
+    runtimeInputs = [ pkgs.git ];
+    text = ''
+      cmd=$1 file=$2 first=''${3:-1} last=''${4:-1}
+      cd "$(dirname "$file")"
+      name=$(basename "$file")
+      case "$cmd" in
+        permalink)
+          remote=$(git remote get-url origin)
+          remote=''${remote%.git}
+          case "$remote" in
+            *://*) remote=''${remote#*://} remote=''${remote#*@} host=''${remote%%/*} repo=''${remote#*/} ;;
+            *) remote=''${remote#*@} host=''${remote%%:*} repo=''${remote#*:} ;;
+          esac
+          rel=$(git ls-files --full-name -- "$name")
+          if [[ -z "$rel" ]]; then
+            echo "$name is not tracked by git" >&2
+            exit 1
+          fi
+          lines="L$first"
+          if ((last > first)); then lines+="-L$last"; fi
+          url="https://''${host%%:*}/$repo/blob/$(git rev-parse HEAD)/$rel#$lines"
+          printf %s "$url" | /usr/bin/pbcopy
+          ;;
+        blame) git blame -L "$first,$last" --date=short -- "$name" ;;
+      esac
+    '';
+  };
+
+  # Script menu entry (Shift-Command-O) that opens a ~/src/<host>/<owner>/<repo>
+  # folder. The picker runs in osascript, outside the sandboxed editor.
+  openProject = pkgs.writeShellApplication {
+    name = "coteditor-open-project";
+    runtimeInputs = [ pkgs.fd ];
+    text = ''
+      src="$HOME/src"
+      mapfile -t projects < <(fd --exact-depth 3 --type d --base-directory "$src" --strip-cwd-prefix | sed 's|/$||' | sort)
+      choice=$(/usr/bin/osascript \
+        -e 'on run argv' \
+        -e 'activate' \
+        -e 'choose from list argv with prompt "Open project"' \
+        -e 'end run' \
+        -- "''${projects[@]}")
+      if [[ "$choice" != false && -n "$choice" ]]; then
+        /usr/bin/open -a CotEditor "$src/$choice"
+      fi
+    '';
+  };
+
+  # JXA scripts are compiled at activation. Standard Additions such as `do shell
+  # script` raise a privilege violation here because the current application is
+  # the sandboxed editor, so commands run through NSTask in the script process.
+  jxaPrelude = ''
+    ObjC.import("Foundation");
+    const cot = Application("CotEditor");
+
+    function sh(args) {
+      const task = $.NSTask.alloc.init;
+      task.executableURL = $.NSURL.fileURLWithPath(args[0]);
+      task.arguments = $(args.slice(1));
+      const stdout = $.NSPipe.pipe;
+      const stderr = $.NSPipe.pipe;
+      task.standardOutput = stdout;
+      task.standardError = stderr;
+      if (!task.launchAndReturnError(null)) throw new Error("Could not run " + args[0]);
+      const read = (pipe) =>
+        $.NSString.alloc.initWithDataEncoding(pipe.fileHandleForReading.readDataToEndOfFile, $.NSUTF8StringEncoding).js;
+      const out = read(stdout);
+      const err = read(stderr);
+      task.waitUntilExit;
+      if (task.terminationStatus !== 0) throw new Error(err.trim() || args[0] + " failed");
+      return out;
+    }
+
+    // A folder window forwards to its current document, but `file` is the folder's.
+    function textDocument(doc) {
+      try {
+        return doc.currentDocument() || doc;
+      } catch (e) {
+        return doc;
+      }
+    }
+    function frontFile() {
+      const doc = textDocument(cot.documents[0]);
+      const file = doc.file();
+      if (!file) throw new Error("Save the document first");
+      return { doc, path: file.toString() };
+    }
+    function selectedLines(doc) {
+      const [first, length] = doc.selection.lineRange();
+      return [first, first + Math.max(length, 1) - 1];
+    }
+    function report(fn) {
+      try {
+        fn();
+      } catch (e) {
+        cot.writeToConsole(String(e.message || e));
+      }
+    }
+  '';
+  gitCommand = command: ''
+    function run() {
+      report(() => {
+        const { doc, path } = frontFile();
+        const [first, last] = selectedLines(doc);
+        const out = sh([${builtins.toJSON (lib.getExe gitScript)}, "${command}", path, String(first), String(last)]);
+        if (out.trim()) cot.writeToConsole(out);
+      });
+    }
+  '';
+  scripts = {
+    "Git/Copy Permalink.@Y" = gitCommand "permalink";
+    "Git/Blame.@B" = gitCommand "blame";
+  };
+
   defaults = {
+    NSQuitAlwaysKeepsWindows = true; # reopen windows from last session
     autoExpandTab = true;
     autoTrimsTrailingWhitespace = true;
     continuousSpellChecking = false;
     defaultTheme = "Ghostty";
+    enablesAutosaveInPlace = true;
     fileBrowserShowsHiddenFiles = true;
+    findIgnoresCase = true;
     highlightCurrentLine = true;
     lineHeight = 1.15; # default 1.3 feels stretched with Fira Code's tall metrics
     # Side panels default to the small system size (11pt).
@@ -452,6 +571,7 @@ let
     showStatusBarColumn = true;
     tabWidth = 2;
     trimsWhitespaceOnlyLines = true;
+    windowTabbing = 1; # always open documents in tabs
     wrapLines = false;
   };
   defaultsFlag =
@@ -565,7 +685,18 @@ in
       )}
       run mkdir -p "${appSupport}/KeyBindings"
       run /usr/bin/plutil -convert xml1 -o "${appSupport}/KeyBindings/Shortcuts.plist" "${keyBindings}"
-      run install -m 0755 "${lib.getExe formatScript}" "${scriptsDir}/Format.^~f.sh"
+      # Clear managed scripts first so renamed shortcuts leave no stale copies.
+      run rm -rf "${scriptsDir}/Git" "${scriptsDir}"/Format.*.sh "${scriptsDir}"/Open\ Project.*
+      run install -m 0755 "${lib.getExe formatScript}" "${scriptsDir}/Format.@I.sh"
+      run install -m 0755 "${lib.getExe openProject}" "${scriptsDir}/Open Project.@O.sh"
+      ${lib.concatStrings (
+        lib.mapAttrsToList (name: body: ''
+          run mkdir -p "$(dirname "${scriptsDir}/${name}")"
+          run /usr/bin/osacompile -l JavaScript -o "${scriptsDir}/${name}.scpt" "${
+            pkgs.writeText "coteditor-script.js" (jxaPrelude + body)
+          }"
+        '') scripts
+      )}
       ${lib.concatStrings (
         lib.mapAttrsToList (key: value: ''
           run /usr/bin/defaults write com.coteditor.CotEditor ${key} ${defaultsFlag value}
