@@ -57,10 +57,8 @@ in
     ]
     ++ lib.optionals stdenv.isLinux [
       arp-scan
-      cliphist
       cryptsetup
       dnsutils
-      hardinfo2
       iperf
       iputils
       libsecret
@@ -76,6 +74,5 @@ in
       usbutils
       vpngate.packages.${pkgs.stdenv.hostPlatform.system}.default
       whois
-      wl-clip-persist
     ];
 }

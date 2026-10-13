@@ -104,30 +104,6 @@
           data = "${lib.getBin unstable.tailscale}/bin/tailscaled";
         };
       };
-      clamav-freshclam = {
-        name = "Allow ClamAV freshclam";
-        enabled = true;
-        action = "allow";
-        duration = "always";
-        operator = {
-          type = "list";
-          operand = "list";
-          list = [
-            {
-              type = "simple";
-              sensitive = false;
-              operand = "process.path";
-              data = "${lib.getBin pkgs.clamav}/bin/freshclam";
-            }
-            {
-              type = "regexp";
-              operand = "dest.host";
-              sensitive = false;
-              data = "^([a-z0-9|-]+\\.)*clamav\\.net$";
-            }
-          ];
-        };
-      };
       ssh-github = {
         name = "Allow SSH to github";
         enabled = true;

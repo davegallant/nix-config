@@ -254,10 +254,7 @@ in
       ];
   };
 
-  nix = {
-    registry.nixpkgs.flake = inputs.nixpkgs;
-    gc.dates = "daily";
-  };
+  nix.gc.dates = "daily";
 
   users.users.dave.extraGroups = [
     "docker"
@@ -294,9 +291,6 @@ in
     overrideFolders = false;
     settings.options.urAccepted = -1;
   };
-
-  services.clamav.daemon.enable = true;
-  services.clamav.updater.enable = true;
 
   services.ollama = {
     package = unstable.ollama-rocm;

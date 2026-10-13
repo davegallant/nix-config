@@ -37,7 +37,7 @@ in
     gpg-agent = {
       enable = stdenv.isLinux;
       defaultCacheTtl = 3600;
-      pinentry.package = pkgs.pinentry-gnome3;
+      pinentry.package = pkgs.pinentry-qt;
     };
   };
 
