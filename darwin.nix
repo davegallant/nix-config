@@ -116,7 +116,6 @@
       "font-fira-code-nerd-font"
       "font-hack-nerd-font"
       "fork"
-      "kap"
       "knockknock"
       "ghostty"
       "lulu"
@@ -129,7 +128,6 @@
       "windows-app"
       "unity-hub"
       "utm"
-      "vlc"
     ];
   };
 }
