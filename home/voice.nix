@@ -4,6 +4,7 @@
   config,
   hostname ? "",
   lib,
+  nixpkgs-kokoro,
   pkgs,
   ...
 }:
@@ -48,13 +49,15 @@ let
     }) kokoroVoices
   );
 
-  kokoroPython = pkgs.python3.withPackages (ps: [
-    ps.fastapi
-    ps.kokoro
-    ps.soundfile
-    ps.spacy-models.en_core_web_sm
-    ps.uvicorn
-  ]);
+  kokoroPython =
+    nixpkgs-kokoro.legacyPackages.${pkgs.stdenv.hostPlatform.system}.python3.withPackages
+      (ps: [
+        ps.fastapi
+        ps.kokoro
+        ps.soundfile
+        ps.spacy-models.en_core_web_sm
+        ps.uvicorn
+      ]);
 in
 lib.mkIf (hostname == "kratos") {
   launchd.agents.whisper = {
