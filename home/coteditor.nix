@@ -530,6 +530,29 @@ let
     '';
   };
 
+  # Script menu entries under Base64 that replace the selection in place.
+  base64Script =
+    name: text:
+    pkgs.writeShellApplication {
+      name = "coteditor-base64-${name}";
+      text = ''
+        # %%%{CotEditorXInput=Selection}%%%
+        # %%%{CotEditorXOutput=ReplaceSelection}%%%
+        input=$(cat)
+        ${text}
+      '';
+    };
+  base64Encode = base64Script "encode" ''printf %s "$(printf %s "$input" | /usr/bin/base64)"'';
+  # `base64 -D` exits 0 on garbage, so hand back non-base64 selections unchanged.
+  base64Decode = base64Script "decode" ''
+    if [[ "$input" =~ ^[A-Za-z0-9+/=[:space:]]+$ ]]; then
+      printf %s "$input" | /usr/bin/base64 -D
+    else
+      echo "Selection is not base64" >&2
+      printf %s "$input"
+    fi
+  '';
+
   # JXA scripts are compiled at activation. Standard Additions such as `do shell
   # script` raise a privilege violation here because the current application is
   # the sandboxed editor, so commands run through NSTask in the script process.
@@ -737,10 +760,13 @@ in
       run mkdir -p "${appSupport}/KeyBindings"
       run /usr/bin/plutil -convert xml1 -o "${appSupport}/KeyBindings/Shortcuts.plist" "${keyBindings}"
       # Clear managed scripts first so renamed shortcuts leave no stale copies.
-      run rm -rf "${scriptsDir}/Git" "${scriptsDir}"/Format.*.sh "${scriptsDir}"/Open\ Project.* "${scriptsDir}"/Markdown\ Preview.*
+      run rm -rf "${scriptsDir}/Git" "${scriptsDir}/Base64" "${scriptsDir}"/Format.*.sh "${scriptsDir}"/Open\ Project.* "${scriptsDir}"/Markdown\ Preview.*
       run install -m 0755 "${lib.getExe formatScript}" "${scriptsDir}/Format.@I.sh"
       run install -m 0755 "${lib.getExe openProject}" "${scriptsDir}/Open Project.@O.sh"
       run install -m 0755 "${lib.getExe markdownPreview}" "${scriptsDir}/Markdown Preview.@V.sh"
+      run mkdir -p "${scriptsDir}/Base64"
+      run install -m 0755 "${lib.getExe base64Encode}" "${scriptsDir}/Base64/Encode.sh"
+      run install -m 0755 "${lib.getExe base64Decode}" "${scriptsDir}/Base64/Decode.sh"
       ${lib.concatStrings (
         lib.mapAttrsToList (name: body: ''
           run mkdir -p "$(dirname "${scriptsDir}/${name}")"

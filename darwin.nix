@@ -107,7 +107,6 @@
     global.brewfile = true;
 
     casks = [
-      "boop"
       "coteditor"
       "brave-browser"
       "bruno"
