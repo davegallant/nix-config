@@ -137,6 +137,8 @@
           default = pkgs.mkShell {
             packages = with pkgs; [
               deadnix
+              # update-hashes.sh uses GNU `sed -i`; macOS ships BSD sed.
+              gnused
               just
               nixfmt
               shellcheck

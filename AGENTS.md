@@ -29,8 +29,8 @@ Nix Flake configuration for NixOS and macOS, with home-manager and nixvim.
 
 ## Agent Shell
 
-Agent `Bash` calls run under **zsh** with `nomatch` and `EQUALS` enabled, with
-nix-provided GNU coreutils ahead of the BSD tools on `PATH` (including on macOS).
+Agent `Bash` calls run under **zsh** with `nomatch` and `EQUALS` enabled. Core tools
+are BSD on macOS and GNU on Linux.
 
 - Quote every glob passed as an argument: `--include='*.nix'`, `'.prettierrc*'`,
   `"repos/o/r/contents/f.md?ref=$SHA"`. An unmatched glob aborts the whole command
@@ -39,9 +39,9 @@ nix-provided GNU coreutils ahead of the BSD tools on `PATH` (including on macOS)
 - Quote separators: bare `echo ===` fails with `== not found`.
 - zsh does not word-split unquoted variables. `FLAGS="-a -b"; cmd $FLAGS` passes one
   literal argument — write flags inline or use an array. `PIPESTATUS` is bash-only.
-- `stat` is GNU coreutils: use `stat -c %Y`, never BSD `stat -f %m` (on GNU, `-f` is
-  `--file-system` and silently prints filesystem stats instead of an mtime). Same
-  class of trap for `sed -i` — call `/usr/bin/sed` for BSD behaviour.
+- On macOS, `stat`, `sed`, `date`, and `tar` take BSD flags: `stat -f %m`, `sed -i ''`.
+  Shared scripts must work with both (see `home/gh-clone.sh`). The `update-hashes.sh`
+  scripts need GNU sed, which the flake devShell (direnv) provides.
 - Paths under `~/.claude/projects/` begin with `-`, which tools read as a flag.
   Pass `--` (`head -c N -- "$f"`) or prefix the glob with `./`.
 - Don't read `$?` after a pipe — it is the last command's status, not the one you
