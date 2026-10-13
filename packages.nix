@@ -51,7 +51,7 @@ in
       unstable.stern
       unzip
       viddy
-      virtualenv
+      uv
       yq-go
       zip
     ]

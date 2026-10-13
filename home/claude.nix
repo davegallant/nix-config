@@ -11,10 +11,7 @@ let
   };
 in
 {
-  home.packages = [
-    claude-code
-    pkgs.uv
-  ];
+  home.packages = [ claude-code ];
 
   home.file.".claude/statusline-command.sh" = {
     source = ./claude/statusline-command.sh;

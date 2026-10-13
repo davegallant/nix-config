@@ -39,10 +39,6 @@
       url = "github:dekomote/vermouth";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    weathr = {
-      url = "github:Veirt/weathr";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
@@ -53,7 +49,6 @@
       nixpkgs-unstable,
       pvectl,
       vpngate,
-      weathr,
       ...
     }@inputs:
     let
@@ -90,7 +85,6 @@
                 users.${username}.imports = [
                   ./home
                   inputs.nixvim.homeModules.nixvim
-                  weathr.homeModules.weathr
                 ];
                 extraSpecialArgs = {
                   inherit (inputs) nixpkgs-kokoro;

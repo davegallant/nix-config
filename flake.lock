@@ -42,24 +42,6 @@
         "type": "github"
       }
     },
-    "flake-parts_2": {
-      "inputs": {
-        "nixpkgs-lib": "nixpkgs-lib"
-      },
-      "locked": {
-        "lastModified": 1769996383,
-        "narHash": "sha256-AnYjnFWgS49RlqX7LrC4uA+sCCDBj0Ry/WOJ5XWAsa0=",
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "rev": "57928607ea566b5db3ad13af0e57e921e6b12381",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -126,21 +108,6 @@
         "owner": "NixOS",
         "repo": "nixpkgs",
         "rev": "774debe7a0d1b496e35677ad955a1011c6ff74f3",
-        "type": "github"
-      }
-    },
-    "nixpkgs-lib": {
-      "locked": {
-        "lastModified": 1769909678,
-        "narHash": "sha256-cBEymOf4/o3FD5AZnzC3J9hLbiZ+QDT/KDuyHXVJOpM=",
-        "owner": "nix-community",
-        "repo": "nixpkgs.lib",
-        "rev": "72716169fe93074c333e8d0173151350670b824c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "nixpkgs.lib",
         "type": "github"
       }
     },
@@ -215,8 +182,7 @@
         "pvectl": "pvectl",
         "superpowers": "superpowers",
         "vermouth": "vermouth",
-        "vpngate": "vpngate",
-        "weathr": "weathr"
+        "vpngate": "vpngate"
       }
     },
     "superpowers": {
@@ -287,27 +253,6 @@
       "original": {
         "owner": "davegallant",
         "repo": "vpngate",
-        "type": "github"
-      }
-    },
-    "weathr": {
-      "inputs": {
-        "flake-parts": "flake-parts_2",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1786509803,
-        "narHash": "sha256-84gJJdEtO2ytI1Rb8dMZe4kJyEpOjXxn3iIlNc0oHbg=",
-        "owner": "Veirt",
-        "repo": "weathr",
-        "rev": "7d403a0c4039aca37ff4609ffe613e39552307f2",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Veirt",
-        "repo": "weathr",
         "type": "github"
       }
     }

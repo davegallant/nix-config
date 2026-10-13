@@ -67,19 +67,6 @@ in
       enable = true;
     };
 
-    broot = {
-      enable = true;
-      enableFishIntegration = true;
-      settings.verbs = [
-        {
-          invocation = "open";
-          key = "ctrl-o";
-          execution = "$EDITOR {file}";
-          leave_broot = false;
-        }
-      ];
-    };
-
     yazi = {
       enable = true;
       enableFishIntegration = true;
@@ -88,10 +75,6 @@ in
     zoxide = {
       enable = true;
       enableFishIntegration = true;
-    };
-
-    weathr = {
-      enable = true;
     };
   };
 }
