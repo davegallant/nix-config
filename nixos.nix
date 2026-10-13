@@ -104,14 +104,11 @@
     borgbackup
     bruno
     calibre
-    clamtk
-    evince
     heroic
     libation
     libnotify
     ludusavi
     lutris
-    mission-center
     mupdf
     pinta
     unstable.protonplus
@@ -189,8 +186,6 @@
   };
 
   services.flatpak.enable = true;
-
-  services.tumbler.enable = true;
 
   services.avahi = {
     enable = true;
