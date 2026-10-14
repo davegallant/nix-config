@@ -117,6 +117,7 @@
       "knockknock"
       "ghostty"
       "lulu"
+      "monitorcontrol"
       "notunes"
       "obs"
       "obsidian"
