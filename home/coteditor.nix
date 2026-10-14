@@ -723,7 +723,7 @@ let
         }
         {
           action = "toggleLineWrap:";
-          shortcut = "~z";
+          shortcut = "^@w";
         }
       ]
     )
