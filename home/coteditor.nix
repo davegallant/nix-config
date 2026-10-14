@@ -721,6 +721,10 @@ let
           action = "deleteLine:";
           shortcut = "$@k";
         }
+        {
+          action = "toggleLineWrap:";
+          shortcut = "~z";
+        }
       ]
     )
   );
