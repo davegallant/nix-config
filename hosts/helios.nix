@@ -70,7 +70,7 @@ in
     "heroic"
     "keepassxc"
     "librewolf"
-    "minecraft"
+    "prismlauncher"
     "moonlight"
     "pocket-casts"
     "retroarch-metal"
