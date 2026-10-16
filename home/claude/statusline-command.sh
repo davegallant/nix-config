@@ -12,10 +12,11 @@ input=$(cat)
 # spaces, which would otherwise shift every later value into the wrong variable.
 # Absent values become "" (not `empty`) so the field count stays fixed.
 us=$'\x1f'
-IFS=$us read -r cwd model window_size input_tokens used_pct < <(
+IFS=$us read -r cwd model session_name window_size input_tokens used_pct < <(
   jq --arg us "$us" -r '
     [ (.workspace.current_dir // .cwd // ""),
       (.model.display_name // ""),
+      (.session_name // ""),
       (.context_window.context_window_size // ""),
       ([ .context_window.current_usage.input_tokens,
          .context_window.current_usage.cache_creation_input_tokens,
@@ -69,6 +70,11 @@ parts+=("$(printf '\033[36m%s\033[0m' "$short_cwd")")
 # Git branch (magenta)
 if [ -n "$git_branch" ]; then
     parts+=("$(printf '\033[35m(%s)\033[0m' "$git_branch")")
+fi
+
+# Session name (dim) — custom /rename name or AI-generated title
+if [ -n "$session_name" ]; then
+    parts+=("$(printf '\033[2m%s\033[0m' "$session_name")")
 fi
 
 # Model (yellow)
