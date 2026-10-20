@@ -8,6 +8,7 @@ on:
       - home/hunk/package.nix
       - home/pi/package.nix
       - home/codex/package.nix
+      - home/litra-autotoggle/package.nix
 
 jobs:
   update-hashes:
@@ -54,10 +55,16 @@ jobs:
           VERSION=$(grep 'version = ' home/codex/package.nix | head -1 | sed 's/.*version = "\([^"]*\)".*/\1/')
           bash home/codex/update-hashes.sh "$VERSION"
 
+      - name: update litra-autotoggle hash
+        if: contains(steps.changed.outputs.files, 'home/litra-autotoggle/package.nix')
+        run: |
+          VERSION=$(grep 'version = ' home/litra-autotoggle/package.nix | head -1 | sed 's/.*version = "\([^"]*\)".*/\1/')
+          bash home/litra-autotoggle/update-hashes.sh "$VERSION"
+
       - name: commit and push updated hashes
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add home/claude/package.nix home/hunk/package.nix home/pi/package.nix home/codex/package.nix
+          git add home/claude/package.nix home/hunk/package.nix home/pi/package.nix home/codex/package.nix home/litra-autotoggle/package.nix
           git diff --staged --quiet || git commit -m "chore: update hashes"
           git push
