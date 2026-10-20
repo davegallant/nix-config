@@ -96,6 +96,30 @@ let
               maxTokens = 128000;
               # Leave cost unset until authoritative gateway pricing is available.
             }
+            {
+              id = "gpt-6.1-sol";
+              name = "GPT-6.1 Sol (litellm)";
+              reasoning = true;
+              input = [
+                "text"
+                "image"
+              ];
+              contextWindow = 1000000;
+              maxTokens = 131072;
+              # Leave cost unset until authoritative gateway pricing is available.
+            }
+            {
+              id = "gemini-4-argon";
+              name = "Gemini 4 Argon (litellm)";
+              reasoning = true;
+              input = [
+                "text"
+                "image"
+              ];
+              contextWindow = 1048576;
+              maxTokens = 65536;
+              # Leave cost unset until authoritative gateway pricing is available.
+            }
           ];
         };
       };
@@ -172,6 +196,8 @@ in
     # Prevent rare, oversized read/bash results from inflating every later turn.
     home.file.".pi/agent/extensions/token-budget.ts".source = ./pi/token-budget.ts;
 
+    home.file.".pi/agent/extensions/litellm-compat.ts".source = ./pi/litellm-compat.ts;
+
     # Attaches image paths in the prompt as real image content on submit, so
     # Ctrl+V pastes reach the model directly instead of costing a `read` call.
     home.file.".pi/agent/extensions/image-paste.ts".source = ./pi/image-paste.ts;
@@ -211,6 +237,10 @@ in
         "${modelProvider}/${defaultModel}"
         "${modelProvider}/${solModel}"
         "openrouter/deepseek/deepseek-v4.1-flash"
+      ]
+      ++ lib.optionals onKratos [
+        "litellm/gpt-6.1-sol"
+        "litellm/gemini-4-argon"
       ];
       # Skills (home/skills + obra/superpowers + a few from
       # mattpocock/skills) aren't declared here: pi auto-discovers
