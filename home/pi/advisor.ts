@@ -30,6 +30,7 @@ import * as path from "node:path";
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
 import type { AutocompleteItem } from "@earendil-works/pi-tui";
 import { Type } from "typebox";
+import { elide, fitToBudget, type Section } from "./advisor-transcript.ts";
 
 // ---------------------------------------------------------------------------
 // ADVISOR CONFIG
@@ -207,27 +208,6 @@ type AgentMessage = {
 
 type SessionEntry = { type: string; message?: AgentMessage };
 
-// A transcript is a list of sections so the budget pass can shrink tool
-// results selectively instead of tail-slicing the whole conversation.
-export interface Section {
-  isToolResult: boolean;
-  text: string;
-}
-
-/** Middle-elide to an exact maximum, keeping the signal-rich head and tail. */
-export function elide(text: string, max: number): string {
-  const limit = Math.max(0, Math.floor(max));
-  if (text.length <= limit) return text;
-
-  const marker = "\n… [elided] …\n";
-  if (limit <= marker.length) return text.slice(0, limit);
-
-  const kept = limit - marker.length;
-  const head = Math.floor(kept * 0.7);
-  const tail = kept - head;
-  return `${text.slice(0, head)}${marker}${text.slice(-tail)}`;
-}
-
 function blocks(content: unknown): ContentBlock[] {
   if (typeof content === "string") return [{ type: "text", text: content }];
   if (!Array.isArray(content)) return [];
@@ -281,44 +261,10 @@ function buildSections(entries: SessionEntry[]): Section[] {
   return sections;
 }
 
-function totalChars(sections: Section[]): number {
-  return sections.reduce((sum, s) => sum + s.text.length + 2, 0);
-}
-
 function advisorCallCount(entries: SessionEntry[]): number {
   return entries.filter(
     (entry) => entry.type === "message" && entry.message?.role === "toolResult" && entry.message.toolName === "advisor",
   ).length;
-}
-
-/**
- * Fit the transcript to budget by degrading the least valuable material first:
- * oldest tool results get stubbed out, and only if that is not enough do whole
- * sections drop off the front. The most recent exchanges always survive — they
- * are the ones the advice is actually about.
- */
-export function fitToBudget(sections: Section[], budget: number): Section[] {
-  const limit = Math.max(0, Math.floor(budget));
-  if (!Number.isFinite(budget) || limit <= 2) return [];
-
-  const result = [...sections];
-
-  for (let i = 0; i < result.length && totalChars(result) > limit; i++) {
-    const section = result[i];
-    if (!section.isToolResult) continue;
-    const firstLine = section.text.split("\n", 1)[0];
-    result[i] = { ...section, text: `${firstLine}\n[older tool result elided to fit context]` };
-  }
-
-  while (result.length > 1 && totalChars(result) > limit) {
-    result.shift();
-  }
-
-  if (result.length === 1 && totalChars(result) > limit) {
-    result[0] = { ...result[0], text: elide(result[0].text, limit - 2) };
-  }
-
-  return result;
 }
 
 // ---------------------------------------------------------------------------

@@ -10,19 +10,11 @@
   "nix": {
     "enabled": false
   },
-  "packageRules": [
-    {
-      "matchManagers": [
-        "nix"
-      ],
-      "enabled": false
-    }
-  ],
   "customManagers": [
     {
       "customType": "regex",
       "managerFilePatterns": [
-        "/home/(claude|hunk|pi)/package\\.nix$/"
+        "/home/(claude|hunk|pi|litra-autotoggle)/package\\.nix$/"
       ],
       "matchStrings": [
         "version = \"(?<currentValue>[^\"]+)\";\\s*# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)"

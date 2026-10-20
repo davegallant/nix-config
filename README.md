@@ -46,18 +46,6 @@ If the build is stable, run `just merge-pr`.
 
 ## Common Recipes
 
-Run `just` to view all recipes and associated descriptions:
-
-```console
-❯ just
-Available recipes:
-    clean                    # run nix garbage collection (user + root)
-    fmt                      # format all nix files [alias: f]
-    merge-pr                 # squash-merge current branch's PR with nvd diff in body
-    rebuild                  # build, show nvd diff, then switch [alias: r]
-    rollback                 # switch to previous generation
-    update-claude *version   # usage: just update-claude [VERSION]  (VERSION without leading 'v'; defaults to latest)
-    update-pi *version       # usage: just update-pi [VERSION]  (VERSION without leading 'v'; defaults to latest)
-```
+Run `just` to view the current recipes and their descriptions.
 
 

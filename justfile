@@ -81,10 +81,20 @@ update-claude *version:
 update-pi *version:
   @./home/pi/update-hashes.sh {{version}}
 
+# update version and hashes in home/hunk/package.nix
+# usage: just update-hunk [VERSION]  (VERSION without leading 'v'; defaults to latest)
+update-hunk *version:
+  @./home/hunk/update-hashes.sh {{version}}
+
 # update version and hash in home/codex/package.nix
 # usage: just update-codex [VERSION]  (VERSION without leading 'rust-v'; defaults to latest)
 update-codex *version:
   @./home/codex/update-hashes.sh {{version}}
+
+# update version and hash in home/litra-autotoggle/package.nix
+# usage: just update-litra [VERSION]  (VERSION without leading 'v'; defaults to latest)
+update-litra *version:
+  @./home/litra-autotoggle/update-hashes.sh {{version}}
 
 # update pvectl flake input to latest and rebuild
 update-pvectl:

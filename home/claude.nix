@@ -37,6 +37,7 @@ in
     recursive = true;
   };
 
+  # Keep machine-specific MCP permissions in the untracked private overlay.
   # Merge two JSON files (deep merge, second overrides first) into a target.
   # If the overlay is missing, fall back to the base unchanged.
   home.activation.claudeSettings = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
