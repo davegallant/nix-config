@@ -108,7 +108,6 @@
     libation
     libnotify
     ludusavi
-    lutris
     mupdf
     pinta
     unstable.protonplus
