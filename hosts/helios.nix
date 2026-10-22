@@ -2,6 +2,7 @@
   lib,
   pkgs,
   pvectl,
+  unstable,
   username,
   ...
 }:
@@ -14,6 +15,7 @@ in
   networking.hostName = "helios";
 
   environment.systemPackages = [
+    unstable.talosctl
     pvectl.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
