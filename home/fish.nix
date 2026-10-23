@@ -175,6 +175,7 @@
         gc = "git checkout $(git branch | fzf)";
         gco = "git checkout $(git branch -r | sed -e 's/^  origin\\///' | fzf)";
         gho = "gh repo view --json url --jq .url; gh repo view --web 2>/dev/null";
+        ghp = "gh repo view --json url --jq '.url + \"/pulls\"'; gh pr list --web 2>/dev/null";
         gr = "cd $(git rev-parse --show-toplevel)";
         hd = "hunk diff";
         hdc = "hunk diff --cached";
