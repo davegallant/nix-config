@@ -31,6 +31,11 @@ let
 
   '';
 
+  # Local Ollama on kratos, reached over the tailnet from other hosts.
+  ollamaModel = import ./lib/ollama.nix;
+  ollamaBaseUrl =
+    if hostname == "kratos" then "http://127.0.0.1:11434/v1" else "http://kratos:11434/v1";
+
   # Create defaults once, then let Codex retain mutable state such as trusted
   # project decisions in ~/.codex/config.toml.
   codex-wrapper = pkgs.writeShellScriptBin "codex" ''
@@ -64,10 +69,26 @@ let
       --config 'tui.status_line_use_colors=true' \
       "$@"
   '';
+
+  # Profiles can't override the wrapper's `--config model=...`, so switch the
+  # provider at the top level and pass the model with `-m`, which wins.
+  codex-qwen = pkgs.writeShellScriptBin "codex-qwen" ''
+    exec ${codex-wrapper}/bin/codex \
+      --config 'model_providers.kratos-ollama.name="Ollama (kratos)"' \
+      --config 'model_providers.kratos-ollama.base_url="${ollamaBaseUrl}"' \
+      --config 'model_providers.kratos-ollama.wire_api="responses"' \
+      --config 'model_provider="kratos-ollama"' \
+      --config 'model_context_window=${toString ollamaModel.contextWindow}' \
+      -m '${ollamaModel.id}' \
+      "$@"
+  '';
 in
 {
   config = {
-    home.packages = [ codex-wrapper ];
+    home.packages = [
+      codex-wrapper
+      codex-qwen
+    ];
 
     # Global instructions loaded into every Codex session.
     home.file.".codex/AGENTS.md".source = ./instructions/links.md;
