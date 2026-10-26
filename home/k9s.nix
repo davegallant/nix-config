@@ -124,6 +124,9 @@
         ui = {
           skin = "ghostty";
         };
+        thresholds = {
+          memory.warn = 85;
+        };
       };
     };
   };
