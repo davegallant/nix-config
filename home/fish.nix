@@ -32,7 +32,16 @@
       enableFishIntegration = true;
       settings = {
         add_newline = false;
-        format = "$all$kubernetes$sudo$cmd_duration$line_break$jobs$battery$time$status$container$netns$os$shell$character";
+        format = "$all$kubernetes$sudo$fill$cmd_duration$time$line_break$jobs$battery$status$container$netns$os$shell$character";
+        # Closes the bracket opened after $time on the line above
+        right_format = "[─╯](fg:#586e75)";
+        fill.symbol = " ";
+        cmd_duration.format = "[ $duration ](fg:#93a1a1 bg:#4e5758)[│](fg:#eee8d5 bg:#4e5758)";
+        time = {
+          disabled = false;
+          time_format = "%I:%M:%S %p";
+          format = "[ $time ](fg:#93a1a1 bg:#4e5758)[─╮](fg:#586e75)";
+        };
         gcloud = {
           disabled = true;
         };
