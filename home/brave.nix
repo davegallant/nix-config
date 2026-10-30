@@ -17,6 +17,7 @@ in
         preFixup = ''
           ${old.preFixup or ""}
           gappsWrapperArgs+=(
+            --unset QT_PLUGIN_PATH
             --add-flags "--disable-features=MediaRouter --no-pings"
           )
         '';
