@@ -128,6 +128,7 @@ in
     kdePackages.krdp
     keepassxc
     discord
+    unstable.argocd
     unstable.talosctl
     pvectl.packages.${pkgs.stdenv.hostPlatform.system}.default
     unstable.signal-desktop
