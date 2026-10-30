@@ -186,6 +186,7 @@
         gr = "cd $(git rev-parse --show-toplevel)";
         hd = "hunk diff";
         hdc = "hunk diff --cached";
+        hl = "hunk log";
         hs = "hunk show";
         j = "just";
         k = "kubecolor";
