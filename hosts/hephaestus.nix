@@ -21,6 +21,16 @@ let
   mcpelauncher = unstable.mcpelauncher-ui-qt.override {
     mcpelauncher-client = mcpelauncherClient;
   };
+  keepassxc = pkgs.keepassxc.overrideAttrs (old: {
+    nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkgs.makeWrapper ];
+    postFixup = ''
+      ${old.postFixup or ""}
+      mv "$out/bin/keepassxc-proxy" "$out/bin/.keepassxc-proxy-nix"
+      makeWrapper \
+        "$out/bin/.keepassxc-proxy-nix" "$out/bin/keepassxc-proxy" \
+        --unset LD_LIBRARY_PATH
+    '';
+  });
 in
 {
   imports = [
