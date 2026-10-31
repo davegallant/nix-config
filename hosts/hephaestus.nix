@@ -8,6 +8,19 @@
 }:
 let
   unityCli = pkgs.callPackage ../pkgs/unity-cli.nix { };
+  mcpelauncherClient = unstable.mcpelauncher-client.overrideAttrs (_: {
+    version = "1.8.7-qt6";
+    src = unstable.fetchFromGitHub {
+      owner = "minecraft-linux";
+      repo = "mcpelauncher-manifest";
+      tag = "v1.8.7-qt6";
+      fetchSubmodules = true;
+      hash = "sha256-XF0X7UPYOk2A/K00g3MJFI4M5YLkqDloyYioUU6W1Lk=";
+    };
+  });
+  mcpelauncher = unstable.mcpelauncher-ui-qt.override {
+    mcpelauncher-client = mcpelauncherClient;
+  };
 in
 {
   imports = [
@@ -100,7 +113,7 @@ in
 
   # npm-installed tooling runs via nix-ld (nixos.nix)
   environment.systemPackages = with pkgs; [
-    unstable.mcpelauncher-ui-qt
+    mcpelauncher
     # LINE needs a manually-fetched installer added to the store first — see
     # pkgs/line.nix for instructions. Re-add once that's done on hephaestus:
     # (pkgs.callPackage ../pkgs/line.nix { wine = pkgs.wineWow64Packages.base; })
