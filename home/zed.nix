@@ -23,8 +23,8 @@
       };
       autosave = "on_focus_change";
       format_on_save = "off";
-      ui_font_size = 18;
-      buffer_font_size = 16;
+      ui_font_size = 16;
+      buffer_font_size = 14;
       disable_ai = true;
       project_panel = {
         dock = "left";
