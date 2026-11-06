@@ -41,6 +41,7 @@
     "1password"
     "1password-cli"
     "gcloud-cli"
+    "headlamp"
     "orka3"
     "slack"
     "tailscale-app"
