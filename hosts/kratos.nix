@@ -1,4 +1,5 @@
 {
+  config,
   lib,
   pkgs,
   unstable,
@@ -11,6 +12,10 @@
   home-manager.users.${username}.imports = [ ../home/claude.nix ];
 
   services.openssh.enable = true;
+
+  # GUI apps (e.g. Headlamp) take PATH from `zsh --login -c env`, so brew tools
+  # like az (used by kubelogin) must be on the system PATH.
+  environment.systemPath = [ "${config.homebrew.prefix}/bin" ];
 
   system.defaults.dock = {
     autohide = true;
