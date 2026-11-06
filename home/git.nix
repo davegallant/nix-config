@@ -11,7 +11,6 @@ _: {
         commit.gpgsign = true;
         tag.gpgsign = true;
         alias = {
-          aa = "add -A .";
           c = "commit";
           cm = "commit -m";
           ca = "commit --amend";
@@ -19,15 +18,9 @@ _: {
           cb = "checkout -b";
           cmp = "! git checkout main && git pl";
           co = "checkout";
-          d = "diff";
-          dc = "diff --cached";
-          dcn = "diff --cached --name-only";
-          l = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
-          ms = "merge --squash";
           p = "push origin";
           pl = "! git pull origin $(git rev-parse --abbrev-ref HEAD)";
           pom = "pull origin main";
-          st = "status";
         };
         push = {
           default = "current";
