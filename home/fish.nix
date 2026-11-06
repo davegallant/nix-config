@@ -187,6 +187,7 @@
         hd = "hunk diff";
         hdc = "hunk diff --cached";
         hl = "hunk log";
+        hst = "hunk status";
         hs = "hunk show";
         j = "just";
         k = "kubecolor";
