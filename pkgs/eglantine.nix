@@ -5,6 +5,7 @@
   cubeb,
   enet,
   fetchFromGitHub,
+  fetchurl,
   fetchzip,
   ffmpeg-headless,
   fmt_11,
@@ -45,6 +46,10 @@ let
     rev = "39ebc72";
     hash = "sha256-1N95mYb2vAcbUIeNG17goWP6gOMjhAM01sbQX/+oM+0=";
   };
+  amdCasPatch = fetchurl {
+    url = "https://github.com/jpkto/Lichii/compare/5a50f50e0b7ea0cb0e71c4ae8e8e7425c8a3069c...2b5cfdd0b9f6ca236d52acfef44be98961016819.diff";
+    hash = "sha256-rxazdjIbxUMEqkokPR3i2DLQsiXgawKzMw7xYg6J6NI=";
+  };
   zbicSrc = fetchFromGitHub {
     owner = "kinnay";
     repo = "zbic";
@@ -76,6 +81,8 @@ let
 in
 stdenv.mkDerivation {
   inherit pname version src;
+
+  patches = [ amdCasPatch ];
 
   nativeBuildInputs = [
     cmake
