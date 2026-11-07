@@ -31,6 +31,7 @@
   };
 
   environment.systemPackages = [
+    (pkgs.callPackage ../home/eglantine/package.nix { })
     pkgs.ffmpeg
     pkgs.terraform-mcp-server
     unstable.kubelogin
