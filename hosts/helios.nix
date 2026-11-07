@@ -15,6 +15,7 @@ in
   networking.hostName = "helios";
 
   environment.systemPackages = [
+    (pkgs.callPackage ../home/eglantine/package.nix { })
     unstable.argocd
     unstable.talosctl
     pvectl.packages.${pkgs.stdenv.hostPlatform.system}.default
