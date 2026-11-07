@@ -182,6 +182,8 @@ in
     };
   };
 
+  services.tailscale.openFirewall = true;
+
   # Screen capture on Plasma Wayland is fussy; see the capture= note below for
   # why the backend is pinned. capSysAdmin is what KMS/DRM capture needs and is
   # kept as a fallback lever, though the KWin backend in use does not need it.
