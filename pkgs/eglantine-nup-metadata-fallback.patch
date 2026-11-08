@@ -1,0 +1,44 @@
+--- a/src/core/loader/nup.cpp
++++ b/src/core/loader/nup.cpp
+@@ -137,2 +137,21 @@
+     const auto& program = nup->GetPackages()[*program_index];
++    auto metadata = program;
++    if (base_index && *base_index != *program_index) {
++        const auto& base = nup->GetPackages()[*base_index];
++        if (metadata.title_name.empty()) {
++            metadata.title_name = base.title_name;
++        }
++        if (metadata.publisher.empty()) {
++            metadata.publisher = base.publisher;
++        }
++        if (metadata.localized_titles.empty()) {
++            metadata.localized_titles = base.localized_titles;
++        }
++        if (metadata.icon.empty()) {
++            metadata.icon = base.icon;
++        }
++        if (metadata.localized_icons.empty()) {
++            metadata.localized_icons = base.localized_icons;
++        }
++    }
+     base_title_id = program.title_id;
+@@ -156,7 +175,7 @@
+     }
+-    nacp_file = BuildNacp(program, display_version);
+-    if (!program.icon.empty()) {
+-        icon_file = std::make_shared<FileSys::VectorVfsFile>(program.icon, "icon.dat");
++    nacp_file = BuildNacp(metadata, display_version);
++    if (!metadata.icon.empty()) {
++        icon_file = std::make_shared<FileSys::VectorVfsFile>(metadata.icon, "icon.dat");
+     } else {
+-        for (const auto& [lang, icon] : program.localized_icons) {
++        for (const auto& [lang, icon] : metadata.localized_icons) {
+             if (lang == "en-us") {
+@@ -165,5 +184,5 @@
+         }
+-        if (icon_file == nullptr && !program.localized_icons.empty()) {
++        if (icon_file == nullptr && !metadata.localized_icons.empty()) {
+             icon_file = std::make_shared<FileSys::VectorVfsFile>(
+-                program.localized_icons.front().second, "icon.dat");
++                metadata.localized_icons.front().second, "icon.dat");
+         }

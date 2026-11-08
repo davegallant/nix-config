@@ -45,6 +45,7 @@ let
     rev = "df2989c794cdb6b979e478c5b02ed7f565ebb443";
     hash = "sha256-ngwXYuqdk3y9ynXMRlSjG/7RmER+KE5SsLmq8x8vh0o=";
   };
+  nupMetadataFallbackPatch = ./eglantine-nup-metadata-fallback.patch;
   zbicSrc = fetchFromGitHub {
     owner = "kinnay";
     repo = "zbic";
@@ -76,6 +77,8 @@ let
 in
 stdenv.mkDerivation {
   inherit pname version src;
+
+  patches = [ nupMetadataFallbackPatch ];
 
   nativeBuildInputs = [
     cmake
