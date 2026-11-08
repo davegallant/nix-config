@@ -1,7 +1,7 @@
 {
   lib,
   pkgs,
-  unstable,
+  bravePkgs,
   ...
 }:
 let
@@ -11,9 +11,7 @@ in
   config = lib.mkIf stdenv.isLinux {
     programs.brave = {
       enable = true;
-      # unstable.brave has no working `.override` right now (nixpkgs brave-origin
-      # refactor lost it), so append flags via overrideAttrs on preFixup instead.
-      package = unstable.brave.overrideAttrs (old: {
+      package = bravePkgs.brave.overrideAttrs (old: {
         preFixup = ''
           ${old.preFixup or ""}
           gappsWrapperArgs+=(

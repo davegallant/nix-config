@@ -39,7 +39,7 @@
 }:
 let
   pname = "eglantine";
-  version = "fix-oot-blackscreen-39ebc72";
+  version = "fix-oot-black-scene-b536a97";
   src = fetchFromGitHub {
     owner = "l33tm4st3r";
     repo = "Eglantine";
@@ -49,6 +49,10 @@ let
   amdCasPatch = fetchurl {
     url = "https://github.com/jpkto/Lichii/compare/5a50f50e0b7ea0cb0e71c4ae8e8e7425c8a3069c...2b5cfdd0b9f6ca236d52acfef44be98961016819.diff";
     hash = "sha256-rxazdjIbxUMEqkokPR3i2DLQsiXgawKzMw7xYg6J6NI=";
+  };
+  ootBlackScenePatch = fetchurl {
+    url = "https://github.com/A-Man-With-A-Plan-dev/Eglantine/compare/e736dfde9e45bc3640935e373927814883803d95...b536a971a54524ef271be60baef830e368529797.diff";
+    hash = "sha256-vvDWwPJ4BNc+vop3IQiZo26c04CMqvcdHNpsyLXxXyA=";
   };
   zbicSrc = fetchFromGitHub {
     owner = "kinnay";
@@ -82,7 +86,10 @@ in
 stdenv.mkDerivation {
   inherit pname version src;
 
-  patches = [ amdCasPatch ];
+  patches = [
+    amdCasPatch
+    ootBlackScenePatch
+  ];
 
   nativeBuildInputs = [
     cmake
