@@ -5,7 +5,6 @@
   cubeb,
   enet,
   fetchFromGitHub,
-  fetchurl,
   fetchzip,
   ffmpeg-headless,
   fmt_11,
@@ -39,20 +38,12 @@
 }:
 let
   pname = "eglantine";
-  version = "fix-oot-black-scene-b536a97";
+  version = "experimental-20261108-df2989c";
   src = fetchFromGitHub {
-    owner = "l33tm4st3r";
+    owner = "Eglantine-Community";
     repo = "Eglantine";
-    rev = "39ebc72";
-    hash = "sha256-1N95mYb2vAcbUIeNG17goWP6gOMjhAM01sbQX/+oM+0=";
-  };
-  amdCasPatch = fetchurl {
-    url = "https://github.com/jpkto/Lichii/compare/5a50f50e0b7ea0cb0e71c4ae8e8e7425c8a3069c...2b5cfdd0b9f6ca236d52acfef44be98961016819.diff";
-    hash = "sha256-rxazdjIbxUMEqkokPR3i2DLQsiXgawKzMw7xYg6J6NI=";
-  };
-  ootBlackScenePatch = fetchurl {
-    url = "https://github.com/A-Man-With-A-Plan-dev/Eglantine/compare/e736dfde9e45bc3640935e373927814883803d95...b536a971a54524ef271be60baef830e368529797.diff";
-    hash = "sha256-vvDWwPJ4BNc+vop3IQiZo26c04CMqvcdHNpsyLXxXyA=";
+    rev = "df2989c794cdb6b979e478c5b02ed7f565ebb443";
+    hash = "sha256-ngwXYuqdk3y9ynXMRlSjG/7RmER+KE5SsLmq8x8vh0o=";
   };
   zbicSrc = fetchFromGitHub {
     owner = "kinnay";
@@ -85,11 +76,6 @@ let
 in
 stdenv.mkDerivation {
   inherit pname version src;
-
-  patches = [
-    amdCasPatch
-    ootBlackScenePatch
-  ];
 
   nativeBuildInputs = [
     cmake
