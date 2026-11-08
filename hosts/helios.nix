@@ -75,7 +75,6 @@ in
     "librewolf"
     "prismlauncher"
     "moonlight"
-    "pocket-casts"
     "retroarch-metal"
     "signal"
     "steam"
