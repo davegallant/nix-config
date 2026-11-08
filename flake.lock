@@ -95,6 +95,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-brave": {
+      "locked": {
+        "lastModified": 1794070417,
+        "narHash": "sha256-leOOarLQ85CtX6NUcHuqNoOCwHbNKLRj6mNK59enKAA=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "d63e5b96ca17ae27b5d248d29564e31ff7a83f02",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable-small",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs-kokoro": {
       "locked": {
         "lastModified": 1790920529,
@@ -113,11 +129,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1793726008,
-        "narHash": "sha256-jQp1wKvbwWdLBASTXkSi/VYmDJ5AbBi1WvcMt9HWJC8=",
+        "lastModified": 1793876309,
+        "narHash": "sha256-Wojg9lIH/hDH91iDVH2/EPw8oDSpxjxhXONbU1yf4Zg=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "1d060086d60cb76a40cf37109f979d88a5bd6396",
+        "rev": "f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
         "type": "github"
       },
       "original": {
@@ -176,6 +192,7 @@
         "home-manager": "home-manager",
         "mattpocockSkills": "mattpocockSkills",
         "nixpkgs": "nixpkgs",
+        "nixpkgs-brave": "nixpkgs-brave",
         "nixpkgs-kokoro": "nixpkgs-kokoro",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nixvim": "nixvim",
