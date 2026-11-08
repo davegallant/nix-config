@@ -100,6 +100,12 @@ stdenv.mkDerivation {
     qt6.wrapQtAppsHook
   ];
 
+  qtWrapperArgs = [
+    "--set-default"
+    "EDEN_NX2_NO_MESH"
+    "1"
+  ];
+
   buildInputs = [
     boost
     cpp-jwt
