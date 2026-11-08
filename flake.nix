@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-brave.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     # Pinned for kokoro: thrift 0.24 in later revisions fails on aarch64-darwin, so the
     # pyarrow chain has no binary cache
@@ -45,6 +46,7 @@
     {
       darwin,
       home-manager,
+      nixpkgs-brave,
       nixpkgs,
       nixpkgs-unstable,
       pvectl,
@@ -65,10 +67,18 @@
           config = nixpkgsConfig;
         };
 
+      mkBravePkgs =
+        system:
+        import nixpkgs-brave {
+          inherit system;
+          config = nixpkgsConfig;
+        };
+
       mkSharedModules =
         {
           username,
           unstable,
+          bravePkgs,
           hmModule,
           hostname ? "",
           extraModules ? [ ],
@@ -90,6 +100,7 @@
                   inherit (inputs) nixpkgs-kokoro;
                   inherit
                     unstable
+                    bravePkgs
                     hostname
                     mattpocockSkills
                     pvectl
@@ -155,6 +166,7 @@
             }:
             let
               unstable = mkUnstable system;
+              bravePkgs = mkBravePkgs system;
             in
             nixpkgs.lib.nixosSystem {
               specialArgs = {
@@ -169,6 +181,7 @@
                 inherit
                   username
                   unstable
+                  bravePkgs
                   hostname
                   ;
                 hmModule = home-manager.nixosModules.home-manager;
@@ -191,6 +204,7 @@
         let
           system = "aarch64-darwin";
           unstable = mkUnstable system;
+          bravePkgs = null;
           mkDarwin =
             { hostname, username }:
             darwin.lib.darwinSystem {
@@ -200,6 +214,7 @@
                   inputs
                   pvectl
                   unstable
+                  bravePkgs
                   username
                   vpngate
                   ;
@@ -208,6 +223,7 @@
                 inherit
                   hostname
                   unstable
+                  bravePkgs
                   username
                   ;
                 hmModule = home-manager.darwinModules.home-manager;
