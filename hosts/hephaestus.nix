@@ -152,7 +152,6 @@ in
     # does not land, the process wedges inside a GPU call.
     kdePackages.krdp
     keepassxc
-    discord
     unstable.argocd
     unstable.talosctl
     pvectl.packages.${pkgs.stdenv.hostPlatform.system}.default
