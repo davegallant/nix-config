@@ -145,6 +145,8 @@
               gnused
               just
               nixfmt
+              # runs the pi extension tests (`just test`)
+              nodejs
               shellcheck
               shfmt
               # Upstream snapshot tests are broken in nixpkgs 26.05; skip checks.
