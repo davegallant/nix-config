@@ -163,7 +163,7 @@ stdenv.mkDerivation {
 
   meta = {
     description = "Experimental Nintendo Switch and Switch 2 emulator";
-    homepage = "https://github.com/Djihads80/Eglantine";
+    homepage = "https://github.com/Eglantine-Community/Eglantine";
     license = lib.licenses.gpl3Plus;
     mainProgram = "eglantine";
     platforms = [ "x86_64-linux" ];
