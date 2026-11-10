@@ -8,6 +8,7 @@
 }:
 let
   unityCli = pkgs.callPackage ../pkgs/unity-cli.nix { };
+  eglantine = pkgs.callPackage ../pkgs/eglantine.nix { };
   mcpelauncherClient = unstable.mcpelauncher-client.overrideAttrs (_: {
     version = "1.8.7-qt6";
     src = unstable.fetchFromGitHub {
@@ -124,10 +125,8 @@ in
   # npm-installed tooling runs via nix-ld (nixos.nix)
   environment.systemPackages = with pkgs; [
     mcpelauncher
-    (callPackage ../pkgs/eglantine.nix { })
-    (callPackage ../pkgs/lichii.nix {
-      basePackage = callPackage ../pkgs/eglantine.nix { };
-    })
+    eglantine
+    (callPackage ../pkgs/lichii.nix { basePackage = eglantine; })
     # LINE needs a manually-fetched installer added to the store first — see
     # pkgs/line.nix for instructions. Re-add once that's done on hephaestus:
     # (pkgs.callPackage ../pkgs/line.nix { wine = pkgs.wineWow64Packages.base; })

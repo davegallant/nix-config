@@ -13,7 +13,7 @@ let
     };
   };
 in
-callPackage ../lib/mk-prebuilt-binary.nix {
+callPackage ../home/lib/mk-prebuilt-binary.nix {
   pname = "eglantine";
   inherit version assets;
   sourceRoot = "eglantine.app";
@@ -26,7 +26,7 @@ callPackage ../lib/mk-prebuilt-binary.nix {
 
   meta = {
     description = "Experimental Nintendo Switch and Switch 2 emulator";
-    homepage = "https://github.com/Djihads80/Eglantine";
+    homepage = "https://github.com/Eglantine-Community/Eglantine";
     license = lib.licenses.gpl3Plus;
   };
 }

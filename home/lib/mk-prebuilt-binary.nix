@@ -1,6 +1,7 @@
-# Build a derivation from a prebuilt release tarball: select the asset for the
-# host system and apply the boilerplate shared by the claude/pi/hunk packages
-# (autoPatchelfHook on ELF, dontBuild/dontStrip, meta defaults).
+# Build a derivation from a prebuilt release archive: select the asset for the
+# host system and apply the boilerplate shared by the prebuilt packages
+# (home/<tool>/package.nix, pkgs/eglantine-bin.nix): autoPatchelfHook on ELF,
+# dontBuild/dontStrip, meta defaults.
 {
   lib,
   stdenvNoCC,
