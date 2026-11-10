@@ -38,12 +38,12 @@
 }:
 let
   pname = "eglantine";
-  version = "experimental-20261108-df2989c";
+  version = "experimental-20261109-78743f3";
   src = fetchFromGitHub {
     owner = "Eglantine-Community";
     repo = "Eglantine";
-    rev = "df2989c794cdb6b979e478c5b02ed7f565ebb443";
-    hash = "sha256-ngwXYuqdk3y9ynXMRlSjG/7RmER+KE5SsLmq8x8vh0o=";
+    rev = "78743f30c251f66bd77e6eea6c28d8632d642d6f";
+    hash = "sha256-sHfT2K2WoX3xbqyO8076JmPhB5VP6KKQsxLN2AH/TSU=";
   };
   nupMetadataFallbackPatch = ./eglantine-nup-metadata-fallback.patch;
   zbicSrc = fetchFromGitHub {

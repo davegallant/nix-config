@@ -4,12 +4,12 @@
   unzip,
 }:
 let
-  version = "daily-20261106";
+  version = "daily-20261109";
 
   assets = {
     aarch64-darwin = {
-      url = "https://github.com/Djihads80/Eglantine/releases/download/${version}/eglantine-macos-arm64.zip";
-      hash = "sha256-VSx3zoAD92rQdNf6qcBd6rNoU+ZhMmGdEHfvPh5CBEQ=";
+      url = "https://github.com/Eglantine-Community/Eglantine/releases/download/${version}/eglantine-macos-arm64.zip";
+      hash = "sha256-ZceC0zIAY4mmhmsovHvLcXK5mPWD740/zFJToFvn5co=";
     };
   };
 in
