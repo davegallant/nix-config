@@ -20,6 +20,14 @@ test("codexStylePayload requests concise text and removes reasoning summaries", 
   assert.equal(payload.reasoning.summary, "auto");
 });
 
+test("codexStylePayload matches gpt-6 point releases", () => {
+  const verbosity = (model) => codexStylePayload({ model, input: "hello" }).text?.verbosity;
+
+  assert.equal(verbosity("gpt-6.1-sol"), "low");
+  assert.equal(verbosity("gpt-5.6-sol"), "low");
+  assert.equal(verbosity("gpt-60-x"), undefined);
+});
+
 test("codexStylePayload leaves unrelated requests untouched", () => {
   for (const payload of [
     null,

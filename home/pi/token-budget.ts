@@ -5,6 +5,7 @@
  */
 
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
+import { rmSync } from "node:fs";
 import { mkdtemp, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -20,7 +21,7 @@ export function codexStylePayload(payload: unknown): unknown {
   if (
     !isRecord(payload) ||
     typeof payload.model !== "string" ||
-    !/^gpt-(?:5\.6|6)-/.test(payload.model) ||
+    !/^gpt-(?:5\.6|6(?:\.\d+)?)-/.test(payload.model) ||
     !(Array.isArray(payload.input) || typeof payload.input === "string")
   ) {
     return payload;
@@ -61,9 +62,27 @@ export function shortenToolResult(
   return `${head}${marker}${tail}`;
 }
 
+let outputDirectory: Promise<string> | undefined;
+let savedOutputs = 0;
+
+/** One private directory per process, removed on exit, so saved outputs don't pile up in tmp. */
+function toolOutputDirectory(): Promise<string> {
+  outputDirectory ??= mkdtemp(join(tmpdir(), "pi-tool-output-")).then(
+    (directory) => {
+      process.once("exit", () => rmSync(directory, { recursive: true, force: true }));
+      return directory;
+    },
+    (error: unknown) => {
+      outputDirectory = undefined;
+      throw error;
+    },
+  );
+  return outputDirectory;
+}
+
 async function saveToolOutput(toolName: string, text: string): Promise<string> {
-  const directory = await mkdtemp(join(tmpdir(), "pi-tool-output-"));
-  const fullOutputPath = join(directory, `${toolName}.txt`);
+  const directory = await toolOutputDirectory();
+  const fullOutputPath = join(directory, `${toolName}-${++savedOutputs}.txt`);
   await writeFile(fullOutputPath, text, { encoding: "utf8", mode: 0o600, flag: "wx" });
   return fullOutputPath;
 }
