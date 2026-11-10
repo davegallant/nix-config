@@ -9,6 +9,7 @@ jobs:
   update:
     runs-on: ubuntu-latest
     permissions:
+      actions: write # dispatch cachix.yml for the update branch
       contents: write
       pull-requests: write
     steps:
@@ -18,9 +19,18 @@ jobs:
           extra_nix_config: |
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
       - uses: DeterminateSystems/update-flake-lock@a6b01882e9290a55d390f352ff11664ceea1661a # main
+        id: update
         with:
           pr-title: "chore: flake.lock update"
           pr-labels: |
             dependencies
             automated
           commit-msg: "chore: flake.lock update"
+
+      # The PR is pushed with GITHUB_TOKEN, which triggers no workflows, so
+      # build the branch explicitly; workflow_dispatch is the documented exception.
+      - name: build the update branch
+        if: steps.update.outputs.pull-request-operation == 'created' || steps.update.outputs.pull-request-operation == 'updated'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run cachix.yml --repo "$GITHUB_REPOSITORY" --ref update_flake_lock_action
