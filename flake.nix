@@ -57,7 +57,6 @@
       inherit (inputs) mattpocockSkills superpowers;
       nixpkgsConfig = {
         allowUnfree = true;
-        permittedInsecurePackages = [ "pnpm-10.29.2" ];
       };
 
       mkUnstable =
