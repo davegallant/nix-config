@@ -60,7 +60,18 @@ eval-host host=`hostname -s`:
     echo "warning: untracked .nix files are invisible to the flake; 'git add' them first:" >&2
     echo "$untracked" | sed 's/^/  /' >&2
   fi
-  if [ "$(uname -s)" = "Linux" ]; then attr=nixosConfigurations; else attr=darwinConfigurations; fi
+  # look the host up rather than assuming the local OS, so a Mac can eval hephaestus
+  attr=""
+  for cfg in nixosConfigurations darwinConfigurations; do
+    if [ "$(nix eval ".#${cfg}" --apply 'c: c ? "{{host}}"' --option warn-dirty false)" = true ]; then
+      attr=$cfg
+      break
+    fi
+  done
+  if [ -z "$attr" ]; then
+    echo "unknown host '{{host}}'; see 'just hosts'" >&2
+    exit 1
+  fi
   nix eval --raw ".#${attr}.{{host}}.config.system.build.toplevel.drvPath" --option warn-dirty false
   echo
 
