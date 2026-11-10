@@ -15,6 +15,7 @@ jobs:
     if: startsWith(github.head_ref, 'renovate/')
     runs-on: ubuntu-latest
     permissions:
+      actions: write # dispatch cachix.yml for the hash commit
       contents: write
       pull-requests: read
     steps:
@@ -62,9 +63,23 @@ jobs:
           bash home/litra-autotoggle/update-hashes.sh "$VERSION"
 
       - name: commit and push updated hashes
+        id: push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add home/claude/package.nix home/hunk/package.nix home/pi/package.nix home/codex/package.nix home/litra-autotoggle/package.nix
-          git diff --staged --quiet || git commit -m "chore: update hashes"
-          git push
+          if git diff --staged --quiet; then
+            echo "pushed=false" >> "$GITHUB_OUTPUT"
+          else
+            git commit -m "chore: update hashes"
+            git push
+            echo "pushed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      # A push made with GITHUB_TOKEN triggers no workflows, so the PR's head
+      # commit would merge unbuilt. workflow_dispatch is the documented exception.
+      - name: build the hash commit
+        if: steps.push.outputs.pushed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run cachix.yml --repo "$GITHUB_REPOSITORY" --ref "$GITHUB_HEAD_REF"
