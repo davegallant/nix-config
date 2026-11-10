@@ -29,6 +29,7 @@ jobs:
       - run: nix develop -c deadnix --fail .
       - run: nix develop -c statix check .
       - run: git ls-files -z '*.sh' | nix develop -c xargs -0 shellcheck
+      - run: nix develop -c just test
 
   build-darwin:
     runs-on: macos-latest
