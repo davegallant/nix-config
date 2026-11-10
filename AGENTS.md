@@ -5,7 +5,9 @@ Nix Flake configuration for NixOS and macOS, with home-manager and nixvim.
 ## Project
 
 - Hosts: `hephaestus` (x86_64-linux), `kratos` and `helios` (aarch64-darwin).
-- Channels: nixpkgs 26.05 stable plus nixpkgs-unstable.
+- Channels: nixpkgs 26.05 stable plus nixpkgs-unstable. Two narrow pins sit beside
+  them: `nixpkgs-brave` (Brave on Linux) and `nixpkgs-kokoro` (voice stack; the
+  reason is in `flake.nix`).
 - Interactive shell: Fish with Starship. Task runner: `just`.
   Agent `Bash` calls run under **zsh**, not Fish — see [Agent Shell](#agent-shell).
 - Resolve the current host with `hostname -s` (or `just hosts`), never
@@ -17,13 +19,14 @@ Nix Flake configuration for NixOS and macOS, with home-manager and nixvim.
 
 - Format Nix changes with `just fmt`; check without rewriting via `just fmt-check`.
   `nix run .#formatter` fails — `formatter` is per-system, so it needs a system suffix.
-- Before committing, run `just lint` and `nix flake check --no-build`.
-  `nix-instantiate --parse` is syntax-only and will NOT catch undefined variables
-  after a refactor; use `nix flake check --no-build` for that.
+- Before committing, run `just check`: format check, lint, pi tests, and
+  `nix flake check --no-build --all-systems`. Without `--all-systems`, a Mac skips
+  hephaestus as an incompatible system. `nix-instantiate --parse` is syntax-only and
+  misses undefined variables after a refactor.
 - The flake only sees git-tracked files. After creating a new file, `git add` it
   (staging is enough, no commit) before any `nix eval`, `nix build`, or
   `nix flake check`, or evaluation fails with `Path 'X' ... is not tracked by Git`.
-  Use `just eval-host <host>` to eval a host config without building.
+  Use `just eval-host <host>` to eval any host's config without building, from either OS.
 - Do not run Nix builds or rebuilds inside the Pi harness (`nix build`, `just rebuild`, `nixos-rebuild`, or `darwin-rebuild`). Ask the user to run builds outside the harness.
 - See [docs/agent-reference.md](docs/agent-reference.md) for rebuild, maintenance, and merge commands.
 
@@ -85,6 +88,11 @@ source; `~/.claude/settings.json` is generated and denied for editing). Changes 
 - `hosts/*.nix`: host-specific settings.
 - `home/`: home-manager modules.
 - `packages.nix`: shared package set.
+- `pkgs/`: derivations a host installs as system packages (`callPackage` from `hosts/*.nix`).
+- `home/<tool>/package.nix`: prebuilt tools, each with an `update-hashes.sh` behind
+  `just update-<tool>`. Renovate bumps the version; `update-hashes.yml` refreshes the
+  hashes on its PR. Shared builders and helpers live in `home/lib/`.
+- `home/pi/`: pi extensions (TypeScript); tests in `home/pi/tests/` run via `just test`.
 - `home/skills/<name>/SKILL.md`: agent skills for Claude, Codex, and pi. Line 1 must be
   the opening `---` of the frontmatter, and `name` must match the directory.
 

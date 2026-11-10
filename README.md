@@ -26,7 +26,7 @@ flowchart TD
 
 ## Prerequisites
 
-- [NixOS](nixos.org) (Linux)
+- [NixOS](https://nixos.org) (Linux)
 - [Determinate Nix](https://determinate.systems/nix-installer) (macOS)
 - [just](https://github.com/casey/just)
 
@@ -40,7 +40,7 @@ just rebuild
 
 ## Updates
 
-Updates are proposed by [renovate](https://github.com/renovatebot/renovate). To build the system, checkout the renovate PR and run `just rebuild`.
+Updates arrive as PRs: [renovate](https://github.com/renovatebot/renovate) bumps the prebuilt tools and GitHub Actions, and a weekly workflow updates `flake.lock`. To build the system, checkout the PR and run `just rebuild`.
 
 If the build is stable, run `just merge-pr`.
 
