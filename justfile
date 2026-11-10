@@ -46,6 +46,15 @@ lint:
   # --others also covers new scripts that git does not track yet
   shellcheck $(git ls-files --cached --others --exclude-standard '*.sh')
 
+# run the pi extension tests (Node strips the TypeScript types itself)
+test:
+  node --test home/pi/tests/*.test.mjs
+
+# everything to run before committing: format check, lint, tests, and eval of every host
+check: fmt-check lint test
+  # --all-systems: without it a Mac skips hephaestus as an incompatible system
+  nix flake check --no-build --all-systems --option warn-dirty false
+
 # print which hosts are linux vs darwin (authoritative, from flake.nix)
 hosts:
   @nix eval --raw --impure --expr 'let f = builtins.getFlake (toString ./.); in "linux:  " + builtins.concatStringsSep " " (builtins.attrNames f.nixosConfigurations) + "\ndarwin: " + builtins.concatStringsSep " " (builtins.attrNames f.darwinConfigurations) + "\n"'
