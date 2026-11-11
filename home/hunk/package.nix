@@ -11,11 +11,6 @@ let
       hash = "sha256-S4yY+Nl3RUmZFsweHS8n/9JYxtY1jdRTL2HkHF6xlpI=";
       sourceRoot = "hunkdiff-linux-x64";
     };
-    aarch64-linux = {
-      url = "https://github.com/modem-dev/hunk/releases/download/v${version}/hunkdiff-linux-arm64.tar.gz";
-      hash = "sha256-q0nIq6gsPJhy8cXu/ZbRxMJJHluAZH+XsugfxsRnbes=";
-      sourceRoot = "hunkdiff-linux-arm64";
-    };
     aarch64-darwin = {
       url = "https://github.com/modem-dev/hunk/releases/download/v${version}/hunkdiff-darwin-arm64.tar.gz";
       hash = "sha256-X5r9Qdgl4vh5WLBwLneeUtOCB8C0LVMW7+VCGPNbTX0=";

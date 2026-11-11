@@ -68,6 +68,7 @@ reads. Changes need `just rebuild` plus a new session to take effect.
 
 - `flake.nix`: inputs, system builders, shared module wiring.
 - `nixos.nix` / `darwin.nix`: shared system modules.
+- `litellm/`, `opensnitch.nix`: hephaestus-only system modules (LiteLLM proxy, OpenSnitch rules).
 - `hosts/*.nix`: host-specific settings.
 - `home/`: home-manager modules.
 - `packages.nix`: shared package set.
@@ -86,7 +87,8 @@ reads. Changes need `just rebuild` plus a new session to take effect.
 - Prefer standard dot-paths and flat dot-notation for simple enables; use nested sets for related options.
 - Use `stdenv.isLinux` directly for Linux-only enables; use `lib.optionals`, `lib.optionalAttrs`, or `lib.optionalString` for conditional values.
 - Use `pkgs.foo` by default and `unstable.foo` only when newer packages are needed. Use `${lib.getBin pkg}/bin/name` for service binaries and `input.packages.${pkgs.stdenv.hostPlatform.system}.default` for flake inputs.
-- Do not use `assert`; use `lib.mkDefault` only for hardware defaults.
+- Do not use `assert`; use `lib.mkDefault` for hardware defaults and for shared
+  defaults that a host overrides.
 - Keep `#` comments minimal and pragmatic; use package-list section headers and explain non-obvious settings inline.
 - `packages.nix` installs on **all** hosts. Anything only one machine needs goes in
   that host's `hosts/<host>.nix`, not here.
