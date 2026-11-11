@@ -1,7 +1,6 @@
 {
   "env": {
-    "CLAUDE_CODE_ENABLE_TELEMETRY": "0",
-    "CLAUDE_CODE_SUBAGENT_MODEL": "sonnet"
+    "CLAUDE_CODE_ENABLE_TELEMETRY": "0"
   },
   "permissions": {
     "defaultMode": "bypassPermissions",

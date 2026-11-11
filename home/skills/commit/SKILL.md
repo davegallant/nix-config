@@ -9,7 +9,7 @@ Create a git commit for the current changes using a concise Conventional Commits
 
 `<type>(<scope>): <summary>`
 
-- `type` REQUIRED. Use `feat` for new features, `fix` for bug fixes. Other common types: `docs`, `refactor`, `chore`, `test`, `perf`.
+- `type` REQUIRED. Use `feat` for new features, `fix` for bug fixes. Other types: `chore`, `refactor`, `style`, `docs`, `ci`, `revert`; a repo's AGENTS.md list wins if it differs.
 - `scope` OPTIONAL. Short noun in parentheses for the affected area (e.g., `api`, `parser`, `ui`).
 - `summary` REQUIRED. Short, imperative, <= 72 chars, no trailing period.
 

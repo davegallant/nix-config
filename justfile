@@ -5,8 +5,8 @@ alias f := fmt
 
 arch := `uname -s`
 
-# Activation runs under a single `sudo <rebuild>` so it matches the one
-# NOPASSWD sudoers rule in nixos.nix (see security.sudo-rs.extraRules).
+# On Linux, activation runs under a single `sudo nixos-rebuild` so it matches
+# the one NOPASSWD sudoers rule in nixos.nix (see security.sudo-rs.extraRules).
 cmd := if arch == "Linux" { "sudo nixos-rebuild" } else { "sudo darwin-rebuild" }
 # Building stays unprivileged on Linux so ./result stays owned by the user.
 build_cmd := if arch == "Linux" { "nixos-rebuild" } else { "sudo darwin-rebuild" }
@@ -24,6 +24,7 @@ rebuild:
   sh -c "$switch_cmd"
 
 # rebuild and install bootloader
+[linux]
 rebuild-boot:
   $cmd boot --flake . --install-bootloader
 

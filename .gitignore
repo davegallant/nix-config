@@ -1,5 +1,3 @@
-.pre-commit-config.yaml
-.vscode
 result
 .direnv
 .claude

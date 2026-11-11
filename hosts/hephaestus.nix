@@ -127,9 +127,6 @@ in
     mcpelauncher
     eglantine
     (callPackage ../pkgs/lichii.nix { basePackage = eglantine; })
-    # LINE needs a manually-fetched installer added to the store first — see
-    # pkgs/line.nix for instructions. Re-add once that's done on hephaestus:
-    # (pkgs.callPackage ../pkgs/line.nix { wine = pkgs.wineWow64Packages.base; })
     (retroarch.withCores (
       cores: with cores; [
         mupen64plus

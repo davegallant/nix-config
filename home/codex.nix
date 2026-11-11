@@ -16,9 +16,10 @@ let
     cp -rL ${skills}/. "$out"
     cp -rL ${superpowers}/skills/. "$out/superpowers"
   '';
-  # Only kratos routes through litellm (base_url from $LITELLM_BASE_URL, key
-  # via env_key at runtime, keeping the internal URL and secret out of this
-  # public repo). Other hosts fall back to codex's default ChatGPT-login auth
+  # Only kratos routes through litellm, keeping the internal URL and secret
+  # out of this public repo: base_url is copied from $LITELLM_BASE_URL when
+  # config.toml is first created (delete the file to pick up a new URL), and
+  # the key is read from env_key at runtime. Other hosts fall back to codex's default ChatGPT-login auth
   # (`codex login`), riding whatever ChatGPT plan is signed in there.
   litellmProvider = ''
     model_provider = "litellm"

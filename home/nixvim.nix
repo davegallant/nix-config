@@ -422,7 +422,6 @@ in
       auto-save.enable = true;
       render-markdown.enable = true;
       which-key.enable = true;
-      cmp.enable = true;
       gitsigns = {
         enable = true;
         settings.current_line_blame = true;

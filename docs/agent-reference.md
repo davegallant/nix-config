@@ -10,8 +10,9 @@ Rebuild and switch the current system:
 just rebuild # or: just r
 ```
 
-This builds first, writes an `nvd diff` to `/tmp/nvd-diff.txt`, then switches
-with `nixos-rebuild` on Linux or `darwin-rebuild` on macOS.
+This builds first, writes an `nvd diff` to `/tmp/nvd-diff.txt`, then switches.
+Linux switches with `nixos-rebuild switch`; macOS builds with `darwin-rebuild`,
+then activates with `nix-env --set` and `./result/activate`.
 
 Build a host without switching:
 
@@ -31,6 +32,8 @@ just check   # fmt-check, lint, test, then nix flake check --no-build --all-syst
 just eval-host hephaestus   # one host's drvPath; works across OSes
 ```
 
+`just lint` and `just check` need the flake devShell (`direnv allow`, or
+`nix develop -c just check`), which provides `deadnix` and `statix`.
 `just lint` runs `deadnix`, `statix`, and ShellCheck for shell scripts.
 `statix.toml` disables `repeated_keys` because this repository deliberately
 uses flat dot-notation for simple option assignments. `just test` runs the pi
@@ -56,8 +59,8 @@ just update-superpowers   # bump the flake input, then rebuild
 Renovate opens the version bumps for the `update-*` packages above on its own;
 these recipes are for bumping by hand. A weekly workflow opens `flake.lock` PRs.
 
-To squash-merge the current branch's pull request and attach the latest `nvd`
-diff, run:
+Routine changes go straight to `main`. For a bot PR (Renovate or `flake.lock`),
+a human squash-merges it with the latest `nvd` diff attached; agents do not run this:
 
 ```sh
 just merge-pr
