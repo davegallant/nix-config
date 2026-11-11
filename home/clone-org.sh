@@ -8,7 +8,7 @@ mkdir -p "$TARGET_DIR"
 
 echo "Fetching repos for org: $ORG"
 
-gh repo list "$ORG" --limit 1000 --json nameWithOwner -q '.[].nameWithOwner' | \
+gh repo list "$ORG" --limit 10000 --json nameWithOwner -q '.[].nameWithOwner' | \
   while read -r repo; do
     name="${repo##*/}"
     dest="$TARGET_DIR/$name"

@@ -53,7 +53,14 @@
 
   system.primaryUser = username;
 
+  environment.systemPackages = [ (pkgs.callPackage ./pkgs/eglantine-bin.nix { }) ];
+
   system.defaults = {
+    dock = {
+      autohide = true;
+      tilesize = 50;
+      orientation = "bottom";
+    };
     trackpad = {
       ActuationStrength = 0;
       Clicking = true;
@@ -123,6 +130,7 @@
       "obsidian"
       "secretive"
       "spotify"
+      "tailscale-app"
       "taskexplorer"
       "windows-app"
       "unity-cli"
