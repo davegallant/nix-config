@@ -14,7 +14,7 @@ export default function (pi: ExtensionAPI) {
 
     const request = payload as Record<string, unknown>;
     if (
-      (request.model !== "gemini-4-argon" && request.model !== "gemini-4-argon-ent-ai") ||
+      request.model !== "gemini-4-argon" ||
       !("prompt_cache_key" in request)
     ) {
       return payload;

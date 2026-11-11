@@ -7,7 +7,6 @@
 #   asset-prefix  release asset basename prefix, e.g. "pi" or "hunkdiff".
 #                 Expects assets named:
 #                   <prefix>-linux-x64.tar.gz
-#                   <prefix>-linux-arm64.tar.gz
 #                   <prefix>-darwin-arm64.tar.gz
 #   package.nix   path to the file to rewrite (hashes sit on the line after
 #                 each asset URL)
@@ -37,13 +36,11 @@ fi
 echo "version: ${VERSION}"
 
 HASH_X86_LINUX=$(sri  "${BASE_URL}/v${VERSION}/${PREFIX}-linux-x64.tar.gz")
-HASH_ARM_LINUX=$(sri  "${BASE_URL}/v${VERSION}/${PREFIX}-linux-arm64.tar.gz")
 HASH_ARM_DARWIN=$(sri "${BASE_URL}/v${VERSION}/${PREFIX}-darwin-arm64.tar.gz")
 
 echo ""
 echo "hashes:"
 echo "  x86_64-linux:   ${HASH_X86_LINUX}"
-echo "  aarch64-linux:  ${HASH_ARM_LINUX}"
 echo "  aarch64-darwin: ${HASH_ARM_DARWIN}"
 echo ""
 
@@ -52,10 +49,6 @@ set_version "$PACKAGE_NIX" "$VERSION"
 # update hashes by matching the url pattern adjacent to each hash line
 sed -i \
   "/${PREFIX}-linux-x64\.tar\.gz/{n; s|hash = \"[^\"]*\";|hash = \"${HASH_X86_LINUX}\";|}" \
-  "$PACKAGE_NIX"
-
-sed -i \
-  "/${PREFIX}-linux-arm64\.tar\.gz/{n; s|hash = \"[^\"]*\";|hash = \"${HASH_ARM_LINUX}\";|}" \
   "$PACKAGE_NIX"
 
 sed -i \

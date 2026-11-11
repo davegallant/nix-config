@@ -2,6 +2,7 @@
  * Keep unusually large built-in tool results from dominating every later model
  * request. The tool has already completed; this only shortens the text persisted
  * in conversation context. The marker tells the model how to retrieve more.
+ * Also asks Codex-style Responses models for concise output (codexStylePayload).
  */
 
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
@@ -10,7 +11,7 @@ import { mkdtemp, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 
-export const MAX_TOOL_RESULT_CHARS = 20_000;
+const MAX_TOOL_RESULT_CHARS = 20_000;
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);

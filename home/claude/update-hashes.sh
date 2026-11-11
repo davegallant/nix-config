@@ -32,13 +32,11 @@ npm_integrity() {
 }
 
 HASH_X86_LINUX=$(npm_integrity "claude-code-linux-x64")
-HASH_ARM_LINUX=$(npm_integrity "claude-code-linux-arm64")
 HASH_ARM_DARWIN=$(npm_integrity "claude-code-darwin-arm64")
 
 echo ""
 echo "hashes:"
 echo "  x86_64-linux:  ${HASH_X86_LINUX}"
-echo "  aarch64-linux: ${HASH_ARM_LINUX}"
 echo "  aarch64-darwin: ${HASH_ARM_DARWIN}"
 echo ""
 
@@ -46,10 +44,6 @@ set_version "$PACKAGE_NIX" "$VERSION"
 
 sed -i \
   "/claude-code-linux-x64-/{n; s|hash = \"[^\"]*\";|hash = \"${HASH_X86_LINUX}\";|}" \
-  "$PACKAGE_NIX"
-
-sed -i \
-  "/claude-code-linux-arm64-/{n; s|hash = \"[^\"]*\";|hash = \"${HASH_ARM_LINUX}\";|}" \
   "$PACKAGE_NIX"
 
 sed -i \

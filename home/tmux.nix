@@ -79,7 +79,6 @@
       set -g detach-on-destroy off
       set -g display-panes-time 800
       set -g display-time 2000
-      set -g xterm-keys on
       set -g monitor-activity on
       set -g visual-activity off
 

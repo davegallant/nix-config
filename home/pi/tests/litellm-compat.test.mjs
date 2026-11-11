@@ -15,7 +15,7 @@ function transform(payload, provider = "litellm") {
   );
 }
 
-for (const model of ["gemini-4-argon", "gemini-4-argon-ent-ai"]) {
+for (const model of ["gemini-4-argon"]) {
   test(`removes the unsupported cache key for LiteLLM ${model}`, () => {
     const payload = {
       model,
