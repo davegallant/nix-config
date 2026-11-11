@@ -114,7 +114,10 @@ in
     ];
 
     # Global instructions loaded into every Codex session.
-    home.file.".codex/AGENTS.md".source = ./instructions/links.md;
+    home.file.".codex/AGENTS.md".source = pkgs.concatText "AGENTS.md" [
+      ./instructions/links.md
+      ./instructions/commits.md
+    ];
 
     # Codex scans ~/.agents/skills for user-level skills but ignores symlinked
     # SKILL.md files. Materialize the shared and Superpowers skills as real
