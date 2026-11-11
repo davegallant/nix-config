@@ -31,6 +31,7 @@ in
   # User-level rules load into every session, unlike skills which load on demand.
   home.file.".claude/rules/links.md".source = ./instructions/links.md;
   home.file.".claude/rules/voice.md".source = ./instructions/voice.md;
+  home.file.".claude/rules/commits.md".source = ./instructions/commits.md;
 
   home.file.".claude/skills" = {
     source = skills;

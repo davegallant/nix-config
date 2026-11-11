@@ -161,7 +161,10 @@ in
     home.file.".pi/agent/extensions/questionnaire.ts".source = ./pi/questionnaire.ts;
 
     # Global instructions, shared with Claude and Codex (voice.md is Claude-only).
-    home.file.".pi/agent/AGENTS.md".source = ./instructions/links.md;
+    home.file.".pi/agent/AGENTS.md".source = pkgs.concatText "AGENTS.md" [
+      ./instructions/links.md
+      ./instructions/commits.md
+    ];
 
     # Claude-Code-parity prompt templates (/plan, /recap, /security-review,
     # /simplify, /verify). Pi auto-discovers templates in ~/.pi/agent/prompts/*.md.
