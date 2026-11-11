@@ -164,6 +164,7 @@ in
     home.file.".pi/agent/AGENTS.md".source = pkgs.concatText "AGENTS.md" [
       ./instructions/links.md
       ./instructions/commits.md
+      ./instructions/reviews.md
     ];
 
     # Claude-Code-parity prompt templates (/plan, /recap, /security-review,

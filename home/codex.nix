@@ -117,6 +117,7 @@ in
     home.file.".codex/AGENTS.md".source = pkgs.concatText "AGENTS.md" [
       ./instructions/links.md
       ./instructions/commits.md
+      ./instructions/reviews.md
     ];
 
     # Codex scans ~/.agents/skills for user-level skills but ignores symlinked
