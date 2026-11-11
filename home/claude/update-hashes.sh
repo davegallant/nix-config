@@ -6,7 +6,11 @@
 
 set -euo pipefail
 
-PACKAGE_NIX="$(dirname "$0")/package.nix"
+DIR="$(dirname "$0")"
+PACKAGE_NIX="$DIR/package.nix"
+
+# shellcheck source=home/lib/update-common.sh
+source "$DIR/../lib/update-common.sh"
 NPM_REGISTRY="https://registry.npmjs.org"
 
 # resolve version
@@ -38,15 +42,7 @@ echo "  aarch64-linux: ${HASH_ARM_LINUX}"
 echo "  aarch64-darwin: ${HASH_ARM_DARWIN}"
 echo ""
 
-# current version in the file
-CURRENT_VERSION=$(grep 'version = ' "$PACKAGE_NIX" | head -1 | sed 's/.*version = "\([^"]*\)".*/\1/')
-
-if [[ "$CURRENT_VERSION" == "$VERSION" ]]; then
-  echo "version unchanged (${VERSION}), updating hashes only"
-else
-  echo "updating version: ${CURRENT_VERSION} -> ${VERSION}"
-  sed -i "s|version = \"${CURRENT_VERSION}\";|version = \"${VERSION}\";|" "$PACKAGE_NIX"
-fi
+set_version "$PACKAGE_NIX" "$VERSION"
 
 sed -i \
   "/claude-code-linux-x64-/{n; s|hash = \"[^\"]*\";|hash = \"${HASH_X86_LINUX}\";|}" \

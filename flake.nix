@@ -59,19 +59,14 @@
         allowUnfree = true;
       };
 
-      mkUnstable =
-        system:
-        import nixpkgs-unstable {
+      mkPkgs =
+        input: system:
+        import input {
           inherit system;
           config = nixpkgsConfig;
         };
-
-      mkBravePkgs =
-        system:
-        import nixpkgs-brave {
-          inherit system;
-          config = nixpkgsConfig;
-        };
+      mkUnstable = mkPkgs nixpkgs-unstable;
+      mkBravePkgs = mkPkgs nixpkgs-brave;
 
       mkSharedModules =
         {
@@ -124,10 +119,7 @@
             system:
             f {
               inherit system;
-              pkgs = import nixpkgs {
-                inherit system;
-                config = nixpkgsConfig;
-              };
+              pkgs = mkPkgs nixpkgs system;
             }
           );
 
@@ -212,10 +204,8 @@
               inherit system;
               specialArgs = {
                 inherit
-                  inputs
                   pvectl
                   unstable
-                  bravePkgs
                   username
                   vpngate
                   ;

@@ -31,10 +31,41 @@ let
 
   '';
 
-  # Local Ollama on kratos, reached over the tailnet from other hosts.
   ollamaModel = import ./lib/ollama.nix;
-  ollamaBaseUrl =
-    if hostname == "kratos" then "http://127.0.0.1:11434/v1" else "http://kratos:11434/v1";
+  ollamaBaseUrl = (import ./lib/ollama-endpoint.nix hostname).baseUrl;
+
+  # Defaults written to the seed config and forced on every launch, so
+  # wrapper launches always use them even if config.toml has gone stale.
+  defaults = {
+    model = "gpt-6-luna";
+    model_reasoning_effort = "medium";
+    sandbox_mode = "danger-full-access";
+    approval_policy = "on-request";
+  };
+  statusLine = [
+    "context-remaining"
+    "five-hour-limit"
+    "weekly-limit"
+    "model-with-reasoning"
+    "thread-title"
+  ];
+  # JSON strings and arrays are valid TOML values.
+  toToml = builtins.toJSON;
+  seedDefaults = lib.concatStringsSep "\n" (lib.mapAttrsToList (k: v: "${k} = ${toToml v}") defaults);
+  defaultFlags = lib.escapeShellArgs (
+    lib.concatMap
+      (setting: [
+        "--config"
+        setting
+      ])
+      (
+        lib.mapAttrsToList (k: v: "${k}=${toToml v}") defaults
+        ++ [
+          "tui.status_line=${toToml statusLine}"
+          "tui.status_line_use_colors=true"
+        ]
+      )
+  );
 
   # Create defaults once, then let Codex retain mutable state such as trusted
   # project decisions in ~/.codex/config.toml.
@@ -45,28 +76,19 @@ let
 
     if [ ! -f "$HOME/.codex/config.toml" ]; then
       cat > "$HOME/.codex/config.toml" <<EOF
-      model = "gpt-6-luna"
-      model_reasoning_effort = "medium"
-      sandbox_mode = "danger-full-access"
-      approval_policy = "on-request"
+      ${seedDefaults}
 
       ${lib.optionalString (hostname == "kratos") litellmProvider}[features]
       code_mode_host = true
 
       [tui]
-      status_line = [ "context-remaining", "five-hour-limit", "weekly-limit", "model-with-reasoning", "thread-title" ]
+      status_line = ${toToml statusLine}
       status_line_use_colors = true
       vim_mode_default = true
     EOF
     fi
 
-    exec ${codex-pkg}/bin/codex \
-      --config 'model="gpt-6-luna"' \
-      --config 'model_reasoning_effort="medium"' \
-      --config 'sandbox_mode="danger-full-access"' \
-      --config 'approval_policy="on-request"' \
-      --config 'tui.status_line=["context-remaining","five-hour-limit","weekly-limit","model-with-reasoning","thread-title"]' \
-      --config 'tui.status_line_use_colors=true' \
+    exec ${codex-pkg}/bin/codex ${defaultFlags} \
       "$@"
   '';
 
