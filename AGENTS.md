@@ -50,33 +50,16 @@ are BSD on macOS and GNU on Linux.
 - Don't read `$?` after a pipe — it is the last command's status, not the one you
   care about.
 
-## Sandbox
+## Permissions
 
-Sandbox and permission rules live in `home/claude/settings.json` (the nix-managed
-source; `~/.claude/settings.json` is generated and denied for editing). Changes need
-`just rebuild` plus a new session to take effect.
+Claude runs unsandboxed in `bypassPermissions` mode. The only rules live in
+`home/claude/settings.json` (the nix-managed source; `~/.claude/settings.json` is
+generated and denied for editing): a short deny list for force pushes and secret
+reads. Changes need `just rebuild` plus a new session to take effect.
 
-- Writable: `$TMPDIR`, `/tmp/claude`, and the paths in `sandbox.filesystem.allowWrite` —
-  which includes `~/src/github.com/`, so local git operations in sibling clones work.
-  That is deliberately broad: you can write to clones unrelated to the current task, so
-  confirm the repo you are in before editing.
-- Filesystem access is not network access. Remote git operations in any clone still fail
-  on the SSH block below, regardless of the write allowlist.
-- `origin` is an SSH URL and outbound port 22 is blocked, so `git fetch/push origin`
-  always fails. Use the explicit HTTPS URL for remote operations. The following
-  `fatal: failed to store: 100001` is the macOS keychain failing to *cache* a token —
-  harmless; check the ref-update line to confirm success.
 - Deny patterns match anywhere in a compound command, and `*` spans spaces. One
   denied clause kills the whole command, so keep a possibly-denied read in its own
-  call. `rm -f` / `rm -rf` are denied: use a fresh unique path, `git rm` for tracked
-  files, or `git clone --depth 1 <url> "$TMPDIR/<name>"` with no pre-`rm`.
-- `ps aux` and `pgrep` do not work (`requires entitlement` / `sysmond service not
-  found`). To test whether a daemon is up, probe its socket or use the client's own
-  status subcommand.
-- macOS pasteboard access and `tmux` both fail inside the sandbox (`NSPasteboard
-  generalPasteboard unavailable`; `fork failed`). Read `home/tmux.nix` instead of
-  querying a live server, and ask the user for clipboard checks.
-- `go build` and `go test` work in the sandbox.
+  call.
 - MCP servers are not managed by this flake; they live in `~/.claude.json`, which
   holds plaintext credentials. When inspecting it, print server names and `env`
   **keys** only. Never run a bare `env`/`printenv` grep that can match a secret value.
