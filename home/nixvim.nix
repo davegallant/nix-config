@@ -1,4 +1,35 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
+let
+  # Show `git <args>` output in a scratch diff buffer; `q` closes it.
+  diffKeymap = key: desc: args: emptyMsg: {
+    inherit key;
+    mode = [ "n" ];
+    action.__raw = ''
+      function()
+        local result = vim.system({"git", ${
+          lib.concatMapStringsSep ", " builtins.toJSON args
+        }}, {text = true}):wait()
+        if result.stdout == "" then
+          vim.notify(${builtins.toJSON emptyMsg}, vim.log.levels.INFO)
+          return
+        end
+        local lines = vim.split(result.stdout, "\n", {plain = true})
+        vim.cmd("enew")
+        vim.bo.buftype = "nofile"
+        vim.bo.bufhidden = "wipe"
+        vim.bo.swapfile = false
+        vim.bo.filetype = "diff"
+        vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
+        vim.bo.modifiable = false
+        vim.keymap.set("n", "q", "<cmd>bd<CR>", {buffer = true, silent = true})
+      end
+    '';
+    options = {
+      silent = true;
+      inherit desc;
+    };
+  };
+in
 {
   programs.nixvim = {
     enable = true;
@@ -200,58 +231,11 @@
           desc = "Git push";
         };
       }
-      {
-        key = "<leader>gd";
-        mode = [ "n" ];
-        action.__raw = ''
-          function()
-            local result = vim.system({"git", "diff"}, {text = true}):wait()
-            if result.stdout == "" then
-              vim.notify("No changes", vim.log.levels.INFO)
-              return
-            end
-            local lines = vim.split(result.stdout, "\n", {plain = true})
-            vim.cmd("enew")
-            vim.bo.buftype = "nofile"
-            vim.bo.bufhidden = "wipe"
-            vim.bo.swapfile = false
-            vim.bo.filetype = "diff"
-            vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
-            vim.bo.modifiable = false
-            vim.keymap.set("n", "q", "<cmd>bd<CR>", {buffer = true, silent = true})
-          end
-        '';
-        options = {
-          silent = true;
-          desc = "Git diff";
-        };
-      }
-      {
-        key = "<leader>gD";
-        mode = [ "n" ];
-        action.__raw = ''
-          function()
-            local result = vim.system({"git", "diff", "--cached"}, {text = true}):wait()
-            if result.stdout == "" then
-              vim.notify("No staged changes", vim.log.levels.INFO)
-              return
-            end
-            local lines = vim.split(result.stdout, "\n", {plain = true})
-            vim.cmd("enew")
-            vim.bo.buftype = "nofile"
-            vim.bo.bufhidden = "wipe"
-            vim.bo.swapfile = false
-            vim.bo.filetype = "diff"
-            vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
-            vim.bo.modifiable = false
-            vim.keymap.set("n", "q", "<cmd>bd<CR>", {buffer = true, silent = true})
-          end
-        '';
-        options = {
-          silent = true;
-          desc = "Git diff (staged)";
-        };
-      }
+      (diffKeymap "<leader>gd" "Git diff" [ "diff" ] "No changes")
+      (diffKeymap "<leader>gD" "Git diff (staged)" [
+        "diff"
+        "--cached"
+      ] "No staged changes")
       {
         key = "<leader>gl";
         mode = [ "n" ];

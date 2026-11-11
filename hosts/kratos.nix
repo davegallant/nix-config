@@ -18,9 +18,6 @@
   environment.systemPath = [ "${config.homebrew.prefix}/bin" ];
 
   system.defaults.dock = {
-    autohide = true;
-    tilesize = 50;
-    orientation = "bottom";
     persistent-apps = [
       "/Applications/ghostty.app"
       "/Applications/Google Chrome.app"
@@ -49,7 +46,6 @@
     "headlamp"
     "orka3"
     "slack"
-    "tailscale-app"
     "zulu@8" # Java 8 runtime required by Cisco ASDM-IDM Launcher
   ];
 }

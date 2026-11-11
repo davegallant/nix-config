@@ -12,19 +12,23 @@
     # Shadows fish's stock j.fish (an autojump/history completion), which runs
     # `complete -c j -e` and wipes the `j` alias's inherited `just` completions.
     "fish/completions/j.fish".text = "complete -c j -w just\n";
-    "fish/completions/kubectl.fish".source = pkgs.runCommand "kubectl-completions.fish" { } ''
-      ${unstable.kubectl}/bin/kubectl completion fish > $out
-    '';
-    "fish/completions/helm.fish".source = pkgs.runCommand "helm-completions.fish" { } ''
-      ${unstable.kubernetes-helm}/bin/helm completion fish > $out
-    '';
-    "fish/completions/pvectl.fish".source = pkgs.runCommand "pvectl-completions.fish" { } ''
-      ${pvectl.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/pvectl completion fish > $out
-    '';
-    "fish/completions/vpngate.fish".source = pkgs.runCommand "vpngate-completions.fish" { } ''
-      ${vpngate.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/vpngate completion fish > $out
-    '';
-  };
+  }
+  //
+    lib.mapAttrs'
+      (
+        name: pkg:
+        lib.nameValuePair "fish/completions/${name}.fish" {
+          source = pkgs.runCommand "${name}-completions.fish" { } ''
+            ${pkg}/bin/${name} completion fish > $out
+          '';
+        }
+      )
+      {
+        inherit (unstable) kubectl;
+        helm = unstable.kubernetes-helm;
+        pvectl = pvectl.packages.${pkgs.stdenv.hostPlatform.system}.default;
+        vpngate = vpngate.packages.${pkgs.stdenv.hostPlatform.system}.default;
+      };
 
   programs = {
     starship = {

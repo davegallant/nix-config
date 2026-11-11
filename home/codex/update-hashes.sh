@@ -16,23 +16,16 @@ DIR="$(dirname "$0")"
 PACKAGE_NIX="$DIR/package.nix"
 VERSION="${1:-}"
 
+# shellcheck source=home/lib/update-common.sh
+source "$DIR/../lib/update-common.sh"
+
 if [[ -z "$VERSION" ]]; then
-  echo "fetching latest release from github.com/${REPO}..."
-  VERSION=$(curl -fsSL "https://api.github.com/repos/${REPO}/releases/latest" \
-    | grep '"tag_name"' \
-    | sed 's/.*"tag_name": *"rust-v\?\([^"]*\)".*/\1/')
+  VERSION=$(latest_github_tag "$REPO" rust-v)
 fi
 
 echo "version: ${VERSION}"
 
-CURRENT_VERSION=$(grep 'version = ' "$PACKAGE_NIX" | head -1 | sed 's/.*version = "\([^"]*\)".*/\1/')
-
-if [[ "$CURRENT_VERSION" == "$VERSION" ]]; then
-  echo "version unchanged (${VERSION}), updating hashes only"
-else
-  echo "updating version: ${CURRENT_VERSION} -> ${VERSION}"
-  sed -i "s|version = \"${CURRENT_VERSION}\";|version = \"${VERSION}\";|" "$PACKAGE_NIX"
-fi
+set_version "$PACKAGE_NIX" "$VERSION"
 
 declare -A ASSETS=(
   [codex-aarch64-apple-darwin.tar.gz]=1
@@ -43,8 +36,7 @@ declare -A ASSETS=(
 
 for asset in "${!ASSETS[@]}"; do
   URL="https://github.com/${REPO}/releases/download/rust-v${VERSION}/${asset}"
-  echo "  fetching ${asset}..."
-  HASH="sha256-$(curl -fsSL "$URL" | openssl dgst -sha256 -binary | openssl base64)"
+  HASH=$(sri "$URL")
   echo "  hash: ${HASH}"
   if [[ "$asset" == codex-code-mode-host-* ]]; then
     sed -i \

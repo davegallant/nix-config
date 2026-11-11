@@ -10,29 +10,23 @@ if [[ $# -gt 1 ]]; then
   exit 1
 fi
 
-PACKAGE_NIX="$(dirname "$0")/package.nix"
+DIR="$(dirname "$0")"
+PACKAGE_NIX="$DIR/package.nix"
+
+# shellcheck source=home/lib/update-common.sh
+source "$DIR/../lib/update-common.sh"
 VERSION="${1:-}"
 
 if [[ -z "$VERSION" ]]; then
-  echo "fetching latest release from github.com/timrogers/litra-autotoggle..."
-  VERSION=$(curl -fsSL "https://api.github.com/repos/timrogers/litra-autotoggle/releases/latest" \
-    | grep '"tag_name"' \
-    | sed 's/.*"tag_name": *"v\?\([^"]*\)".*/\1/')
+  VERSION=$(latest_github_tag timrogers/litra-autotoggle v)
 fi
 
 echo "version: ${VERSION}"
 
 URL="https://github.com/timrogers/litra-autotoggle/releases/download/v${VERSION}/litra-autotoggle_v${VERSION}_darwin-aarch64"
-echo "  fetching ${URL##*/}..." >&2
-HASH="sha256-$(curl -fsSL "$URL" | openssl dgst -sha256 -binary | openssl base64)"
+HASH=$(sri "$URL")
 
-CURRENT_VERSION=$(grep 'version = ' "$PACKAGE_NIX" | head -1 | sed 's/.*version = "\([^"]*\)".*/\1/')
-if [[ "$CURRENT_VERSION" == "$VERSION" ]]; then
-  echo "version unchanged (${VERSION}), updating hash only"
-else
-  echo "updating version: ${CURRENT_VERSION} -> ${VERSION}"
-  sed -i "s|version = \"${CURRENT_VERSION}\";|version = \"${VERSION}\";|" "$PACKAGE_NIX"
-fi
+set_version "$PACKAGE_NIX" "$VERSION"
 
 sed -i \
   '/darwin-aarch64";/{n; s|hash = "[^"]*";|hash = "'"${HASH}"'";|}' \

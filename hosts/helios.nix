@@ -20,7 +20,7 @@ in
     pvectl.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
-  home-manager.users.dave.imports = [
+  home-manager.users.${username}.imports = [
     ../home/retroarch.nix
     ../home/ryujinx.nix
   ];
@@ -47,9 +47,6 @@ in
   '';
 
   system.defaults.dock = {
-    autohide = true;
-    tilesize = 50;
-    orientation = "bottom";
     persistent-apps = [
       "/Applications/ghostty.app"
       "/Applications/Brave Browser.app"
@@ -78,7 +75,6 @@ in
     "retroarch-metal"
     "signal"
     "steam"
-    "tailscale-app"
     "transmission"
     "zoom"
   ];

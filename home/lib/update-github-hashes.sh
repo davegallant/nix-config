@@ -16,6 +16,9 @@
 
 set -euo pipefail
 
+# shellcheck source=home/lib/update-common.sh
+source "$(dirname "$0")/update-common.sh"
+
 if [[ $# -lt 3 ]]; then
   echo "Usage: $0 <repo> <asset-prefix> <package.nix> [VERSION]" >&2
   exit 1
@@ -27,23 +30,11 @@ PACKAGE_NIX="$3"
 VERSION="${4:-}"
 BASE_URL="https://github.com/${REPO}/releases/download"
 
-# resolve version
 if [[ -z "$VERSION" ]]; then
-  echo "fetching latest release from github.com/${REPO}..."
-  VERSION=$(curl -fsSL "https://api.github.com/repos/${REPO}/releases/latest" \
-    | grep '"tag_name"' \
-    | sed 's/.*"tag_name": *"v\?\([^"]*\)".*/\1/')
+  VERSION=$(latest_github_tag "$REPO" v)
 fi
 
 echo "version: ${VERSION}"
-
-sri() {
-  local url="$1"
-  echo "  fetching ${url##*/}..." >&2
-  local hash
-  hash=$(curl -fsSL "$url" | openssl dgst -sha256 -binary | openssl base64)
-  echo "sha256-${hash}"
-}
 
 HASH_X86_LINUX=$(sri  "${BASE_URL}/v${VERSION}/${PREFIX}-linux-x64.tar.gz")
 HASH_ARM_LINUX=$(sri  "${BASE_URL}/v${VERSION}/${PREFIX}-linux-arm64.tar.gz")
@@ -56,15 +47,7 @@ echo "  aarch64-linux:  ${HASH_ARM_LINUX}"
 echo "  aarch64-darwin: ${HASH_ARM_DARWIN}"
 echo ""
 
-# current version in the file
-CURRENT_VERSION=$(grep 'version = ' "$PACKAGE_NIX" | head -1 | sed 's/.*version = "\([^"]*\)".*/\1/')
-
-if [[ "$CURRENT_VERSION" == "$VERSION" ]]; then
-  echo "version unchanged (${VERSION}), updating hashes only"
-else
-  echo "updating version: ${CURRENT_VERSION} -> ${VERSION}"
-  sed -i "s|version = \"${CURRENT_VERSION}\";|version = \"${VERSION}\";|" "$PACKAGE_NIX"
-fi
+set_version "$PACKAGE_NIX" "$VERSION"
 
 # update hashes by matching the url pattern adjacent to each hash line
 sed -i \

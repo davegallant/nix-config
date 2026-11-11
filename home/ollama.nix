@@ -6,6 +6,7 @@
 }:
 let
   ollamaModel = import ./lib/ollama.nix;
+  ollamaEndpoint = import ./lib/ollama-endpoint.nix hostname;
 in
 {
   launchd.agents.ollama = lib.mkIf (hostname == "kratos") {
@@ -20,7 +21,7 @@ in
         HOME = config.home.homeDirectory;
         OLLAMA_CONTEXT_LENGTH = toString ollamaModel.contextWindow;
         OLLAMA_FLASH_ATTENTION = "1";
-        OLLAMA_HOST = "0.0.0.0:11434";
+        OLLAMA_HOST = "0.0.0.0:${toString ollamaEndpoint.port}";
         OLLAMA_KEEP_ALIVE = "-1";
         OLLAMA_KV_CACHE_TYPE = "q8_0";
       };

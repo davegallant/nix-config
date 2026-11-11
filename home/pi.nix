@@ -14,7 +14,23 @@ let
   defaultModel = if onKratos then "gpt-6-luna" else "openai/gpt-6-luna";
   solModel = if onKratos then "gpt-6-sol" else "openai/gpt-6-sol";
   ollamaModel = import ./lib/ollama.nix;
-  ollamaBaseUrl = if onKratos then "http://127.0.0.1:11434/v1" else "http://kratos:11434/v1";
+  ollamaBaseUrl = (import ./lib/ollama-endpoint.nix hostname).baseUrl;
+
+  mkModel =
+    id: name: limits:
+    {
+      inherit id name;
+      reasoning = true;
+      input = [
+        "text"
+        "image"
+      ];
+    }
+    // limits;
+  gpt6Limits = {
+    contextWindow = 1050000;
+    maxTokens = 128000;
+  };
 
   modelsTemplate = pkgs.writeText "pi-models.json" (
     builtins.toJSON {
@@ -30,39 +46,12 @@ let
           models = [ ollamaModel ];
         };
         openrouter.models = [
-          {
-            id = "openai/gpt-6-luna";
-            name = "GPT-6 Luna (OpenRouter)";
-            reasoning = true;
-            input = [
-              "text"
-              "image"
-            ];
-            contextWindow = 1050000;
-            maxTokens = 128000;
-          }
-          {
-            id = "openai/gpt-6-sol";
-            name = "GPT-6 Sol (OpenRouter)";
-            reasoning = true;
-            input = [
-              "text"
-              "image"
-            ];
-            contextWindow = 1050000;
-            maxTokens = 128000;
-          }
-          {
-            id = "deepseek/deepseek-v4.1-flash";
-            name = "DeepSeek V4.1 Flash (OpenRouter)";
-            reasoning = true;
-            input = [
-              "text"
-              "image"
-            ];
+          (mkModel "openai/gpt-6-luna" "GPT-6 Luna (OpenRouter)" gpt6Limits)
+          (mkModel "openai/gpt-6-sol" "GPT-6 Sol (OpenRouter)" gpt6Limits)
+          (mkModel "deepseek/deepseek-v4.1-flash" "DeepSeek V4.1 Flash (OpenRouter)" {
             contextWindow = 1048576;
             maxTokens = 1048576;
-          }
+          })
         ];
       }
       // lib.optionalAttrs onKratos {
@@ -71,55 +60,18 @@ let
           baseUrl = "";
           api = "openai-responses";
           apiKey = "$LITELLM_API_KEY";
+          # Cost is left unset until authoritative gateway pricing is available.
           models = [
-            {
-              id = defaultModel;
-              name = "GPT-6 Luna (litellm)";
-              reasoning = true;
-              input = [
-                "text"
-                "image"
-              ];
-              contextWindow = 1050000;
-              maxTokens = 128000;
-              # Leave cost unset until authoritative gateway pricing is available.
-            }
-            {
-              id = solModel;
-              name = "GPT-6 Sol (litellm)";
-              reasoning = true;
-              input = [
-                "text"
-                "image"
-              ];
-              contextWindow = 1050000;
-              maxTokens = 128000;
-              # Leave cost unset until authoritative gateway pricing is available.
-            }
-            {
-              id = "gpt-6.1-sol";
-              name = "GPT-6.1 Sol (litellm)";
-              reasoning = true;
-              input = [
-                "text"
-                "image"
-              ];
+            (mkModel defaultModel "GPT-6 Luna (litellm)" gpt6Limits)
+            (mkModel solModel "GPT-6 Sol (litellm)" gpt6Limits)
+            (mkModel "gpt-6.1-sol" "GPT-6.1 Sol (litellm)" {
               contextWindow = 1000000;
               maxTokens = 131072;
-              # Leave cost unset until authoritative gateway pricing is available.
-            }
-            {
-              id = "gemini-4-argon";
-              name = "Gemini 4 Argon (litellm)";
-              reasoning = true;
-              input = [
-                "text"
-                "image"
-              ];
+            })
+            (mkModel "gemini-4-argon" "Gemini 4 Argon (litellm)" {
               contextWindow = 1048576;
               maxTokens = 65536;
-              # Leave cost unset until authoritative gateway pricing is available.
-            }
+            })
           ];
         };
       };
@@ -210,11 +162,10 @@ in
 
     # Claude-Code-parity prompt templates (/plan, /recap, /security-review,
     # /simplify, /verify). Pi auto-discovers templates in ~/.pi/agent/prompts/*.md.
-    home.file.".pi/agent/prompts/plan.md".source = ./pi/prompts/plan.md;
-    home.file.".pi/agent/prompts/recap.md".source = ./pi/prompts/recap.md;
-    home.file.".pi/agent/prompts/security-review.md".source = ./pi/prompts/security-review.md;
-    home.file.".pi/agent/prompts/simplify.md".source = ./pi/prompts/simplify.md;
-    home.file.".pi/agent/prompts/verify.md".source = ./pi/prompts/verify.md;
+    home.file.".pi/agent/prompts" = {
+      source = ./pi/prompts;
+      recursive = true;
+    };
 
     home.file.".pi/agent/settings.json".text = builtins.toJSON {
       defaultProvider = modelProvider;
