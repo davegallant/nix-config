@@ -3,17 +3,17 @@
   callPackage,
 }:
 let
-  version = "0.24.1"; # renovate: datasource=github-releases depName=modem-dev/hunk
+  version = "0.25.0"; # renovate: datasource=github-releases depName=modem-dev/hunk
 
   assets = {
     x86_64-linux = {
       url = "https://github.com/modem-dev/hunk/releases/download/v${version}/hunkdiff-linux-x64.tar.gz";
-      hash = "sha256-S4yY+Nl3RUmZFsweHS8n/9JYxtY1jdRTL2HkHF6xlpI=";
+      hash = "sha256-/DMBFRqbNUALAiPXMEHOqF+xiXLW3FyXorvcQn+tKv4=";
       sourceRoot = "hunkdiff-linux-x64";
     };
     aarch64-darwin = {
       url = "https://github.com/modem-dev/hunk/releases/download/v${version}/hunkdiff-darwin-arm64.tar.gz";
-      hash = "sha256-X5r9Qdgl4vh5WLBwLneeUtOCB8C0LVMW7+VCGPNbTX0=";
+      hash = "sha256-Kld5CbR4JCvHWYK+MLwsXr+aAET8OKrZSxEat+mpkuA=";
       sourceRoot = "hunkdiff-darwin-arm64";
     };
   };
