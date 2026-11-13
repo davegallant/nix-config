@@ -52,10 +52,13 @@ are BSD on macOS and GNU on Linux.
 
 ## Permissions
 
-Claude runs unsandboxed in `bypassPermissions` mode. The only rules live in
+Claude runs unsandboxed in `auto` mode. The rules live in
 `home/claude/settings.json` (the nix-managed source; `~/.claude/settings.json` is
-generated and denied for editing): a short deny list for force pushes and secret
-reads. Changes need `just rebuild` plus a new session to take effect.
+generated and denied for editing): a deny list for force pushes and credential
+reads. `~/.claude/settings.private.json` adds machine-specific rules, including
+`ask` rules for MCP tools that change production; activation concatenates its
+`deny` and `ask` lists onto the base ones. Changes need `just rebuild` plus a new
+session to take effect.
 
 - Deny patterns match anywhere in a compound command, and `*` spans spaces. One
   denied clause kills the whole command, so keep a possibly-denied read in its own
