@@ -37,11 +37,17 @@ let
 
   # Defaults written to the seed config and forced on every launch, so
   # wrapper launches always use them even if config.toml has gone stale.
+  # kratos holds work credentials, so Codex is confined to the workspace there
+  # and asks before stepping outside it; network stays on for builds and gh.
+  onKratos = hostname == "kratos";
   defaults = {
     model = "gpt-6-luna";
     model_reasoning_effort = "medium";
-    sandbox_mode = "danger-full-access";
+    sandbox_mode = if onKratos then "workspace-write" else "danger-full-access";
     approval_policy = "on-request";
+  }
+  // lib.optionalAttrs onKratos {
+    "sandbox_workspace_write.network_access" = true;
   };
   statusLine = [
     "context-remaining"
@@ -79,7 +85,7 @@ let
       cat > "$HOME/.codex/config.toml" <<EOF
       ${seedDefaults}
 
-      ${lib.optionalString (hostname == "kratos") litellmProvider}[features]
+      ${lib.optionalString onKratos litellmProvider}[features]
       code_mode_host = true
 
       [tui]
