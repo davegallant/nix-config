@@ -40,14 +40,21 @@ in
 
   # Keep machine-specific MCP permissions in the untracked private overlay.
   # Merge two JSON files (deep merge, second overrides first) into a target.
-  # If the overlay is missing, fall back to the base unchanged.
+  # If the overlay is missing, fall back to the base unchanged. jq's `*`
+  # replaces arrays, so deny lists are concatenated: an overlay can add denies
+  # but never drop the base ones.
   home.activation.claudeSettings = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     mergeJson() {
       local target="$1" base="$2" overlay="$3"
       local tmp
       tmp=$(mktemp)
       if [ -f "$base" ] && [ -f "$overlay" ]; then
-        ${lib.getExe pkgs.jq} -s '.[0] * .[1]' "$base" "$overlay" > "$tmp"
+        ${lib.getExe pkgs.jq} -s '
+          . as [$base, $overlay]
+          | ($base * $overlay)
+          | .permissions.deny =
+              (($base.permissions.deny // []) + ($overlay.permissions.deny // []) | unique)
+        ' "$base" "$overlay" > "$tmp"
       elif [ -f "$overlay" ]; then
         cp "$overlay" "$tmp"
       else
