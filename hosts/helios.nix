@@ -10,6 +10,9 @@ let
   trustedHomebrewTaps = [
     "davegallant/public"
   ];
+  homebrewTrust = pkgs.writeText "homebrew-trust.json" (
+    builtins.toJSON { trustedtaps = trustedHomebrewTaps; }
+  );
 in
 {
   networking.hostName = "helios";
@@ -26,25 +29,20 @@ in
     ../home/ryujinx.nix
   ];
 
+  # Runs as the user, not root: the directory is user-writable, so a root
+  # write or chown there could be redirected through a planted symlink.
   system.activationScripts.preActivation.text = ''
     homebrew_trust_dir=/Users/${lib.escapeShellArg username}/.homebrew
     homebrew_trust_file="$homebrew_trust_dir/trust.json"
+    as_user() { /usr/bin/sudo --user=${lib.escapeShellArg username} -- "$@"; }
 
     if [ -L "$homebrew_trust_dir" ]; then
-      rm "$homebrew_trust_dir"
+      as_user /bin/rm "$homebrew_trust_dir"
     fi
-
-    mkdir -p "$homebrew_trust_dir"
-    if [ -L "$homebrew_trust_file" ]; then
-      rm "$homebrew_trust_file"
-    fi
-
-    cat > "$homebrew_trust_file" <<'EOF'
-    ${builtins.toJSON { trustedtaps = trustedHomebrewTaps; }}
-    EOF
-    chown -R ${lib.escapeShellArg username}:staff "$homebrew_trust_dir"
-    chmod 700 "$homebrew_trust_dir"
-    chmod 600 "$homebrew_trust_file"
+    as_user /bin/mkdir -p "$homebrew_trust_dir"
+    as_user /bin/chmod 700 "$homebrew_trust_dir"
+    as_user /bin/rm -f "$homebrew_trust_file"
+    as_user /usr/bin/install -m 600 ${homebrewTrust} "$homebrew_trust_file"
   '';
 
   system.defaults.dock = {
