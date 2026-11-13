@@ -121,10 +121,10 @@ update-pvectl:
   nix flake lock --update-input pvectl
   just rebuild
 
-# update the Superpowers flake input and activate its skills
-update-superpowers:
-  nix flake lock --update-input superpowers
-  just rebuild
+# update the agent skill inputs; review the upstream diff before rebuilding
+update-skills:
+  nix flake lock --update-input superpowers --update-input mattpocockSkills
+  git diff flake.lock
 
 # squash-merge current branch's PR with nvd diff in body
 merge-pr:

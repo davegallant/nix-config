@@ -9,6 +9,13 @@ let
     inherit (pkgs) python3;
   };
 
+  # Fetched by hash instead of `npm:pi-vimmode@...`, which pi would install at
+  # runtime with no integrity check. It has no dependencies or install scripts.
+  piVimmode = pkgs.fetchzip {
+    url = "https://registry.npmjs.org/pi-vimmode/-/pi-vimmode-0.9.0.tgz";
+    hash = "sha256-SeuRnbmry10i0apZjIAT18CWcGeWY7bV5O8rXrAAVm0=";
+  };
+
   onKratos = hostname == "kratos";
   modelProvider = if onKratos then "litellm" else "openrouter";
   defaultModel = if onKratos then "gpt-6-luna" else "openai/gpt-6-luna";
@@ -220,7 +227,7 @@ in
             "extensions/whimsical.ts"
           ];
         }
-        { source = "npm:pi-vimmode@0.9.0"; }
+        { source = "${piVimmode}"; }
       ];
     };
   };
