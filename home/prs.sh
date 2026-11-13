@@ -30,9 +30,10 @@ fi
 esc=$'\033'
 if [ "$style" = term ]; then
   bold="${esc}[1m" dim="${esc}[2m" cyan="${esc}[36m" yellow="${esc}[33m" reset="${esc}[0m"
+  green="${esc}[32m" red="${esc}[31m"
   link_open="${esc}]8;;" link_mid="${esc}\\" link_close="${esc}]8;;${esc}\\"
 else
-  bold="" dim="" cyan="" yellow="" reset=""
+  bold="" dim="" cyan="" yellow="" reset="" green="" red=""
   link_open="" link_mid="" link_close=""
 fi
 
@@ -52,9 +53,27 @@ gh search prs "user-review-requested:@me" --archived=false --state=open --limit 
   --jq 'sort_by(.updatedAt)|reverse|.[]|["\(.repository.nameWithOwner)#\(.number)",.url,"@\(.author.login)",.title]|join("\u001f")' \
   >"$tmp/mine-to-review" &
 
-gh search prs --author=@me --archived=false --state=open --limit 1000 \
-  --json repository,number,title,isDraft,url,updatedAt \
-  --jq 'sort_by(.updatedAt)|reverse|.[]|["\(.repository.nameWithOwner)#\(.number)",.url,(if .isDraft then "draft" else "" end),.title]|join("\u001f")' \
+# The REST search behind `gh search prs` has no review decision or CI state, so
+# my own PRs go through GraphQL search. --paginate applies --jq per page; the
+# sort qualifier keeps the order global.
+# shellcheck disable=SC2016 # $q and $endCursor are GraphQL variables
+gh api graphql --paginate -f q="is:pr is:open author:@me archived:false sort:updated-desc" -f query='
+  query($q: String!, $endCursor: String) {
+    search(query: $q, type: ISSUE, first: 100, after: $endCursor) {
+      pageInfo { hasNextPage endCursor }
+      nodes { ... on PullRequest {
+        number title url isDraft reviewDecision
+        repository { nameWithOwner }
+        commits(last: 1) { nodes { commit { statusCheckRollup { state } } } }
+      } }
+    }
+  }' --jq '.data.search.nodes[]|select(.number)|[
+    "\(.repository.nameWithOwner)#\(.number)", .url,
+    ([ (if .isDraft then "draft" else empty end),
+       ({APPROVED: "approved", CHANGES_REQUESTED: "changes requested"}[.reviewDecision // ""] // empty),
+       ({FAILURE: "ci failing", ERROR: "ci failing", PENDING: "ci pending", EXPECTED: "ci pending"}[.commits.nodes[0].commit.statusCheckRollup.state // ""] // empty)
+     ] | join(", ")),
+    .title]|join("\u001f")' \
   >"$tmp/authored" &
 
 # --review-requested is team-inclusive: every PR routed to any team I'm in.
@@ -65,6 +84,22 @@ gh search prs --review-requested=@me --archived=false --draft=false --state=open
 
 wait
 
+# Colour each comma-separated tag in a note: green when ready, red when blocked.
+tags() {
+  local rest=$1 tag colour out=""
+  while [ -n "$rest" ]; do
+    tag=${rest%%, *}
+    if [ "$tag" = "$rest" ]; then rest=""; else rest=${rest#*, }; fi
+    case $tag in
+    approved) colour=$green ;;
+    "changes requested" | "ci failing") colour=$red ;;
+    *) colour=$yellow ;;
+    esac
+    out+="${out:+$yellow, }$colour$tag$reset"
+  done
+  printf ' %s(%s%s)%s' "$yellow" "$out" "$yellow" "$reset"
+}
+
 render() {
   local ref url note title
   while IFS=$'\037' read -r ref url note title; do
@@ -73,7 +108,7 @@ render() {
     else
       printf -- '  %s%s%s%s%s%s %s\n' \
         "$cyan$bold" "$link_open$url$link_mid" "$ref" "$link_close" "$reset" \
-        "${note:+ $yellow($note)$reset}" "$title"
+        "${note:+$(tags "$note")}" "$title"
     fi
   done <"$1"
 }
