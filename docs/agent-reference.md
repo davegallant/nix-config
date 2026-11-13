@@ -10,7 +10,8 @@ Rebuild and switch the current system:
 just rebuild # or: just r
 ```
 
-This builds first, writes an `nvd diff` to `/tmp/nvd-diff.txt`, then switches.
+This builds first, writes an `nvd diff` to `nvd-diff.txt` under `$XDG_RUNTIME_DIR`
+(or `$TMPDIR`), then switches.
 Linux switches with `nixos-rebuild switch`; macOS builds with `darwin-rebuild`,
 then activates with `nix-env --set` and `./result/activate`.
 

@@ -9,6 +9,8 @@ arch := `uname -s`
 cmd := if arch == "Linux" { "sudo nixos-rebuild" } else { "sudo darwin-rebuild" }
 # Building stays unprivileged on Linux so ./result stays owned by the user.
 build_cmd := if arch == "Linux" { "nixos-rebuild" } else { "sudo darwin-rebuild" }
+# Per-user location: a fixed name in shared /tmp could be pre-created by another user.
+nvd_diff := env('XDG_RUNTIME_DIR', env('TMPDIR', '/tmp')) / 'nvd-diff.txt'
 switch_cmd := if arch == "Linux" { "sudo nixos-rebuild switch --flake . --option warn-dirty false" } else { "sudo nix-env -p /nix/var/nix/profiles/system --set ./result && sudo ./result/activate" }
 
 # list available recipes
@@ -19,7 +21,7 @@ default:
 # build, show nvd diff, then switch
 rebuild:
   $build_cmd build --flake . --option warn-dirty false
-  nvd diff /run/current-system result | rg -v '^[<>]{3} ' > /tmp/nvd-diff.txt
+  nvd diff /run/current-system result | rg -v '^[<>]{3} ' > "$nvd_diff"
   sh -c "$switch_cmd"
 
 # rebuild and install bootloader
@@ -136,7 +138,7 @@ merge-pr:
       echo "No PR found for branch $BRANCH"
       exit 1
   fi
-  DIFF=$(cat /tmp/nvd-diff.txt 2>/dev/null || echo "")
+  DIFF=$(cat "$nvd_diff" 2>/dev/null || echo "")
   BODY_FILE=$(mktemp)
   if [[ -n "$DIFF" ]]; then
       printf '## nvd diff\n```\n%s\n```\n' "$DIFF" > "$BODY_FILE"
