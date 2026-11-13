@@ -21,6 +21,10 @@ jobs:
       - uses: DeterminateSystems/update-flake-lock@a6b01882e9290a55d390f352ff11664ceea1661a # main
         id: update
         with:
+          # superpowers and mattpocockSkills are left out: their text is loaded
+          # into unsandboxed agents, so bump them by hand and read the diff
+          # (`just update-skills`).
+          inputs: nixpkgs nixpkgs-unstable nixpkgs-brave darwin home-manager nixvim pvectl vpngate vermouth
           pr-title: "chore: flake.lock update"
           pr-labels: |
             dependencies

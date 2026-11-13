@@ -2,8 +2,8 @@
 # (codex.nix), and pi (which rides codex's copy): the skills in home/skills plus
 # a few cherry-picked from mattpocock/skills and flattened out of its category
 # directories. Most of that repo overlaps skills we already have, so only the
-# ones listed below are pulled in. It is a flake input, so the weekly
-# flake-update workflow bumps it.
+# ones listed below are pulled in. It is a flake input that the weekly
+# flake-update workflow skips: bump it by hand with `just update-skills`.
 {
   pkgs,
   mattpocockSkills,

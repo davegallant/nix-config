@@ -53,11 +53,12 @@ just update-hunk [VERSION]
 just update-litra [VERSION]
 just update-pi [VERSION]
 just update-pvectl        # bump the flake input, then rebuild
-just update-superpowers   # bump the flake input, then rebuild
+just update-skills        # bump superpowers + mattpocockSkills; review before rebuilding
 ```
 
 Renovate opens the version bumps for the `update-*` packages above on its own;
-these recipes are for bumping by hand. A weekly workflow opens `flake.lock` PRs.
+these recipes are for bumping by hand. A weekly workflow opens `flake.lock` PRs
+for every input except the two skill inputs, which are bumped by hand only.
 
 Routine changes go straight to `main`. For a bot PR (Renovate or `flake.lock`),
 a human squash-merges it with the latest `nvd` diff attached; agents do not run this:
