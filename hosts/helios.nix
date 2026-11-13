@@ -64,7 +64,6 @@ in
   ];
 
   homebrew.casks = lib.mkAfter [
-    "antigravity-cli"
     "blender"
     "heroic"
     "keepassxc"
