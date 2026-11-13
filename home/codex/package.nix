@@ -15,18 +15,18 @@ let
   assets = {
     aarch64-darwin = {
       url = "https://github.com/openai/codex/releases/download/rust-v${version}/codex-aarch64-apple-darwin.tar.gz";
-      hash = "sha256-dREWO3oBUrzw4SKQkr0lRf3M/2T8jZKtfG4B8MpGgd8=";
+      hash = "sha256-f0xJyAuuHQtONHrPzfEfqjR12Hrl5lpesSYdPDWBRe4=";
       binary = "codex-aarch64-apple-darwin";
       codeModeHostUrl = "https://github.com/openai/codex/releases/download/rust-v${version}/codex-code-mode-host-aarch64-apple-darwin.tar.gz";
-      codeModeHostHash = "sha256-UV6EFwLwNKeb+vAMTM9spG6iAyaJ1gjtvRf0vDKUDM4=";
+      codeModeHostHash = "sha256-1AsyD28laDXUCUcrfTvuYYonVJs/Phy4tx3GxW04J78=";
       codeModeHostBinary = "codex-code-mode-host-aarch64-apple-darwin";
     };
     x86_64-linux = {
       url = "https://github.com/openai/codex/releases/download/rust-v${version}/codex-x86_64-unknown-linux-musl.tar.gz";
-      hash = "sha256-gkboRsVQ6iEZf8xAZ7wnDcqJXpTqQu1qKC5vTgElsV8=";
+      hash = "sha256-mvTXUfzhg/rt6mKUN9UlLb9FjusEEwz0+XvoRGIeqYU=";
       binary = "codex-x86_64-unknown-linux-musl";
       codeModeHostUrl = "https://github.com/openai/codex/releases/download/rust-v${version}/codex-code-mode-host-x86_64-unknown-linux-musl.tar.gz";
-      codeModeHostHash = "sha256-GJR1plTYLKd24I3+8ic0EG0+WyzyHaboTsPZdNAsOaY=";
+      codeModeHostHash = "sha256-y+1qjSXoJoeSt1d2f7x21MYuhLz47kpj+XVH8N46rOs=";
       codeModeHostBinary = "codex-code-mode-host-x86_64-unknown-linux-musl";
     };
   };
