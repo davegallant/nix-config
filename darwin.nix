@@ -53,8 +53,6 @@
 
   system.primaryUser = username;
 
-  environment.systemPackages = [ (pkgs.callPackage ./pkgs/eglantine-bin.nix { }) ];
-
   system.defaults = {
     dock = {
       autohide = true;
