@@ -72,7 +72,9 @@ in
       tcpdump
       traceroute
       usbutils
-      vpngate.packages.${pkgs.stdenv.hostPlatform.system}.default
+      (vpngate.packages.${pkgs.stdenv.hostPlatform.system}.default.overrideAttrs (_: {
+        vendorHash = "sha256-ywaF/VKjfCssuO5b4qYHIUWdbPlcIiaYX34+XpnMoUQ=";
+      }))
       whois
     ];
 }
