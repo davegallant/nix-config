@@ -27,7 +27,9 @@
         inherit (unstable) kubectl;
         helm = unstable.kubernetes-helm;
         pvectl = pvectl.packages.${pkgs.stdenv.hostPlatform.system}.default;
-        vpngate = vpngate.packages.${pkgs.stdenv.hostPlatform.system}.default;
+        vpngate = vpngate.packages.${pkgs.stdenv.hostPlatform.system}.default.overrideAttrs (_: {
+          vendorHash = "sha256-ywaF/VKjfCssuO5b4qYHIUWdbPlcIiaYX34+XpnMoUQ=";
+        });
       };
 
   programs = {
