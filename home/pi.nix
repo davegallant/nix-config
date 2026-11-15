@@ -207,6 +207,7 @@ in
         "${modelProvider}/${defaultModel}"
         "${modelProvider}/${solModel}"
         "openrouter/deepseek/deepseek-v4.1-flash"
+        "openrouter/anthropic/claude-opus-5.5"
       ]
       ++ lib.optionals onKratos [
         "litellm/gpt-6.1-sol"
