@@ -197,6 +197,11 @@ in
         keepRecentTokens = 20000;
       };
       collapseChangelog = true;
+      # Like codex's code_mode_host: one script batches tool calls and filters
+      # their output, cutting round trips that each replay the whole context.
+      defaultTools = [ "+codemode" ];
+      # Flags large prompt-cache misses (prefix changes, cold caches).
+      showCacheMissNotices = true;
       enabledModels = [
         "ollama/${ollamaModel.id}"
         "${modelProvider}/${defaultModel}"
