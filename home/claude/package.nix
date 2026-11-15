@@ -15,11 +15,11 @@ let
   assets = {
     x86_64-linux = {
       url = "https://registry.npmjs.org/@anthropic-ai/claude-code-linux-x64/-/claude-code-linux-x64-${version}.tgz";
-      hash = "sha512-0DoaNAXLWCYYIGachWBCkTUsS8dOOgvk4R2fFKdrLejO9XlRTwaWUMD9ONdDmv0csdpwxj4qLUN6zWMaG2Sz6g==";
+      hash = "sha512-BqZzMvP/zgLLL34S+7OzbG+cyoFp7gwWHU5koVwsyMlTAz+0zZAmbY+UkzvtN2RXxp6AcMenbYIjQJxoXfUY3w==";
     };
     aarch64-darwin = {
       url = "https://registry.npmjs.org/@anthropic-ai/claude-code-darwin-arm64/-/claude-code-darwin-arm64-${version}.tgz";
-      hash = "sha512-OAx5Y7V7tGCi0tWuDV3lwcDWmIua512NgpClLbqvwC9m+mbLiaytgVLXf4unTXBjMf+QbQiIUO1Kus90PklDhA==";
+      hash = "sha512-Ds1f1B+qy2BWDI+VnmDHwkNyTbXCwFrBtrinPD95RBmUubFJu9nCzMgn+wrg5VwwF6vtkkzGexogneZIYZKb6A==";
     };
   };
 in
