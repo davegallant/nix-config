@@ -11,10 +11,12 @@ let
   skills = import ./lib/skillset.nix {
     inherit pkgs mattpocockSkills;
   };
+  # Flat layout (one dir per skill): models that guess a skill path assume
+  # ~/.agents/skills/<name>/SKILL.md rather than a grouping subdirectory.
   codexSkills = pkgs.runCommand "codex-skills" { } ''
-    mkdir -p "$out/superpowers"
+    mkdir -p "$out"
     cp -rL ${skills}/. "$out"
-    cp -rL ${superpowers}/skills/. "$out/superpowers"
+    cp -rL ${superpowers}/skills/. "$out"
   '';
   # Only kratos routes through litellm, keeping the internal URL and secret
   # out of this public repo: base_url is copied from $LITELLM_BASE_URL when
