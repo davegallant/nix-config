@@ -18,7 +18,8 @@ let
 
   onKratos = hostname == "kratos";
   modelProvider = if onKratos then "litellm" else "openrouter";
-  defaultModel = if onKratos then "gpt-6-luna" else "openai/gpt-6-luna";
+  lunaModel = if onKratos then "gpt-6-luna" else "openai/gpt-6-luna";
+  defaultModel = "anthropic/claude-haiku-5.5";
   ollamaModel = import ./lib/ollama.nix;
   ollamaBaseUrl = (import ./lib/ollama-endpoint.nix hostname).baseUrl;
 
@@ -67,7 +68,7 @@ let
           apiKey = "$LITELLM_API_KEY";
           # Cost is left unset until authoritative gateway pricing is available.
           models = [
-            (mkModel defaultModel "GPT-6 Luna (litellm)" gpt6Limits)
+            (mkModel lunaModel "GPT-6 Luna (litellm)" gpt6Limits)
             (mkModel "gemini-4-argon" "Gemini 4 Argon (litellm)" {
               contextWindow = 1048576;
               maxTokens = 65536;
@@ -175,10 +176,10 @@ in
     };
 
     home.file.".pi/agent/settings.json".text = builtins.toJSON {
-      defaultProvider = modelProvider;
+      defaultProvider = "openrouter";
       inherit defaultModel;
       defaultThinkingLevel = "medium";
-      modelThinkingLevels."${modelProvider}/${defaultModel}" = "medium";
+      modelThinkingLevels."openrouter/${defaultModel}" = "medium";
       thinkingBudgets = {
         low = 1024;
         medium = 4096;
@@ -197,7 +198,7 @@ in
       showCacheMissNotices = true;
       enabledModels = [
         "ollama/${ollamaModel.id}"
-        "${modelProvider}/${defaultModel}"
+        "${modelProvider}/${lunaModel}"
         "openrouter/deepseek/deepseek-v4.1-flash"
         "openrouter/anthropic/claude-opus-5.5"
         "openrouter/anthropic/claude-haiku-5.5"
