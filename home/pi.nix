@@ -19,7 +19,6 @@ let
   onKratos = hostname == "kratos";
   modelProvider = if onKratos then "litellm" else "openrouter";
   defaultModel = if onKratos then "gpt-6-luna" else "openai/gpt-6-luna";
-  solModel = if onKratos then "gpt-6-sol" else "openai/gpt-6-sol";
   ollamaModel = import ./lib/ollama.nix;
   ollamaBaseUrl = (import ./lib/ollama-endpoint.nix hostname).baseUrl;
 
@@ -54,7 +53,6 @@ let
         };
         openrouter.models = [
           (mkModel "openai/gpt-6-luna" "GPT-6 Luna (OpenRouter)" gpt6Limits)
-          (mkModel "openai/gpt-6-sol" "GPT-6 Sol (OpenRouter)" gpt6Limits)
           (mkModel "deepseek/deepseek-v4.1-flash" "DeepSeek V4.1 Flash (OpenRouter)" {
             contextWindow = 1048576;
             maxTokens = 1048576;
@@ -70,11 +68,6 @@ let
           # Cost is left unset until authoritative gateway pricing is available.
           models = [
             (mkModel defaultModel "GPT-6 Luna (litellm)" gpt6Limits)
-            (mkModel solModel "GPT-6 Sol (litellm)" gpt6Limits)
-            (mkModel "gpt-6.1-sol" "GPT-6.1 Sol (litellm)" {
-              contextWindow = 1000000;
-              maxTokens = 131072;
-            })
             (mkModel "gemini-4-argon" "Gemini 4 Argon (litellm)" {
               contextWindow = 1048576;
               maxTokens = 65536;
@@ -205,12 +198,11 @@ in
       enabledModels = [
         "ollama/${ollamaModel.id}"
         "${modelProvider}/${defaultModel}"
-        "${modelProvider}/${solModel}"
         "openrouter/deepseek/deepseek-v4.1-flash"
         "openrouter/anthropic/claude-opus-5.5"
+        "openrouter/anthropic/claude-haiku-5.5"
       ]
       ++ lib.optionals onKratos [
-        "litellm/gpt-6.1-sol"
         "litellm/gemini-4-argon"
       ];
       # Skills (home/skills + obra/superpowers + a few from
