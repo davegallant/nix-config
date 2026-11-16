@@ -18,6 +18,11 @@ in
     executable = true;
   };
 
+  home.file.".claude/bell.sh" = {
+    source = ./claude/bell.sh;
+    executable = true;
+  };
+
   home.file.".claude/claude-resume.sh" = {
     source = ./claude/claude-resume.sh;
     executable = true;

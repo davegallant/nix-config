@@ -146,6 +146,9 @@ in
 
     home.file.".pi/agent/extensions/statusline.ts".source = ./pi/statusline.ts;
 
+    # Rings the bell on agent_end so Ghostty flags the tab (see ghostty.nix).
+    home.file.".pi/agent/extensions/bell.ts".source = ./pi/bell.ts;
+
     # Prevent rare, oversized read/bash results from inflating every later turn.
     home.file.".pi/agent/extensions/token-budget.ts".source = ./pi/token-budget.ts;
 

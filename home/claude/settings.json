@@ -61,5 +61,27 @@
   "editorMode": "vim",
   "effortLevel": "high",
   "model": "claude-opus-5-5",
-  "outputStyle": "Concise"
+  "outputStyle": "Concise",
+  "hooks": {
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh ~/.claude/bell.sh"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh ~/.claude/bell.sh"
+          }
+        ]
+      }
+    ]
+  }
 }

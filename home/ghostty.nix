@@ -10,5 +10,10 @@
     clipboard-trim-trailing-spaces = true
     ${lib.optionalString pkgs.stdenv.isLinux "async-backend = epoll"}
     ${lib.optionalString pkgs.stdenv.isDarwin "# explicit bind works around cmd+v not pasting into the search bar (ghostty#10749)\nkeybind = super+v=paste_from_clipboard"}
+
+    # Agents (claude, codex, pi) ring the bell when they finish or need input:
+    # 🔔 in the tab title, a border on the pane, and a Dock bounce
+    bell-features = no-system,no-audio,attention,title,border
+    unfocused-split-opacity = 0.85
   '';
 }

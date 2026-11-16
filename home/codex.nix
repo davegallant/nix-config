@@ -58,6 +58,10 @@ let
     "model-with-reasoning"
     "thread-title"
   ];
+  codexNotify = pkgs.writeShellScript "codex-notify" ''
+    export PATH=${lib.makeBinPath [ pkgs.jq ]}:$PATH
+    ${builtins.readFile ./codex/notify.sh}
+  '';
   # JSON strings and arrays are valid TOML values.
   toToml = builtins.toJSON;
   seedDefaults = lib.concatStringsSep "\n" (lib.mapAttrsToList (k: v: "${k} = ${toToml v}") defaults);
@@ -72,6 +76,10 @@ let
         ++ [
           "tui.status_line=${toToml statusLine}"
           "tui.status_line_use_colors=true"
+          # Ring the bell (not OSC 9) so Ghostty flags the tab; see ghostty.nix.
+          # notify restores the desktop notification on turn completion.
+          "tui.notification_method=\"bel\""
+          "notify=${toToml [ "${codexNotify}" ]}"
         ]
       )
   );
