@@ -35,13 +35,13 @@
   ];
 
   homebrew.brews = lib.mkAfter [
-    "azure-cli"
     "ollama"
   ];
 
   homebrew.casks = lib.mkAfter [
     "1password"
     "1password-cli"
+    "azure-cli"
     "gcloud-cli"
     "headlamp"
     "orka3"
