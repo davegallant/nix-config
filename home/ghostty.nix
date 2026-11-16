@@ -15,5 +15,14 @@
     # 🔔 in the tab title, a border on the pane, and a Dock bounce
     bell-features = no-system,no-audio,attention,title,border
     unfocused-split-opacity = 0.85
+
+    # Copy Ghostty's terminfo and TERM fallback to SSH hosts, so remotes
+    # don't fail with "unknown terminal xterm-ghostty"
+    shell-integration-features = cursor,title,path,ssh-env,ssh-terminfo
+
+    # Restore tabs and splits on every relaunch, not only after a crash
+    # (macOS-only; the default follows the system "close windows" setting)
+    window-save-state = always
+    ${lib.optionalString pkgs.stdenv.isDarwin "# left Option sends Alt (Claude's option+p, option+t); right Option still types special characters\nmacos-option-as-alt = left"}
   '';
 }
