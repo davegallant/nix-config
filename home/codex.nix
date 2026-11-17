@@ -134,6 +134,7 @@ in
       ./instructions/links.md
       ./instructions/commits.md
       ./instructions/reviews.md
+      ./instructions/hop.md
     ];
 
     # Codex scans ~/.agents/skills for user-level skills but ignores symlinked

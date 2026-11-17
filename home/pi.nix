@@ -169,6 +169,7 @@ in
       ./instructions/links.md
       ./instructions/commits.md
       ./instructions/reviews.md
+      ./instructions/hop.md
     ];
 
     # Claude-Code-parity prompt templates (/plan, /recap, /security-review,
