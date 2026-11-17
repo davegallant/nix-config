@@ -15,7 +15,7 @@ let
     macos-titlebar-style = tabs
 
     # Dropdown terminal from any app (needs Accessibility permission)
-    keybind = global:super+grave_accent=toggle_quick_terminal
+    keybind = global:alt+grave_accent=toggle_quick_terminal
   '';
 in
 {
