@@ -2,6 +2,7 @@
   lib,
   pkgs,
   mattpocockSkills,
+  agora,
   ...
 }:
 let
@@ -11,7 +12,11 @@ let
   };
 in
 {
-  home.packages = [ claude-code ];
+  home.packages = [
+    claude-code
+    # Live and past Claude, Codex and pi sessions in one TUI (`cr`)
+    agora.packages.${pkgs.stdenv.hostPlatform.system}.default
+  ];
 
   home.file.".claude/statusline-command.sh" = {
     source = ./claude/statusline-command.sh;
@@ -20,11 +25,6 @@ in
 
   home.file.".claude/bell.sh" = {
     source = ./claude/bell.sh;
-    executable = true;
-  };
-
-  home.file.".claude/claude-resume.sh" = {
-    source = ./claude/claude-resume.sh;
     executable = true;
   };
 

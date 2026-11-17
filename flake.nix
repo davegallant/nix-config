@@ -2,6 +2,10 @@
   description = "nixos and macos configurations";
 
   inputs = {
+    agora = {
+      url = "github:davegallant/agora";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-brave.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
@@ -91,7 +95,7 @@
                   inputs.nixvim.homeModules.nixvim
                 ];
                 extraSpecialArgs = {
-                  inherit (inputs) nixpkgs-kokoro;
+                  inherit (inputs) agora nixpkgs-kokoro;
                   inherit
                     unstable
                     bravePkgs
