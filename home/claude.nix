@@ -2,7 +2,6 @@
   lib,
   pkgs,
   mattpocockSkills,
-  agora,
   ...
 }:
 let
@@ -14,8 +13,6 @@ in
 {
   home.packages = [
     claude-code
-    # Live and past Claude, Codex and pi sessions in one TUI (`cr`)
-    agora.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   home.file.".claude/statusline-command.sh" = {

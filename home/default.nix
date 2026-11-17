@@ -1,6 +1,7 @@
 {
   pkgs,
   unstable,
+  agora,
   ...
 }:
 let
@@ -29,6 +30,11 @@ in
   ];
 
   home.stateVersion = "26.05";
+
+  home.packages = [
+    # Live and past Claude, Codex and pi sessions in one TUI (`cr`)
+    agora.packages.${pkgs.stdenv.hostPlatform.system}.default
+  ];
 
   services = {
     # SSH support is handled by services.ssh-agent (see home/keepassxc-ssh-agent.nix)
