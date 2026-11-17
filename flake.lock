@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1794876900,
-        "narHash": "sha256-/o6rC/OUrC2KbtbNvgsPUpfKTIigOA2U9CxANJaLhWE=",
+        "lastModified": 1794880001,
+        "narHash": "sha256-WNngWz41OxTb66J6h/rfgZr3ek59vQMed/HTkGs8cz0=",
         "owner": "davegallant",
         "repo": "agora",
-        "rev": "a90ae340ac989584cb3fe4d5ff97aea5e247d3d4",
+        "rev": "01b815636f05f6eb64ab293c09ea92b92c97d14d",
         "type": "github"
       },
       "original": {
