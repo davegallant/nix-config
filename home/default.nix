@@ -17,6 +17,7 @@ in
     ./git.nix
     ./gui.nix
     ./gh-clone.nix
+    ./gh-dash.nix
     ./hunk.nix
     ./k9s.nix
     ./litra-autotoggle.nix
@@ -24,7 +25,6 @@ in
     ./nixvim.nix
     ./ollama.nix
     ./pi.nix
-    ./prs.nix
     ./tmux.nix
     ./voice.nix
   ];

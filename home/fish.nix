@@ -106,6 +106,8 @@
         '';
         # Browse live and past agent sessions: jump to a tab or resume (agora)
         cr = "agora $argv";
+        # PR dashboard (gh-dash)
+        prs = "gh-dash $argv";
         kdebug = "kubectl run debug-(random) --image=nicolaka/netshoot --restart=Never -it --rm -- bash";
         kdesc = ''
           set pod (kubectl get pods -o name | fzf)
