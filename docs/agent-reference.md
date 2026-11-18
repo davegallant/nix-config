@@ -41,13 +41,14 @@ uses flat dot-notation for simple option assignments. `just test` runs the pi
 extension tests with Node's built-in runner; Node strips the TypeScript types.
 
 CI checks formatting, lints, runs the pi tests, builds all three hosts, and pushes
-main outputs to Cachix. Pushes made with `GITHUB_TOKEN` trigger no workflows, so
-`update-hashes.yml` and `flake-update.yml` dispatch `cachix.yml` on their branch
-after pushing; without that, bot PRs would merge with an unbuilt head commit.
+main outputs to Cachix.
 
 ## Maintenance
 
 ```sh
+just update               # flake inputs + prebuilt tools + agent-stuff pin; review, then rebuild
+just update-flake         # flake inputs only (skills, agora, pinned kokoro excluded)
+just update-agent-stuff   # agent-stuff pin in home/pi.nix to the tip of main
 just update-claude [VERSION]
 just update-codex [VERSION]
 just update-hunk [VERSION]
@@ -57,12 +58,11 @@ just update-pvectl        # bump the flake input, then rebuild
 just update-skills        # bump superpowers + mattpocockSkills; review before rebuilding
 ```
 
-Renovate opens the version bumps for the `update-*` packages above on its own;
-these recipes are for bumping by hand. A weekly workflow opens `flake.lock` PRs
-for every input except the two skill inputs, which are bumped by hand only.
+`just update` bumps everything at once; the single-tool recipes bump one thing.
+The skill inputs are bumped by hand only, with `just update-skills`.
 
-Routine changes go straight to `main`. For a bot PR (Renovate or `flake.lock`),
-a human squash-merges it with the latest `nvd` diff attached; agents do not run this:
+Routine changes go straight to `main`. For a PR, a human squash-merges it with
+the latest `nvd` diff attached; agents do not run this:
 
 ```sh
 just merge-pr

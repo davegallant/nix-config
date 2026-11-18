@@ -40,9 +40,9 @@ just rebuild
 
 ## Updates
 
-Updates arrive as PRs: [renovate](https://github.com/renovatebot/renovate) bumps the prebuilt tools and GitHub Actions, and a weekly workflow updates `flake.lock`. To build the system, checkout the PR and run `just rebuild`.
+Run `just update` to bump the flake inputs and the prebuilt tools, review the diff, then run `just rebuild`.
 
-If the build is stable, run `just merge-pr`.
+The agent skill inputs are bumped separately with `just update-skills`; review the upstream diff before rebuilding. GitHub Actions pins are updated by hand.
 
 ## Common Recipes
 

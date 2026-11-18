@@ -128,6 +128,24 @@ update-skills:
   nix flake lock --update-input superpowers --update-input mattpocockSkills
   git diff flake.lock
 
+# update flake inputs (the 9 the weekly workflow updated; skills, agora, and pinned kokoro excluded)
+update-flake:
+  nix flake lock --update-input nixpkgs --update-input nixpkgs-unstable --update-input nixpkgs-brave --update-input darwin --update-input home-manager --update-input nixvim --update-input pvectl --update-input vpngate --update-input vermouth
+
+# update the agent-stuff pin in home/pi.nix to the tip of main
+update-agent-stuff:
+  #!/usr/bin/env bash
+  set -euo pipefail
+  sha=$(git ls-remote https://github.com/mitsuhiko/agent-stuff.git refs/heads/main | cut -f1)
+  if [[ ! "$sha" =~ ^[a-f0-9]{40}$ ]]; then echo "unexpected sha: $sha" >&2; exit 1; fi
+  sed -i -E "s|git:github\.com/mitsuhiko/agent-stuff@[a-f0-9]{40}|git:github.com/mitsuhiko/agent-stuff@${sha}|" home/pi.nix
+  grep -q "agent-stuff@${sha}" home/pi.nix || { echo "pin not updated in home/pi.nix" >&2; exit 1; }
+  echo "agent-stuff: ${sha}"
+
+# update flake inputs, prebuilt tools, and the agent-stuff pin; review the diff, then just check / just rebuild
+update: update-flake update-claude update-pi update-hunk update-codex update-litra update-agent-stuff
+  git diff --stat
+
 # squash-merge current branch's PR with nvd diff in body
 merge-pr:
   #!/usr/bin/env bash

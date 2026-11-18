@@ -3,7 +3,7 @@
   callPackage,
 }:
 let
-  version = "1.4.1"; # renovate: datasource=github-releases depName=timrogers/litra-autotoggle
+  version = "1.4.1";
 
   assets = {
     aarch64-darwin = {
