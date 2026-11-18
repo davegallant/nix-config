@@ -16,6 +16,7 @@ let
 
     # Dropdown terminal from any app (needs Accessibility permission)
     keybind = global:alt+grave_accent=toggle_quick_terminal
+    quick-terminal-size = 75%
   '';
 in
 {
