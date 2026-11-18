@@ -120,17 +120,17 @@ update-litra *version:
 
 # update pvectl flake input to latest and rebuild
 update-pvectl:
-  nix flake lock --update-input pvectl
+  nix flake update pvectl
   just rebuild
 
 # update the agent skill inputs; review the upstream diff before rebuilding
 update-skills:
-  nix flake lock --update-input superpowers --update-input mattpocockSkills
+  nix flake update superpowers mattpocockSkills
   git diff flake.lock
 
 # update flake inputs (the 9 the weekly workflow updated; skills, agora, and pinned kokoro excluded)
 update-flake:
-  nix flake lock --update-input nixpkgs --update-input nixpkgs-unstable --update-input nixpkgs-brave --update-input darwin --update-input home-manager --update-input nixvim --update-input pvectl --update-input vpngate --update-input vermouth
+  nix flake update nixpkgs nixpkgs-unstable nixpkgs-brave darwin home-manager nixvim pvectl vpngate vermouth
 
 # update the agent-stuff pin in home/pi.nix to the tip of main
 update-agent-stuff:
@@ -145,6 +145,16 @@ update-agent-stuff:
 # update flake inputs, prebuilt tools, and the agent-stuff pin; review the diff, then just check / just rebuild
 update: update-flake update-claude update-pi update-hunk update-codex update-litra update-agent-stuff
   git diff --stat
+
+# commit the output of `just update` (only the update-touched paths; push stays manual)
+commit-update message="chore(deps): update flake inputs and package versions":
+  #!/usr/bin/env bash
+  set -euo pipefail
+  git diff --stat
+  read -r -p "Commit the update changes? [y/N] " answer
+  [[ "$answer" =~ ^[Yy]$ ]] || { echo "aborted" >&2; exit 1; }
+  git add flake.lock home/claude/package.nix home/pi/package.nix home/hunk/package.nix home/codex/package.nix home/litra-autotoggle/package.nix home/pi.nix
+  git commit -m "{{message}}"
 
 # squash-merge current branch's PR with nvd diff in body
 merge-pr:
