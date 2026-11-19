@@ -26,9 +26,11 @@ import { join } from "node:path";
 // Width (in block characters) of the filled+empty portion of the bar.
 const BAR_WIDTH = 10;
 
-// OpenRouter credit balance, shown only for OpenRouter models and refreshed
-// at most every CREDIT_REFRESH_MS.
-const CREDIT_REFRESH_MS = 5 * 60 * 1000;
+// OpenRouter credit balance, shown only for OpenRouter models. A timer polls
+// every CREDIT_REFRESH_MS while a session is active, so the balance stays
+// current even when idle.
+const CREDIT_REFRESH_MS = 60 * 1000;
+let creditTimer: ReturnType<typeof setInterval> | undefined;
 let credit: number | undefined;
 let creditFetchedAt = 0;
 let creditInFlight = false;
@@ -145,5 +147,12 @@ export default function (pi: ExtensionAPI) {
   pi.on("session_start", async (_event, ctx) => {
     installFooter(ctx);
     void refreshCredit(ctx);
+    clearInterval(creditTimer);
+    creditTimer = setInterval(() => void refreshCredit(ctx), CREDIT_REFRESH_MS);
+  });
+
+  pi.on("session_shutdown", () => {
+    clearInterval(creditTimer);
+    creditTimer = undefined;
   });
 }
