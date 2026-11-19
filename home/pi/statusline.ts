@@ -19,16 +19,68 @@
 
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
 import { truncateToWidth } from "@earendil-works/pi-tui";
+import { readFileSync } from "node:fs";
+import { homedir } from "node:os";
+import { join } from "node:path";
 
 // Width (in block characters) of the filled+empty portion of the bar.
 const BAR_WIDTH = 10;
+
+// OpenRouter credit balance, shown only for OpenRouter models and refreshed
+// at most every CREDIT_REFRESH_MS.
+const CREDIT_REFRESH_MS = 5 * 60 * 1000;
+let credit: number | undefined;
+let creditFetchedAt = 0;
+let creditInFlight = false;
+
+// OPENROUTER_API_KEY, falling back to the key pi stores from /login.
+function openRouterKey(): string | undefined {
+  if (process.env.OPENROUTER_API_KEY) return process.env.OPENROUTER_API_KEY;
+  try {
+    const auth = JSON.parse(readFileSync(join(homedir(), ".pi/agent/auth.json"), "utf8"));
+    return auth?.openrouter?.key || undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+async function refreshCredit(ctx: { model?: { provider?: string } }): Promise<void> {
+  if (ctx.model?.provider !== "openrouter") return;
+  if (creditInFlight || Date.now() - creditFetchedAt < CREDIT_REFRESH_MS) return;
+  const key = openRouterKey();
+  if (!key) return;
+  creditInFlight = true;
+  creditFetchedAt = Date.now();
+  try {
+    const res = await fetch("https://openrouter.ai/api/v1/credits", {
+      headers: { Authorization: `Bearer ${key}` },
+      signal: AbortSignal.timeout(5000),
+    });
+    if (!res.ok) return;
+    const { data } = await res.json();
+    const balance = Number(data.total_credits) - Number(data.total_usage);
+    if (Number.isFinite(balance)) credit = balance;
+    activeTui?.requestRender();
+  } catch {
+    // Keep the last known balance.
+  } finally {
+    creditInFlight = false;
+  }
+}
 
 // Stored so the turn_end hook can trigger a re-render from outside the footer closure.
 let activeTui: { requestRender(): void } | undefined;
 
 export default function (pi: ExtensionAPI) {
   // After each assistant turn the context usage changes – refresh the bar.
-  pi.on("turn_end", () => {
+  pi.on("turn_end", (_event, ctx) => {
+    activeTui?.requestRender();
+    void refreshCredit(ctx);
+  });
+
+  // Switching to an OpenRouter model fetches the balance right away.
+  pi.on("model_select", (_event, ctx) => {
+    void refreshCredit(ctx);
     activeTui?.requestRender();
   });
 
@@ -75,7 +127,14 @@ export default function (pi: ExtensionAPI) {
           const repoStr = theme.fg("accent", repoName) + branchStr;
           const modelStr = theme.fg("dim", modelId);
 
-          const line = ` ${repoStr}  ${modelStr}  ${ctxBar}`;
+          // --- OpenRouter credit balance (hidden until fetched) ---
+          let creditStr = "";
+          if (ctx.model?.provider === "openrouter" && credit !== undefined) {
+            const color = credit < 1 ? "error" : credit < 5 ? "warning" : "success";
+            creditStr = `  ${theme.fg(color, `$${credit.toFixed(2)}`)}`;
+          }
+
+          const line = ` ${repoStr}  ${modelStr}${creditStr}  ${ctxBar}`;
           return [truncateToWidth(line, width)];
         },
       };
@@ -85,5 +144,6 @@ export default function (pi: ExtensionAPI) {
   // Install on every session start (covers startup, new, resume, fork, reload).
   pi.on("session_start", async (_event, ctx) => {
     installFooter(ctx);
+    void refreshCredit(ctx);
   });
 }
