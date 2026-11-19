@@ -12,6 +12,14 @@
       xdg-utils
     ];
 
+    # Free Alt+` (KWin's default) for Ghostty's quick terminal. kglobalaccel owns
+    # this file, so patch the one key; it applies on the next login
+    home.activation.kwinFreeAltGrave = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      run ${pkgs.kdePackages.kconfig}/bin/kwriteconfig6 --file kglobalshortcutsrc --group kwin \
+        --key 'Walk Through Windows of Current Application' \
+        'none,Alt+`,Walk Through Windows of Current Application'
+    '';
+
     xdg.configFile."kscreenlockerrc".text = ''
       [Daemon]
       Autolock=true

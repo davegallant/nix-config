@@ -13,10 +13,6 @@ let
     # left Option sends Alt (Claude's option+p, option+t); right Option still types special characters
     macos-option-as-alt = left
     macos-titlebar-style = tabs
-
-    # Dropdown terminal from any app (needs Accessibility permission)
-    keybind = global:alt+grave_accent=toggle_quick_terminal
-    quick-terminal-size = 75%
   '';
 in
 {
@@ -45,6 +41,12 @@ in
 
     # Dump scrollback to a file and open it in the editor
     keybind = ctrl+shift+o=write_scrollback_file:open
+
+    # Dropdown terminal from any app. macOS needs the Accessibility permission;
+    # KDE registers it through the GlobalShortcuts portal (approve it once) and
+    # needs the background service in nixos.nix
+    keybind = global:alt+grave_accent=toggle_quick_terminal
+    quick-terminal-size = 75%
 
     ${lib.optionalString pkgs.stdenv.isDarwin darwinConfig}
   '';

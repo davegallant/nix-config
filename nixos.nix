@@ -123,6 +123,16 @@
 
   services.desktopManager.plasma6.enable = true;
 
+  # Ghostty's own user unit keeps one windowless instance running, so the
+  # global quick-terminal shortcut in home/ghostty.nix works from any app
+  systemd.packages = [ unstable.ghostty ];
+  systemd.user.services."app-com.mitchellh.ghostty" = {
+    wantedBy = [ "graphical-session.target" ];
+    # Otherwise NixOS pins PATH to coreutils & co., which every shell would inherit
+    path = lib.mkForce [ ];
+  };
+  services.dbus.packages = [ unstable.ghostty ];
+
   environment.etc."chromium/native-messaging-hosts/org.kde.plasma.browser_integration.json".source =
     "${pkgs.kdePackages.plasma-browser-integration}/etc/chromium/native-messaging-hosts/org.kde.plasma.browser_integration.json";
 
