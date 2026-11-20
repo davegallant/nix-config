@@ -52,13 +52,37 @@ let
           };
           models = [ ollamaModel ];
         };
-        openrouter.models = [
-          (mkModel "openai/gpt-6-luna" "GPT-6 Luna (OpenRouter)" gpt6Limits)
-          (mkModel "deepseek/deepseek-v4.1-flash" "DeepSeek V4.1 Flash (OpenRouter)" {
-            contextWindow = 1048576;
-            maxTokens = 1048576;
-          })
-        ];
+        openrouter = {
+          # Deny by default: OpenRouter may only route to these US hosts, so
+          # no request reaches a Chinese provider. Applies to every OpenRouter
+          # model except Claude (anthropic-messages), whose hosts are all US.
+          compat.openRouterRouting = {
+            only = [
+              "anthropic"
+              "openai"
+              "amazon-bedrock"
+              "google-vertex"
+              "azure"
+              "together"
+              "fireworks"
+              "deepinfra"
+              "baseten"
+            ];
+            allow_fallbacks = false;
+          };
+          models = [
+            (mkModel "openai/gpt-6-luna" "GPT-6 Luna (OpenRouter)" gpt6Limits)
+            (mkModel "deepseek/deepseek-v4.1-flash" "DeepSeek V4.1 Flash (OpenRouter)" {
+              contextWindow = 1048576;
+              maxTokens = 1048576;
+            })
+            (mkModel "z-ai/glm-5.3" "GLM 5.3 (OpenRouter)" {
+              input = [ "text" ];
+              contextWindow = 1048576;
+              maxTokens = 131072;
+            })
+          ];
+        };
       }
       // lib.optionalAttrs onKratos {
         litellm = {
@@ -204,6 +228,7 @@ in
         "ollama/${ollamaModel.id}"
         "${modelProvider}/${lunaModel}"
         "openrouter/deepseek/deepseek-v4.1-flash"
+        "openrouter/z-ai/glm-5.3"
         "openrouter/anthropic/claude-opus-5.5"
         "openrouter/anthropic/claude-haiku-5.5"
       ]
