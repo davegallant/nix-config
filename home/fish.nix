@@ -178,6 +178,7 @@
 
       shellAliases = {
         ".." = "cd ..";
+        c = "claude";
         g = "git";
         gc = "git checkout $(git branch | fzf)";
         gco = "git checkout $(git branch -r | sed -e 's/^  origin\\///' | fzf)";
