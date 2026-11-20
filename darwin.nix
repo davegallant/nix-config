@@ -123,7 +123,6 @@
       "ghostty"
       "lulu"
       "monitorcontrol"
-      "notunes"
       "obs"
       "obsidian"
       "secretive"
