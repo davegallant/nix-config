@@ -12,12 +12,18 @@
       xdg-utils
     ];
 
-    # Free Alt+` (KWin's default) for Ghostty's quick terminal. kglobalaccel owns
-    # this file, so patch the one key; it applies on the next login
-    home.activation.kwinFreeAltGrave = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    # Free Alt+` (KWin's default) for Ghostty's quick terminal, and move
+    # KWin's window cycling to Meta+` / Meta+~ only (Super/Cmd+`). Alt+` must
+    # not remain as a second binding — KDE treats it as live, and it blocks
+    # Meta+`. kglobalaccel owns this file, so patch the keys; it applies on
+    # the next login
+    home.activation.kwinMoveAltGraveToMeta = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       run ${pkgs.kdePackages.kconfig}/bin/kwriteconfig6 --file kglobalshortcutsrc --group kwin \
         --key 'Walk Through Windows of Current Application' \
-        'none,Alt+`,Walk Through Windows of Current Application'
+        'Meta+`,none,Walk Through Windows of Current Application'
+      run ${pkgs.kdePackages.kconfig}/bin/kwriteconfig6 --file kglobalshortcutsrc --group kwin \
+        --key 'Walk Through Windows of Current Application (Reverse)' \
+        'Meta+~,none,Walk Through Windows of Current Application (Reverse)'
     '';
 
     xdg.configFile."kscreenlockerrc".text = ''
