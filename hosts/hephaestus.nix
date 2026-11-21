@@ -155,6 +155,8 @@ in
     unstable.umu-launcher
     unityhub
     unityCli
+    # AirPods features on Linux (listening modes, battery, ear detection).
+    librepods
     inputs.vermouth.packages.${pkgs.stdenv.hostPlatform.system}.default
     vim
   ];
