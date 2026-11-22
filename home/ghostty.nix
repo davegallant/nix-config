@@ -46,7 +46,7 @@ in
     # KDE registers it through the GlobalShortcuts portal (approve it once) and
     # needs the background service in nixos.nix
     keybind = global:alt+grave_accent=toggle_quick_terminal
-    quick-terminal-size = 75%
+    quick-terminal-size = 75%, 1200px
 
     ${lib.optionalString pkgs.stdenv.isDarwin darwinConfig}
   '';
