@@ -93,30 +93,31 @@ clean:
   echo 'Cleaning root...'
   sudo nix-collect-garbage -d
 
-# update version and hashes in home/claude/package.nix
-# usage: just update-claude [VERSION]  (VERSION without leading 'v'; defaults to latest)
-update-claude *version:
-  @./home/claude/update-hashes.sh {{version}}
+# usage: just update-tool TOOL [VERSION]  (VERSION without the tag prefix; defaults to latest)
+# update one prebuilt tool's version and hashes; TOOL is its home/ dir name
+update-tool tool *version:
+  @test -x home/{{tool}}/update-hashes.sh || { echo "unknown tool '{{tool}}'; have:" home/*/update-hashes.sh >&2; exit 1; }
+  @./home/{{tool}}/update-hashes.sh {{version}}
 
-# update version and hashes in home/pi/package.nix
-# usage: just update-pi [VERSION]  (VERSION without leading 'v'; defaults to latest)
-update-pi *version:
-  @./home/pi/update-hashes.sh {{version}}
-
-# update version and hashes in home/hunk/package.nix
-# usage: just update-hunk [VERSION]  (VERSION without leading 'v'; defaults to latest)
-update-hunk *version:
-  @./home/hunk/update-hashes.sh {{version}}
-
-# update version and hash in home/codex/package.nix
-# usage: just update-codex [VERSION]  (VERSION without leading 'rust-v'; defaults to latest)
-update-codex *version:
-  @./home/codex/update-hashes.sh {{version}}
-
-# update version and hash in home/litra-autotoggle/package.nix
-# usage: just update-litra [VERSION]  (VERSION without leading 'v'; defaults to latest)
-update-litra *version:
-  @./home/litra-autotoggle/update-hashes.sh {{version}}
+# update every prebuilt tool (each home/*/update-hashes.sh) in parallel
+update-tools:
+  #!/usr/bin/env bash
+  set -euo pipefail
+  logs=$(mktemp -d)
+  trap 'rm -rf "$logs"' EXIT
+  tools=() pids=() failed=()
+  for script in home/*/update-hashes.sh; do
+    tool=$(basename "$(dirname "$script")")
+    "$script" >"$logs/$tool" 2>&1 &
+    tools+=("$tool") pids+=($!)
+  done
+  for i in "${!tools[@]}"; do
+    status=ok
+    wait "${pids[$i]}" || { status=FAILED; failed+=("${tools[$i]}"); }
+    echo "== ${tools[$i]} ($status)"
+    cat "$logs/${tools[$i]}"
+  done
+  if ((${#failed[@]})); then echo "failed: ${failed[*]}" >&2; exit 1; fi
 
 # update pvectl flake input to latest and rebuild
 update-pvectl:
@@ -128,9 +129,13 @@ update-skills:
   nix flake update superpowers mattpocockSkills
   git diff flake.lock
 
-# update flake inputs (the 9 the weekly workflow updated; skills, agora, and pinned kokoro excluded)
+# update every flake input except the skills (update-skills), agora, and the pinned kokoro
 update-flake:
-  nix flake update nixpkgs nixpkgs-unstable nixpkgs-brave darwin home-manager nixvim pvectl vpngate vermouth
+  #!/usr/bin/env bash
+  set -euo pipefail
+  mapfile -t inputs < <(jq -r '.nodes.root.inputs | keys[]' flake.lock \
+    | grep -Ev '^(agora|mattpocockSkills|nixpkgs-kokoro|superpowers)$')
+  nix flake update "${inputs[@]}"
 
 # update the agent-stuff pin in home/pi.nix to the tip of main
 update-agent-stuff:
@@ -143,17 +148,19 @@ update-agent-stuff:
   echo "agent-stuff: ${sha}"
 
 # update flake inputs, prebuilt tools, and the agent-stuff pin; review the diff, then just check / just rebuild
-update: update-flake update-claude update-pi update-hunk update-codex update-litra update-agent-stuff
+update: update-flake update-tools update-agent-stuff
   git diff --stat
 
 # commit the output of `just update` (only the update-touched paths; push stays manual)
 commit-update message="chore(deps): update flake inputs and package versions":
   #!/usr/bin/env bash
   set -euo pipefail
-  git diff --stat
+  paths=(flake.lock home/pi.nix)
+  for script in home/*/update-hashes.sh; do paths+=("${script%update-hashes.sh}package.nix"); done
+  git diff --stat -- "${paths[@]}"
   read -r -p "Commit the update changes? [y/N] " answer
   [[ "$answer" =~ ^[Yy]$ ]] || { echo "aborted" >&2; exit 1; }
-  git add flake.lock home/claude/package.nix home/pi/package.nix home/hunk/package.nix home/codex/package.nix home/litra-autotoggle/package.nix home/pi.nix
+  git add -- "${paths[@]}"
   git commit -m "{{message}}"
 
 # squash-merge current branch's PR with nvd diff in body

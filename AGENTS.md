@@ -77,7 +77,8 @@ session to take effect.
 - `packages.nix`: shared package set.
 - `pkgs/`: derivations a host installs as system packages (`callPackage` from `hosts/*.nix`).
 - `home/<tool>/package.nix`: prebuilt tools, each with an `update-hashes.sh` behind
-  `just update-<tool>`. `just update` runs them all, plus the flake lock update.
+  `just update-tool <tool>`. Adding the script is enough: `update-tools`, `update`, and
+  `commit-update` discover it by glob. `just update` also updates the flake lock.
   Shared builders and helpers live in `home/lib/`.
 - `home/pi/`: pi extensions (TypeScript); tests in `home/pi/tests/` run via `just test`.
 - `home/skills/<name>/SKILL.md`: agent skills for Claude, Codex, and pi. Line 1 must be
