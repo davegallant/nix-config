@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  agentStuff,
   hostname ? "",
   ...
 }:
@@ -243,7 +244,10 @@ in
       # copy and produces startup "skill conflict" collision warnings.
       packages = [
         {
-          source = "git:github.com/mitsuhiko/agent-stuff@0865c849befd2021490679f96a8dee58c84ac857";
+          # flake input (hash-locked in flake.lock) instead of a git: source, which pi
+          # clones at runtime unverified. Local sources get no npm install; these
+          # extensions import only node built-ins and pi-provided packages.
+          source = "${agentStuff}";
           skills = [ ];
           extensions = [
             "extensions/btw.ts"

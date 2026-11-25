@@ -132,25 +132,15 @@ update-flake:
     | grep -Ev '^(agora|mattpocockSkills|nixpkgs-kokoro|superpowers)$')
   nix flake update "${inputs[@]}"
 
-# update the agent-stuff pin in home/pi.nix to the tip of main
-update-agent-stuff:
-  #!/usr/bin/env bash
-  set -euo pipefail
-  sha=$(git ls-remote https://github.com/mitsuhiko/agent-stuff.git refs/heads/main | cut -f1)
-  if [[ ! "$sha" =~ ^[a-f0-9]{40}$ ]]; then echo "unexpected sha: $sha" >&2; exit 1; fi
-  sed -i -E "s|git:github\.com/mitsuhiko/agent-stuff@[a-f0-9]{40}|git:github.com/mitsuhiko/agent-stuff@${sha}|" home/pi.nix
-  grep -q "agent-stuff@${sha}" home/pi.nix || { echo "pin not updated in home/pi.nix" >&2; exit 1; }
-  echo "agent-stuff: ${sha}"
-
-# update flake inputs, prebuilt tools, and the agent-stuff pin; review the diff, then just check / just rebuild
-update: update-flake update-tools update-agent-stuff
+# update flake inputs and prebuilt tools; review the diff, then just check / just rebuild
+update: update-flake update-tools
   git diff --stat
 
 # commit the output of `just update` (only the update-touched paths; push stays manual)
 commit-update message="chore(deps): update flake inputs and package versions":
   #!/usr/bin/env bash
   set -euo pipefail
-  paths=(flake.lock home/pi.nix)
+  paths=(flake.lock)
   for script in home/*/update-hashes.sh; do paths+=("${script%update-hashes.sh}package.nix"); done
   git diff --stat -- "${paths[@]}"
   read -r -p "Commit the update changes? [y/N] " answer

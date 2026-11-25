@@ -46,11 +46,10 @@ main outputs to Cachix.
 ## Maintenance
 
 ```sh
-just update               # flake inputs + prebuilt tools + agent-stuff pin; review, then rebuild
+just update               # flake inputs + prebuilt tools; review, then rebuild
 just update-flake         # every flake input except skills, agora, and pinned kokoro
 just update-tools         # every prebuilt tool (home/*/update-hashes.sh), in parallel
 just update-tool TOOL [VERSION]   # one tool by home/ dir name: claude, codex, hunk, litra-autotoggle, pi
-just update-agent-stuff   # agent-stuff pin in home/pi.nix to the tip of main
 just update-skills        # bump superpowers + mattpocockSkills; review before rebuilding
 ```
 

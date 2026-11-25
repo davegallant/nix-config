@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "agentStuff": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1790543438,
+        "narHash": "sha256-tIKtwPCXCYhYza7BgRQiRK+Lv9YrI+xpDtfSPrzR3w4=",
+        "owner": "mitsuhiko",
+        "repo": "agent-stuff",
+        "rev": "0865c849befd2021490679f96a8dee58c84ac857",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mitsuhiko",
+        "repo": "agent-stuff",
+        "type": "github"
+      }
+    },
     "agora": {
       "inputs": {
         "nixpkgs": [
@@ -208,6 +224,7 @@
     },
     "root": {
       "inputs": {
+        "agentStuff": "agentStuff",
         "agora": "agora",
         "darwin": "darwin",
         "home-manager": "home-manager",
