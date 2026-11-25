@@ -51,7 +51,6 @@ just update-flake         # every flake input except skills, agora, and pinned k
 just update-tools         # every prebuilt tool (home/*/update-hashes.sh), in parallel
 just update-tool TOOL [VERSION]   # one tool by home/ dir name: claude, codex, hunk, litra-autotoggle, pi
 just update-agent-stuff   # agent-stuff pin in home/pi.nix to the tip of main
-just update-pvectl        # bump the flake input, then rebuild
 just update-skills        # bump superpowers + mattpocockSkills; review before rebuilding
 ```
 

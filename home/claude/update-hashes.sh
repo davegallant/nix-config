@@ -18,27 +18,24 @@ if [[ $# -ge 1 ]]; then
   VERSION="$1"
 else
   echo "fetching latest version from npm..."
-  VERSION=$(curl -fsSL "${NPM_REGISTRY}/@anthropic-ai/claude-code/latest" \
-    | grep '"version"' | sed 's/.*"version": *"\([^"]*\)".*/\1/')
+  VERSION=$(curl -fsSL "${NPM_REGISTRY}/@anthropic-ai/claude-code/latest" | jq -er .version)
 fi
 
 echo "version: ${VERSION}"
+skip_if_current "$PACKAGE_NIX" "$VERSION"
 
 npm_integrity() {
   local pkg="$1"
   echo "  fetching ${pkg}@${VERSION}..." >&2
-  curl -fsSL "${NPM_REGISTRY}/@anthropic-ai/${pkg}/${VERSION}" \
-    | grep '"integrity"' | sed 's/.*"integrity": *"\([^"]*\)".*/\1/'
+  curl -fsSL "${NPM_REGISTRY}/@anthropic-ai/${pkg}/${VERSION}" | jq -er .dist.integrity
 }
 
 HASH_X86_LINUX=$(npm_integrity "claude-code-linux-x64")
 HASH_ARM_DARWIN=$(npm_integrity "claude-code-darwin-arm64")
 
-echo ""
 echo "hashes:"
 echo "  x86_64-linux:  ${HASH_X86_LINUX}"
 echo "  aarch64-darwin: ${HASH_ARM_DARWIN}"
-echo ""
 
 set_version "$PACKAGE_NIX" "$VERSION"
 

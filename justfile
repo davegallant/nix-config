@@ -119,11 +119,6 @@ update-tools:
   done
   if ((${#failed[@]})); then echo "failed: ${failed[*]}" >&2; exit 1; fi
 
-# update pvectl flake input to latest and rebuild
-update-pvectl:
-  nix flake update pvectl
-  just rebuild
-
 # update the agent skill inputs; review the upstream diff before rebuilding
 update-skills:
   nix flake update superpowers mattpocockSkills

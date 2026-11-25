@@ -26,23 +26,19 @@ fi
 REPO="$1"
 PREFIX="$2"
 PACKAGE_NIX="$3"
-VERSION="${4:-}"
 BASE_URL="https://github.com/${REPO}/releases/download"
 
-if [[ -z "$VERSION" ]]; then
-  VERSION=$(latest_github_tag "$REPO" v)
-fi
+github_release "$REPO" v "${4:-}"
+skip_if_current "$PACKAGE_NIX" "$VERSION"
 
-echo "version: ${VERSION}"
+LINUX="${PREFIX}-linux-x64.tar.gz"
+DARWIN="${PREFIX}-darwin-arm64.tar.gz"
+HASH_X86_LINUX=$(release_sri "$LINUX" "${BASE_URL}/v${VERSION}/${LINUX}")
+HASH_ARM_DARWIN=$(release_sri "$DARWIN" "${BASE_URL}/v${VERSION}/${DARWIN}")
 
-HASH_X86_LINUX=$(sri  "${BASE_URL}/v${VERSION}/${PREFIX}-linux-x64.tar.gz")
-HASH_ARM_DARWIN=$(sri "${BASE_URL}/v${VERSION}/${PREFIX}-darwin-arm64.tar.gz")
-
-echo ""
 echo "hashes:"
 echo "  x86_64-linux:   ${HASH_X86_LINUX}"
 echo "  aarch64-darwin: ${HASH_ARM_DARWIN}"
-echo ""
 
 set_version "$PACKAGE_NIX" "$VERSION"
 

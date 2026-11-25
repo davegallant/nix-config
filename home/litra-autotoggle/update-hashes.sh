@@ -15,16 +15,12 @@ PACKAGE_NIX="$DIR/package.nix"
 
 # shellcheck source=home/lib/update-common.sh
 source "$DIR/../lib/update-common.sh"
-VERSION="${1:-}"
 
-if [[ -z "$VERSION" ]]; then
-  VERSION=$(latest_github_tag timrogers/litra-autotoggle v)
-fi
+github_release timrogers/litra-autotoggle v "${1:-}"
+skip_if_current "$PACKAGE_NIX" "$VERSION"
 
-echo "version: ${VERSION}"
-
-URL="https://github.com/timrogers/litra-autotoggle/releases/download/v${VERSION}/litra-autotoggle_v${VERSION}_darwin-aarch64"
-HASH=$(sri "$URL")
+ASSET="litra-autotoggle_v${VERSION}_darwin-aarch64"
+HASH=$(release_sri "$ASSET" "https://github.com/timrogers/litra-autotoggle/releases/download/v${VERSION}/${ASSET}")
 
 set_version "$PACKAGE_NIX" "$VERSION"
 

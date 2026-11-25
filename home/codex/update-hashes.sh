@@ -14,18 +14,12 @@ set -euo pipefail
 REPO="openai/codex"
 DIR="$(dirname "$0")"
 PACKAGE_NIX="$DIR/package.nix"
-VERSION="${1:-}"
 
 # shellcheck source=home/lib/update-common.sh
 source "$DIR/../lib/update-common.sh"
 
-if [[ -z "$VERSION" ]]; then
-  VERSION=$(latest_github_tag "$REPO" rust-v)
-fi
-
-echo "version: ${VERSION}"
-
-set_version "$PACKAGE_NIX" "$VERSION"
+github_release "$REPO" rust-v "${1:-}"
+skip_if_current "$PACKAGE_NIX" "$VERSION"
 
 declare -A ASSETS=(
   [codex-aarch64-apple-darwin.tar.gz]=1
@@ -36,7 +30,7 @@ declare -A ASSETS=(
 
 for asset in "${!ASSETS[@]}"; do
   URL="https://github.com/${REPO}/releases/download/rust-v${VERSION}/${asset}"
-  HASH=$(sri "$URL")
+  HASH=$(release_sri "$asset" "$URL")
   echo "  hash: ${HASH}"
   if [[ "$asset" == codex-code-mode-host-* ]]; then
     sed -i \
@@ -49,4 +43,5 @@ for asset in "${!ASSETS[@]}"; do
   fi
 done
 
+set_version "$PACKAGE_NIX" "$VERSION"
 echo "updated ${PACKAGE_NIX}"
