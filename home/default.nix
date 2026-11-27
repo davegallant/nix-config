@@ -10,6 +10,7 @@ in
 {
   imports = [
     ./borgmatic.nix
+    ./claude.nix
     ./codex.nix
     ./coteditor.nix
     ./fish.nix
