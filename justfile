@@ -124,12 +124,12 @@ update-skills:
   nix flake update superpowers mattpocockSkills
   git diff flake.lock
 
-# update every flake input except the skills (update-skills), agora, and the pinned kokoro
+# update every flake input except the skills (update-skills) and the pinned kokoro
 update-flake:
   #!/usr/bin/env bash
   set -euo pipefail
   mapfile -t inputs < <(jq -r '.nodes.root.inputs | keys[]' flake.lock \
-    | grep -Ev '^(agora|mattpocockSkills|nixpkgs-kokoro|superpowers)$')
+    | grep -Ev '^(mattpocockSkills|nixpkgs-kokoro|superpowers)$')
   nix flake update "${inputs[@]}"
 
 # update flake inputs and prebuilt tools; review the diff, then just check / just rebuild
