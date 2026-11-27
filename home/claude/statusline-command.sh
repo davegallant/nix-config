@@ -12,7 +12,7 @@ input=$(cat)
 # spaces, which would otherwise shift every later value into the wrong variable.
 # Absent values become "" (not `empty`) so the field count stays fixed.
 us=$'\x1f'
-IFS=$us read -r cwd model session_name window_size input_tokens used_pct < <(
+IFS=$us read -r cwd model session_name window_size input_tokens used_pct five_hour_pct seven_day_pct < <(
   jq --arg us "$us" -r '
     [ (.workspace.current_dir // .cwd // ""),
       (.model.display_name // ""),
@@ -21,7 +21,9 @@ IFS=$us read -r cwd model session_name window_size input_tokens used_pct < <(
       ([ .context_window.current_usage.input_tokens,
          .context_window.current_usage.cache_creation_input_tokens,
          .context_window.current_usage.cache_read_input_tokens ] | map(. // 0) | add),
-      (.context_window.used_percentage // "")
+      (.context_window.used_percentage // ""),
+      (.rate_limits.five_hour.used_percentage // ""),
+      (.rate_limits.seven_day.used_percentage // "")
     ] | map(tostring) | join($us)' <<<"$input" 2>/dev/null
 )
 
@@ -108,6 +110,30 @@ if [ -n "$used" ]; then
         fi
     fi
     parts+=("$(printf "${color}[%s] %s%%\033[0m\033[2m%s\033[0m" "$bar" "$used_int" "$limit_label")")
+fi
+
+# Plan usage (opt-in via CLAUDE_STATUSLINE_USAGE): 5-hour and weekly windows.
+# Claude Code only sends rate_limits for subscription plans, after the first
+# response of a session.
+usage_part() {
+    local label="$1" pct="$2" pct_int color
+    [ -n "$pct" ] || return 0
+    pct_int=$(printf '%.0f' "$pct")
+    if [ "$pct_int" -ge 80 ]; then
+        color='\033[31m'
+    elif [ "$pct_int" -ge 50 ]; then
+        color='\033[33m'
+    else
+        color='\033[32m'
+    fi
+    printf "\033[2m%s\033[0m ${color}%s%%\033[0m" "$label" "$pct_int"
+}
+
+if [ -n "${CLAUDE_STATUSLINE_USAGE:-}" ]; then
+    usage=()
+    [ -n "$five_hour_pct" ] && usage+=("$(usage_part 5h "$five_hour_pct")")
+    [ -n "$seven_day_pct" ] && usage+=("$(usage_part wk "$seven_day_pct")")
+    [ ${#usage[@]} -gt 0 ] && parts+=("${usage[*]}")
 fi
 
 (IFS=' '; printf '%s' "${parts[*]}")

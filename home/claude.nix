@@ -1,11 +1,25 @@
 {
   lib,
   pkgs,
+  hostname,
   mattpocockSkills,
   ...
 }:
 let
   claude-code = pkgs.callPackage ./claude/package.nix { };
+  # kratos keeps the Opus default; other hosts default to Haiku and show the
+  # 5h/weekly plan usage in the statusline.
+  isKratos = hostname == "kratos";
+  baseSettings = pkgs.writeText "claude-settings.json" (
+    builtins.toJSON (
+      lib.recursiveUpdate (lib.importJSON ./claude/settings.json) (
+        lib.optionalAttrs (!isKratos) {
+          model = "claude-haiku-5-5";
+          statusLine.command = "CLAUDE_STATUSLINE_USAGE=1 bash ~/.claude/statusline-command.sh";
+        }
+      )
+    )
+  );
   skills = import ./lib/skillset.nix {
     inherit pkgs mattpocockSkills;
   };
@@ -74,7 +88,7 @@ in
 
     # ~/.claude/settings.json: nix-managed base + optional private overlay
     mergeJson "$HOME/.claude/settings.json" \
-      "${./claude/settings.json}" \
+      "${baseSettings}" \
       "$HOME/.claude/settings.private.json"
   '';
 }
